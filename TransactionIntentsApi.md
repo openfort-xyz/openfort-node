@@ -1,0 +1,318 @@
+# .TransactionIntentsApi
+
+All URIs are relative to *https://api.openfort.xyz*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**createTransactionIntent**](TransactionIntentsApi.md#createTransactionIntent) | **POST** /v1/transaction_intents | 
+[**getTransactionIntent**](TransactionIntentsApi.md#getTransactionIntent) | **GET** /v1/transaction_intents/{id} | 
+[**getTransactionIntents**](TransactionIntentsApi.md#getTransactionIntents) | **GET** /v1/transaction_intents | 
+[**updateTransactionIntentResponse**](TransactionIntentsApi.md#updateTransactionIntentResponse) | **PUT** /v1/transaction_intents/{id}/update_response | 
+[**updateTransactionIntentsResponse**](TransactionIntentsApi.md#updateTransactionIntentsResponse) | **PUT** /v1/transaction_intents/update_response | 
+
+
+# **createTransactionIntent**
+> TransactionIntentResponse createTransactionIntent()
+
+Creates a transaction intent object.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .TransactionIntentsApi(configuration);
+
+let body:.TransactionIntentsApiCreateTransactionIntentRequest = {
+  // string
+  player: "player_example",
+  // number
+  chainId: 3.14,
+  // boolean
+  optimistic: true,
+  // Array<Interaction>
+  interactions: [
+    {
+      contract: "contract_example",
+      functionName: "functionName_example",
+      functionArgs: [
+        null,
+      ],
+    },
+  ],
+  // string (optional)
+  policy: "policy_example",
+  // string (optional)
+  project: "project_example",
+};
+
+apiInstance.createTransactionIntent(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **player** | [**string**] |  | defaults to undefined
+ **chainId** | [**number**] |  | defaults to undefined
+ **optimistic** | [**boolean**] |  | defaults to undefined
+ **interactions** | **Array&lt;Interaction&gt;** |  | defaults to undefined
+ **policy** | [**string**] |  | (optional) defaults to undefined
+ **project** | [**string**] |  | (optional) defaults to undefined
+
+
+### Return type
+
+**TransactionIntentResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response. |  -  |
+**401** | Error response. |  -  |
+**409** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **getTransactionIntent**
+> TransactionIntentResponse getTransactionIntent()
+
+Updates a transaction intent object.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .TransactionIntentsApi(configuration);
+
+let body:.TransactionIntentsApiGetTransactionIntentRequest = {
+  // string
+  id: "id_example",
+  // string (optional)
+  project: "project_example",
+};
+
+apiInstance.getTransactionIntent(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**string**] |  | defaults to undefined
+ **project** | [**string**] |  | (optional) defaults to undefined
+
+
+### Return type
+
+**TransactionIntentResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response. |  -  |
+**401** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **getTransactionIntents**
+> TransactionIntentsResponse getTransactionIntents()
+
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .TransactionIntentsApi(configuration);
+
+let body:.TransactionIntentsApiGetTransactionIntentsRequest = {
+  // string (optional)
+  project: "project_example",
+};
+
+apiInstance.getTransactionIntents(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project** | [**string**] |  | (optional) defaults to undefined
+
+
+### Return type
+
+**TransactionIntentsResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response. |  -  |
+**401** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateTransactionIntentResponse**
+> TransactionIntentResponse updateTransactionIntentResponse()
+
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .TransactionIntentsApi(configuration);
+
+let body:.TransactionIntentsApiUpdateTransactionIntentResponseRequest = {
+  // string
+  id: "id_example",
+  // string (optional)
+  project: "project_example",
+};
+
+apiInstance.updateTransactionIntentResponse(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**string**] |  | defaults to undefined
+ **project** | [**string**] |  | (optional) defaults to undefined
+
+
+### Return type
+
+**TransactionIntentResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response. |  -  |
+**401** | Error response. |  -  |
+**409** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateTransactionIntentsResponse**
+> TransactionIntentsResponse updateTransactionIntentsResponse()
+
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .TransactionIntentsApi(configuration);
+
+let body:.TransactionIntentsApiUpdateTransactionIntentsResponseRequest = {
+  // string (optional)
+  project: "project_example",
+};
+
+apiInstance.updateTransactionIntentsResponse(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project** | [**string**] |  | (optional) defaults to undefined
+
+
+### Return type
+
+**TransactionIntentsResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response. |  -  |
+**401** | Error response. |  -  |
+**409** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+
