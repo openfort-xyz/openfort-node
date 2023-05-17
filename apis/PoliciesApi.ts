@@ -2,6 +2,8 @@
 import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
 import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
@@ -13,6 +15,7 @@ import { AllowFunctionsResponse } from '../models/AllowFunctionsResponse';
 import { Gas } from '../models/Gas';
 import { PoliciesResponse } from '../models/PoliciesResponse';
 import { PolicyResponse } from '../models/PolicyResponse';
+import { Strategy } from '../models/Strategy';
 import { SumGas } from '../models/SumGas';
 
 /**
@@ -27,7 +30,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
      * @param strategy 
      * @param project 
      */
-    public async createPolicy(name: string, chainId: number, strategy?: string, project?: string, _options?: Configuration): Promise<RequestContext> {
+    public async createPolicy(name: string, chainId: number, strategy?: Strategy, project?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'name' is not null or undefined
@@ -393,7 +396,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
      * @param strategy 
      * @param project 
      */
-    public async updatePolicy(id: string, name?: string, chainId?: number, strategy?: string, project?: string, _options?: Configuration): Promise<RequestContext> {
+    public async updatePolicy(id: string, name?: string, chainId?: number, strategy?: Strategy, project?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -586,7 +589,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -621,7 +624,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -653,7 +656,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -685,7 +688,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -720,7 +723,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -755,7 +758,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -790,7 +793,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -825,7 +828,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -860,7 +863,7 @@ export class PoliciesApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

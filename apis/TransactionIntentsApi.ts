@@ -2,6 +2,8 @@
 import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
 import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
@@ -157,9 +159,17 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * @param project 
+     * @param filter 
+     * @param order 
+     * @param skip 
+     * @param take 
      */
-    public async getTransactionIntents(project?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getTransactionIntents(project?: string, filter?: string, order?: string, skip?: number, take?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+
+
+
 
 
         // Path Params
@@ -172,6 +182,26 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (project !== undefined) {
             requestContext.setQueryParam("project", ObjectSerializer.serialize(project, "string", ""));
+        }
+
+        // Query Params
+        if (filter !== undefined) {
+            requestContext.setQueryParam("filter", ObjectSerializer.serialize(filter, "string", ""));
+        }
+
+        // Query Params
+        if (order !== undefined) {
+            requestContext.setQueryParam("order", ObjectSerializer.serialize(order, "string", ""));
+        }
+
+        // Query Params
+        if (skip !== undefined) {
+            requestContext.setQueryParam("skip", ObjectSerializer.serialize(skip, "number", "double"));
+        }
+
+        // Query Params
+        if (take !== undefined) {
+            requestContext.setQueryParam("take", ObjectSerializer.serialize(take, "number", "double"));
         }
 
 
@@ -286,7 +316,7 @@ export class TransactionIntentsApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -318,7 +348,7 @@ export class TransactionIntentsApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -350,7 +380,7 @@ export class TransactionIntentsApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -385,7 +415,7 @@ export class TransactionIntentsApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -420,7 +450,7 @@ export class TransactionIntentsApiResponseProcessor {
             return body;
         }
 
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

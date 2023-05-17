@@ -1,4 +1,4 @@
-# .PlayersApi
+# openfort.PlayersApi
 
 All URIs are relative to *https://api.openfort.xyz*
 
@@ -25,13 +25,13 @@ Creates a player object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiCreatePlayerRequest = {
+let body:openfort.PlayersApiCreatePlayerRequest = {
   // string
   name: "name_example",
   // string (optional)
@@ -87,13 +87,13 @@ Updates an account object of an existing player.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiCreatePlayerAccountRequest = {
+let body:openfort.PlayersApiCreatePlayerAccountRequest = {
   // string | Specifies the unique player ID.
   player: "player_example",
   // string | The player ID
@@ -152,13 +152,13 @@ Creates the session for the player.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiCreateSessionRequest = {
+let body:openfort.PlayersApiCreateSessionRequest = {
   // string
   player: "player_example",
   // string
@@ -214,13 +214,13 @@ Retrieves the details of an existing player. Supply the unique player ID from ei
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiGetPlayerRequest = {
+let body:openfort.PlayersApiGetPlayerRequest = {
   // string | Specifies the unique player ID.
   id: "id_example",
   // string | Specifies the unique project ID. (optional)
@@ -272,13 +272,13 @@ Returns a list of your accounts for the given player. The accounts are returned 
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiGetPlayerAccountsRequest = {
+let body:openfort.PlayersApiGetPlayerAccountsRequest = {
   // string | Specifies the unique player ID.
   player: "player_example",
   // string | Specifies the unique project ID. (optional)
@@ -330,13 +330,13 @@ Retrieves the inventory of an existing player. Supply the unique player ID from 
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiGetPlayerInventoryRequest = {
+let body:openfort.PlayersApiGetPlayerInventoryRequest = {
   // string | Specifies the unique player ID.
   id: "id_example",
   // number
@@ -391,15 +391,23 @@ Returns a list of your players. The players are returned sorted by creation date
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiGetPlayersRequest = {
+let body:openfort.PlayersApiGetPlayersRequest = {
   // string | Specifies the unique project ID. (optional)
   project: "project_example",
+  // string (optional)
+  filter: "filter_example",
+  // string (optional)
+  order: "order_example",
+  // number (optional)
+  skip: 3.14,
+  // number (optional)
+  take: 3.14,
 };
 
 apiInstance.getPlayers(body).then((data:any) => {
@@ -413,6 +421,10 @@ apiInstance.getPlayers(body).then((data:any) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **project** | [**string**] | Specifies the unique project ID. | (optional) defaults to undefined
+ **filter** | [**string**] |  | (optional) defaults to undefined
+ **order** | [**string**] |  | (optional) defaults to undefined
+ **skip** | [**number**] |  | (optional) defaults to undefined
+ **take** | [**number**] |  | (optional) defaults to undefined
 
 
 ### Return type
@@ -445,13 +457,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiLoginRequest = {
+let body:openfort.PlayersApiLoginRequest = {
   // string
   email: "email_example",
   // string
@@ -502,13 +514,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiSignupRequest = {
+let body:openfort.PlayersApiSignupRequest = {
   // string
   email: "email_example",
   // string
@@ -561,13 +573,13 @@ Updates a player object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PlayersApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PlayersApi(configuration);
 
-let body:.PlayersApiUpdatePlayerRequest = {
+let body:openfort.PlayersApiUpdatePlayerRequest = {
   // string
   id: "id_example",
   // string

@@ -1,4 +1,4 @@
-# .LogsApi
+# openfort.LogsApi
 
 All URIs are relative to *https://api.openfort.xyz*
 
@@ -15,13 +15,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .LogsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.LogsApi(configuration);
 
-let body:.LogsApiGetProjectLogsRequest = {
+let body:openfort.LogsApiGetProjectLogsRequest = {
   // string (optional)
   project: "project_example",
   // Array<string> (optional)

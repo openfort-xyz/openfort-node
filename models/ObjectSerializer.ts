@@ -26,6 +26,7 @@ export * from '../models/ProjectLogs';
 export * from '../models/ProjectResponse';
 export * from '../models/ProjectsResponse';
 export * from '../models/ResponseResponse';
+export * from '../models/Strategy';
 export * from '../models/SumGas';
 export * from '../models/TransactionIntentResponse';
 export * from '../models/TransactionIntentsResponse';
@@ -59,6 +60,7 @@ import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectsResponse } from '../models/ProjectsResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
+import { Strategy } from '../models/Strategy';
 import { SumGas } from '../models/SumGas';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
 import { TransactionIntentsResponse } from '../models/TransactionIntentsResponse';
@@ -115,6 +117,7 @@ let typeMap: {[index: string]: any} = {
     "ProjectResponse": ProjectResponse,
     "ProjectsResponse": ProjectsResponse,
     "ResponseResponse": ResponseResponse,
+    "Strategy": Strategy,
     "SumGas": SumGas,
     "TransactionIntentResponse": TransactionIntentResponse,
     "TransactionIntentsResponse": TransactionIntentsResponse,

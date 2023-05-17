@@ -11,6 +11,7 @@
  */
 
 import { AllowFunctionResponse } from '../models/AllowFunctionResponse';
+import { Strategy } from '../models/Strategy';
 import { HttpFile } from '../http/http';
 
 export class PolicyResponse {
@@ -18,7 +19,7 @@ export class PolicyResponse {
     'createdAt': Date;
     'name': string | null;
     'chainId': number;
-    'strategy': string;
+    'strategy': Strategy;
     'transactionIntents': Array<any>;
     'allowFunctions': Array<AllowFunctionResponse>;
     'object': string;
@@ -53,7 +54,7 @@ export class PolicyResponse {
         {
             "name": "strategy",
             "baseName": "strategy",
-            "type": "string",
+            "type": "Strategy",
             "format": ""
         },
         {

@@ -52,6 +52,7 @@ models/ProjectLogs.ts
 models/ProjectResponse.ts
 models/ProjectsResponse.ts
 models/ResponseResponse.ts
+models/Strategy.ts
 models/SumGas.ts
 models/TransactionIntentResponse.ts
 models/TransactionIntentsResponse.ts

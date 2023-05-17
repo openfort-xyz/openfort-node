@@ -1,4 +1,4 @@
-# .TransactionIntentsApi
+# openfort.TransactionIntentsApi
 
 All URIs are relative to *https://api.openfort.xyz*
 
@@ -20,13 +20,13 @@ Creates a transaction intent object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .TransactionIntentsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.TransactionIntentsApi(configuration);
 
-let body:.TransactionIntentsApiCreateTransactionIntentRequest = {
+let body:openfort.TransactionIntentsApiCreateTransactionIntentRequest = {
   // string
   player: "player_example",
   // number
@@ -99,13 +99,13 @@ Updates a transaction intent object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .TransactionIntentsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.TransactionIntentsApi(configuration);
 
-let body:.TransactionIntentsApiGetTransactionIntentRequest = {
+let body:openfort.TransactionIntentsApiGetTransactionIntentRequest = {
   // string
   id: "id_example",
   // string (optional)
@@ -156,15 +156,23 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .TransactionIntentsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.TransactionIntentsApi(configuration);
 
-let body:.TransactionIntentsApiGetTransactionIntentsRequest = {
+let body:openfort.TransactionIntentsApiGetTransactionIntentsRequest = {
   // string (optional)
   project: "project_example",
+  // string (optional)
+  filter: "filter_example",
+  // string (optional)
+  order: "order_example",
+  // number (optional)
+  skip: 3.14,
+  // number (optional)
+  take: 3.14,
 };
 
 apiInstance.getTransactionIntents(body).then((data:any) => {
@@ -178,6 +186,10 @@ apiInstance.getTransactionIntents(body).then((data:any) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **project** | [**string**] |  | (optional) defaults to undefined
+ **filter** | [**string**] |  | (optional) defaults to undefined
+ **order** | [**string**] |  | (optional) defaults to undefined
+ **skip** | [**number**] |  | (optional) defaults to undefined
+ **take** | [**number**] |  | (optional) defaults to undefined
 
 
 ### Return type
@@ -210,13 +222,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .TransactionIntentsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.TransactionIntentsApi(configuration);
 
-let body:.TransactionIntentsApiUpdateTransactionIntentResponseRequest = {
+let body:openfort.TransactionIntentsApiUpdateTransactionIntentResponseRequest = {
   // string
   id: "id_example",
   // string (optional)
@@ -268,13 +280,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .TransactionIntentsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.TransactionIntentsApi(configuration);
 
-let body:.TransactionIntentsApiUpdateTransactionIntentsResponseRequest = {
+let body:openfort.TransactionIntentsApiUpdateTransactionIntentsResponseRequest = {
   // string (optional)
   project: "project_example",
 };

@@ -1,4 +1,4 @@
-# .DefaultApi
+# openfort.DefaultApi
 
 All URIs are relative to *https://api.openfort.xyz*
 
@@ -22,13 +22,13 @@ Creates an account object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.DefaultApi(configuration);
 
-let body:.DefaultApiCreateAccountRequest = {
+let body:openfort.DefaultApiCreateAccountRequest = {
   // string | The player ID
   player: "player_example",
   // string | The project ID (optional)
@@ -84,13 +84,13 @@ Creates an allow function object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.DefaultApi(configuration);
 
-let body:.DefaultApiCreateAllowFunctionRequest = {
+let body:openfort.DefaultApiCreateAllowFunctionRequest = {
   // string
   type: "type_example",
   // string
@@ -152,13 +152,13 @@ Retrieves the details of an existing account. Supply the unique account ID from 
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.DefaultApi(configuration);
 
-let body:.DefaultApiGetAccountRequest = {
+let body:openfort.DefaultApiGetAccountRequest = {
   // string | Specifies the unique account ID.
   id: "id_example",
   // string | Specifies the unique project ID. (optional)
@@ -210,13 +210,13 @@ Retrieves the inventory of an existing account. Supply the unique account ID fro
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.DefaultApi(configuration);
 
-let body:.DefaultApiGetAccountInventoryRequest = {
+let body:openfort.DefaultApiGetAccountInventoryRequest = {
   // string | Specifies the unique account ID.
   id: "id_example",
   // string | Specifies the unique project ID. (optional)
@@ -268,13 +268,13 @@ Returns a list of your accounts for the given player. The accounts are returned 
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.DefaultApi(configuration);
 
-let body:.DefaultApiGetAccountsRequest = {
+let body:openfort.DefaultApiGetAccountsRequest = {
   // string | Specifies the unique player ID.
   player: "player_example",
   // string | Specifies the unique project ID. (optional)
@@ -326,13 +326,13 @@ Returns a list of your allow functions for the given policy. The allow functions
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.DefaultApi(configuration);
 
-let body:.DefaultApiGetAllowFunctionsRequest = {
+let body:openfort.DefaultApiGetAllowFunctionsRequest = {
   // string | Specifies the unique project ID. (optional)
   project: "project_example",
   // string | Specifies the unique policy ID. (optional)
@@ -384,13 +384,13 @@ Updates your allow functions object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.DefaultApi(configuration);
 
-let body:.DefaultApiUpdateAllowFunctionRequest = {
+let body:openfort.DefaultApiUpdateAllowFunctionRequest = {
   // string | Specifies the unique allow function ID.
   id: "id_example",
   // string

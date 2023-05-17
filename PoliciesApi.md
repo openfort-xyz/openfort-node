@@ -1,4 +1,4 @@
-# .PoliciesApi
+# openfort.PoliciesApi
 
 All URIs are relative to *https://api.openfort.xyz*
 
@@ -24,19 +24,23 @@ Create a policy object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiCreatePolicyRequest = {
+let body:openfort.PoliciesApiCreatePolicyRequest = {
   // string
   name: "name_example",
   // number
   chainId: 3.14,
-  // string (optional)
-  strategy: "strategy_example",
+  // Strategy (optional)
+  strategy: {
+    sponsorSchema: "sponsorSchema_example",
+    tokenContract: "tokenContract_example",
+    tokenContractAmount: "tokenContractAmount_example",
+  },
   // string (optional)
   project: "project_example",
 };
@@ -53,7 +57,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | [**string**] |  | defaults to undefined
  **chainId** | [**number**] |  | defaults to undefined
- **strategy** | [**string**] |  | (optional) defaults to undefined
+ **strategy** | **Strategy** |  | (optional) defaults to undefined
  **project** | [**string**] |  | (optional) defaults to undefined
 
 
@@ -88,13 +92,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiCreatePolicyAllowFunctionRequest = {
+let body:openfort.PoliciesApiCreatePolicyAllowFunctionRequest = {
   // string
   policy: "policy_example",
   // string
@@ -158,13 +162,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiGetPoliciesRequest = {
+let body:openfort.PoliciesApiGetPoliciesRequest = {
   // string (optional)
   project: "project_example",
 };
@@ -212,13 +216,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiGetPolicyRequest = {
+let body:openfort.PoliciesApiGetPolicyRequest = {
   // string
   id: "id_example",
   // string (optional)
@@ -269,13 +273,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiGetPolicyAllowFunctionsRequest = {
+let body:openfort.PoliciesApiGetPolicyAllowFunctionsRequest = {
   // string
   policy: "policy_example",
   // string (optional)
@@ -327,13 +331,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiGetPolicyDailyGasUsageRequest = {
+let body:openfort.PoliciesApiGetPolicyDailyGasUsageRequest = {
   // string
   policy: "policy_example",
   // string (optional)
@@ -388,13 +392,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiGetPolicyTotalGasUsageRequest = {
+let body:openfort.PoliciesApiGetPolicyTotalGasUsageRequest = {
   // string
   policy: "policy_example",
   // string (optional)
@@ -450,21 +454,25 @@ Updates a policy object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiUpdatePolicyRequest = {
+let body:openfort.PoliciesApiUpdatePolicyRequest = {
   // string
   id: "id_example",
   // string (optional)
   name: "name_example",
   // number (optional)
   chainId: 3.14,
-  // string (optional)
-  strategy: "strategy_example",
+  // Strategy (optional)
+  strategy: {
+    sponsorSchema: "sponsorSchema_example",
+    tokenContract: "tokenContract_example",
+    tokenContractAmount: "tokenContractAmount_example",
+  },
   // string (optional)
   project: "project_example",
 };
@@ -482,7 +490,7 @@ Name | Type | Description  | Notes
  **id** | [**string**] |  | defaults to undefined
  **name** | [**string**] |  | (optional) defaults to undefined
  **chainId** | [**number**] |  | (optional) defaults to undefined
- **strategy** | [**string**] |  | (optional) defaults to undefined
+ **strategy** | **Strategy** |  | (optional) defaults to undefined
  **project** | [**string**] |  | (optional) defaults to undefined
 
 
@@ -517,13 +525,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .PoliciesApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.PoliciesApi(configuration);
 
-let body:.PoliciesApiUpdatePolicyAllowFunctionRequest = {
+let body:openfort.PoliciesApiUpdatePolicyAllowFunctionRequest = {
   // string
   policy: "policy_example",
   // string

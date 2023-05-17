@@ -1,4 +1,4 @@
-# .ContractsApi
+# openfort.ContractsApi
 
 All URIs are relative to *https://api.openfort.xyz*
 
@@ -18,13 +18,13 @@ Creates an contract object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ContractsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ContractsApi(configuration);
 
-let body:.ContractsApiCreateContractRequest = {
+let body:openfort.ContractsApiCreateContractRequest = {
   // string
   name: "name_example",
   // number
@@ -89,13 +89,13 @@ Retrieves the details of an existing contract. Supply the unique contract ID fro
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ContractsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ContractsApi(configuration);
 
-let body:.ContractsApiGetContractRequest = {
+let body:openfort.ContractsApiGetContractRequest = {
   // string | Specifies the unique contract ID.
   id: "id_example",
   // string | Specifies the unique project ID. (optional)
@@ -147,13 +147,13 @@ Returns a list of your contracts. The contracts are returned sorted by creation 
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ContractsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ContractsApi(configuration);
 
-let body:.ContractsApiGetContractsRequest = {
+let body:openfort.ContractsApiGetContractsRequest = {
   // string | Specifies the unique project ID. (optional)
   project: "project_example",
 };

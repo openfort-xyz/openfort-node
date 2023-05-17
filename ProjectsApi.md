@@ -1,4 +1,4 @@
-# .ProjectsApi
+# openfort.ProjectsApi
 
 All URIs are relative to *https://api.openfort.xyz*
 
@@ -20,13 +20,13 @@ Creates a project object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ProjectsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ProjectsApi(configuration);
 
-let body:.ProjectsApiCreateProjectRequest = {
+let body:openfort.ProjectsApiCreateProjectRequest = {
   // string
   name: "name_example",
   // boolean (optional)
@@ -81,11 +81,11 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ProjectsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ProjectsApi(configuration);
 
 let body:any = {};
 
@@ -130,13 +130,13 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ProjectsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ProjectsApi(configuration);
 
-let body:.ProjectsApiGetProjectRequest = {
+let body:openfort.ProjectsApiGetProjectRequest = {
   // string
   id: "id_example",
 };
@@ -184,13 +184,13 @@ No authorization required
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ProjectsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ProjectsApi(configuration);
 
-let body:.ProjectsApiGetProjectsRequest = {
+let body:openfort.ProjectsApiGetProjectsRequest = {
   // string (optional)
   project: "project_example",
 };
@@ -239,13 +239,13 @@ Updates a project object.
 
 
 ```typescript
-import {  } from '';
+import { openfort } from '@openfort/openfort-node';
 import * as fs from 'fs';
 
-const configuration = .createConfiguration();
-const apiInstance = new .ProjectsApi(configuration);
+const configuration = openfort.createConfiguration();
+const apiInstance = new openfort.ProjectsApi(configuration);
 
-let body:.ProjectsApiUpdateProjectRequest = {
+let body:openfort.ProjectsApiUpdateProjectRequest = {
   // string
   id: "id_example",
   // string

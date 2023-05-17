@@ -29,6 +29,7 @@ import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectsResponse } from '../models/ProjectsResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
+import { Strategy } from '../models/Strategy';
 import { SumGas } from '../models/SumGas';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
 import { TransactionIntentsResponse } from '../models/TransactionIntentsResponse';
@@ -293,9 +294,13 @@ export class PromisePlayersApi {
     /**
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
      * @param project Specifies the unique project ID.
+     * @param filter 
+     * @param order 
+     * @param skip 
+     * @param take 
      */
-    public getPlayers(project?: string, _options?: Configuration): Promise<PlayersResponse> {
-        const result = this.api.getPlayers(project, _options);
+    public getPlayers(project?: string, filter?: string, order?: string, skip?: number, take?: number, _options?: Configuration): Promise<PlayersResponse> {
+        const result = this.api.getPlayers(project, filter, order, skip, take, _options);
         return result.toPromise();
     }
 
@@ -355,7 +360,7 @@ export class PromisePoliciesApi {
      * @param strategy 
      * @param project 
      */
-    public createPolicy(name: string, chainId: number, strategy?: string, project?: string, _options?: Configuration): Promise<PolicyResponse> {
+    public createPolicy(name: string, chainId: number, strategy?: Strategy, project?: string, _options?: Configuration): Promise<PolicyResponse> {
         const result = this.api.createPolicy(name, chainId, strategy, project, _options);
         return result.toPromise();
     }
@@ -427,7 +432,7 @@ export class PromisePoliciesApi {
      * @param strategy 
      * @param project 
      */
-    public updatePolicy(id: string, name?: string, chainId?: number, strategy?: string, project?: string, _options?: Configuration): Promise<PolicyResponse> {
+    public updatePolicy(id: string, name?: string, chainId?: number, strategy?: Strategy, project?: string, _options?: Configuration): Promise<PolicyResponse> {
         const result = this.api.updatePolicy(id, name, chainId, strategy, project, _options);
         return result.toPromise();
     }
@@ -556,9 +561,13 @@ export class PromiseTransactionIntentsApi {
 
     /**
      * @param project 
+     * @param filter 
+     * @param order 
+     * @param skip 
+     * @param take 
      */
-    public getTransactionIntents(project?: string, _options?: Configuration): Promise<TransactionIntentsResponse> {
-        const result = this.api.getTransactionIntents(project, _options);
+    public getTransactionIntents(project?: string, filter?: string, order?: string, skip?: number, take?: number, _options?: Configuration): Promise<TransactionIntentsResponse> {
+        const result = this.api.getTransactionIntents(project, filter, order, skip, take, _options);
         return result.toPromise();
     }
 

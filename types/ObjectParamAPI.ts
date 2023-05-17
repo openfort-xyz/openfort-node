@@ -29,6 +29,7 @@ import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectsResponse } from '../models/ProjectsResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
+import { Strategy } from '../models/Strategy';
 import { SumGas } from '../models/SumGas';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
 import { TransactionIntentsResponse } from '../models/TransactionIntentsResponse';
@@ -524,6 +525,30 @@ export interface PlayersApiGetPlayersRequest {
      * @memberof PlayersApigetPlayers
      */
     project?: string
+    /**
+     * 
+     * @type string
+     * @memberof PlayersApigetPlayers
+     */
+    filter?: string
+    /**
+     * 
+     * @type string
+     * @memberof PlayersApigetPlayers
+     */
+    order?: string
+    /**
+     * 
+     * @type number
+     * @memberof PlayersApigetPlayers
+     */
+    skip?: number
+    /**
+     * 
+     * @type number
+     * @memberof PlayersApigetPlayers
+     */
+    take?: number
 }
 
 export interface PlayersApiLoginRequest {
@@ -643,7 +668,7 @@ export class ObjectPlayersApi {
      * @param param the request object
      */
     public getPlayers(param: PlayersApiGetPlayersRequest = {}, options?: Configuration): Promise<PlayersResponse> {
-        return this.api.getPlayers(param.project,  options).toPromise();
+        return this.api.getPlayers(param.project, param.filter, param.order, param.skip, param.take,  options).toPromise();
     }
 
     /**
@@ -688,10 +713,10 @@ export interface PoliciesApiCreatePolicyRequest {
     chainId: number
     /**
      * 
-     * @type string
+     * @type Strategy
      * @memberof PoliciesApicreatePolicy
      */
-    strategy?: string
+    strategy?: Strategy
     /**
      * 
      * @type string
@@ -841,10 +866,10 @@ export interface PoliciesApiUpdatePolicyRequest {
     chainId?: number
     /**
      * 
-     * @type string
+     * @type Strategy
      * @memberof PoliciesApiupdatePolicy
      */
-    strategy?: string
+    strategy?: Strategy
     /**
      * 
      * @type string
@@ -1154,6 +1179,30 @@ export interface TransactionIntentsApiGetTransactionIntentsRequest {
      * @memberof TransactionIntentsApigetTransactionIntents
      */
     project?: string
+    /**
+     * 
+     * @type string
+     * @memberof TransactionIntentsApigetTransactionIntents
+     */
+    filter?: string
+    /**
+     * 
+     * @type string
+     * @memberof TransactionIntentsApigetTransactionIntents
+     */
+    order?: string
+    /**
+     * 
+     * @type number
+     * @memberof TransactionIntentsApigetTransactionIntents
+     */
+    skip?: number
+    /**
+     * 
+     * @type number
+     * @memberof TransactionIntentsApigetTransactionIntents
+     */
+    take?: number
 }
 
 export interface TransactionIntentsApiUpdateTransactionIntentResponseRequest {
@@ -1207,7 +1256,7 @@ export class ObjectTransactionIntentsApi {
      * @param param the request object
      */
     public getTransactionIntents(param: TransactionIntentsApiGetTransactionIntentsRequest = {}, options?: Configuration): Promise<TransactionIntentsResponse> {
-        return this.api.getTransactionIntents(param.project,  options).toPromise();
+        return this.api.getTransactionIntents(param.project, param.filter, param.order, param.skip, param.take,  options).toPromise();
     }
 
     /**
