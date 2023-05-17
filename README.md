@@ -1,4 +1,4 @@
-## OpenfortClient@1.0.0
+## @openfort/openfort-node@1.0.0
 
 This generator creates TypeScript/JavaScript client that utilizes fetch-api.
 
@@ -21,7 +21,7 @@ Navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install OpenfortClient@1.0.0 --save
+npm install @openfort/openfort-node@1.0.0 --save
 ```
 
 _unPublished (not recommended):_
