@@ -2,3 +2,4 @@ dist
 package-lock.json
 .idea
 node_modules
+tsconfig.tsbuildinfo
