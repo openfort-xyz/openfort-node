@@ -1,7 +1,7 @@
 import {OpenfortClient} from "@openfort/openfort-node";
 
 async function example() {
-    const openfortClient = new OpenfortClient("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "http://localhost:3000");
+    const openfortClient = new OpenfortClient("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
     const players = await openfortClient.players.getPlayers();
     for (const player of players.body.data) {
         console.log(player.id);
