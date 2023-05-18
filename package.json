@@ -15,14 +15,14 @@
   ],
   "license": "MIT",
   "main": "./dist/index.js",
-  "type": "commonjs",
   "exports": {
     ".": "./dist/index.js"
   },
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "yarn build",
+    "prepack": "yarn install && yarn build"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
