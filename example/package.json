@@ -1,5 +1,5 @@
 {
-  "name": "@openfort/openfort-node-test",
+  "name": "@openfort-xyz/openfort-node-test",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -22,6 +22,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@openfort/openfort-node": "file:../src/index.ts"
+    "@openfort-xyz/openfort-node": "file:../src/index.ts"
   }
 }

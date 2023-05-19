@@ -1,4 +1,4 @@
-import {OpenfortClient} from "@openfort/openfort-node";
+import {OpenfortClient} from "@openfort-xyz/openfort-node";
 
 async function example() {
     const openfort = new OpenfortClient("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");

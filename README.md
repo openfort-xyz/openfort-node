@@ -1,11 +1,11 @@
-## @openfort/openfort-node@1.0.0
+## @openfort-xyz/openfort-node@1.0.0
 
 ### Usage
 
 Below code snippet shows exemplary usage of the configuration and the API. 
 
 ```typescript
-import {OpenfortClient} from "@openfort/openfort-node";
+import {OpenfortClient} from "@openfort-xyz/openfort-node";
 
 async function example() {
     const openfort = new OpenfortClient("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
