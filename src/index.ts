@@ -5,7 +5,7 @@ import { PoliciesApi } from './api/policiesApi';
 import { ProjectsApi } from './api/projectsApi';
 import { TransactionIntentsApi } from './api/transactionIntentsApi';
 
-export class OpenfortClient {
+export class Openfort {
     private _contractApi?: ContractsApi;
     private _defaultApi?: DefaultApi;
     private _playerApi?: PlayersApi;

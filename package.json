@@ -1,6 +1,6 @@
 {
   "name": "@openfort-xyz/openfort-node",
-  "version": "1.0.0",
+  "version": "0.1.4",
   "description": "OpenAPI client for @openfort-xyz/openfort-node",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
@@ -21,8 +21,6 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "yarn build",
-    "prepack": "yarn install && yarn build",
     "prepublishOnly": "yarn install && yarn build"
   },
   "publishConfig": {

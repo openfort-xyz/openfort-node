@@ -1,7 +1,7 @@
-import {OpenfortClient} from "@openfort-xyz/openfort-node";
+import {Openfort} from "@openfort-xyz/openfort-node";
 
 async function example() {
-    const openfort = new OpenfortClient("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
+    const openfort = new Openfort("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
     const players = await openfort.players.getPlayers();
     for (const player of players.body.data) {
         console.log(player.id);

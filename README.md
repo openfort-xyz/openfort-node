@@ -1,14 +1,32 @@
 ## @openfort-xyz/openfort-node@1.0.0
 
+### Installation
+
+Add the Openfort registry to the configuration file for NPM `.npmrc`:
+
+```text
+@openfort-xyz:registry=https://npm.pkg.github.com
+```
+
+Depends on the package manager that used in the project, one of the following commands should be run:
+
+```shell
+npm install @openfort-xyz/openfort-node
+```
+
+```shell
+yarn add @openfort-xyz/openfort-node
+```
+
 ### Usage
 
 Below code snippet shows exemplary usage of the configuration and the API. 
 
 ```typescript
-import {OpenfortClient} from "@openfort-xyz/openfort-node";
+import {Openfort} from "@openfort-xyz/openfort-node";
 
 async function example() {
-    const openfort = new OpenfortClient("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
+    const openfort = new Openfort("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
     const players = await openfort.players.getPlayers();
     for (const player of players.body.data) {
         console.log(player.id);
@@ -25,5 +43,4 @@ async function example() {
 }
 
 example().catch((e) => console.error(e));
-
 ```
