@@ -1,4 +1,4 @@
-import {Openfort} from "@openfort-xyz/openfort-node";
+import Openfort from "@openfort/openfort-node";
 import { CreateSessionPlayerRequest } from "../src/model/createSessionPlayerRequest";
 
 async function example() {

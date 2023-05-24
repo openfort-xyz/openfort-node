@@ -16,7 +16,7 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "paths": {
-      "@openfort-xyz/openfort-node": ["../src/index.ts"]
+      "@openfort/openfort-node": ["../src/index.ts"]
     },
     "esModuleInterop": true
   },

@@ -1,7 +1,7 @@
 {
-  "name": "@openfort-xyz/openfort-node",
-  "version": "0.1.4",
-  "description": "OpenAPI client for @openfort-xyz/openfort-node",
+  "name": "@openfort/openfort-node",
+  "version": "0.1.8",
+  "description": "OpenAPI client for @openfort/openfort-node",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "prepublishOnly": "yarn install && yarn build"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
