@@ -22,6 +22,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@openfort/openfort-node": "file:../src/index.ts"
+    "@openfort/openfort-node": "file:../dist/index.ts"
   }
 }

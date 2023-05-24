@@ -1,14 +1,6 @@
-## @openfort/openfort-node@1.0.0
+## @openfort/openfort-node@0.2.2
 
 ### Installation
-
-Add the Openfort registry to the configuration file for NPM `.npmrc`:
-
-```text
-@openfort:registry=https://npm.pkg.github.com
-```
-
-Depends on the package manager that used in the project, one of the following commands should be run:
 
 ```shell
 npm install @openfort/openfort-node

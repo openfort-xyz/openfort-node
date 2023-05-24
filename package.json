@@ -1,6 +1,6 @@
 {
   "name": "@openfort/openfort-node",
-  "version": "0.1.8",
+  "version": "0.2.2",
   "description": "OpenAPI client for @openfort/openfort-node",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
@@ -16,7 +16,13 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./*": "./dist/*"
+  },
+  "typesVersions": {
+    "*": {
+      "*": ["dist/*"]
+    }
   },
   "typings": "./dist/index.d.ts",
   "scripts": {
