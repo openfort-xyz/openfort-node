@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export class Interaction {
-    'contract': string;
+    'contract': string | null;
     'functionName': string;
     'functionArgs': Array<any>;
 

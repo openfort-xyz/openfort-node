@@ -11,15 +11,16 @@
  */
 
 import { RequestFile } from './models';
-import { ContractResponse } from './contractResponse';
 
-export class AllowFunctionResponse {
+export class SessionResponse {
     'id': string;
     'createdAt': Date;
-    'type': string;
-    'functionName'?: string;
-    'contract'?: ContractResponse;
     'object': string;
+    'validAfter'?: string;
+    'validUntil'?: string;
+    'whitelist'?: Array<string>;
+    'limit'?: number;
+    'nextAction': object | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -35,28 +36,38 @@ export class AllowFunctionResponse {
             "type": "Date"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "functionName",
-            "baseName": "function_name",
-            "type": "string"
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractResponse"
-        },
-        {
             "name": "object",
             "baseName": "object",
             "type": "string"
+        },
+        {
+            "name": "validAfter",
+            "baseName": "valid_after",
+            "type": "string"
+        },
+        {
+            "name": "validUntil",
+            "baseName": "valid_until",
+            "type": "string"
+        },
+        {
+            "name": "whitelist",
+            "baseName": "whitelist",
+            "type": "Array<string>"
+        },
+        {
+            "name": "limit",
+            "baseName": "limit",
+            "type": "number"
+        },
+        {
+            "name": "nextAction",
+            "baseName": "next_action",
+            "type": "object"
         }    ];
 
     static getAttributeTypeMap() {
-        return AllowFunctionResponse.attributeTypeMap;
+        return SessionResponse.attributeTypeMap;
     }
 }
 

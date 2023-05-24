@@ -7,11 +7,11 @@ export * from './allowFunctionsResponse';
 export * from './apiKeyResponse';
 export * from './assetInventory';
 export * from './assetType';
-export * from './authResponse';
 export * from './contractResponse';
 export * from './contractResponseAbi';
 export * from './contractResponseAbiAnyOfInner';
 export * from './contractsResponse';
+export * from './createSessionPlayerRequest';
 export * from './fragment';
 export * from './gas';
 export * from './getProjectResponse';
@@ -28,6 +28,7 @@ export * from './projectLogs';
 export * from './projectResponse';
 export * from './projectsResponse';
 export * from './responseResponse';
+export * from './sessionResponse';
 export * from './strategy';
 export * from './sumGas';
 export * from './transactionIntentResponse';
@@ -54,11 +55,11 @@ import { AllowFunctionsResponse } from './allowFunctionsResponse';
 import { ApiKeyResponse } from './apiKeyResponse';
 import { AssetInventory } from './assetInventory';
 import { AssetType } from './assetType';
-import { AuthResponse } from './authResponse';
 import { ContractResponse } from './contractResponse';
 import { ContractResponseAbi } from './contractResponseAbi';
 import { ContractResponseAbiAnyOfInner } from './contractResponseAbiAnyOfInner';
 import { ContractsResponse } from './contractsResponse';
+import { CreateSessionPlayerRequest } from './createSessionPlayerRequest';
 import { Fragment } from './fragment';
 import { Gas } from './gas';
 import { GetProjectResponse } from './getProjectResponse';
@@ -75,6 +76,7 @@ import { ProjectLogs } from './projectLogs';
 import { ProjectResponse } from './projectResponse';
 import { ProjectsResponse } from './projectsResponse';
 import { ResponseResponse } from './responseResponse';
+import { SessionResponse } from './sessionResponse';
 import { Strategy } from './strategy';
 import { SumGas } from './sumGas';
 import { TransactionIntentResponse } from './transactionIntentResponse';
@@ -104,11 +106,11 @@ let typeMap: {[index: string]: any} = {
     "AllowFunctionsResponse": AllowFunctionsResponse,
     "ApiKeyResponse": ApiKeyResponse,
     "AssetInventory": AssetInventory,
-    "AuthResponse": AuthResponse,
     "ContractResponse": ContractResponse,
     "ContractResponseAbi": ContractResponseAbi,
     "ContractResponseAbiAnyOfInner": ContractResponseAbiAnyOfInner,
     "ContractsResponse": ContractsResponse,
+    "CreateSessionPlayerRequest": CreateSessionPlayerRequest,
     "Fragment": Fragment,
     "Gas": Gas,
     "GetProjectResponse": GetProjectResponse,
@@ -125,6 +127,7 @@ let typeMap: {[index: string]: any} = {
     "ProjectResponse": ProjectResponse,
     "ProjectsResponse": ProjectsResponse,
     "ResponseResponse": ResponseResponse,
+    "SessionResponse": SessionResponse,
     "Strategy": Strategy,
     "SumGas": SumGas,
     "TransactionIntentResponse": TransactionIntentResponse,

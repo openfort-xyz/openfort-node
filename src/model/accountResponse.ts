@@ -19,6 +19,7 @@ export class AccountResponse {
     'address': string;
     'deployed': boolean;
     'object': string;
+    'custodial': boolean;
     'chainId': number;
     'transactionIntents': Array<TransactionIntentResponse>;
 
@@ -49,6 +50,11 @@ export class AccountResponse {
             "name": "object",
             "baseName": "object",
             "type": "string"
+        },
+        {
+            "name": "custodial",
+            "baseName": "custodial",
+            "type": "boolean"
         },
         {
             "name": "chainId",

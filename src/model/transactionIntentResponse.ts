@@ -24,6 +24,7 @@ export class TransactionIntentResponse {
     'userOperation'?: UserOpResult;
     'policy': string | null;
     'player': string;
+    'nextAction': object | null;
     'account'?: string;
     'transactions': Array<Interaction>;
     'response': ResponseResponse | null;
@@ -71,6 +72,11 @@ export class TransactionIntentResponse {
             "name": "player",
             "baseName": "player",
             "type": "string"
+        },
+        {
+            "name": "nextAction",
+            "baseName": "next_action",
+            "type": "object"
         },
         {
             "name": "account",
