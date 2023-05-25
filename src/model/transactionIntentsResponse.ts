@@ -10,35 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { TransactionIntentResponse } from './transactionIntentResponse';
+import { RequestFile } from "./models";
+import { TransactionIntentResponse } from "./transactionIntentResponse";
 
 export class TransactionIntentsResponse {
-    'object': string;
-    'url': string;
-    'data': Array<TransactionIntentResponse>;
+  "object": string;
+  "url": string;
+  "data": Array<TransactionIntentResponse>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<TransactionIntentResponse>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "url",
+      baseName: "url",
+      type: "string",
+    },
+    {
+      name: "data",
+      baseName: "data",
+      type: "Array<TransactionIntentResponse>",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return TransactionIntentsResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TransactionIntentsResponse.attributeTypeMap;
+  }
 }
-

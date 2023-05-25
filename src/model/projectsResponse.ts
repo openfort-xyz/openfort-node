@@ -10,35 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { ProjectResponse } from './projectResponse';
+import { RequestFile } from "./models";
+import { ProjectResponse } from "./projectResponse";
 
 export class ProjectsResponse {
-    'object': string;
-    'url': string;
-    'data': Array<ProjectResponse>;
+  "object": string;
+  "url": string;
+  "data": Array<ProjectResponse>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<ProjectResponse>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "url",
+      baseName: "url",
+      type: "string",
+    },
+    {
+      name: "data",
+      baseName: "data",
+      type: "Array<ProjectResponse>",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ProjectsResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ProjectsResponse.attributeTypeMap;
+  }
 }
-

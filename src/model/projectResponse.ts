@@ -10,59 +10,63 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { ApiKeyResponse } from './apiKeyResponse';
+import { RequestFile } from "./models";
+import { ApiKeyResponse } from "./apiKeyResponse";
 
 export class ProjectResponse {
-    'id': string;
-    'createdAt': Date;
-    'name': string | null;
-    'livemode': boolean;
-    'logoUrl'?: string | null;
-    'apikeys': Array<ApiKeyResponse>;
-    'object': string;
+  "id": string;
+  "createdAt": Date;
+  "name": string | null;
+  "livemode": boolean;
+  "logoUrl"?: string | null;
+  "apikeys": Array<ApiKeyResponse>;
+  "object": string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean"
-        },
-        {
-            "name": "logoUrl",
-            "baseName": "logo_url",
-            "type": "string"
-        },
-        {
-            "name": "apikeys",
-            "baseName": "apikeys",
-            "type": "Array<ApiKeyResponse>"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "livemode",
+      baseName: "livemode",
+      type: "boolean",
+    },
+    {
+      name: "logoUrl",
+      baseName: "logo_url",
+      type: "string",
+    },
+    {
+      name: "apikeys",
+      baseName: "apikeys",
+      type: "Array<ApiKeyResponse>",
+    },
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ProjectResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ProjectResponse.attributeTypeMap;
+  }
 }
-

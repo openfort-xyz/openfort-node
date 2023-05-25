@@ -10,58 +10,62 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class Log {
-    'id': string;
-    'timestamp': string;
-    'event': string;
-    'requestBody': any | null;
-    'status': number;
-    'responseTime': number;
-    'responseData': any | null;
+  "id": string;
+  "timestamp": string;
+  "event": string;
+  "requestBody": any | null;
+  "status": number;
+  "responseTime": number;
+  "responseData": any | null;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "string"
-        },
-        {
-            "name": "event",
-            "baseName": "event",
-            "type": "string"
-        },
-        {
-            "name": "requestBody",
-            "baseName": "request_body",
-            "type": "any"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "number"
-        },
-        {
-            "name": "responseTime",
-            "baseName": "response_time",
-            "type": "number"
-        },
-        {
-            "name": "responseData",
-            "baseName": "response_data",
-            "type": "any"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "timestamp",
+      baseName: "timestamp",
+      type: "string",
+    },
+    {
+      name: "event",
+      baseName: "event",
+      type: "string",
+    },
+    {
+      name: "requestBody",
+      baseName: "request_body",
+      type: "any",
+    },
+    {
+      name: "status",
+      baseName: "status",
+      type: "number",
+    },
+    {
+      name: "responseTime",
+      baseName: "response_time",
+      type: "number",
+    },
+    {
+      name: "responseData",
+      baseName: "response_data",
+      type: "any",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Log.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Log.attributeTypeMap;
+  }
 }
-

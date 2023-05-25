@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum AssetType {
-    NUMBER_1 = <any> 1,
-    NUMBER_2 = <any> 2,
-    NUMBER_3 = <any> 3,
-    NUMBER_4 = <any> 4
+  NUMBER_1 = <any>1,
+  NUMBER_2 = <any>2,
+  NUMBER_3 = <any>3,
+  NUMBER_4 = <any>4,
 }

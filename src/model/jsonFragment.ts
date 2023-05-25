@@ -10,70 +10,74 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class JsonFragment {
-    'name'?: string;
-    'type'?: string;
-    'anonymous'?: boolean;
-    'payable'?: boolean;
-    'constant'?: boolean;
-    'stateMutability'?: string;
-    'inputs'?: object;
-    'outputs'?: object;
-    'gas'?: string;
+  "name"?: string;
+  "type"?: string;
+  "anonymous"?: boolean;
+  "payable"?: boolean;
+  "constant"?: boolean;
+  "stateMutability"?: string;
+  "inputs"?: object;
+  "outputs"?: object;
+  "gas"?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "anonymous",
-            "baseName": "anonymous",
-            "type": "boolean"
-        },
-        {
-            "name": "payable",
-            "baseName": "payable",
-            "type": "boolean"
-        },
-        {
-            "name": "constant",
-            "baseName": "constant",
-            "type": "boolean"
-        },
-        {
-            "name": "stateMutability",
-            "baseName": "stateMutability",
-            "type": "string"
-        },
-        {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "object"
-        },
-        {
-            "name": "outputs",
-            "baseName": "outputs",
-            "type": "object"
-        },
-        {
-            "name": "gas",
-            "baseName": "gas",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "type",
+      baseName: "type",
+      type: "string",
+    },
+    {
+      name: "anonymous",
+      baseName: "anonymous",
+      type: "boolean",
+    },
+    {
+      name: "payable",
+      baseName: "payable",
+      type: "boolean",
+    },
+    {
+      name: "constant",
+      baseName: "constant",
+      type: "boolean",
+    },
+    {
+      name: "stateMutability",
+      baseName: "stateMutability",
+      type: "string",
+    },
+    {
+      name: "inputs",
+      baseName: "inputs",
+      type: "object",
+    },
+    {
+      name: "outputs",
+      baseName: "outputs",
+      type: "object",
+    },
+    {
+      name: "gas",
+      baseName: "gas",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return JsonFragment.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return JsonFragment.attributeTypeMap;
+  }
 }
-

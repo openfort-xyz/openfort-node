@@ -10,64 +10,68 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class ParamType {
-    'name': string;
-    'type': string;
-    'baseType': string;
-    'indexed': boolean;
-    'components': Array<ParamType>;
-    'arrayLength': number;
-    'arrayChildren': ParamType;
-    'isParamType': boolean;
+  "name": string;
+  "type": string;
+  "baseType": string;
+  "indexed": boolean;
+  "components": Array<ParamType>;
+  "arrayLength": number;
+  "arrayChildren": ParamType;
+  "isParamType": boolean;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "baseType",
-            "baseName": "baseType",
-            "type": "string"
-        },
-        {
-            "name": "indexed",
-            "baseName": "indexed",
-            "type": "boolean"
-        },
-        {
-            "name": "components",
-            "baseName": "components",
-            "type": "Array<ParamType>"
-        },
-        {
-            "name": "arrayLength",
-            "baseName": "arrayLength",
-            "type": "number"
-        },
-        {
-            "name": "arrayChildren",
-            "baseName": "arrayChildren",
-            "type": "ParamType"
-        },
-        {
-            "name": "isParamType",
-            "baseName": "_isParamType",
-            "type": "boolean"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "type",
+      baseName: "type",
+      type: "string",
+    },
+    {
+      name: "baseType",
+      baseName: "baseType",
+      type: "string",
+    },
+    {
+      name: "indexed",
+      baseName: "indexed",
+      type: "boolean",
+    },
+    {
+      name: "components",
+      baseName: "components",
+      type: "Array<ParamType>",
+    },
+    {
+      name: "arrayLength",
+      baseName: "arrayLength",
+      type: "number",
+    },
+    {
+      name: "arrayChildren",
+      baseName: "arrayChildren",
+      type: "ParamType",
+    },
+    {
+      name: "isParamType",
+      baseName: "_isParamType",
+      type: "boolean",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ParamType.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ParamType.attributeTypeMap;
+  }
 }
-

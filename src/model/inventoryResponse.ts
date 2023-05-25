@@ -10,41 +10,45 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AssetInventory } from './assetInventory';
+import { RequestFile } from "./models";
+import { AssetInventory } from "./assetInventory";
 
 export class InventoryResponse {
-    'object': string;
-    'nftAssets'?: Array<AssetInventory>;
-    'nativeAsset'?: AssetInventory;
-    'tokenAssets'?: Array<AssetInventory>;
+  "object": string;
+  "nftAssets"?: Array<AssetInventory>;
+  "nativeAsset"?: AssetInventory;
+  "tokenAssets"?: Array<AssetInventory>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "nftAssets",
-            "baseName": "nft_assets",
-            "type": "Array<AssetInventory>"
-        },
-        {
-            "name": "nativeAsset",
-            "baseName": "native_asset",
-            "type": "AssetInventory"
-        },
-        {
-            "name": "tokenAssets",
-            "baseName": "token_assets",
-            "type": "Array<AssetInventory>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "nftAssets",
+      baseName: "nft_assets",
+      type: "Array<AssetInventory>",
+    },
+    {
+      name: "nativeAsset",
+      baseName: "native_asset",
+      type: "AssetInventory",
+    },
+    {
+      name: "tokenAssets",
+      baseName: "token_assets",
+      type: "Array<AssetInventory>",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return InventoryResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return InventoryResponse.attributeTypeMap;
+  }
 }
-

@@ -10,66 +10,70 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AllowFunctionResponse } from './allowFunctionResponse';
-import { Strategy } from './strategy';
+import { RequestFile } from "./models";
+import { AllowFunctionResponse } from "./allowFunctionResponse";
+import { Strategy } from "./strategy";
 
 export class PolicyResponse {
-    'id': string;
-    'createdAt': Date;
-    'name': string | null;
-    'chainId': number;
-    'strategy': Strategy;
-    'transactionIntents': Array<any>;
-    'allowFunctions': Array<AllowFunctionResponse>;
-    'object': string;
+  "id": string;
+  "createdAt": Date;
+  "name": string | null;
+  "chainId": number;
+  "strategy": Strategy;
+  "transactionIntents": Array<any>;
+  "allowFunctions": Array<AllowFunctionResponse>;
+  "object": string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "chainId",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "strategy",
-            "baseName": "strategy",
-            "type": "Strategy"
-        },
-        {
-            "name": "transactionIntents",
-            "baseName": "transaction_intents",
-            "type": "Array<any>"
-        },
-        {
-            "name": "allowFunctions",
-            "baseName": "allow_functions",
-            "type": "Array<AllowFunctionResponse>"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "chainId",
+      baseName: "chain_id",
+      type: "number",
+    },
+    {
+      name: "strategy",
+      baseName: "strategy",
+      type: "Strategy",
+    },
+    {
+      name: "transactionIntents",
+      baseName: "transaction_intents",
+      type: "Array<any>",
+    },
+    {
+      name: "allowFunctions",
+      baseName: "allow_functions",
+      type: "Array<AllowFunctionResponse>",
+    },
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return PolicyResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return PolicyResponse.attributeTypeMap;
+  }
 }
-

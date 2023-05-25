@@ -10,53 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { ContractResponse } from './contractResponse';
+import { RequestFile } from "./models";
+import { ContractResponse } from "./contractResponse";
 
 export class AllowFunctionResponse {
-    'id': string;
-    'createdAt': Date;
-    'type': string;
-    'functionName'?: string;
-    'contract'?: ContractResponse;
-    'object': string;
+  "id": string;
+  "createdAt": Date;
+  "type": string;
+  "functionName"?: string;
+  "contract"?: ContractResponse;
+  "object": string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "functionName",
-            "baseName": "function_name",
-            "type": "string"
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractResponse"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "type",
+      baseName: "type",
+      type: "string",
+    },
+    {
+      name: "functionName",
+      baseName: "function_name",
+      type: "string",
+    },
+    {
+      name: "contract",
+      baseName: "contract",
+      type: "ContractResponse",
+    },
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AllowFunctionResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AllowFunctionResponse.attributeTypeMap;
+  }
 }
-

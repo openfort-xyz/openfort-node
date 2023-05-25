@@ -10,65 +10,69 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { ContractResponseAbi } from './contractResponseAbi';
+import { RequestFile } from "./models";
+import { ContractResponseAbi } from "./contractResponseAbi";
 
 export class ContractResponse {
-    'id': string;
-    'createdAt': Date;
-    'name': string | null;
-    'chainId': number;
-    'address': string;
-    'abi': ContractResponseAbi;
-    'publicVerification': boolean;
-    'object': string;
+  "id": string;
+  "createdAt": Date;
+  "name": string | null;
+  "chainId": number;
+  "address": string;
+  "abi": ContractResponseAbi;
+  "publicVerification": boolean;
+  "object": string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "chainId",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
-        },
-        {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "ContractResponseAbi"
-        },
-        {
-            "name": "publicVerification",
-            "baseName": "public_verification",
-            "type": "boolean"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "chainId",
+      baseName: "chain_id",
+      type: "number",
+    },
+    {
+      name: "address",
+      baseName: "address",
+      type: "string",
+    },
+    {
+      name: "abi",
+      baseName: "abi",
+      type: "ContractResponseAbi",
+    },
+    {
+      name: "publicVerification",
+      baseName: "public_verification",
+      type: "boolean",
+    },
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ContractResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ContractResponse.attributeTypeMap;
+  }
 }
-

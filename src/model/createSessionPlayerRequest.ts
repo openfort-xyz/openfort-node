@@ -10,58 +10,62 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class CreateSessionPlayerRequest {
-    'address': string;
-    'policy'?: string;
-    'chainId': number;
-    'validUntil': number;
-    'validAfter': number;
-    'whitelist'?: Array<string>;
-    'limit'?: number;
+  "address": string;
+  "policy"?: string;
+  "chainId": number;
+  "validUntil": number;
+  "validAfter": number;
+  "whitelist"?: Array<string>;
+  "limit"?: number;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string"
-        },
-        {
-            "name": "chainId",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "validUntil",
-            "baseName": "valid_until",
-            "type": "number"
-        },
-        {
-            "name": "validAfter",
-            "baseName": "valid_after",
-            "type": "number"
-        },
-        {
-            "name": "whitelist",
-            "baseName": "whitelist",
-            "type": "Array<string>"
-        },
-        {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "address",
+      baseName: "address",
+      type: "string",
+    },
+    {
+      name: "policy",
+      baseName: "policy",
+      type: "string",
+    },
+    {
+      name: "chainId",
+      baseName: "chain_id",
+      type: "number",
+    },
+    {
+      name: "validUntil",
+      baseName: "valid_until",
+      type: "number",
+    },
+    {
+      name: "validAfter",
+      baseName: "valid_after",
+      type: "number",
+    },
+    {
+      name: "whitelist",
+      baseName: "whitelist",
+      type: "Array<string>",
+    },
+    {
+      name: "limit",
+      baseName: "limit",
+      type: "number",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return CreateSessionPlayerRequest.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return CreateSessionPlayerRequest.attributeTypeMap;
+  }
 }
-

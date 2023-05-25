@@ -10,28 +10,32 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class AuthResponse {
-    'player': string;
-    'token': string;
+  "player": string;
+  "token": string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "player",
+      baseName: "player",
+      type: "string",
+    },
+    {
+      name: "token",
+      baseName: "token",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AuthResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AuthResponse.attributeTypeMap;
+  }
 }
-

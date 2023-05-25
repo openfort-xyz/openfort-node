@@ -10,40 +10,44 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class ApiKeyResponse {
-    'createdAt': Date;
-    'token': string;
-    'name': string;
-    'livemode': boolean;
+  "createdAt": Date;
+  "token": string;
+  "name": string;
+  "livemode": boolean;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "token",
+      baseName: "token",
+      type: "string",
+    },
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "livemode",
+      baseName: "livemode",
+      type: "boolean",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ApiKeyResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ApiKeyResponse.attributeTypeMap;
+  }
 }
-

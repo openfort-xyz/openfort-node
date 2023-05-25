@@ -10,34 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class Gas {
-    'object': string;
-    'url': string;
-    'dailyGasUsage': { [key: string]: number; };
+  "object": string;
+  "url": string;
+  "dailyGasUsage": { [key: string]: number };
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
-        },
-        {
-            "name": "dailyGasUsage",
-            "baseName": "dailyGasUsage",
-            "type": "{ [key: string]: number; }"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "url",
+      baseName: "url",
+      type: "string",
+    },
+    {
+      name: "dailyGasUsage",
+      baseName: "dailyGasUsage",
+      type: "{ [key: string]: number; }",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Gas.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Gas.attributeTypeMap;
+  }
 }
-

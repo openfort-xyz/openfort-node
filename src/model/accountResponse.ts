@@ -10,65 +10,69 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { TransactionIntentResponse } from './transactionIntentResponse';
+import { RequestFile } from "./models";
+import { TransactionIntentResponse } from "./transactionIntentResponse";
 
 export class AccountResponse {
-    'id': string;
-    'createdAt': Date;
-    'address': string;
-    'deployed': boolean;
-    'object': string;
-    'custodial': boolean;
-    'chainId': number;
-    'transactionIntents': Array<TransactionIntentResponse>;
+  "id": string;
+  "createdAt": Date;
+  "address": string;
+  "deployed": boolean;
+  "object": string;
+  "custodial": boolean;
+  "chainId": number;
+  "transactionIntents": Array<TransactionIntentResponse>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
-        },
-        {
-            "name": "deployed",
-            "baseName": "deployed",
-            "type": "boolean"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "custodial",
-            "baseName": "custodial",
-            "type": "boolean"
-        },
-        {
-            "name": "chainId",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "transactionIntents",
-            "baseName": "transaction_intents",
-            "type": "Array<TransactionIntentResponse>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "address",
+      baseName: "address",
+      type: "string",
+    },
+    {
+      name: "deployed",
+      baseName: "deployed",
+      type: "boolean",
+    },
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "custodial",
+      baseName: "custodial",
+      type: "boolean",
+    },
+    {
+      name: "chainId",
+      baseName: "chain_id",
+      type: "number",
+    },
+    {
+      name: "transactionIntents",
+      baseName: "transaction_intents",
+      type: "Array<TransactionIntentResponse>",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AccountResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AccountResponse.attributeTypeMap;
+  }
 }
-

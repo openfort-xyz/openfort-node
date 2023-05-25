@@ -10,34 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class SumGas {
-    'object': string;
-    'url': string;
-    'sumGas': number;
+  "object": string;
+  "url": string;
+  "sumGas": number;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
-        },
-        {
-            "name": "sumGas",
-            "baseName": "sumGas",
-            "type": "number"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "url",
+      baseName: "url",
+      type: "string",
+    },
+    {
+      name: "sumGas",
+      baseName: "sumGas",
+      type: "number",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return SumGas.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return SumGas.attributeTypeMap;
+  }
 }
-

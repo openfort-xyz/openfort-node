@@ -10,97 +10,101 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Interaction } from './interaction';
-import { ResponseResponse } from './responseResponse';
-import { UserOpResult } from './userOpResult';
+import { RequestFile } from "./models";
+import { Interaction } from "./interaction";
+import { ResponseResponse } from "./responseResponse";
+import { UserOpResult } from "./userOpResult";
 
 export class TransactionIntentResponse {
-    'id': string;
-    'createdAt': Date;
-    'updatedAt': Date;
-    'chainId': number;
-    'userOperationHash': string | null;
-    'userOperation'?: UserOpResult;
-    'policy': string | null;
-    'player': string;
-    'nextAction': object | null;
-    'account'?: string;
-    'transactions': Array<Interaction>;
-    'response': ResponseResponse | null;
-    'object': string;
+  "id": string;
+  "createdAt": Date;
+  "updatedAt": Date;
+  "chainId": number;
+  "userOperationHash": string | null;
+  "userOperation"?: UserOpResult;
+  "policy": string | null;
+  "player": string;
+  "nextAction": object | null;
+  "account"?: string;
+  "transactions": Array<Interaction>;
+  "response": ResponseResponse | null;
+  "object": string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updated_at",
-            "type": "Date"
-        },
-        {
-            "name": "chainId",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "userOperationHash",
-            "baseName": "user_operation_hash",
-            "type": "string"
-        },
-        {
-            "name": "userOperation",
-            "baseName": "user_operation",
-            "type": "UserOpResult"
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string"
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
-        },
-        {
-            "name": "nextAction",
-            "baseName": "next_action",
-            "type": "object"
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string"
-        },
-        {
-            "name": "transactions",
-            "baseName": "transactions",
-            "type": "Array<Interaction>"
-        },
-        {
-            "name": "response",
-            "baseName": "response",
-            "type": "ResponseResponse"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "updatedAt",
+      baseName: "updated_at",
+      type: "Date",
+    },
+    {
+      name: "chainId",
+      baseName: "chain_id",
+      type: "number",
+    },
+    {
+      name: "userOperationHash",
+      baseName: "user_operation_hash",
+      type: "string",
+    },
+    {
+      name: "userOperation",
+      baseName: "user_operation",
+      type: "UserOpResult",
+    },
+    {
+      name: "policy",
+      baseName: "policy",
+      type: "string",
+    },
+    {
+      name: "player",
+      baseName: "player",
+      type: "string",
+    },
+    {
+      name: "nextAction",
+      baseName: "next_action",
+      type: "object",
+    },
+    {
+      name: "account",
+      baseName: "account",
+      type: "string",
+    },
+    {
+      name: "transactions",
+      baseName: "transactions",
+      type: "Array<Interaction>",
+    },
+    {
+      name: "response",
+      baseName: "response",
+      type: "ResponseResponse",
+    },
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return TransactionIntentResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TransactionIntentResponse.attributeTypeMap;
+  }
 }
-

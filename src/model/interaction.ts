@@ -10,34 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class Interaction {
-    'contract': string | null;
-    'functionName': string;
-    'functionArgs': Array<any>;
+  "contract": string | null;
+  "functionName": string;
+  "functionArgs": Array<any>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "string"
-        },
-        {
-            "name": "functionName",
-            "baseName": "function_name",
-            "type": "string"
-        },
-        {
-            "name": "functionArgs",
-            "baseName": "function_args",
-            "type": "Array<any>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "contract",
+      baseName: "contract",
+      type: "string",
+    },
+    {
+      name: "functionName",
+      baseName: "function_name",
+      type: "string",
+    },
+    {
+      name: "functionArgs",
+      baseName: "function_args",
+      type: "Array<any>",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Interaction.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Interaction.attributeTypeMap;
+  }
 }
-

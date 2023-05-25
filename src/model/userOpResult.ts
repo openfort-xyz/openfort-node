@@ -10,28 +10,32 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class UserOpResult {
-    'transactionHash': string;
-    'success': boolean;
+  "transactionHash": string;
+  "success": boolean;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "transactionHash",
-            "baseName": "transactionHash",
-            "type": "string"
-        },
-        {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "transactionHash",
+      baseName: "transactionHash",
+      type: "string",
+    },
+    {
+      name: "success",
+      baseName: "success",
+      type: "boolean",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return UserOpResult.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return UserOpResult.attributeTypeMap;
+  }
 }
-

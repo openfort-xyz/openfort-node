@@ -10,78 +10,82 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Fragment } from './fragment';
-import { JsonFragment } from './jsonFragment';
+import { RequestFile } from "./models";
+import { Fragment } from "./fragment";
+import { JsonFragment } from "./jsonFragment";
 
 export class ContractResponseAbiAnyOfInner {
-    'type': string;
-    'name': string;
-    'inputs': object;
-    'isFragment': boolean;
-    'anonymous'?: boolean;
-    'payable'?: boolean;
-    'constant'?: boolean;
-    'stateMutability'?: string;
-    'outputs'?: object;
-    'gas'?: string;
+  "type": string;
+  "name": string;
+  "inputs": object;
+  "isFragment": boolean;
+  "anonymous"?: boolean;
+  "payable"?: boolean;
+  "constant"?: boolean;
+  "stateMutability"?: string;
+  "outputs"?: object;
+  "gas"?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "object"
-        },
-        {
-            "name": "isFragment",
-            "baseName": "_isFragment",
-            "type": "boolean"
-        },
-        {
-            "name": "anonymous",
-            "baseName": "anonymous",
-            "type": "boolean"
-        },
-        {
-            "name": "payable",
-            "baseName": "payable",
-            "type": "boolean"
-        },
-        {
-            "name": "constant",
-            "baseName": "constant",
-            "type": "boolean"
-        },
-        {
-            "name": "stateMutability",
-            "baseName": "stateMutability",
-            "type": "string"
-        },
-        {
-            "name": "outputs",
-            "baseName": "outputs",
-            "type": "object"
-        },
-        {
-            "name": "gas",
-            "baseName": "gas",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "type",
+      baseName: "type",
+      type: "string",
+    },
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "inputs",
+      baseName: "inputs",
+      type: "object",
+    },
+    {
+      name: "isFragment",
+      baseName: "_isFragment",
+      type: "boolean",
+    },
+    {
+      name: "anonymous",
+      baseName: "anonymous",
+      type: "boolean",
+    },
+    {
+      name: "payable",
+      baseName: "payable",
+      type: "boolean",
+    },
+    {
+      name: "constant",
+      baseName: "constant",
+      type: "boolean",
+    },
+    {
+      name: "stateMutability",
+      baseName: "stateMutability",
+      type: "string",
+    },
+    {
+      name: "outputs",
+      baseName: "outputs",
+      type: "object",
+    },
+    {
+      name: "gas",
+      baseName: "gas",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ContractResponseAbiAnyOfInner.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ContractResponseAbiAnyOfInner.attributeTypeMap;
+  }
 }
-

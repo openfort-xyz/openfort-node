@@ -16,7 +16,6 @@ import http from "http";
 /* tslint:disable:no-unused-locals */
 import { AccountResponse } from "../model/accountResponse";
 import { AccountsResponse } from "../model/accountsResponse";
-import { CreateSessionPlayerRequest } from "../model/createSessionPlayerRequest";
 import { InventoryResponse } from "../model/inventoryResponse";
 import { PlayerResponse } from "../model/playerResponse";
 import { PlayersResponse } from "../model/playersResponse";
@@ -356,11 +355,23 @@ export class PlayersApi {
   /**
    * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
    * @param player Specifies the unique player ID.
-   * @param createSessionPlayerRequest
+   * @param address
+   * @param chainId
+   * @param validUntil
+   * @param validAfter
+   * @param policy
+   * @param whitelist
+   * @param limit
    */
   public async createPlayerSession(
     player: string,
-    createSessionPlayerRequest: CreateSessionPlayerRequest,
+    address: string,
+    chainId: number,
+    validUntil: number,
+    validAfter: number,
+    policy?: string,
+    whitelist?: Array<string>,
+    limit?: number,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{ response: http.IncomingMessage; body: SessionResponse }> {
     const localVarPath =
@@ -390,19 +401,83 @@ export class PlayersApi {
       );
     }
 
-    // verify required parameter 'createSessionPlayerRequest' is not null or undefined
-    if (
-      createSessionPlayerRequest === null ||
-      createSessionPlayerRequest === undefined
-    ) {
+    // verify required parameter 'address' is not null or undefined
+    if (address === null || address === undefined) {
       throw new Error(
-        "Required parameter createSessionPlayerRequest was null or undefined when calling createPlayerSession."
+        "Required parameter address was null or undefined when calling createPlayerSession."
+      );
+    }
+
+    // verify required parameter 'chainId' is not null or undefined
+    if (chainId === null || chainId === undefined) {
+      throw new Error(
+        "Required parameter chainId was null or undefined when calling createPlayerSession."
+      );
+    }
+
+    // verify required parameter 'validUntil' is not null or undefined
+    if (validUntil === null || validUntil === undefined) {
+      throw new Error(
+        "Required parameter validUntil was null or undefined when calling createPlayerSession."
+      );
+    }
+
+    // verify required parameter 'validAfter' is not null or undefined
+    if (validAfter === null || validAfter === undefined) {
+      throw new Error(
+        "Required parameter validAfter was null or undefined when calling createPlayerSession."
       );
     }
 
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
+
+    if (address !== undefined) {
+      localVarFormParams["address"] = ObjectSerializer.serialize(
+        address,
+        "string"
+      );
+    }
+
+    if (policy !== undefined) {
+      localVarFormParams["policy"] = ObjectSerializer.serialize(
+        policy,
+        "string"
+      );
+    }
+
+    if (chainId !== undefined) {
+      localVarFormParams["chain_id"] = ObjectSerializer.serialize(
+        chainId,
+        "number"
+      );
+    }
+
+    if (validUntil !== undefined) {
+      localVarFormParams["valid_until"] = ObjectSerializer.serialize(
+        validUntil,
+        "number"
+      );
+    }
+
+    if (validAfter !== undefined) {
+      localVarFormParams["valid_after"] = ObjectSerializer.serialize(
+        validAfter,
+        "number"
+      );
+    }
+
+    if (whitelist !== undefined) {
+      localVarFormParams["whitelist"] = ObjectSerializer.serialize(
+        whitelist,
+        "Array<string>"
+      );
+    }
+
+    if (limit !== undefined) {
+      localVarFormParams["limit"] = ObjectSerializer.serialize(limit, "number");
+    }
 
     let localVarRequestOptions: localVarRequest.Options = {
       method: "POST",
@@ -411,10 +486,6 @@ export class PlayersApi {
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
       json: true,
-      body: ObjectSerializer.serialize(
-        createSessionPlayerRequest,
-        "CreateSessionPlayerRequest"
-      ),
     };
 
     let authenticationPromise = Promise.resolve();

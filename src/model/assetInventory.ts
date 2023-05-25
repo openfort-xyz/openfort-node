@@ -10,46 +10,50 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AssetType } from './assetType';
+import { RequestFile } from "./models";
+import { AssetType } from "./assetType";
 
 export class AssetInventory {
-    'assetType': AssetType;
-    'address'?: string;
-    'tokenId'?: number;
-    /**
-    * amount in Wei
-    */
-    'amount'?: number;
+  "assetType": AssetType;
+  "address"?: string;
+  "tokenId"?: number;
+  /**
+   * amount in Wei
+   */
+  "amount"?: number;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "assetType",
-            "baseName": "asset_type",
-            "type": "AssetType"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
-        },
-        {
-            "name": "tokenId",
-            "baseName": "token_id",
-            "type": "number"
-        },
-        {
-            "name": "amount",
-            "baseName": "amount",
-            "type": "number"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "assetType",
+      baseName: "asset_type",
+      type: "AssetType",
+    },
+    {
+      name: "address",
+      baseName: "address",
+      type: "string",
+    },
+    {
+      name: "tokenId",
+      baseName: "token_id",
+      type: "number",
+    },
+    {
+      name: "amount",
+      baseName: "amount",
+      type: "number",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AssetInventory.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AssetInventory.attributeTypeMap;
+  }
 }
 
-export namespace AssetInventory {
-}
+export namespace AssetInventory {}

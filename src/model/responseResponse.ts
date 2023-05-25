@@ -10,64 +10,68 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class ResponseResponse {
-    'createdAt': Date;
-    'blockNumber': number | null;
-    'transactionHash': string | null;
-    'gasUsed': number;
-    'status': number;
-    'logs': Array<string>;
-    'to': string;
-    'error': string;
+  "createdAt": Date;
+  "blockNumber": number | null;
+  "transactionHash": string | null;
+  "gasUsed": number;
+  "status": number;
+  "logs": Array<string>;
+  "to": string;
+  "error": string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "blockNumber",
-            "baseName": "block_number",
-            "type": "number"
-        },
-        {
-            "name": "transactionHash",
-            "baseName": "transaction_hash",
-            "type": "string"
-        },
-        {
-            "name": "gasUsed",
-            "baseName": "gas_used",
-            "type": "number"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "number"
-        },
-        {
-            "name": "logs",
-            "baseName": "logs",
-            "type": "Array<string>"
-        },
-        {
-            "name": "to",
-            "baseName": "to",
-            "type": "string"
-        },
-        {
-            "name": "error",
-            "baseName": "error",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "blockNumber",
+      baseName: "block_number",
+      type: "number",
+    },
+    {
+      name: "transactionHash",
+      baseName: "transaction_hash",
+      type: "string",
+    },
+    {
+      name: "gasUsed",
+      baseName: "gas_used",
+      type: "number",
+    },
+    {
+      name: "status",
+      baseName: "status",
+      type: "number",
+    },
+    {
+      name: "logs",
+      baseName: "logs",
+      type: "Array<string>",
+    },
+    {
+      name: "to",
+      baseName: "to",
+      type: "string",
+    },
+    {
+      name: "error",
+      baseName: "error",
+      type: "string",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ResponseResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ResponseResponse.attributeTypeMap;
+  }
 }
-

@@ -10,64 +10,68 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class SessionResponse {
-    'id': string;
-    'createdAt': Date;
-    'object': string;
-    'validAfter'?: string;
-    'validUntil'?: string;
-    'whitelist'?: Array<string>;
-    'limit'?: number;
-    'nextAction': object | null;
+  "id": string;
+  "createdAt": Date;
+  "object": string;
+  "validAfter"?: string;
+  "validUntil"?: string;
+  "whitelist"?: Array<string>;
+  "limit"?: number;
+  "nextAction": object | null;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "validAfter",
-            "baseName": "valid_after",
-            "type": "string"
-        },
-        {
-            "name": "validUntil",
-            "baseName": "valid_until",
-            "type": "string"
-        },
-        {
-            "name": "whitelist",
-            "baseName": "whitelist",
-            "type": "Array<string>"
-        },
-        {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number"
-        },
-        {
-            "name": "nextAction",
-            "baseName": "next_action",
-            "type": "object"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
+    },
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "validAfter",
+      baseName: "valid_after",
+      type: "string",
+    },
+    {
+      name: "validUntil",
+      baseName: "valid_until",
+      type: "string",
+    },
+    {
+      name: "whitelist",
+      baseName: "whitelist",
+      type: "Array<string>",
+    },
+    {
+      name: "limit",
+      baseName: "limit",
+      type: "number",
+    },
+    {
+      name: "nextAction",
+      baseName: "next_action",
+      type: "object",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return SessionResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return SessionResponse.attributeTypeMap;
+  }
 }
-

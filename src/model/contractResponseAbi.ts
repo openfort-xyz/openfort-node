@@ -10,18 +10,19 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { ContractResponseAbiAnyOfInner } from './contractResponseAbiAnyOfInner';
+import { RequestFile } from "./models";
+import { ContractResponseAbiAnyOfInner } from "./contractResponseAbiAnyOfInner";
 
 export class ContractResponseAbi {
+  static discriminator: string | undefined = undefined;
 
-    static discriminator: string | undefined = undefined;
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [];
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    ];
-
-    static getAttributeTypeMap() {
-        return ContractResponseAbi.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ContractResponseAbi.attributeTypeMap;
+  }
 }
-

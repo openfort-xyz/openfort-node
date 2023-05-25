@@ -10,35 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AllowFunctionResponse } from './allowFunctionResponse';
+import { RequestFile } from "./models";
+import { AllowFunctionResponse } from "./allowFunctionResponse";
 
 export class AllowFunctionsResponse {
-    'object': string;
-    'url': string;
-    'data': Array<AllowFunctionResponse>;
+  "object": string;
+  "url": string;
+  "data": Array<AllowFunctionResponse>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<AllowFunctionResponse>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "object",
+      baseName: "object",
+      type: "string",
+    },
+    {
+      name: "url",
+      baseName: "url",
+      type: "string",
+    },
+    {
+      name: "data",
+      baseName: "data",
+      type: "Array<AllowFunctionResponse>",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AllowFunctionsResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AllowFunctionsResponse.attributeTypeMap;
+  }
 }
-

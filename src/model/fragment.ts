@@ -10,41 +10,45 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { ParamType } from './paramType';
+import { RequestFile } from "./models";
+import { ParamType } from "./paramType";
 
 export class Fragment {
-    'type': string;
-    'name': string;
-    'inputs': Array<ParamType>;
-    'isFragment': boolean;
+  "type": string;
+  "name": string;
+  "inputs": Array<ParamType>;
+  "isFragment": boolean;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<ParamType>"
-        },
-        {
-            "name": "isFragment",
-            "baseName": "_isFragment",
-            "type": "boolean"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: "type",
+      baseName: "type",
+      type: "string",
+    },
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+    },
+    {
+      name: "inputs",
+      baseName: "inputs",
+      type: "Array<ParamType>",
+    },
+    {
+      name: "isFragment",
+      baseName: "_isFragment",
+      type: "boolean",
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Fragment.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Fragment.attributeTypeMap;
+  }
 }
-
