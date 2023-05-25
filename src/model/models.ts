@@ -11,7 +11,6 @@ export * from "./contractResponse";
 export * from "./contractResponseAbi";
 export * from "./contractResponseAbiAnyOfInner";
 export * from "./contractsResponse";
-export * from "./createSessionPlayerRequest";
 export * from "./fragment";
 export * from "./gas";
 export * from "./getProjectResponse";
@@ -58,7 +57,6 @@ import { ContractResponse } from "./contractResponse";
 import { ContractResponseAbi } from "./contractResponseAbi";
 import { ContractResponseAbiAnyOfInner } from "./contractResponseAbiAnyOfInner";
 import { ContractsResponse } from "./contractsResponse";
-import { CreateSessionPlayerRequest } from "./createSessionPlayerRequest";
 import { Fragment } from "./fragment";
 import { Gas } from "./gas";
 import { GetProjectResponse } from "./getProjectResponse";
@@ -109,7 +107,6 @@ let typeMap: { [index: string]: any } = {
   ContractResponseAbi: ContractResponseAbi,
   ContractResponseAbiAnyOfInner: ContractResponseAbiAnyOfInner,
   ContractsResponse: ContractsResponse,
-  CreateSessionPlayerRequest: CreateSessionPlayerRequest,
   Fragment: Fragment,
   Gas: Gas,
   GetProjectResponse: GetProjectResponse,

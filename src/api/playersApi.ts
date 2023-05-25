@@ -360,6 +360,7 @@ export class PlayersApi {
    * @param validUntil
    * @param validAfter
    * @param policy
+   * @param externalOwnerAddress
    * @param whitelist
    * @param limit
    */
@@ -370,6 +371,7 @@ export class PlayersApi {
     validUntil: number,
     validAfter: number,
     policy?: string,
+    externalOwnerAddress?: string,
     whitelist?: Array<string>,
     limit?: number,
     options: { headers: { [name: string]: string } } = { headers: {} }
@@ -443,6 +445,13 @@ export class PlayersApi {
     if (policy !== undefined) {
       localVarFormParams["policy"] = ObjectSerializer.serialize(
         policy,
+        "string"
+      );
+    }
+
+    if (externalOwnerAddress !== undefined) {
+      localVarFormParams["external_owner_address"] = ObjectSerializer.serialize(
+        externalOwnerAddress,
         "string"
       );
     }
