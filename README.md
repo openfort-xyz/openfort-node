@@ -1,4 +1,4 @@
-## @openfort/openfort-node@0.2.2
+## @openfort/openfort-node@0.2.4
 
 ### Installation
 
