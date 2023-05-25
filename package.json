@@ -1,6 +1,6 @@
 {
   "name": "@openfort/openfort-node",
-  "version": "0.2.5",
+  "version": "0.2.4",
   "description": "OpenAPI client for @openfort/openfort-node",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
@@ -21,8 +21,12 @@
   },
   "typesVersions": {
     "*": {
-      "model/*": ["dist/model/*"],
-      "api/*": ["dist/api/*"]
+      "model/*": [
+        "dist/model/*"
+      ],
+      "api/*": [
+        "dist/api/*"
+      ]
     }
   },
   "typings": "./dist/index.d.ts",
