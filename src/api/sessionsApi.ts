@@ -112,6 +112,7 @@ export class SessionsApi {
    * @param validUntil
    * @param validAfter
    * @param policy
+   * @param externalOwnerAddress
    * @param whitelist
    * @param limit
    */
@@ -122,6 +123,7 @@ export class SessionsApi {
     validUntil: number,
     validAfter: number,
     policy?: string,
+    externalOwnerAddress?: string,
     whitelist?: Array<string>,
     limit?: number,
     options: { headers: { [name: string]: string } } = { headers: {} }
@@ -194,6 +196,13 @@ export class SessionsApi {
       );
     }
 
+    if (externalOwnerAddress !== undefined) {
+      localVarFormParams["external_owner_address"] = ObjectSerializer.serialize(
+        externalOwnerAddress,
+        "string"
+      );
+    }
+
     if (address !== undefined) {
       localVarFormParams["address"] = ObjectSerializer.serialize(
         address,
@@ -243,11 +252,6 @@ export class SessionsApi {
     };
 
     let authenticationPromise = Promise.resolve();
-    if (this.authentications.pk.accessToken) {
-      authenticationPromise = authenticationPromise.then(() =>
-        this.authentications.pk.applyToRequest(localVarRequestOptions)
-      );
-    }
     authenticationPromise = authenticationPromise.then(() =>
       this.authentications.default.applyToRequest(localVarRequestOptions)
     );
@@ -355,11 +359,6 @@ export class SessionsApi {
     };
 
     let authenticationPromise = Promise.resolve();
-    if (this.authentications.pk.accessToken) {
-      authenticationPromise = authenticationPromise.then(() =>
-        this.authentications.pk.applyToRequest(localVarRequestOptions)
-      );
-    }
     if (this.authentications.pk.accessToken) {
       authenticationPromise = authenticationPromise.then(() =>
         this.authentications.pk.applyToRequest(localVarRequestOptions)

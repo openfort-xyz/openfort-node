@@ -1,4 +1,4 @@
-## @openfort/openfort-node@0.2.4
+## @openfort/openfort-node@0.2.5
 
 ### Installation
 
@@ -26,7 +26,6 @@ async function example() {
 
     const newPlayer = await openfort.players.createPlayer("Test");
     console.log(newPlayer.body.id)
-    await openfort.players.createSession(newPlayer.body.id, "public key");
 
     const transactionIntents = await openfort.transactions.getTransactionIntents();
     for (const intent of transactionIntents.body.data) {
