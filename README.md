@@ -1,6 +1,6 @@
 # Openfort Node.js Library
 
-[![Version](https://img.shields.io/npm/v/stripe.svg)](https://www.npmjs.org/package/@openfort/openfort-node)
+[![Version](https://img.shields.io/npm/v/@oppenfort/openfort-node.svg)](https://www.npmjs.org/package/@openfort/openfort-node)
 
 The Openfort Node library provides convenient access to the Openfort API from applications written in server-side JavaScript.
 
