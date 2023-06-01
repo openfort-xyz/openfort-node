@@ -1,6 +1,18 @@
-## @openfort/openfort-node@0.2.6
+# Openfort Node.js Library
 
-### Installation
+[![Version](https://img.shields.io/npm/v/@openfort/openfort-node.svg)](https://www.npmjs.org/package/@openfort/openfort-node)
+
+The Openfort Node library provides convenient access to the Openfort API from applications written in server-side JavaScript.
+
+## Documentation
+
+See the [`openfort-node` API docs](https://openfort.xyz/docs/api?lang=node) for Node.js.
+
+## Requirements
+
+Node 14 or higher.
+
+## Installation
 
 ```shell
 npm install @openfort/openfort-node
@@ -10,7 +22,37 @@ npm install @openfort/openfort-node
 yarn add @openfort/openfort-node
 ```
 
-### Usage
+## Usage
+
+The package needs to be configured with your account's secret key, which is
+available in the [Openfort Dashboard][api-keys]. Require it with the key's
+value:
+
+<!-- prettier-ignore -->
+```js
+const openfort = require('@openfort/openfort-node')('sk_test_...');
+
+openfort.players.createPlayer(
+  'Joan McCoain',
+  'API created player'
+)
+  .then(player => console.log(player.body.id))
+  .catch(error => console.error(error));
+```
+
+Or using ES modules and `async`/`await`:
+
+```js
+import Openfort from '@openfort/openfort-node';
+const openfort = new Openfort('sk_test_...');
+
+const player = await openfort.players.createPlayer(
+  'customer@example.com',
+  'API created player'
+);
+
+console.log(player.body.id);
+```
 
 Below code snippet shows exemplary usage of the configuration and the API. 
 
@@ -35,3 +77,13 @@ async function example() {
 
 example().catch((e) => console.error(e));
 ```
+
+## Support
+
+New features and bug fixes are released on the latest major version of the `openfort` package. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
+
+[api-keys]: https://dashboard.openfort.xyz/api-keys
+
+<!--
+# vim: set tw=79:
+-->
