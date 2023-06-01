@@ -16,9 +16,10 @@ import http from "http";
 /* tslint:disable:no-unused-locals */
 import { AccountResponse } from "../model/accountResponse";
 import { AccountsResponse } from "../model/accountsResponse";
-import { AllowFunctionResponse } from "../model/allowFunctionResponse";
-import { AllowFunctionsResponse } from "../model/allowFunctionsResponse";
 import { InventoryResponse } from "../model/inventoryResponse";
+import { PolicyRuleResponse } from "../model/policyRuleResponse";
+import { PolicyRulesResponse } from "../model/policyRulesResponse";
+import { TransactionIntentResponse } from "../model/transactionIntentResponse";
 
 import {
   ObjectSerializer,
@@ -248,15 +249,15 @@ export class DefaultApi {
    * @param project
    * @param contract
    */
-  public async createAllowFunction(
+  public async createPolicyRules(
     type: string,
     policy: string,
     functionName?: string,
     project?: string,
     contract?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{ response: http.IncomingMessage; body: AllowFunctionResponse }> {
-    const localVarPath = this.basePath + "/v1/allow_functions";
+  ): Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse }> {
+    const localVarPath = this.basePath + "/v1/policy_rules";
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign(
       {},
@@ -274,14 +275,14 @@ export class DefaultApi {
     // verify required parameter 'type' is not null or undefined
     if (type === null || type === undefined) {
       throw new Error(
-        "Required parameter type was null or undefined when calling createAllowFunction."
+        "Required parameter type was null or undefined when calling createPolicyRules."
       );
     }
 
     // verify required parameter 'policy' is not null or undefined
     if (policy === null || policy === undefined) {
       throw new Error(
-        "Required parameter policy was null or undefined when calling createAllowFunction."
+        "Required parameter policy was null or undefined when calling createPolicyRules."
       );
     }
 
@@ -357,7 +358,7 @@ export class DefaultApi {
       }
       return new Promise<{
         response: http.IncomingMessage;
-        body: AllowFunctionResponse;
+        body: PolicyRuleResponse;
       }>((resolve, reject) => {
         localVarRequest(localVarRequestOptions, (error, response, body) => {
           if (error) {
@@ -368,10 +369,7 @@ export class DefaultApi {
               response.statusCode >= 200 &&
               response.statusCode <= 299
             ) {
-              body = ObjectSerializer.deserialize(
-                body,
-                "AllowFunctionResponse"
-              );
+              body = ObjectSerializer.deserialize(body, "PolicyRuleResponse");
               resolve({ response: response, body: body });
             } else {
               reject(new HttpError(response, body, response.statusCode));
@@ -703,12 +701,12 @@ export class DefaultApi {
    * @param project Specifies the unique project ID.
    * @param policy Specifies the unique policy ID.
    */
-  public async getAllowFunctions(
+  public async getPolicyRules(
     project?: string,
     policy?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{ response: http.IncomingMessage; body: AllowFunctionsResponse }> {
-    const localVarPath = this.basePath + "/v1/allow_functions";
+  ): Promise<{ response: http.IncomingMessage; body: PolicyRulesResponse }> {
+    const localVarPath = this.basePath + "/v1/policy_rules";
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign(
       {},
@@ -777,7 +775,7 @@ export class DefaultApi {
       }
       return new Promise<{
         response: http.IncomingMessage;
-        body: AllowFunctionsResponse;
+        body: PolicyRulesResponse;
       }>((resolve, reject) => {
         localVarRequest(localVarRequestOptions, (error, response, body) => {
           if (error) {
@@ -788,10 +786,7 @@ export class DefaultApi {
               response.statusCode >= 200 &&
               response.statusCode <= 299
             ) {
-              body = ObjectSerializer.deserialize(
-                body,
-                "AllowFunctionsResponse"
-              );
+              body = ObjectSerializer.deserialize(body, "PolicyRulesResponse");
               resolve({ response: response, body: body });
             } else {
               reject(new HttpError(response, body, response.statusCode));
@@ -802,26 +797,25 @@ export class DefaultApi {
     });
   }
   /**
-   * Updates your allow functions object.
-   * @param id Specifies the unique allow function ID.
-   * @param type
-   * @param policy
-   * @param functionName
-   * @param project
-   * @param contract
+   * Transfer ownership of an account to an address.
+   * @param id Specifies the unique account ID.
+   * @param newOwnerAddress The address of the new owner
+   * @param project The project ID
+   * @param policy The policy ID
    */
-  public async updateAllowFunction(
+  public async transferOwnership(
     id: string,
-    type: string,
-    policy: string,
-    functionName?: string,
+    newOwnerAddress: string,
     project?: string,
-    contract?: string,
+    policy?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{ response: http.IncomingMessage; body: AllowFunctionResponse }> {
+  ): Promise<{
+    response: http.IncomingMessage;
+    body: TransactionIntentResponse;
+  }> {
     const localVarPath =
       this.basePath +
-      "/v1/allow_functions/{id}".replace(
+      "/v1/accounts/{id}/transfer-ownership".replace(
         "{" + "id" + "}",
         encodeURIComponent(String(id))
       );
@@ -842,21 +836,158 @@ export class DefaultApi {
     // verify required parameter 'id' is not null or undefined
     if (id === null || id === undefined) {
       throw new Error(
-        "Required parameter id was null or undefined when calling updateAllowFunction."
+        "Required parameter id was null or undefined when calling transferOwnership."
+      );
+    }
+
+    // verify required parameter 'newOwnerAddress' is not null or undefined
+    if (newOwnerAddress === null || newOwnerAddress === undefined) {
+      throw new Error(
+        "Required parameter newOwnerAddress was null or undefined when calling transferOwnership."
+      );
+    }
+
+    (<any>Object).assign(localVarHeaderParams, options.headers);
+
+    let localVarUseFormData = false;
+
+    if (project !== undefined) {
+      localVarFormParams["project"] = ObjectSerializer.serialize(
+        project,
+        "string"
+      );
+    }
+
+    if (newOwnerAddress !== undefined) {
+      localVarFormParams["new_owner_address"] = ObjectSerializer.serialize(
+        newOwnerAddress,
+        "string"
+      );
+    }
+
+    if (policy !== undefined) {
+      localVarFormParams["policy"] = ObjectSerializer.serialize(
+        policy,
+        "string"
+      );
+    }
+
+    let localVarRequestOptions: localVarRequest.Options = {
+      method: "POST",
+      qs: localVarQueryParameters,
+      headers: localVarHeaderParams,
+      uri: localVarPath,
+      useQuerystring: this._useQuerystring,
+      json: true,
+    };
+
+    let authenticationPromise = Promise.resolve();
+    if (this.authentications.pk.accessToken) {
+      authenticationPromise = authenticationPromise.then(() =>
+        this.authentications.pk.applyToRequest(localVarRequestOptions)
+      );
+    }
+    authenticationPromise = authenticationPromise.then(() =>
+      this.authentications.default.applyToRequest(localVarRequestOptions)
+    );
+
+    let interceptorPromise = authenticationPromise;
+    for (const interceptor of this.interceptors) {
+      interceptorPromise = interceptorPromise.then(() =>
+        interceptor(localVarRequestOptions)
+      );
+    }
+
+    return interceptorPromise.then(() => {
+      if (Object.keys(localVarFormParams).length) {
+        if (localVarUseFormData) {
+          (<any>localVarRequestOptions).formData = localVarFormParams;
+        } else {
+          localVarRequestOptions.form = localVarFormParams;
+        }
+      }
+      return new Promise<{
+        response: http.IncomingMessage;
+        body: TransactionIntentResponse;
+      }>((resolve, reject) => {
+        localVarRequest(localVarRequestOptions, (error, response, body) => {
+          if (error) {
+            reject(error);
+          } else {
+            if (
+              response.statusCode &&
+              response.statusCode >= 200 &&
+              response.statusCode <= 299
+            ) {
+              body = ObjectSerializer.deserialize(
+                body,
+                "TransactionIntentResponse"
+              );
+              resolve({ response: response, body: body });
+            } else {
+              reject(new HttpError(response, body, response.statusCode));
+            }
+          }
+        });
+      });
+    });
+  }
+  /**
+   * Updates your allow functions object.
+   * @param id Specifies the unique allow function ID.
+   * @param type
+   * @param policy
+   * @param functionName
+   * @param project
+   * @param contract
+   */
+  public async updatePolicyRules(
+    id: string,
+    type: string,
+    policy: string,
+    functionName?: string,
+    project?: string,
+    contract?: string,
+    options: { headers: { [name: string]: string } } = { headers: {} }
+  ): Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse }> {
+    const localVarPath =
+      this.basePath +
+      "/v1/policy_rules/{id}".replace(
+        "{" + "id" + "}",
+        encodeURIComponent(String(id))
+      );
+    let localVarQueryParameters: any = {};
+    let localVarHeaderParams: any = (<any>Object).assign(
+      {},
+      this._defaultHeaders
+    );
+    const produces = ["application/json"];
+    // give precedence to 'application/json'
+    if (produces.indexOf("application/json") >= 0) {
+      localVarHeaderParams.Accept = "application/json";
+    } else {
+      localVarHeaderParams.Accept = produces.join(",");
+    }
+    let localVarFormParams: any = {};
+
+    // verify required parameter 'id' is not null or undefined
+    if (id === null || id === undefined) {
+      throw new Error(
+        "Required parameter id was null or undefined when calling updatePolicyRules."
       );
     }
 
     // verify required parameter 'type' is not null or undefined
     if (type === null || type === undefined) {
       throw new Error(
-        "Required parameter type was null or undefined when calling updateAllowFunction."
+        "Required parameter type was null or undefined when calling updatePolicyRules."
       );
     }
 
     // verify required parameter 'policy' is not null or undefined
     if (policy === null || policy === undefined) {
       throw new Error(
-        "Required parameter policy was null or undefined when calling updateAllowFunction."
+        "Required parameter policy was null or undefined when calling updatePolicyRules."
       );
     }
 
@@ -932,7 +1063,7 @@ export class DefaultApi {
       }
       return new Promise<{
         response: http.IncomingMessage;
-        body: AllowFunctionResponse;
+        body: PolicyRuleResponse;
       }>((resolve, reject) => {
         localVarRequest(localVarRequestOptions, (error, response, body) => {
           if (error) {
@@ -943,10 +1074,7 @@ export class DefaultApi {
               response.statusCode >= 200 &&
               response.statusCode <= 299
             ) {
-              body = ObjectSerializer.deserialize(
-                body,
-                "AllowFunctionResponse"
-              );
+              body = ObjectSerializer.deserialize(body, "PolicyRuleResponse");
               resolve({ response: response, body: body });
             } else {
               reject(new HttpError(response, body, response.statusCode));

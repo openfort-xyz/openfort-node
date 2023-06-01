@@ -2,8 +2,6 @@ import localVarRequest from "request";
 
 export * from "./accountResponse";
 export * from "./accountsResponse";
-export * from "./allowFunctionResponse";
-export * from "./allowFunctionsResponse";
 export * from "./apiKeyResponse";
 export * from "./assetInventory";
 export * from "./assetType";
@@ -23,6 +21,8 @@ export * from "./playerResponse";
 export * from "./playersResponse";
 export * from "./policiesResponse";
 export * from "./policyResponse";
+export * from "./policyRuleResponse";
+export * from "./policyRulesResponse";
 export * from "./projectLogs";
 export * from "./projectResponse";
 export * from "./projectsResponse";
@@ -48,8 +48,6 @@ export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 import { AccountResponse } from "./accountResponse";
 import { AccountsResponse } from "./accountsResponse";
-import { AllowFunctionResponse } from "./allowFunctionResponse";
-import { AllowFunctionsResponse } from "./allowFunctionsResponse";
 import { ApiKeyResponse } from "./apiKeyResponse";
 import { AssetInventory } from "./assetInventory";
 import { AssetType } from "./assetType";
@@ -69,6 +67,8 @@ import { PlayerResponse } from "./playerResponse";
 import { PlayersResponse } from "./playersResponse";
 import { PoliciesResponse } from "./policiesResponse";
 import { PolicyResponse } from "./policyResponse";
+import { PolicyRuleResponse } from "./policyRuleResponse";
+import { PolicyRulesResponse } from "./policyRulesResponse";
 import { ProjectLogs } from "./projectLogs";
 import { ProjectResponse } from "./projectResponse";
 import { ProjectsResponse } from "./projectsResponse";
@@ -99,8 +99,6 @@ let enumsMap: { [index: string]: any } = {
 let typeMap: { [index: string]: any } = {
   AccountResponse: AccountResponse,
   AccountsResponse: AccountsResponse,
-  AllowFunctionResponse: AllowFunctionResponse,
-  AllowFunctionsResponse: AllowFunctionsResponse,
   ApiKeyResponse: ApiKeyResponse,
   AssetInventory: AssetInventory,
   ContractResponse: ContractResponse,
@@ -119,6 +117,8 @@ let typeMap: { [index: string]: any } = {
   PlayersResponse: PlayersResponse,
   PoliciesResponse: PoliciesResponse,
   PolicyResponse: PolicyResponse,
+  PolicyRuleResponse: PolicyRuleResponse,
+  PolicyRulesResponse: PolicyRulesResponse,
   ProjectLogs: ProjectLogs,
   ProjectResponse: ProjectResponse,
   ProjectsResponse: ProjectsResponse,

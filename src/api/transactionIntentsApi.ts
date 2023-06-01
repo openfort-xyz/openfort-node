@@ -114,6 +114,7 @@ export class TransactionIntentsApi {
    * @param optimistic
    * @param interactions
    * @param policy
+   * @param externalOwnerAddress
    * @param project
    */
   public async createTransactionIntent(
@@ -122,6 +123,7 @@ export class TransactionIntentsApi {
     optimistic: boolean,
     interactions: Array<Interaction>,
     policy?: string,
+    externalOwnerAddress?: string,
     project?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{
@@ -192,6 +194,13 @@ export class TransactionIntentsApi {
     if (policy !== undefined) {
       localVarFormParams["policy"] = ObjectSerializer.serialize(
         policy,
+        "string"
+      );
+    }
+
+    if (externalOwnerAddress !== undefined) {
+      localVarFormParams["external_owner_address"] = ObjectSerializer.serialize(
+        externalOwnerAddress,
         "string"
       );
     }
@@ -523,11 +532,11 @@ export class TransactionIntentsApi {
   }
   /**
    * Confirms the creation of a transaction intent with an external owner.
-   * @param transactionIntent
+   * @param id
    * @param signature
    */
   public async signature(
-    transactionIntent: string,
+    id: string,
     signature: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{
@@ -536,9 +545,9 @@ export class TransactionIntentsApi {
   }> {
     const localVarPath =
       this.basePath +
-      "/v1/transaction_intents/{transaction_intent}/signature".replace(
-        "{" + "transaction_intent" + "}",
-        encodeURIComponent(String(transactionIntent))
+      "/v1/transaction_intents/{id}/signature".replace(
+        "{" + "id" + "}",
+        encodeURIComponent(String(id))
       );
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign(
@@ -554,10 +563,10 @@ export class TransactionIntentsApi {
     }
     let localVarFormParams: any = {};
 
-    // verify required parameter 'transactionIntent' is not null or undefined
-    if (transactionIntent === null || transactionIntent === undefined) {
+    // verify required parameter 'id' is not null or undefined
+    if (id === null || id === undefined) {
       throw new Error(
-        "Required parameter transactionIntent was null or undefined when calling signature."
+        "Required parameter id was null or undefined when calling signature."
       );
     }
 

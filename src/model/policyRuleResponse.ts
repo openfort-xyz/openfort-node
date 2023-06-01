@@ -11,17 +11,14 @@
  */
 
 import { RequestFile } from "./models";
-import { PolicyRuleResponse } from "./policyRuleResponse";
-import { Strategy } from "./strategy";
+import { ContractResponse } from "./contractResponse";
 
-export class PolicyResponse {
+export class PolicyRuleResponse {
   "id": string;
   "createdAt": Date;
-  "name": string | null;
-  "chainId": number;
-  "strategy": Strategy;
-  "transactionIntents": Array<any>;
-  "policyRules": Array<PolicyRuleResponse>;
+  "type": string;
+  "functionName"?: string;
+  "contract"?: ContractResponse;
   "object": string;
 
   static discriminator: string | undefined = undefined;
@@ -42,29 +39,19 @@ export class PolicyResponse {
       type: "Date",
     },
     {
-      name: "name",
-      baseName: "name",
+      name: "type",
+      baseName: "type",
       type: "string",
     },
     {
-      name: "chainId",
-      baseName: "chain_id",
-      type: "number",
+      name: "functionName",
+      baseName: "function_name",
+      type: "string",
     },
     {
-      name: "strategy",
-      baseName: "strategy",
-      type: "Strategy",
-    },
-    {
-      name: "transactionIntents",
-      baseName: "transaction_intents",
-      type: "Array<any>",
-    },
-    {
-      name: "policyRules",
-      baseName: "policy_rules",
-      type: "Array<PolicyRuleResponse>",
+      name: "contract",
+      baseName: "contract",
+      type: "ContractResponse",
     },
     {
       name: "object",
@@ -74,6 +61,6 @@ export class PolicyResponse {
   ];
 
   static getAttributeTypeMap() {
-    return PolicyResponse.attributeTypeMap;
+    return PolicyRuleResponse.attributeTypeMap;
   }
 }

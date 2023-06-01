@@ -252,6 +252,11 @@ export class SessionsApi {
     };
 
     let authenticationPromise = Promise.resolve();
+    if (this.authentications.pk.accessToken) {
+      authenticationPromise = authenticationPromise.then(() =>
+        this.authentications.pk.applyToRequest(localVarRequestOptions)
+      );
+    }
     authenticationPromise = authenticationPromise.then(() =>
       this.authentications.default.applyToRequest(localVarRequestOptions)
     );
@@ -296,19 +301,19 @@ export class SessionsApi {
   }
   /**
    * Confirms the creation of a session with an external owner.
-   * @param session
+   * @param id
    * @param signature
    */
   public async signatureSession(
-    session: string,
+    id: string,
     signature: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{ response: http.IncomingMessage; body: SessionResponse }> {
     const localVarPath =
       this.basePath +
-      "/v1/sessions/{session}/signature".replace(
-        "{" + "session" + "}",
-        encodeURIComponent(String(session))
+      "/v1/sessions/{id}/signature".replace(
+        "{" + "id" + "}",
+        encodeURIComponent(String(id))
       );
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign(
@@ -324,10 +329,10 @@ export class SessionsApi {
     }
     let localVarFormParams: any = {};
 
-    // verify required parameter 'session' is not null or undefined
-    if (session === null || session === undefined) {
+    // verify required parameter 'id' is not null or undefined
+    if (id === null || id === undefined) {
       throw new Error(
-        "Required parameter session was null or undefined when calling signatureSession."
+        "Required parameter id was null or undefined when calling signatureSession."
       );
     }
 
@@ -359,6 +364,11 @@ export class SessionsApi {
     };
 
     let authenticationPromise = Promise.resolve();
+    if (this.authentications.pk.accessToken) {
+      authenticationPromise = authenticationPromise.then(() =>
+        this.authentications.pk.applyToRequest(localVarRequestOptions)
+      );
+    }
     if (this.authentications.pk.accessToken) {
       authenticationPromise = authenticationPromise.then(() =>
         this.authentications.pk.applyToRequest(localVarRequestOptions)
