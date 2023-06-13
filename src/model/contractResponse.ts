@@ -11,17 +11,17 @@
  */
 
 import { RequestFile } from "./models";
-import { ContractResponseAbi } from "./contractResponseAbi";
+import { PrismaJsonValue } from "./prismaJsonValue";
 
 export class ContractResponse {
   "id": string;
+  "object": string;
   "createdAt": Date;
   "name": string | null;
   "chainId": number;
   "address": string;
-  "abi": ContractResponseAbi;
+  "abi": PrismaJsonValue | null;
   "publicVerification": boolean;
-  "object": string;
 
   static discriminator: string | undefined = undefined;
 
@@ -33,6 +33,11 @@ export class ContractResponse {
     {
       name: "id",
       baseName: "id",
+      type: "string",
+    },
+    {
+      name: "object",
+      baseName: "object",
       type: "string",
     },
     {
@@ -58,17 +63,12 @@ export class ContractResponse {
     {
       name: "abi",
       baseName: "abi",
-      type: "ContractResponseAbi",
+      type: "PrismaJsonValue",
     },
     {
       name: "publicVerification",
       baseName: "public_verification",
       type: "boolean",
-    },
-    {
-      name: "object",
-      baseName: "object",
-      type: "string",
     },
   ];
 

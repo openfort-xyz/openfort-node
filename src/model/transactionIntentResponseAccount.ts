@@ -11,16 +11,18 @@
  */
 
 import { RequestFile } from "./models";
-import { ApiKeyResponse } from "./apiKeyResponse";
+import { AccountResponse } from "./accountResponse";
+import { PolicyResponseTransactionIntents } from "./policyResponseTransactionIntents";
 
-export class ProjectResponse {
+export class TransactionIntentResponseAccount {
   "id": string;
   "object": string;
   "createdAt": Date;
-  "name": string | null;
-  "livemode": boolean;
-  "logoUrl"?: string | null;
-  "apikeys": Array<ApiKeyResponse>;
+  "address": string;
+  "deployed": boolean;
+  "custodial": boolean;
+  "chainId": number;
+  "transactionIntents"?: PolicyResponseTransactionIntents;
 
   static discriminator: string | undefined = undefined;
 
@@ -45,28 +47,33 @@ export class ProjectResponse {
       type: "Date",
     },
     {
-      name: "name",
-      baseName: "name",
+      name: "address",
+      baseName: "address",
       type: "string",
     },
     {
-      name: "livemode",
-      baseName: "livemode",
+      name: "deployed",
+      baseName: "deployed",
       type: "boolean",
     },
     {
-      name: "logoUrl",
-      baseName: "logo_url",
-      type: "string",
+      name: "custodial",
+      baseName: "custodial",
+      type: "boolean",
     },
     {
-      name: "apikeys",
-      baseName: "apikeys",
-      type: "Array<ApiKeyResponse>",
+      name: "chainId",
+      baseName: "chain_id",
+      type: "number",
+    },
+    {
+      name: "transactionIntents",
+      baseName: "transaction_intents",
+      type: "PolicyResponseTransactionIntents",
     },
   ];
 
   static getAttributeTypeMap() {
-    return ProjectResponse.attributeTypeMap;
+    return TransactionIntentResponseAccount.attributeTypeMap;
   }
 }

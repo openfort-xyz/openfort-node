@@ -11,16 +11,11 @@
  */
 
 import { RequestFile } from "./models";
-import { ApiKeyResponse } from "./apiKeyResponse";
 
-export class ProjectResponse {
+export class ContractDeleteResponse {
   "id": string;
   "object": string;
-  "createdAt": Date;
-  "name": string | null;
-  "livemode": boolean;
-  "logoUrl"?: string | null;
-  "apikeys": Array<ApiKeyResponse>;
+  "deleted": boolean;
 
   static discriminator: string | undefined = undefined;
 
@@ -40,33 +35,13 @@ export class ProjectResponse {
       type: "string",
     },
     {
-      name: "createdAt",
-      baseName: "created_at",
-      type: "Date",
-    },
-    {
-      name: "name",
-      baseName: "name",
-      type: "string",
-    },
-    {
-      name: "livemode",
-      baseName: "livemode",
+      name: "deleted",
+      baseName: "deleted",
       type: "boolean",
-    },
-    {
-      name: "logoUrl",
-      baseName: "logo_url",
-      type: "string",
-    },
-    {
-      name: "apikeys",
-      baseName: "apikeys",
-      type: "Array<ApiKeyResponse>",
     },
   ];
 
   static getAttributeTypeMap() {
-    return ProjectResponse.attributeTypeMap;
+    return ContractDeleteResponse.attributeTypeMap;
   }
 }

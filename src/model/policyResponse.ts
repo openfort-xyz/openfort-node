@@ -11,18 +11,18 @@
  */
 
 import { RequestFile } from "./models";
-import { PolicyRuleResponse } from "./policyRuleResponse";
-import { Strategy } from "./strategy";
+import { PolicyResponsePolicyRules } from "./policyResponsePolicyRules";
+import { PolicyResponseTransactionIntents } from "./policyResponseTransactionIntents";
 
 export class PolicyResponse {
   "id": string;
+  "object": string;
   "createdAt": Date;
   "name": string | null;
   "chainId": number;
-  "strategy": Strategy;
-  "transactionIntents": Array<any>;
-  "policyRules": Array<PolicyRuleResponse>;
-  "object": string;
+  "strategy": any | null;
+  "transactionIntents"?: PolicyResponseTransactionIntents;
+  "policyRules"?: PolicyResponsePolicyRules;
 
   static discriminator: string | undefined = undefined;
 
@@ -34,6 +34,11 @@ export class PolicyResponse {
     {
       name: "id",
       baseName: "id",
+      type: "string",
+    },
+    {
+      name: "object",
+      baseName: "object",
       type: "string",
     },
     {
@@ -54,22 +59,17 @@ export class PolicyResponse {
     {
       name: "strategy",
       baseName: "strategy",
-      type: "Strategy",
+      type: "any",
     },
     {
       name: "transactionIntents",
       baseName: "transaction_intents",
-      type: "Array<any>",
+      type: "PolicyResponseTransactionIntents",
     },
     {
       name: "policyRules",
       baseName: "policy_rules",
-      type: "Array<PolicyRuleResponse>",
-    },
-    {
-      name: "object",
-      baseName: "object",
-      type: "string",
+      type: "PolicyResponsePolicyRules",
     },
   ];
 

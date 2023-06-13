@@ -11,17 +11,17 @@
  */
 
 import { RequestFile } from "./models";
-import { TransactionIntentResponse } from "./transactionIntentResponse";
+import { PolicyResponseTransactionIntents } from "./policyResponseTransactionIntents";
 
 export class AccountResponse {
   "id": string;
+  "object": string;
   "createdAt": Date;
   "address": string;
   "deployed": boolean;
-  "object": string;
   "custodial": boolean;
   "chainId": number;
-  "transactionIntents": Array<TransactionIntentResponse>;
+  "transactionIntents"?: PolicyResponseTransactionIntents;
 
   static discriminator: string | undefined = undefined;
 
@@ -33,6 +33,11 @@ export class AccountResponse {
     {
       name: "id",
       baseName: "id",
+      type: "string",
+    },
+    {
+      name: "object",
+      baseName: "object",
       type: "string",
     },
     {
@@ -51,11 +56,6 @@ export class AccountResponse {
       type: "boolean",
     },
     {
-      name: "object",
-      baseName: "object",
-      type: "string",
-    },
-    {
       name: "custodial",
       baseName: "custodial",
       type: "boolean",
@@ -68,7 +68,7 @@ export class AccountResponse {
     {
       name: "transactionIntents",
       baseName: "transaction_intents",
-      type: "Array<TransactionIntentResponse>",
+      type: "PolicyResponseTransactionIntents",
     },
   ];
 

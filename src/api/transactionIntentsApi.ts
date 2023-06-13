@@ -287,7 +287,7 @@ export class TransactionIntentsApi {
     });
   }
   /**
-   * Updates a transaction intent object.
+   * Retrieves a transaction intent object.
    * @param id
    * @param project
    */
@@ -398,19 +398,21 @@ export class TransactionIntentsApi {
     });
   }
   /**
-   *
-   * @param project
+   * Returns a list of transaction intents for the given project. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
+   * @param expand
+   * @param limit
+   * @param project Specifies the unique project ID.
    * @param filter
    * @param order
    * @param skip
-   * @param take
    */
   public async getTransactionIntents(
+    expand?: Array<string>,
+    limit?: number,
     project?: string,
     filter?: string,
     order?: string,
     skip?: number,
-    take?: number,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{
     response: http.IncomingMessage;
@@ -430,6 +432,20 @@ export class TransactionIntentsApi {
       localVarHeaderParams.Accept = produces.join(",");
     }
     let localVarFormParams: any = {};
+
+    if (expand !== undefined) {
+      localVarQueryParameters["expand"] = ObjectSerializer.serialize(
+        expand,
+        "Array<string>"
+      );
+    }
+
+    if (limit !== undefined) {
+      localVarQueryParameters["limit"] = ObjectSerializer.serialize(
+        limit,
+        "number"
+      );
+    }
 
     if (project !== undefined) {
       localVarQueryParameters["project"] = ObjectSerializer.serialize(
@@ -455,13 +471,6 @@ export class TransactionIntentsApi {
     if (skip !== undefined) {
       localVarQueryParameters["skip"] = ObjectSerializer.serialize(
         skip,
-        "number"
-      );
-    }
-
-    if (take !== undefined) {
-      localVarQueryParameters["take"] = ObjectSerializer.serialize(
-        take,
         "number"
       );
     }

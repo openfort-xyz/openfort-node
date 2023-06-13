@@ -11,16 +11,21 @@
  */
 
 import { RequestFile } from "./models";
-import { ApiKeyResponse } from "./apiKeyResponse";
+import { PlayerResponse } from "./playerResponse";
+import { PlayerResponseAccounts } from "./playerResponseAccounts";
+import { PolicyResponseTransactionIntents } from "./policyResponseTransactionIntents";
 
-export class ProjectResponse {
+export class TransactionIntentResponsePlayer {
   "id": string;
   "object": string;
   "createdAt": Date;
   "name": string | null;
   "livemode": boolean;
-  "logoUrl"?: string | null;
-  "apikeys": Array<ApiKeyResponse>;
+  "email": string | null;
+  "description": string | null;
+  "metadata": string;
+  "transactionIntents"?: PolicyResponseTransactionIntents;
+  "accounts"?: PlayerResponseAccounts;
 
   static discriminator: string | undefined = undefined;
 
@@ -55,18 +60,33 @@ export class ProjectResponse {
       type: "boolean",
     },
     {
-      name: "logoUrl",
-      baseName: "logo_url",
+      name: "email",
+      baseName: "email",
       type: "string",
     },
     {
-      name: "apikeys",
-      baseName: "apikeys",
-      type: "Array<ApiKeyResponse>",
+      name: "description",
+      baseName: "description",
+      type: "string",
+    },
+    {
+      name: "metadata",
+      baseName: "metadata",
+      type: "string",
+    },
+    {
+      name: "transactionIntents",
+      baseName: "transaction_intents",
+      type: "PolicyResponseTransactionIntents",
+    },
+    {
+      name: "accounts",
+      baseName: "accounts",
+      type: "PlayerResponseAccounts",
     },
   ];
 
   static getAttributeTypeMap() {
-    return ProjectResponse.attributeTypeMap;
+    return TransactionIntentResponsePlayer.attributeTypeMap;
   }
 }
