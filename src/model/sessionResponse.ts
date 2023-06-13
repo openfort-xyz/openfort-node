@@ -14,8 +14,8 @@ import { RequestFile } from "./models";
 
 export class SessionResponse {
   "id": string;
-  "createdAt": Date;
   "object": string;
+  "createdAt": Date;
   "validAfter"?: string;
   "validUntil"?: string;
   "whitelist"?: Array<string>;
@@ -35,14 +35,14 @@ export class SessionResponse {
       type: "string",
     },
     {
-      name: "createdAt",
-      baseName: "created_at",
-      type: "Date",
-    },
-    {
       name: "object",
       baseName: "object",
       type: "string",
+    },
+    {
+      name: "createdAt",
+      baseName: "created_at",
+      type: "Date",
     },
     {
       name: "validAfter",

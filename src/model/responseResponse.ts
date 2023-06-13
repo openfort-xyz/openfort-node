@@ -11,16 +11,17 @@
  */
 
 import { RequestFile } from "./models";
+import { PrismaJsonValue } from "./prismaJsonValue";
 
 export class ResponseResponse {
   "createdAt": Date;
   "blockNumber": number | null;
   "transactionHash": string | null;
-  "gasUsed": number;
-  "status": number;
-  "logs": Array<string>;
-  "to": string;
-  "error": string;
+  "gasUsed"?: number | null;
+  "status"?: number | null;
+  "logs"?: PrismaJsonValue | null;
+  "to"?: string | null;
+  "error"?: PrismaJsonValue | null;
 
   static discriminator: string | undefined = undefined;
 
@@ -57,7 +58,7 @@ export class ResponseResponse {
     {
       name: "logs",
       baseName: "logs",
-      type: "Array<string>",
+      type: "PrismaJsonValue",
     },
     {
       name: "to",
@@ -67,7 +68,7 @@ export class ResponseResponse {
     {
       name: "error",
       baseName: "error",
-      type: "string",
+      type: "PrismaJsonValue",
     },
   ];
 

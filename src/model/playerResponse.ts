@@ -11,20 +11,20 @@
  */
 
 import { RequestFile } from "./models";
-import { AccountResponse } from "./accountResponse";
-import { TransactionIntentResponse } from "./transactionIntentResponse";
+import { PlayerResponseAccounts } from "./playerResponseAccounts";
+import { PolicyResponseTransactionIntents } from "./policyResponseTransactionIntents";
 
 export class PlayerResponse {
   "id": string;
+  "object": string;
   "createdAt": Date;
   "name": string | null;
   "livemode": boolean;
   "email": string | null;
   "description": string | null;
   "metadata": string;
-  "transactionIntents"?: Array<TransactionIntentResponse>;
-  "accounts": Array<AccountResponse>;
-  "object": string;
+  "transactionIntents"?: PolicyResponseTransactionIntents;
+  "accounts"?: PlayerResponseAccounts;
 
   static discriminator: string | undefined = undefined;
 
@@ -36,6 +36,11 @@ export class PlayerResponse {
     {
       name: "id",
       baseName: "id",
+      type: "string",
+    },
+    {
+      name: "object",
+      baseName: "object",
       type: "string",
     },
     {
@@ -71,17 +76,12 @@ export class PlayerResponse {
     {
       name: "transactionIntents",
       baseName: "transaction_intents",
-      type: "Array<TransactionIntentResponse>",
+      type: "PolicyResponseTransactionIntents",
     },
     {
       name: "accounts",
       baseName: "accounts",
-      type: "Array<AccountResponse>",
-    },
-    {
-      name: "object",
-      baseName: "object",
-      type: "string",
+      type: "PlayerResponseAccounts",
     },
   ];
 

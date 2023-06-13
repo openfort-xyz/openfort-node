@@ -12,23 +12,26 @@
 
 import { RequestFile } from "./models";
 import { Interaction } from "./interaction";
+import { PrismaJsonValue } from "./prismaJsonValue";
 import { ResponseResponse } from "./responseResponse";
-import { UserOpResult } from "./userOpResult";
+import { TransactionIntentResponseAccount } from "./transactionIntentResponseAccount";
+import { TransactionIntentResponsePlayer } from "./transactionIntentResponsePlayer";
+import { TransactionIntentResponsePolicy } from "./transactionIntentResponsePolicy";
 
 export class TransactionIntentResponse {
   "id": string;
+  "object": string;
   "createdAt": Date;
   "updatedAt": Date;
   "chainId": number;
   "userOperationHash": string | null;
-  "userOperation"?: UserOpResult;
-  "policy": string | null;
-  "player": string;
-  "nextAction": object | null;
-  "account"?: string;
-  "transactions": Array<Interaction>;
+  "userOperation"?: PrismaJsonValue | null;
+  "policy"?: TransactionIntentResponsePolicy;
+  "player"?: TransactionIntentResponsePlayer;
+  "nextAction"?: object | null;
+  "account"?: TransactionIntentResponseAccount;
+  "interactions": Array<Interaction> | null;
   "response": ResponseResponse | null;
-  "object": string;
 
   static discriminator: string | undefined = undefined;
 
@@ -40,6 +43,11 @@ export class TransactionIntentResponse {
     {
       name: "id",
       baseName: "id",
+      type: "string",
+    },
+    {
+      name: "object",
+      baseName: "object",
       type: "string",
     },
     {
@@ -65,17 +73,17 @@ export class TransactionIntentResponse {
     {
       name: "userOperation",
       baseName: "user_operation",
-      type: "UserOpResult",
+      type: "PrismaJsonValue",
     },
     {
       name: "policy",
       baseName: "policy",
-      type: "string",
+      type: "TransactionIntentResponsePolicy",
     },
     {
       name: "player",
       baseName: "player",
-      type: "string",
+      type: "TransactionIntentResponsePlayer",
     },
     {
       name: "nextAction",
@@ -85,22 +93,17 @@ export class TransactionIntentResponse {
     {
       name: "account",
       baseName: "account",
-      type: "string",
+      type: "TransactionIntentResponseAccount",
     },
     {
-      name: "transactions",
-      baseName: "transactions",
+      name: "interactions",
+      baseName: "interactions",
       type: "Array<Interaction>",
     },
     {
       name: "response",
       baseName: "response",
       type: "ResponseResponse",
-    },
-    {
-      name: "object",
-      baseName: "object",
-      type: "string",
     },
   ];
 

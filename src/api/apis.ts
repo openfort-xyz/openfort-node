@@ -1,9 +1,9 @@
+export * from "./accountsApi";
+import { AccountsApi } from "./accountsApi";
 export * from "./contractsApi";
 import { ContractsApi } from "./contractsApi";
 export * from "./defaultApi";
 import { DefaultApi } from "./defaultApi";
-export * from "./logsApi";
-import { LogsApi } from "./logsApi";
 export * from "./playersApi";
 import { PlayersApi } from "./playersApi";
 export * from "./policiesApi";
@@ -30,9 +30,9 @@ export class HttpError extends Error {
 export { RequestFile } from "../model/models";
 
 export const APIS = [
+  AccountsApi,
   ContractsApi,
   DefaultApi,
-  LogsApi,
   PlayersApi,
   PoliciesApi,
   ProjectsApi,

@@ -117,7 +117,7 @@ export class PlayersApi {
    * @param project
    */
   public async createPlayer(
-    name: string,
+    name?: string,
     description?: string,
     project?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
@@ -136,13 +136,6 @@ export class PlayersApi {
       localVarHeaderParams.Accept = produces.join(",");
     }
     let localVarFormParams: any = {};
-
-    // verify required parameter 'name' is not null or undefined
-    if (name === null || name === undefined) {
-      throw new Error(
-        "Required parameter name was null or undefined when calling createPlayer."
-      );
-    }
 
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -550,10 +543,12 @@ export class PlayersApi {
    * Retrieves the details of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
    * @param id Specifies the unique player ID.
    * @param project Specifies the unique project ID.
+   * @param expand
    */
   public async getPlayer(
     id: string,
     project?: string,
+    expand?: Array<string>,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{ response: http.IncomingMessage; body: PlayerResponse }> {
     const localVarPath =
@@ -587,6 +582,13 @@ export class PlayersApi {
       localVarQueryParameters["project"] = ObjectSerializer.serialize(
         project,
         "string"
+      );
+    }
+
+    if (expand !== undefined) {
+      localVarQueryParameters["expand"] = ObjectSerializer.serialize(
+        expand,
+        "Array<string>"
       );
     }
 
@@ -654,10 +656,12 @@ export class PlayersApi {
   /**
    * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
    * @param id Specifies the unique player ID.
+   * @param expand
    * @param project Specifies the unique project ID.
    */
   public async getPlayerAccounts(
     id: string,
+    expand?: Array<string>,
     project?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{ response: http.IncomingMessage; body: AccountsResponse }> {
@@ -685,6 +689,13 @@ export class PlayersApi {
     if (id === null || id === undefined) {
       throw new Error(
         "Required parameter id was null or undefined when calling getPlayerAccounts."
+      );
+    }
+
+    if (expand !== undefined) {
+      localVarQueryParameters["expand"] = ObjectSerializer.serialize(
+        expand,
+        "Array<string>"
       );
     }
 
@@ -879,18 +890,20 @@ export class PlayersApi {
   }
   /**
    * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
+   * @param expand
+   * @param limit
    * @param project Specifies the unique project ID.
    * @param filter
    * @param order
    * @param skip
-   * @param take
    */
   public async getPlayers(
+    expand?: Array<string>,
+    limit?: number,
     project?: string,
     filter?: string,
     order?: string,
     skip?: number,
-    take?: number,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{ response: http.IncomingMessage; body: PlayersResponse }> {
     const localVarPath = this.basePath + "/v1/players";
@@ -907,6 +920,20 @@ export class PlayersApi {
       localVarHeaderParams.Accept = produces.join(",");
     }
     let localVarFormParams: any = {};
+
+    if (expand !== undefined) {
+      localVarQueryParameters["expand"] = ObjectSerializer.serialize(
+        expand,
+        "Array<string>"
+      );
+    }
+
+    if (limit !== undefined) {
+      localVarQueryParameters["limit"] = ObjectSerializer.serialize(
+        limit,
+        "number"
+      );
+    }
 
     if (project !== undefined) {
       localVarQueryParameters["project"] = ObjectSerializer.serialize(
@@ -932,13 +959,6 @@ export class PlayersApi {
     if (skip !== undefined) {
       localVarQueryParameters["skip"] = ObjectSerializer.serialize(
         skip,
-        "number"
-      );
-    }
-
-    if (take !== undefined) {
-      localVarQueryParameters["take"] = ObjectSerializer.serialize(
-        take,
         "number"
       );
     }
@@ -1010,14 +1030,14 @@ export class PlayersApi {
    * @param chainId The chain_id where the account is.
    * @param newOwnerAddress The address of the new owner
    * @param project The project ID
-   * @param policy The policy ID
+   * @param player The player ID
    */
   public async transferAccountOwnership(
     id: string,
     chainId: number,
     newOwnerAddress: string,
     project?: string,
-    policy?: string,
+    player?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{
     response: http.IncomingMessage;
@@ -1089,9 +1109,9 @@ export class PlayersApi {
       );
     }
 
-    if (policy !== undefined) {
-      localVarFormParams["policy"] = ObjectSerializer.serialize(
-        policy,
+    if (player !== undefined) {
+      localVarFormParams["player"] = ObjectSerializer.serialize(
+        player,
         "string"
       );
     }
@@ -1165,7 +1185,7 @@ export class PlayersApi {
    */
   public async updatePlayer(
     id: string,
-    name: string,
+    name?: string,
     description?: string,
     project?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
@@ -1194,13 +1214,6 @@ export class PlayersApi {
     if (id === null || id === undefined) {
       throw new Error(
         "Required parameter id was null or undefined when calling updatePlayer."
-      );
-    }
-
-    // verify required parameter 'name' is not null or undefined
-    if (name === null || name === undefined) {
-      throw new Error(
-        "Required parameter name was null or undefined when calling updatePlayer."
       );
     }
 

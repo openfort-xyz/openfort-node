@@ -4,9 +4,11 @@ import { PlayersApi } from "./api/playersApi";
 import { PoliciesApi } from "./api/policiesApi";
 import { ProjectsApi } from "./api/projectsApi";
 import { SessionsApi } from "./api/sessionsApi";
+import { AccountsApi } from "./api/accountsApi";
 import { TransactionIntentsApi } from "./api/transactionIntentsApi";
 
 export default class Openfort {
+  private _accountsApi?: AccountsApi;
   private _contractApi?: ContractsApi;
   private _defaultApi?: DefaultApi;
   private _playerApi?: PlayersApi;
@@ -26,6 +28,14 @@ export default class Openfort {
       this._contractApi.accessToken = this.apiKey;
     }
     return this._contractApi;
+  }
+
+  public get accounts(): AccountsApi {
+    if (!this._accountsApi) {
+      this._accountsApi = new AccountsApi(this.basePath);
+      this._accountsApi.accessToken = this.apiKey;
+    }
+    return this._accountsApi;
   }
 
   public get default(): DefaultApi {

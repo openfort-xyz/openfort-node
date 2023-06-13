@@ -14,12 +14,9 @@ import localVarRequest from "request";
 import http from "http";
 
 /* tslint:disable:no-unused-locals */
-import { AccountResponse } from "../model/accountResponse";
-import { AccountsResponse } from "../model/accountsResponse";
-import { InventoryResponse } from "../model/inventoryResponse";
 import { PolicyRuleResponse } from "../model/policyRuleResponse";
 import { PolicyRulesResponse } from "../model/policyRulesResponse";
-import { TransactionIntentResponse } from "../model/transactionIntentResponse";
+import { PolicySchema } from "../model/policySchema";
 
 import {
   ObjectSerializer,
@@ -110,151 +107,19 @@ export class DefaultApi {
   }
 
   /**
-   * Creates an account object.
-   * @param chainId The chain_id
-   * @param player The player ID
-   * @param project The project ID
-   * @param externalOwnerAddress The address of the external owner
-   */
-  public async createAccount(
-    chainId: number,
-    player: string,
-    project?: string,
-    externalOwnerAddress?: string,
-    options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{ response: http.IncomingMessage; body: AccountResponse }> {
-    const localVarPath = this.basePath + "/v1/accounts";
-    let localVarQueryParameters: any = {};
-    let localVarHeaderParams: any = (<any>Object).assign(
-      {},
-      this._defaultHeaders
-    );
-    const produces = ["application/json"];
-    // give precedence to 'application/json'
-    if (produces.indexOf("application/json") >= 0) {
-      localVarHeaderParams.Accept = "application/json";
-    } else {
-      localVarHeaderParams.Accept = produces.join(",");
-    }
-    let localVarFormParams: any = {};
-
-    // verify required parameter 'chainId' is not null or undefined
-    if (chainId === null || chainId === undefined) {
-      throw new Error(
-        "Required parameter chainId was null or undefined when calling createAccount."
-      );
-    }
-
-    // verify required parameter 'player' is not null or undefined
-    if (player === null || player === undefined) {
-      throw new Error(
-        "Required parameter player was null or undefined when calling createAccount."
-      );
-    }
-
-    (<any>Object).assign(localVarHeaderParams, options.headers);
-
-    let localVarUseFormData = false;
-
-    if (project !== undefined) {
-      localVarFormParams["project"] = ObjectSerializer.serialize(
-        project,
-        "string"
-      );
-    }
-
-    if (chainId !== undefined) {
-      localVarFormParams["chain_id"] = ObjectSerializer.serialize(
-        chainId,
-        "number"
-      );
-    }
-
-    if (player !== undefined) {
-      localVarFormParams["player"] = ObjectSerializer.serialize(
-        player,
-        "string"
-      );
-    }
-
-    if (externalOwnerAddress !== undefined) {
-      localVarFormParams["external_owner_address"] = ObjectSerializer.serialize(
-        externalOwnerAddress,
-        "string"
-      );
-    }
-
-    let localVarRequestOptions: localVarRequest.Options = {
-      method: "POST",
-      qs: localVarQueryParameters,
-      headers: localVarHeaderParams,
-      uri: localVarPath,
-      useQuerystring: this._useQuerystring,
-      json: true,
-    };
-
-    let authenticationPromise = Promise.resolve();
-    if (this.authentications.pk.accessToken) {
-      authenticationPromise = authenticationPromise.then(() =>
-        this.authentications.pk.applyToRequest(localVarRequestOptions)
-      );
-    }
-    authenticationPromise = authenticationPromise.then(() =>
-      this.authentications.default.applyToRequest(localVarRequestOptions)
-    );
-
-    let interceptorPromise = authenticationPromise;
-    for (const interceptor of this.interceptors) {
-      interceptorPromise = interceptorPromise.then(() =>
-        interceptor(localVarRequestOptions)
-      );
-    }
-
-    return interceptorPromise.then(() => {
-      if (Object.keys(localVarFormParams).length) {
-        if (localVarUseFormData) {
-          (<any>localVarRequestOptions).formData = localVarFormParams;
-        } else {
-          localVarRequestOptions.form = localVarFormParams;
-        }
-      }
-      return new Promise<{
-        response: http.IncomingMessage;
-        body: AccountResponse;
-      }>((resolve, reject) => {
-        localVarRequest(localVarRequestOptions, (error, response, body) => {
-          if (error) {
-            reject(error);
-          } else {
-            if (
-              response.statusCode &&
-              response.statusCode >= 200 &&
-              response.statusCode <= 299
-            ) {
-              body = ObjectSerializer.deserialize(body, "AccountResponse");
-              resolve({ response: response, body: body });
-            } else {
-              reject(new HttpError(response, body, response.statusCode));
-            }
-          }
-        });
-      });
-    });
-  }
-  /**
    * Creates an allow function object.
    * @param type
-   * @param policy
    * @param functionName
-   * @param project
+   * @param policy
    * @param contract
+   * @param project
    */
   public async createPolicyRules(
-    type: string,
+    type: PolicySchema,
+    functionName: string,
     policy: string,
-    functionName?: string,
+    contract: string,
     project?: string,
-    contract?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse }> {
     const localVarPath = this.basePath + "/v1/policy_rules";
@@ -279,10 +144,24 @@ export class DefaultApi {
       );
     }
 
+    // verify required parameter 'functionName' is not null or undefined
+    if (functionName === null || functionName === undefined) {
+      throw new Error(
+        "Required parameter functionName was null or undefined when calling createPolicyRules."
+      );
+    }
+
     // verify required parameter 'policy' is not null or undefined
     if (policy === null || policy === undefined) {
       throw new Error(
         "Required parameter policy was null or undefined when calling createPolicyRules."
+      );
+    }
+
+    // verify required parameter 'contract' is not null or undefined
+    if (contract === null || contract === undefined) {
+      throw new Error(
+        "Required parameter contract was null or undefined when calling createPolicyRules."
       );
     }
 
@@ -291,7 +170,10 @@ export class DefaultApi {
     let localVarUseFormData = false;
 
     if (type !== undefined) {
-      localVarFormParams["type"] = ObjectSerializer.serialize(type, "string");
+      localVarFormParams["type"] = ObjectSerializer.serialize(
+        type,
+        "PolicySchema"
+      );
     }
 
     if (functionName !== undefined) {
@@ -370,323 +252,6 @@ export class DefaultApi {
               response.statusCode <= 299
             ) {
               body = ObjectSerializer.deserialize(body, "PolicyRuleResponse");
-              resolve({ response: response, body: body });
-            } else {
-              reject(new HttpError(response, body, response.statusCode));
-            }
-          }
-        });
-      });
-    });
-  }
-  /**
-   * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
-   * @param id Specifies the unique account ID.
-   * @param project Specifies the unique project ID.
-   */
-  public async getAccount(
-    id: string,
-    project?: string,
-    options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{ response: http.IncomingMessage; body: AccountResponse }> {
-    const localVarPath =
-      this.basePath +
-      "/v1/accounts/{id}".replace(
-        "{" + "id" + "}",
-        encodeURIComponent(String(id))
-      );
-    let localVarQueryParameters: any = {};
-    let localVarHeaderParams: any = (<any>Object).assign(
-      {},
-      this._defaultHeaders
-    );
-    const produces = ["application/json"];
-    // give precedence to 'application/json'
-    if (produces.indexOf("application/json") >= 0) {
-      localVarHeaderParams.Accept = "application/json";
-    } else {
-      localVarHeaderParams.Accept = produces.join(",");
-    }
-    let localVarFormParams: any = {};
-
-    // verify required parameter 'id' is not null or undefined
-    if (id === null || id === undefined) {
-      throw new Error(
-        "Required parameter id was null or undefined when calling getAccount."
-      );
-    }
-
-    if (project !== undefined) {
-      localVarQueryParameters["project"] = ObjectSerializer.serialize(
-        project,
-        "string"
-      );
-    }
-
-    (<any>Object).assign(localVarHeaderParams, options.headers);
-
-    let localVarUseFormData = false;
-
-    let localVarRequestOptions: localVarRequest.Options = {
-      method: "GET",
-      qs: localVarQueryParameters,
-      headers: localVarHeaderParams,
-      uri: localVarPath,
-      useQuerystring: this._useQuerystring,
-      json: true,
-    };
-
-    let authenticationPromise = Promise.resolve();
-    if (this.authentications.pk.accessToken) {
-      authenticationPromise = authenticationPromise.then(() =>
-        this.authentications.pk.applyToRequest(localVarRequestOptions)
-      );
-    }
-    authenticationPromise = authenticationPromise.then(() =>
-      this.authentications.default.applyToRequest(localVarRequestOptions)
-    );
-
-    let interceptorPromise = authenticationPromise;
-    for (const interceptor of this.interceptors) {
-      interceptorPromise = interceptorPromise.then(() =>
-        interceptor(localVarRequestOptions)
-      );
-    }
-
-    return interceptorPromise.then(() => {
-      if (Object.keys(localVarFormParams).length) {
-        if (localVarUseFormData) {
-          (<any>localVarRequestOptions).formData = localVarFormParams;
-        } else {
-          localVarRequestOptions.form = localVarFormParams;
-        }
-      }
-      return new Promise<{
-        response: http.IncomingMessage;
-        body: AccountResponse;
-      }>((resolve, reject) => {
-        localVarRequest(localVarRequestOptions, (error, response, body) => {
-          if (error) {
-            reject(error);
-          } else {
-            if (
-              response.statusCode &&
-              response.statusCode >= 200 &&
-              response.statusCode <= 299
-            ) {
-              body = ObjectSerializer.deserialize(body, "AccountResponse");
-              resolve({ response: response, body: body });
-            } else {
-              reject(new HttpError(response, body, response.statusCode));
-            }
-          }
-        });
-      });
-    });
-  }
-  /**
-   * Retrieves the inventory of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
-   * @param id Specifies the unique account ID.
-   * @param project Specifies the unique project ID.
-   */
-  public async getAccountInventory(
-    id: string,
-    project?: string,
-    options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{ response: http.IncomingMessage; body: InventoryResponse }> {
-    const localVarPath =
-      this.basePath +
-      "/v1/accounts/{id}/inventory".replace(
-        "{" + "id" + "}",
-        encodeURIComponent(String(id))
-      );
-    let localVarQueryParameters: any = {};
-    let localVarHeaderParams: any = (<any>Object).assign(
-      {},
-      this._defaultHeaders
-    );
-    const produces = ["application/json"];
-    // give precedence to 'application/json'
-    if (produces.indexOf("application/json") >= 0) {
-      localVarHeaderParams.Accept = "application/json";
-    } else {
-      localVarHeaderParams.Accept = produces.join(",");
-    }
-    let localVarFormParams: any = {};
-
-    // verify required parameter 'id' is not null or undefined
-    if (id === null || id === undefined) {
-      throw new Error(
-        "Required parameter id was null or undefined when calling getAccountInventory."
-      );
-    }
-
-    if (project !== undefined) {
-      localVarQueryParameters["project"] = ObjectSerializer.serialize(
-        project,
-        "string"
-      );
-    }
-
-    (<any>Object).assign(localVarHeaderParams, options.headers);
-
-    let localVarUseFormData = false;
-
-    let localVarRequestOptions: localVarRequest.Options = {
-      method: "GET",
-      qs: localVarQueryParameters,
-      headers: localVarHeaderParams,
-      uri: localVarPath,
-      useQuerystring: this._useQuerystring,
-      json: true,
-    };
-
-    let authenticationPromise = Promise.resolve();
-    if (this.authentications.pk.accessToken) {
-      authenticationPromise = authenticationPromise.then(() =>
-        this.authentications.pk.applyToRequest(localVarRequestOptions)
-      );
-    }
-    authenticationPromise = authenticationPromise.then(() =>
-      this.authentications.default.applyToRequest(localVarRequestOptions)
-    );
-
-    let interceptorPromise = authenticationPromise;
-    for (const interceptor of this.interceptors) {
-      interceptorPromise = interceptorPromise.then(() =>
-        interceptor(localVarRequestOptions)
-      );
-    }
-
-    return interceptorPromise.then(() => {
-      if (Object.keys(localVarFormParams).length) {
-        if (localVarUseFormData) {
-          (<any>localVarRequestOptions).formData = localVarFormParams;
-        } else {
-          localVarRequestOptions.form = localVarFormParams;
-        }
-      }
-      return new Promise<{
-        response: http.IncomingMessage;
-        body: InventoryResponse;
-      }>((resolve, reject) => {
-        localVarRequest(localVarRequestOptions, (error, response, body) => {
-          if (error) {
-            reject(error);
-          } else {
-            if (
-              response.statusCode &&
-              response.statusCode >= 200 &&
-              response.statusCode <= 299
-            ) {
-              body = ObjectSerializer.deserialize(body, "InventoryResponse");
-              resolve({ response: response, body: body });
-            } else {
-              reject(new HttpError(response, body, response.statusCode));
-            }
-          }
-        });
-      });
-    });
-  }
-  /**
-   * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-   * @param player Specifies the unique player ID.
-   * @param project Specifies the unique project ID.
-   */
-  public async getAccounts(
-    player: string,
-    project?: string,
-    options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{ response: http.IncomingMessage; body: AccountsResponse }> {
-    const localVarPath = this.basePath + "/v1/accounts";
-    let localVarQueryParameters: any = {};
-    let localVarHeaderParams: any = (<any>Object).assign(
-      {},
-      this._defaultHeaders
-    );
-    const produces = ["application/json"];
-    // give precedence to 'application/json'
-    if (produces.indexOf("application/json") >= 0) {
-      localVarHeaderParams.Accept = "application/json";
-    } else {
-      localVarHeaderParams.Accept = produces.join(",");
-    }
-    let localVarFormParams: any = {};
-
-    // verify required parameter 'player' is not null or undefined
-    if (player === null || player === undefined) {
-      throw new Error(
-        "Required parameter player was null or undefined when calling getAccounts."
-      );
-    }
-
-    if (player !== undefined) {
-      localVarQueryParameters["player"] = ObjectSerializer.serialize(
-        player,
-        "string"
-      );
-    }
-
-    if (project !== undefined) {
-      localVarQueryParameters["project"] = ObjectSerializer.serialize(
-        project,
-        "string"
-      );
-    }
-
-    (<any>Object).assign(localVarHeaderParams, options.headers);
-
-    let localVarUseFormData = false;
-
-    let localVarRequestOptions: localVarRequest.Options = {
-      method: "GET",
-      qs: localVarQueryParameters,
-      headers: localVarHeaderParams,
-      uri: localVarPath,
-      useQuerystring: this._useQuerystring,
-      json: true,
-    };
-
-    let authenticationPromise = Promise.resolve();
-    if (this.authentications.pk.accessToken) {
-      authenticationPromise = authenticationPromise.then(() =>
-        this.authentications.pk.applyToRequest(localVarRequestOptions)
-      );
-    }
-    authenticationPromise = authenticationPromise.then(() =>
-      this.authentications.default.applyToRequest(localVarRequestOptions)
-    );
-
-    let interceptorPromise = authenticationPromise;
-    for (const interceptor of this.interceptors) {
-      interceptorPromise = interceptorPromise.then(() =>
-        interceptor(localVarRequestOptions)
-      );
-    }
-
-    return interceptorPromise.then(() => {
-      if (Object.keys(localVarFormParams).length) {
-        if (localVarUseFormData) {
-          (<any>localVarRequestOptions).formData = localVarFormParams;
-        } else {
-          localVarRequestOptions.form = localVarFormParams;
-        }
-      }
-      return new Promise<{
-        response: http.IncomingMessage;
-        body: AccountsResponse;
-      }>((resolve, reject) => {
-        localVarRequest(localVarRequestOptions, (error, response, body) => {
-          if (error) {
-            reject(error);
-          } else {
-            if (
-              response.statusCode &&
-              response.statusCode >= 200 &&
-              response.statusCode <= 299
-            ) {
-              body = ObjectSerializer.deserialize(body, "AccountsResponse");
               resolve({ response: response, body: body });
             } else {
               reject(new HttpError(response, body, response.statusCode));
@@ -797,157 +362,21 @@ export class DefaultApi {
     });
   }
   /**
-   * Transfer ownership of an account to an address.
-   * @param id Specifies the unique account ID.
-   * @param newOwnerAddress The address of the new owner
-   * @param project The project ID
-   * @param policy The policy ID
-   */
-  public async transferOwnership(
-    id: string,
-    newOwnerAddress: string,
-    project?: string,
-    policy?: string,
-    options: { headers: { [name: string]: string } } = { headers: {} }
-  ): Promise<{
-    response: http.IncomingMessage;
-    body: TransactionIntentResponse;
-  }> {
-    const localVarPath =
-      this.basePath +
-      "/v1/accounts/{id}/transfer-ownership".replace(
-        "{" + "id" + "}",
-        encodeURIComponent(String(id))
-      );
-    let localVarQueryParameters: any = {};
-    let localVarHeaderParams: any = (<any>Object).assign(
-      {},
-      this._defaultHeaders
-    );
-    const produces = ["application/json"];
-    // give precedence to 'application/json'
-    if (produces.indexOf("application/json") >= 0) {
-      localVarHeaderParams.Accept = "application/json";
-    } else {
-      localVarHeaderParams.Accept = produces.join(",");
-    }
-    let localVarFormParams: any = {};
-
-    // verify required parameter 'id' is not null or undefined
-    if (id === null || id === undefined) {
-      throw new Error(
-        "Required parameter id was null or undefined when calling transferOwnership."
-      );
-    }
-
-    // verify required parameter 'newOwnerAddress' is not null or undefined
-    if (newOwnerAddress === null || newOwnerAddress === undefined) {
-      throw new Error(
-        "Required parameter newOwnerAddress was null or undefined when calling transferOwnership."
-      );
-    }
-
-    (<any>Object).assign(localVarHeaderParams, options.headers);
-
-    let localVarUseFormData = false;
-
-    if (project !== undefined) {
-      localVarFormParams["project"] = ObjectSerializer.serialize(
-        project,
-        "string"
-      );
-    }
-
-    if (newOwnerAddress !== undefined) {
-      localVarFormParams["new_owner_address"] = ObjectSerializer.serialize(
-        newOwnerAddress,
-        "string"
-      );
-    }
-
-    if (policy !== undefined) {
-      localVarFormParams["policy"] = ObjectSerializer.serialize(
-        policy,
-        "string"
-      );
-    }
-
-    let localVarRequestOptions: localVarRequest.Options = {
-      method: "POST",
-      qs: localVarQueryParameters,
-      headers: localVarHeaderParams,
-      uri: localVarPath,
-      useQuerystring: this._useQuerystring,
-      json: true,
-    };
-
-    let authenticationPromise = Promise.resolve();
-    if (this.authentications.pk.accessToken) {
-      authenticationPromise = authenticationPromise.then(() =>
-        this.authentications.pk.applyToRequest(localVarRequestOptions)
-      );
-    }
-    authenticationPromise = authenticationPromise.then(() =>
-      this.authentications.default.applyToRequest(localVarRequestOptions)
-    );
-
-    let interceptorPromise = authenticationPromise;
-    for (const interceptor of this.interceptors) {
-      interceptorPromise = interceptorPromise.then(() =>
-        interceptor(localVarRequestOptions)
-      );
-    }
-
-    return interceptorPromise.then(() => {
-      if (Object.keys(localVarFormParams).length) {
-        if (localVarUseFormData) {
-          (<any>localVarRequestOptions).formData = localVarFormParams;
-        } else {
-          localVarRequestOptions.form = localVarFormParams;
-        }
-      }
-      return new Promise<{
-        response: http.IncomingMessage;
-        body: TransactionIntentResponse;
-      }>((resolve, reject) => {
-        localVarRequest(localVarRequestOptions, (error, response, body) => {
-          if (error) {
-            reject(error);
-          } else {
-            if (
-              response.statusCode &&
-              response.statusCode >= 200 &&
-              response.statusCode <= 299
-            ) {
-              body = ObjectSerializer.deserialize(
-                body,
-                "TransactionIntentResponse"
-              );
-              resolve({ response: response, body: body });
-            } else {
-              reject(new HttpError(response, body, response.statusCode));
-            }
-          }
-        });
-      });
-    });
-  }
-  /**
    * Updates your allow functions object.
    * @param id Specifies the unique allow function ID.
    * @param type
-   * @param policy
    * @param functionName
-   * @param project
+   * @param policy
    * @param contract
+   * @param project
    */
   public async updatePolicyRules(
     id: string,
-    type: string,
+    type: PolicySchema,
+    functionName: string,
     policy: string,
-    functionName?: string,
+    contract: string,
     project?: string,
-    contract?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse }> {
     const localVarPath =
@@ -984,10 +413,24 @@ export class DefaultApi {
       );
     }
 
+    // verify required parameter 'functionName' is not null or undefined
+    if (functionName === null || functionName === undefined) {
+      throw new Error(
+        "Required parameter functionName was null or undefined when calling updatePolicyRules."
+      );
+    }
+
     // verify required parameter 'policy' is not null or undefined
     if (policy === null || policy === undefined) {
       throw new Error(
         "Required parameter policy was null or undefined when calling updatePolicyRules."
+      );
+    }
+
+    // verify required parameter 'contract' is not null or undefined
+    if (contract === null || contract === undefined) {
+      throw new Error(
+        "Required parameter contract was null or undefined when calling updatePolicyRules."
       );
     }
 
@@ -996,7 +439,10 @@ export class DefaultApi {
     let localVarUseFormData = false;
 
     if (type !== undefined) {
-      localVarFormParams["type"] = ObjectSerializer.serialize(type, "string");
+      localVarFormParams["type"] = ObjectSerializer.serialize(
+        type,
+        "PolicySchema"
+      );
     }
 
     if (functionName !== undefined) {

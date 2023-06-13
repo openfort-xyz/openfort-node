@@ -11,16 +11,19 @@
  */
 
 import { RequestFile } from "./models";
-import { ApiKeyResponse } from "./apiKeyResponse";
+import { PolicyResponse } from "./policyResponse";
+import { PolicyResponsePolicyRules } from "./policyResponsePolicyRules";
+import { PolicyResponseTransactionIntents } from "./policyResponseTransactionIntents";
 
-export class ProjectResponse {
+export class TransactionIntentResponsePolicy {
   "id": string;
   "object": string;
   "createdAt": Date;
   "name": string | null;
-  "livemode": boolean;
-  "logoUrl"?: string | null;
-  "apikeys": Array<ApiKeyResponse>;
+  "chainId": number;
+  "strategy": any | null;
+  "transactionIntents"?: PolicyResponseTransactionIntents;
+  "policyRules"?: PolicyResponsePolicyRules;
 
   static discriminator: string | undefined = undefined;
 
@@ -50,23 +53,28 @@ export class ProjectResponse {
       type: "string",
     },
     {
-      name: "livemode",
-      baseName: "livemode",
-      type: "boolean",
+      name: "chainId",
+      baseName: "chain_id",
+      type: "number",
     },
     {
-      name: "logoUrl",
-      baseName: "logo_url",
-      type: "string",
+      name: "strategy",
+      baseName: "strategy",
+      type: "any",
     },
     {
-      name: "apikeys",
-      baseName: "apikeys",
-      type: "Array<ApiKeyResponse>",
+      name: "transactionIntents",
+      baseName: "transaction_intents",
+      type: "PolicyResponseTransactionIntents",
+    },
+    {
+      name: "policyRules",
+      baseName: "policy_rules",
+      type: "PolicyResponsePolicyRules",
     },
   ];
 
   static getAttributeTypeMap() {
-    return ProjectResponse.attributeTypeMap;
+    return TransactionIntentResponsePolicy.attributeTypeMap;
   }
 }
