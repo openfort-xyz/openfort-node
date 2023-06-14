@@ -26,7 +26,7 @@ export class TransactionIntentResponse {
   "chainId": number;
   "userOperationHash": string | null;
   "userOperation"?: PrismaJsonValue | null;
-  "policy"?: TransactionIntentResponsePolicy;
+  "policy": TransactionIntentResponsePolicy | null;
   "player"?: TransactionIntentResponsePlayer;
   "nextAction"?: object | null;
   "account"?: TransactionIntentResponseAccount;
