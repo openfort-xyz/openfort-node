@@ -187,26 +187,27 @@ export class LogsApi {
           localVarRequestOptions.form = localVarFormParams;
         }
       }
-      return new Promise<{ response: http.IncomingMessage; body: ProjectLogs }>(
-        (resolve, reject) => {
-          localVarRequest(localVarRequestOptions, (error, response, body) => {
-            if (error) {
-              reject(error);
+      return new Promise<{
+        response: http.IncomingMessage;
+        body: ProjectLogs;
+      }>((resolve, reject) => {
+        localVarRequest(localVarRequestOptions, (error, response, body) => {
+          if (error) {
+            reject(error);
+          } else {
+            if (
+              response.statusCode &&
+              response.statusCode >= 200 &&
+              response.statusCode <= 299
+            ) {
+              body = ObjectSerializer.deserialize(body, "ProjectLogs");
+              resolve({ response: response, body: body });
             } else {
-              if (
-                response.statusCode &&
-                response.statusCode >= 200 &&
-                response.statusCode <= 299
-              ) {
-                body = ObjectSerializer.deserialize(body, "ProjectLogs");
-                resolve({ response: response, body: body });
-              } else {
-                reject(new HttpError(response, body, response.statusCode));
-              }
+              reject(new HttpError(response, body, response.statusCode));
             }
-          });
-        }
-      );
+          }
+        });
+      });
     });
   }
 }

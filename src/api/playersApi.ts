@@ -1025,8 +1025,146 @@ export class PlayersApi {
     });
   }
   /**
+   * Creates a session object for the given player.
+   * @param id Specifies the unique player ID.
+   * @param address
+   * @param chainId
+   * @param policy
+   */
+  public async revokePlayerSession(
+    id: string,
+    address: string,
+    chainId: number,
+    policy?: string,
+    options: { headers: { [name: string]: string } } = { headers: {} }
+  ): Promise<{ response: http.IncomingMessage; body: SessionResponse }> {
+    const localVarPath =
+      this.basePath +
+      "/v1/players/{id}/sessions/revoke".replace(
+        "{" + "id" + "}",
+        encodeURIComponent(String(id))
+      );
+    let localVarQueryParameters: any = {};
+    let localVarHeaderParams: any = (<any>Object).assign(
+      {},
+      this._defaultHeaders
+    );
+    const produces = ["application/json"];
+    // give precedence to 'application/json'
+    if (produces.indexOf("application/json") >= 0) {
+      localVarHeaderParams.Accept = "application/json";
+    } else {
+      localVarHeaderParams.Accept = produces.join(",");
+    }
+    let localVarFormParams: any = {};
+
+    // verify required parameter 'id' is not null or undefined
+    if (id === null || id === undefined) {
+      throw new Error(
+        "Required parameter id was null or undefined when calling revokePlayerSession."
+      );
+    }
+
+    // verify required parameter 'address' is not null or undefined
+    if (address === null || address === undefined) {
+      throw new Error(
+        "Required parameter address was null or undefined when calling revokePlayerSession."
+      );
+    }
+
+    // verify required parameter 'chainId' is not null or undefined
+    if (chainId === null || chainId === undefined) {
+      throw new Error(
+        "Required parameter chainId was null or undefined when calling revokePlayerSession."
+      );
+    }
+
+    (<any>Object).assign(localVarHeaderParams, options.headers);
+
+    let localVarUseFormData = false;
+
+    if (address !== undefined) {
+      localVarFormParams["address"] = ObjectSerializer.serialize(
+        address,
+        "string"
+      );
+    }
+
+    if (policy !== undefined) {
+      localVarFormParams["policy"] = ObjectSerializer.serialize(
+        policy,
+        "string"
+      );
+    }
+
+    if (chainId !== undefined) {
+      localVarFormParams["chain_id"] = ObjectSerializer.serialize(
+        chainId,
+        "number"
+      );
+    }
+
+    let localVarRequestOptions: localVarRequest.Options = {
+      method: "POST",
+      qs: localVarQueryParameters,
+      headers: localVarHeaderParams,
+      uri: localVarPath,
+      useQuerystring: this._useQuerystring,
+      json: true,
+    };
+
+    let authenticationPromise = Promise.resolve();
+    if (this.authentications.pk.accessToken) {
+      authenticationPromise = authenticationPromise.then(() =>
+        this.authentications.pk.applyToRequest(localVarRequestOptions)
+      );
+    }
+    authenticationPromise = authenticationPromise.then(() =>
+      this.authentications.default.applyToRequest(localVarRequestOptions)
+    );
+
+    let interceptorPromise = authenticationPromise;
+    for (const interceptor of this.interceptors) {
+      interceptorPromise = interceptorPromise.then(() =>
+        interceptor(localVarRequestOptions)
+      );
+    }
+
+    return interceptorPromise.then(() => {
+      if (Object.keys(localVarFormParams).length) {
+        if (localVarUseFormData) {
+          (<any>localVarRequestOptions).formData = localVarFormParams;
+        } else {
+          localVarRequestOptions.form = localVarFormParams;
+        }
+      }
+      return new Promise<{
+        response: http.IncomingMessage;
+        body: SessionResponse;
+      }>((resolve, reject) => {
+        localVarRequest(localVarRequestOptions, (error, response, body) => {
+          if (error) {
+            reject(error);
+          } else {
+            if (
+              response.statusCode &&
+              response.statusCode >= 200 &&
+              response.statusCode <= 299
+            ) {
+              body = ObjectSerializer.deserialize(body, "SessionResponse");
+              resolve({ response: response, body: body });
+            } else {
+              reject(new HttpError(response, body, response.statusCode));
+            }
+          }
+        });
+      });
+    });
+  }
+  /**
    * Transfer ownership of an account to an address.
    * @param id Specifies the unique player ID.
+   * @param policy The policy ID
    * @param chainId The chain_id where the account is.
    * @param newOwnerAddress The address of the new owner
    * @param project The project ID
@@ -1034,6 +1172,7 @@ export class PlayersApi {
    */
   public async transferAccountOwnership(
     id: string,
+    policy: string,
     chainId: number,
     newOwnerAddress: string,
     project?: string,
@@ -1070,6 +1209,13 @@ export class PlayersApi {
       );
     }
 
+    // verify required parameter 'policy' is not null or undefined
+    if (policy === null || policy === undefined) {
+      throw new Error(
+        "Required parameter policy was null or undefined when calling transferAccountOwnership."
+      );
+    }
+
     // verify required parameter 'chainId' is not null or undefined
     if (chainId === null || chainId === undefined) {
       throw new Error(
@@ -1091,6 +1237,13 @@ export class PlayersApi {
     if (project !== undefined) {
       localVarFormParams["project"] = ObjectSerializer.serialize(
         project,
+        "string"
+      );
+    }
+
+    if (policy !== undefined) {
+      localVarFormParams["policy"] = ObjectSerializer.serialize(
+        policy,
         "string"
       );
     }

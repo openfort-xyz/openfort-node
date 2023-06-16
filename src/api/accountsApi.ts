@@ -587,14 +587,14 @@ export class AccountsApi {
    * Transfers ownership of an account to an address.
    * @param id Specifies the unique account ID.
    * @param newOwnerAddress The address of the new owner
-   * @param project The project ID
    * @param policy The policy ID
+   * @param project The project ID
    */
   public async transferOwnership(
     id: string,
     newOwnerAddress: string,
+    policy: string,
     project?: string,
-    policy?: string,
     options: { headers: { [name: string]: string } } = { headers: {} }
   ): Promise<{
     response: http.IncomingMessage;
@@ -631,6 +631,13 @@ export class AccountsApi {
     if (newOwnerAddress === null || newOwnerAddress === undefined) {
       throw new Error(
         "Required parameter newOwnerAddress was null or undefined when calling transferOwnership."
+      );
+    }
+
+    // verify required parameter 'policy' is not null or undefined
+    if (policy === null || policy === undefined) {
+      throw new Error(
+        "Required parameter policy was null or undefined when calling transferOwnership."
       );
     }
 

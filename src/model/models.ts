@@ -27,9 +27,12 @@ export * from "./policySchema";
 export * from "./prismaJsonValue";
 export * from "./projectLogs";
 export * from "./projectResponse";
+export * from "./projectResponseApikeys";
 export * from "./projectsResponse";
 export * from "./responseResponse";
 export * from "./sessionResponse";
+export * from "./sessionResponseTransactionIntents";
+export * from "./sessionsResponse";
 export * from "./sumGas";
 export * from "./transactionIntentResponse";
 export * from "./transactionIntentResponseAccount";
@@ -76,9 +79,12 @@ import { PolicySchema } from "./policySchema";
 import { PrismaJsonValue } from "./prismaJsonValue";
 import { ProjectLogs } from "./projectLogs";
 import { ProjectResponse } from "./projectResponse";
+import { ProjectResponseApikeys } from "./projectResponseApikeys";
 import { ProjectsResponse } from "./projectsResponse";
 import { ResponseResponse } from "./responseResponse";
 import { SessionResponse } from "./sessionResponse";
+import { SessionResponseTransactionIntents } from "./sessionResponseTransactionIntents";
+import { SessionsResponse } from "./sessionsResponse";
 import { SumGas } from "./sumGas";
 import { TransactionIntentResponse } from "./transactionIntentResponse";
 import { TransactionIntentResponseAccount } from "./transactionIntentResponseAccount";
@@ -129,9 +135,12 @@ let typeMap: { [index: string]: any } = {
   PrismaJsonValue: PrismaJsonValue,
   ProjectLogs: ProjectLogs,
   ProjectResponse: ProjectResponse,
+  ProjectResponseApikeys: ProjectResponseApikeys,
   ProjectsResponse: ProjectsResponse,
   ResponseResponse: ResponseResponse,
   SessionResponse: SessionResponse,
+  SessionResponseTransactionIntents: SessionResponseTransactionIntents,
+  SessionsResponse: SessionsResponse,
   SumGas: SumGas,
   TransactionIntentResponse: TransactionIntentResponse,
   TransactionIntentResponseAccount: TransactionIntentResponseAccount,
