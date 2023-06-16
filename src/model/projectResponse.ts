@@ -11,7 +11,7 @@
  */
 
 import { RequestFile } from "./models";
-import { ApiKeyResponse } from "./apiKeyResponse";
+import { ProjectResponseApikeys } from "./projectResponseApikeys";
 
 export class ProjectResponse {
   "id": string;
@@ -20,7 +20,7 @@ export class ProjectResponse {
   "name": string | null;
   "livemode": boolean;
   "logoUrl"?: string | null;
-  "apikeys": Array<ApiKeyResponse>;
+  "apikeys": ProjectResponseApikeys | null;
 
   static discriminator: string | undefined = undefined;
 
@@ -62,7 +62,7 @@ export class ProjectResponse {
     {
       name: "apikeys",
       baseName: "apikeys",
-      type: "Array<ApiKeyResponse>",
+      type: "ProjectResponseApikeys",
     },
   ];
 

@@ -11,16 +11,21 @@
  */
 
 import { RequestFile } from "./models";
+import { SessionResponseTransactionIntents } from "./sessionResponseTransactionIntents";
 
 export class SessionResponse {
   "id": string;
   "object": string;
   "createdAt": Date;
+  "updatedAt": Date;
+  "isActive"?: boolean;
+  "address": string;
   "validAfter"?: string;
   "validUntil"?: string;
   "whitelist"?: Array<string>;
   "limit"?: number;
   "nextAction": object | null;
+  "transactionIntents": SessionResponseTransactionIntents | null;
 
   static discriminator: string | undefined = undefined;
 
@@ -43,6 +48,21 @@ export class SessionResponse {
       name: "createdAt",
       baseName: "created_at",
       type: "Date",
+    },
+    {
+      name: "updatedAt",
+      baseName: "updated_at",
+      type: "Date",
+    },
+    {
+      name: "isActive",
+      baseName: "is_active",
+      type: "boolean",
+    },
+    {
+      name: "address",
+      baseName: "address",
+      type: "string",
     },
     {
       name: "validAfter",
@@ -68,6 +88,11 @@ export class SessionResponse {
       name: "nextAction",
       baseName: "next_action",
       type: "object",
+    },
+    {
+      name: "transactionIntents",
+      baseName: "transaction_intents",
+      type: "SessionResponseTransactionIntents",
     },
   ];
 
