@@ -1,88 +1,78 @@
-import { ContractsApi } from "./api/contractsApi";
-import { DefaultApi } from "./api/defaultApi";
-import { PlayersApi } from "./api/playersApi";
-import { PoliciesApi } from "./api/policiesApi";
-import { ProjectsApi } from "./api/projectsApi";
-import { SessionsApi } from "./api/sessionsApi";
-import { AccountsApi } from "./api/accountsApi";
-import { TransactionIntentsApi } from "./api/transactionIntentsApi";
+import {AccountsApiWrapper} from "./wrapper/accountsApiWrapper";
+import {ContractsApiWrapper} from "./wrapper/contractsApiWrapper";
+import {PlayersApiWrapper} from "./wrapper/playersApiWrapper";
+import {PoliciesApiWrapper} from "./wrapper/policiesApiWrapper";
+import {PolicyRulesApiWrapper} from "./wrapper/policyRulesApiWrapper";
+import {ProjectsApiWrapper} from "./wrapper/projectsApiWrapper";
+import {SessionsApiWrapper} from "./wrapper/sessionsApiWrapper";
+import {TransactionIntentsApiWrapper} from "./wrapper/transactionIntentsApiWrapper";
 
 export default class Openfort {
-  private _accountsApi?: AccountsApi;
-  private _contractApi?: ContractsApi;
-  private _defaultApi?: DefaultApi;
-  private _playerApi?: PlayersApi;
-  private _policiesApi?: PoliciesApi;
-  private _projectApi?: ProjectsApi;
-  private _sessionsApi?: SessionsApi;
-  private _transactionApi?: TransactionIntentsApi;
+    private _accountsApi?: AccountsApiWrapper;
+    private _contractsApi?: ContractsApiWrapper;
+    private _playersApi?: PlayersApiWrapper;
+    private _policiesApi?: PoliciesApiWrapper;
+    private _policyRulesApi?: PolicyRulesApiWrapper;
+    private _projectsApi?: ProjectsApiWrapper;
+    private _sessionsApi?: SessionsApiWrapper;
+    private _transactionIntentsApi?: TransactionIntentsApiWrapper;
 
-  constructor(
-    private readonly apiKey: string,
-    private readonly basePath?: string
-  ) {}
-
-  public get contracts(): ContractsApi {
-    if (!this._contractApi) {
-      this._contractApi = new ContractsApi(this.basePath);
-      this._contractApi.accessToken = this.apiKey;
+    constructor(private readonly apiKey: string, private readonly basePath?: string) {
     }
-    return this._contractApi;
-  }
 
-  public get accounts(): AccountsApi {
-    if (!this._accountsApi) {
-      this._accountsApi = new AccountsApi(this.basePath);
-      this._accountsApi.accessToken = this.apiKey;
+    public get accounts(): AccountsApiWrapper {
+        if (!this._accountsApi) {
+            this._accountsApi = new AccountsApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._accountsApi;
     }
-    return this._accountsApi;
-  }
 
-  public get default(): DefaultApi {
-    if (!this._defaultApi) {
-      this._defaultApi = new DefaultApi(this.basePath);
-      this._defaultApi.accessToken = this.apiKey;
+    public get contracts(): ContractsApiWrapper {
+        if (!this._contractsApi) {
+            this._contractsApi = new ContractsApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._contractsApi;
     }
-    return this._defaultApi;
-  }
 
-  public get players(): PlayersApi {
-    if (!this._playerApi) {
-      this._playerApi = new PlayersApi(this.basePath);
-      this._playerApi.accessToken = this.apiKey;
+    public get players(): PlayersApiWrapper {
+        if (!this._playersApi) {
+            this._playersApi = new PlayersApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._playersApi;
     }
-    return this._playerApi;
-  }
 
-  public get policies(): PoliciesApi {
-    if (!this._policiesApi) {
-      this._policiesApi = new PoliciesApi(this.basePath);
-      this._policiesApi.accessToken = this.apiKey;
+    public get policies(): PoliciesApiWrapper {
+        if (!this._policiesApi) {
+            this._policiesApi = new PoliciesApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._policiesApi;
     }
-    return this._policiesApi;
-  }
 
-  public get projects(): ProjectsApi {
-    if (!this._projectApi) {
-      this._projectApi = new ProjectsApi();
-      this._projectApi.accessToken = this.apiKey;
+    public get policyRules(): PolicyRulesApiWrapper {
+        if (!this._policyRulesApi) {
+            this._policyRulesApi = new PolicyRulesApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._policyRulesApi;
     }
-    return this._projectApi;
-  }
 
-  public get sessions(): SessionsApi {
-    if (!this._sessionsApi) {
-      this._sessionsApi = new SessionsApi();
-      this._sessionsApi.accessToken = this.apiKey;
+    public get projects(): ProjectsApiWrapper {
+        if (!this._projectsApi) {
+            this._projectsApi = new ProjectsApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._projectsApi;
     }
-    return this._sessionsApi;
-  }
 
-  public get transactions(): TransactionIntentsApi {
-    if (!this._transactionApi) {
-      this._transactionApi = new TransactionIntentsApi(this.basePath);
-      this._transactionApi.accessToken = this.apiKey;
+    public get sessions(): SessionsApiWrapper {
+        if (!this._sessionsApi) {
+            this._sessionsApi = new SessionsApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._sessionsApi;
     }
-    return this._transactionApi;
-  }
+
+    public get transactionIntents(): TransactionIntentsApiWrapper {
+        if (!this._transactionIntentsApi) {
+            this._transactionIntentsApi = new TransactionIntentsApiWrapper(this.apiKey, this.basePath);
+        }
+        return this._transactionIntentsApi;
+    }
 }
