@@ -1,6 +1,6 @@
-import { ContractDeleteResponse } from '../generated/model/contractDeleteResponse';
-import { ContractResponse } from '../generated/model/contractResponse';
-import { ContractsResponse } from '../generated/model/contractsResponse';
+import {ContractDeleteResponse} from "../generated/model/contractDeleteResponse";
+import {ContractResponse} from "../generated/model/contractResponse";
+import {ContractsResponse} from "../generated/model/contractsResponse";
 import {ContractsApi} from "../generated/api/contractsApi";
 import {CreateContractRequest} from "../model/createContractRequest";
 import {httpErrorHandler} from "./http-error-handler";
@@ -20,8 +20,15 @@ export class ContractsApiWrapper {
      * @param req Parameters to create contract
      */
     @httpErrorHandler()
-    public async create(req: CreateContractRequest) : Promise<ContractResponse> {
-        const response = await this._api.createContract(req.name, req.chain_id, req.address, req.abi, req.public_verification, req.project);
+    public async create(req: CreateContractRequest): Promise<ContractResponse> {
+        const response = await this._api.createContract(
+            req.name,
+            req.chain_id,
+            req.address,
+            req.abi,
+            req.public_verification,
+            req.project,
+        );
         return response.body;
     }
 
@@ -30,7 +37,7 @@ export class ContractsApiWrapper {
      * @param id Id of the contract to delete
      */
     @httpErrorHandler()
-    public async delete(id: string) : Promise<ContractDeleteResponse> {
+    public async delete(id: string): Promise<ContractDeleteResponse> {
         const response = await this._api.deleteContract(id);
         return response.body;
     }
@@ -40,7 +47,7 @@ export class ContractsApiWrapper {
      * @param req Criteria to get the contract.
      */
     @httpErrorHandler()
-    public async get(req: GetContractRequest) : Promise<ContractResponse> {
+    public async get(req: GetContractRequest): Promise<ContractResponse> {
         const response = await this._api.getContract(req.id, req.project);
         return response.body;
     }
@@ -50,7 +57,7 @@ export class ContractsApiWrapper {
      * @param req Criteria to retrieve list of contracts.
      */
     @httpErrorHandler()
-    public async list(req?: ListContractsRequest) : Promise<ContractsResponse> {
+    public async list(req?: ListContractsRequest): Promise<ContractsResponse> {
         const response = await this._api.getContracts(req?.project, req?.limit);
         return response.body;
     }

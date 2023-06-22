@@ -1,7 +1,7 @@
-import { AccountResponse } from '../generated/model/accountResponse';
-import { AccountsResponse } from '../generated/model/accountsResponse';
-import { InventoryResponse } from '../generated/model/inventoryResponse';
-import { TransactionIntentResponse } from '../generated/model/transactionIntentResponse';
+import {AccountResponse} from "../generated/model/accountResponse";
+import {AccountsResponse} from "../generated/model/accountsResponse";
+import {InventoryResponse} from "../generated/model/inventoryResponse";
+import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
 import {AccountsApi} from "../generated/api/accountsApi";
 import {CreateAccountRequest} from "../model/createAccountRequest";
 import {httpErrorHandler} from "./http-error-handler";
@@ -23,8 +23,13 @@ export class AccountsApiWrapper {
      * @param req The account to create
      */
     @httpErrorHandler()
-    public async create(req: CreateAccountRequest) : Promise<AccountResponse> {
-        const response = await this._api.createAccount(req.chain_id, req.player, req.project, req.external_owner_address);
+    public async create(req: CreateAccountRequest): Promise<AccountResponse> {
+        const response = await this._api.createAccount(
+            req.chain_id,
+            req.player,
+            req.project,
+            req.external_owner_address,
+        );
         return response.body;
     }
 
@@ -33,7 +38,7 @@ export class AccountsApiWrapper {
      * @param req Criteria to get account.
      */
     @httpErrorHandler()
-    public async get(req: GetAccountRequest) : Promise<AccountResponse> {
+    public async get(req: GetAccountRequest): Promise<AccountResponse> {
         const response = await this._api.getAccount(req.id, req.expand, req.project);
         return response.body;
     }
@@ -43,7 +48,7 @@ export class AccountsApiWrapper {
      * @param req Criteria to get inventory.
      */
     @httpErrorHandler()
-    public async getInventory(req: GetAccountInventoryRequest) : Promise<InventoryResponse> {
+    public async getInventory(req: GetAccountInventoryRequest): Promise<InventoryResponse> {
         const response = await this._api.getAccountInventory(req.id, req.project);
         return response.body;
     }
@@ -53,7 +58,7 @@ export class AccountsApiWrapper {
      * @param req Criteria to get the list of accounts.
      */
     @httpErrorHandler()
-    public async list(req: ListAccountsRequest) : Promise<AccountsResponse> {
+    public async list(req: ListAccountsRequest): Promise<AccountsResponse> {
         const response = await this._api.getAccounts(req.player, req.expand, req.limit, req.project);
         return response.body;
     }
@@ -63,7 +68,7 @@ export class AccountsApiWrapper {
      * @param req Parameters to transfer ownership.
      */
     @httpErrorHandler()
-    public async transferOwnership(req: TransferOwnershipRequest) : Promise<TransactionIntentResponse> {
+    public async transferOwnership(req: TransferOwnershipRequest): Promise<TransactionIntentResponse> {
         const response = await this._api.transferOwnership(req.id, req.new_owner_address, req.policy, req.project);
         return response.body;
     }

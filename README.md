@@ -32,11 +32,11 @@ value:
 ```js
 const openfort = require('@openfort/openfort-node')('sk_test_...');
 
-openfort.players.createPlayer(
-  'Joan McCoain',
-  'API created player'
-)
-  .then(player => console.log(player.body.id))
+openfort.players.create({
+    name: 'Joan McCoain',
+    description: 'API created player'
+})
+  .then(player => console.log(player.id))
   .catch(error => console.error(error));
 ```
 
@@ -46,12 +46,12 @@ Or using ES modules and `async`/`await`:
 import Openfort from '@openfort/openfort-node';
 const openfort = new Openfort('sk_test_...');
 
-const player = await openfort.players.createPlayer(
-  'customer@example.com',
-  'API created player'
-);
+const player = await openfort.players.create({
+    name: 'customer@example.com',
+    description: 'API created player'
+});
 
-console.log(player.body.id);
+console.log(player.id);
 ```
 
 Below code snippet shows exemplary usage of the configuration and the API. 
@@ -61,16 +61,16 @@ import Openfort from "@openfort/openfort-node";
 
 async function example() {
     const openfort = new Openfort("sk_test_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
-    const players = await openfort.players.getPlayers();
-    for (const player of players.body.data) {
+    const players = await openfort.players.list();
+    for (const player of players.data) {
         console.log(player.id);
     }
 
-    const newPlayer = await openfort.players.createPlayer("Test");
-    console.log(newPlayer.body.id)
+    const newPlayer = await openfort.players.create({name: "Test"});
+    console.log(newPlayer.id)
 
-    const transactionIntents = await openfort.transactions.getTransactionIntents();
-    for (const intent of transactionIntents.body.data) {
+    const transactionIntents = await openfort.transactionIntents.list();
+    for (const intent of transactionIntents.data) {
         console.log(`Intent ${intent.id} by ${intent.player}`);
     }
 }
