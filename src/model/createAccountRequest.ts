@@ -1,4 +1,4 @@
-export interface CreateAccountRequest{
+export interface CreateAccountRequest {
     chain_id: number;
     player: string;
     project?: string;

@@ -1,5 +1,5 @@
-import { PolicyRuleResponse } from '../generated/model/policyRuleResponse';
-import { PolicyRulesResponse } from '../generated/model/policyRulesResponse';
+import {PolicyRuleResponse} from "../generated/model/policyRuleResponse";
+import {PolicyRulesResponse} from "../generated/model/policyRulesResponse";
 import {DefaultApi} from "../generated/api/defaultApi";
 import {CreatePolicyRulesRequest} from "../model/createPolicyRulesRequest";
 import {httpErrorHandler} from "./http-error-handler";
@@ -19,8 +19,14 @@ export class PolicyRulesApiWrapper {
      * @param req Parameters to create policy rules.
      */
     @httpErrorHandler()
-    public async create(req: CreatePolicyRulesRequest) : Promise<PolicyRuleResponse> {
-        const response = await this._api.createPolicyRules(req.type, req.function_name, req.policy, req.contract, req.project);
+    public async create(req: CreatePolicyRulesRequest): Promise<PolicyRuleResponse> {
+        const response = await this._api.createPolicyRules(
+            req.type,
+            req.function_name,
+            req.policy,
+            req.contract,
+            req.project,
+        );
         return response.body;
     }
 
@@ -29,7 +35,7 @@ export class PolicyRulesApiWrapper {
      * @param req Criteria to get policy rules by.
      */
     @httpErrorHandler()
-    public async get(req?: GetPolicyRulesRequest) : Promise<PolicyRulesResponse> {
+    public async get(req?: GetPolicyRulesRequest): Promise<PolicyRulesResponse> {
         const response = await this._api.getPolicyRules(req?.project, req?.policy);
         return response.body;
     }
@@ -39,8 +45,15 @@ export class PolicyRulesApiWrapper {
      * @param req Parameters to update policy rules
      */
     @httpErrorHandler()
-    public async update(req: UpdatePolicyRulesRequest) : Promise<PolicyRuleResponse> {
-        const response = await this._api.updatePolicyRules(req.id, req.type, req.function_name, req.policy, req.contract, req.policy);
+    public async update(req: UpdatePolicyRulesRequest): Promise<PolicyRuleResponse> {
+        const response = await this._api.updatePolicyRules(
+            req.id,
+            req.type,
+            req.function_name,
+            req.policy,
+            req.contract,
+            req.policy,
+        );
         return response.body;
     }
 }

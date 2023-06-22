@@ -17,8 +17,7 @@ export default class Openfort {
     private _sessionsApi?: SessionsApiWrapper;
     private _transactionIntentsApi?: TransactionIntentsApiWrapper;
 
-    constructor(private readonly apiKey: string, private readonly basePath?: string) {
-    }
+    constructor(private readonly apiKey: string, private readonly basePath?: string) {}
 
     public get accounts(): AccountsApiWrapper {
         if (!this._accountsApi) {
@@ -76,3 +75,6 @@ export default class Openfort {
         return this._transactionIntentsApi;
     }
 }
+
+export * from "./generated/model/models";
+export * from "./model";

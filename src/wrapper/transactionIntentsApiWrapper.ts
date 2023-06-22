@@ -1,5 +1,5 @@
-import { TransactionIntentResponse } from '../generated/model/transactionIntentResponse';
-import { TransactionIntentsResponse } from '../generated/model/transactionIntentsResponse';
+import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
+import {TransactionIntentsResponse} from "../generated/model/transactionIntentsResponse";
 import {TransactionIntentsApi} from "../generated/api/transactionIntentsApi";
 import {CreateTransactionIntentRequest} from "../model/createTransactionIntentRequest";
 import {GetTransactionIntentRequest} from "../model/getTransactionIntentRequest";
@@ -21,8 +21,16 @@ export class TransactionIntentsApiWrapper {
      * @param req Parameters to create transaction intent
      */
     @httpErrorHandler()
-    public async create(req: CreateTransactionIntentRequest) : Promise<TransactionIntentResponse> {
-        const response = await this._api.createTransactionIntent(req.player, req.chain_id, req.optimistic, req.interactions, req.policy, req.external_owner_address, req.project);
+    public async create(req: CreateTransactionIntentRequest): Promise<TransactionIntentResponse> {
+        const response = await this._api.createTransactionIntent(
+            req.player,
+            req.chain_id,
+            req.optimistic,
+            req.interactions,
+            req.policy,
+            req.external_owner_address,
+            req.project,
+        );
         return response.body;
     }
 
@@ -31,7 +39,7 @@ export class TransactionIntentsApiWrapper {
      * @param req Parameters to retrieve transaction intent
      */
     @httpErrorHandler()
-    public async get(req: GetTransactionIntentRequest) : Promise<TransactionIntentResponse> {
+    public async get(req: GetTransactionIntentRequest): Promise<TransactionIntentResponse> {
         const response = await this._api.getTransactionIntent(req.id, req.project);
         return response.body;
     }
@@ -41,8 +49,15 @@ export class TransactionIntentsApiWrapper {
      * @param req Parameters to get list of the transaction intents
      */
     @httpErrorHandler()
-    public async list(req?: ListTransactionIntentsRequest) : Promise<TransactionIntentsResponse> {
-        const response = await this._api.getTransactionIntents(req?.expand, req?.limit, req?.project, req?.filter, req?.order, req?.skip);
+    public async list(req?: ListTransactionIntentsRequest): Promise<TransactionIntentsResponse> {
+        const response = await this._api.getTransactionIntents(
+            req?.expand,
+            req?.limit,
+            req?.project,
+            req?.filter,
+            req?.order,
+            req?.skip,
+        );
         return response.body;
     }
 
@@ -51,7 +66,7 @@ export class TransactionIntentsApiWrapper {
      * @param req Parameters to signature session
      */
     @httpErrorHandler()
-    public async signature(req: SignatureTransactionIntentRequest) : Promise<TransactionIntentResponse> {
+    public async signature(req: SignatureTransactionIntentRequest): Promise<TransactionIntentResponse> {
         const response = await this._api.signature(req.id, req.signature);
         return response.body;
     }
@@ -62,7 +77,7 @@ export class TransactionIntentsApiWrapper {
      * @param project
      */
     @httpErrorHandler()
-    public async update(req: UpdateTransactionIntentRequest) : Promise<TransactionIntentResponse> {
+    public async update(req: UpdateTransactionIntentRequest): Promise<TransactionIntentResponse> {
         const response = await this._api.updateTransactionIntentResponse(req.id, req.project);
         return response.body;
     }
@@ -72,7 +87,7 @@ export class TransactionIntentsApiWrapper {
      * @param project
      */
     @httpErrorHandler()
-    public async updateList(project?: string) : Promise<TransactionIntentsResponse> {
+    public async updateList(project?: string): Promise<TransactionIntentsResponse> {
         const response = await this._api.updateTransactionIntentsResponse(project);
         return response.body;
     }
