@@ -1,10 +1,6 @@
-import {GetProjectResponse} from "../generated/model/getProjectResponse";
-import {ProjectResponse} from "../generated/model/projectResponse";
-import {ProjectsResponse} from "../generated/model/projectsResponse";
 import {httpErrorHandler} from "./http-error-handler";
-import {CreateProjectRequest} from "../model/createProjectRequest";
 import {ProjectsApi} from "../generated/api/projectsApi";
-import {UpdateProjectRequest} from "../model/updateProjectRequest";
+import {UpdateProjectRequest, GetProjectResponse, ProjectResponse, ProjectsResponse, ProjectRequest} from "../model";
 
 export class ProjectsApiWrapper {
     private readonly _api: ProjectsApi;
@@ -19,14 +15,8 @@ export class ProjectsApiWrapper {
      * @param req Parameters to create project
      */
     @httpErrorHandler()
-    public async create(req: CreateProjectRequest): Promise<ProjectResponse> {
-        const response = await this._api.createProject(
-            req.name,
-            req.livemode,
-            req.project,
-            req.pk_policy,
-            req.pk_location,
-        );
+    public async create(req: ProjectRequest): Promise<ProjectResponse> {
+        const response = await this._api.createProject(req);
         return response.body;
     }
 
@@ -64,14 +54,8 @@ export class ProjectsApiWrapper {
      */
     @httpErrorHandler()
     public async updateProject(req: UpdateProjectRequest): Promise<ProjectResponse> {
-        const response = await this._api.updateProject(
-            req.id,
-            req.name,
-            req.livemode,
-            req.project,
-            req.pk_policy,
-            req.pk_location,
-        );
+        const {id, ...request} = req;
+        const response = await this._api.updateProject(id, request);
         return response.body;
     }
 }

@@ -1,11 +1,13 @@
-import {ContractDeleteResponse} from "../generated/model/contractDeleteResponse";
-import {ContractResponse} from "../generated/model/contractResponse";
-import {ContractsResponse} from "../generated/model/contractsResponse";
-import {ContractsApi} from "../generated/api/contractsApi";
-import {CreateContractRequest} from "../model/createContractRequest";
 import {httpErrorHandler} from "./http-error-handler";
-import {GetContractRequest} from "../model/getContractRequest";
-import {ListContractsRequest} from "../model/listContractsRequest";
+import {ContractsApi} from "../generated/api/contractsApi";
+import {
+    GetContractRequest,
+    ListContractsRequest,
+    ContractDeleteResponse,
+    ContractsResponse,
+    ContractResponse,
+    ContractRequest,
+} from "../model";
 
 export class ContractsApiWrapper {
     private readonly _api: ContractsApi;
@@ -20,15 +22,8 @@ export class ContractsApiWrapper {
      * @param req Parameters to create contract
      */
     @httpErrorHandler()
-    public async create(req: CreateContractRequest): Promise<ContractResponse> {
-        const response = await this._api.createContract(
-            req.name,
-            req.chain_id,
-            req.address,
-            req.abi,
-            req.public_verification,
-            req.project,
-        );
+    public async create(req: ContractRequest): Promise<ContractResponse> {
+        const response = await this._api.createContract(req);
         return response.body;
     }
 

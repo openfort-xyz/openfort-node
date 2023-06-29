@@ -15,10 +15,12 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { AccountRequest } from '../model/accountRequest';
 import { AccountResponse } from '../model/accountResponse';
 import { AccountsResponse } from '../model/accountsResponse';
 import { InventoryResponse } from '../model/inventoryResponse';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
+import { TransferOwnershipRequest } from '../model/transferOwnershipRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -97,12 +99,9 @@ export class AccountsApi {
 
     /**
      * Creates an account object.
-     * @param chainId The chain_id
-     * @param player The player ID
-     * @param project The project ID
-     * @param externalOwnerAddress The address of the external owner
+     * @param accountRequest
      */
-    public async createAccount (chainId: number, player: string, project?: string, externalOwnerAddress?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
+    public async createAccount (accountRequest: AccountRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -115,35 +114,14 @@ export class AccountsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling createAccount.');
-        }
-
-        // verify required parameter 'player' is not null or undefined
-        if (player === null || player === undefined) {
-            throw new Error('Required parameter player was null or undefined when calling createAccount.');
+        // verify required parameter 'accountRequest' is not null or undefined
+        if (accountRequest === null || accountRequest === undefined) {
+            throw new Error('Required parameter accountRequest was null or undefined when calling createAccount.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (player !== undefined) {
-            localVarFormParams['player'] = ObjectSerializer.serialize(player, "string");
-        }
-
-        if (externalOwnerAddress !== undefined) {
-            localVarFormParams['external_owner_address'] = ObjectSerializer.serialize(externalOwnerAddress, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -152,6 +130,7 @@ export class AccountsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(accountRequest, "AccountRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -192,7 +171,7 @@ export class AccountsApi {
     /**
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * @param id Specifies the unique account ID.
-     * @param expand
+     * @param expand whether to expand the response or not
      * @param project Specifies the unique project ID.
      */
     public async getAccount (id: string, expand?: Array<string>, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
@@ -349,8 +328,8 @@ export class AccountsApi {
     /**
      * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param player Specifies the unique player ID.
-     * @param expand
-     * @param limit
+     * @param expand whether to expand the response or not
+     * @param limit amount of results per query
      * @param project Specifies the unique project ID.
      */
     public async getAccounts (player: string, expand?: Array<string>, limit?: number, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
@@ -436,13 +415,11 @@ export class AccountsApi {
         });
     }
     /**
-     * Transfers ownership of an account to an address.
+     * Request the ownership transfer of an account to a given address.
      * @param id Specifies the unique account ID.
-     * @param newOwnerAddress The address of the new owner
-     * @param policy The policy ID
-     * @param project The project ID
+     * @param transferOwnershipRequest
      */
-    public async transferOwnership (id: string, newOwnerAddress: string, policy: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async transferOwnership (id: string, transferOwnershipRequest: TransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts/{id}/transfer-ownership'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -461,31 +438,14 @@ export class AccountsApi {
             throw new Error('Required parameter id was null or undefined when calling transferOwnership.');
         }
 
-        // verify required parameter 'newOwnerAddress' is not null or undefined
-        if (newOwnerAddress === null || newOwnerAddress === undefined) {
-            throw new Error('Required parameter newOwnerAddress was null or undefined when calling transferOwnership.');
-        }
-
-        // verify required parameter 'policy' is not null or undefined
-        if (policy === null || policy === undefined) {
-            throw new Error('Required parameter policy was null or undefined when calling transferOwnership.');
+        // verify required parameter 'transferOwnershipRequest' is not null or undefined
+        if (transferOwnershipRequest === null || transferOwnershipRequest === undefined) {
+            throw new Error('Required parameter transferOwnershipRequest was null or undefined when calling transferOwnership.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
-        if (newOwnerAddress !== undefined) {
-            localVarFormParams['new_owner_address'] = ObjectSerializer.serialize(newOwnerAddress, "string");
-        }
-
-        if (policy !== undefined) {
-            localVarFormParams['policy'] = ObjectSerializer.serialize(policy, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -494,6 +454,7 @@ export class AccountsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(transferOwnershipRequest, "TransferOwnershipRequest")
         };
 
         let authenticationPromise = Promise.resolve();

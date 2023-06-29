@@ -1,12 +1,14 @@
+import {httpErrorHandler} from "./http-error-handler";
+import {TransactionIntentsApi} from "../generated/api/transactionIntentsApi";
+import {
+    GetTransactionIntentRequest,
+    ListTransactionIntentsRequest,
+    UpdateTransactionIntentRequest,
+    SignatureTransactionIntentRequest,
+} from "../model";
 import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
 import {TransactionIntentsResponse} from "../generated/model/transactionIntentsResponse";
-import {TransactionIntentsApi} from "../generated/api/transactionIntentsApi";
-import {CreateTransactionIntentRequest} from "../model/createTransactionIntentRequest";
-import {GetTransactionIntentRequest} from "../model/getTransactionIntentRequest";
-import {ListTransactionIntentsRequest} from "../model/listTransactionIntentsRequest";
-import {SignatureTransactionIntentRequest} from "../model/signatureTransactionIntentRequest";
-import {UpdateTransactionIntentRequest} from "../model/updateTransactionIntentRequest";
-import {httpErrorHandler} from "./http-error-handler";
+import {TransactionIntentRequest} from "../generated/model/transactionIntentRequest";
 
 export class TransactionIntentsApiWrapper {
     private readonly _api: TransactionIntentsApi;
@@ -21,16 +23,8 @@ export class TransactionIntentsApiWrapper {
      * @param req Parameters to create transaction intent
      */
     @httpErrorHandler()
-    public async create(req: CreateTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        const response = await this._api.createTransactionIntent(
-            req.player,
-            req.chain_id,
-            req.optimistic,
-            req.interactions,
-            req.policy,
-            req.external_owner_address,
-            req.project,
-        );
+    public async create(req: TransactionIntentRequest): Promise<TransactionIntentResponse> {
+        const response = await this._api.createTransactionIntent(req);
         return response.body;
     }
 
@@ -67,17 +61,17 @@ export class TransactionIntentsApiWrapper {
      */
     @httpErrorHandler()
     public async signature(req: SignatureTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        const response = await this._api.signature(req.id, req.signature);
+        const {id, ...body} = req;
+        const response = await this._api.signature(id, body);
         return response.body;
     }
 
     /**
-     *
-     * @param id
-     * @param project
+     * Updates transaction intent response
+     * @param req Request to update transaction intent
      */
     @httpErrorHandler()
-    public async update(req: UpdateTransactionIntentRequest): Promise<TransactionIntentResponse> {
+    public async updateResponse(req: UpdateTransactionIntentRequest): Promise<TransactionIntentResponse> {
         const response = await this._api.updateTransactionIntentResponse(req.id, req.project);
         return response.body;
     }

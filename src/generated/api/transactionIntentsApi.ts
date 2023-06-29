@@ -15,7 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { Interaction } from '../model/interaction';
+import { SignatureRequest } from '../model/signatureRequest';
+import { SortOrder } from '../model/sortOrder';
+import { TransactionIntentRequest } from '../model/transactionIntentRequest';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
 import { TransactionIntentsResponse } from '../model/transactionIntentsResponse';
 
@@ -96,15 +98,9 @@ export class TransactionIntentsApi {
 
     /**
      * Creates a transaction intent object.
-     * @param player
-     * @param chainId
-     * @param optimistic
-     * @param interactions
-     * @param policy
-     * @param externalOwnerAddress
-     * @param project
+     * @param transactionIntentRequest
      */
-    public async createTransactionIntent (player: string, chainId: number, optimistic: boolean, interactions: Array<Interaction>, policy?: string, externalOwnerAddress?: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async createTransactionIntent (transactionIntentRequest: TransactionIntentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -117,57 +113,14 @@ export class TransactionIntentsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'player' is not null or undefined
-        if (player === null || player === undefined) {
-            throw new Error('Required parameter player was null or undefined when calling createTransactionIntent.');
-        }
-
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling createTransactionIntent.');
-        }
-
-        // verify required parameter 'optimistic' is not null or undefined
-        if (optimistic === null || optimistic === undefined) {
-            throw new Error('Required parameter optimistic was null or undefined when calling createTransactionIntent.');
-        }
-
-        // verify required parameter 'interactions' is not null or undefined
-        if (interactions === null || interactions === undefined) {
-            throw new Error('Required parameter interactions was null or undefined when calling createTransactionIntent.');
+        // verify required parameter 'transactionIntentRequest' is not null or undefined
+        if (transactionIntentRequest === null || transactionIntentRequest === undefined) {
+            throw new Error('Required parameter transactionIntentRequest was null or undefined when calling createTransactionIntent.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (player !== undefined) {
-            localVarFormParams['player'] = ObjectSerializer.serialize(player, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (policy !== undefined) {
-            localVarFormParams['policy'] = ObjectSerializer.serialize(policy, "string");
-        }
-
-        if (externalOwnerAddress !== undefined) {
-            localVarFormParams['external_owner_address'] = ObjectSerializer.serialize(externalOwnerAddress, "string");
-        }
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
-        if (optimistic !== undefined) {
-            localVarFormParams['optimistic'] = ObjectSerializer.serialize(optimistic, "boolean");
-        }
-
-        if (interactions !== undefined) {
-            localVarFormParams['interactions'] = ObjectSerializer.serialize(interactions, "Array<Interaction>");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -176,6 +129,7 @@ export class TransactionIntentsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(transactionIntentRequest, "TransactionIntentRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -298,7 +252,7 @@ export class TransactionIntentsApi {
      * @param order
      * @param skip
      */
-    public async getTransactionIntents (expand?: Array<string>, limit?: number, project?: string, filter?: string, order?: string, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
+    public async getTransactionIntents (expand?: Array<string>, limit?: number, project?: string, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -328,7 +282,7 @@ export class TransactionIntentsApi {
         }
 
         if (order !== undefined) {
-            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
         }
 
         if (skip !== undefined) {
@@ -386,9 +340,9 @@ export class TransactionIntentsApi {
     /**
      * Confirms the creation of a transaction intent with an external owner.
      * @param id
-     * @param signature
+     * @param signatureRequest
      */
-    public async signature (id: string, signature: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async signature (id: string, signatureRequest: SignatureRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/{id}/signature'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -407,18 +361,14 @@ export class TransactionIntentsApi {
             throw new Error('Required parameter id was null or undefined when calling signature.');
         }
 
-        // verify required parameter 'signature' is not null or undefined
-        if (signature === null || signature === undefined) {
-            throw new Error('Required parameter signature was null or undefined when calling signature.');
+        // verify required parameter 'signatureRequest' is not null or undefined
+        if (signatureRequest === null || signatureRequest === undefined) {
+            throw new Error('Required parameter signatureRequest was null or undefined when calling signature.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (signature !== undefined) {
-            localVarFormParams['signature'] = ObjectSerializer.serialize(signature, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -427,6 +377,7 @@ export class TransactionIntentsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(signatureRequest, "SignatureRequest")
         };
 
         let authenticationPromise = Promise.resolve();
