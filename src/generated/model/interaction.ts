@@ -14,6 +14,7 @@ import { RequestFile } from './models';
 
 export class Interaction {
     'contract': string | null;
+    'value': string | null;
     'functionName': string;
     'functionArgs': Array<any>;
 
@@ -23,6 +24,11 @@ export class Interaction {
         {
             "name": "contract",
             "baseName": "contract",
+            "type": "string"
+        },
+        {
+            "name": "value",
+            "baseName": "value",
             "type": "string"
         },
         {

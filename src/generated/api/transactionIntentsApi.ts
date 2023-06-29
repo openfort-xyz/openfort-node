@@ -98,7 +98,7 @@ export class TransactionIntentsApi {
 
     /**
      * Creates a transaction intent object.
-     * @param transactionIntentRequest
+     * @param transactionIntentRequest 
      */
     public async createTransactionIntent (transactionIntentRequest: TransactionIntentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
@@ -169,8 +169,8 @@ export class TransactionIntentsApi {
     }
     /**
      * Retrieves a transaction intent object.
-     * @param id
-     * @param project
+     * @param id 
+     * @param project 
      */
     public async getTransactionIntent (id: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/{id}'
@@ -245,12 +245,12 @@ export class TransactionIntentsApi {
     }
     /**
      * Returns a list of transaction intents for the given project. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param expand
-     * @param limit
+     * @param expand 
+     * @param limit 
      * @param project Specifies the unique project ID.
-     * @param filter
-     * @param order
-     * @param skip
+     * @param filter 
+     * @param order 
+     * @param skip 
      */
     public async getTransactionIntents (expand?: Array<string>, limit?: number, project?: string, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
@@ -339,8 +339,8 @@ export class TransactionIntentsApi {
     }
     /**
      * Confirms the creation of a transaction intent with an external owner.
-     * @param id
-     * @param signatureRequest
+     * @param id 
+     * @param signatureRequest 
      */
     public async signature (id: string, signatureRequest: SignatureRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/{id}/signature'
@@ -384,6 +384,9 @@ export class TransactionIntentsApi {
         if (this.authentications.pk.accessToken) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
         }
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -416,9 +419,9 @@ export class TransactionIntentsApi {
         });
     }
     /**
-     *
-     * @param id
-     * @param project
+     * 
+     * @param id 
+     * @param project 
      */
     public async updateTransactionIntentResponse (id: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/{id}/update_response'
@@ -492,8 +495,8 @@ export class TransactionIntentsApi {
         });
     }
     /**
-     *
-     * @param project
+     * 
+     * @param project 
      */
     public async updateTransactionIntentsResponse (project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/update_response';
