@@ -1,19 +1,6 @@
-import {Gas} from "../generated/model/gas";
-import {PoliciesResponse} from "../generated/model/policiesResponse";
-import {PolicyDeleteResponse} from "../generated/model/policyDeleteResponse";
-import {PolicyResponse} from "../generated/model/policyResponse";
-import {PolicyRuleResponse} from "../generated/model/policyRuleResponse";
-import {PolicyRulesResponse} from "../generated/model/policyRulesResponse";
-import {SumGas} from "../generated/model/sumGas";
-import {PoliciesApi} from "../generated/api/policiesApi";
 import {httpErrorHandler} from "./http-error-handler";
-import {CreatePolicyAllowFunctionRequest} from "../model/createPolicyAllowFunctionRequest";
-import {ListPoliciesRequest} from "../model/listPoliciesRequest";
-import {GetPolicyRequest} from "../model/getPolicyRequest";
-import {GetAllowFunctionsRequest} from "../model/getAllowFunctionsRequest";
-import {GetPolicyDailyGasUsageRequest} from "../model/getPolicyDailyGasUsageRequest";
-import {GetPolicyTotalGasUsageRequest} from "../model/getPolicyTotalGasUsageRequest";
-import {UpdatePolicyAllowFunctionRequest} from "../model/updatePolicyAllowFunctionRequest";
+import {PoliciesApi} from "../generated/api/policiesApi";
+import {Gas, PoliciesResponse, PolicyDeleteResponse, PolicyResponse, PolicyRuleResponse, PolicyRulesResponse, SumGas, CreatePolicyAllowFunctionRequest, ListPoliciesRequest, GetPolicyRequest, GetAllowFunctionsRequest, GetPolicyDailyGasUsageRequest, UpdatePolicyAllowFunctionRequest, GetPolicyTotalGasUsageRequest} from "../model";
 
 export class PoliciesApiWrapper {
     private readonly _api: PoliciesApi;
@@ -25,17 +12,12 @@ export class PoliciesApiWrapper {
 
     /**
      * Creates allow function
-     * @param req: parameters to create
+     * @param req parameters to create
      */
     @httpErrorHandler()
     public async createAllowFunction(req: CreatePolicyAllowFunctionRequest): Promise<PolicyRuleResponse> {
-        const response = await this._api.createPolicyAllowFunction(
-            req.id,
-            req.type,
-            req.function_name,
-            req.contract,
-            req.project,
-        );
+        const {id, ...body} = req;
+        const response = await this._api.createPolicyAllowFunction(id, body);
         return response.body;
     }
 
@@ -75,7 +57,7 @@ export class PoliciesApiWrapper {
      */
     @httpErrorHandler()
     public async getAllowFunctions(req: GetAllowFunctionsRequest): Promise<PolicyRulesResponse> {
-        const response = await this._api.getPolicyAllowFunctions(req.id, req.project);
+        const response = await this._api.getPolicyAllowFunctions(req.id, req.expand, req.project);
         return response.body;
     }
 
@@ -105,15 +87,8 @@ export class PoliciesApiWrapper {
      */
     @httpErrorHandler()
     public async updateAllowFunction(req: UpdatePolicyAllowFunctionRequest): Promise<PolicyRuleResponse> {
-        const response = await this._api.updatePolicyAllowFunction(
-            req.policy,
-            req.policy_rule,
-            req.function_name,
-            req.contract,
-            req.type,
-            req.policy2,
-            req.project,
-        );
+        const {policyRule, ...body} = req;
+        const response = await this._api.updatePolicyAllowFunction(req.policy, policyRule, body);
         return response.body;
     }
 }

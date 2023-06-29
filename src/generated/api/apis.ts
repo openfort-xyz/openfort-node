@@ -2,12 +2,12 @@ export * from './accountsApi';
 import { AccountsApi } from './accountsApi';
 export * from './contractsApi';
 import { ContractsApi } from './contractsApi';
-export * from './defaultApi';
-import { DefaultApi } from './defaultApi';
 export * from './playersApi';
 import { PlayersApi } from './playersApi';
 export * from './policiesApi';
 import { PoliciesApi } from './policiesApi';
+export * from './policyRulesApi';
+import { PolicyRulesApi } from './policyRulesApi';
 export * from './projectsApi';
 import { ProjectsApi } from './projectsApi';
 export * from './sessionsApi';
@@ -25,4 +25,4 @@ export class HttpError extends Error {
 
 export { RequestFile } from '../model/models';
 
-export const APIS = [AccountsApi, ContractsApi, DefaultApi, PlayersApi, PoliciesApi, ProjectsApi, SessionsApi, TransactionIntentsApi];
+export const APIS = [AccountsApi, ContractsApi, PlayersApi, PoliciesApi, PolicyRulesApi, ProjectsApi, SessionsApi, TransactionIntentsApi];

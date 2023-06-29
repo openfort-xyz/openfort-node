@@ -71,7 +71,7 @@ async function example() {
 
     const transactionIntents = await openfort.transactionIntents.list();
     for (const intent of transactionIntents.data) {
-        console.log(`Intent ${intent.id} by ${intent.player}`);
+        console.log(`Intent ${intent.id} by ${intent.player.name}`);
     }
 }
 

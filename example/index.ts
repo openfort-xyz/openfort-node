@@ -1,4 +1,4 @@
-import Openfort, {CreatePlayerRequest, CreatePlayerSessionRequest, PlayersResponse} from "@openfort/openfort-node";
+import Openfort, {PlayerRequest, CreatePlayerSessionRequest, PlayersResponse} from "@openfort/openfort-node";
 
 async function example() {
     const openfort = new Openfort("sk_test_44b87423-9f53-5cf9-ae18-82b3e8bae139");
@@ -7,17 +7,17 @@ async function example() {
         console.log(player.id);
     }
 
-    const createPlayerRequest: CreatePlayerRequest = {
+    const createPlayerRequest: PlayerRequest = {
         name: "Test",
     };
     const newPlayer = await openfort.players.create(createPlayerRequest);
 
     const createSessionRequest: CreatePlayerSessionRequest = {
-        id: newPlayer.id,
+        playerId: newPlayer.id,
         address: "0x9590Ed0C18190a310f4e93CAccc4CC17270bED40",
-        chain_id: Number(process.env.NEXTAUTH_OPENFORT_CHAINID!),
-        valid_until: 281474976710655,
-        valid_after: 0,
+        chainId: Number(process.env.NEXTAUTH_OPENFORT_CHAINID!),
+        validUntil: 281474976710655,
+        validAfter: 0,
         policy: "pol_55814cce-9f5b-463a-a3ac-e20bde85903b",
     };
     await openfort.players.createSession(createSessionRequest);

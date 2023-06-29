@@ -1,22 +1,6 @@
-import {AccountResponse} from "../generated/model/accountResponse";
-import {AccountsResponse} from "../generated/model/accountsResponse";
-import {InventoryResponse} from "../generated/model/inventoryResponse";
-import {PlayerResponse} from "../generated/model/playerResponse";
-import {PlayersResponse} from "../generated/model/playersResponse";
-import {SessionResponse} from "../generated/model/sessionResponse";
-import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
 import {httpErrorHandler} from "./http-error-handler";
 import {PlayersApi} from "../generated/api/playersApi";
-import {CreatePlayerRequest} from "../model/createPlayerRequest";
-import {CreatePlayerAccountRequest} from "../model/createPlayerAccountRequest";
-import {CreatePlayerSessionRequest} from "../model/createPlayerSessionRequest";
-import {GetPlayerRequest} from "../model/getPlayerRequest";
-import {ListPlayerAccountsRequest} from "../model/listPlayerAccountsRequest";
-import {GetPlayerInventoryRequest} from "../model/getPlayerInventoryRequest";
-import {ListPlayersRequest} from "../model/listPlayersRequest";
-import {RevokePlayerSessionRequest} from "../model/revokePlayerSessionRequest";
-import {TransferAccountOwnershipRequest} from "../model/transferAccountOwnershipRequest";
-import {UpdatePlayerRequest} from "../model/updatePlayerRequest";
+import {AccountResponse, AccountsResponse, InventoryResponse, PlayerResponse, PlayersResponse, PlayerRequest, SessionResponse, TransactionIntentResponse, CreatePlayerAccountRequest, CreatePlayerSessionRequest, GetPlayerRequest, ListPlayerAccountsRequest, GetPlayerInventoryRequest, ListPlayersRequest, RevokePlayerSessionRequest, TransferPlayerAccountOwnershipRequest, UpdatePlayerRequest} from "../model";
 
 export class PlayersApiWrapper {
     private readonly _api: PlayersApi;
@@ -31,8 +15,8 @@ export class PlayersApiWrapper {
      * @param req Parameters to create a player
      */
     @httpErrorHandler()
-    public async create(req: CreatePlayerRequest): Promise<PlayerResponse> {
-        const response = await this._api.createPlayer(req.name, req.description, req.project);
+    public async create(req: PlayerRequest): Promise<PlayerResponse> {
+        const response = await this._api.createPlayer(req);
         return response.body;
     }
 
@@ -42,12 +26,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async createAccount(req: CreatePlayerAccountRequest): Promise<AccountResponse> {
-        const response = await this._api.createPlayerAccount(
-            req.id,
-            req.chain_id,
-            req.project,
-            req.external_owner_address,
-        );
+        const {playerId, ...body} = req;
+        const response = await this._api.createPlayerAccount(playerId, body);
         return response.body;
     }
 
@@ -57,17 +37,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async createSession(req: CreatePlayerSessionRequest): Promise<SessionResponse> {
-        const response = await this._api.createPlayerSession(
-            req.id,
-            req.address,
-            req.chain_id,
-            req.valid_until,
-            req.valid_after,
-            req.policy,
-            req.external_owner_address,
-            req.whitelist,
-            req.limit,
-        );
+        const {playerId, ...body} = req;
+        const response = await this._api.createPlayerSession(playerId, body);
         return response.body;
     }
 
@@ -124,7 +95,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async revokeSession(req: RevokePlayerSessionRequest): Promise<SessionResponse> {
-        const response = await this._api.revokePlayerSession(req.id, req.address, req.chain_id, req.policy);
+        const {playerId, ...body} = req;
+        const response = await this._api.revokePlayerSession(playerId, body);
         return response.body;
     }
 
@@ -133,15 +105,9 @@ export class PlayersApiWrapper {
      * @param req Parameters to transfer account ownership.
      */
     @httpErrorHandler()
-    public async transferAccountOwnership(req: TransferAccountOwnershipRequest): Promise<TransactionIntentResponse> {
-        const response = await this._api.transferAccountOwnership(
-            req.id,
-            req.policy,
-            req.chain_id,
-            req.new_owner_address,
-            req.project,
-            req.player,
-        );
+    public async transferAccountOwnership(req: TransferPlayerAccountOwnershipRequest): Promise<TransactionIntentResponse> {
+        const {playerId, ...body} = req;
+        const response = await this._api.transferAccountOwnership(playerId, body);
         return response.body;
     }
 
@@ -151,7 +117,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async update(req: UpdatePlayerRequest): Promise<PlayerResponse> {
-        const response = await this._api.updatePlayer(req.id, req.name, req.description, req.project);
+        const {id, ...body} = req;
+        const response = await this._api.updatePlayer(id, body);
         return response.body;
     }
 }
