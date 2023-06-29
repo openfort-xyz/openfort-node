@@ -14,7 +14,7 @@ import { RequestFile } from './models';
 
 export class Interaction {
     'contract': string | null;
-    'value': string | null;
+    'value'?: string | null;
     'functionName': string;
     'functionArgs': Array<any>;
 
