@@ -1,6 +1,24 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {PlayersApi} from "../generated/api/playersApi";
-import {AccountResponse, AccountsResponse, InventoryResponse, PlayerResponse, PlayersResponse, PlayerRequest, SessionResponse, TransactionIntentResponse, CreatePlayerAccountRequest, CreatePlayerSessionRequest, GetPlayerRequest, ListPlayerAccountsRequest, GetPlayerInventoryRequest, ListPlayersRequest, RevokePlayerSessionRequest, TransferPlayerAccountOwnershipRequest, UpdatePlayerRequest} from "../model";
+import {
+    AccountResponse,
+    AccountsResponse,
+    InventoryResponse,
+    PlayerResponse,
+    PlayersResponse,
+    PlayerRequest,
+    SessionResponse,
+    TransactionIntentResponse,
+    CreatePlayerAccountRequest,
+    CreatePlayerSessionRequest,
+    GetPlayerRequest,
+    ListPlayerAccountsRequest,
+    GetPlayerInventoryRequest,
+    ListPlayersRequest,
+    RevokePlayerSessionRequest,
+    TransferPlayerAccountOwnershipRequest,
+    UpdatePlayerRequest,
+} from "../model";
 
 export class PlayersApiWrapper {
     private readonly _api: PlayersApi;
@@ -105,7 +123,9 @@ export class PlayersApiWrapper {
      * @param req Parameters to transfer account ownership.
      */
     @httpErrorHandler()
-    public async transferAccountOwnership(req: TransferPlayerAccountOwnershipRequest): Promise<TransactionIntentResponse> {
+    public async transferAccountOwnership(
+        req: TransferPlayerAccountOwnershipRequest,
+    ): Promise<TransactionIntentResponse> {
         const {playerId, ...body} = req;
         const response = await this._api.transferAccountOwnership(playerId, body);
         return response.body;

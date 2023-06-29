@@ -1,6 +1,11 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {TransactionIntentsApi} from "../generated/api/transactionIntentsApi";
-import {GetTransactionIntentRequest, ListTransactionIntentsRequest, UpdateTransactionIntentRequest, SignatureTransactionIntentRequest} from "../model";
+import {
+    GetTransactionIntentRequest,
+    ListTransactionIntentsRequest,
+    UpdateTransactionIntentRequest,
+    SignatureTransactionIntentRequest,
+} from "../model";
 import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
 import {TransactionIntentsResponse} from "../generated/model/transactionIntentsResponse";
 import {TransactionIntentRequest} from "../generated/model/transactionIntentRequest";

@@ -1,6 +1,13 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {ContractsApi} from "../generated/api/contractsApi";
-import {GetContractRequest, ListContractsRequest, ContractDeleteResponse, ContractsResponse, ContractResponse, ContractRequest} from "../model";
+import {
+    GetContractRequest,
+    ListContractsRequest,
+    ContractDeleteResponse,
+    ContractsResponse,
+    ContractResponse,
+    ContractRequest,
+} from "../model";
 
 export class ContractsApiWrapper {
     private readonly _api: ContractsApi;
