@@ -11,19 +11,18 @@
  */
 
 import { RequestFile } from './models';
-import { PKPolicy } from './pKPolicy';
-import { ProjectResponseApikeys } from './projectResponseApikeys';
+import { ContractResponse } from './contractResponse';
+import { PrismaJsonValue } from './prismaJsonValue';
 
-export class ProjectResponse {
+export class PolicyRuleResponseContract {
     'id': string;
     'object': string;
     'createdAt': Date;
-    'updatedAt': Date;
     'name': string | null;
-    'pkPolicy': PKPolicy;
-    'livemode': boolean;
-    'logoUrl'?: string | null;
-    'apikeys': ProjectResponseApikeys | null;
+    'chainId': number;
+    'address': string;
+    'abi': PrismaJsonValue | null;
+    'publicVerification': boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -44,40 +43,33 @@ export class ProjectResponse {
             "type": "Date"
         },
         {
-            "name": "updatedAt",
-            "baseName": "updated_at",
-            "type": "Date"
-        },
-        {
             "name": "name",
             "baseName": "name",
             "type": "string"
         },
         {
-            "name": "pkPolicy",
-            "baseName": "pk_policy",
-            "type": "PKPolicy"
+            "name": "chainId",
+            "baseName": "chain_id",
+            "type": "number"
         },
         {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean"
-        },
-        {
-            "name": "logoUrl",
-            "baseName": "logo_url",
+            "name": "address",
+            "baseName": "address",
             "type": "string"
         },
         {
-            "name": "apikeys",
-            "baseName": "apikeys",
-            "type": "ProjectResponseApikeys"
+            "name": "abi",
+            "baseName": "abi",
+            "type": "PrismaJsonValue"
+        },
+        {
+            "name": "publicVerification",
+            "baseName": "public_verification",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectResponse.attributeTypeMap;
+        return PolicyRuleResponseContract.attributeTypeMap;
     }
 }
 
-export namespace ProjectResponse {
-}

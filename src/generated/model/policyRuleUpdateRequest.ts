@@ -11,35 +11,18 @@
  */
 
 import { RequestFile } from './models';
-import { PolicyRuleResponseContract } from './policyRuleResponseContract';
 import { PolicySchema } from './policySchema';
 
-export class PolicyRuleResponse {
-    'id': string;
-    'object': string;
-    'createdAt': Date;
-    'type': PolicySchema;
+export class PolicyRuleUpdateRequest {
+    'type'?: PolicySchema;
     'functionName': string | null;
-    'contract': PolicyRuleResponseContract | null;
+    'policy'?: string;
+    'project'?: string;
+    'contract': string | null;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
         {
             "name": "type",
             "baseName": "type",
@@ -51,15 +34,25 @@ export class PolicyRuleResponse {
             "type": "string"
         },
         {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string"
+        },
+        {
+            "name": "project",
+            "baseName": "project",
+            "type": "string"
+        },
+        {
             "name": "contract",
             "baseName": "contract",
-            "type": "PolicyRuleResponseContract"
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleResponse.attributeTypeMap;
+        return PolicyRuleUpdateRequest.attributeTypeMap;
     }
 }
 
-export namespace PolicyRuleResponse {
+export namespace PolicyRuleUpdateRequest {
 }

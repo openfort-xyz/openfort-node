@@ -1,8 +1,5 @@
-export interface UpdateProjectRequest {
+import {ProjectRequest} from "../generated/model/projectRequest";
+
+export interface UpdateProjectRequest extends ProjectRequest {
     id: string;
-    name: string;
-    livemode?: boolean;
-    project?: string;
-    pk_policy?: string;
-    pk_location?: string;
 }

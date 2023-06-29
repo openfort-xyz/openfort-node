@@ -15,8 +15,11 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { CreateSessionRequest } from '../model/createSessionRequest';
+import { RevokeSessionRequest } from '../model/revokeSessionRequest';
 import { SessionResponse } from '../model/sessionResponse';
 import { SessionsResponse } from '../model/sessionsResponse';
+import { SignatureRequest } from '../model/signatureRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -95,17 +98,9 @@ export class SessionsApi {
 
     /**
      * Creates the session for the account.
-     * @param player
-     * @param address
-     * @param chainId
-     * @param validUntil
-     * @param validAfter
-     * @param policy
-     * @param externalOwnerAddress
-     * @param whitelist
-     * @param limit
+     * @param createSessionRequest
      */
-    public async createSession (player: string, address: string, chainId: number, validUntil: number, validAfter: number, policy?: string, externalOwnerAddress?: string, whitelist?: Array<string>, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
+    public async createSession (createSessionRequest: CreateSessionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -118,70 +113,14 @@ export class SessionsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'player' is not null or undefined
-        if (player === null || player === undefined) {
-            throw new Error('Required parameter player was null or undefined when calling createSession.');
-        }
-
-        // verify required parameter 'address' is not null or undefined
-        if (address === null || address === undefined) {
-            throw new Error('Required parameter address was null or undefined when calling createSession.');
-        }
-
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling createSession.');
-        }
-
-        // verify required parameter 'validUntil' is not null or undefined
-        if (validUntil === null || validUntil === undefined) {
-            throw new Error('Required parameter validUntil was null or undefined when calling createSession.');
-        }
-
-        // verify required parameter 'validAfter' is not null or undefined
-        if (validAfter === null || validAfter === undefined) {
-            throw new Error('Required parameter validAfter was null or undefined when calling createSession.');
+        // verify required parameter 'createSessionRequest' is not null or undefined
+        if (createSessionRequest === null || createSessionRequest === undefined) {
+            throw new Error('Required parameter createSessionRequest was null or undefined when calling createSession.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (player !== undefined) {
-            localVarFormParams['player'] = ObjectSerializer.serialize(player, "string");
-        }
-
-        if (policy !== undefined) {
-            localVarFormParams['policy'] = ObjectSerializer.serialize(policy, "string");
-        }
-
-        if (externalOwnerAddress !== undefined) {
-            localVarFormParams['external_owner_address'] = ObjectSerializer.serialize(externalOwnerAddress, "string");
-        }
-
-        if (address !== undefined) {
-            localVarFormParams['address'] = ObjectSerializer.serialize(address, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (validUntil !== undefined) {
-            localVarFormParams['valid_until'] = ObjectSerializer.serialize(validUntil, "number");
-        }
-
-        if (validAfter !== undefined) {
-            localVarFormParams['valid_after'] = ObjectSerializer.serialize(validAfter, "number");
-        }
-
-        if (whitelist !== undefined) {
-            localVarFormParams['whitelist'] = ObjectSerializer.serialize(whitelist, "Array<string>");
-        }
-
-        if (limit !== undefined) {
-            localVarFormParams['limit'] = ObjectSerializer.serialize(limit, "number");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -190,6 +129,7 @@ export class SessionsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(createSessionRequest, "CreateSessionRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -333,12 +273,9 @@ export class SessionsApi {
     }
     /**
      * Revokes the session for the account.
-     * @param player
-     * @param chainId
-     * @param address
-     * @param policy
+     * @param revokeSessionRequest
      */
-    public async revokeSession (player: string, chainId: number, address: string, policy?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
+    public async revokeSession (revokeSessionRequest: RevokeSessionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions/revoke';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -351,40 +288,14 @@ export class SessionsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'player' is not null or undefined
-        if (player === null || player === undefined) {
-            throw new Error('Required parameter player was null or undefined when calling revokeSession.');
-        }
-
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling revokeSession.');
-        }
-
-        // verify required parameter 'address' is not null or undefined
-        if (address === null || address === undefined) {
-            throw new Error('Required parameter address was null or undefined when calling revokeSession.');
+        // verify required parameter 'revokeSessionRequest' is not null or undefined
+        if (revokeSessionRequest === null || revokeSessionRequest === undefined) {
+            throw new Error('Required parameter revokeSessionRequest was null or undefined when calling revokeSession.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (player !== undefined) {
-            localVarFormParams['player'] = ObjectSerializer.serialize(player, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (address !== undefined) {
-            localVarFormParams['address'] = ObjectSerializer.serialize(address, "string");
-        }
-
-        if (policy !== undefined) {
-            localVarFormParams['policy'] = ObjectSerializer.serialize(policy, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -393,6 +304,7 @@ export class SessionsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(revokeSessionRequest, "RevokeSessionRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -433,9 +345,9 @@ export class SessionsApi {
     /**
      * Confirms the creation of a session with an external owner.
      * @param id
-     * @param signature
+     * @param signatureRequest
      */
-    public async signatureSession (id: string, signature: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
+    public async signatureSession (id: string, signatureRequest: SignatureRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions/{id}/signature'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -454,18 +366,14 @@ export class SessionsApi {
             throw new Error('Required parameter id was null or undefined when calling signatureSession.');
         }
 
-        // verify required parameter 'signature' is not null or undefined
-        if (signature === null || signature === undefined) {
-            throw new Error('Required parameter signature was null or undefined when calling signatureSession.');
+        // verify required parameter 'signatureRequest' is not null or undefined
+        if (signatureRequest === null || signatureRequest === undefined) {
+            throw new Error('Required parameter signatureRequest was null or undefined when calling signatureSession.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (signature !== undefined) {
-            localVarFormParams['signature'] = ObjectSerializer.serialize(signature, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -474,6 +382,7 @@ export class SessionsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(signatureRequest, "SignatureRequest")
         };
 
         let authenticationPromise = Promise.resolve();

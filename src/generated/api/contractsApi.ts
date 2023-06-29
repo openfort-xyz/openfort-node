@@ -16,9 +16,9 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { ContractDeleteResponse } from '../model/contractDeleteResponse';
+import { ContractRequest } from '../model/contractRequest';
 import { ContractResponse } from '../model/contractResponse';
 import { ContractsResponse } from '../model/contractsResponse';
-import { PrismaJsonValue } from '../model/prismaJsonValue';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -97,14 +97,9 @@ export class ContractsApi {
 
     /**
      * Creates a contract object.
-     * @param name
-     * @param chainId
-     * @param address
-     * @param abi
-     * @param publicVerification
-     * @param project
+     * @param contractRequest
      */
-    public async createContract (name: string, chainId: number, address?: string, abi?: PrismaJsonValue, publicVerification?: boolean, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractResponse;  }> {
+    public async createContract (contractRequest: ContractRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -117,43 +112,14 @@ export class ContractsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'name' is not null or undefined
-        if (name === null || name === undefined) {
-            throw new Error('Required parameter name was null or undefined when calling createContract.');
-        }
-
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling createContract.');
+        // verify required parameter 'contractRequest' is not null or undefined
+        if (contractRequest === null || contractRequest === undefined) {
+            throw new Error('Required parameter contractRequest was null or undefined when calling createContract.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (name !== undefined) {
-            localVarFormParams['name'] = ObjectSerializer.serialize(name, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (address !== undefined) {
-            localVarFormParams['address'] = ObjectSerializer.serialize(address, "string");
-        }
-
-        if (abi !== undefined) {
-            localVarFormParams['abi'] = ObjectSerializer.serialize(abi, "PrismaJsonValue");
-        }
-
-        if (publicVerification !== undefined) {
-            localVarFormParams['public_verification'] = ObjectSerializer.serialize(publicVerification, "boolean");
-        }
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -162,6 +128,7 @@ export class ContractsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(contractRequest, "ContractRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -349,7 +316,7 @@ export class ContractsApi {
     /**
      * Returns a list of your contracts. The contracts are returned sorted by creation date, with the most recently created contracts appearing first.
      * @param project Specifies the unique project ID.
-     * @param limit
+     * @param limit amount of results per query
      */
     public async getContracts (project?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractsResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts';
