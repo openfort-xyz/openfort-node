@@ -1,11 +1,13 @@
-import {SessionResponse} from "../generated/model/sessionResponse";
-import {SessionsResponse} from "../generated/model/sessionsResponse";
-import {SessionsApi} from "../generated/api/sessionsApi";
 import {httpErrorHandler} from "./http-error-handler";
-import {CreateSessionRequest} from "../model/createSessionRequest";
-import {ListSessionsRequest} from "../model/listSessionsRequest";
-import {RevokeSessionRequest} from "../model/revokeSessionRequest";
-import {SignatureSessionRequest} from "../model/signatureSessionRequest";
+import {SessionsApi} from "../generated/api/sessionsApi";
+import {
+    ListSessionsRequest,
+    SignatureSessionRequest,
+    SessionResponse,
+    SessionsResponse,
+    CreateSessionRequest,
+    RevokeSessionRequest,
+} from "../model";
 
 export class SessionsApiWrapper {
     private readonly _api: SessionsApi;
@@ -21,17 +23,7 @@ export class SessionsApiWrapper {
      */
     @httpErrorHandler()
     public async create(req: CreateSessionRequest): Promise<SessionResponse> {
-        const response = await this._api.createSession(
-            req.player,
-            req.address,
-            req.chain_id,
-            req.valid_until,
-            req.valid_after,
-            req.policy,
-            req.external_owner_address,
-            req.whitelist,
-            req.limit,
-        );
+        const response = await this._api.createSession(req);
         return response.body;
     }
 
@@ -59,7 +51,7 @@ export class SessionsApiWrapper {
      */
     @httpErrorHandler()
     public async revoke(req: RevokeSessionRequest): Promise<SessionResponse> {
-        const response = await this._api.revokeSession(req.player, req.chain_id, req.address, req.policy);
+        const response = await this._api.revokeSession(req);
         return response.body;
     }
 
@@ -69,7 +61,8 @@ export class SessionsApiWrapper {
      */
     @httpErrorHandler()
     public async signature(req: SignatureSessionRequest): Promise<SessionResponse> {
-        const response = await this._api.signatureSession(req.id, req.signature);
+        const {id, ...request} = req;
+        const response = await this._api.signatureSession(id, request);
         return response.body;
     }
 }

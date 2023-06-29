@@ -1,6 +1,5 @@
-export interface RevokePlayerSessionRequest {
-    id: string;
-    address: string;
-    chain_id: number;
-    policy?: string;
+import {RevokeSessionPlayerRequest} from "../generated/model/revokeSessionPlayerRequest";
+
+export interface RevokePlayerSessionRequest extends RevokeSessionPlayerRequest {
+    playerId: string;
 }

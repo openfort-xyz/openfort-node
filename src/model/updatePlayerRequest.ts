@@ -1,6 +1,5 @@
-export interface UpdatePlayerRequest {
+import {PlayerRequest} from "../generated/model/playerRequest";
+
+export interface UpdatePlayerRequest extends PlayerRequest {
     id: string;
-    name?: string;
-    description?: string;
-    project?: string;
 }

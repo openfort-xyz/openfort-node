@@ -15,11 +15,16 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { AccountPlayerRequest } from '../model/accountPlayerRequest';
 import { AccountResponse } from '../model/accountResponse';
 import { AccountsResponse } from '../model/accountsResponse';
+import { CreateSessionPlayerRequest } from '../model/createSessionPlayerRequest';
 import { InventoryResponse } from '../model/inventoryResponse';
+import { PlayerRequest } from '../model/playerRequest';
 import { PlayerResponse } from '../model/playerResponse';
+import { PlayerTransferOwnershipRequest } from '../model/playerTransferOwnershipRequest';
 import { PlayersResponse } from '../model/playersResponse';
+import { RevokeSessionPlayerRequest } from '../model/revokeSessionPlayerRequest';
 import { SessionResponse } from '../model/sessionResponse';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
 
@@ -100,11 +105,9 @@ export class PlayersApi {
 
     /**
      * Creates a player object.
-     * @param name
-     * @param description
-     * @param project
+     * @param playerRequest
      */
-    public async createPlayer (name?: string, description?: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
+    public async createPlayer (playerRequest: PlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
         const localVarPath = this.basePath + '/v1/players';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -117,21 +120,14 @@ export class PlayersApi {
         }
         let localVarFormParams: any = {};
 
+        // verify required parameter 'playerRequest' is not null or undefined
+        if (playerRequest === null || playerRequest === undefined) {
+            throw new Error('Required parameter playerRequest was null or undefined when calling createPlayer.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (name !== undefined) {
-            localVarFormParams['name'] = ObjectSerializer.serialize(name, "string");
-        }
-
-        if (description !== undefined) {
-            localVarFormParams['description'] = ObjectSerializer.serialize(description, "string");
-        }
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -140,6 +136,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(playerRequest, "PlayerRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -180,11 +177,9 @@ export class PlayersApi {
     /**
      * Creates an account object for an existing player.
      * @param id Specifies the unique player ID.
-     * @param chainId The chain_id
-     * @param project The project ID
-     * @param externalOwnerAddress The address of the external owner
+     * @param accountPlayerRequest
      */
-    public async createPlayerAccount (id: string, chainId: number, project?: string, externalOwnerAddress?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
+    public async createPlayerAccount (id: string, accountPlayerRequest: AccountPlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/accounts'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -203,26 +198,14 @@ export class PlayersApi {
             throw new Error('Required parameter id was null or undefined when calling createPlayerAccount.');
         }
 
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling createPlayerAccount.');
+        // verify required parameter 'accountPlayerRequest' is not null or undefined
+        if (accountPlayerRequest === null || accountPlayerRequest === undefined) {
+            throw new Error('Required parameter accountPlayerRequest was null or undefined when calling createPlayerAccount.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (externalOwnerAddress !== undefined) {
-            localVarFormParams['external_owner_address'] = ObjectSerializer.serialize(externalOwnerAddress, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -231,6 +214,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(accountPlayerRequest, "AccountPlayerRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -271,16 +255,9 @@ export class PlayersApi {
     /**
      * Creates a session object for the given player.
      * @param id Specifies the unique player ID.
-     * @param address
-     * @param chainId
-     * @param validUntil
-     * @param validAfter
-     * @param policy
-     * @param externalOwnerAddress
-     * @param whitelist
-     * @param limit
+     * @param createSessionPlayerRequest
      */
-    public async createPlayerSession (id: string, address: string, chainId: number, validUntil: number, validAfter: number, policy?: string, externalOwnerAddress?: string, whitelist?: Array<string>, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
+    public async createPlayerSession (id: string, createSessionPlayerRequest: CreateSessionPlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/sessions'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -299,61 +276,14 @@ export class PlayersApi {
             throw new Error('Required parameter id was null or undefined when calling createPlayerSession.');
         }
 
-        // verify required parameter 'address' is not null or undefined
-        if (address === null || address === undefined) {
-            throw new Error('Required parameter address was null or undefined when calling createPlayerSession.');
-        }
-
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling createPlayerSession.');
-        }
-
-        // verify required parameter 'validUntil' is not null or undefined
-        if (validUntil === null || validUntil === undefined) {
-            throw new Error('Required parameter validUntil was null or undefined when calling createPlayerSession.');
-        }
-
-        // verify required parameter 'validAfter' is not null or undefined
-        if (validAfter === null || validAfter === undefined) {
-            throw new Error('Required parameter validAfter was null or undefined when calling createPlayerSession.');
+        // verify required parameter 'createSessionPlayerRequest' is not null or undefined
+        if (createSessionPlayerRequest === null || createSessionPlayerRequest === undefined) {
+            throw new Error('Required parameter createSessionPlayerRequest was null or undefined when calling createPlayerSession.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (address !== undefined) {
-            localVarFormParams['address'] = ObjectSerializer.serialize(address, "string");
-        }
-
-        if (policy !== undefined) {
-            localVarFormParams['policy'] = ObjectSerializer.serialize(policy, "string");
-        }
-
-        if (externalOwnerAddress !== undefined) {
-            localVarFormParams['external_owner_address'] = ObjectSerializer.serialize(externalOwnerAddress, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (validUntil !== undefined) {
-            localVarFormParams['valid_until'] = ObjectSerializer.serialize(validUntil, "number");
-        }
-
-        if (validAfter !== undefined) {
-            localVarFormParams['valid_after'] = ObjectSerializer.serialize(validAfter, "number");
-        }
-
-        if (whitelist !== undefined) {
-            localVarFormParams['whitelist'] = ObjectSerializer.serialize(whitelist, "Array<string>");
-        }
-
-        if (limit !== undefined) {
-            localVarFormParams['limit'] = ObjectSerializer.serialize(limit, "number");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -362,6 +292,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(createSessionPlayerRequest, "CreateSessionPlayerRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -744,11 +675,9 @@ export class PlayersApi {
     /**
      * Creates a session object for the given player.
      * @param id Specifies the unique player ID.
-     * @param address
-     * @param chainId
-     * @param policy
+     * @param revokeSessionPlayerRequest
      */
-    public async revokePlayerSession (id: string, address: string, chainId: number, policy?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
+    public async revokePlayerSession (id: string, revokeSessionPlayerRequest: RevokeSessionPlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/sessions/revoke'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -767,31 +696,14 @@ export class PlayersApi {
             throw new Error('Required parameter id was null or undefined when calling revokePlayerSession.');
         }
 
-        // verify required parameter 'address' is not null or undefined
-        if (address === null || address === undefined) {
-            throw new Error('Required parameter address was null or undefined when calling revokePlayerSession.');
-        }
-
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling revokePlayerSession.');
+        // verify required parameter 'revokeSessionPlayerRequest' is not null or undefined
+        if (revokeSessionPlayerRequest === null || revokeSessionPlayerRequest === undefined) {
+            throw new Error('Required parameter revokeSessionPlayerRequest was null or undefined when calling revokePlayerSession.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (address !== undefined) {
-            localVarFormParams['address'] = ObjectSerializer.serialize(address, "string");
-        }
-
-        if (policy !== undefined) {
-            localVarFormParams['policy'] = ObjectSerializer.serialize(policy, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -800,6 +712,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(revokeSessionPlayerRequest, "RevokeSessionPlayerRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -840,13 +753,9 @@ export class PlayersApi {
     /**
      * Transfer ownership of an account to an address.
      * @param id Specifies the unique player ID.
-     * @param policy The policy ID
-     * @param chainId The chain_id where the account is.
-     * @param newOwnerAddress The address of the new owner
-     * @param project The project ID
-     * @param player The player ID
+     * @param playerTransferOwnershipRequest
      */
-    public async transferAccountOwnership (id: string, policy: string, chainId: number, newOwnerAddress: string, project?: string, player?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async transferAccountOwnership (id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/transfer-ownership'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -865,44 +774,14 @@ export class PlayersApi {
             throw new Error('Required parameter id was null or undefined when calling transferAccountOwnership.');
         }
 
-        // verify required parameter 'policy' is not null or undefined
-        if (policy === null || policy === undefined) {
-            throw new Error('Required parameter policy was null or undefined when calling transferAccountOwnership.');
-        }
-
-        // verify required parameter 'chainId' is not null or undefined
-        if (chainId === null || chainId === undefined) {
-            throw new Error('Required parameter chainId was null or undefined when calling transferAccountOwnership.');
-        }
-
-        // verify required parameter 'newOwnerAddress' is not null or undefined
-        if (newOwnerAddress === null || newOwnerAddress === undefined) {
-            throw new Error('Required parameter newOwnerAddress was null or undefined when calling transferAccountOwnership.');
+        // verify required parameter 'playerTransferOwnershipRequest' is not null or undefined
+        if (playerTransferOwnershipRequest === null || playerTransferOwnershipRequest === undefined) {
+            throw new Error('Required parameter playerTransferOwnershipRequest was null or undefined when calling transferAccountOwnership.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
-        if (policy !== undefined) {
-            localVarFormParams['policy'] = ObjectSerializer.serialize(policy, "string");
-        }
-
-        if (chainId !== undefined) {
-            localVarFormParams['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (newOwnerAddress !== undefined) {
-            localVarFormParams['new_owner_address'] = ObjectSerializer.serialize(newOwnerAddress, "string");
-        }
-
-        if (player !== undefined) {
-            localVarFormParams['player'] = ObjectSerializer.serialize(player, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -911,6 +790,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(playerTransferOwnershipRequest, "PlayerTransferOwnershipRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -951,11 +831,9 @@ export class PlayersApi {
     /**
      * Updates a player object.
      * @param id Specifies the unique player ID.
-     * @param name
-     * @param description
-     * @param project
+     * @param playerRequest
      */
-    public async updatePlayer (id: string, name?: string, description?: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
+    public async updatePlayer (id: string, playerRequest: PlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -974,21 +852,14 @@ export class PlayersApi {
             throw new Error('Required parameter id was null or undefined when calling updatePlayer.');
         }
 
+        // verify required parameter 'playerRequest' is not null or undefined
+        if (playerRequest === null || playerRequest === undefined) {
+            throw new Error('Required parameter playerRequest was null or undefined when calling updatePlayer.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
-
-        if (name !== undefined) {
-            localVarFormParams['name'] = ObjectSerializer.serialize(name, "string");
-        }
-
-        if (description !== undefined) {
-            localVarFormParams['description'] = ObjectSerializer.serialize(description, "string");
-        }
-
-        if (project !== undefined) {
-            localVarFormParams['project'] = ObjectSerializer.serialize(project, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -997,6 +868,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(playerRequest, "PlayerRequest")
         };
 
         let authenticationPromise = Promise.resolve();

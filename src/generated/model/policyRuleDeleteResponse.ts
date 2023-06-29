@@ -11,16 +11,11 @@
  */
 
 import { RequestFile } from './models';
-import { PolicyRuleResponseContract } from './policyRuleResponseContract';
-import { PolicySchema } from './policySchema';
 
-export class PolicyRuleResponse {
+export class PolicyRuleDeleteResponse {
     'id': string;
     'object': string;
-    'createdAt': Date;
-    'type': PolicySchema;
-    'functionName': string | null;
-    'contract': PolicyRuleResponseContract | null;
+    'deleted': boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -36,30 +31,13 @@ export class PolicyRuleResponse {
             "type": "string"
         },
         {
-            "name": "createdAt",
-            "baseName": "created_at",
-            "type": "Date"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicySchema"
-        },
-        {
-            "name": "functionName",
-            "baseName": "function_name",
-            "type": "string"
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "PolicyRuleResponseContract"
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleResponse.attributeTypeMap;
+        return PolicyRuleDeleteResponse.attributeTypeMap;
     }
 }
 
-export namespace PolicyRuleResponse {
-}

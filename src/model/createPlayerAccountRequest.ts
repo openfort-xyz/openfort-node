@@ -1,6 +1,5 @@
-export interface CreatePlayerAccountRequest {
-    id: string;
-    chain_id: number;
-    project?: string;
-    external_owner_address?: string;
+import {AccountPlayerRequest} from "../generated/model/accountPlayerRequest";
+
+export interface CreatePlayerAccountRequest extends AccountPlayerRequest {
+    playerId: string;
 }

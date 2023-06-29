@@ -1,11 +1,5 @@
-export interface CreatePlayerSessionRequest {
-    id: string;
-    address: string;
-    chain_id: number;
-    valid_until: number;
-    valid_after: number;
-    policy?: string;
-    external_owner_address?: string;
-    whitelist?: string[];
-    limit?: number;
+import {CreateSessionPlayerRequest} from "../generated/model/createSessionPlayerRequest";
+
+export interface CreatePlayerSessionRequest extends CreateSessionPlayerRequest {
+    playerId: string;
 }

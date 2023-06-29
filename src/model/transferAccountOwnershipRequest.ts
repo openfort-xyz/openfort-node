@@ -1,8 +1,5 @@
-export interface TransferAccountOwnershipRequest {
+import {TransferOwnershipRequest} from "../generated/model/transferOwnershipRequest";
+
+export interface TransferAccountOwnershipRequest extends TransferOwnershipRequest {
     id: string;
-    policy: string;
-    chain_id: number;
-    new_owner_address: string;
-    project?: string;
-    player?: string;
 }

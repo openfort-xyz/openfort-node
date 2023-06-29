@@ -1,10 +1,5 @@
-import {PolicySchema} from "../generated/model/policySchema";
+import {PolicyRuleRequest} from "../generated/model/policyRuleRequest";
 
-export interface UpdatePolicyRulesRequest {
+export interface UpdatePolicyRulesRequest extends PolicyRuleRequest {
     id: string;
-    type: PolicySchema;
-    function_name: string;
-    policy: string;
-    contract: string;
-    project?: string;
 }

@@ -1,14 +1,16 @@
-import {AccountResponse} from "../generated/model/accountResponse";
-import {AccountsResponse} from "../generated/model/accountsResponse";
-import {InventoryResponse} from "../generated/model/inventoryResponse";
-import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
-import {AccountsApi} from "../generated/api/accountsApi";
-import {CreateAccountRequest} from "../model/createAccountRequest";
 import {httpErrorHandler} from "./http-error-handler";
-import {GetAccountRequest} from "../model/getAccountRequest";
-import {GetAccountInventoryRequest} from "../model/getAccountInventoryRequest";
-import {ListAccountsRequest} from "../model/listAccountsRequest";
-import {TransferOwnershipRequest} from "../model/transferOwnershipRequest";
+import {AccountsApi} from "../generated/api/accountsApi";
+import {
+    AccountResponse,
+    AccountsResponse,
+    InventoryResponse,
+    TransactionIntentResponse,
+    AccountRequest,
+    GetAccountRequest,
+    GetAccountInventoryRequest,
+    ListAccountsRequest,
+    TransferAccountOwnershipRequest,
+} from "../model";
 
 export class AccountsApiWrapper {
     private readonly _api: AccountsApi;
@@ -23,13 +25,8 @@ export class AccountsApiWrapper {
      * @param req The account to create
      */
     @httpErrorHandler()
-    public async create(req: CreateAccountRequest): Promise<AccountResponse> {
-        const response = await this._api.createAccount(
-            req.chain_id,
-            req.player,
-            req.project,
-            req.external_owner_address,
-        );
+    public async create(req: AccountRequest): Promise<AccountResponse> {
+        const response = await this._api.createAccount(req);
         return response.body;
     }
 
@@ -68,8 +65,9 @@ export class AccountsApiWrapper {
      * @param req Parameters to transfer ownership.
      */
     @httpErrorHandler()
-    public async transferOwnership(req: TransferOwnershipRequest): Promise<TransactionIntentResponse> {
-        const response = await this._api.transferOwnership(req.id, req.new_owner_address, req.policy, req.project);
+    public async transferOwnership(req: TransferAccountOwnershipRequest): Promise<TransactionIntentResponse> {
+        const {id, ...body} = req;
+        const response = await this._api.transferOwnership(id, body);
         return response.body;
     }
 }
