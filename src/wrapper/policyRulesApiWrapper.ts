@@ -1,6 +1,13 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {PolicyRulesApi} from "../generated/api/apis";
-import {GetPolicyRulesRequest, PolicyRuleDeleteResponse, UpdatePolicyRulesRequest, PolicyRuleResponse, PolicyRulesResponse, PolicyRuleRequest} from "../model";
+import {
+    GetPolicyRulesRequest,
+    PolicyRuleDeleteResponse,
+    UpdatePolicyRulesRequest,
+    PolicyRuleResponse,
+    PolicyRulesResponse,
+    PolicyRuleRequest,
+} from "../model";
 
 export class PolicyRulesApiWrapper {
     private readonly _api: PolicyRulesApi;

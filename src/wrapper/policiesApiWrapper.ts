@@ -1,6 +1,21 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {PoliciesApi} from "../generated/api/policiesApi";
-import {Gas, PoliciesResponse, PolicyDeleteResponse, PolicyResponse, PolicyRuleResponse, PolicyRulesResponse, SumGas, CreatePolicyAllowFunctionRequest, ListPoliciesRequest, GetPolicyRequest, GetAllowFunctionsRequest, GetPolicyDailyGasUsageRequest, UpdatePolicyAllowFunctionRequest, GetPolicyTotalGasUsageRequest} from "../model";
+import {
+    Gas,
+    PoliciesResponse,
+    PolicyDeleteResponse,
+    PolicyResponse,
+    PolicyRuleResponse,
+    PolicyRulesResponse,
+    SumGas,
+    CreatePolicyAllowFunctionRequest,
+    ListPoliciesRequest,
+    GetPolicyRequest,
+    GetAllowFunctionsRequest,
+    GetPolicyDailyGasUsageRequest,
+    UpdatePolicyAllowFunctionRequest,
+    GetPolicyTotalGasUsageRequest,
+} from "../model";
 
 export class PoliciesApiWrapper {
     private readonly _api: PoliciesApi;

@@ -1,5 +1,5 @@
 import {RevokeSessionPlayerRequest} from "../generated/model/revokeSessionPlayerRequest";
 
-export interface RevokePlayerSessionRequest extends RevokeSessionPlayerRequest{
+export interface RevokePlayerSessionRequest extends RevokeSessionPlayerRequest {
     playerId: string;
 }

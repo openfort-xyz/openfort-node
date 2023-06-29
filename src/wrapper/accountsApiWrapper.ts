@@ -1,6 +1,16 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {AccountsApi} from "../generated/api/accountsApi";
-import {AccountResponse, AccountsResponse, InventoryResponse, TransactionIntentResponse, AccountRequest, GetAccountRequest, GetAccountInventoryRequest, ListAccountsRequest, TransferAccountOwnershipRequest} from "../model";
+import {
+    AccountResponse,
+    AccountsResponse,
+    InventoryResponse,
+    TransactionIntentResponse,
+    AccountRequest,
+    GetAccountRequest,
+    GetAccountInventoryRequest,
+    ListAccountsRequest,
+    TransferAccountOwnershipRequest,
+} from "../model";
 
 export class AccountsApiWrapper {
     private readonly _api: AccountsApi;

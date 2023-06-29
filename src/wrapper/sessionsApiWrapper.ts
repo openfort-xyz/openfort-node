@@ -1,6 +1,13 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {SessionsApi} from "../generated/api/sessionsApi";
-import {ListSessionsRequest, SignatureSessionRequest, SessionResponse, SessionsResponse, CreateSessionRequest, RevokeSessionRequest} from "../model";
+import {
+    ListSessionsRequest,
+    SignatureSessionRequest,
+    SessionResponse,
+    SessionsResponse,
+    CreateSessionRequest,
+    RevokeSessionRequest,
+} from "../model";
 
 export class SessionsApiWrapper {
     private readonly _api: SessionsApi;
