@@ -12,32 +12,23 @@
 
 import { RequestFile } from './models';
 
-export class TransferOwnershipRequest {
+export class SignPayloadRequest {
     /**
-    * The address of the new owner
+    * Payload to sign
     */
-    'newOwnerAddress': string;
-    /**
-    * The policy ID
-    */
-    'policy': string;
+    'payload': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "newOwnerAddress",
-            "baseName": "new_owner_address",
-            "type": "string"
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "payload",
+            "baseName": "payload",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return TransferOwnershipRequest.attributeTypeMap;
+        return SignPayloadRequest.attributeTypeMap;
     }
 }
 

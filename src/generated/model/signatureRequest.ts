@@ -14,6 +14,7 @@ import { RequestFile } from './models';
 
 export class SignatureRequest {
     'signature': string;
+    'optimistic'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -22,6 +23,11 @@ export class SignatureRequest {
             "name": "signature",
             "baseName": "signature",
             "type": "string"
+        },
+        {
+            "name": "optimistic",
+            "baseName": "optimistic",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {

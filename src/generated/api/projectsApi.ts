@@ -15,7 +15,6 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { GetProjectResponse } from '../model/getProjectResponse';
 import { ProjectRequest } from '../model/projectRequest';
 import { ProjectResponse } from '../model/projectResponse';
 import { ProjectsResponse } from '../model/projectsResponse';
@@ -97,7 +96,7 @@ export class ProjectsApi {
 
     /**
      * Creates a project object.
-     * @param projectRequest
+     * @param projectRequest 
      */
     public async createProject (projectRequest: ProjectRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ProjectResponse;  }> {
         const localVarPath = this.basePath + '/v1/projects';
@@ -132,9 +131,6 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -167,72 +163,8 @@ export class ProjectsApi {
         });
     }
     /**
-     *
-     */
-    public async get (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetProjectResponse;  }> {
-        const localVarPath = this.basePath + '/v1/projects/auth';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: GetProjectResponse;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "GetProjectResponse");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     *
-     * @param id
+     * 
+     * @param id 
      */
     public async getProject (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ProjectResponse;  }> {
         const localVarPath = this.basePath + '/v1/projects/{id}'
@@ -267,9 +199,6 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -302,10 +231,9 @@ export class ProjectsApi {
         });
     }
     /**
-     *
-     * @param project
+     * 
      */
-    public async getProjects (project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ProjectsResponse;  }> {
+    public async getProjects (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ProjectsResponse;  }> {
         const localVarPath = this.basePath + '/v1/projects';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -317,10 +245,6 @@ export class ProjectsApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
-        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -336,9 +260,6 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -372,8 +293,8 @@ export class ProjectsApi {
     }
     /**
      * Updates a project object.
-     * @param id
-     * @param projectRequest
+     * @param id 
+     * @param projectRequest 
      */
     public async updateProject (id: string, projectRequest: ProjectRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ProjectResponse;  }> {
         const localVarPath = this.basePath + '/v1/projects/{id}'
@@ -414,9 +335,6 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;

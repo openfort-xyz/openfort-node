@@ -17,7 +17,6 @@ export class PolicyRequest {
     'name': string;
     'chainId': number;
     'strategy'?: Strategy;
-    'project'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -36,11 +35,6 @@ export class PolicyRequest {
             "name": "strategy",
             "baseName": "strategy",
             "type": "Strategy"
-        },
-        {
-            "name": "project",
-            "baseName": "project",
-            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

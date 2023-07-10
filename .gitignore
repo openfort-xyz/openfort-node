@@ -1,4 +1,5 @@
 dist
 .idea
+.env
 node_modules
 tsconfig.tsbuildinfo

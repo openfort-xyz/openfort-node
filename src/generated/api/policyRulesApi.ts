@@ -97,7 +97,7 @@ export class PolicyRulesApi {
 
     /**
      * Creates an allow function object.
-     * @param policyRuleRequest
+     * @param policyRuleRequest 
      */
     public async createPolicyRules (policyRuleRequest: PolicyRuleRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules';
@@ -168,7 +168,7 @@ export class PolicyRulesApi {
     }
     /**
      * Deletes an polciy rule (allow_functions) object.
-     * @param id
+     * @param id 
      */
     public async deletePolicyRules (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleDeleteResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules/{id}'
@@ -239,11 +239,10 @@ export class PolicyRulesApi {
     }
     /**
      * Returns a list of your allow functions for the given policy. The allow functions are returned sorted by creation date, with the most recently created allow functions appearing first.
-     * @param project Specifies the unique project ID.
-     * @param expand
+     * @param expand 
      * @param policy Specifies the unique policy ID.
      */
-    public async getPolicyRules (project?: string, expand?: Array<string>, policy?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRulesResponse;  }> {
+    public async getPolicyRules (expand?: Array<string>, policy?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRulesResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -255,10 +254,6 @@ export class PolicyRulesApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
-        }
 
         if (expand !== undefined) {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
@@ -319,7 +314,7 @@ export class PolicyRulesApi {
     /**
      * Updates an allow functions object.
      * @param id Specifies the unique allow function ID.
-     * @param policyRuleRequest
+     * @param policyRuleRequest 
      */
     public async updatePolicyRules (id: string, policyRuleRequest: PolicyRuleRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules/{id}'

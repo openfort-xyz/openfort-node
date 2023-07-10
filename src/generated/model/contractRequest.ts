@@ -16,10 +16,9 @@ import { PrismaJsonValue } from './prismaJsonValue';
 export class ContractRequest {
     'name': string;
     'chainId': number;
-    'address'?: string;
+    'address': string;
     'abi'?: PrismaJsonValue | null;
     'publicVerification'?: boolean;
-    'project'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -48,11 +47,6 @@ export class ContractRequest {
             "name": "publicVerification",
             "baseName": "public_verification",
             "type": "boolean"
-        },
-        {
-            "name": "project",
-            "baseName": "project",
-            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

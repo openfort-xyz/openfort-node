@@ -11,13 +11,13 @@
  */
 
 import { RequestFile } from './models';
+import { PKLocation } from './pKLocation';
+import { PKPolicy } from './pKPolicy';
 
 export class ProjectRequest {
     'name': string;
-    'livemode'?: boolean;
-    'project'?: string;
-    'pkPolicy'?: string;
-    'pkLocation'?: string;
+    'pkPolicy'?: PKPolicy;
+    'pkLocation'?: PKLocation;
 
     static discriminator: string | undefined = undefined;
 
@@ -28,24 +28,14 @@ export class ProjectRequest {
             "type": "string"
         },
         {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean"
-        },
-        {
-            "name": "project",
-            "baseName": "project",
-            "type": "string"
-        },
-        {
             "name": "pkPolicy",
             "baseName": "pk_policy",
-            "type": "string"
+            "type": "PKPolicy"
         },
         {
             "name": "pkLocation",
             "baseName": "pk_location",
-            "type": "string"
+            "type": "PKLocation"
         }    ];
 
     static getAttributeTypeMap() {
@@ -53,3 +43,5 @@ export class ProjectRequest {
     }
 }
 
+export namespace ProjectRequest {
+}

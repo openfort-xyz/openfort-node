@@ -14,10 +14,6 @@ import { RequestFile } from './models';
 
 export class AccountRequest {
     /**
-    * The project ID
-    */
-    'project'?: string;
-    /**
     * The chain_id
     */
     'chainId': number;
@@ -33,11 +29,6 @@ export class AccountRequest {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "project",
-            "baseName": "project",
-            "type": "string"
-        },
         {
             "name": "chainId",
             "baseName": "chain_id",

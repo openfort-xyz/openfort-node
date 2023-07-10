@@ -19,6 +19,8 @@ import { AccountRequest } from '../model/accountRequest';
 import { AccountResponse } from '../model/accountResponse';
 import { AccountsResponse } from '../model/accountsResponse';
 import { InventoryResponse } from '../model/inventoryResponse';
+import { SignPayloadRequest } from '../model/signPayloadRequest';
+import { SignPayloadResponse } from '../model/signPayloadResponse';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
 import { TransferOwnershipRequest } from '../model/transferOwnershipRequest';
 
@@ -99,7 +101,7 @@ export class AccountsApi {
 
     /**
      * Creates an account object.
-     * @param accountRequest
+     * @param accountRequest 
      */
     public async createAccount (accountRequest: AccountRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts';
@@ -172,9 +174,8 @@ export class AccountsApi {
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * @param id Specifies the unique account ID.
      * @param expand whether to expand the response or not
-     * @param project Specifies the unique project ID.
      */
-    public async getAccount (id: string, expand?: Array<string>, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
+    public async getAccount (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -195,10 +196,6 @@ export class AccountsApi {
 
         if (expand !== undefined) {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -252,9 +249,8 @@ export class AccountsApi {
     /**
      * Retrieves the inventory of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * @param id Specifies the unique account ID.
-     * @param project Specifies the unique project ID.
      */
-    public async getAccountInventory (id: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: InventoryResponse;  }> {
+    public async getAccountInventory (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: InventoryResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts/{id}/inventory'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -271,10 +267,6 @@ export class AccountsApi {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getAccountInventory.');
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -330,9 +322,8 @@ export class AccountsApi {
      * @param player Specifies the unique player ID.
      * @param expand whether to expand the response or not
      * @param limit amount of results per query
-     * @param project Specifies the unique project ID.
      */
-    public async getAccounts (player: string, expand?: Array<string>, limit?: number, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
+    public async getAccounts (player: string, expand?: Array<string>, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -360,10 +351,6 @@ export class AccountsApi {
 
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -415,9 +402,87 @@ export class AccountsApi {
         });
     }
     /**
+     * Sign a given payload
+     * @param id Specifies the unique account ID.
+     * @param signPayloadRequest 
+     */
+    public async signPayload (id: string, signPayloadRequest: SignPayloadRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SignPayloadResponse;  }> {
+        const localVarPath = this.basePath + '/v1/accounts/{id}/sign-payload'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling signPayload.');
+        }
+
+        // verify required parameter 'signPayloadRequest' is not null or undefined
+        if (signPayloadRequest === null || signPayloadRequest === undefined) {
+            throw new Error('Required parameter signPayloadRequest was null or undefined when calling signPayload.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(signPayloadRequest, "SignPayloadRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: SignPayloadResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "SignPayloadResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
      * Request the ownership transfer of an account to a given address.
      * @param id Specifies the unique account ID.
-     * @param transferOwnershipRequest
+     * @param transferOwnershipRequest 
      */
     public async transferOwnership (id: string, transferOwnershipRequest: TransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts/{id}/transfer-ownership'
