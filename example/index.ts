@@ -1,4 +1,4 @@
-import Openfort, {PlayerRequest, CreatePlayerSessionRequest, PlayersResponse} from "@openfort/openfort-node";
+import Openfort, {CreatePlayerRequest, CreatePlayerSessionRequest, PlayersResponse} from "@openfort/openfort-node";
 
 async function example() {
     const openfort = new Openfort("sk_test_44b87423-9f53-5cf9-ae18-82b3e8bae139");
@@ -7,7 +7,7 @@ async function example() {
         console.log(player.id);
     }
 
-    const createPlayerRequest: PlayerRequest = {
+    const createPlayerRequest: CreatePlayerRequest = {
         name: "Test",
     };
     const newPlayer = await openfort.players.create(createPlayerRequest);

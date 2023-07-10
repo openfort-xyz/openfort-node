@@ -6,7 +6,6 @@ import {
     InventoryResponse,
     PlayerResponse,
     PlayersResponse,
-    PlayerRequest,
     SessionResponse,
     TransactionIntentResponse,
     CreatePlayerAccountRequest,
@@ -18,6 +17,7 @@ import {
     RevokePlayerSessionRequest,
     TransferPlayerAccountOwnershipRequest,
     UpdatePlayerRequest,
+    CreatePlayerRequest,
 } from "../model";
 
 export class PlayersApiWrapper {
@@ -33,7 +33,7 @@ export class PlayersApiWrapper {
      * @param req Parameters to create a player
      */
     @httpErrorHandler()
-    public async create(req: PlayerRequest): Promise<PlayerResponse> {
+    public async create(req: CreatePlayerRequest): Promise<PlayerResponse> {
         const response = await this._api.createPlayer(req);
         return response.body;
     }
@@ -66,7 +66,7 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async get(req: GetPlayerRequest): Promise<PlayerResponse> {
-        const response = await this._api.getPlayer(req.id, req.project, req.expand);
+        const response = await this._api.getPlayer(req.id, req.expand);
         return response.body;
     }
 
@@ -76,7 +76,7 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async listAccounts(req: ListPlayerAccountsRequest): Promise<AccountsResponse> {
-        const response = await this._api.getPlayerAccounts(req.id, req.expand, req.project);
+        const response = await this._api.getPlayerAccounts(req.id, req.expand);
         return response.body;
     }
 
@@ -86,7 +86,7 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async getInventory(req: GetPlayerInventoryRequest): Promise<InventoryResponse> {
-        const response = await this._api.getPlayerInventory(req.id, req.chain_id, req.project);
+        const response = await this._api.getPlayerInventory(req.id, req.chain_id);
         return response.body;
     }
 
@@ -99,7 +99,6 @@ export class PlayersApiWrapper {
         const response = await this._api.getPlayers(
             req?.expand,
             req?.limit,
-            req?.project,
             req?.filter,
             req?.order,
             req?.skip,

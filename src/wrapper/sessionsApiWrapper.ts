@@ -37,7 +37,6 @@ export class SessionsApiWrapper {
             req.player,
             req.expand,
             req.limit,
-            req.project,
             req.filter,
             req.order,
             req.skip,

@@ -1,6 +1,6 @@
 import {httpErrorHandler} from "./http-error-handler";
 import {ProjectsApi} from "../generated/api/projectsApi";
-import {UpdateProjectRequest, GetProjectResponse, ProjectResponse, ProjectsResponse, ProjectRequest} from "../model";
+import {UpdateProjectRequest, ProjectResponse, ProjectsResponse, ProjectRequest} from "../model";
 
 export class ProjectsApiWrapper {
     private readonly _api: ProjectsApi;
@@ -21,15 +21,6 @@ export class ProjectsApiWrapper {
     }
 
     /**
-     * Get current project
-     */
-    @httpErrorHandler()
-    public async getCurrent(): Promise<GetProjectResponse> {
-        const response = await this._api.get();
-        return response.body;
-    }
-
-    /**
      * Get project by id
      * @param id Id of the project
      */
@@ -44,8 +35,8 @@ export class ProjectsApiWrapper {
      * @param project
      */
     @httpErrorHandler()
-    public async list(project?: string): Promise<ProjectsResponse> {
-        const response = await this._api.getProjects(project);
+    public async list(): Promise<ProjectsResponse> {
+        const response = await this._api.getProjects();
         return response.body;
     }
     /**

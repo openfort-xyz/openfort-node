@@ -1,8 +1,9 @@
+import { SortOrder } from "../generated/model/sortOrder";
+
 export interface ListPlayersRequest {
     expand?: string[];
     limit?: number;
-    project?: string;
     filter?: string;
-    order?: string;
+    order?: SortOrder;
     skip?: number;
 }

@@ -43,7 +43,7 @@ export class ContractsApiWrapper {
      */
     @httpErrorHandler()
     public async get(req: GetContractRequest): Promise<ContractResponse> {
-        const response = await this._api.getContract(req.id, req.project);
+        const response = await this._api.getContract(req.id);
         return response.body;
     }
 
@@ -53,7 +53,7 @@ export class ContractsApiWrapper {
      */
     @httpErrorHandler()
     public async list(req?: ListContractsRequest): Promise<ContractsResponse> {
-        const response = await this._api.getContracts(req?.project, req?.limit);
+        const response = await this._api.getContracts(req?.limit);
         return response.body;
     }
 }

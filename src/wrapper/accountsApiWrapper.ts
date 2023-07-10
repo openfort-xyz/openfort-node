@@ -36,7 +36,7 @@ export class AccountsApiWrapper {
      */
     @httpErrorHandler()
     public async get(req: GetAccountRequest): Promise<AccountResponse> {
-        const response = await this._api.getAccount(req.id, req.expand, req.project);
+        const response = await this._api.getAccount(req.id, req.expand);
         return response.body;
     }
 
@@ -46,7 +46,7 @@ export class AccountsApiWrapper {
      */
     @httpErrorHandler()
     public async getInventory(req: GetAccountInventoryRequest): Promise<InventoryResponse> {
-        const response = await this._api.getAccountInventory(req.id, req.project);
+        const response = await this._api.getAccountInventory(req.id);
         return response.body;
     }
 
@@ -56,7 +56,7 @@ export class AccountsApiWrapper {
      */
     @httpErrorHandler()
     public async list(req: ListAccountsRequest): Promise<AccountsResponse> {
-        const response = await this._api.getAccounts(req.player, req.expand, req.limit, req.project);
+        const response = await this._api.getAccounts(req.player, req.expand, req.limit);
         return response.body;
     }
 
