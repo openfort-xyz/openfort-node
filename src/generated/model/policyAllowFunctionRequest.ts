@@ -16,7 +16,6 @@ import { PolicySchema } from './policySchema';
 export class PolicyAllowFunctionRequest {
     'type': PolicySchema;
     'functionName': string | null;
-    'project'?: string;
     'contract': string | null;
 
     static discriminator: string | undefined = undefined;
@@ -30,11 +29,6 @@ export class PolicyAllowFunctionRequest {
         {
             "name": "functionName",
             "baseName": "function_name",
-            "type": "string"
-        },
-        {
-            "name": "project",
-            "baseName": "project",
             "type": "string"
         },
         {

@@ -15,6 +15,7 @@ import { RequestFile } from './models';
 export class RevokeSessionPlayerRequest {
     'address': string;
     'policy'?: string;
+    'optimistic'?: boolean;
     'chainId': number;
 
     static discriminator: string | undefined = undefined;
@@ -29,6 +30,11 @@ export class RevokeSessionPlayerRequest {
             "name": "policy",
             "baseName": "policy",
             "type": "string"
+        },
+        {
+            "name": "optimistic",
+            "baseName": "optimistic",
+            "type": "boolean"
         },
         {
             "name": "chainId",

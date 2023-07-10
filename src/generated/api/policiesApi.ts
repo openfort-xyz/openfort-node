@@ -104,7 +104,7 @@ export class PoliciesApi {
 
     /**
      * Creates a policy object.
-     * @param policyRequest
+     * @param policyRequest 
      */
     public async createPolicy (policyRequest: PolicyRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies';
@@ -174,9 +174,9 @@ export class PoliciesApi {
         });
     }
     /**
-     *
-     * @param id
-     * @param policyAllowFunctionRequest
+     * 
+     * @param id 
+     * @param policyAllowFunctionRequest 
      */
     public async createPolicyAllowFunction (id: string, policyAllowFunctionRequest: PolicyAllowFunctionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}/policy_rules'
@@ -253,7 +253,7 @@ export class PoliciesApi {
     }
     /**
      * Deletes a policy object.
-     * @param id
+     * @param id 
      */
     public async deletePolicy (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyDeleteResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}'
@@ -324,11 +324,11 @@ export class PoliciesApi {
     }
     /**
      * Gets all policy objects for a given project.
-     * @param project
-     * @param limit
-     * @param expand
+     * @param limit 
+     * @param expand 
+     * @param skip 
      */
-    public async getPolicies (project?: string, limit?: number, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
+    public async getPolicies (limit?: number, expand?: Array<string>, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -341,16 +341,16 @@ export class PoliciesApi {
         }
         let localVarFormParams: any = {};
 
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
         if (expand !== undefined) {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
+        }
+
+        if (skip !== undefined) {
+            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -403,11 +403,10 @@ export class PoliciesApi {
     }
     /**
      * Gets a policy object for a given project.
-     * @param id
-     * @param project
-     * @param expand
+     * @param id 
+     * @param expand 
      */
-    public async getPolicy (id: string, project?: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
+    public async getPolicy (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -424,10 +423,6 @@ export class PoliciesApi {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getPolicy.');
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         if (expand !== undefined) {
@@ -483,12 +478,11 @@ export class PoliciesApi {
         });
     }
     /**
-     *
-     * @param id
-     * @param expand
-     * @param project
+     * 
+     * @param id 
+     * @param expand 
      */
-    public async getPolicyAllowFunctions (id: string, expand?: Array<string>, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRulesResponse;  }> {
+    public async getPolicyAllowFunctions (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRulesResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}/policy_rules'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -509,10 +503,6 @@ export class PoliciesApi {
 
         if (expand !== undefined) {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -564,10 +554,10 @@ export class PoliciesApi {
         });
     }
     /**
-     *
-     * @param id
-     * @param from
-     * @param to
+     * 
+     * @param id 
+     * @param from 
+     * @param to 
      */
     public async getPolicyDailyGasUsage (id: string, from?: string, to?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Gas;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}/daily_gas_usage'
@@ -610,9 +600,6 @@ export class PoliciesApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -645,10 +632,10 @@ export class PoliciesApi {
         });
     }
     /**
-     *
-     * @param id
-     * @param from
-     * @param to
+     * 
+     * @param id 
+     * @param from 
+     * @param to 
      */
     public async getPolicyTotalGasUsage (id: string, from?: string, to?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SumGas;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}/gas_usage'
@@ -691,9 +678,6 @@ export class PoliciesApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -727,8 +711,8 @@ export class PoliciesApi {
     }
     /**
      * Updates a policy object.
-     * @param id
-     * @param policyUpdateRequest
+     * @param id 
+     * @param policyUpdateRequest 
      */
     public async updatePolicy (id: string, policyUpdateRequest: PolicyUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}'
@@ -769,9 +753,6 @@ export class PoliciesApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -804,10 +785,10 @@ export class PoliciesApi {
         });
     }
     /**
-     *
-     * @param policy
-     * @param policyRule
-     * @param policyRuleUpdateRequest
+     * 
+     * @param policy 
+     * @param policyRule 
+     * @param policyRuleUpdateRequest 
      */
     public async updatePolicyAllowFunction (policy: string, policyRule: string, policyRuleUpdateRequest: PolicyRuleUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{policy}/policy_rules/{policy_rule}'
@@ -854,9 +835,6 @@ export class PoliciesApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;

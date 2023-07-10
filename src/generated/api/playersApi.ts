@@ -18,6 +18,7 @@ import http from 'http';
 import { AccountPlayerRequest } from '../model/accountPlayerRequest';
 import { AccountResponse } from '../model/accountResponse';
 import { AccountsResponse } from '../model/accountsResponse';
+import { CreatePlayerRequest } from '../model/createPlayerRequest';
 import { CreateSessionPlayerRequest } from '../model/createSessionPlayerRequest';
 import { InventoryResponse } from '../model/inventoryResponse';
 import { PlayerRequest } from '../model/playerRequest';
@@ -26,6 +27,7 @@ import { PlayerTransferOwnershipRequest } from '../model/playerTransferOwnership
 import { PlayersResponse } from '../model/playersResponse';
 import { RevokeSessionPlayerRequest } from '../model/revokeSessionPlayerRequest';
 import { SessionResponse } from '../model/sessionResponse';
+import { SortOrder } from '../model/sortOrder';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -105,9 +107,9 @@ export class PlayersApi {
 
     /**
      * Creates a player object.
-     * @param playerRequest
+     * @param createPlayerRequest 
      */
-    public async createPlayer (playerRequest: PlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
+    public async createPlayer (createPlayerRequest: CreatePlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
         const localVarPath = this.basePath + '/v1/players';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -120,9 +122,9 @@ export class PlayersApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'playerRequest' is not null or undefined
-        if (playerRequest === null || playerRequest === undefined) {
-            throw new Error('Required parameter playerRequest was null or undefined when calling createPlayer.');
+        // verify required parameter 'createPlayerRequest' is not null or undefined
+        if (createPlayerRequest === null || createPlayerRequest === undefined) {
+            throw new Error('Required parameter createPlayerRequest was null or undefined when calling createPlayer.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -136,7 +138,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(playerRequest, "PlayerRequest")
+            body: ObjectSerializer.serialize(createPlayerRequest, "CreatePlayerRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -177,7 +179,7 @@ export class PlayersApi {
     /**
      * Creates an account object for an existing player.
      * @param id Specifies the unique player ID.
-     * @param accountPlayerRequest
+     * @param accountPlayerRequest 
      */
     public async createPlayerAccount (id: string, accountPlayerRequest: AccountPlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/accounts'
@@ -255,7 +257,7 @@ export class PlayersApi {
     /**
      * Creates a session object for the given player.
      * @param id Specifies the unique player ID.
-     * @param createSessionPlayerRequest
+     * @param createSessionPlayerRequest 
      */
     public async createPlayerSession (id: string, createSessionPlayerRequest: CreateSessionPlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/sessions'
@@ -331,12 +333,11 @@ export class PlayersApi {
         });
     }
     /**
-     * Retrieves the details of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Returns a list of your players for the query. The players are returned sorted by creation date, with the most recently created players appearing first.
      * @param id Specifies the unique player ID.
-     * @param project Specifies the unique project ID.
-     * @param expand
+     * @param expand 
      */
-    public async getPlayer (id: string, project?: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
+    public async getPlayer (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -353,10 +354,6 @@ export class PlayersApi {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getPlayer.');
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         if (expand !== undefined) {
@@ -414,10 +411,9 @@ export class PlayersApi {
     /**
      * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param id Specifies the unique player ID.
-     * @param expand
-     * @param project Specifies the unique project ID.
+     * @param expand 
      */
-    public async getPlayerAccounts (id: string, expand?: Array<string>, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
+    public async getPlayerAccounts (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/accounts'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -438,10 +434,6 @@ export class PlayersApi {
 
         if (expand !== undefined) {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -495,10 +487,9 @@ export class PlayersApi {
     /**
      * Retrieves the inventory of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
      * @param id Specifies the unique player ID.
-     * @param chainId
-     * @param project Specifies the unique project ID.
+     * @param chainId 
      */
-    public async getPlayerInventory (id: string, chainId: number, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: InventoryResponse;  }> {
+    public async getPlayerInventory (id: string, chainId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: InventoryResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/inventory'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -524,10 +515,6 @@ export class PlayersApi {
 
         if (chainId !== undefined) {
             localVarQueryParameters['chain_id'] = ObjectSerializer.serialize(chainId, "number");
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -580,14 +567,13 @@ export class PlayersApi {
     }
     /**
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param expand
-     * @param limit
-     * @param project Specifies the unique project ID.
-     * @param filter
-     * @param order
-     * @param skip
+     * @param expand 
+     * @param limit 
+     * @param filter 
+     * @param order 
+     * @param skip 
      */
-    public async getPlayers (expand?: Array<string>, limit?: number, project?: string, filter?: string, order?: string, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayersResponse;  }> {
+    public async getPlayers (expand?: Array<string>, limit?: number, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayersResponse;  }> {
         const localVarPath = this.basePath + '/v1/players';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -608,16 +594,12 @@ export class PlayersApi {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
         if (filter !== undefined) {
             localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
         }
 
         if (order !== undefined) {
-            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
         }
 
         if (skip !== undefined) {
@@ -675,7 +657,7 @@ export class PlayersApi {
     /**
      * Creates a session object for the given player.
      * @param id Specifies the unique player ID.
-     * @param revokeSessionPlayerRequest
+     * @param revokeSessionPlayerRequest 
      */
     public async revokePlayerSession (id: string, revokeSessionPlayerRequest: RevokeSessionPlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/sessions/revoke'
@@ -753,7 +735,7 @@ export class PlayersApi {
     /**
      * Transfer ownership of an account to an address.
      * @param id Specifies the unique player ID.
-     * @param playerTransferOwnershipRequest
+     * @param playerTransferOwnershipRequest 
      */
     public async transferAccountOwnership (id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/transfer-ownership'
@@ -831,7 +813,7 @@ export class PlayersApi {
     /**
      * Updates a player object.
      * @param id Specifies the unique player ID.
-     * @param playerRequest
+     * @param playerRequest 
      */
     public async updatePlayer (id: string, playerRequest: PlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}'

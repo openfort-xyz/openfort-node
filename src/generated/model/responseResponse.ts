@@ -11,7 +11,7 @@
  */
 
 import { RequestFile } from './models';
-import { PrismaJsonValue } from './prismaJsonValue';
+import { JsonValue } from './jsonValue';
 
 export class ResponseResponse {
     'createdAt': Date;
@@ -19,9 +19,9 @@ export class ResponseResponse {
     'transactionHash': string | null;
     'gasUsed'?: number | null;
     'status'?: number | null;
-    'logs'?: PrismaJsonValue | null;
+    'logs'?: JsonValue | null;
     'to'?: string | null;
-    'error'?: PrismaJsonValue | null;
+    'error'?: JsonValue | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -54,7 +54,7 @@ export class ResponseResponse {
         {
             "name": "logs",
             "baseName": "logs",
-            "type": "PrismaJsonValue"
+            "type": "JsonValue"
         },
         {
             "name": "to",
@@ -64,7 +64,7 @@ export class ResponseResponse {
         {
             "name": "error",
             "baseName": "error",
-            "type": "PrismaJsonValue"
+            "type": "JsonValue"
         }    ];
 
     static getAttributeTypeMap() {

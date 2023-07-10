@@ -11,8 +11,8 @@
  */
 
 import { RequestFile } from './models';
-import { Interaction } from './interaction';
-import { PrismaJsonValue } from './prismaJsonValue';
+import { InteractionResponse } from './interactionResponse';
+import { JsonValue } from './jsonValue';
 import { ResponseResponse } from './responseResponse';
 import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlayer';
@@ -25,12 +25,12 @@ export class TransactionIntentResponse {
     'updatedAt': Date;
     'chainId': number;
     'userOperationHash': string | null;
-    'userOperation'?: PrismaJsonValue | null;
+    'userOperation'?: JsonValue | null;
     'policy': TransactionIntentResponsePolicy | null;
     'player'?: TransactionIntentResponsePlayer;
     'nextAction'?: object | null;
     'account'?: TransactionIntentResponseAccount;
-    'interactions': Array<Interaction> | null;
+    'interactions': Array<InteractionResponse> | null;
     'response': ResponseResponse | null;
 
     static discriminator: string | undefined = undefined;
@@ -69,7 +69,7 @@ export class TransactionIntentResponse {
         {
             "name": "userOperation",
             "baseName": "user_operation",
-            "type": "PrismaJsonValue"
+            "type": "JsonValue"
         },
         {
             "name": "policy",
@@ -94,7 +94,7 @@ export class TransactionIntentResponse {
         {
             "name": "interactions",
             "baseName": "interactions",
-            "type": "Array<Interaction>"
+            "type": "Array<InteractionResponse>"
         },
         {
             "name": "response",

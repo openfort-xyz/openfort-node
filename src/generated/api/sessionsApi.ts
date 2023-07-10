@@ -98,7 +98,7 @@ export class SessionsApi {
 
     /**
      * Creates the session for the account.
-     * @param createSessionRequest
+     * @param createSessionRequest 
      */
     public async createSession (createSessionRequest: CreateSessionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions';
@@ -169,15 +169,14 @@ export class SessionsApi {
     }
     /**
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param player
-     * @param expand
-     * @param limit
-     * @param project Specifies the unique project ID.
-     * @param filter
-     * @param order
-     * @param skip
+     * @param player 
+     * @param expand 
+     * @param limit 
+     * @param filter 
+     * @param order 
+     * @param skip 
      */
-    public async getPlayerSessions (player: string, expand?: Array<string>, limit?: number, project?: string, filter?: string, order?: string, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionsResponse;  }> {
+    public async getPlayerSessions (player: string, expand?: Array<string>, limit?: number, filter?: string, order?: string, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionsResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -205,10 +204,6 @@ export class SessionsApi {
 
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         if (filter !== undefined) {
@@ -273,7 +268,7 @@ export class SessionsApi {
     }
     /**
      * Revokes the session for the account.
-     * @param revokeSessionRequest
+     * @param revokeSessionRequest 
      */
     public async revokeSession (revokeSessionRequest: RevokeSessionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions/revoke';
@@ -344,8 +339,8 @@ export class SessionsApi {
     }
     /**
      * Confirms the creation of a session with an external owner.
-     * @param id
-     * @param signatureRequest
+     * @param id 
+     * @param signatureRequest 
      */
     public async signatureSession (id: string, signatureRequest: SignatureRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions/{id}/signature'

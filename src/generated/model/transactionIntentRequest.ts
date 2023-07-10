@@ -18,7 +18,6 @@ export class TransactionIntentRequest {
     'chainId': number;
     'policy'?: string;
     'externalOwnerAddress'?: string;
-    'project'?: string;
     'optimistic': boolean;
     'interactions': Array<Interaction>;
 
@@ -43,11 +42,6 @@ export class TransactionIntentRequest {
         {
             "name": "externalOwnerAddress",
             "baseName": "external_owner_address",
-            "type": "string"
-        },
-        {
-            "name": "project",
-            "baseName": "project",
             "type": "string"
         },
         {

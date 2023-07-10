@@ -12,32 +12,26 @@
 
 import { RequestFile } from './models';
 
-export class TransferOwnershipRequest {
-    /**
-    * The address of the new owner
-    */
-    'newOwnerAddress': string;
-    /**
-    * The policy ID
-    */
-    'policy': string;
+export class CreatePlayerRequest {
+    'name': string;
+    'description'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "newOwnerAddress",
-            "baseName": "new_owner_address",
+            "name": "name",
+            "baseName": "name",
             "type": "string"
         },
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "description",
+            "baseName": "description",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return TransferOwnershipRequest.attributeTypeMap;
+        return CreatePlayerRequest.attributeTypeMap;
     }
 }
 

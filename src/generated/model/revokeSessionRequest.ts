@@ -15,6 +15,7 @@ import { RequestFile } from './models';
 export class RevokeSessionRequest {
     'player': string;
     'chainId': number;
+    'optimistic'?: boolean;
     'address': string;
     'policy'?: string;
 
@@ -30,6 +31,11 @@ export class RevokeSessionRequest {
             "name": "chainId",
             "baseName": "chain_id",
             "type": "number"
+        },
+        {
+            "name": "optimistic",
+            "baseName": "optimistic",
+            "type": "boolean"
         },
         {
             "name": "address",

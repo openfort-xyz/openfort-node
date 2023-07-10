@@ -15,7 +15,6 @@ import { RequestFile } from './models';
 export class PlayerRequest {
     'name'?: string;
     'description'?: string;
-    'project'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -28,11 +27,6 @@ export class PlayerRequest {
         {
             "name": "description",
             "baseName": "description",
-            "type": "string"
-        },
-        {
-            "name": "project",
-            "baseName": "project",
             "type": "string"
         }    ];
 

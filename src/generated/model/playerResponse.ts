@@ -19,7 +19,6 @@ export class PlayerResponse {
     'object': string;
     'createdAt': Date;
     'name': string | null;
-    'livemode': boolean;
     'email': string | null;
     'description': string | null;
     'metadata': string;
@@ -48,11 +47,6 @@ export class PlayerResponse {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean"
         },
         {
             "name": "email",

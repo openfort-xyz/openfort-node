@@ -11,19 +11,17 @@
  */
 
 import { RequestFile } from './models';
+import { ApiKeyResponse } from './apiKeyResponse';
 import { PKPolicy } from './pKPolicy';
-import { ProjectResponseApikeys } from './projectResponseApikeys';
 
 export class ProjectResponse {
     'id': string;
     'object': string;
     'createdAt': Date;
     'updatedAt': Date;
-    'name': string | null;
+    'name': string;
     'pkPolicy': PKPolicy;
-    'livemode': boolean;
-    'logoUrl'?: string | null;
-    'apikeys': ProjectResponseApikeys | null;
+    'apikeys'?: Array<ApiKeyResponse>;
 
     static discriminator: string | undefined = undefined;
 
@@ -59,19 +57,9 @@ export class ProjectResponse {
             "type": "PKPolicy"
         },
         {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean"
-        },
-        {
-            "name": "logoUrl",
-            "baseName": "logo_url",
-            "type": "string"
-        },
-        {
             "name": "apikeys",
             "baseName": "apikeys",
-            "type": "ProjectResponseApikeys"
+            "type": "Array<ApiKeyResponse>"
         }    ];
 
     static getAttributeTypeMap() {

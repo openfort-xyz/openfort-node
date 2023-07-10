@@ -17,7 +17,6 @@ export class PolicyRuleUpdateRequest {
     'type'?: PolicySchema;
     'functionName': string | null;
     'policy'?: string;
-    'project'?: string;
     'contract': string | null;
 
     static discriminator: string | undefined = undefined;
@@ -36,11 +35,6 @@ export class PolicyRuleUpdateRequest {
         {
             "name": "policy",
             "baseName": "policy",
-            "type": "string"
-        },
-        {
-            "name": "project",
-            "baseName": "project",
             "type": "string"
         },
         {

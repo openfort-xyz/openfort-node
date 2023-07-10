@@ -170,9 +170,8 @@ export class TransactionIntentsApi {
     /**
      * Retrieves a transaction intent object.
      * @param id 
-     * @param project 
      */
-    public async getTransactionIntent (id: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async getTransactionIntent (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -189,10 +188,6 @@ export class TransactionIntentsApi {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getTransactionIntent.');
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -247,12 +242,11 @@ export class TransactionIntentsApi {
      * Returns a list of transaction intents for the given project. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param expand 
      * @param limit 
-     * @param project Specifies the unique project ID.
      * @param filter 
      * @param order 
      * @param skip 
      */
-    public async getTransactionIntents (expand?: Array<string>, limit?: number, project?: string, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
+    public async getTransactionIntents (expand?: Array<string>, limit?: number, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -271,10 +265,6 @@ export class TransactionIntentsApi {
 
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         if (filter !== undefined) {
@@ -421,9 +411,8 @@ export class TransactionIntentsApi {
     /**
      * 
      * @param id 
-     * @param project 
      */
-    public async updateTransactionIntentResponse (id: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async updateTransactionIntentResponse (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/{id}/update_response'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -440,10 +429,6 @@ export class TransactionIntentsApi {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling updateTransactionIntentResponse.');
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -496,9 +481,8 @@ export class TransactionIntentsApi {
     }
     /**
      * 
-     * @param project 
      */
-    public async updateTransactionIntentsResponse (project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
+    public async updateTransactionIntentsResponse (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/update_response';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -510,10 +494,6 @@ export class TransactionIntentsApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
-        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 

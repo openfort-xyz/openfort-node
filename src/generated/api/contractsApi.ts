@@ -19,6 +19,7 @@ import { ContractDeleteResponse } from '../model/contractDeleteResponse';
 import { ContractRequest } from '../model/contractRequest';
 import { ContractResponse } from '../model/contractResponse';
 import { ContractsResponse } from '../model/contractsResponse';
+import { SortOrder } from '../model/sortOrder';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -97,7 +98,7 @@ export class ContractsApi {
 
     /**
      * Creates a contract object.
-     * @param contractRequest
+     * @param contractRequest 
      */
     public async createContract (contractRequest: ContractRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts';
@@ -168,7 +169,7 @@ export class ContractsApi {
     }
     /**
      * Deletes a contract object.
-     * @param id
+     * @param id 
      */
     public async deleteContract (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractDeleteResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts/{id}'
@@ -240,9 +241,8 @@ export class ContractsApi {
     /**
      * Retrieves the details of an existing contract. Supply the unique contract ID from either a contract creation request or the contract list, and Openfort will return the corresponding contract information.
      * @param id Specifies the unique contract ID.
-     * @param project Specifies the unique project ID.
      */
-    public async getContract (id: string, project?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractResponse;  }> {
+    public async getContract (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -259,10 +259,6 @@ export class ContractsApi {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getContract.');
-        }
-
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -315,10 +311,11 @@ export class ContractsApi {
     }
     /**
      * Returns a list of your contracts. The contracts are returned sorted by creation date, with the most recently created contracts appearing first.
-     * @param project Specifies the unique project ID.
      * @param limit amount of results per query
+     * @param order 
+     * @param skip 
      */
-    public async getContracts (project?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractsResponse;  }> {
+    public async getContracts (limit?: number, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractsResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -331,12 +328,16 @@ export class ContractsApi {
         }
         let localVarFormParams: any = {};
 
-        if (project !== undefined) {
-            localVarQueryParameters['project'] = ObjectSerializer.serialize(project, "string");
-        }
-
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
+        }
+
+        if (skip !== undefined) {
+            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

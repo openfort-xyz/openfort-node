@@ -20,7 +20,7 @@ export class AssetInventory {
     /**
     * amount in Wei
     */
-    'amount'?: number;
+    'amount'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -43,7 +43,7 @@ export class AssetInventory {
         {
             "name": "amount",
             "baseName": "amount",
-            "type": "number"
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

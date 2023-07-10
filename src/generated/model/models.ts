@@ -11,13 +11,16 @@ export * from './contractDeleteResponse';
 export * from './contractRequest';
 export * from './contractResponse';
 export * from './contractsResponse';
+export * from './createPlayerRequest';
 export * from './createSessionPlayerRequest';
 export * from './createSessionRequest';
 export * from './gas';
-export * from './getProjectResponse';
 export * from './interaction';
+export * from './interactionResponse';
 export * from './inventoryResponse';
+export * from './jsonValue';
 export * from './log';
+export * from './pKLocation';
 export * from './pKPolicy';
 export * from './playerRequest';
 export * from './playerResponse';
@@ -43,7 +46,6 @@ export * from './prismaJsonValue';
 export * from './projectLogs';
 export * from './projectRequest';
 export * from './projectResponse';
-export * from './projectResponseApikeys';
 export * from './projectsResponse';
 export * from './responseResponse';
 export * from './revokeSessionPlayerRequest';
@@ -51,6 +53,8 @@ export * from './revokeSessionRequest';
 export * from './sessionResponse';
 export * from './sessionResponseTransactionIntents';
 export * from './sessionsResponse';
+export * from './signPayloadRequest';
+export * from './signPayloadResponse';
 export * from './signatureRequest';
 export * from './sortOrder';
 export * from './strategy';
@@ -87,13 +91,16 @@ import { ContractDeleteResponse } from './contractDeleteResponse';
 import { ContractRequest } from './contractRequest';
 import { ContractResponse } from './contractResponse';
 import { ContractsResponse } from './contractsResponse';
+import { CreatePlayerRequest } from './createPlayerRequest';
 import { CreateSessionPlayerRequest } from './createSessionPlayerRequest';
 import { CreateSessionRequest } from './createSessionRequest';
 import { Gas } from './gas';
-import { GetProjectResponse } from './getProjectResponse';
 import { Interaction } from './interaction';
+import { InteractionResponse } from './interactionResponse';
 import { InventoryResponse } from './inventoryResponse';
+import { JsonValue } from './jsonValue';
 import { Log } from './log';
+import { PKLocation } from './pKLocation';
 import { PKPolicy } from './pKPolicy';
 import { PlayerRequest } from './playerRequest';
 import { PlayerResponse } from './playerResponse';
@@ -119,7 +126,6 @@ import { PrismaJsonValue } from './prismaJsonValue';
 import { ProjectLogs } from './projectLogs';
 import { ProjectRequest } from './projectRequest';
 import { ProjectResponse } from './projectResponse';
-import { ProjectResponseApikeys } from './projectResponseApikeys';
 import { ProjectsResponse } from './projectsResponse';
 import { ResponseResponse } from './responseResponse';
 import { RevokeSessionPlayerRequest } from './revokeSessionPlayerRequest';
@@ -127,6 +133,8 @@ import { RevokeSessionRequest } from './revokeSessionRequest';
 import { SessionResponse } from './sessionResponse';
 import { SessionResponseTransactionIntents } from './sessionResponseTransactionIntents';
 import { SessionsResponse } from './sessionsResponse';
+import { SignPayloadRequest } from './signPayloadRequest';
+import { SignPayloadResponse } from './signPayloadResponse';
 import { SignatureRequest } from './signatureRequest';
 import { SortOrder } from './sortOrder';
 import { Strategy } from './strategy';
@@ -153,6 +161,7 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "AssetType": AssetType,
+        "PKLocation": PKLocation,
         "PKPolicy": PKPolicy,
         "PolicySchema": PolicySchema,
         "SortOrder": SortOrder,
@@ -169,12 +178,14 @@ let typeMap: {[index: string]: any} = {
     "ContractRequest": ContractRequest,
     "ContractResponse": ContractResponse,
     "ContractsResponse": ContractsResponse,
+    "CreatePlayerRequest": CreatePlayerRequest,
     "CreateSessionPlayerRequest": CreateSessionPlayerRequest,
     "CreateSessionRequest": CreateSessionRequest,
     "Gas": Gas,
-    "GetProjectResponse": GetProjectResponse,
     "Interaction": Interaction,
+    "InteractionResponse": InteractionResponse,
     "InventoryResponse": InventoryResponse,
+    "JsonValue": JsonValue,
     "Log": Log,
     "PlayerRequest": PlayerRequest,
     "PlayerResponse": PlayerResponse,
@@ -199,7 +210,6 @@ let typeMap: {[index: string]: any} = {
     "ProjectLogs": ProjectLogs,
     "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
-    "ProjectResponseApikeys": ProjectResponseApikeys,
     "ProjectsResponse": ProjectsResponse,
     "ResponseResponse": ResponseResponse,
     "RevokeSessionPlayerRequest": RevokeSessionPlayerRequest,
@@ -207,6 +217,8 @@ let typeMap: {[index: string]: any} = {
     "SessionResponse": SessionResponse,
     "SessionResponseTransactionIntents": SessionResponseTransactionIntents,
     "SessionsResponse": SessionsResponse,
+    "SignPayloadRequest": SignPayloadRequest,
+    "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
     "Strategy": Strategy,
     "SumGas": SumGas,

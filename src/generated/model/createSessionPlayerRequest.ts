@@ -15,6 +15,7 @@ import { RequestFile } from './models';
 export class CreateSessionPlayerRequest {
     'address': string;
     'policy'?: string;
+    'optimistic'?: boolean;
     'externalOwnerAddress'?: string;
     'chainId': number;
     'validUntil': number;
@@ -34,6 +35,11 @@ export class CreateSessionPlayerRequest {
             "name": "policy",
             "baseName": "policy",
             "type": "string"
+        },
+        {
+            "name": "optimistic",
+            "baseName": "optimistic",
+            "type": "boolean"
         },
         {
             "name": "externalOwnerAddress",

@@ -11,9 +11,11 @@
  */
 
 import { RequestFile } from './models';
-import { ApiKeyResponse } from './apiKeyResponse';
 
-export class ProjectResponseApikeys {
+/**
+* From https://github.com/sindresorhus/type-fest/ Matches any valid JSON value.
+*/
+export class JsonValue {
 
     static discriminator: string | undefined = undefined;
 
@@ -21,7 +23,7 @@ export class ProjectResponseApikeys {
     ];
 
     static getAttributeTypeMap() {
-        return ProjectResponseApikeys.attributeTypeMap;
+        return JsonValue.attributeTypeMap;
     }
 }
 

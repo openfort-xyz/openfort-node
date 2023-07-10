@@ -12,32 +12,38 @@
 
 import { RequestFile } from './models';
 
-export class GetProjectResponse {
-    'id': string | null;
-    'name'?: string;
-    'logoUrl'?: string | null;
+export class InteractionResponse {
+    'contract': string | null;
+    'value'?: string | null;
+    'functionName': string;
+    'functionArgs': Array<any>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "contract",
+            "baseName": "contract",
             "type": "string"
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "value",
+            "baseName": "value",
             "type": "string"
         },
         {
-            "name": "logoUrl",
-            "baseName": "logo_url",
+            "name": "functionName",
+            "baseName": "function_name",
             "type": "string"
+        },
+        {
+            "name": "functionArgs",
+            "baseName": "function_args",
+            "type": "Array<any>"
         }    ];
 
     static getAttributeTypeMap() {
-        return GetProjectResponse.attributeTypeMap;
+        return InteractionResponse.attributeTypeMap;
     }
 }
 
