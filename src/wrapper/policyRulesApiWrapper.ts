@@ -33,7 +33,7 @@ export class PolicyRulesApiWrapper {
      */
     @httpErrorHandler()
     public async list(req?: GetPolicyRulesRequest): Promise<PolicyRulesResponse> {
-        const response = await this._api.getPolicyRules(req?.project, req?.expand, req?.policy);
+        const response = await this._api.getPolicyRules(req?.expand, req?.policy);
         return response.body;
     }
 

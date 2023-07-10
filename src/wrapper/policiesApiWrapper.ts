@@ -52,7 +52,7 @@ export class PoliciesApiWrapper {
      */
     @httpErrorHandler()
     public async list(req?: ListPoliciesRequest): Promise<PoliciesResponse> {
-        const response = await this._api.getPolicies(req?.project, req?.limit, req?.expand);
+        const response = await this._api.getPolicies(req?.limit, req?.expand);
         return response.body;
     }
 
@@ -62,7 +62,7 @@ export class PoliciesApiWrapper {
      */
     @httpErrorHandler()
     public async get(req: GetPolicyRequest): Promise<PolicyResponse> {
-        const response = await this._api.getPolicy(req.id, req.project, req.expand);
+        const response = await this._api.getPolicy(req.id, req.expand);
         return response.body;
     }
 
@@ -72,7 +72,7 @@ export class PoliciesApiWrapper {
      */
     @httpErrorHandler()
     public async getAllowFunctions(req: GetAllowFunctionsRequest): Promise<PolicyRulesResponse> {
-        const response = await this._api.getPolicyAllowFunctions(req.id, req.expand, req.project);
+        const response = await this._api.getPolicyAllowFunctions(req.id, req.expand);
         return response.body;
     }
 

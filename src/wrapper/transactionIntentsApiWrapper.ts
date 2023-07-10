@@ -34,7 +34,7 @@ export class TransactionIntentsApiWrapper {
      */
     @httpErrorHandler()
     public async get(req: GetTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        const response = await this._api.getTransactionIntent(req.id, req.project);
+        const response = await this._api.getTransactionIntent(req.id);
         return response.body;
     }
 
@@ -47,7 +47,6 @@ export class TransactionIntentsApiWrapper {
         const response = await this._api.getTransactionIntents(
             req?.expand,
             req?.limit,
-            req?.project,
             req?.filter,
             req?.order,
             req?.skip,
@@ -72,7 +71,7 @@ export class TransactionIntentsApiWrapper {
      */
     @httpErrorHandler()
     public async updateResponse(req: UpdateTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        const response = await this._api.updateTransactionIntentResponse(req.id, req.project);
+        const response = await this._api.updateTransactionIntentResponse(req.id);
         return response.body;
     }
 
@@ -81,8 +80,8 @@ export class TransactionIntentsApiWrapper {
      * @param project
      */
     @httpErrorHandler()
-    public async updateList(project?: string): Promise<TransactionIntentsResponse> {
-        const response = await this._api.updateTransactionIntentsResponse(project);
+    public async updateList(): Promise<TransactionIntentsResponse> {
+        const response = await this._api.updateTransactionIntentsResponse();
         return response.body;
     }
 }
