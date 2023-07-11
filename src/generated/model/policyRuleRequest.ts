@@ -15,7 +15,7 @@ import { PolicySchema } from './policySchema';
 
 export class PolicyRuleRequest {
     'type': PolicySchema;
-    'functionName': string | null;
+    'function_name': string | null;
     'policy': string;
     'contract': string | null;
 
@@ -28,7 +28,7 @@ export class PolicyRuleRequest {
             "type": "PolicySchema"
         },
         {
-            "name": "functionName",
+            "name": "function_name",
             "baseName": "function_name",
             "type": "string"
         },

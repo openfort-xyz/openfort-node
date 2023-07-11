@@ -12,50 +12,50 @@
 
 import { RequestFile } from './models';
 
-export class PlayerTransferOwnershipRequest {
-    /**
-    * The policy ID
-    */
-    'policy': string;
-    /**
-    * The chain_id where the account is.
-    */
-    'chain_id': number;
-    /**
-    * The address of the new owner
-    */
-    'new_owner_address': string;
-    /**
-    * The player ID
-    */
-    'player'?: string;
+export class SignTextResponse {
+    'object': string;
+    'account': string;
+    'address': string;
+    'text': string;
+    'digest': string;
+    'signature': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "object",
+            "baseName": "object",
             "type": "string"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "new_owner_address",
-            "baseName": "new_owner_address",
+            "name": "account",
+            "baseName": "account",
             "type": "string"
         },
         {
-            "name": "player",
-            "baseName": "player",
+            "name": "address",
+            "baseName": "address",
+            "type": "string"
+        },
+        {
+            "name": "text",
+            "baseName": "text",
+            "type": "string"
+        },
+        {
+            "name": "digest",
+            "baseName": "digest",
+            "type": "string"
+        },
+        {
+            "name": "signature",
+            "baseName": "signature",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerTransferOwnershipRequest.attributeTypeMap;
+        return SignTextResponse.attributeTypeMap;
     }
 }
 

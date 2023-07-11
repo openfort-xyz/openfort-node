@@ -15,10 +15,10 @@ import { PrismaJsonValue } from './prismaJsonValue';
 
 export class ContractRequest {
     'name': string;
-    'chainId': number;
+    'chain_id': number;
     'address': string;
     'abi'?: PrismaJsonValue | null;
-    'publicVerification'?: boolean;
+    'public_verification'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -29,7 +29,7 @@ export class ContractRequest {
             "type": "string"
         },
         {
-            "name": "chainId",
+            "name": "chain_id",
             "baseName": "chain_id",
             "type": "number"
         },
@@ -44,7 +44,7 @@ export class ContractRequest {
             "type": "PrismaJsonValue"
         },
         {
-            "name": "publicVerification",
+            "name": "public_verification",
             "baseName": "public_verification",
             "type": "boolean"
         }    ];

@@ -18,12 +18,12 @@ import { PolicyResponseTransactionIntents } from './policyResponseTransactionInt
 export class TransactionIntentResponsePlayer {
     'id': string;
     'object': string;
-    'createdAt': Date;
+    'created_at': Date;
     'name': string | null;
     'email': string | null;
     'description': string | null;
     'metadata': string;
-    'transactionIntents'?: PolicyResponseTransactionIntents;
+    'transaction_intents'?: PolicyResponseTransactionIntents;
     'accounts'?: PlayerResponseAccounts;
 
     static discriminator: string | undefined = undefined;
@@ -40,7 +40,7 @@ export class TransactionIntentResponsePlayer {
             "type": "string"
         },
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
@@ -65,7 +65,7 @@ export class TransactionIntentResponsePlayer {
             "type": "string"
         },
         {
-            "name": "transactionIntents",
+            "name": "transaction_intents",
             "baseName": "transaction_intents",
             "type": "PolicyResponseTransactionIntents"
         },

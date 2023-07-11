@@ -16,10 +16,10 @@ export class Log {
     'id': string;
     'timestamp': string;
     'event': string;
-    'requestBody': any | null;
+    'request_body': any | null;
     'status': number;
-    'responseTime': number;
-    'responseData': any | null;
+    'response_time': number;
+    'response_data': any | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class Log {
             "type": "string"
         },
         {
-            "name": "requestBody",
+            "name": "request_body",
             "baseName": "request_body",
             "type": "any"
         },
@@ -50,12 +50,12 @@ export class Log {
             "type": "number"
         },
         {
-            "name": "responseTime",
+            "name": "response_time",
             "baseName": "response_time",
             "type": "number"
         },
         {
-            "name": "responseData",
+            "name": "response_data",
             "baseName": "response_data",
             "type": "any"
         }    ];

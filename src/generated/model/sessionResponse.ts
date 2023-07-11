@@ -16,16 +16,16 @@ import { SessionResponseTransactionIntents } from './sessionResponseTransactionI
 export class SessionResponse {
     'id': string;
     'object': string;
-    'createdAt': Date;
-    'updatedAt': Date;
-    'isActive'?: boolean;
+    'created_at': Date;
+    'updated_at': Date;
+    'is_active'?: boolean;
     'address': string;
-    'validAfter'?: string;
-    'validUntil'?: string;
+    'valid_after'?: string;
+    'valid_until'?: string;
     'whitelist'?: Array<string>;
     'limit'?: number;
-    'nextAction': object | null;
-    'transactionIntents': SessionResponseTransactionIntents | null;
+    'next_action': object | null;
+    'transaction_intents': SessionResponseTransactionIntents | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -41,17 +41,17 @@ export class SessionResponse {
             "type": "string"
         },
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
         {
-            "name": "updatedAt",
+            "name": "updated_at",
             "baseName": "updated_at",
             "type": "Date"
         },
         {
-            "name": "isActive",
+            "name": "is_active",
             "baseName": "is_active",
             "type": "boolean"
         },
@@ -61,12 +61,12 @@ export class SessionResponse {
             "type": "string"
         },
         {
-            "name": "validAfter",
+            "name": "valid_after",
             "baseName": "valid_after",
             "type": "string"
         },
         {
-            "name": "validUntil",
+            "name": "valid_until",
             "baseName": "valid_until",
             "type": "string"
         },
@@ -81,12 +81,12 @@ export class SessionResponse {
             "type": "number"
         },
         {
-            "name": "nextAction",
+            "name": "next_action",
             "baseName": "next_action",
             "type": "object"
         },
         {
-            "name": "transactionIntents",
+            "name": "transaction_intents",
             "baseName": "transaction_intents",
             "type": "SessionResponseTransactionIntents"
         }    ];

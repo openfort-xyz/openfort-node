@@ -55,6 +55,8 @@ export * from './sessionResponseTransactionIntents';
 export * from './sessionsResponse';
 export * from './signPayloadRequest';
 export * from './signPayloadResponse';
+export * from './signTextRequest';
+export * from './signTextResponse';
 export * from './signatureRequest';
 export * from './sortOrder';
 export * from './strategy';
@@ -135,6 +137,8 @@ import { SessionResponseTransactionIntents } from './sessionResponseTransactionI
 import { SessionsResponse } from './sessionsResponse';
 import { SignPayloadRequest } from './signPayloadRequest';
 import { SignPayloadResponse } from './signPayloadResponse';
+import { SignTextRequest } from './signTextRequest';
+import { SignTextResponse } from './signTextResponse';
 import { SignatureRequest } from './signatureRequest';
 import { SortOrder } from './sortOrder';
 import { Strategy } from './strategy';
@@ -219,6 +223,8 @@ let typeMap: {[index: string]: any} = {
     "SessionsResponse": SessionsResponse,
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
+    "SignTextRequest": SignTextRequest,
+    "SignTextResponse": SignTextResponse,
     "SignatureRequest": SignatureRequest,
     "Strategy": Strategy,
     "SumGas": SumGas,

@@ -102,8 +102,8 @@ export class PoliciesApiWrapper {
      */
     @httpErrorHandler()
     public async updateAllowFunction(req: UpdatePolicyAllowFunctionRequest): Promise<PolicyRuleResponse> {
-        const {policyRule, ...body} = req;
-        const response = await this._api.updatePolicyAllowFunction(req.policy, policyRule, body);
+        const {policy_rule, ...body} = req;
+        const response = await this._api.updatePolicyAllowFunction(req.policy, policy_rule, body);
         return response.body;
     }
 }

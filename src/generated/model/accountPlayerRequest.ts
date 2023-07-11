@@ -16,22 +16,22 @@ export class AccountPlayerRequest {
     /**
     * The chain_id
     */
-    'chainId': number;
+    'chain_id': number;
     /**
     * The address of the external owner
     */
-    'externalOwnerAddress'?: string;
+    'external_owner_address'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "chainId",
+            "name": "chain_id",
             "baseName": "chain_id",
             "type": "number"
         },
         {
-            "name": "externalOwnerAddress",
+            "name": "external_owner_address",
             "baseName": "external_owner_address",
             "type": "string"
         }    ];

@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export class ApiKeyResponse {
-    'createdAt': Date;
+    'created_at': Date;
     'token': string;
     'name': string;
     'livemode': boolean;
@@ -22,7 +22,7 @@ export class ApiKeyResponse {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
