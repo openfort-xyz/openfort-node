@@ -2,5 +2,5 @@ import {PolicyRuleUpdateRequest} from "../generated/model/policyRuleUpdateReques
 
 export interface UpdatePolicyAllowFunctionRequest extends PolicyRuleUpdateRequest {
     policy: string;
-    policyRule: string;
+    policy_rule: string;
 }

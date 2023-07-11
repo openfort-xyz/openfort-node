@@ -15,8 +15,8 @@ import { RequestFile } from './models';
 export class InteractionResponse {
     'contract': string | null;
     'value'?: string | null;
-    'functionName': string;
-    'functionArgs': Array<any>;
+    'function_name': string;
+    'function_args': Array<any>;
 
     static discriminator: string | undefined = undefined;
 
@@ -32,12 +32,12 @@ export class InteractionResponse {
             "type": "string"
         },
         {
-            "name": "functionName",
+            "name": "function_name",
             "baseName": "function_name",
             "type": "string"
         },
         {
-            "name": "functionArgs",
+            "name": "function_args",
             "baseName": "function_args",
             "type": "Array<any>"
         }    ];

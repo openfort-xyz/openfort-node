@@ -44,8 +44,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async createAccount(req: CreatePlayerAccountRequest): Promise<AccountResponse> {
-        const {playerId, ...body} = req;
-        const response = await this._api.createPlayerAccount(playerId, body);
+        const {player_id, ...body} = req;
+        const response = await this._api.createPlayerAccount(player_id, body);
         return response.body;
     }
 
@@ -55,8 +55,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async createSession(req: CreatePlayerSessionRequest): Promise<SessionResponse> {
-        const {playerId, ...body} = req;
-        const response = await this._api.createPlayerSession(playerId, body);
+        const {player_id, ...body} = req;
+        const response = await this._api.createPlayerSession(player_id, body);
         return response.body;
     }
 
@@ -96,13 +96,7 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async list(req?: ListPlayersRequest): Promise<PlayersResponse> {
-        const response = await this._api.getPlayers(
-            req?.expand,
-            req?.limit,
-            req?.filter,
-            req?.order,
-            req?.skip,
-        );
+        const response = await this._api.getPlayers(req?.expand, req?.limit, req?.filter, req?.order, req?.skip);
         return response.body;
     }
 
@@ -112,8 +106,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async revokeSession(req: RevokePlayerSessionRequest): Promise<SessionResponse> {
-        const {playerId, ...body} = req;
-        const response = await this._api.revokePlayerSession(playerId, body);
+        const {player_id, ...body} = req;
+        const response = await this._api.revokePlayerSession(player_id, body);
         return response.body;
     }
 
@@ -125,8 +119,8 @@ export class PlayersApiWrapper {
     public async transferAccountOwnership(
         req: TransferPlayerAccountOwnershipRequest,
     ): Promise<TransactionIntentResponse> {
-        const {playerId, ...body} = req;
-        const response = await this._api.transferAccountOwnership(playerId, body);
+        const {player_id, ...body} = req;
+        const response = await this._api.transferAccountOwnership(player_id, body);
         return response.body;
     }
 

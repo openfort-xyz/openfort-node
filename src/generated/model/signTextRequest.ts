@@ -11,36 +11,24 @@
  */
 
 import { RequestFile } from './models';
-import { PolicySchema } from './policySchema';
 
-export class PolicyAllowFunctionRequest {
-    'type': PolicySchema;
-    'function_name': string | null;
-    'contract': string | null;
+export class SignTextRequest {
+    /**
+    * Text to sign
+    */
+    'text': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicySchema"
-        },
-        {
-            "name": "function_name",
-            "baseName": "function_name",
-            "type": "string"
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
+            "name": "text",
+            "baseName": "text",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyAllowFunctionRequest.attributeTypeMap;
+        return SignTextRequest.attributeTypeMap;
     }
 }
 
-export namespace PolicyAllowFunctionRequest {
-}

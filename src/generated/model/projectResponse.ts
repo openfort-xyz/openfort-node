@@ -17,10 +17,10 @@ import { PKPolicy } from './pKPolicy';
 export class ProjectResponse {
     'id': string;
     'object': string;
-    'createdAt': Date;
-    'updatedAt': Date;
+    'created_at': Date;
+    'updated_at': Date;
     'name': string;
-    'pkPolicy': PKPolicy;
+    'pk_policy': PKPolicy;
     'apikeys'?: Array<ApiKeyResponse>;
 
     static discriminator: string | undefined = undefined;
@@ -37,12 +37,12 @@ export class ProjectResponse {
             "type": "string"
         },
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
         {
-            "name": "updatedAt",
+            "name": "updated_at",
             "baseName": "updated_at",
             "type": "Date"
         },
@@ -52,7 +52,7 @@ export class ProjectResponse {
             "type": "string"
         },
         {
-            "name": "pkPolicy",
+            "name": "pk_policy",
             "baseName": "pk_policy",
             "type": "PKPolicy"
         },

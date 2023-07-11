@@ -15,9 +15,9 @@ import { Interaction } from './interaction';
 
 export class TransactionIntentRequest {
     'player': string;
-    'chainId': number;
+    'chain_id': number;
     'policy'?: string;
-    'externalOwnerAddress'?: string;
+    'external_owner_address'?: string;
     'optimistic': boolean;
     'interactions': Array<Interaction>;
 
@@ -30,7 +30,7 @@ export class TransactionIntentRequest {
             "type": "string"
         },
         {
-            "name": "chainId",
+            "name": "chain_id",
             "baseName": "chain_id",
             "type": "number"
         },
@@ -40,7 +40,7 @@ export class TransactionIntentRequest {
             "type": "string"
         },
         {
-            "name": "externalOwnerAddress",
+            "name": "external_owner_address",
             "baseName": "external_owner_address",
             "type": "string"
         },

@@ -13,25 +13,25 @@
 import { RequestFile } from './models';
 
 export class Strategy {
-    'sponsorSchema': string;
-    'tokenContract': string | null;
-    'tokenContractAmount': string | null;
+    'sponsor_schema': string;
+    'token_contract': string | null;
+    'token_contract_amount': string | null;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "sponsorSchema",
+            "name": "sponsor_schema",
             "baseName": "sponsor_schema",
             "type": "string"
         },
         {
-            "name": "tokenContract",
+            "name": "token_contract",
             "baseName": "token_contract",
             "type": "string"
         },
         {
-            "name": "tokenContractAmount",
+            "name": "token_contract_amount",
             "baseName": "token_contract_amount",
             "type": "string"
         }    ];

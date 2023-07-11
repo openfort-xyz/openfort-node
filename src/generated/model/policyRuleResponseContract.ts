@@ -12,17 +12,17 @@
 
 import { RequestFile } from './models';
 import { ContractResponse } from './contractResponse';
-import { PrismaJsonValue } from './prismaJsonValue';
+import { JsonValue } from './jsonValue';
 
 export class PolicyRuleResponseContract {
     'id': string;
     'object': string;
-    'createdAt': Date;
+    'created_at': Date;
     'name': string | null;
-    'chainId': number;
+    'chain_id': number;
     'address': string;
-    'abi': PrismaJsonValue | null;
-    'publicVerification': boolean;
+    'abi': JsonValue | null;
+    'public_verification': boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -38,7 +38,7 @@ export class PolicyRuleResponseContract {
             "type": "string"
         },
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
@@ -48,7 +48,7 @@ export class PolicyRuleResponseContract {
             "type": "string"
         },
         {
-            "name": "chainId",
+            "name": "chain_id",
             "baseName": "chain_id",
             "type": "number"
         },
@@ -60,10 +60,10 @@ export class PolicyRuleResponseContract {
         {
             "name": "abi",
             "baseName": "abi",
-            "type": "PrismaJsonValue"
+            "type": "JsonValue"
         },
         {
-            "name": "publicVerification",
+            "name": "public_verification",
             "baseName": "public_verification",
             "type": "boolean"
         }    ];

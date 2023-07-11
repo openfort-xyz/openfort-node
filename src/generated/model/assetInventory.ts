@@ -14,9 +14,9 @@ import { RequestFile } from './models';
 import { AssetType } from './assetType';
 
 export class AssetInventory {
-    'assetType': AssetType;
+    'asset_type': AssetType;
     'address'?: string;
-    'tokenId'?: number;
+    'token_id'?: number;
     /**
     * amount in Wei
     */
@@ -26,7 +26,7 @@ export class AssetInventory {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "assetType",
+            "name": "asset_type",
             "baseName": "asset_type",
             "type": "AssetType"
         },
@@ -36,7 +36,7 @@ export class AssetInventory {
             "type": "string"
         },
         {
-            "name": "tokenId",
+            "name": "token_id",
             "baseName": "token_id",
             "type": "number"
         },

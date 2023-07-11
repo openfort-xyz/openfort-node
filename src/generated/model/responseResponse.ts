@@ -14,10 +14,10 @@ import { RequestFile } from './models';
 import { JsonValue } from './jsonValue';
 
 export class ResponseResponse {
-    'createdAt': Date;
-    'blockNumber': number | null;
-    'transactionHash': string | null;
-    'gasUsed'?: number | null;
+    'created_at': Date;
+    'block_number': number | null;
+    'transaction_hash': string | null;
+    'gas_used'?: number | null;
     'status'?: number | null;
     'logs'?: JsonValue | null;
     'to'?: string | null;
@@ -27,22 +27,22 @@ export class ResponseResponse {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
         {
-            "name": "blockNumber",
+            "name": "block_number",
             "baseName": "block_number",
             "type": "number"
         },
         {
-            "name": "transactionHash",
+            "name": "transaction_hash",
             "baseName": "transaction_hash",
             "type": "string"
         },
         {
-            "name": "gasUsed",
+            "name": "gas_used",
             "baseName": "gas_used",
             "type": "number"
         },

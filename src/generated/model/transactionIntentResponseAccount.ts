@@ -17,12 +17,12 @@ import { PolicyResponseTransactionIntents } from './policyResponseTransactionInt
 export class TransactionIntentResponseAccount {
     'id': string;
     'object': string;
-    'createdAt': Date;
+    'created_at': Date;
     'address': string;
     'deployed': boolean;
     'custodial': boolean;
-    'chainId': number;
-    'transactionIntents'?: PolicyResponseTransactionIntents;
+    'chain_id': number;
+    'transaction_intents'?: PolicyResponseTransactionIntents;
 
     static discriminator: string | undefined = undefined;
 
@@ -38,7 +38,7 @@ export class TransactionIntentResponseAccount {
             "type": "string"
         },
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
@@ -58,12 +58,12 @@ export class TransactionIntentResponseAccount {
             "type": "boolean"
         },
         {
-            "name": "chainId",
+            "name": "chain_id",
             "baseName": "chain_id",
             "type": "number"
         },
         {
-            "name": "transactionIntents",
+            "name": "transaction_intents",
             "baseName": "transaction_intents",
             "type": "PolicyResponseTransactionIntents"
         }    ];

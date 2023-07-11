@@ -21,14 +21,14 @@ import { TransactionIntentResponsePolicy } from './transactionIntentResponsePoli
 export class TransactionIntentResponse {
     'id': string;
     'object': string;
-    'createdAt': Date;
-    'updatedAt': Date;
-    'chainId': number;
-    'userOperationHash': string | null;
-    'userOperation'?: JsonValue | null;
+    'created_at': Date;
+    'updated_at': Date;
+    'chain_id': number;
+    'user_operation_hash': string | null;
+    'user_operation'?: JsonValue | null;
     'policy': TransactionIntentResponsePolicy | null;
     'player'?: TransactionIntentResponsePlayer;
-    'nextAction'?: object | null;
+    'next_action'?: object | null;
     'account'?: TransactionIntentResponseAccount;
     'interactions': Array<InteractionResponse> | null;
     'response': ResponseResponse | null;
@@ -47,27 +47,27 @@ export class TransactionIntentResponse {
             "type": "string"
         },
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
         {
-            "name": "updatedAt",
+            "name": "updated_at",
             "baseName": "updated_at",
             "type": "Date"
         },
         {
-            "name": "chainId",
+            "name": "chain_id",
             "baseName": "chain_id",
             "type": "number"
         },
         {
-            "name": "userOperationHash",
+            "name": "user_operation_hash",
             "baseName": "user_operation_hash",
             "type": "string"
         },
         {
-            "name": "userOperation",
+            "name": "user_operation",
             "baseName": "user_operation",
             "type": "JsonValue"
         },
@@ -82,7 +82,7 @@ export class TransactionIntentResponse {
             "type": "TransactionIntentResponsePlayer"
         },
         {
-            "name": "nextAction",
+            "name": "next_action",
             "baseName": "next_action",
             "type": "object"
         },

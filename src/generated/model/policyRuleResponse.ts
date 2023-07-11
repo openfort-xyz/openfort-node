@@ -17,9 +17,9 @@ import { PolicySchema } from './policySchema';
 export class PolicyRuleResponse {
     'id': string;
     'object': string;
-    'createdAt': Date;
+    'created_at': Date;
     'type': PolicySchema;
-    'functionName': string | null;
+    'function_name': string | null;
     'contract': PolicyRuleResponseContract | null;
 
     static discriminator: string | undefined = undefined;
@@ -36,7 +36,7 @@ export class PolicyRuleResponse {
             "type": "string"
         },
         {
-            "name": "createdAt",
+            "name": "created_at",
             "baseName": "created_at",
             "type": "Date"
         },
@@ -46,7 +46,7 @@ export class PolicyRuleResponse {
             "type": "PolicySchema"
         },
         {
-            "name": "functionName",
+            "name": "function_name",
             "baseName": "function_name",
             "type": "string"
         },

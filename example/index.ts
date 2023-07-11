@@ -1,7 +1,16 @@
 import Openfort, {CreatePlayerRequest, CreatePlayerSessionRequest, PlayersResponse} from "@openfort/openfort-node";
+import * as dotenv from "dotenv";
+
+function getEnvVariable(name: string): string {
+    const result = process.env[name];
+    if (!result) {
+        throw Error(`Environment variable is missing: ${name}`);
+    }
+    return result;
+}
 
 async function example() {
-    const openfort = new Openfort("sk_test_44b87423-9f53-5cf9-ae18-82b3e8bae139");
+    const openfort = new Openfort(getEnvVariable("OPENFORT_APIKEY"), process.env.OPENFORT_BASEURL);
     const players: PlayersResponse = await openfort.players.list();
     for (const player of players.data) {
         console.log(player.id);
@@ -13,12 +22,12 @@ async function example() {
     const newPlayer = await openfort.players.create(createPlayerRequest);
 
     const createSessionRequest: CreatePlayerSessionRequest = {
-        playerId: newPlayer.id,
+        player_id: newPlayer.id,
         address: "0x9590Ed0C18190a310f4e93CAccc4CC17270bED40",
-        chainId: Number(process.env.NEXTAUTH_OPENFORT_CHAINID!),
-        validUntil: 281474976710655,
-        validAfter: 0,
-        policy: "pol_55814cce-9f5b-463a-a3ac-e20bde85903b",
+        chain_id: Number(getEnvVariable("OPENFORT_CHAINID")),
+        valid_until: 281474976710655,
+        valid_after: 0,
+        policy: getEnvVariable("OPENFORT_POLICY"),
     };
     await openfort.players.createSession(createSessionRequest);
 
@@ -28,4 +37,5 @@ async function example() {
     }
 }
 
+dotenv.config();
 example().catch((e) => console.error(e));
