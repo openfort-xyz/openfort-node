@@ -32,7 +32,7 @@ export class PoliciesApiWrapper {
      * @param req parameters to create
      */
     @httpErrorHandler()
-    public async createPolicy(req: PolicyRequest): Promise<PolicyResponse> {
+    public async create(req: PolicyRequest): Promise<PolicyResponse> {
         const response = await this._api.createPolicy(req);
         return response.body;
     }
