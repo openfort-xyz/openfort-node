@@ -11,7 +11,7 @@
  */
 
 import { RequestFile } from './models';
-import { JsonValue } from './jsonValue';
+import { Log } from './log';
 
 export class ResponseResponse {
     'created_at': Date;
@@ -19,9 +19,9 @@ export class ResponseResponse {
     'transaction_hash': string | null;
     'gas_used'?: number | null;
     'status'?: number | null;
-    'logs'?: JsonValue | null;
+    'logs'?: Array<Log> | null;
     'to'?: string | null;
-    'error'?: JsonValue | null;
+    'error'?: any | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -54,7 +54,7 @@ export class ResponseResponse {
         {
             "name": "logs",
             "baseName": "logs",
-            "type": "JsonValue"
+            "type": "Array<Log>"
         },
         {
             "name": "to",
@@ -64,7 +64,7 @@ export class ResponseResponse {
         {
             "name": "error",
             "baseName": "error",
-            "type": "JsonValue"
+            "type": "any"
         }    ];
 
     static getAttributeTypeMap() {

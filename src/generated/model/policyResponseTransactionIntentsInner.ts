@@ -11,8 +11,7 @@
  */
 
 import { RequestFile } from './models';
-import { InteractionResponse } from './interactionResponse';
-import { JsonValue } from './jsonValue';
+import { Interaction } from './interaction';
 import { PickTransactionIntentResponseId } from './pickTransactionIntentResponseId';
 import { ResponseResponse } from './responseResponse';
 import { TransactionIntentResponse } from './transactionIntentResponse';
@@ -27,12 +26,12 @@ export class PolicyResponseTransactionIntentsInner {
     'updated_at': Date;
     'chain_id': number;
     'user_operation_hash': string | null;
-    'user_operation'?: JsonValue | null;
+    'user_operation'?: any | null;
     'policy': TransactionIntentResponsePolicy | null;
     'player'?: TransactionIntentResponsePlayer;
     'next_action'?: object | null;
     'account'?: TransactionIntentResponseAccount;
-    'interactions': Array<InteractionResponse> | null;
+    'interactions': Array<Interaction> | null;
     'response': ResponseResponse | null;
 
     static discriminator: string | undefined = undefined;
@@ -71,7 +70,7 @@ export class PolicyResponseTransactionIntentsInner {
         {
             "name": "user_operation",
             "baseName": "user_operation",
-            "type": "JsonValue"
+            "type": "any"
         },
         {
             "name": "policy",
@@ -96,7 +95,7 @@ export class PolicyResponseTransactionIntentsInner {
         {
             "name": "interactions",
             "baseName": "interactions",
-            "type": "Array<InteractionResponse>"
+            "type": "Array<Interaction>"
         },
         {
             "name": "response",

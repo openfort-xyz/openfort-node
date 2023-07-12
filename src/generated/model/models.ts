@@ -16,9 +16,7 @@ export * from './createSessionPlayerRequest';
 export * from './createSessionRequest';
 export * from './gas';
 export * from './interaction';
-export * from './interactionResponse';
 export * from './inventoryResponse';
-export * from './jsonValue';
 export * from './log';
 export * from './pKLocation';
 export * from './pKPolicy';
@@ -46,7 +44,6 @@ export * from './policyRuleUpdateRequest';
 export * from './policyRulesResponse';
 export * from './policySchema';
 export * from './policyUpdateRequest';
-export * from './prismaJsonValue';
 export * from './projectLogs';
 export * from './projectRequest';
 export * from './projectResponse';
@@ -101,9 +98,7 @@ import { CreateSessionPlayerRequest } from './createSessionPlayerRequest';
 import { CreateSessionRequest } from './createSessionRequest';
 import { Gas } from './gas';
 import { Interaction } from './interaction';
-import { InteractionResponse } from './interactionResponse';
 import { InventoryResponse } from './inventoryResponse';
-import { JsonValue } from './jsonValue';
 import { Log } from './log';
 import { PKLocation } from './pKLocation';
 import { PKPolicy } from './pKPolicy';
@@ -131,7 +126,6 @@ import { PolicyRuleUpdateRequest } from './policyRuleUpdateRequest';
 import { PolicyRulesResponse } from './policyRulesResponse';
 import { PolicySchema } from './policySchema';
 import { PolicyUpdateRequest } from './policyUpdateRequest';
-import { PrismaJsonValue } from './prismaJsonValue';
 import { ProjectLogs } from './projectLogs';
 import { ProjectRequest } from './projectRequest';
 import { ProjectResponse } from './projectResponse';
@@ -193,9 +187,7 @@ let typeMap: {[index: string]: any} = {
     "CreateSessionRequest": CreateSessionRequest,
     "Gas": Gas,
     "Interaction": Interaction,
-    "InteractionResponse": InteractionResponse,
     "InventoryResponse": InventoryResponse,
-    "JsonValue": JsonValue,
     "Log": Log,
     "PickAccountResponseId": PickAccountResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
@@ -220,7 +212,6 @@ let typeMap: {[index: string]: any} = {
     "PolicyRuleUpdateRequest": PolicyRuleUpdateRequest,
     "PolicyRulesResponse": PolicyRulesResponse,
     "PolicyUpdateRequest": PolicyUpdateRequest,
-    "PrismaJsonValue": PrismaJsonValue,
     "ProjectLogs": ProjectLogs,
     "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
