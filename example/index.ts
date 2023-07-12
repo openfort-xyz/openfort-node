@@ -21,6 +21,9 @@ async function example() {
     };
     const newPlayer = await openfort.players.create(createPlayerRequest);
 
+    const policy = await openfort.policies.get({id: getEnvVariable("OPENFORT_POLICY")});
+    console.dir(policy);
+
     const createSessionRequest: CreatePlayerSessionRequest = {
         player_id: newPlayer.id,
         address: "0x9590Ed0C18190a310f4e93CAccc4CC17270bED40",
