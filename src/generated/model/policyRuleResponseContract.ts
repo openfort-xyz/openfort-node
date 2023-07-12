@@ -12,7 +12,6 @@
 
 import { RequestFile } from './models';
 import { ContractResponse } from './contractResponse';
-import { JsonValue } from './jsonValue';
 
 export class PolicyRuleResponseContract {
     'id': string;
@@ -21,7 +20,7 @@ export class PolicyRuleResponseContract {
     'name': string | null;
     'chain_id': number;
     'address': string;
-    'abi': JsonValue | null;
+    'abi': any | null;
     'public_verification': boolean;
 
     static discriminator: string | undefined = undefined;
@@ -60,7 +59,7 @@ export class PolicyRuleResponseContract {
         {
             "name": "abi",
             "baseName": "abi",
-            "type": "JsonValue"
+            "type": "any"
         },
         {
             "name": "public_verification",

@@ -24,6 +24,9 @@ async function example() {
     const policy = await openfort.policies.get({id: getEnvVariable("OPENFORT_POLICY")});
     console.dir(policy);
 
+    const contract = await openfort.contracts.get({id: getEnvVariable("OPENFORT_CONTRACT")});
+    console.dir(contract);
+
     const createSessionRequest: CreatePlayerSessionRequest = {
         player_id: newPlayer.id,
         address: "0x9590Ed0C18190a310f4e93CAccc4CC17270bED40",

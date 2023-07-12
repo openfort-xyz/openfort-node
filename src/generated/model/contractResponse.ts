@@ -11,7 +11,6 @@
  */
 
 import { RequestFile } from './models';
-import { JsonValue } from './jsonValue';
 
 export class ContractResponse {
     'id': string;
@@ -20,7 +19,7 @@ export class ContractResponse {
     'name': string | null;
     'chain_id': number;
     'address': string;
-    'abi': JsonValue | null;
+    'abi': any | null;
     'public_verification': boolean;
 
     static discriminator: string | undefined = undefined;
@@ -59,7 +58,7 @@ export class ContractResponse {
         {
             "name": "abi",
             "baseName": "abi",
-            "type": "JsonValue"
+            "type": "any"
         },
         {
             "name": "public_verification",

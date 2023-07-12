@@ -13,51 +13,63 @@
 import { RequestFile } from './models';
 
 export class Log {
-    'id': string;
-    'timestamp': string;
-    'event': string;
-    'request_body': any | null;
-    'status': number;
-    'response_time': number;
-    'response_data': any | null;
+    'blockNumber': number;
+    'blockHash': string;
+    'transactionIndex': number;
+    'removed': boolean;
+    'address': string;
+    'data': string;
+    'topics': Array<string>;
+    'transactionHash': string;
+    'logIndex': number;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "string"
-        },
-        {
-            "name": "event",
-            "baseName": "event",
-            "type": "string"
-        },
-        {
-            "name": "request_body",
-            "baseName": "request_body",
-            "type": "any"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
+            "name": "blockNumber",
+            "baseName": "blockNumber",
             "type": "number"
         },
         {
-            "name": "response_time",
-            "baseName": "response_time",
+            "name": "blockHash",
+            "baseName": "blockHash",
+            "type": "string"
+        },
+        {
+            "name": "transactionIndex",
+            "baseName": "transactionIndex",
             "type": "number"
         },
         {
-            "name": "response_data",
-            "baseName": "response_data",
-            "type": "any"
+            "name": "removed",
+            "baseName": "removed",
+            "type": "boolean"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string"
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "string"
+        },
+        {
+            "name": "topics",
+            "baseName": "topics",
+            "type": "Array<string>"
+        },
+        {
+            "name": "transactionHash",
+            "baseName": "transactionHash",
+            "type": "string"
+        },
+        {
+            "name": "logIndex",
+            "baseName": "logIndex",
+            "type": "number"
         }    ];
 
     static getAttributeTypeMap() {

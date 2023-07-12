@@ -1,4 +1,4 @@
-import {httpErrorHandler} from "./http-error-handler";
+import {httpErrorHandler} from "./httpErrorHandler";
 import {PlayersApi} from "../generated/api/playersApi";
 import {
     AccountResponse,
