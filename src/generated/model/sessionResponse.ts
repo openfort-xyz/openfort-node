@@ -11,7 +11,7 @@
  */
 
 import { RequestFile } from './models';
-import { SessionResponseTransactionIntents } from './sessionResponseTransactionIntents';
+import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class SessionResponse {
     'id': string;
@@ -25,7 +25,7 @@ export class SessionResponse {
     'whitelist'?: Array<string>;
     'limit'?: number;
     'next_action': object | null;
-    'transaction_intents': SessionResponseTransactionIntents | null;
+    'transaction_intents': Array<PolicyResponseTransactionIntentsInner> | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -88,7 +88,7 @@ export class SessionResponse {
         {
             "name": "transaction_intents",
             "baseName": "transaction_intents",
-            "type": "SessionResponseTransactionIntents"
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
         }    ];
 
     static getAttributeTypeMap() {

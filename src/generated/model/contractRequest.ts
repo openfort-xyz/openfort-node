@@ -11,13 +11,12 @@
  */
 
 import { RequestFile } from './models';
-import { PrismaJsonValue } from './prismaJsonValue';
 
 export class ContractRequest {
     'name': string;
     'chain_id': number;
     'address': string;
-    'abi'?: PrismaJsonValue | null;
+    'abi'?: any | null;
     'public_verification'?: boolean;
 
     static discriminator: string | undefined = undefined;
@@ -41,7 +40,7 @@ export class ContractRequest {
         {
             "name": "abi",
             "baseName": "abi",
-            "type": "PrismaJsonValue"
+            "type": "any"
         },
         {
             "name": "public_verification",

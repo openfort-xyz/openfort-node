@@ -1,4 +1,4 @@
-import {httpErrorHandler} from "./http-error-handler";
+import {httpErrorHandler} from "./httpErrorHandler";
 import {PolicyRulesApi} from "../generated/api/apis";
 import {
     GetPolicyRulesRequest,

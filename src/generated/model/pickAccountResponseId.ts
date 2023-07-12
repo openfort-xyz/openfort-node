@@ -13,17 +13,22 @@
 import { RequestFile } from './models';
 
 /**
-* From https://github.com/sindresorhus/type-fest/ Matches any valid JSON value.
+* From T, pick a set of properties whose keys are in the union K
 */
-export class JsonValue {
+export class PickAccountResponseId {
+    'id': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    ];
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        }    ];
 
     static getAttributeTypeMap() {
-        return JsonValue.attributeTypeMap;
+        return PickAccountResponseId.attributeTypeMap;
     }
 }
 

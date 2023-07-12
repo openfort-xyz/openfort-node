@@ -1,4 +1,4 @@
-import {httpErrorHandler} from "./http-error-handler";
+import {httpErrorHandler} from "./httpErrorHandler";
 import {ProjectsApi} from "../generated/api/projectsApi";
 import {UpdateProjectRequest, ProjectResponse, ProjectsResponse, ProjectRequest} from "../model";
 
