@@ -12,12 +12,14 @@
 
 import { RequestFile } from './models';
 import { Interaction } from './interaction';
+import { PickTransactionIntentResponseId } from './pickTransactionIntentResponseId';
 import { ResponseResponse } from './responseResponse';
+import { TransactionIntentResponse } from './transactionIntentResponse';
 import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from './transactionIntentResponsePolicy';
 
-export class TransactionIntentResponse {
+export class PolicyResponseTransactionIntentsInner {
     'id': string;
     'object': string;
     'created_at': Date;
@@ -102,7 +104,7 @@ export class TransactionIntentResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return TransactionIntentResponse.attributeTypeMap;
+        return PolicyResponseTransactionIntentsInner.attributeTypeMap;
     }
 }
 

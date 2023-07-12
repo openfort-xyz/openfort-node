@@ -11,7 +11,7 @@
  */
 
 import { RequestFile } from './models';
-import { PolicyResponseTransactionIntents } from './policyResponseTransactionIntents';
+import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class AccountResponse {
     'id': string;
@@ -21,7 +21,7 @@ export class AccountResponse {
     'deployed': boolean;
     'custodial': boolean;
     'chain_id': number;
-    'transaction_intents'?: PolicyResponseTransactionIntents;
+    'transaction_intents': Array<PolicyResponseTransactionIntentsInner>;
 
     static discriminator: string | undefined = undefined;
 
@@ -64,7 +64,7 @@ export class AccountResponse {
         {
             "name": "transaction_intents",
             "baseName": "transaction_intents",
-            "type": "PolicyResponseTransactionIntents"
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
         }    ];
 
     static getAttributeTypeMap() {

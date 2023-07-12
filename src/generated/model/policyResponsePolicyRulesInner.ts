@@ -11,17 +11,18 @@
  */
 
 import { RequestFile } from './models';
-import { ContractResponse } from './contractResponse';
+import { PickPolicyRuleResponseId } from './pickPolicyRuleResponseId';
+import { PolicyRuleResponse } from './policyRuleResponse';
+import { PolicyRuleResponseContract } from './policyRuleResponseContract';
+import { PolicySchema } from './policySchema';
 
-export class PolicyRuleResponseContract {
+export class PolicyResponsePolicyRulesInner {
     'id': string;
     'object': string;
     'created_at': Date;
-    'name': string | null;
-    'chain_id': number;
-    'address': string;
-    'abi': any | null;
-    'public_verification': boolean;
+    'type': PolicySchema;
+    'function_name': string | null;
+    'contract': PolicyRuleResponseContract | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -42,33 +43,25 @@ export class PolicyRuleResponseContract {
             "type": "Date"
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "type",
+            "baseName": "type",
+            "type": "PolicySchema"
+        },
+        {
+            "name": "function_name",
+            "baseName": "function_name",
             "type": "string"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
-        },
-        {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "any"
-        },
-        {
-            "name": "public_verification",
-            "baseName": "public_verification",
-            "type": "boolean"
+            "name": "contract",
+            "baseName": "contract",
+            "type": "PolicyRuleResponseContract"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleResponseContract.attributeTypeMap;
+        return PolicyResponsePolicyRulesInner.attributeTypeMap;
     }
 }
 
+export namespace PolicyResponsePolicyRulesInner {
+}

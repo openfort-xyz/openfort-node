@@ -11,9 +11,10 @@
  */
 
 import { RequestFile } from './models';
+import { PickPlayerResponseId } from './pickPlayerResponseId';
 import { PlayerResponse } from './playerResponse';
-import { PlayerResponseAccounts } from './playerResponseAccounts';
-import { PolicyResponseTransactionIntents } from './policyResponseTransactionIntents';
+import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
+import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 
 export class TransactionIntentResponsePlayer {
     'id': string;
@@ -23,8 +24,8 @@ export class TransactionIntentResponsePlayer {
     'email': string | null;
     'description': string | null;
     'metadata': string;
-    'transaction_intents'?: PolicyResponseTransactionIntents;
-    'accounts'?: PlayerResponseAccounts;
+    'transaction_intents'?: Array<PolicyResponseTransactionIntentsInner>;
+    'accounts'?: Array<TransactionIntentResponseAccount>;
 
     static discriminator: string | undefined = undefined;
 
@@ -67,12 +68,12 @@ export class TransactionIntentResponsePlayer {
         {
             "name": "transaction_intents",
             "baseName": "transaction_intents",
-            "type": "PolicyResponseTransactionIntents"
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
         },
         {
             "name": "accounts",
             "baseName": "accounts",
-            "type": "PlayerResponseAccounts"
+            "type": "Array<TransactionIntentResponseAccount>"
         }    ];
 
     static getAttributeTypeMap() {

@@ -1,4 +1,4 @@
-import {httpErrorHandler} from "./http-error-handler";
+import {httpErrorHandler} from "./httpErrorHandler";
 import {ContractsApi} from "../generated/api/contractsApi";
 import {
     GetContractRequest,
