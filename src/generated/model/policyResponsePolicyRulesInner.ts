@@ -11,17 +11,18 @@
  */
 
 import { RequestFile } from './models';
-import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
+import { PickPolicyRuleResponseId } from './pickPolicyRuleResponseId';
+import { PolicyRuleResponse } from './policyRuleResponse';
+import { PolicyRuleResponseContract } from './policyRuleResponseContract';
+import { PolicySchema } from './policySchema';
 
-export class AccountResponse {
+export class PolicyResponsePolicyRulesInner {
     'id': string;
     'object': string;
     'created_at': Date;
-    'address': string;
-    'deployed': boolean;
-    'custodial': boolean;
-    'chain_id': number;
-    'transaction_intents': Array<PolicyResponseTransactionIntentsInner>;
+    'type': PolicySchema;
+    'function_name': string | null;
+    'contract': PolicyRuleResponseContract | null;
 
     static discriminator: string | undefined = undefined;
 
@@ -42,33 +43,25 @@ export class AccountResponse {
             "type": "Date"
         },
         {
-            "name": "address",
-            "baseName": "address",
+            "name": "type",
+            "baseName": "type",
+            "type": "PolicySchema"
+        },
+        {
+            "name": "function_name",
+            "baseName": "function_name",
             "type": "string"
         },
         {
-            "name": "deployed",
-            "baseName": "deployed",
-            "type": "boolean"
-        },
-        {
-            "name": "custodial",
-            "baseName": "custodial",
-            "type": "boolean"
-        },
-        {
-            "name": "chain_id",
-            "baseName": "chain_id",
-            "type": "number"
-        },
-        {
-            "name": "transaction_intents",
-            "baseName": "transaction_intents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
+            "name": "contract",
+            "baseName": "contract",
+            "type": "PolicyRuleResponseContract"
         }    ];
 
     static getAttributeTypeMap() {
-        return AccountResponse.attributeTypeMap;
+        return PolicyResponsePolicyRulesInner.attributeTypeMap;
     }
 }
 
+export namespace PolicyResponsePolicyRulesInner {
+}

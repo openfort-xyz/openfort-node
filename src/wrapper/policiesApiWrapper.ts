@@ -15,6 +15,7 @@ import {
     GetPolicyDailyGasUsageRequest,
     UpdatePolicyAllowFunctionRequest,
     GetPolicyTotalGasUsageRequest,
+    PolicyRequest,
 } from "../model";
 
 export class PoliciesApiWrapper {
@@ -23,6 +24,17 @@ export class PoliciesApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new PoliciesApi(basePath);
         this._api.accessToken = accessToken;
+    }
+
+
+    /**
+     * Creates allow function
+     * @param req parameters to create
+     */
+    @httpErrorHandler()
+    public async createPolicy(req: PolicyRequest): Promise<PolicyResponse> {
+        const response = await this._api.createPolicy(req);
+        return response.body;
     }
 
     /**

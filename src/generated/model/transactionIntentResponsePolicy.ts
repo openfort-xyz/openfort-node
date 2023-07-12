@@ -11,9 +11,10 @@
  */
 
 import { RequestFile } from './models';
+import { PickPolicyResponseId } from './pickPolicyResponseId';
 import { PolicyResponse } from './policyResponse';
-import { PolicyResponsePolicyRules } from './policyResponsePolicyRules';
-import { PolicyResponseTransactionIntents } from './policyResponseTransactionIntents';
+import { PolicyResponsePolicyRulesInner } from './policyResponsePolicyRulesInner';
+import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class TransactionIntentResponsePolicy {
     'id': string;
@@ -22,8 +23,8 @@ export class TransactionIntentResponsePolicy {
     'name': string | null;
     'chain_id': number;
     'strategy': any | null;
-    'transaction_intents'?: PolicyResponseTransactionIntents;
-    'policy_rules'?: PolicyResponsePolicyRules;
+    'transaction_intents'?: Array<PolicyResponseTransactionIntentsInner>;
+    'policy_rules'?: Array<PolicyResponsePolicyRulesInner>;
 
     static discriminator: string | undefined = undefined;
 
@@ -61,12 +62,12 @@ export class TransactionIntentResponsePolicy {
         {
             "name": "transaction_intents",
             "baseName": "transaction_intents",
-            "type": "PolicyResponseTransactionIntents"
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
         },
         {
             "name": "policy_rules",
             "baseName": "policy_rules",
-            "type": "PolicyResponsePolicyRules"
+            "type": "Array<PolicyResponsePolicyRulesInner>"
         }    ];
 
     static getAttributeTypeMap() {

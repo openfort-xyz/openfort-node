@@ -11,17 +11,24 @@
  */
 
 import { RequestFile } from './models';
-import { TransactionIntentResponse } from './transactionIntentResponse';
 
-export class SessionResponseTransactionIntents {
+/**
+* From T, pick a set of properties whose keys are in the union K
+*/
+export class PickPolicyRuleResponseId {
+    'id': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    ];
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        }    ];
 
     static getAttributeTypeMap() {
-        return SessionResponseTransactionIntents.attributeTypeMap;
+        return PickPolicyRuleResponseId.attributeTypeMap;
     }
 }
 
