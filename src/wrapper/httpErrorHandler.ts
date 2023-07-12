@@ -2,11 +2,13 @@ import {HttpError} from "../generated/api/apis";
 
 function parseAndPrepareHttpError<T>(error: T): Error | T {
     if (error instanceof HttpError) {
-        if (error.body?.error?.message) {
-            throw new Error(error.body?.error?.message);
+        const bareError = error.body?.error ?? error.body;
+
+        if (bareError?.details) {
+            throw new ValidationError(bareError.message, bareError.details);
         }
-        if (error.body?.message) {
-            throw new ValidationError(error.body?.message, error.body?.details);
+        if (bareError?.message) {
+            throw new Error(bareError.message);
         }
     }
 
