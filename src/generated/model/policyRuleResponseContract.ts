@@ -16,7 +16,7 @@ import { ContractResponse } from './contractResponse';
 export class PolicyRuleResponseContract {
     'id': string;
     'object': string;
-    'created_at': Date;
+    'created_at': number;
     'name': string | null;
     'chain_id': number;
     'address': string;
@@ -39,7 +39,7 @@ export class PolicyRuleResponseContract {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "name",

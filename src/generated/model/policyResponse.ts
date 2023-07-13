@@ -17,7 +17,7 @@ import { PolicyResponseTransactionIntentsInner } from './policyResponseTransacti
 export class PolicyResponse {
     'id': string;
     'object': string;
-    'created_at': Date;
+    'created_at': number;
     'name': string | null;
     'chain_id': number;
     'strategy': any | null;
@@ -40,7 +40,7 @@ export class PolicyResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "name",

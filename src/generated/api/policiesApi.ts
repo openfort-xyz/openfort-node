@@ -25,6 +25,7 @@ import { PolicyRuleResponse } from '../model/policyRuleResponse';
 import { PolicyRuleUpdateRequest } from '../model/policyRuleUpdateRequest';
 import { PolicyRulesResponse } from '../model/policyRulesResponse';
 import { PolicyUpdateRequest } from '../model/policyUpdateRequest';
+import { SortOrder } from '../model/sortOrder';
 import { SumGas } from '../model/sumGas';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -327,8 +328,9 @@ export class PoliciesApi {
      * @param limit 
      * @param expand 
      * @param skip 
+     * @param order 
      */
-    public async getPolicies (limit?: number, expand?: Array<string>, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
+    public async getPolicies (limit?: number, expand?: Array<string>, skip?: number, order?: SortOrder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -351,6 +353,10 @@ export class PoliciesApi {
 
         if (skip !== undefined) {
             localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

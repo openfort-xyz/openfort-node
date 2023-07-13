@@ -16,7 +16,7 @@ import { PolicyResponseTransactionIntentsInner } from './policyResponseTransacti
 export class AccountResponse {
     'id': string;
     'object': string;
-    'created_at': Date;
+    'created_at': number;
     'address': string;
     'deployed': boolean;
     'custodial': boolean;
@@ -39,7 +39,7 @@ export class AccountResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "address",
