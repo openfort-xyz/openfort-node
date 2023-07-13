@@ -17,7 +17,7 @@ import { PolicySchema } from './policySchema';
 export class PolicyRuleResponse {
     'id': string;
     'object': string;
-    'created_at': Date;
+    'created_at': number;
     'type': PolicySchema;
     'function_name': string | null;
     'contract': PolicyRuleResponseContract | null;
@@ -38,7 +38,7 @@ export class PolicyRuleResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "type",

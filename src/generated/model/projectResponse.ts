@@ -17,8 +17,8 @@ import { PKPolicy } from './pKPolicy';
 export class ProjectResponse {
     'id': string;
     'object': string;
-    'created_at': Date;
-    'updated_at': Date;
+    'created_at': number;
+    'updated_at': number;
     'name': string;
     'pk_policy': PKPolicy;
     'apikeys'?: Array<ApiKeyResponse>;
@@ -39,12 +39,12 @@ export class ProjectResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "updated_at",
             "baseName": "updated_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "name",

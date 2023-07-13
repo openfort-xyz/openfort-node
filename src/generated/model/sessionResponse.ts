@@ -16,8 +16,8 @@ import { PolicyResponseTransactionIntentsInner } from './policyResponseTransacti
 export class SessionResponse {
     'id': string;
     'object': string;
-    'created_at': Date;
-    'updated_at': Date;
+    'created_at': number;
+    'updated_at': number;
     'is_active'?: boolean;
     'address': string;
     'valid_after'?: string;
@@ -43,12 +43,12 @@ export class SessionResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "updated_at",
             "baseName": "updated_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "is_active",

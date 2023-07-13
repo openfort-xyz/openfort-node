@@ -17,7 +17,7 @@ import { TransactionIntentResponseAccount } from './transactionIntentResponseAcc
 export class PlayerResponse {
     'id': string;
     'object': string;
-    'created_at': Date;
+    'created_at': number;
     'name': string | null;
     'email': string | null;
     'description': string | null;
@@ -41,7 +41,7 @@ export class PlayerResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "name",
