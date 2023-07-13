@@ -1,3 +1,4 @@
+export * from "../generated/model/models";
 export * from "./createPlayerAccountRequest";
 export * from "./createPlayerSessionRequest";
 export * from "./createPolicyAllowFunctionRequest";
@@ -29,4 +30,4 @@ export * from "./updatePolicyAllowFunctionRequest";
 export * from "./updatePolicyRulesRequest";
 export * from "./updateProjectRequest";
 export * from "./updateTransactionIntentRequest";
-export * from "../generated/model/models";
+export {UpdatePolicyRequest} from "./updatePolicyRequest";
