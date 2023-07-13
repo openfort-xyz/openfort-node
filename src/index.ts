@@ -76,5 +76,4 @@ export default class Openfort {
     }
 }
 
-export * from "./generated/model/models";
 export * from "./model";

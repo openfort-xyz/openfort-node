@@ -15,17 +15,18 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { CreatePolicyRequest } from '../model/createPolicyRequest';
 import { Gas } from '../model/gas';
 import { PoliciesResponse } from '../model/policiesResponse';
 import { PolicyAllowFunctionRequest } from '../model/policyAllowFunctionRequest';
 import { PolicyDeleteResponse } from '../model/policyDeleteResponse';
-import { PolicyRequest } from '../model/policyRequest';
 import { PolicyResponse } from '../model/policyResponse';
 import { PolicyRuleResponse } from '../model/policyRuleResponse';
 import { PolicyRuleUpdateRequest } from '../model/policyRuleUpdateRequest';
 import { PolicyRulesResponse } from '../model/policyRulesResponse';
-import { PolicyUpdateRequest } from '../model/policyUpdateRequest';
+import { SortOrder } from '../model/sortOrder';
 import { SumGas } from '../model/sumGas';
+import { UpdatePolicyRequest } from '../model/updatePolicyRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -104,9 +105,9 @@ export class PoliciesApi {
 
     /**
      * Creates a policy object.
-     * @param policyRequest 
+     * @param createPolicyRequest 
      */
-    public async createPolicy (policyRequest: PolicyRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
+    public async createPolicy (createPolicyRequest: CreatePolicyRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -119,9 +120,9 @@ export class PoliciesApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'policyRequest' is not null or undefined
-        if (policyRequest === null || policyRequest === undefined) {
-            throw new Error('Required parameter policyRequest was null or undefined when calling createPolicy.');
+        // verify required parameter 'createPolicyRequest' is not null or undefined
+        if (createPolicyRequest === null || createPolicyRequest === undefined) {
+            throw new Error('Required parameter createPolicyRequest was null or undefined when calling createPolicy.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -135,7 +136,7 @@ export class PoliciesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(policyRequest, "PolicyRequest")
+            body: ObjectSerializer.serialize(createPolicyRequest, "CreatePolicyRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -327,8 +328,9 @@ export class PoliciesApi {
      * @param limit 
      * @param expand 
      * @param skip 
+     * @param order 
      */
-    public async getPolicies (limit?: number, expand?: Array<string>, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
+    public async getPolicies (limit?: number, expand?: Array<string>, skip?: number, order?: SortOrder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -351,6 +353,10 @@ export class PoliciesApi {
 
         if (skip !== undefined) {
             localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -712,9 +718,9 @@ export class PoliciesApi {
     /**
      * Updates a policy object.
      * @param id 
-     * @param policyUpdateRequest 
+     * @param updatePolicyRequest 
      */
-    public async updatePolicy (id: string, policyUpdateRequest: PolicyUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
+    public async updatePolicy (id: string, updatePolicyRequest: UpdatePolicyRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -733,9 +739,9 @@ export class PoliciesApi {
             throw new Error('Required parameter id was null or undefined when calling updatePolicy.');
         }
 
-        // verify required parameter 'policyUpdateRequest' is not null or undefined
-        if (policyUpdateRequest === null || policyUpdateRequest === undefined) {
-            throw new Error('Required parameter policyUpdateRequest was null or undefined when calling updatePolicy.');
+        // verify required parameter 'updatePolicyRequest' is not null or undefined
+        if (updatePolicyRequest === null || updatePolicyRequest === undefined) {
+            throw new Error('Required parameter updatePolicyRequest was null or undefined when calling updatePolicy.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -749,7 +755,7 @@ export class PoliciesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(policyUpdateRequest, "PolicyUpdateRequest")
+            body: ObjectSerializer.serialize(updatePolicyRequest, "UpdatePolicyRequest")
         };
 
         let authenticationPromise = Promise.resolve();

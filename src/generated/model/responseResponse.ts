@@ -14,7 +14,7 @@ import { RequestFile } from './models';
 import { Log } from './log';
 
 export class ResponseResponse {
-    'created_at': Date;
+    'created_at': number;
     'block_number': number | null;
     'transaction_hash': string | null;
     'gas_used'?: number | null;
@@ -29,7 +29,7 @@ export class ResponseResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "block_number",

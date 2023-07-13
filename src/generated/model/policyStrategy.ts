@@ -11,24 +11,36 @@
  */
 
 import { RequestFile } from './models';
+import { SponsorSchema } from './sponsorSchema';
 
-export class SignTextRequest {
-    /**
-    * Text to sign
-    */
-    'text': string;
+export class PolicyStrategy {
+    'sponsor_schema': SponsorSchema;
+    'token_contract': string | null;
+    'token_contract_amount': string | null;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "text",
-            "baseName": "text",
+            "name": "sponsor_schema",
+            "baseName": "sponsor_schema",
+            "type": "SponsorSchema"
+        },
+        {
+            "name": "token_contract",
+            "baseName": "token_contract",
+            "type": "string"
+        },
+        {
+            "name": "token_contract_amount",
+            "baseName": "token_contract_amount",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return SignTextRequest.attributeTypeMap;
+        return PolicyStrategy.attributeTypeMap;
     }
 }
 
+export namespace PolicyStrategy {
+}

@@ -15,14 +15,15 @@ import { PickPolicyResponseId } from './pickPolicyResponseId';
 import { PolicyResponse } from './policyResponse';
 import { PolicyResponsePolicyRulesInner } from './policyResponsePolicyRulesInner';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
+import { PolicyStrategy } from './policyStrategy';
 
 export class TransactionIntentResponsePolicy {
     'id': string;
     'object': string;
-    'created_at': Date;
+    'created_at': number;
     'name': string | null;
     'chain_id': number;
-    'strategy': any | null;
+    'strategy': PolicyStrategy;
     'transaction_intents'?: Array<PolicyResponseTransactionIntentsInner>;
     'policy_rules'?: Array<PolicyResponsePolicyRulesInner>;
 
@@ -42,7 +43,7 @@ export class TransactionIntentResponsePolicy {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "name",
@@ -57,7 +58,7 @@ export class TransactionIntentResponsePolicy {
         {
             "name": "strategy",
             "baseName": "strategy",
-            "type": "any"
+            "type": "PolicyStrategy"
         },
         {
             "name": "transaction_intents",

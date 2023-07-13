@@ -12,8 +12,10 @@ export * from './contractRequest';
 export * from './contractResponse';
 export * from './contractsResponse';
 export * from './createPlayerRequest';
+export * from './createPolicyRequest';
 export * from './createSessionPlayerRequest';
 export * from './createSessionRequest';
+export * from './domainData';
 export * from './gas';
 export * from './interaction';
 export * from './inventoryResponse';
@@ -32,7 +34,6 @@ export * from './playersResponse';
 export * from './policiesResponse';
 export * from './policyAllowFunctionRequest';
 export * from './policyDeleteResponse';
-export * from './policyRequest';
 export * from './policyResponse';
 export * from './policyResponsePolicyRulesInner';
 export * from './policyResponseTransactionIntentsInner';
@@ -43,7 +44,7 @@ export * from './policyRuleResponseContract';
 export * from './policyRuleUpdateRequest';
 export * from './policyRulesResponse';
 export * from './policySchema';
-export * from './policyUpdateRequest';
+export * from './policyStrategy';
 export * from './projectLogs';
 export * from './projectRequest';
 export * from './projectResponse';
@@ -55,11 +56,9 @@ export * from './sessionResponse';
 export * from './sessionsResponse';
 export * from './signPayloadRequest';
 export * from './signPayloadResponse';
-export * from './signTextRequest';
-export * from './signTextResponse';
 export * from './signatureRequest';
 export * from './sortOrder';
-export * from './strategy';
+export * from './sponsorSchema';
 export * from './sumGas';
 export * from './transactionIntentRequest';
 export * from './transactionIntentResponse';
@@ -68,6 +67,8 @@ export * from './transactionIntentResponsePlayer';
 export * from './transactionIntentResponsePolicy';
 export * from './transactionIntentsResponse';
 export * from './transferOwnershipRequest';
+export * from './typedDataField';
+export * from './updatePolicyRequest';
 
 import * as fs from 'fs';
 
@@ -94,8 +95,10 @@ import { ContractRequest } from './contractRequest';
 import { ContractResponse } from './contractResponse';
 import { ContractsResponse } from './contractsResponse';
 import { CreatePlayerRequest } from './createPlayerRequest';
+import { CreatePolicyRequest } from './createPolicyRequest';
 import { CreateSessionPlayerRequest } from './createSessionPlayerRequest';
 import { CreateSessionRequest } from './createSessionRequest';
+import { DomainData } from './domainData';
 import { Gas } from './gas';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
@@ -114,7 +117,6 @@ import { PlayersResponse } from './playersResponse';
 import { PoliciesResponse } from './policiesResponse';
 import { PolicyAllowFunctionRequest } from './policyAllowFunctionRequest';
 import { PolicyDeleteResponse } from './policyDeleteResponse';
-import { PolicyRequest } from './policyRequest';
 import { PolicyResponse } from './policyResponse';
 import { PolicyResponsePolicyRulesInner } from './policyResponsePolicyRulesInner';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
@@ -125,7 +127,7 @@ import { PolicyRuleResponseContract } from './policyRuleResponseContract';
 import { PolicyRuleUpdateRequest } from './policyRuleUpdateRequest';
 import { PolicyRulesResponse } from './policyRulesResponse';
 import { PolicySchema } from './policySchema';
-import { PolicyUpdateRequest } from './policyUpdateRequest';
+import { PolicyStrategy } from './policyStrategy';
 import { ProjectLogs } from './projectLogs';
 import { ProjectRequest } from './projectRequest';
 import { ProjectResponse } from './projectResponse';
@@ -137,11 +139,9 @@ import { SessionResponse } from './sessionResponse';
 import { SessionsResponse } from './sessionsResponse';
 import { SignPayloadRequest } from './signPayloadRequest';
 import { SignPayloadResponse } from './signPayloadResponse';
-import { SignTextRequest } from './signTextRequest';
-import { SignTextResponse } from './signTextResponse';
 import { SignatureRequest } from './signatureRequest';
 import { SortOrder } from './sortOrder';
-import { Strategy } from './strategy';
+import { SponsorSchema } from './sponsorSchema';
 import { SumGas } from './sumGas';
 import { TransactionIntentRequest } from './transactionIntentRequest';
 import { TransactionIntentResponse } from './transactionIntentResponse';
@@ -150,6 +150,8 @@ import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlay
 import { TransactionIntentResponsePolicy } from './transactionIntentResponsePolicy';
 import { TransactionIntentsResponse } from './transactionIntentsResponse';
 import { TransferOwnershipRequest } from './transferOwnershipRequest';
+import { TypedDataField } from './typedDataField';
+import { UpdatePolicyRequest } from './updatePolicyRequest';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -169,6 +171,7 @@ let enumsMap: {[index: string]: any} = {
         "PKPolicy": PKPolicy,
         "PolicySchema": PolicySchema,
         "SortOrder": SortOrder,
+        "SponsorSchema": SponsorSchema,
 }
 
 let typeMap: {[index: string]: any} = {
@@ -183,8 +186,10 @@ let typeMap: {[index: string]: any} = {
     "ContractResponse": ContractResponse,
     "ContractsResponse": ContractsResponse,
     "CreatePlayerRequest": CreatePlayerRequest,
+    "CreatePolicyRequest": CreatePolicyRequest,
     "CreateSessionPlayerRequest": CreateSessionPlayerRequest,
     "CreateSessionRequest": CreateSessionRequest,
+    "DomainData": DomainData,
     "Gas": Gas,
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
@@ -201,7 +206,6 @@ let typeMap: {[index: string]: any} = {
     "PoliciesResponse": PoliciesResponse,
     "PolicyAllowFunctionRequest": PolicyAllowFunctionRequest,
     "PolicyDeleteResponse": PolicyDeleteResponse,
-    "PolicyRequest": PolicyRequest,
     "PolicyResponse": PolicyResponse,
     "PolicyResponsePolicyRulesInner": PolicyResponsePolicyRulesInner,
     "PolicyResponseTransactionIntentsInner": PolicyResponseTransactionIntentsInner,
@@ -211,7 +215,7 @@ let typeMap: {[index: string]: any} = {
     "PolicyRuleResponseContract": PolicyRuleResponseContract,
     "PolicyRuleUpdateRequest": PolicyRuleUpdateRequest,
     "PolicyRulesResponse": PolicyRulesResponse,
-    "PolicyUpdateRequest": PolicyUpdateRequest,
+    "PolicyStrategy": PolicyStrategy,
     "ProjectLogs": ProjectLogs,
     "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
@@ -223,10 +227,7 @@ let typeMap: {[index: string]: any} = {
     "SessionsResponse": SessionsResponse,
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
-    "SignTextRequest": SignTextRequest,
-    "SignTextResponse": SignTextResponse,
     "SignatureRequest": SignatureRequest,
-    "Strategy": Strategy,
     "SumGas": SumGas,
     "TransactionIntentRequest": TransactionIntentRequest,
     "TransactionIntentResponse": TransactionIntentResponse,
@@ -235,6 +236,8 @@ let typeMap: {[index: string]: any} = {
     "TransactionIntentResponsePolicy": TransactionIntentResponsePolicy,
     "TransactionIntentsResponse": TransactionIntentsResponse,
     "TransferOwnershipRequest": TransferOwnershipRequest,
+    "TypedDataField": TypedDataField,
+    "UpdatePolicyRequest": UpdatePolicyRequest,
 }
 
 export class ObjectSerializer {

@@ -22,8 +22,8 @@ import { TransactionIntentResponsePolicy } from './transactionIntentResponsePoli
 export class PolicyResponseTransactionIntentsInner {
     'id': string;
     'object': string;
-    'created_at': Date;
-    'updated_at': Date;
+    'created_at': number;
+    'updated_at': number;
     'chain_id': number;
     'user_operation_hash': string | null;
     'user_operation'?: any | null;
@@ -50,12 +50,12 @@ export class PolicyResponseTransactionIntentsInner {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "updated_at",
             "baseName": "updated_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "chain_id",
