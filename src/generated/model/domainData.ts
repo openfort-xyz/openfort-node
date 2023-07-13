@@ -12,50 +12,38 @@
 
 import { RequestFile } from './models';
 
-export class SignTextResponse {
-    'object': string;
-    'account': string;
-    'address': string;
-    'text': string;
-    'digest': string;
-    'signature': string;
+export class DomainData {
+    'chainId': number;
+    'name'?: string;
+    'version'?: string;
+    'verifyingContract'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "object",
-            "baseName": "object",
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string"
         },
         {
-            "name": "account",
-            "baseName": "account",
+            "name": "version",
+            "baseName": "version",
             "type": "string"
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
-        },
-        {
-            "name": "text",
-            "baseName": "text",
-            "type": "string"
-        },
-        {
-            "name": "digest",
-            "baseName": "digest",
-            "type": "string"
-        },
-        {
-            "name": "signature",
-            "baseName": "signature",
+            "name": "verifyingContract",
+            "baseName": "verifyingContract",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return SignTextResponse.attributeTypeMap;
+        return DomainData.attributeTypeMap;
     }
 }
 

@@ -16,7 +16,7 @@ export class SignPayloadResponse {
     'object': string;
     'account': string;
     'address': string;
-    'payload': string;
+    'hash': string;
     'signature': string;
 
     static discriminator: string | undefined = undefined;
@@ -38,8 +38,8 @@ export class SignPayloadResponse {
             "type": "string"
         },
         {
-            "name": "payload",
-            "baseName": "payload",
+            "name": "hash",
+            "baseName": "hash",
             "type": "string"
         },
         {

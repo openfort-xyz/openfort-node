@@ -12,32 +12,26 @@
 
 import { RequestFile } from './models';
 
-export class Strategy {
-    'sponsor_schema': string;
-    'token_contract': string | null;
-    'token_contract_amount': string | null;
+export class TypedDataField {
+    'name': string;
+    'type': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "sponsor_schema",
-            "baseName": "sponsor_schema",
+            "name": "name",
+            "baseName": "name",
             "type": "string"
         },
         {
-            "name": "token_contract",
-            "baseName": "token_contract",
-            "type": "string"
-        },
-        {
-            "name": "token_contract_amount",
-            "baseName": "token_contract_amount",
+            "name": "type",
+            "baseName": "type",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return Strategy.attributeTypeMap;
+        return TypedDataField.attributeTypeMap;
     }
 }
 

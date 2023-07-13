@@ -13,6 +13,7 @@
 import { RequestFile } from './models';
 import { PolicyResponsePolicyRulesInner } from './policyResponsePolicyRulesInner';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
+import { PolicyStrategy } from './policyStrategy';
 
 export class PolicyResponse {
     'id': string;
@@ -20,7 +21,7 @@ export class PolicyResponse {
     'created_at': number;
     'name': string | null;
     'chain_id': number;
-    'strategy': any | null;
+    'strategy': PolicyStrategy;
     'transaction_intents'?: Array<PolicyResponseTransactionIntentsInner>;
     'policy_rules'?: Array<PolicyResponsePolicyRulesInner>;
 
@@ -55,7 +56,7 @@ export class PolicyResponse {
         {
             "name": "strategy",
             "baseName": "strategy",
-            "type": "any"
+            "type": "PolicyStrategy"
         },
         {
             "name": "transaction_intents",
