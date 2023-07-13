@@ -11,12 +11,12 @@
  */
 
 import { RequestFile } from './models';
-import { Strategy } from './strategy';
+import { PolicyStrategy } from './policyStrategy';
 
-export class PolicyUpdateRequest {
-    'name'?: string;
-    'chain_id'?: number;
-    'strategy'?: Strategy;
+export class CreatePolicyRequest {
+    'name': string;
+    'chain_id': number;
+    'strategy': PolicyStrategy;
 
     static discriminator: string | undefined = undefined;
 
@@ -34,11 +34,11 @@ export class PolicyUpdateRequest {
         {
             "name": "strategy",
             "baseName": "strategy",
-            "type": "Strategy"
+            "type": "PolicyStrategy"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyUpdateRequest.attributeTypeMap;
+        return CreatePolicyRequest.attributeTypeMap;
     }
 }
 

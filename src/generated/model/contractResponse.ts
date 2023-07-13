@@ -15,7 +15,7 @@ import { RequestFile } from './models';
 export class ContractResponse {
     'id': string;
     'object': string;
-    'created_at': Date;
+    'created_at': number;
     'name': string | null;
     'chain_id': number;
     'address': string;
@@ -38,7 +38,7 @@ export class ContractResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "name",

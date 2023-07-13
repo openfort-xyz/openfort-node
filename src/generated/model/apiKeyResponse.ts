@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export class ApiKeyResponse {
-    'created_at': Date;
+    'created_at': number;
     'token': string;
     'name': string;
     'livemode': boolean;
@@ -24,7 +24,7 @@ export class ApiKeyResponse {
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date"
+            "type": "number"
         },
         {
             "name": "token",
