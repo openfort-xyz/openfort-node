@@ -11,36 +11,27 @@
  */
 
 import { RequestFile } from './models';
-import { SponsorSchema } from './sponsorSchema';
 
-export class PolicyStrategy {
-    'sponsor_schema': SponsorSchema;
-    'token_contract'?: string;
-    'token_contract_amount'?: string;
+export class NextActionPayload {
+    'user_op'?: any | null;
+    'user_op_hash'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "sponsor_schema",
-            "baseName": "sponsor_schema",
-            "type": "SponsorSchema"
+            "name": "user_op",
+            "baseName": "user_op",
+            "type": "any"
         },
         {
-            "name": "token_contract",
-            "baseName": "token_contract",
-            "type": "string"
-        },
-        {
-            "name": "token_contract_amount",
-            "baseName": "token_contract_amount",
+            "name": "user_op_hash",
+            "baseName": "user_op_hash",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyStrategy.attributeTypeMap;
+        return NextActionPayload.attributeTypeMap;
     }
 }
 
-export namespace PolicyStrategy {
-}

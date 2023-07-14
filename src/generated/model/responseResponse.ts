@@ -15,12 +15,12 @@ import { Log } from './log';
 
 export class ResponseResponse {
     'created_at': number;
-    'block_number': number | null;
-    'transaction_hash': string | null;
-    'gas_used'?: number | null;
-    'status'?: number | null;
-    'logs'?: Array<Log> | null;
-    'to'?: string | null;
+    'block_number'?: number;
+    'transaction_hash'?: string;
+    'gas_used'?: number;
+    'status'?: number;
+    'logs'?: Array<Log>;
+    'to'?: string;
     'error'?: any | null;
 
     static discriminator: string | undefined = undefined;

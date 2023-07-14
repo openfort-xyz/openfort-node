@@ -13,8 +13,8 @@
 import { RequestFile } from './models';
 
 export class Interaction {
-    'contract': string | null;
-    'value'?: string | null;
+    'contract'?: string;
+    'value'?: string;
     'function_name': string;
     'function_args': Array<any>;
 
