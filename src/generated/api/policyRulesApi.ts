@@ -15,10 +15,11 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { CreatePolicyRuleRequest } from '../model/createPolicyRuleRequest';
 import { PolicyRuleDeleteResponse } from '../model/policyRuleDeleteResponse';
-import { PolicyRuleRequest } from '../model/policyRuleRequest';
 import { PolicyRuleResponse } from '../model/policyRuleResponse';
 import { PolicyRulesResponse } from '../model/policyRulesResponse';
+import { UpdatePolicyRuleRequest } from '../model/updatePolicyRuleRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -97,9 +98,9 @@ export class PolicyRulesApi {
 
     /**
      * Creates an allow function object.
-     * @param policyRuleRequest 
+     * @param createPolicyRuleRequest 
      */
-    public async createPolicyRules (policyRuleRequest: PolicyRuleRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
+    public async createPolicyRules (createPolicyRuleRequest: CreatePolicyRuleRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -112,9 +113,9 @@ export class PolicyRulesApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'policyRuleRequest' is not null or undefined
-        if (policyRuleRequest === null || policyRuleRequest === undefined) {
-            throw new Error('Required parameter policyRuleRequest was null or undefined when calling createPolicyRules.');
+        // verify required parameter 'createPolicyRuleRequest' is not null or undefined
+        if (createPolicyRuleRequest === null || createPolicyRuleRequest === undefined) {
+            throw new Error('Required parameter createPolicyRuleRequest was null or undefined when calling createPolicyRules.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -128,7 +129,7 @@ export class PolicyRulesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(policyRuleRequest, "PolicyRuleRequest")
+            body: ObjectSerializer.serialize(createPolicyRuleRequest, "CreatePolicyRuleRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -314,9 +315,9 @@ export class PolicyRulesApi {
     /**
      * Updates an allow functions object.
      * @param id Specifies the unique allow function ID.
-     * @param policyRuleRequest 
+     * @param updatePolicyRuleRequest 
      */
-    public async updatePolicyRules (id: string, policyRuleRequest: PolicyRuleRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
+    public async updatePolicyRules (id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -335,9 +336,9 @@ export class PolicyRulesApi {
             throw new Error('Required parameter id was null or undefined when calling updatePolicyRules.');
         }
 
-        // verify required parameter 'policyRuleRequest' is not null or undefined
-        if (policyRuleRequest === null || policyRuleRequest === undefined) {
-            throw new Error('Required parameter policyRuleRequest was null or undefined when calling updatePolicyRules.');
+        // verify required parameter 'updatePolicyRuleRequest' is not null or undefined
+        if (updatePolicyRuleRequest === null || updatePolicyRuleRequest === undefined) {
+            throw new Error('Required parameter updatePolicyRuleRequest was null or undefined when calling updatePolicyRules.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -351,7 +352,7 @@ export class PolicyRulesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(policyRuleRequest, "PolicyRuleRequest")
+            body: ObjectSerializer.serialize(updatePolicyRuleRequest, "UpdatePolicyRuleRequest")
         };
 
         let authenticationPromise = Promise.resolve();

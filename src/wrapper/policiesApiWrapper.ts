@@ -8,7 +8,6 @@ import {
     PolicyRuleResponse,
     PolicyRulesResponse,
     SumGas,
-    CreatePolicyAllowFunctionRequest,
     ListPoliciesRequest,
     GetPolicyRequest,
     GetAllowFunctionsRequest,
@@ -17,7 +16,9 @@ import {
     GetPolicyTotalGasUsageRequest,
     CreatePolicyRequest,
     UpdatePolicyRequest,
+    CreatePolicyRuleRequest,
 } from "../model";
+import {PACKAGE, VERSION} from "../version";
 
 export class PoliciesApiWrapper {
     private readonly _api: PoliciesApi;
@@ -25,6 +26,7 @@ export class PoliciesApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new PoliciesApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**
@@ -53,9 +55,9 @@ export class PoliciesApiWrapper {
      * @param req parameters to create
      */
     @httpErrorHandler()
-    public async createAllowFunction(req: CreatePolicyAllowFunctionRequest): Promise<PolicyRuleResponse> {
-        const {id, ...body} = req;
-        const response = await this._api.createPolicyAllowFunction(id, body);
+    public async createAllowFunction(req: CreatePolicyRuleRequest): Promise<PolicyRuleResponse> {
+        const {policy, ...body} = req;
+        const response = await this._api.createPolicyAllowFunction(policy, body);
         return response.body;
     }
 
@@ -125,8 +127,8 @@ export class PoliciesApiWrapper {
      */
     @httpErrorHandler()
     public async updateAllowFunction(req: UpdatePolicyAllowFunctionRequest): Promise<PolicyRuleResponse> {
-        const {policy_rule, ...body} = req;
-        const response = await this._api.updatePolicyAllowFunction(req.policy, policy_rule, body);
+        const {policy, policyRule, ...body} = req;
+        const response = await this._api.updatePolicyAllowFunction(policy, policyRule, body);
         return response.body;
     }
 }

@@ -16,8 +16,8 @@ import { PKPolicy } from './pKPolicy';
 
 export class ProjectRequest {
     'name': string;
-    'pk_policy'?: PKPolicy;
-    'pk_location'?: PKLocation;
+    'pkPolicy'?: PKPolicy;
+    'pkLocation'?: PKLocation;
 
     static discriminator: string | undefined = undefined;
 
@@ -28,13 +28,13 @@ export class ProjectRequest {
             "type": "string"
         },
         {
-            "name": "pk_policy",
-            "baseName": "pk_policy",
+            "name": "pkPolicy",
+            "baseName": "pkPolicy",
             "type": "PKPolicy"
         },
         {
-            "name": "pk_location",
-            "baseName": "pk_location",
+            "name": "pkLocation",
+            "baseName": "pkLocation",
             "type": "PKLocation"
         }    ];
 

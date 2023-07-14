@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { AccountRequest } from '../model/accountRequest';
 import { AccountResponse } from '../model/accountResponse';
 import { AccountsResponse } from '../model/accountsResponse';
+import { CreateAccountRequest } from '../model/createAccountRequest';
 import { InventoryResponse } from '../model/inventoryResponse';
 import { SignPayloadRequest } from '../model/signPayloadRequest';
 import { SignPayloadResponse } from '../model/signPayloadResponse';
@@ -101,9 +101,9 @@ export class AccountsApi {
 
     /**
      * Creates an account object.
-     * @param accountRequest 
+     * @param createAccountRequest 
      */
-    public async createAccount (accountRequest: AccountRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
+    public async createAccount (createAccountRequest: CreateAccountRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -116,9 +116,9 @@ export class AccountsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'accountRequest' is not null or undefined
-        if (accountRequest === null || accountRequest === undefined) {
-            throw new Error('Required parameter accountRequest was null or undefined when calling createAccount.');
+        // verify required parameter 'createAccountRequest' is not null or undefined
+        if (createAccountRequest === null || createAccountRequest === undefined) {
+            throw new Error('Required parameter createAccountRequest was null or undefined when calling createAccount.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -132,7 +132,7 @@ export class AccountsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(accountRequest, "AccountRequest")
+            body: ObjectSerializer.serialize(createAccountRequest, "CreateAccountRequest")
         };
 
         let authenticationPromise = Promise.resolve();

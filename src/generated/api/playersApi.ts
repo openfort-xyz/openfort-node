@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { AccountPlayerRequest } from '../model/accountPlayerRequest';
 import { AccountResponse } from '../model/accountResponse';
 import { AccountsResponse } from '../model/accountsResponse';
+import { CreatePlayerAccountRequest } from '../model/createPlayerAccountRequest';
 import { CreatePlayerRequest } from '../model/createPlayerRequest';
 import { CreateSessionPlayerRequest } from '../model/createSessionPlayerRequest';
 import { InventoryResponse } from '../model/inventoryResponse';
@@ -179,9 +179,9 @@ export class PlayersApi {
     /**
      * Creates an account object for an existing player.
      * @param id Specifies the unique player ID.
-     * @param accountPlayerRequest 
+     * @param createPlayerAccountRequest 
      */
-    public async createPlayerAccount (id: string, accountPlayerRequest: AccountPlayerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
+    public async createPlayerAccount (id: string, createPlayerAccountRequest: CreatePlayerAccountRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/accounts'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -200,9 +200,9 @@ export class PlayersApi {
             throw new Error('Required parameter id was null or undefined when calling createPlayerAccount.');
         }
 
-        // verify required parameter 'accountPlayerRequest' is not null or undefined
-        if (accountPlayerRequest === null || accountPlayerRequest === undefined) {
-            throw new Error('Required parameter accountPlayerRequest was null or undefined when calling createPlayerAccount.');
+        // verify required parameter 'createPlayerAccountRequest' is not null or undefined
+        if (createPlayerAccountRequest === null || createPlayerAccountRequest === undefined) {
+            throw new Error('Required parameter createPlayerAccountRequest was null or undefined when calling createPlayerAccount.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -216,7 +216,7 @@ export class PlayersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(accountPlayerRequest, "AccountPlayerRequest")
+            body: ObjectSerializer.serialize(createPlayerAccountRequest, "CreatePlayerAccountRequest")
         };
 
         let authenticationPromise = Promise.resolve();

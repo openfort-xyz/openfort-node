@@ -15,9 +15,9 @@ import { AssetInventory } from './assetInventory';
 
 export class InventoryResponse {
     'object': string;
-    'nft_assets'?: Array<AssetInventory>;
-    'native_asset'?: AssetInventory;
-    'token_assets'?: Array<AssetInventory>;
+    'nftAssets'?: Array<AssetInventory>;
+    'nativeAsset'?: AssetInventory;
+    'tokenAssets'?: Array<AssetInventory>;
 
     static discriminator: string | undefined = undefined;
 
@@ -28,18 +28,18 @@ export class InventoryResponse {
             "type": "string"
         },
         {
-            "name": "nft_assets",
-            "baseName": "nft_assets",
+            "name": "nftAssets",
+            "baseName": "nftAssets",
             "type": "Array<AssetInventory>"
         },
         {
-            "name": "native_asset",
-            "baseName": "native_asset",
+            "name": "nativeAsset",
+            "baseName": "nativeAsset",
             "type": "AssetInventory"
         },
         {
-            "name": "token_assets",
-            "baseName": "token_assets",
+            "name": "tokenAssets",
+            "baseName": "tokenAssets",
             "type": "Array<AssetInventory>"
         }    ];
 

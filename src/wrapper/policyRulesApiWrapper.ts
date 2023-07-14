@@ -3,11 +3,12 @@ import {PolicyRulesApi} from "../generated/api/apis";
 import {
     GetPolicyRulesRequest,
     PolicyRuleDeleteResponse,
-    UpdatePolicyRulesRequest,
     PolicyRuleResponse,
     PolicyRulesResponse,
-    PolicyRuleRequest,
+    CreatePolicyRuleRequest,
+    UpdatePolicyRuleRequest,
 } from "../model";
+import {PACKAGE, VERSION} from "../version";
 
 export class PolicyRulesApiWrapper {
     private readonly _api: PolicyRulesApi;
@@ -15,6 +16,7 @@ export class PolicyRulesApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new PolicyRulesApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**
@@ -22,7 +24,7 @@ export class PolicyRulesApiWrapper {
      * @param req Parameters to create policy rules.
      */
     @httpErrorHandler()
-    public async create(req: PolicyRuleRequest): Promise<PolicyRuleResponse> {
+    public async create(req: CreatePolicyRuleRequest): Promise<PolicyRuleResponse> {
         const response = await this._api.createPolicyRules(req);
         return response.body;
     }
@@ -42,7 +44,7 @@ export class PolicyRulesApiWrapper {
      * @param req Parameters to update policy rules
      */
     @httpErrorHandler()
-    public async update(req: UpdatePolicyRulesRequest): Promise<PolicyRuleResponse> {
+    public async update(req: UpdatePolicyRuleRequest): Promise<PolicyRuleResponse> {
         const {id, ...request} = req;
         const response = await this._api.updatePolicyRules(id, request);
         return response.body;

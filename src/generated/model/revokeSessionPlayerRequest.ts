@@ -16,7 +16,7 @@ export class RevokeSessionPlayerRequest {
     'address': string;
     'policy'?: string;
     'optimistic'?: boolean;
-    'chain_id': number;
+    'chainId': number;
 
     static discriminator: string | undefined = undefined;
 
@@ -37,8 +37,8 @@ export class RevokeSessionPlayerRequest {
             "type": "boolean"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         }    ];
 

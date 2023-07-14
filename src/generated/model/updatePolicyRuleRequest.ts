@@ -11,33 +11,36 @@
  */
 
 import { RequestFile } from './models';
+import { PolicySchema } from './policySchema';
 
-export class AccountPlayerRequest {
-    /**
-    * The chain_id
-    */
-    'chain_id': number;
-    /**
-    * The address of the external owner
-    */
-    'external_owner_address'?: string;
+export class UpdatePolicyRuleRequest {
+    'type': PolicySchema;
+    'functionName': string | null;
+    'contract': string | null;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
-            "type": "number"
+            "name": "type",
+            "baseName": "type",
+            "type": "PolicySchema"
         },
         {
-            "name": "external_owner_address",
-            "baseName": "external_owner_address",
+            "name": "functionName",
+            "baseName": "functionName",
+            "type": "string"
+        },
+        {
+            "name": "contract",
+            "baseName": "contract",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return AccountPlayerRequest.attributeTypeMap;
+        return UpdatePolicyRuleRequest.attributeTypeMap;
     }
 }
 
+export namespace UpdatePolicyRuleRequest {
+}
