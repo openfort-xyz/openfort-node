@@ -14,26 +14,26 @@ import { RequestFile } from './models';
 import { SponsorSchema } from './sponsorSchema';
 
 export class PolicyStrategy {
-    'sponsor_schema': SponsorSchema;
-    'token_contract'?: string;
-    'token_contract_amount'?: string;
+    'sponsorSchema': SponsorSchema;
+    'tokenContract'?: string;
+    'tokenContractAmount'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "sponsor_schema",
-            "baseName": "sponsor_schema",
+            "name": "sponsorSchema",
+            "baseName": "sponsorSchema",
             "type": "SponsorSchema"
         },
         {
-            "name": "token_contract",
-            "baseName": "token_contract",
+            "name": "tokenContract",
+            "baseName": "tokenContract",
             "type": "string"
         },
         {
-            "name": "token_contract_amount",
-            "baseName": "token_contract_amount",
+            "name": "tokenContractAmount",
+            "baseName": "tokenContractAmount",
             "type": "string"
         }    ];
 

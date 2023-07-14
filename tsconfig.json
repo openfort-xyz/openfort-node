@@ -29,7 +29,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "strictBindCallApply": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "exclude": [
     "dist",

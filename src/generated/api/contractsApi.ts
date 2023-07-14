@@ -16,9 +16,9 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { ContractDeleteResponse } from '../model/contractDeleteResponse';
-import { ContractRequest } from '../model/contractRequest';
 import { ContractResponse } from '../model/contractResponse';
 import { ContractsResponse } from '../model/contractsResponse';
+import { CreateContractRequest } from '../model/createContractRequest';
 import { SortOrder } from '../model/sortOrder';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -98,9 +98,9 @@ export class ContractsApi {
 
     /**
      * Creates a contract object.
-     * @param contractRequest 
+     * @param createContractRequest 
      */
-    public async createContract (contractRequest: ContractRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractResponse;  }> {
+    public async createContract (createContractRequest: CreateContractRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -113,9 +113,9 @@ export class ContractsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'contractRequest' is not null or undefined
-        if (contractRequest === null || contractRequest === undefined) {
-            throw new Error('Required parameter contractRequest was null or undefined when calling createContract.');
+        // verify required parameter 'createContractRequest' is not null or undefined
+        if (createContractRequest === null || createContractRequest === undefined) {
+            throw new Error('Required parameter createContractRequest was null or undefined when calling createContract.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -129,7 +129,7 @@ export class ContractsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(contractRequest, "ContractRequest")
+            body: ObjectSerializer.serialize(createContractRequest, "CreateContractRequest")
         };
 
         let authenticationPromise = Promise.resolve();

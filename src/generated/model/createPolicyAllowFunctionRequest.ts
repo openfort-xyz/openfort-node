@@ -13,9 +13,9 @@
 import { RequestFile } from './models';
 import { PolicySchema } from './policySchema';
 
-export class PolicyAllowFunctionRequest {
+export class CreatePolicyAllowFunctionRequest {
     'type': PolicySchema;
-    'function_name': string | null;
+    'functionName': string | null;
     'contract': string | null;
 
     static discriminator: string | undefined = undefined;
@@ -27,8 +27,8 @@ export class PolicyAllowFunctionRequest {
             "type": "PolicySchema"
         },
         {
-            "name": "function_name",
-            "baseName": "function_name",
+            "name": "functionName",
+            "baseName": "functionName",
             "type": "string"
         },
         {
@@ -38,9 +38,9 @@ export class PolicyAllowFunctionRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyAllowFunctionRequest.attributeTypeMap;
+        return CreatePolicyAllowFunctionRequest.attributeTypeMap;
     }
 }
 
-export namespace PolicyAllowFunctionRequest {
+export namespace CreatePolicyAllowFunctionRequest {
 }

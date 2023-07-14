@@ -6,8 +6,9 @@ import {
     ContractDeleteResponse,
     ContractsResponse,
     ContractResponse,
-    ContractRequest,
+    CreateContractRequest,
 } from "../model";
+import {PACKAGE, VERSION} from "../version";
 
 export class ContractsApiWrapper {
     private readonly _api: ContractsApi;
@@ -15,6 +16,7 @@ export class ContractsApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new ContractsApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**
@@ -22,7 +24,7 @@ export class ContractsApiWrapper {
      * @param req Parameters to create contract
      */
     @httpErrorHandler()
-    public async create(req: ContractRequest): Promise<ContractResponse> {
+    public async create(req: CreateContractRequest): Promise<ContractResponse> {
         const response = await this._api.createContract(req);
         return response.body;
     }

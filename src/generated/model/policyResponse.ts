@@ -18,12 +18,12 @@ import { PolicyStrategy } from './policyStrategy';
 export class PolicyResponse {
     'id': string;
     'object': string;
-    'created_at': number;
+    'createdAt': number;
     'name': string | null;
-    'chain_id': number;
+    'chainId': number;
     'strategy': PolicyStrategy;
-    'transaction_intents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'policy_rules'?: Array<PolicyResponsePolicyRulesInner>;
+    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
+    'policyRules'?: Array<PolicyResponsePolicyRulesInner>;
 
     static discriminator: string | undefined = undefined;
 
@@ -39,8 +39,8 @@ export class PolicyResponse {
             "type": "string"
         },
         {
-            "name": "created_at",
-            "baseName": "created_at",
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number"
         },
         {
@@ -49,8 +49,8 @@ export class PolicyResponse {
             "type": "string"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {
@@ -59,13 +59,13 @@ export class PolicyResponse {
             "type": "PolicyStrategy"
         },
         {
-            "name": "transaction_intents",
-            "baseName": "transaction_intents",
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
             "type": "Array<PolicyResponseTransactionIntentsInner>"
         },
         {
-            "name": "policy_rules",
-            "baseName": "policy_rules",
+            "name": "policyRules",
+            "baseName": "policyRules",
             "type": "Array<PolicyResponsePolicyRulesInner>"
         }    ];
 

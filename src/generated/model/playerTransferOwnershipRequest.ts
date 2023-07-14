@@ -18,13 +18,13 @@ export class PlayerTransferOwnershipRequest {
     */
     'policy': string;
     /**
-    * The chain_id where the account is.
+    * The chain id where the account is.
     */
-    'chain_id': number;
+    'chainId': number;
     /**
     * The address of the new owner
     */
-    'new_owner_address': string;
+    'newOwnerAddress': string;
     /**
     * The player ID
     */
@@ -39,13 +39,13 @@ export class PlayerTransferOwnershipRequest {
             "type": "string"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {
-            "name": "new_owner_address",
-            "baseName": "new_owner_address",
+            "name": "newOwnerAddress",
+            "baseName": "newOwnerAddress",
             "type": "string"
         },
         {

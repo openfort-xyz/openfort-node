@@ -15,8 +15,8 @@ import { RequestFile } from './models';
 export class Interaction {
     'contract'?: string;
     'value'?: string;
-    'function_name': string;
-    'function_args': Array<any>;
+    'functionName': string;
+    'functionArgs': Array<any>;
 
     static discriminator: string | undefined = undefined;
 
@@ -32,13 +32,13 @@ export class Interaction {
             "type": "string"
         },
         {
-            "name": "function_name",
-            "baseName": "function_name",
+            "name": "functionName",
+            "baseName": "functionName",
             "type": "string"
         },
         {
-            "name": "function_args",
-            "baseName": "function_args",
+            "name": "functionArgs",
+            "baseName": "functionArgs",
             "type": "Array<any>"
         }    ];
 

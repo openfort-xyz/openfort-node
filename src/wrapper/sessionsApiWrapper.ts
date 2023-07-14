@@ -8,6 +8,7 @@ import {
     CreateSessionRequest,
     RevokeSessionRequest,
 } from "../model";
+import {PACKAGE, VERSION} from "../version";
 
 export class SessionsApiWrapper {
     private readonly _api: SessionsApi;
@@ -15,6 +16,7 @@ export class SessionsApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new SessionsApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**
