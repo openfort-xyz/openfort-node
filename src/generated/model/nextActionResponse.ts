@@ -11,36 +11,31 @@
  */
 
 import { RequestFile } from './models';
-import { SponsorSchema } from './sponsorSchema';
+import { NextActionPayload } from './nextActionPayload';
+import { NextActionType } from './nextActionType';
 
-export class PolicyStrategy {
-    'sponsor_schema': SponsorSchema;
-    'token_contract'?: string;
-    'token_contract_amount'?: string;
+export class NextActionResponse {
+    'type': NextActionType;
+    'payload': NextActionPayload;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "sponsor_schema",
-            "baseName": "sponsor_schema",
-            "type": "SponsorSchema"
+            "name": "type",
+            "baseName": "type",
+            "type": "NextActionType"
         },
         {
-            "name": "token_contract",
-            "baseName": "token_contract",
-            "type": "string"
-        },
-        {
-            "name": "token_contract_amount",
-            "baseName": "token_contract_amount",
-            "type": "string"
+            "name": "payload",
+            "baseName": "payload",
+            "type": "NextActionPayload"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyStrategy.attributeTypeMap;
+        return NextActionResponse.attributeTypeMap;
     }
 }
 
-export namespace PolicyStrategy {
+export namespace NextActionResponse {
 }

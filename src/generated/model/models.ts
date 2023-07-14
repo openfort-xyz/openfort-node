@@ -20,6 +20,9 @@ export * from './gas';
 export * from './interaction';
 export * from './inventoryResponse';
 export * from './log';
+export * from './nextActionPayload';
+export * from './nextActionResponse';
+export * from './nextActionType';
 export * from './pKLocation';
 export * from './pKPolicy';
 export * from './pickAccountResponseId';
@@ -103,6 +106,9 @@ import { Gas } from './gas';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
 import { Log } from './log';
+import { NextActionPayload } from './nextActionPayload';
+import { NextActionResponse } from './nextActionResponse';
+import { NextActionType } from './nextActionType';
 import { PKLocation } from './pKLocation';
 import { PKPolicy } from './pKPolicy';
 import { PickAccountResponseId } from './pickAccountResponseId';
@@ -167,6 +173,7 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "AssetType": AssetType,
+        "NextActionType": NextActionType,
         "PKLocation": PKLocation,
         "PKPolicy": PKPolicy,
         "PolicySchema": PolicySchema,
@@ -194,6 +201,8 @@ let typeMap: {[index: string]: any} = {
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
     "Log": Log,
+    "NextActionPayload": NextActionPayload,
+    "NextActionResponse": NextActionResponse,
     "PickAccountResponseId": PickAccountResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
     "PickPolicyResponseId": PickPolicyResponseId,

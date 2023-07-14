@@ -12,6 +12,7 @@
 
 import { RequestFile } from './models';
 import { Interaction } from './interaction';
+import { NextActionResponse } from './nextActionResponse';
 import { ResponseResponse } from './responseResponse';
 import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlayer';
@@ -23,14 +24,14 @@ export class TransactionIntentResponse {
     'created_at': number;
     'updated_at': number;
     'chain_id': number;
-    'user_operation_hash': string | null;
+    'user_operation_hash'?: string;
     'user_operation'?: any | null;
-    'policy': TransactionIntentResponsePolicy | null;
+    'next_action'?: NextActionResponse;
+    'response'?: ResponseResponse;
+    'policy'?: TransactionIntentResponsePolicy;
     'player'?: TransactionIntentResponsePlayer;
-    'next_action'?: object | null;
     'account'?: TransactionIntentResponseAccount;
-    'interactions': Array<Interaction> | null;
-    'response': ResponseResponse | null;
+    'interactions'?: Array<Interaction>;
 
     static discriminator: string | undefined = undefined;
 
@@ -71,6 +72,16 @@ export class TransactionIntentResponse {
             "type": "any"
         },
         {
+            "name": "next_action",
+            "baseName": "next_action",
+            "type": "NextActionResponse"
+        },
+        {
+            "name": "response",
+            "baseName": "response",
+            "type": "ResponseResponse"
+        },
+        {
             "name": "policy",
             "baseName": "policy",
             "type": "TransactionIntentResponsePolicy"
@@ -81,11 +92,6 @@ export class TransactionIntentResponse {
             "type": "TransactionIntentResponsePlayer"
         },
         {
-            "name": "next_action",
-            "baseName": "next_action",
-            "type": "object"
-        },
-        {
             "name": "account",
             "baseName": "account",
             "type": "TransactionIntentResponseAccount"
@@ -94,11 +100,6 @@ export class TransactionIntentResponse {
             "name": "interactions",
             "baseName": "interactions",
             "type": "Array<Interaction>"
-        },
-        {
-            "name": "response",
-            "baseName": "response",
-            "type": "ResponseResponse"
         }    ];
 
     static getAttributeTypeMap() {
