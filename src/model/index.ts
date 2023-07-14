@@ -1,7 +1,5 @@
 export * from "../generated/model/models";
-export * from "./createPlayerAccountRequest";
 export * from "./createPlayerSessionRequest";
-export * from "./createPolicyAllowFunctionRequest";
 export * from "./getAccountInventoryRequest";
 export * from "./getAccountRequest";
 export * from "./getAllowFunctionsRequest";
@@ -27,7 +25,7 @@ export * from "./transferPlayerAccountOwnershipRequest";
 export * from "./transferAccountOwnershipRequest";
 export * from "./updatePlayerRequest";
 export * from "./updatePolicyAllowFunctionRequest";
-export * from "./updatePolicyRulesRequest";
 export * from "./updateProjectRequest";
 export * from "./updateTransactionIntentRequest";
 export {UpdatePolicyRequest} from "./updatePolicyRequest";
+export {UpdatePolicyRuleRequest} from "./updatePolicyRuleRequest";

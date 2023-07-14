@@ -16,10 +16,10 @@ export class CreateSessionPlayerRequest {
     'address': string;
     'policy'?: string;
     'optimistic'?: boolean;
-    'external_owner_address'?: string;
-    'chain_id': number;
-    'valid_until': number;
-    'valid_after': number;
+    'externalOwnerAddress'?: string;
+    'chainId': number;
+    'validUntil': number;
+    'validAfter': number;
     'limit'?: number;
     'whitelist'?: Array<string>;
 
@@ -42,23 +42,23 @@ export class CreateSessionPlayerRequest {
             "type": "boolean"
         },
         {
-            "name": "external_owner_address",
-            "baseName": "external_owner_address",
+            "name": "externalOwnerAddress",
+            "baseName": "externalOwnerAddress",
             "type": "string"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {
-            "name": "valid_until",
-            "baseName": "valid_until",
+            "name": "validUntil",
+            "baseName": "validUntil",
             "type": "number"
         },
         {
-            "name": "valid_after",
-            "baseName": "valid_after",
+            "name": "validAfter",
+            "baseName": "validAfter",
             "type": "number"
         },
         {

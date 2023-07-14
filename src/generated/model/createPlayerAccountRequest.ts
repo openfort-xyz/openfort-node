@@ -12,41 +12,32 @@
 
 import { RequestFile } from './models';
 
-export class AccountRequest {
+export class CreatePlayerAccountRequest {
     /**
-    * The chain_id
+    * The chain id
     */
-    'chain_id': number;
-    /**
-    * The player ID
-    */
-    'player': string;
+    'chainId': number;
     /**
     * The address of the external owner
     */
-    'external_owner_address'?: string;
+    'externalOwnerAddress'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
-        },
-        {
-            "name": "external_owner_address",
-            "baseName": "external_owner_address",
+            "name": "externalOwnerAddress",
+            "baseName": "externalOwnerAddress",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return AccountRequest.attributeTypeMap;
+        return CreatePlayerAccountRequest.attributeTypeMap;
     }
 }
 

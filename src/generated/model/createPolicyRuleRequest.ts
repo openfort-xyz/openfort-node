@@ -13,11 +13,11 @@
 import { RequestFile } from './models';
 import { PolicySchema } from './policySchema';
 
-export class PolicyRuleUpdateRequest {
-    'type'?: PolicySchema;
-    'function_name': string | null;
-    'policy'?: string;
+export class CreatePolicyRuleRequest {
+    'type': PolicySchema;
+    'functionName': string | null;
     'contract': string | null;
+    'policy': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -28,25 +28,25 @@ export class PolicyRuleUpdateRequest {
             "type": "PolicySchema"
         },
         {
-            "name": "function_name",
-            "baseName": "function_name",
-            "type": "string"
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "functionName",
+            "baseName": "functionName",
             "type": "string"
         },
         {
             "name": "contract",
             "baseName": "contract",
             "type": "string"
+        },
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleUpdateRequest.attributeTypeMap;
+        return CreatePolicyRuleRequest.attributeTypeMap;
     }
 }
 
-export namespace PolicyRuleUpdateRequest {
+export namespace CreatePolicyRuleRequest {
 }

@@ -50,7 +50,7 @@
             {
                 "selector": "property",
                 "modifiers": ["public"],
-                "format": ["snake_case"]
+                "format": ["camelCase"]
             }
         ]
     }

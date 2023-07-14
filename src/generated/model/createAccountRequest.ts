@@ -12,44 +12,41 @@
 
 import { RequestFile } from './models';
 
-export class ContractRequest {
-    'name': string;
-    'chain_id': number;
-    'address': string;
-    'abi'?: any | null;
-    'public_verification'?: boolean;
+export class CreateAccountRequest {
+    /**
+    * The chain id
+    */
+    'chainId': number;
+    /**
+    * The player ID
+    */
+    'player': string;
+    /**
+    * The address of the external owner
+    */
+    'externalOwnerAddress'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {
-            "name": "address",
-            "baseName": "address",
+            "name": "player",
+            "baseName": "player",
             "type": "string"
         },
         {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "any"
-        },
-        {
-            "name": "public_verification",
-            "baseName": "public_verification",
-            "type": "boolean"
+            "name": "externalOwnerAddress",
+            "baseName": "externalOwnerAddress",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractRequest.attributeTypeMap;
+        return CreateAccountRequest.attributeTypeMap;
     }
 }
 

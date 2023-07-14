@@ -13,20 +13,20 @@
 import { RequestFile } from './models';
 
 export class NextActionPayload {
-    'user_op'?: any | null;
-    'user_op_hash'?: string;
+    'userOp'?: any | null;
+    'userOpHash'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "user_op",
-            "baseName": "user_op",
+            "name": "userOp",
+            "baseName": "userOp",
             "type": "any"
         },
         {
-            "name": "user_op_hash",
-            "baseName": "user_op_hash",
+            "name": "userOpHash",
+            "baseName": "userOpHash",
             "type": "string"
         }    ];
 

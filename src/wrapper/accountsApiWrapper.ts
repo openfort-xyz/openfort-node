@@ -5,12 +5,13 @@ import {
     AccountsResponse,
     InventoryResponse,
     TransactionIntentResponse,
-    AccountRequest,
     GetAccountRequest,
     GetAccountInventoryRequest,
     ListAccountsRequest,
     TransferAccountOwnershipRequest,
+    CreateAccountRequest,
 } from "../model";
+import {PACKAGE, VERSION} from "../version";
 
 export class AccountsApiWrapper {
     private readonly _api: AccountsApi;
@@ -18,6 +19,7 @@ export class AccountsApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new AccountsApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**
@@ -25,7 +27,7 @@ export class AccountsApiWrapper {
      * @param req The account to create
      */
     @httpErrorHandler()
-    public async create(req: AccountRequest): Promise<AccountResponse> {
+    public async create(req: CreateAccountRequest): Promise<AccountResponse> {
         const response = await this._api.createAccount(req);
         return response.body;
     }

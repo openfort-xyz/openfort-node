@@ -17,16 +17,16 @@ import { PolicyResponseTransactionIntentsInner } from './policyResponseTransacti
 export class SessionResponse {
     'id': string;
     'object': string;
-    'created_at': number;
-    'updated_at': number;
-    'is_active'?: boolean;
+    'createdAt': number;
+    'updatedAt': number;
+    'isActive'?: boolean;
     'address': string;
-    'valid_after'?: string;
-    'valid_until'?: string;
+    'validAfter'?: string;
+    'validUntil'?: string;
     'whitelist'?: Array<string>;
     'limit'?: number;
-    'next_action'?: NextActionResponse;
-    'transaction_intents'?: Array<PolicyResponseTransactionIntentsInner>;
+    'nextAction'?: NextActionResponse;
+    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
 
     static discriminator: string | undefined = undefined;
 
@@ -42,18 +42,18 @@ export class SessionResponse {
             "type": "string"
         },
         {
-            "name": "created_at",
-            "baseName": "created_at",
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number"
         },
         {
-            "name": "updated_at",
-            "baseName": "updated_at",
+            "name": "updatedAt",
+            "baseName": "updatedAt",
             "type": "number"
         },
         {
-            "name": "is_active",
-            "baseName": "is_active",
+            "name": "isActive",
+            "baseName": "isActive",
             "type": "boolean"
         },
         {
@@ -62,13 +62,13 @@ export class SessionResponse {
             "type": "string"
         },
         {
-            "name": "valid_after",
-            "baseName": "valid_after",
+            "name": "validAfter",
+            "baseName": "validAfter",
             "type": "string"
         },
         {
-            "name": "valid_until",
-            "baseName": "valid_until",
+            "name": "validUntil",
+            "baseName": "validUntil",
             "type": "string"
         },
         {
@@ -82,13 +82,13 @@ export class SessionResponse {
             "type": "number"
         },
         {
-            "name": "next_action",
-            "baseName": "next_action",
+            "name": "nextAction",
+            "baseName": "nextAction",
             "type": "NextActionResponse"
         },
         {
-            "name": "transaction_intents",
-            "baseName": "transaction_intents",
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
             "type": "Array<PolicyResponseTransactionIntentsInner>"
         }    ];
 

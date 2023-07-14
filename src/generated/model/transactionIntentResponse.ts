@@ -21,12 +21,12 @@ import { TransactionIntentResponsePolicy } from './transactionIntentResponsePoli
 export class TransactionIntentResponse {
     'id': string;
     'object': string;
-    'created_at': number;
-    'updated_at': number;
-    'chain_id': number;
-    'user_operation_hash'?: string;
-    'user_operation'?: any | null;
-    'next_action'?: NextActionResponse;
+    'createdAt': number;
+    'updatedAt': number;
+    'chainId': number;
+    'userOperationHash'?: string;
+    'userOperation'?: any | null;
+    'nextAction'?: NextActionResponse;
     'response'?: ResponseResponse;
     'policy'?: TransactionIntentResponsePolicy;
     'player'?: TransactionIntentResponsePlayer;
@@ -47,33 +47,33 @@ export class TransactionIntentResponse {
             "type": "string"
         },
         {
-            "name": "created_at",
-            "baseName": "created_at",
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number"
         },
         {
-            "name": "updated_at",
-            "baseName": "updated_at",
+            "name": "updatedAt",
+            "baseName": "updatedAt",
             "type": "number"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {
-            "name": "user_operation_hash",
-            "baseName": "user_operation_hash",
+            "name": "userOperationHash",
+            "baseName": "userOperationHash",
             "type": "string"
         },
         {
-            "name": "user_operation",
-            "baseName": "user_operation",
+            "name": "userOperation",
+            "baseName": "userOperation",
             "type": "any"
         },
         {
-            "name": "next_action",
-            "baseName": "next_action",
+            "name": "nextAction",
+            "baseName": "nextAction",
             "type": "NextActionResponse"
         },
         {

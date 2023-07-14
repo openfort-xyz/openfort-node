@@ -11,16 +11,17 @@
  */
 
 import { RequestFile } from './models';
+import { JsonFragment } from './jsonFragment';
 
 export class ContractResponse {
     'id': string;
     'object': string;
-    'created_at': number;
+    'createdAt': number;
     'name': string | null;
-    'chain_id': number;
+    'chainId': number;
     'address': string;
-    'abi': any | null;
-    'public_verification': boolean;
+    'abi': Array<JsonFragment>;
+    'publicVerification': boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -36,8 +37,8 @@ export class ContractResponse {
             "type": "string"
         },
         {
-            "name": "created_at",
-            "baseName": "created_at",
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number"
         },
         {
@@ -46,8 +47,8 @@ export class ContractResponse {
             "type": "string"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {
@@ -58,11 +59,11 @@ export class ContractResponse {
         {
             "name": "abi",
             "baseName": "abi",
-            "type": "any"
+            "type": "Array<JsonFragment>"
         },
         {
-            "name": "public_verification",
-            "baseName": "public_verification",
+            "name": "publicVerification",
+            "baseName": "publicVerification",
             "type": "boolean"
         }    ];
 

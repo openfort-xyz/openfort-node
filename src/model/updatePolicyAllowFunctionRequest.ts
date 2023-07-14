@@ -1,6 +1,6 @@
-import {PolicyRuleUpdateRequest} from "../generated/model/policyRuleUpdateRequest";
+import {UpdatePolicyRuleRequest} from "../generated/model/updatePolicyRuleRequest";
 
-export interface UpdatePolicyAllowFunctionRequest extends PolicyRuleUpdateRequest {
+export interface UpdatePolicyAllowFunctionRequest extends UpdatePolicyRuleRequest {
     policy: string;
-    policy_rule: string;
+    policyRule: string;
 }

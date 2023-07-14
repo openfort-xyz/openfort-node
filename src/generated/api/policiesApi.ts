@@ -15,18 +15,18 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { CreatePolicyAllowFunctionRequest } from '../model/createPolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../model/createPolicyRequest';
 import { Gas } from '../model/gas';
 import { PoliciesResponse } from '../model/policiesResponse';
-import { PolicyAllowFunctionRequest } from '../model/policyAllowFunctionRequest';
 import { PolicyDeleteResponse } from '../model/policyDeleteResponse';
 import { PolicyResponse } from '../model/policyResponse';
 import { PolicyRuleResponse } from '../model/policyRuleResponse';
-import { PolicyRuleUpdateRequest } from '../model/policyRuleUpdateRequest';
 import { PolicyRulesResponse } from '../model/policyRulesResponse';
 import { SortOrder } from '../model/sortOrder';
 import { SumGas } from '../model/sumGas';
 import { UpdatePolicyRequest } from '../model/updatePolicyRequest';
+import { UpdatePolicyRuleRequest } from '../model/updatePolicyRuleRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -177,9 +177,9 @@ export class PoliciesApi {
     /**
      * 
      * @param id 
-     * @param policyAllowFunctionRequest 
+     * @param createPolicyAllowFunctionRequest 
      */
-    public async createPolicyAllowFunction (id: string, policyAllowFunctionRequest: PolicyAllowFunctionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
+    public async createPolicyAllowFunction (id: string, createPolicyAllowFunctionRequest: CreatePolicyAllowFunctionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}/policy_rules'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -198,9 +198,9 @@ export class PoliciesApi {
             throw new Error('Required parameter id was null or undefined when calling createPolicyAllowFunction.');
         }
 
-        // verify required parameter 'policyAllowFunctionRequest' is not null or undefined
-        if (policyAllowFunctionRequest === null || policyAllowFunctionRequest === undefined) {
-            throw new Error('Required parameter policyAllowFunctionRequest was null or undefined when calling createPolicyAllowFunction.');
+        // verify required parameter 'createPolicyAllowFunctionRequest' is not null or undefined
+        if (createPolicyAllowFunctionRequest === null || createPolicyAllowFunctionRequest === undefined) {
+            throw new Error('Required parameter createPolicyAllowFunctionRequest was null or undefined when calling createPolicyAllowFunction.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -214,7 +214,7 @@ export class PoliciesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(policyAllowFunctionRequest, "PolicyAllowFunctionRequest")
+            body: ObjectSerializer.serialize(createPolicyAllowFunctionRequest, "CreatePolicyAllowFunctionRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -794,9 +794,9 @@ export class PoliciesApi {
      * 
      * @param policy 
      * @param policyRule 
-     * @param policyRuleUpdateRequest 
+     * @param updatePolicyRuleRequest 
      */
-    public async updatePolicyAllowFunction (policy: string, policyRule: string, policyRuleUpdateRequest: PolicyRuleUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
+    public async updatePolicyAllowFunction (policy: string, policyRule: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{policy}/policy_rules/{policy_rule}'
             .replace('{' + 'policy' + '}', encodeURIComponent(String(policy)))
             .replace('{' + 'policy_rule' + '}', encodeURIComponent(String(policyRule)));
@@ -821,9 +821,9 @@ export class PoliciesApi {
             throw new Error('Required parameter policyRule was null or undefined when calling updatePolicyAllowFunction.');
         }
 
-        // verify required parameter 'policyRuleUpdateRequest' is not null or undefined
-        if (policyRuleUpdateRequest === null || policyRuleUpdateRequest === undefined) {
-            throw new Error('Required parameter policyRuleUpdateRequest was null or undefined when calling updatePolicyAllowFunction.');
+        // verify required parameter 'updatePolicyRuleRequest' is not null or undefined
+        if (updatePolicyRuleRequest === null || updatePolicyRuleRequest === undefined) {
+            throw new Error('Required parameter updatePolicyRuleRequest was null or undefined when calling updatePolicyAllowFunction.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -837,7 +837,7 @@ export class PoliciesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(policyRuleUpdateRequest, "PolicyRuleUpdateRequest")
+            body: ObjectSerializer.serialize(updatePolicyRuleRequest, "UpdatePolicyRuleRequest")
         };
 
         let authenticationPromise = Promise.resolve();
