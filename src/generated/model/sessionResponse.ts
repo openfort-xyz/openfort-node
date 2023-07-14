@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { NextActionResponse } from './nextActionResponse';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class SessionResponse {
@@ -24,8 +25,8 @@ export class SessionResponse {
     'valid_until'?: string;
     'whitelist'?: Array<string>;
     'limit'?: number;
-    'next_action': object | null;
-    'transaction_intents': Array<PolicyResponseTransactionIntentsInner> | null;
+    'next_action'?: NextActionResponse;
+    'transaction_intents'?: Array<PolicyResponseTransactionIntentsInner>;
 
     static discriminator: string | undefined = undefined;
 
@@ -83,7 +84,7 @@ export class SessionResponse {
         {
             "name": "next_action",
             "baseName": "next_action",
-            "type": "object"
+            "type": "NextActionResponse"
         },
         {
             "name": "transaction_intents",
