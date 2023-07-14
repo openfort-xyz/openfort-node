@@ -16,7 +16,7 @@ export class TransferOwnershipRequest {
     /**
     * The address of the new owner
     */
-    'new_owner_address': string;
+    'newOwnerAddress': string;
     /**
     * The policy ID
     */
@@ -26,8 +26,8 @@ export class TransferOwnershipRequest {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "new_owner_address",
-            "baseName": "new_owner_address",
+            "name": "newOwnerAddress",
+            "baseName": "newOwnerAddress",
             "type": "string"
         },
         {

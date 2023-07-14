@@ -9,6 +9,7 @@ import {
 import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
 import {TransactionIntentsResponse} from "../generated/model/transactionIntentsResponse";
 import {TransactionIntentRequest} from "../generated/model/transactionIntentRequest";
+import {PACKAGE, VERSION} from "../version";
 
 export class TransactionIntentsApiWrapper {
     private readonly _api: TransactionIntentsApi;
@@ -16,6 +17,7 @@ export class TransactionIntentsApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new TransactionIntentsApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**

@@ -1,6 +1,7 @@
 import {httpErrorHandler} from "./httpErrorHandler";
 import {ProjectsApi} from "../generated/api/projectsApi";
 import {UpdateProjectRequest, ProjectResponse, ProjectsResponse, ProjectRequest} from "../model";
+import {PACKAGE, VERSION} from "../version";
 
 export class ProjectsApiWrapper {
     private readonly _api: ProjectsApi;
@@ -8,6 +9,7 @@ export class ProjectsApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new ProjectsApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**

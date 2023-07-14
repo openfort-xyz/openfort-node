@@ -8,7 +8,6 @@ import {
     PlayersResponse,
     SessionResponse,
     TransactionIntentResponse,
-    CreatePlayerAccountRequest,
     CreatePlayerSessionRequest,
     GetPlayerRequest,
     ListPlayerAccountsRequest,
@@ -18,7 +17,9 @@ import {
     TransferPlayerAccountOwnershipRequest,
     UpdatePlayerRequest,
     CreatePlayerRequest,
+    CreateAccountRequest,
 } from "../model";
+import {PACKAGE, VERSION} from "../version";
 
 export class PlayersApiWrapper {
     private readonly _api: PlayersApi;
@@ -26,6 +27,7 @@ export class PlayersApiWrapper {
     constructor(accessToken: string, basePath?: string) {
         this._api = new PlayersApi(basePath);
         this._api.accessToken = accessToken;
+        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
     }
 
     /**
@@ -43,9 +45,9 @@ export class PlayersApiWrapper {
      * @param req Parameters to create a player account.
      */
     @httpErrorHandler()
-    public async createAccount(req: CreatePlayerAccountRequest): Promise<AccountResponse> {
-        const {player_id, ...body} = req;
-        const response = await this._api.createPlayerAccount(player_id, body);
+    public async createAccount(req: CreateAccountRequest): Promise<AccountResponse> {
+        const {player, ...body} = req;
+        const response = await this._api.createPlayerAccount(player, body);
         return response.body;
     }
 
@@ -55,8 +57,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async createSession(req: CreatePlayerSessionRequest): Promise<SessionResponse> {
-        const {player_id, ...body} = req;
-        const response = await this._api.createPlayerSession(player_id, body);
+        const {playerId, ...body} = req;
+        const response = await this._api.createPlayerSession(playerId, body);
         return response.body;
     }
 
@@ -86,7 +88,7 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async getInventory(req: GetPlayerInventoryRequest): Promise<InventoryResponse> {
-        const response = await this._api.getPlayerInventory(req.id, req.chain_id);
+        const response = await this._api.getPlayerInventory(req.id, req.chainId);
         return response.body;
     }
 
@@ -106,8 +108,8 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async revokeSession(req: RevokePlayerSessionRequest): Promise<SessionResponse> {
-        const {player_id, ...body} = req;
-        const response = await this._api.revokePlayerSession(player_id, body);
+        const {playerId, ...body} = req;
+        const response = await this._api.revokePlayerSession(playerId, body);
         return response.body;
     }
 
@@ -119,8 +121,8 @@ export class PlayersApiWrapper {
     public async transferAccountOwnership(
         req: TransferPlayerAccountOwnershipRequest,
     ): Promise<TransactionIntentResponse> {
-        const {player_id, ...body} = req;
-        const response = await this._api.transferAccountOwnership(player_id, body);
+        const {playerId, ...body} = req;
+        const response = await this._api.transferAccountOwnership(playerId, body);
         return response.body;
     }
 

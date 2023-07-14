@@ -14,7 +14,7 @@ import { RequestFile } from './models';
 
 export class RevokeSessionRequest {
     'player': string;
-    'chain_id': number;
+    'chainId': number;
     'optimistic'?: boolean;
     'address': string;
     'policy'?: string;
@@ -28,8 +28,8 @@ export class RevokeSessionRequest {
             "type": "string"
         },
         {
-            "name": "chain_id",
-            "baseName": "chain_id",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number"
         },
         {

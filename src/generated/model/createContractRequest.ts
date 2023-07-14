@@ -11,42 +11,45 @@
  */
 
 import { RequestFile } from './models';
-import { PolicySchema } from './policySchema';
 
-export class PolicyRuleRequest {
-    'type': PolicySchema;
-    'function_name': string | null;
-    'policy': string;
-    'contract': string | null;
+export class CreateContractRequest {
+    'name': string;
+    'chainId': number;
+    'address': string;
+    'abi'?: any | null;
+    'publicVerification'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicySchema"
-        },
-        {
-            "name": "function_name",
-            "baseName": "function_name",
+            "name": "name",
+            "baseName": "name",
             "type": "string"
         },
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
             "type": "string"
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "string"
+            "name": "abi",
+            "baseName": "abi",
+            "type": "any"
+        },
+        {
+            "name": "publicVerification",
+            "baseName": "publicVerification",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleRequest.attributeTypeMap;
+        return CreateContractRequest.attributeTypeMap;
     }
 }
 
-export namespace PolicyRuleRequest {
-}

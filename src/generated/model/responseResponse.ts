@@ -14,10 +14,10 @@ import { RequestFile } from './models';
 import { Log } from './log';
 
 export class ResponseResponse {
-    'created_at': number;
-    'block_number'?: number;
-    'transaction_hash'?: string;
-    'gas_used'?: number;
+    'createdAt': number;
+    'blockNumber'?: number;
+    'transactionHash'?: string;
+    'gasUsed'?: number;
     'status'?: number;
     'logs'?: Array<Log>;
     'to'?: string;
@@ -27,23 +27,23 @@ export class ResponseResponse {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "created_at",
-            "baseName": "created_at",
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number"
         },
         {
-            "name": "block_number",
-            "baseName": "block_number",
+            "name": "blockNumber",
+            "baseName": "blockNumber",
             "type": "number"
         },
         {
-            "name": "transaction_hash",
-            "baseName": "transaction_hash",
+            "name": "transactionHash",
+            "baseName": "transactionHash",
             "type": "string"
         },
         {
-            "name": "gas_used",
-            "baseName": "gas_used",
+            "name": "gasUsed",
+            "baseName": "gasUsed",
             "type": "number"
         },
         {

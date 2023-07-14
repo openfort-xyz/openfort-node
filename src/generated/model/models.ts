@@ -1,24 +1,27 @@
 import localVarRequest from 'request';
 
-export * from './accountPlayerRequest';
-export * from './accountRequest';
 export * from './accountResponse';
 export * from './accountsResponse';
 export * from './apiKeyResponse';
 export * from './assetInventory';
 export * from './assetType';
 export * from './contractDeleteResponse';
-export * from './contractRequest';
 export * from './contractResponse';
 export * from './contractsResponse';
+export * from './createAccountRequest';
+export * from './createContractRequest';
+export * from './createPlayerAccountRequest';
 export * from './createPlayerRequest';
+export * from './createPolicyAllowFunctionRequest';
 export * from './createPolicyRequest';
+export * from './createPolicyRuleRequest';
 export * from './createSessionPlayerRequest';
 export * from './createSessionRequest';
 export * from './domainData';
 export * from './gas';
 export * from './interaction';
 export * from './inventoryResponse';
+export * from './jsonFragment';
 export * from './log';
 export * from './nextActionPayload';
 export * from './nextActionResponse';
@@ -35,16 +38,13 @@ export * from './playerResponse';
 export * from './playerTransferOwnershipRequest';
 export * from './playersResponse';
 export * from './policiesResponse';
-export * from './policyAllowFunctionRequest';
 export * from './policyDeleteResponse';
 export * from './policyResponse';
 export * from './policyResponsePolicyRulesInner';
 export * from './policyResponseTransactionIntentsInner';
 export * from './policyRuleDeleteResponse';
-export * from './policyRuleRequest';
 export * from './policyRuleResponse';
 export * from './policyRuleResponseContract';
-export * from './policyRuleUpdateRequest';
 export * from './policyRulesResponse';
 export * from './policySchema';
 export * from './policyStrategy';
@@ -72,6 +72,7 @@ export * from './transactionIntentsResponse';
 export * from './transferOwnershipRequest';
 export * from './typedDataField';
 export * from './updatePolicyRequest';
+export * from './updatePolicyRuleRequest';
 
 import * as fs from 'fs';
 
@@ -86,25 +87,28 @@ export interface RequestDetailedFile {
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
-import { AccountPlayerRequest } from './accountPlayerRequest';
-import { AccountRequest } from './accountRequest';
 import { AccountResponse } from './accountResponse';
 import { AccountsResponse } from './accountsResponse';
 import { ApiKeyResponse } from './apiKeyResponse';
 import { AssetInventory } from './assetInventory';
 import { AssetType } from './assetType';
 import { ContractDeleteResponse } from './contractDeleteResponse';
-import { ContractRequest } from './contractRequest';
 import { ContractResponse } from './contractResponse';
 import { ContractsResponse } from './contractsResponse';
+import { CreateAccountRequest } from './createAccountRequest';
+import { CreateContractRequest } from './createContractRequest';
+import { CreatePlayerAccountRequest } from './createPlayerAccountRequest';
 import { CreatePlayerRequest } from './createPlayerRequest';
+import { CreatePolicyAllowFunctionRequest } from './createPolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from './createPolicyRequest';
+import { CreatePolicyRuleRequest } from './createPolicyRuleRequest';
 import { CreateSessionPlayerRequest } from './createSessionPlayerRequest';
 import { CreateSessionRequest } from './createSessionRequest';
 import { DomainData } from './domainData';
 import { Gas } from './gas';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
+import { JsonFragment } from './jsonFragment';
 import { Log } from './log';
 import { NextActionPayload } from './nextActionPayload';
 import { NextActionResponse } from './nextActionResponse';
@@ -121,16 +125,13 @@ import { PlayerResponse } from './playerResponse';
 import { PlayerTransferOwnershipRequest } from './playerTransferOwnershipRequest';
 import { PlayersResponse } from './playersResponse';
 import { PoliciesResponse } from './policiesResponse';
-import { PolicyAllowFunctionRequest } from './policyAllowFunctionRequest';
 import { PolicyDeleteResponse } from './policyDeleteResponse';
 import { PolicyResponse } from './policyResponse';
 import { PolicyResponsePolicyRulesInner } from './policyResponsePolicyRulesInner';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 import { PolicyRuleDeleteResponse } from './policyRuleDeleteResponse';
-import { PolicyRuleRequest } from './policyRuleRequest';
 import { PolicyRuleResponse } from './policyRuleResponse';
 import { PolicyRuleResponseContract } from './policyRuleResponseContract';
-import { PolicyRuleUpdateRequest } from './policyRuleUpdateRequest';
 import { PolicyRulesResponse } from './policyRulesResponse';
 import { PolicySchema } from './policySchema';
 import { PolicyStrategy } from './policyStrategy';
@@ -158,6 +159,7 @@ import { TransactionIntentsResponse } from './transactionIntentsResponse';
 import { TransferOwnershipRequest } from './transferOwnershipRequest';
 import { TypedDataField } from './typedDataField';
 import { UpdatePolicyRequest } from './updatePolicyRequest';
+import { UpdatePolicyRuleRequest } from './updatePolicyRuleRequest';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -182,24 +184,27 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
-    "AccountPlayerRequest": AccountPlayerRequest,
-    "AccountRequest": AccountRequest,
     "AccountResponse": AccountResponse,
     "AccountsResponse": AccountsResponse,
     "ApiKeyResponse": ApiKeyResponse,
     "AssetInventory": AssetInventory,
     "ContractDeleteResponse": ContractDeleteResponse,
-    "ContractRequest": ContractRequest,
     "ContractResponse": ContractResponse,
     "ContractsResponse": ContractsResponse,
+    "CreateAccountRequest": CreateAccountRequest,
+    "CreateContractRequest": CreateContractRequest,
+    "CreatePlayerAccountRequest": CreatePlayerAccountRequest,
     "CreatePlayerRequest": CreatePlayerRequest,
+    "CreatePolicyAllowFunctionRequest": CreatePolicyAllowFunctionRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
+    "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateSessionPlayerRequest": CreateSessionPlayerRequest,
     "CreateSessionRequest": CreateSessionRequest,
     "DomainData": DomainData,
     "Gas": Gas,
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
+    "JsonFragment": JsonFragment,
     "Log": Log,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
@@ -213,16 +218,13 @@ let typeMap: {[index: string]: any} = {
     "PlayerTransferOwnershipRequest": PlayerTransferOwnershipRequest,
     "PlayersResponse": PlayersResponse,
     "PoliciesResponse": PoliciesResponse,
-    "PolicyAllowFunctionRequest": PolicyAllowFunctionRequest,
     "PolicyDeleteResponse": PolicyDeleteResponse,
     "PolicyResponse": PolicyResponse,
     "PolicyResponsePolicyRulesInner": PolicyResponsePolicyRulesInner,
     "PolicyResponseTransactionIntentsInner": PolicyResponseTransactionIntentsInner,
     "PolicyRuleDeleteResponse": PolicyRuleDeleteResponse,
-    "PolicyRuleRequest": PolicyRuleRequest,
     "PolicyRuleResponse": PolicyRuleResponse,
     "PolicyRuleResponseContract": PolicyRuleResponseContract,
-    "PolicyRuleUpdateRequest": PolicyRuleUpdateRequest,
     "PolicyRulesResponse": PolicyRulesResponse,
     "PolicyStrategy": PolicyStrategy,
     "ProjectLogs": ProjectLogs,
@@ -247,6 +249,7 @@ let typeMap: {[index: string]: any} = {
     "TransferOwnershipRequest": TransferOwnershipRequest,
     "TypedDataField": TypedDataField,
     "UpdatePolicyRequest": UpdatePolicyRequest,
+    "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
 }
 
 export class ObjectSerializer {

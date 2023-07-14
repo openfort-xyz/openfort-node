@@ -28,11 +28,11 @@ async function example() {
     console.dir(contract);
 
     const createSessionRequest: CreatePlayerSessionRequest = {
-        player_id: newPlayer.id,
+        playerId: newPlayer.id,
         address: "0x9590Ed0C18190a310f4e93CAccc4CC17270bED40",
-        chain_id: Number(getEnvVariable("OPENFORT_CHAINID")),
-        valid_until: 281474976710655,
-        valid_after: 0,
+        chainId: Number(getEnvVariable("OPENFORT_CHAINID")),
+        validUntil: 281474976710655,
+        validAfter: 0,
         policy: getEnvVariable("OPENFORT_POLICY"),
     };
     await openfort.players.createSession(createSessionRequest);
