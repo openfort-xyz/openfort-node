@@ -11,17 +11,18 @@
  */
 
 import { RequestFile } from './models';
+import { AbiType } from './abiType';
 
-export class JsonFragment {
+export class Abi {
     'name'?: string;
     'type'?: string;
     'anonymous'?: boolean;
     'payable'?: boolean;
     'constant'?: boolean;
     'stateMutability'?: string;
-    'inputs'?: object;
-    'outputs'?: object;
     'gas'?: string;
+    'inputs'?: Array<AbiType>;
+    'outputs'?: Array<AbiType>;
 
     static discriminator: string | undefined = undefined;
 
@@ -57,23 +58,23 @@ export class JsonFragment {
             "type": "string"
         },
         {
+            "name": "gas",
+            "baseName": "gas",
+            "type": "string"
+        },
+        {
             "name": "inputs",
             "baseName": "inputs",
-            "type": "object"
+            "type": "Array<AbiType>"
         },
         {
             "name": "outputs",
             "baseName": "outputs",
-            "type": "object"
-        },
-        {
-            "name": "gas",
-            "baseName": "gas",
-            "type": "string"
+            "type": "Array<AbiType>"
         }    ];
 
     static getAttributeTypeMap() {
-        return JsonFragment.attributeTypeMap;
+        return Abi.attributeTypeMap;
     }
 }
 

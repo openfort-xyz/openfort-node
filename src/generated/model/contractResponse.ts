@@ -11,7 +11,7 @@
  */
 
 import { RequestFile } from './models';
-import { JsonFragment } from './jsonFragment';
+import { Abi } from './abi';
 
 export class ContractResponse {
     'id': string;
@@ -20,7 +20,7 @@ export class ContractResponse {
     'name': string | null;
     'chainId': number;
     'address': string;
-    'abi': Array<JsonFragment>;
+    'abi': Array<Abi>;
     'publicVerification': boolean;
 
     static discriminator: string | undefined = undefined;
@@ -59,7 +59,7 @@ export class ContractResponse {
         {
             "name": "abi",
             "baseName": "abi",
-            "type": "Array<JsonFragment>"
+            "type": "Array<Abi>"
         },
         {
             "name": "publicVerification",

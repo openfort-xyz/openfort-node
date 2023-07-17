@@ -11,14 +11,13 @@
  */
 
 import { RequestFile } from './models';
-import { Abi } from './abi';
 
-export class CreateContractRequest {
-    'name': string;
-    'chainId': number;
-    'address': string;
-    'abi'?: Array<Abi>;
-    'publicVerification'?: boolean;
+export class AbiType {
+    'name'?: string;
+    'type'?: string;
+    'indexed'?: boolean;
+    'internalType'?: any | null;
+    'components'?: Array<AbiType>;
 
     static discriminator: string | undefined = undefined;
 
@@ -29,28 +28,28 @@ export class CreateContractRequest {
             "type": "string"
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
+            "name": "type",
+            "baseName": "type",
             "type": "string"
         },
         {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "Array<Abi>"
+            "name": "indexed",
+            "baseName": "indexed",
+            "type": "boolean"
         },
         {
-            "name": "publicVerification",
-            "baseName": "publicVerification",
-            "type": "boolean"
+            "name": "internalType",
+            "baseName": "internalType",
+            "type": "any"
+        },
+        {
+            "name": "components",
+            "baseName": "components",
+            "type": "Array<AbiType>"
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateContractRequest.attributeTypeMap;
+        return AbiType.attributeTypeMap;
     }
 }
 

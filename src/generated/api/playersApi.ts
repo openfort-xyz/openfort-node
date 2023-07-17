@@ -333,7 +333,7 @@ export class PlayersApi {
         });
     }
     /**
-     * Returns a list of your players for the query. The players are returned sorted by creation date, with the most recently created players appearing first.
+     * Retrieves the details of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
      * @param id Specifies the unique player ID.
      * @param expand 
      */
@@ -514,7 +514,7 @@ export class PlayersApi {
         }
 
         if (chainId !== undefined) {
-            localVarQueryParameters['chain_id'] = ObjectSerializer.serialize(chainId, "number");
+            localVarQueryParameters['chainId'] = ObjectSerializer.serialize(chainId, "number");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
