@@ -11,8 +11,8 @@
  */
 
 import { RequestFile } from './models';
+import { Abi } from './abi';
 import { ContractResponse } from './contractResponse';
-import { JsonFragment } from './jsonFragment';
 
 export class PolicyRuleResponseContract {
     'id': string;
@@ -21,7 +21,7 @@ export class PolicyRuleResponseContract {
     'name': string | null;
     'chainId': number;
     'address': string;
-    'abi': Array<JsonFragment>;
+    'abi': Array<Abi>;
     'publicVerification': boolean;
 
     static discriminator: string | undefined = undefined;
@@ -60,7 +60,7 @@ export class PolicyRuleResponseContract {
         {
             "name": "abi",
             "baseName": "abi",
-            "type": "Array<JsonFragment>"
+            "type": "Array<Abi>"
         },
         {
             "name": "publicVerification",

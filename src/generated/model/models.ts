@@ -1,5 +1,7 @@
 import localVarRequest from 'request';
 
+export * from './abi';
+export * from './abiType';
 export * from './accountResponse';
 export * from './accountsResponse';
 export * from './apiKeyResponse';
@@ -21,7 +23,6 @@ export * from './domainData';
 export * from './gas';
 export * from './interaction';
 export * from './inventoryResponse';
-export * from './jsonFragment';
 export * from './log';
 export * from './nextActionPayload';
 export * from './nextActionResponse';
@@ -87,6 +88,8 @@ export interface RequestDetailedFile {
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
+import { Abi } from './abi';
+import { AbiType } from './abiType';
 import { AccountResponse } from './accountResponse';
 import { AccountsResponse } from './accountsResponse';
 import { ApiKeyResponse } from './apiKeyResponse';
@@ -108,7 +111,6 @@ import { DomainData } from './domainData';
 import { Gas } from './gas';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
-import { JsonFragment } from './jsonFragment';
 import { Log } from './log';
 import { NextActionPayload } from './nextActionPayload';
 import { NextActionResponse } from './nextActionResponse';
@@ -184,6 +186,8 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+    "Abi": Abi,
+    "AbiType": AbiType,
     "AccountResponse": AccountResponse,
     "AccountsResponse": AccountsResponse,
     "ApiKeyResponse": ApiKeyResponse,
@@ -204,7 +208,6 @@ let typeMap: {[index: string]: any} = {
     "Gas": Gas,
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
-    "JsonFragment": JsonFragment,
     "Log": Log,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,

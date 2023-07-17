@@ -11,15 +11,15 @@ function getEnvVariable(name: string): string {
 
 async function example() {
     const openfort = new Openfort(getEnvVariable("OPENFORT_APIKEY"), process.env.OPENFORT_BASEURL);
-    const players: PlayersResponse = await openfort.players.list();
+    const createPlayerRequest: CreatePlayerRequest = {
+        name: "Test 1234",
+    };
+    const newPlayer = await openfort.players.create(createPlayerRequest);
+
+    const players: PlayersResponse = await openfort.players.list({filter: {name: "Test 1234"}});
     for (const player of players.data) {
         console.log(player.id);
     }
-
-    const createPlayerRequest: CreatePlayerRequest = {
-        name: "Test",
-    };
-    const newPlayer = await openfort.players.create(createPlayerRequest);
 
     const policy = await openfort.policies.get({id: getEnvVariable("OPENFORT_POLICY")});
     console.dir(policy);
