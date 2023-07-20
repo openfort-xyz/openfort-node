@@ -20,6 +20,7 @@ export class TransactionIntentResponseAccount {
     'object': string;
     'createdAt': number;
     'address': string;
+    'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
     'chainId': number;
@@ -47,6 +48,11 @@ export class TransactionIntentResponseAccount {
         {
             "name": "address",
             "baseName": "address",
+            "type": "string"
+        },
+        {
+            "name": "ownerAddress",
+            "baseName": "ownerAddress",
             "type": "string"
         },
         {

@@ -18,6 +18,7 @@ export class AccountResponse {
     'object': string;
     'createdAt': number;
     'address': string;
+    'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
     'chainId': number;
@@ -45,6 +46,11 @@ export class AccountResponse {
         {
             "name": "address",
             "baseName": "address",
+            "type": "string"
+        },
+        {
+            "name": "ownerAddress",
+            "baseName": "ownerAddress",
             "type": "string"
         },
         {

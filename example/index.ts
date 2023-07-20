@@ -21,6 +21,11 @@ async function example() {
         console.log(player.id);
     }
 
+    const account = await openfort.accounts.create({
+        player: newPlayer.id,
+        chainId: Number(getEnvVariable("OPENFORT_CHAINID")),
+    });
+    console.dir();
     const policy = await openfort.policies.get({id: getEnvVariable("OPENFORT_POLICY")});
     console.dir(policy);
 

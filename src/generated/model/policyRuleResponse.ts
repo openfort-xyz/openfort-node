@@ -19,8 +19,8 @@ export class PolicyRuleResponse {
     'object': string;
     'createdAt': number;
     'type': PolicySchema;
-    'functionName': string | null;
-    'contract': PolicyRuleResponseContract | null;
+    'functionName'?: string;
+    'contract'?: PolicyRuleResponseContract;
 
     static discriminator: string | undefined = undefined;
 

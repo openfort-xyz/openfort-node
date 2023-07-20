@@ -32,6 +32,7 @@ export * from './nextActionType';
 export * from './pKLocation';
 export * from './pKPolicy';
 export * from './pickAccountResponseId';
+export * from './pickContractResponseId';
 export * from './pickPlayerResponseId';
 export * from './pickPolicyResponseId';
 export * from './pickPolicyRuleResponseId';
@@ -121,6 +122,7 @@ import { NextActionType } from './nextActionType';
 import { PKLocation } from './pKLocation';
 import { PKPolicy } from './pKPolicy';
 import { PickAccountResponseId } from './pickAccountResponseId';
+import { PickContractResponseId } from './pickContractResponseId';
 import { PickPlayerResponseId } from './pickPlayerResponseId';
 import { PickPolicyResponseId } from './pickPolicyResponseId';
 import { PickPolicyRuleResponseId } from './pickPolicyRuleResponseId';
@@ -216,6 +218,7 @@ let typeMap: {[index: string]: any} = {
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
     "PickAccountResponseId": PickAccountResponseId,
+    "PickContractResponseId": PickContractResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
     "PickPolicyResponseId": PickPolicyResponseId,
     "PickPolicyRuleResponseId": PickPolicyRuleResponseId,
