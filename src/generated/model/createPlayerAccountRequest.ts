@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { DataAccountTypes } from './dataAccountTypes';
 
 export class CreatePlayerAccountRequest {
     /**
@@ -21,6 +22,15 @@ export class CreatePlayerAccountRequest {
     * The address of the external owner
     */
     'externalOwnerAddress'?: string;
+    'accountType'?: DataAccountTypes;
+    /**
+    * If ERC6551, the NFT contract to use
+    */
+    'tokenContract'?: string;
+    /**
+    * If ERC6551, the tokenID to serve as owner
+    */
+    'tokenId'?: number;
 
     static discriminator: string | undefined = undefined;
 
@@ -34,6 +44,21 @@ export class CreatePlayerAccountRequest {
             "name": "externalOwnerAddress",
             "baseName": "externalOwnerAddress",
             "type": "string"
+        },
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "DataAccountTypes"
+        },
+        {
+            "name": "tokenContract",
+            "baseName": "tokenContract",
+            "type": "string"
+        },
+        {
+            "name": "tokenId",
+            "baseName": "tokenId",
+            "type": "number"
         }    ];
 
     static getAttributeTypeMap() {
@@ -41,3 +66,5 @@ export class CreatePlayerAccountRequest {
     }
 }
 
+export namespace CreatePlayerAccountRequest {
+}

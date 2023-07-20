@@ -1,17 +1,15 @@
 import {httpErrorHandler} from "./httpErrorHandler";
 import {PoliciesApi} from "../generated/api/policiesApi";
 import {
-    Gas,
     PoliciesResponse,
     PolicyDeleteResponse,
     PolicyResponse,
     PolicyRuleResponse,
     PolicyRulesResponse,
-    SumGas,
     ListPoliciesRequest,
     GetPolicyRequest,
     GetAllowFunctionsRequest,
-    GetPolicyDailyGasUsageRequest,
+    GasReport,
     UpdatePolicyAllowFunctionRequest,
     GetPolicyTotalGasUsageRequest,
     CreatePolicyRequest,
@@ -102,22 +100,12 @@ export class PoliciesApiWrapper {
     }
 
     /**
-     * Get daily gas usage by policy
-     * @param req Criteria to get usage
-     */
-    @httpErrorHandler()
-    public async getDailyGasUsage(req: GetPolicyDailyGasUsageRequest): Promise<Gas> {
-        const response = await this._api.getPolicyDailyGasUsage(req.id, req.from, req.to);
-        return response.body;
-    }
-
-    /**
      * Get policy total gas usage
      * @param req Criteria to get usage
      */
     @httpErrorHandler()
-    public async getPolicyTotalGasUsage(req: GetPolicyTotalGasUsageRequest): Promise<SumGas> {
-        const response = await this._api.getPolicyTotalGasUsage(req.id, req.from, req.to);
+    public async getPolicyTotalGasUsage(req: GetPolicyTotalGasUsageRequest): Promise<GasReport> {
+        const response = await this._api.getPolicyTotalGasUsage(req.id);
         return response.body;
     }
 

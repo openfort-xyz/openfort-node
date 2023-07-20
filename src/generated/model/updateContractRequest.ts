@@ -12,37 +12,18 @@
 
 import { RequestFile } from './models';
 import { Abi } from './abi';
-import { ContractResponse } from './contractResponse';
 
-export class PolicyRuleResponseContract {
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'name': string | null;
-    'chainId': number;
-    'address': string;
-    'deleted': boolean;
-    'abi': Array<Abi>;
-    'publicVerification': boolean;
+export class UpdateContractRequest {
+    'name'?: string;
+    'chainId'?: number;
+    'deleted'?: boolean;
+    'address'?: string;
+    'abi'?: Array<Abi>;
+    'publicVerification'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
-        },
         {
             "name": "name",
             "baseName": "name",
@@ -54,14 +35,14 @@ export class PolicyRuleResponseContract {
             "type": "number"
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
-        },
-        {
             "name": "deleted",
             "baseName": "deleted",
             "type": "boolean"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string"
         },
         {
             "name": "abi",
@@ -75,7 +56,7 @@ export class PolicyRuleResponseContract {
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleResponseContract.attributeTypeMap;
+        return UpdateContractRequest.attributeTypeMap;
     }
 }
 

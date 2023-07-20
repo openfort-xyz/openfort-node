@@ -16,6 +16,7 @@ import { PolicyStrategy } from './policyStrategy';
 export class UpdatePolicyRequest {
     'name'?: string;
     'chainId'?: number;
+    'deleted'?: boolean;
     'strategy'?: PolicyStrategy;
 
     static discriminator: string | undefined = undefined;
@@ -30,6 +31,11 @@ export class UpdatePolicyRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number"
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean"
         },
         {
             "name": "strategy",

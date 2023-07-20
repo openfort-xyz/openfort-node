@@ -19,8 +19,10 @@ export * from './createPolicyRequest';
 export * from './createPolicyRuleRequest';
 export * from './createSessionPlayerRequest';
 export * from './createSessionRequest';
+export * from './createTransactionIntentRequest';
+export * from './dataAccountTypes';
 export * from './domainData';
-export * from './gas';
+export * from './gasReport';
 export * from './interaction';
 export * from './inventoryResponse';
 export * from './log';
@@ -63,8 +65,6 @@ export * from './signPayloadResponse';
 export * from './signatureRequest';
 export * from './sortOrder';
 export * from './sponsorSchema';
-export * from './sumGas';
-export * from './transactionIntentRequest';
 export * from './transactionIntentResponse';
 export * from './transactionIntentResponseAccount';
 export * from './transactionIntentResponsePlayer';
@@ -72,6 +72,7 @@ export * from './transactionIntentResponsePolicy';
 export * from './transactionIntentsResponse';
 export * from './transferOwnershipRequest';
 export * from './typedDataField';
+export * from './updateContractRequest';
 export * from './updatePolicyRequest';
 export * from './updatePolicyRuleRequest';
 
@@ -107,8 +108,10 @@ import { CreatePolicyRequest } from './createPolicyRequest';
 import { CreatePolicyRuleRequest } from './createPolicyRuleRequest';
 import { CreateSessionPlayerRequest } from './createSessionPlayerRequest';
 import { CreateSessionRequest } from './createSessionRequest';
+import { CreateTransactionIntentRequest } from './createTransactionIntentRequest';
+import { DataAccountTypes } from './dataAccountTypes';
 import { DomainData } from './domainData';
-import { Gas } from './gas';
+import { GasReport } from './gasReport';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
 import { Log } from './log';
@@ -151,8 +154,6 @@ import { SignPayloadResponse } from './signPayloadResponse';
 import { SignatureRequest } from './signatureRequest';
 import { SortOrder } from './sortOrder';
 import { SponsorSchema } from './sponsorSchema';
-import { SumGas } from './sumGas';
-import { TransactionIntentRequest } from './transactionIntentRequest';
 import { TransactionIntentResponse } from './transactionIntentResponse';
 import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlayer';
@@ -160,6 +161,7 @@ import { TransactionIntentResponsePolicy } from './transactionIntentResponsePoli
 import { TransactionIntentsResponse } from './transactionIntentsResponse';
 import { TransferOwnershipRequest } from './transferOwnershipRequest';
 import { TypedDataField } from './typedDataField';
+import { UpdateContractRequest } from './updateContractRequest';
 import { UpdatePolicyRequest } from './updatePolicyRequest';
 import { UpdatePolicyRuleRequest } from './updatePolicyRuleRequest';
 
@@ -177,6 +179,7 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "AssetType": AssetType,
+        "DataAccountTypes": DataAccountTypes,
         "NextActionType": NextActionType,
         "PKLocation": PKLocation,
         "PKPolicy": PKPolicy,
@@ -204,8 +207,9 @@ let typeMap: {[index: string]: any} = {
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateSessionPlayerRequest": CreateSessionPlayerRequest,
     "CreateSessionRequest": CreateSessionRequest,
+    "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "DomainData": DomainData,
-    "Gas": Gas,
+    "GasReport": GasReport,
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
     "Log": Log,
@@ -242,8 +246,6 @@ let typeMap: {[index: string]: any} = {
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
-    "SumGas": SumGas,
-    "TransactionIntentRequest": TransactionIntentRequest,
     "TransactionIntentResponse": TransactionIntentResponse,
     "TransactionIntentResponseAccount": TransactionIntentResponseAccount,
     "TransactionIntentResponsePlayer": TransactionIntentResponsePlayer,
@@ -251,6 +253,7 @@ let typeMap: {[index: string]: any} = {
     "TransactionIntentsResponse": TransactionIntentsResponse,
     "TransferOwnershipRequest": TransferOwnershipRequest,
     "TypedDataField": TypedDataField,
+    "UpdateContractRequest": UpdateContractRequest,
     "UpdatePolicyRequest": UpdatePolicyRequest,
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
 }

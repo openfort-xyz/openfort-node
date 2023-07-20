@@ -23,6 +23,7 @@ export class TransactionIntentResponseAccount {
     'deployed': boolean;
     'custodial': boolean;
     'chainId': number;
+    'accountType': string;
     'transactionIntents': Array<PolicyResponseTransactionIntentsInner>;
 
     static discriminator: string | undefined = undefined;
@@ -62,6 +63,11 @@ export class TransactionIntentResponseAccount {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number"
+        },
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "string"
         },
         {
             "name": "transactionIntents",

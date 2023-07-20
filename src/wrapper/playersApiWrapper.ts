@@ -98,7 +98,13 @@ export class PlayersApiWrapper {
      */
     @httpErrorHandler()
     public async list(req?: ListPlayersRequest): Promise<PlayersResponse> {
-        const response = await this._api.getPlayers(req?.expand, req?.limit, req?.filter ? JSON.stringify(req.filter) : undefined, req?.order, req?.skip);
+        const response = await this._api.getPlayers(
+            req?.expand,
+            req?.limit,
+            req?.filter ? JSON.stringify(req.filter) : undefined,
+            req?.order,
+            req?.skip,
+        );
         return response.body;
     }
 

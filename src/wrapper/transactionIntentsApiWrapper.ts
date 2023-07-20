@@ -5,10 +5,10 @@ import {
     ListTransactionIntentsRequest,
     UpdateTransactionIntentRequest,
     SignatureTransactionIntentRequest,
+    TransactionIntentResponse,
+    TransactionIntentsResponse,
+    CreateTransactionIntentRequest,
 } from "../model";
-import {TransactionIntentResponse} from "../generated/model/transactionIntentResponse";
-import {TransactionIntentsResponse} from "../generated/model/transactionIntentsResponse";
-import {TransactionIntentRequest} from "../generated/model/transactionIntentRequest";
 import {PACKAGE, VERSION} from "../version";
 
 export class TransactionIntentsApiWrapper {
@@ -25,7 +25,7 @@ export class TransactionIntentsApiWrapper {
      * @param req Parameters to create transaction intent
      */
     @httpErrorHandler()
-    public async create(req: TransactionIntentRequest): Promise<TransactionIntentResponse> {
+    public async create(req: CreateTransactionIntentRequest): Promise<TransactionIntentResponse> {
         const response = await this._api.createTransactionIntent(req);
         return response.body;
     }
