@@ -13,6 +13,7 @@
 import { RequestFile } from './models';
 import { Abi } from './abi';
 import { ContractResponse } from './contractResponse';
+import { PickContractResponseId } from './pickContractResponseId';
 
 export class PolicyRuleResponseContract {
     'id': string;

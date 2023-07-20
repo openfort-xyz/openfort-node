@@ -17,7 +17,7 @@ import { TypedDataField } from './typedDataField';
 export class SignPayloadRequest {
     'domain': DomainData;
     'types': { [key: string]: Array<TypedDataField>; };
-    'primaryType'?: string;
+    'primaryType': string;
     'value': { [key: string]: any; };
     /**
     * Hash to verify and that will be signed
