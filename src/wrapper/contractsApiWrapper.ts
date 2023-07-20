@@ -7,6 +7,7 @@ import {
     ContractsResponse,
     ContractResponse,
     CreateContractRequest,
+    UpdateContractRequest,
 } from "../model";
 import {PACKAGE, VERSION} from "../version";
 
@@ -26,6 +27,17 @@ export class ContractsApiWrapper {
     @httpErrorHandler()
     public async create(req: CreateContractRequest): Promise<ContractResponse> {
         const response = await this._api.createContract(req);
+        return response.body;
+    }
+
+    /**
+     * Updates a contract object.
+     * @param req Parameters to update the contract
+     */
+    @httpErrorHandler()
+    public async update(req: UpdateContractRequest): Promise<ContractResponse> {
+        const {id, ...body} = req;
+        const response = await this._api.updateContract(id, body);
         return response.body;
     }
 

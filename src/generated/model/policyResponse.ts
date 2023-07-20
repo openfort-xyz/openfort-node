@@ -20,6 +20,7 @@ export class PolicyResponse {
     'object': string;
     'createdAt': number;
     'name': string | null;
+    'deleted': boolean;
     'chainId': number;
     'strategy': PolicyStrategy;
     'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
@@ -47,6 +48,11 @@ export class PolicyResponse {
             "name": "name",
             "baseName": "name",
             "type": "string"
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean"
         },
         {
             "name": "chainId",

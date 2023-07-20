@@ -12,8 +12,8 @@
 
 import { RequestFile } from './models';
 
-export enum PKLocation {
-    Db = <any> 'DB',
-    GcpKms = <any> 'GCP_KMS',
-    User = <any> 'USER'
+export enum DataAccountTypes {
+    Upgradeable = <any> 'Upgradeable',
+    Managed = <any> 'Managed',
+    Erc6551 = <any> 'ERC6551'
 }

@@ -20,6 +20,7 @@ export class ContractResponse {
     'name': string | null;
     'chainId': number;
     'address': string;
+    'deleted': boolean;
     'abi': Array<Abi>;
     'publicVerification': boolean;
 
@@ -55,6 +56,11 @@ export class ContractResponse {
             "name": "address",
             "baseName": "address",
             "type": "string"
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean"
         },
         {
             "name": "abi",

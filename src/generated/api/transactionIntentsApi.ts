@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { CreateTransactionIntentRequest } from '../model/createTransactionIntentRequest';
 import { SignatureRequest } from '../model/signatureRequest';
 import { SortOrder } from '../model/sortOrder';
-import { TransactionIntentRequest } from '../model/transactionIntentRequest';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
 import { TransactionIntentsResponse } from '../model/transactionIntentsResponse';
 
@@ -98,9 +98,9 @@ export class TransactionIntentsApi {
 
     /**
      * Creates a transaction intent object.
-     * @param transactionIntentRequest 
+     * @param createTransactionIntentRequest 
      */
-    public async createTransactionIntent (transactionIntentRequest: TransactionIntentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async createTransactionIntent (createTransactionIntentRequest: CreateTransactionIntentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -113,9 +113,9 @@ export class TransactionIntentsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'transactionIntentRequest' is not null or undefined
-        if (transactionIntentRequest === null || transactionIntentRequest === undefined) {
-            throw new Error('Required parameter transactionIntentRequest was null or undefined when calling createTransactionIntent.');
+        // verify required parameter 'createTransactionIntentRequest' is not null or undefined
+        if (createTransactionIntentRequest === null || createTransactionIntentRequest === undefined) {
+            throw new Error('Required parameter createTransactionIntentRequest was null or undefined when calling createTransactionIntent.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -129,7 +129,7 @@ export class TransactionIntentsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(transactionIntentRequest, "TransactionIntentRequest")
+            body: ObjectSerializer.serialize(createTransactionIntentRequest, "CreateTransactionIntentRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -246,7 +246,7 @@ export class TransactionIntentsApi {
      * @param order 
      * @param skip 
      */
-    public async getTransactionIntents (expand?: Array<string>, limit?: number, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
+    public async getTransactionIntents (expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, limit?: number, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -260,7 +260,7 @@ export class TransactionIntentsApi {
         let localVarFormParams: any = {};
 
         if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'nextAction' | 'policy' | 'player' | 'account'>");
         }
 
         if (limit !== undefined) {

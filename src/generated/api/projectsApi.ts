@@ -131,6 +131,9 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -199,6 +202,9 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -260,6 +266,9 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -335,6 +344,9 @@ export class ProjectsApi {
         };
 
         let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;

@@ -12,10 +12,9 @@
 
 import { RequestFile } from './models';
 
-export class Gas {
+export class GasReport {
     'object': string;
-    'url': string;
-    'dailyGasUsage': { [key: string]: number; };
+    'data': Array<any>;
 
     static discriminator: string | undefined = undefined;
 
@@ -26,18 +25,13 @@ export class Gas {
             "type": "string"
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
-        },
-        {
-            "name": "dailyGasUsage",
-            "baseName": "dailyGasUsage",
-            "type": "{ [key: string]: number; }"
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<any>"
         }    ];
 
     static getAttributeTypeMap() {
-        return Gas.attributeTypeMap;
+        return GasReport.attributeTypeMap;
     }
 }
 

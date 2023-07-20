@@ -19,6 +19,10 @@ import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlay
 import { TransactionIntentResponsePolicy } from './transactionIntentResponsePolicy';
 
 export class TransactionIntentResponse {
+    'nextAction'?: NextActionResponse;
+    'policy'?: TransactionIntentResponsePolicy;
+    'player'?: TransactionIntentResponsePlayer;
+    'account'?: TransactionIntentResponseAccount;
     'id': string;
     'object': string;
     'createdAt': number;
@@ -26,16 +30,32 @@ export class TransactionIntentResponse {
     'chainId': number;
     'userOperationHash'?: string;
     'userOperation'?: any | null;
-    'nextAction'?: NextActionResponse;
     'response'?: ResponseResponse;
-    'policy'?: TransactionIntentResponsePolicy;
-    'player'?: TransactionIntentResponsePlayer;
-    'account'?: TransactionIntentResponseAccount;
     'interactions'?: Array<Interaction>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "nextAction",
+            "baseName": "nextAction",
+            "type": "NextActionResponse"
+        },
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "TransactionIntentResponsePolicy"
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "TransactionIntentResponsePlayer"
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "TransactionIntentResponseAccount"
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -72,29 +92,9 @@ export class TransactionIntentResponse {
             "type": "any"
         },
         {
-            "name": "nextAction",
-            "baseName": "nextAction",
-            "type": "NextActionResponse"
-        },
-        {
             "name": "response",
             "baseName": "response",
             "type": "ResponseResponse"
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "TransactionIntentResponsePolicy"
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "TransactionIntentResponsePlayer"
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "TransactionIntentResponseAccount"
         },
         {
             "name": "interactions",

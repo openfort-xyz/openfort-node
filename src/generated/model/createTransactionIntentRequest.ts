@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 import { Interaction } from './interaction';
 
-export class TransactionIntentRequest {
+export class CreateTransactionIntentRequest {
     'player': string;
     'chainId': number;
     'policy'?: string;
@@ -56,7 +56,7 @@ export class TransactionIntentRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return TransactionIntentRequest.attributeTypeMap;
+        return CreateTransactionIntentRequest.attributeTypeMap;
     }
 }
 
