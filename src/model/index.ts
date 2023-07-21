@@ -29,3 +29,4 @@ export * from "./updateTransactionIntentRequest";
 export {UpdatePolicyRequest} from "./updatePolicyRequest";
 export {UpdatePolicyRuleRequest} from "./updatePolicyRuleRequest";
 export {UpdateContractRequest} from "./updateContractRequest";
+export {SignPayloadRequest} from "./SignPayloadRequest";
