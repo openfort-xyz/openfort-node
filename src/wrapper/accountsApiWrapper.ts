@@ -10,6 +10,8 @@ import {
     ListAccountsRequest,
     TransferAccountOwnershipRequest,
     CreateAccountRequest,
+    SignPayloadResponse,
+    SignPayloadRequest,
 } from "../model";
 import {PACKAGE, VERSION} from "../version";
 
@@ -70,6 +72,17 @@ export class AccountsApiWrapper {
     public async transferOwnership(req: TransferAccountOwnershipRequest): Promise<TransactionIntentResponse> {
         const {id, ...body} = req;
         const response = await this._api.transferOwnership(id, body);
+        return response.body;
+    }
+
+    /**
+     * Sign a given payload
+     * @param req Parameters to sign payload
+     */
+    @httpErrorHandler()
+    public async signPayload(req: SignPayloadRequest): Promise<SignPayloadResponse> {
+        const {id, ...body} = req;
+        const response = await this._api.signPayload(id, body);
         return response.body;
     }
 }
