@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export enum DataAccountTypes {
-    Upgradeable = <any> 'Upgradeable',
-    Managed = <any> 'Managed',
-    Erc6551 = <any> 'ERC6551'
+    Upgradeable = 'Upgradeable',
+    Managed = 'Managed',
+    Erc6551 = 'ERC6551'
 }

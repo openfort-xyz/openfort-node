@@ -13,6 +13,6 @@
 import { RequestFile } from './models';
 
 export enum SponsorSchema {
-    PayForUser = <any> 'pay_for_user',
-    ChargeCustomTokens = <any> 'charge_custom_tokens'
+    PayForUser = 'pay_for_user',
+    ChargeCustomTokens = 'charge_custom_tokens'
 }

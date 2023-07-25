@@ -19,10 +19,6 @@ export class CreateAccountRequest {
     */
     'chainId': number;
     /**
-    * The player ID
-    */
-    'player': string;
-    /**
     * The address of the external owner
     */
     'externalOwnerAddress'?: string;
@@ -35,6 +31,10 @@ export class CreateAccountRequest {
     * If ERC6551, the tokenID to serve as owner
     */
     'tokenId'?: number;
+    /**
+    * The player ID
+    */
+    'player': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -43,11 +43,6 @@ export class CreateAccountRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number"
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
         },
         {
             "name": "externalOwnerAddress",
@@ -68,6 +63,11 @@ export class CreateAccountRequest {
             "name": "tokenId",
             "baseName": "tokenId",
             "type": "number"
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
