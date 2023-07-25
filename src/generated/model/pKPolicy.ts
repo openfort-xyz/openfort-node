@@ -13,6 +13,6 @@
 import { RequestFile } from './models';
 
 export enum PKPolicy {
-    Individual = <any> 'INDIVIDUAL',
-    Project = <any> 'PROJECT'
+    Individual = 'INDIVIDUAL',
+    Project = 'PROJECT'
 }

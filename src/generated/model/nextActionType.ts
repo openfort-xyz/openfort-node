@@ -13,5 +13,5 @@
 import { RequestFile } from './models';
 
 export enum NextActionType {
-    SignWithWallet = <any> 'sign_with_wallet'
+    SignWithWallet = 'sign_with_wallet'
 }

@@ -13,6 +13,6 @@
 import { RequestFile } from './models';
 
 export enum SortOrder {
-    Asc = <any> 'asc',
-    Desc = <any> 'desc'
+    Asc = 'asc',
+    Desc = 'desc'
 }

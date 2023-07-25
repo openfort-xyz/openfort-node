@@ -13,6 +13,6 @@
 import { RequestFile } from './models';
 
 export enum PolicySchema {
-    ContractFunctions = <any> 'contract_functions',
-    AccountFunctions = <any> 'account_functions'
+    ContractFunctions = 'contract_functions',
+    AccountFunctions = 'account_functions'
 }
