@@ -10,35 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AccountResponse } from './accountResponse';
+import { RequestFile } from "./models";
+import { AccountResponse } from "./accountResponse";
 
 export class AccountsResponse {
-    'object': string;
-    'url': string;
-    'data': Array<AccountResponse>;
+    object: string;
+    url: string;
+    data: Array<AccountResponse>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
+            name: "url",
+            baseName: "url",
+            type: "string",
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<AccountResponse>"
-        }    ];
+            name: "data",
+            baseName: "data",
+            type: "Array<AccountResponse>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return AccountsResponse.attributeTypeMap;
     }
 }
-

@@ -10,52 +10,52 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class PlayerTransferOwnershipRequest {
     /**
-    * The policy ID
-    */
-    'policy': string;
+     * The policy ID
+     */
+    policy: string;
     /**
-    * The chain id where the account is.
-    */
-    'chainId': number;
+     * The chain id where the account is.
+     */
+    chainId: number;
     /**
-    * The address of the new owner
-    */
-    'newOwnerAddress': string;
+     * The address of the new owner
+     */
+    newOwnerAddress: string;
     /**
-    * The player ID
-    */
-    'player'?: string;
+     * The player ID
+     */
+    player?: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string"
+            name: "policy",
+            baseName: "policy",
+            type: "string",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "newOwnerAddress",
-            "baseName": "newOwnerAddress",
-            "type": "string"
+            name: "newOwnerAddress",
+            baseName: "newOwnerAddress",
+            type: "string",
         },
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
-        }    ];
+            name: "player",
+            baseName: "player",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return PlayerTransferOwnershipRequest.attributeTypeMap;
     }
 }
-

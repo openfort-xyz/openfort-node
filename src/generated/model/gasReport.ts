@@ -10,28 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class GasReport {
-    'object': string;
-    'data': Array<any>;
+    object: string;
+    data: Array<any>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<any>"
-        }    ];
+            name: "data",
+            baseName: "data",
+            type: "Array<any>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return GasReport.attributeTypeMap;
     }
 }
-

@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum PKPolicy {
-    Individual = 'INDIVIDUAL',
-    Project = 'PROJECT'
+    Individual = "INDIVIDUAL",
+    Project = "PROJECT",
 }

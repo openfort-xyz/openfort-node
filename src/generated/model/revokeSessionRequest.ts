@@ -10,46 +10,46 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class RevokeSessionRequest {
-    'player': string;
-    'chainId': number;
-    'optimistic'?: boolean;
-    'address': string;
-    'policy'?: string;
+    player: string;
+    chainId: number;
+    optimistic?: boolean;
+    address: string;
+    policy?: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
+            name: "player",
+            baseName: "player",
+            type: "string",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "optimistic",
-            "baseName": "optimistic",
-            "type": "boolean"
+            name: "optimistic",
+            baseName: "optimistic",
+            type: "boolean",
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
+            name: "address",
+            baseName: "address",
+            type: "string",
         },
         {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string"
-        }    ];
+            name: "policy",
+            baseName: "policy",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return RevokeSessionRequest.attributeTypeMap;
     }
 }
-

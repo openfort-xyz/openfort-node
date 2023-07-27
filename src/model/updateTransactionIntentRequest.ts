@@ -1,3 +1,3 @@
 export interface UpdateTransactionIntentRequest {
-	id: string;
+    id: string;
 }

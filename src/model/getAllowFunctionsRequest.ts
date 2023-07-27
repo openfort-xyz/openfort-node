@@ -1,4 +1,4 @@
 export interface GetAllowFunctionsRequest {
-	id: string;
-	expand?: string[];
+    id: string;
+    expand?: string[];
 }

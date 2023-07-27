@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum NextActionType {
-    SignWithWallet = 'sign_with_wallet'
+    SignWithWallet = "sign_with_wallet",
 }

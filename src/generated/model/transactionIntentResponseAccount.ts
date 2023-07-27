@@ -10,79 +10,79 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AccountResponse } from './accountResponse';
-import { PickAccountResponseId } from './pickAccountResponseId';
-import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
+import { RequestFile } from "./models";
+import { AccountResponse } from "./accountResponse";
+import { PickAccountResponseId } from "./pickAccountResponseId";
+import { PolicyResponseTransactionIntentsInner } from "./policyResponseTransactionIntentsInner";
 
 export class TransactionIntentResponseAccount {
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'address': string;
-    'ownerAddress': string;
-    'deployed': boolean;
-    'custodial': boolean;
-    'chainId': number;
-    'accountType': string;
-    'transactionIntents': Array<PolicyResponseTransactionIntentsInner>;
+    id: string;
+    object: string;
+    createdAt: number;
+    address: string;
+    ownerAddress: string;
+    deployed: boolean;
+    custodial: boolean;
+    chainId: number;
+    accountType: string;
+    transactionIntents: Array<PolicyResponseTransactionIntentsInner>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
+            name: "address",
+            baseName: "address",
+            type: "string",
         },
         {
-            "name": "ownerAddress",
-            "baseName": "ownerAddress",
-            "type": "string"
+            name: "ownerAddress",
+            baseName: "ownerAddress",
+            type: "string",
         },
         {
-            "name": "deployed",
-            "baseName": "deployed",
-            "type": "boolean"
+            name: "deployed",
+            baseName: "deployed",
+            type: "boolean",
         },
         {
-            "name": "custodial",
-            "baseName": "custodial",
-            "type": "boolean"
+            name: "custodial",
+            baseName: "custodial",
+            type: "boolean",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "accountType",
-            "baseName": "accountType",
-            "type": "string"
+            name: "accountType",
+            baseName: "accountType",
+            type: "string",
         },
         {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
-        }    ];
+            name: "transactionIntents",
+            baseName: "transactionIntents",
+            type: "Array<PolicyResponseTransactionIntentsInner>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return TransactionIntentResponseAccount.attributeTypeMap;
     }
 }
-

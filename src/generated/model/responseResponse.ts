@@ -10,65 +10,65 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Log } from './log';
+import { RequestFile } from "./models";
+import { Log } from "./log";
 
 export class ResponseResponse {
-    'createdAt': number;
-    'blockNumber'?: number;
-    'transactionHash'?: string;
-    'gasUsed'?: number;
-    'status'?: number;
-    'logs'?: Array<Log>;
-    'to'?: string;
-    'error'?: any | null;
+    createdAt: number;
+    blockNumber?: number;
+    transactionHash?: string;
+    gasUsed?: number;
+    status?: number;
+    logs?: Array<Log>;
+    to?: string;
+    error?: any | null;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "blockNumber",
-            "baseName": "blockNumber",
-            "type": "number"
+            name: "blockNumber",
+            baseName: "blockNumber",
+            type: "number",
         },
         {
-            "name": "transactionHash",
-            "baseName": "transactionHash",
-            "type": "string"
+            name: "transactionHash",
+            baseName: "transactionHash",
+            type: "string",
         },
         {
-            "name": "gasUsed",
-            "baseName": "gasUsed",
-            "type": "number"
+            name: "gasUsed",
+            baseName: "gasUsed",
+            type: "number",
         },
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "number"
+            name: "status",
+            baseName: "status",
+            type: "number",
         },
         {
-            "name": "logs",
-            "baseName": "logs",
-            "type": "Array<Log>"
+            name: "logs",
+            baseName: "logs",
+            type: "Array<Log>",
         },
         {
-            "name": "to",
-            "baseName": "to",
-            "type": "string"
+            name: "to",
+            baseName: "to",
+            type: "string",
         },
         {
-            "name": "error",
-            "baseName": "error",
-            "type": "any"
-        }    ];
+            name: "error",
+            baseName: "error",
+            type: "any",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return ResponseResponse.attributeTypeMap;
     }
 }
-

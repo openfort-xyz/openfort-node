@@ -10,32 +10,32 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { NextActionPayload } from './nextActionPayload';
-import { NextActionType } from './nextActionType';
+import { RequestFile } from "./models";
+import { NextActionPayload } from "./nextActionPayload";
+import { NextActionType } from "./nextActionType";
 
 export class NextActionResponse {
-    'type': NextActionType;
-    'payload': NextActionPayload;
+    type: NextActionType;
+    payload: NextActionPayload;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "NextActionType"
+            name: "type",
+            baseName: "type",
+            type: "NextActionType",
         },
         {
-            "name": "payload",
-            "baseName": "payload",
-            "type": "NextActionPayload"
-        }    ];
+            name: "payload",
+            baseName: "payload",
+            type: "NextActionPayload",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return NextActionResponse.attributeTypeMap;
     }
 }
 
-export namespace NextActionResponse {
-}
+export namespace NextActionResponse {}

@@ -10,40 +10,40 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class DomainData {
-    'chainId': number;
-    'name'?: string;
-    'version'?: string;
-    'verifyingContract'?: string;
+    chainId: number;
+    name?: string;
+    version?: string;
+    verifyingContract?: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "version",
-            "baseName": "version",
-            "type": "string"
+            name: "version",
+            baseName: "version",
+            type: "string",
         },
         {
-            "name": "verifyingContract",
-            "baseName": "verifyingContract",
-            "type": "string"
-        }    ];
+            name: "verifyingContract",
+            baseName: "verifyingContract",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return DomainData.attributeTypeMap;
     }
 }
-

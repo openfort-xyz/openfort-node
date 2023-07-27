@@ -10,41 +10,41 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { PolicyStrategy } from './policyStrategy';
+import { RequestFile } from "./models";
+import { PolicyStrategy } from "./policyStrategy";
 
 export class UpdatePolicyRequest {
-    'name'?: string;
-    'chainId'?: number;
-    'deleted'?: boolean;
-    'strategy'?: PolicyStrategy;
+    name?: string;
+    chainId?: number;
+    deleted?: boolean;
+    strategy?: PolicyStrategy;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
+            name: "deleted",
+            baseName: "deleted",
+            type: "boolean",
         },
         {
-            "name": "strategy",
-            "baseName": "strategy",
-            "type": "PolicyStrategy"
-        }    ];
+            name: "strategy",
+            baseName: "strategy",
+            type: "PolicyStrategy",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return UpdatePolicyRequest.attributeTypeMap;
     }
 }
-

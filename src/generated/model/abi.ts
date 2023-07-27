@@ -10,71 +10,71 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AbiType } from './abiType';
+import { RequestFile } from "./models";
+import { AbiType } from "./abiType";
 
 export class Abi {
-    'name'?: string;
-    'type'?: string;
-    'anonymous'?: boolean;
-    'payable'?: boolean;
-    'constant'?: boolean;
-    'stateMutability'?: string;
-    'gas'?: string;
-    'inputs'?: Array<AbiType>;
-    'outputs'?: Array<AbiType>;
+    name?: string;
+    type?: string;
+    anonymous?: boolean;
+    payable?: boolean;
+    constant?: boolean;
+    stateMutability?: string;
+    gas?: string;
+    inputs?: Array<AbiType>;
+    outputs?: Array<AbiType>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
+            name: "type",
+            baseName: "type",
+            type: "string",
         },
         {
-            "name": "anonymous",
-            "baseName": "anonymous",
-            "type": "boolean"
+            name: "anonymous",
+            baseName: "anonymous",
+            type: "boolean",
         },
         {
-            "name": "payable",
-            "baseName": "payable",
-            "type": "boolean"
+            name: "payable",
+            baseName: "payable",
+            type: "boolean",
         },
         {
-            "name": "constant",
-            "baseName": "constant",
-            "type": "boolean"
+            name: "constant",
+            baseName: "constant",
+            type: "boolean",
         },
         {
-            "name": "stateMutability",
-            "baseName": "stateMutability",
-            "type": "string"
+            name: "stateMutability",
+            baseName: "stateMutability",
+            type: "string",
         },
         {
-            "name": "gas",
-            "baseName": "gas",
-            "type": "string"
+            name: "gas",
+            baseName: "gas",
+            type: "string",
         },
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<AbiType>"
+            name: "inputs",
+            baseName: "inputs",
+            type: "Array<AbiType>",
         },
         {
-            "name": "outputs",
-            "baseName": "outputs",
-            "type": "Array<AbiType>"
-        }    ];
+            name: "outputs",
+            baseName: "outputs",
+            type: "Array<AbiType>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return Abi.attributeTypeMap;
     }
 }
-

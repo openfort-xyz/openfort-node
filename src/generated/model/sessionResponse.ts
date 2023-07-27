@@ -10,90 +10,90 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { NextActionResponse } from './nextActionResponse';
-import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
+import { RequestFile } from "./models";
+import { NextActionResponse } from "./nextActionResponse";
+import { PolicyResponseTransactionIntentsInner } from "./policyResponseTransactionIntentsInner";
 
 export class SessionResponse {
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'updatedAt': number;
-    'isActive'?: boolean;
-    'address': string;
-    'validAfter'?: string;
-    'validUntil'?: string;
-    'whitelist'?: Array<string>;
-    'limit'?: number;
-    'nextAction'?: NextActionResponse;
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
+    id: string;
+    object: string;
+    createdAt: number;
+    updatedAt: number;
+    isActive?: boolean;
+    address: string;
+    validAfter?: string;
+    validUntil?: string;
+    whitelist?: Array<string>;
+    limit?: number;
+    nextAction?: NextActionResponse;
+    transactionIntents?: Array<PolicyResponseTransactionIntentsInner>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number"
+            name: "updatedAt",
+            baseName: "updatedAt",
+            type: "number",
         },
         {
-            "name": "isActive",
-            "baseName": "isActive",
-            "type": "boolean"
+            name: "isActive",
+            baseName: "isActive",
+            type: "boolean",
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
+            name: "address",
+            baseName: "address",
+            type: "string",
         },
         {
-            "name": "validAfter",
-            "baseName": "validAfter",
-            "type": "string"
+            name: "validAfter",
+            baseName: "validAfter",
+            type: "string",
         },
         {
-            "name": "validUntil",
-            "baseName": "validUntil",
-            "type": "string"
+            name: "validUntil",
+            baseName: "validUntil",
+            type: "string",
         },
         {
-            "name": "whitelist",
-            "baseName": "whitelist",
-            "type": "Array<string>"
+            name: "whitelist",
+            baseName: "whitelist",
+            type: "Array<string>",
         },
         {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number"
+            name: "limit",
+            baseName: "limit",
+            type: "number",
         },
         {
-            "name": "nextAction",
-            "baseName": "nextAction",
-            "type": "NextActionResponse"
+            name: "nextAction",
+            baseName: "nextAction",
+            type: "NextActionResponse",
         },
         {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
-        }    ];
+            name: "transactionIntents",
+            baseName: "transactionIntents",
+            type: "Array<PolicyResponseTransactionIntentsInner>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return SessionResponse.attributeTypeMap;
     }
 }
-

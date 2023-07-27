@@ -10,37 +10,37 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { SponsorSchema } from './sponsorSchema';
+import { RequestFile } from "./models";
+import { SponsorSchema } from "./sponsorSchema";
 
 export class PolicyStrategy {
-    'sponsorSchema': SponsorSchema;
-    'tokenContract'?: string;
-    'tokenContractAmount'?: string;
+    sponsorSchema: SponsorSchema;
+    tokenContract?: string;
+    tokenContractAmount?: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "sponsorSchema",
-            "baseName": "sponsorSchema",
-            "type": "SponsorSchema"
+            name: "sponsorSchema",
+            baseName: "sponsorSchema",
+            type: "SponsorSchema",
         },
         {
-            "name": "tokenContract",
-            "baseName": "tokenContract",
-            "type": "string"
+            name: "tokenContract",
+            baseName: "tokenContract",
+            type: "string",
         },
         {
-            "name": "tokenContractAmount",
-            "baseName": "tokenContractAmount",
-            "type": "string"
-        }    ];
+            name: "tokenContractAmount",
+            baseName: "tokenContractAmount",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return PolicyStrategy.attributeTypeMap;
     }
 }
 
-export namespace PolicyStrategy {
-}
+export namespace PolicyStrategy {}

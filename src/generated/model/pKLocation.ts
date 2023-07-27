@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum PKLocation {
-    Db = 'DB',
-    GcpKms = 'GCP_KMS',
-    User = 'USER'
+    Db = "DB",
+    GcpKms = "GCP_KMS",
+    User = "USER",
 }

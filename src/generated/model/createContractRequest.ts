@@ -10,47 +10,47 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Abi } from './abi';
+import { RequestFile } from "./models";
+import { Abi } from "./abi";
 
 export class CreateContractRequest {
-    'name': string;
-    'chainId': number;
-    'address': string;
-    'abi'?: Array<Abi>;
-    'publicVerification'?: boolean;
+    name: string;
+    chainId: number;
+    address: string;
+    abi?: Array<Abi>;
+    publicVerification?: boolean;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
+            name: "address",
+            baseName: "address",
+            type: "string",
         },
         {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "Array<Abi>"
+            name: "abi",
+            baseName: "abi",
+            type: "Array<Abi>",
         },
         {
-            "name": "publicVerification",
-            "baseName": "publicVerification",
-            "type": "boolean"
-        }    ];
+            name: "publicVerification",
+            baseName: "publicVerification",
+            type: "boolean",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return CreateContractRequest.attributeTypeMap;
     }
 }
-

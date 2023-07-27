@@ -1,4 +1,4 @@
 export interface ListPlayerAccountsRequest {
-	id: string;
-	expand?: string[];
+    id: string;
+    expand?: string[];
 }

@@ -10,56 +10,56 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { PolicyRuleResponseContract } from './policyRuleResponseContract';
-import { PolicySchema } from './policySchema';
+import { RequestFile } from "./models";
+import { PolicyRuleResponseContract } from "./policyRuleResponseContract";
+import { PolicySchema } from "./policySchema";
 
 export class PolicyRuleResponse {
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'type': PolicySchema;
-    'functionName'?: string;
-    'contract'?: PolicyRuleResponseContract;
+    id: string;
+    object: string;
+    createdAt: number;
+    type: PolicySchema;
+    functionName?: string;
+    contract?: PolicyRuleResponseContract;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicySchema"
+            name: "type",
+            baseName: "type",
+            type: "PolicySchema",
         },
         {
-            "name": "functionName",
-            "baseName": "functionName",
-            "type": "string"
+            name: "functionName",
+            baseName: "functionName",
+            type: "string",
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "PolicyRuleResponseContract"
-        }    ];
+            name: "contract",
+            baseName: "contract",
+            type: "PolicyRuleResponseContract",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return PolicyRuleResponse.attributeTypeMap;
     }
 }
 
-export namespace PolicyRuleResponse {
-}
+export namespace PolicyRuleResponse {}

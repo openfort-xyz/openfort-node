@@ -10,28 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class SignatureRequest {
-    'signature': string;
-    'optimistic'?: boolean;
+    signature: string;
+    optimistic?: boolean;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "signature",
-            "baseName": "signature",
-            "type": "string"
+            name: "signature",
+            baseName: "signature",
+            type: "string",
         },
         {
-            "name": "optimistic",
-            "baseName": "optimistic",
-            "type": "boolean"
-        }    ];
+            name: "optimistic",
+            baseName: "optimistic",
+            type: "boolean",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return SignatureRequest.attributeTypeMap;
     }
 }
-

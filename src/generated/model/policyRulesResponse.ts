@@ -10,35 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { PolicyRuleResponse } from './policyRuleResponse';
+import { RequestFile } from "./models";
+import { PolicyRuleResponse } from "./policyRuleResponse";
 
 export class PolicyRulesResponse {
-    'object': string;
-    'url': string;
-    'data': Array<PolicyRuleResponse>;
+    object: string;
+    url: string;
+    data: Array<PolicyRuleResponse>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
+            name: "url",
+            baseName: "url",
+            type: "string",
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<PolicyRuleResponse>"
-        }    ];
+            name: "data",
+            baseName: "data",
+            type: "Array<PolicyRuleResponse>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return PolicyRulesResponse.attributeTypeMap;
     }
 }
-

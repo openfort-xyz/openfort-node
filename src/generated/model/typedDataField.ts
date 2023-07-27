@@ -10,28 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class TypedDataField {
-    'name': string;
-    'type': string;
+    name: string;
+    type: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        }    ];
+            name: "type",
+            baseName: "type",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return TypedDataField.attributeTypeMap;
     }
 }
-

@@ -10,70 +10,70 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class Log {
-    'blockNumber': number;
-    'blockHash': string;
-    'transactionIndex': number;
-    'removed': boolean;
-    'address': string;
-    'data': string;
-    'topics': Array<string>;
-    'transactionHash': string;
-    'logIndex': number;
+    blockNumber: number;
+    blockHash: string;
+    transactionIndex: number;
+    removed: boolean;
+    address: string;
+    data: string;
+    topics: Array<string>;
+    transactionHash: string;
+    logIndex: number;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "blockNumber",
-            "baseName": "blockNumber",
-            "type": "number"
+            name: "blockNumber",
+            baseName: "blockNumber",
+            type: "number",
         },
         {
-            "name": "blockHash",
-            "baseName": "blockHash",
-            "type": "string"
+            name: "blockHash",
+            baseName: "blockHash",
+            type: "string",
         },
         {
-            "name": "transactionIndex",
-            "baseName": "transactionIndex",
-            "type": "number"
+            name: "transactionIndex",
+            baseName: "transactionIndex",
+            type: "number",
         },
         {
-            "name": "removed",
-            "baseName": "removed",
-            "type": "boolean"
+            name: "removed",
+            baseName: "removed",
+            type: "boolean",
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
+            name: "address",
+            baseName: "address",
+            type: "string",
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "string"
+            name: "data",
+            baseName: "data",
+            type: "string",
         },
         {
-            "name": "topics",
-            "baseName": "topics",
-            "type": "Array<string>"
+            name: "topics",
+            baseName: "topics",
+            type: "Array<string>",
         },
         {
-            "name": "transactionHash",
-            "baseName": "transactionHash",
-            "type": "string"
+            name: "transactionHash",
+            baseName: "transactionHash",
+            type: "string",
         },
         {
-            "name": "logIndex",
-            "baseName": "logIndex",
-            "type": "number"
-        }    ];
+            name: "logIndex",
+            baseName: "logIndex",
+            type: "number",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return Log.attributeTypeMap;
     }
 }
-

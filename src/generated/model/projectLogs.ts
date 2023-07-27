@@ -10,35 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Log } from './log';
+import { RequestFile } from "./models";
+import { Log } from "./log";
 
 export class ProjectLogs {
-    'object': string;
-    'url': string;
-    'data': Array<Log>;
+    object: string;
+    url: string;
+    data: Array<Log>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
+            name: "url",
+            baseName: "url",
+            type: "string",
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<Log>"
-        }    ];
+            name: "data",
+            baseName: "data",
+            type: "Array<Log>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return ProjectLogs.attributeTypeMap;
     }
 }
-

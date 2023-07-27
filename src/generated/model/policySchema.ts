@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum PolicySchema {
-    ContractFunctions = 'contract_functions',
-    AccountFunctions = 'account_functions'
+    ContractFunctions = "contract_functions",
+    AccountFunctions = "account_functions",
 }

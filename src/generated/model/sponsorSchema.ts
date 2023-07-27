@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum SponsorSchema {
-    PayForUser = 'pay_for_user',
-    ChargeCustomTokens = 'charge_custom_tokens'
+    PayForUser = "pay_for_user",
+    ChargeCustomTokens = "charge_custom_tokens",
 }

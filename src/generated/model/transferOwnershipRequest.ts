@@ -10,34 +10,34 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class TransferOwnershipRequest {
     /**
-    * The address of the new owner
-    */
-    'newOwnerAddress': string;
+     * The address of the new owner
+     */
+    newOwnerAddress: string;
     /**
-    * The policy ID
-    */
-    'policy': string;
+     * The policy ID
+     */
+    policy: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "newOwnerAddress",
-            "baseName": "newOwnerAddress",
-            "type": "string"
+            name: "newOwnerAddress",
+            baseName: "newOwnerAddress",
+            type: "string",
         },
         {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string"
-        }    ];
+            name: "policy",
+            baseName: "policy",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return TransferOwnershipRequest.attributeTypeMap;
     }
 }
-

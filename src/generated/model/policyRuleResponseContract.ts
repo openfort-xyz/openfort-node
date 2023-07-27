@@ -10,73 +10,73 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Abi } from './abi';
-import { ContractResponse } from './contractResponse';
-import { PickContractResponseId } from './pickContractResponseId';
+import { RequestFile } from "./models";
+import { Abi } from "./abi";
+import { ContractResponse } from "./contractResponse";
+import { PickContractResponseId } from "./pickContractResponseId";
 
 export class PolicyRuleResponseContract {
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'name': string | null;
-    'chainId': number;
-    'address': string;
-    'deleted': boolean;
-    'abi': Array<Abi>;
-    'publicVerification': boolean;
+    id: string;
+    object: string;
+    createdAt: number;
+    name: string | null;
+    chainId: number;
+    address: string;
+    deleted: boolean;
+    abi: Array<Abi>;
+    publicVerification: boolean;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
+            name: "address",
+            baseName: "address",
+            type: "string",
         },
         {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
+            name: "deleted",
+            baseName: "deleted",
+            type: "boolean",
         },
         {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "Array<Abi>"
+            name: "abi",
+            baseName: "abi",
+            type: "Array<Abi>",
         },
         {
-            "name": "publicVerification",
-            "baseName": "publicVerification",
-            "type": "boolean"
-        }    ];
+            name: "publicVerification",
+            baseName: "publicVerification",
+            type: "boolean",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return PolicyRuleResponseContract.attributeTypeMap;
     }
 }
-

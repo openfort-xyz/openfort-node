@@ -10,35 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { SessionResponse } from './sessionResponse';
+import { RequestFile } from "./models";
+import { SessionResponse } from "./sessionResponse";
 
 export class SessionsResponse {
-    'object': string;
-    'url': string;
-    'data': Array<SessionResponse>;
+    object: string;
+    url: string;
+    data: Array<SessionResponse>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
+            name: "url",
+            baseName: "url",
+            type: "string",
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<SessionResponse>"
-        }    ];
+            name: "data",
+            baseName: "data",
+            type: "Array<SessionResponse>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return SessionsResponse.attributeTypeMap;
     }
 }
-

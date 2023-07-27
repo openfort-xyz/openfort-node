@@ -10,28 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class NextActionPayload {
-    'userOp'?: any | null;
-    'userOpHash'?: string;
+    userOp?: any | null;
+    userOpHash?: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "userOp",
-            "baseName": "userOp",
-            "type": "any"
+            name: "userOp",
+            baseName: "userOp",
+            type: "any",
         },
         {
-            "name": "userOpHash",
-            "baseName": "userOpHash",
-            "type": "string"
-        }    ];
+            name: "userOpHash",
+            baseName: "userOpHash",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return NextActionPayload.attributeTypeMap;
     }
 }
-

@@ -10,46 +10,46 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { AssetType } from './assetType';
+import { RequestFile } from "./models";
+import { AssetType } from "./assetType";
 
 export class AssetInventory {
-    'assetType': AssetType;
-    'address'?: string;
-    'tokenId'?: number;
+    assetType: AssetType;
+    address?: string;
+    tokenId?: number;
     /**
-    * amount in Wei
-    */
-    'amount'?: string;
+     * amount in Wei
+     */
+    amount?: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "assetType",
-            "baseName": "assetType",
-            "type": "AssetType"
+            name: "assetType",
+            baseName: "assetType",
+            type: "AssetType",
         },
         {
-            "name": "address",
-            "baseName": "address",
-            "type": "string"
+            name: "address",
+            baseName: "address",
+            type: "string",
         },
         {
-            "name": "tokenId",
-            "baseName": "tokenId",
-            "type": "number"
+            name: "tokenId",
+            baseName: "tokenId",
+            type: "number",
         },
         {
-            "name": "amount",
-            "baseName": "amount",
-            "type": "string"
-        }    ];
+            name: "amount",
+            baseName: "amount",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return AssetInventory.attributeTypeMap;
     }
 }
 
-export namespace AssetInventory {
-}
+export namespace AssetInventory {}

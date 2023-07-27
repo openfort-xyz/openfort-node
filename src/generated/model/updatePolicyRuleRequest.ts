@@ -10,37 +10,37 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { PolicySchema } from './policySchema';
+import { RequestFile } from "./models";
+import { PolicySchema } from "./policySchema";
 
 export class UpdatePolicyRuleRequest {
-    'type': PolicySchema;
-    'functionName': string | null;
-    'contract': string | null;
+    type: PolicySchema;
+    functionName: string | null;
+    contract: string | null;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicySchema"
+            name: "type",
+            baseName: "type",
+            type: "PolicySchema",
         },
         {
-            "name": "functionName",
-            "baseName": "functionName",
-            "type": "string"
+            name: "functionName",
+            baseName: "functionName",
+            type: "string",
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "string"
-        }    ];
+            name: "contract",
+            baseName: "contract",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return UpdatePolicyRuleRequest.attributeTypeMap;
     }
 }
 
-export namespace UpdatePolicyRuleRequest {
-}
+export namespace UpdatePolicyRuleRequest {}

@@ -1,4 +1,4 @@
 export interface GetPolicyRulesRequest {
-	policy?: string;
-	expand?: string[];
+    policy?: string;
+    expand?: string[];
 }

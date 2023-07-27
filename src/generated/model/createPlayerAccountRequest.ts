@@ -10,61 +10,61 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { DataAccountTypes } from './dataAccountTypes';
+import { RequestFile } from "./models";
+import { DataAccountTypes } from "./dataAccountTypes";
 
 export class CreatePlayerAccountRequest {
     /**
-    * The chain id
-    */
-    'chainId': number;
+     * The chain id
+     */
+    chainId: number;
     /**
-    * The address of the external owner
-    */
-    'externalOwnerAddress'?: string;
-    'accountType'?: DataAccountTypes;
+     * The address of the external owner
+     */
+    externalOwnerAddress?: string;
+    accountType?: DataAccountTypes;
     /**
-    * If ERC6551, the NFT contract to use
-    */
-    'tokenContract'?: string;
+     * If ERC6551, the NFT contract to use
+     */
+    tokenContract?: string;
     /**
-    * If ERC6551, the tokenID to serve as owner
-    */
-    'tokenId'?: number;
+     * If ERC6551, the tokenID to serve as owner
+     */
+    tokenId?: number;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "externalOwnerAddress",
-            "baseName": "externalOwnerAddress",
-            "type": "string"
+            name: "externalOwnerAddress",
+            baseName: "externalOwnerAddress",
+            type: "string",
         },
         {
-            "name": "accountType",
-            "baseName": "accountType",
-            "type": "DataAccountTypes"
+            name: "accountType",
+            baseName: "accountType",
+            type: "DataAccountTypes",
         },
         {
-            "name": "tokenContract",
-            "baseName": "tokenContract",
-            "type": "string"
+            name: "tokenContract",
+            baseName: "tokenContract",
+            type: "string",
         },
         {
-            "name": "tokenId",
-            "baseName": "tokenId",
-            "type": "number"
-        }    ];
+            name: "tokenId",
+            baseName: "tokenId",
+            type: "number",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return CreatePlayerAccountRequest.attributeTypeMap;
     }
 }
 
-export namespace CreatePlayerAccountRequest {
-}
+export namespace CreatePlayerAccountRequest {}

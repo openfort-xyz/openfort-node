@@ -10,74 +10,74 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { PickPlayerResponseId } from './pickPlayerResponseId';
-import { PlayerResponse } from './playerResponse';
-import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
-import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
+import { RequestFile } from "./models";
+import { PickPlayerResponseId } from "./pickPlayerResponseId";
+import { PlayerResponse } from "./playerResponse";
+import { PolicyResponseTransactionIntentsInner } from "./policyResponseTransactionIntentsInner";
+import { TransactionIntentResponseAccount } from "./transactionIntentResponseAccount";
 
 export class TransactionIntentResponsePlayer {
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'name': string | null;
-    'email': string | null;
-    'description': string | null;
-    'metadata': string;
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'accounts'?: Array<TransactionIntentResponseAccount>;
+    id: string;
+    object: string;
+    createdAt: number;
+    name: string | null;
+    email: string | null;
+    description: string | null;
+    metadata: string;
+    transactionIntents?: Array<PolicyResponseTransactionIntentsInner>;
+    accounts?: Array<TransactionIntentResponseAccount>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string"
+            name: "email",
+            baseName: "email",
+            type: "string",
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string"
+            name: "description",
+            baseName: "description",
+            type: "string",
         },
         {
-            "name": "metadata",
-            "baseName": "metadata",
-            "type": "string"
+            name: "metadata",
+            baseName: "metadata",
+            type: "string",
         },
         {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
+            name: "transactionIntents",
+            baseName: "transactionIntents",
+            type: "Array<PolicyResponseTransactionIntentsInner>",
         },
         {
-            "name": "accounts",
-            "baseName": "accounts",
-            "type": "Array<TransactionIntentResponseAccount>"
-        }    ];
+            name: "accounts",
+            baseName: "accounts",
+            type: "Array<TransactionIntentResponseAccount>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return TransactionIntentResponsePlayer.attributeTypeMap;
     }
 }
-

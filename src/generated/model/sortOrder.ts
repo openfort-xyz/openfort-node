@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum SortOrder {
-    Asc = 'asc',
-    Desc = 'desc'
+    Asc = "asc",
+    Desc = "desc",
 }

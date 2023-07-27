@@ -10,34 +10,34 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class ContractDeleteResponse {
-    'id': string;
-    'object': string;
-    'deleted': boolean;
+    id: string;
+    object: string;
+    deleted: boolean;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
-        }    ];
+            name: "deleted",
+            baseName: "deleted",
+            type: "boolean",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return ContractDeleteResponse.attributeTypeMap;
     }
 }
-

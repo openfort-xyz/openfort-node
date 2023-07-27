@@ -10,28 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class PlayerRequest {
-    'name'?: string;
-    'description'?: string;
+    name?: string;
+    description?: string;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string"
-        }    ];
+            name: "description",
+            baseName: "description",
+            type: "string",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return PlayerRequest.attributeTypeMap;
     }
 }
-

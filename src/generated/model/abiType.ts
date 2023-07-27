@@ -10,46 +10,46 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export class AbiType {
-    'name'?: string;
-    'type'?: string;
-    'indexed'?: boolean;
-    'internalType'?: any | null;
-    'components'?: Array<AbiType>;
+    name?: string;
+    type?: string;
+    indexed?: boolean;
+    internalType?: any | null;
+    components?: Array<AbiType>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
+            name: "type",
+            baseName: "type",
+            type: "string",
         },
         {
-            "name": "indexed",
-            "baseName": "indexed",
-            "type": "boolean"
+            name: "indexed",
+            baseName: "indexed",
+            type: "boolean",
         },
         {
-            "name": "internalType",
-            "baseName": "internalType",
-            "type": "any"
+            name: "internalType",
+            baseName: "internalType",
+            type: "any",
         },
         {
-            "name": "components",
-            "baseName": "components",
-            "type": "Array<AbiType>"
-        }    ];
+            name: "components",
+            baseName: "components",
+            type: "Array<AbiType>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return AbiType.attributeTypeMap;
     }
 }
-

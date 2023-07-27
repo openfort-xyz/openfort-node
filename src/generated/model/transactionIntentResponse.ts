@@ -10,100 +10,100 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Interaction } from './interaction';
-import { NextActionResponse } from './nextActionResponse';
-import { ResponseResponse } from './responseResponse';
-import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
-import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlayer';
-import { TransactionIntentResponsePolicy } from './transactionIntentResponsePolicy';
+import { RequestFile } from "./models";
+import { Interaction } from "./interaction";
+import { NextActionResponse } from "./nextActionResponse";
+import { ResponseResponse } from "./responseResponse";
+import { TransactionIntentResponseAccount } from "./transactionIntentResponseAccount";
+import { TransactionIntentResponsePlayer } from "./transactionIntentResponsePlayer";
+import { TransactionIntentResponsePolicy } from "./transactionIntentResponsePolicy";
 
 export class TransactionIntentResponse {
-    'nextAction'?: NextActionResponse;
-    'policy'?: TransactionIntentResponsePolicy;
-    'player'?: TransactionIntentResponsePlayer;
-    'account'?: TransactionIntentResponseAccount;
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'updatedAt': number;
-    'chainId': number;
-    'userOperationHash'?: string;
-    'userOperation'?: any | null;
-    'response'?: ResponseResponse;
-    'interactions'?: Array<Interaction>;
+    nextAction?: NextActionResponse;
+    policy?: TransactionIntentResponsePolicy;
+    player?: TransactionIntentResponsePlayer;
+    account?: TransactionIntentResponseAccount;
+    id: string;
+    object: string;
+    createdAt: number;
+    updatedAt: number;
+    chainId: number;
+    userOperationHash?: string;
+    userOperation?: any | null;
+    response?: ResponseResponse;
+    interactions?: Array<Interaction>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "nextAction",
-            "baseName": "nextAction",
-            "type": "NextActionResponse"
+            name: "nextAction",
+            baseName: "nextAction",
+            type: "NextActionResponse",
         },
         {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "TransactionIntentResponsePolicy"
+            name: "policy",
+            baseName: "policy",
+            type: "TransactionIntentResponsePolicy",
         },
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "TransactionIntentResponsePlayer"
+            name: "player",
+            baseName: "player",
+            type: "TransactionIntentResponsePlayer",
         },
         {
-            "name": "account",
-            "baseName": "account",
-            "type": "TransactionIntentResponseAccount"
+            name: "account",
+            baseName: "account",
+            type: "TransactionIntentResponseAccount",
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number"
+            name: "updatedAt",
+            baseName: "updatedAt",
+            type: "number",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "userOperationHash",
-            "baseName": "userOperationHash",
-            "type": "string"
+            name: "userOperationHash",
+            baseName: "userOperationHash",
+            type: "string",
         },
         {
-            "name": "userOperation",
-            "baseName": "userOperation",
-            "type": "any"
+            name: "userOperation",
+            baseName: "userOperation",
+            type: "any",
         },
         {
-            "name": "response",
-            "baseName": "response",
-            "type": "ResponseResponse"
+            name: "response",
+            baseName: "response",
+            type: "ResponseResponse",
         },
         {
-            "name": "interactions",
-            "baseName": "interactions",
-            "type": "Array<Interaction>"
-        }    ];
+            name: "interactions",
+            baseName: "interactions",
+            type: "Array<Interaction>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return TransactionIntentResponse.attributeTypeMap;
     }
 }
-

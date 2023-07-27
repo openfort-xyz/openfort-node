@@ -10,62 +10,62 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { ApiKeyResponse } from './apiKeyResponse';
-import { PKPolicy } from './pKPolicy';
+import { RequestFile } from "./models";
+import { ApiKeyResponse } from "./apiKeyResponse";
+import { PKPolicy } from "./pKPolicy";
 
 export class ProjectResponse {
-    'id': string;
-    'object': string;
-    'createdAt': number;
-    'updatedAt': number;
-    'name': string;
-    'pkPolicy': PKPolicy;
-    'apikeys'?: Array<ApiKeyResponse>;
+    id: string;
+    object: string;
+    createdAt: number;
+    updatedAt: number;
+    name: string;
+    pkPolicy: PKPolicy;
+    apikeys?: Array<ApiKeyResponse>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
+            name: "id",
+            baseName: "id",
+            type: "string",
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            name: "object",
+            baseName: "object",
+            type: "string",
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number"
+            name: "createdAt",
+            baseName: "createdAt",
+            type: "number",
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number"
+            name: "updatedAt",
+            baseName: "updatedAt",
+            type: "number",
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
+            name: "name",
+            baseName: "name",
+            type: "string",
         },
         {
-            "name": "pkPolicy",
-            "baseName": "pkPolicy",
-            "type": "PKPolicy"
+            name: "pkPolicy",
+            baseName: "pkPolicy",
+            type: "PKPolicy",
         },
         {
-            "name": "apikeys",
-            "baseName": "apikeys",
-            "type": "Array<ApiKeyResponse>"
-        }    ];
+            name: "apikeys",
+            baseName: "apikeys",
+            type: "Array<ApiKeyResponse>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return ProjectResponse.attributeTypeMap;
     }
 }
 
-export namespace ProjectResponse {
-}
+export namespace ProjectResponse {}

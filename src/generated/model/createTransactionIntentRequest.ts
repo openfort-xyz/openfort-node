@@ -10,53 +10,53 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
-import { Interaction } from './interaction';
+import { RequestFile } from "./models";
+import { Interaction } from "./interaction";
 
 export class CreateTransactionIntentRequest {
-    'player': string;
-    'chainId': number;
-    'policy'?: string;
-    'externalOwnerAddress'?: string;
-    'optimistic': boolean;
-    'interactions': Array<Interaction>;
+    player: string;
+    chainId: number;
+    policy?: string;
+    externalOwnerAddress?: string;
+    optimistic: boolean;
+    interactions: Array<Interaction>;
 
     static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    static attributeTypeMap: Array<{ name: string; baseName: string; type: string }> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
+            name: "player",
+            baseName: "player",
+            type: "string",
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
+            name: "chainId",
+            baseName: "chainId",
+            type: "number",
         },
         {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string"
+            name: "policy",
+            baseName: "policy",
+            type: "string",
         },
         {
-            "name": "externalOwnerAddress",
-            "baseName": "externalOwnerAddress",
-            "type": "string"
+            name: "externalOwnerAddress",
+            baseName: "externalOwnerAddress",
+            type: "string",
         },
         {
-            "name": "optimistic",
-            "baseName": "optimistic",
-            "type": "boolean"
+            name: "optimistic",
+            baseName: "optimistic",
+            type: "boolean",
         },
         {
-            "name": "interactions",
-            "baseName": "interactions",
-            "type": "Array<Interaction>"
-        }    ];
+            name: "interactions",
+            baseName: "interactions",
+            type: "Array<Interaction>",
+        },
+    ];
 
     static getAttributeTypeMap() {
         return CreateTransactionIntentRequest.attributeTypeMap;
     }
 }
-

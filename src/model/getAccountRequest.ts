@@ -1,4 +1,4 @@
 export interface GetAccountRequest {
-	id: string;
-	expand?: string[];
+    id: string;
+    expand?: string[];
 }

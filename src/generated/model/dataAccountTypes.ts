@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
+import { RequestFile } from "./models";
 
 export enum DataAccountTypes {
-    Upgradeable = 'Upgradeable',
-    Managed = 'Managed',
-    Erc6551 = 'ERC6551'
+    Upgradeable = "Upgradeable",
+    Managed = "Managed",
+    Erc6551 = "ERC6551",
 }
