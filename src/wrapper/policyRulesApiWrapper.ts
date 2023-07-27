@@ -1,14 +1,14 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {PolicyRulesApi} from "../generated/api/apis";
 import {
+    CreatePolicyRuleRequest,
     GetPolicyRulesRequest,
     PolicyRuleDeleteResponse,
     PolicyRuleResponse,
     PolicyRulesResponse,
-    CreatePolicyRuleRequest,
     UpdatePolicyRuleRequest,
 } from "../model";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {PolicyRulesApi} from "../generated/api/apis";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {

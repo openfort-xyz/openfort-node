@@ -1,14 +1,14 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {SessionsApi} from "../generated/api/sessionsApi";
 import {
+    CreateSessionRequest,
     ListSessionsRequest,
-    SignatureSessionRequest,
+    RevokeSessionRequest,
     SessionResponse,
     SessionsResponse,
-    CreateSessionRequest,
-    RevokeSessionRequest,
+    SignatureSessionRequest,
 } from "../model";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {SessionsApi} from "../generated/api/sessionsApi";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {

@@ -1,15 +1,15 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {TransactionIntentsApi} from "../generated/api/transactionIntentsApi";
 import {
+    CreateTransactionIntentRequest,
     GetTransactionIntentRequest,
     ListTransactionIntentsRequest,
-    UpdateTransactionIntentRequest,
     SignatureTransactionIntentRequest,
     TransactionIntentResponse,
     TransactionIntentsResponse,
-    CreateTransactionIntentRequest,
+    UpdateTransactionIntentRequest,
 } from "../model";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {TransactionIntentsApi} from "../generated/api/transactionIntentsApi";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {

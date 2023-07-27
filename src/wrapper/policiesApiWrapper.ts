@@ -1,22 +1,22 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {PoliciesApi} from "../generated/api/policiesApi";
 import {
+    CreatePolicyRequest,
+    CreatePolicyRuleRequest,
+    GasReport,
+    GetAllowFunctionsRequest,
+    GetPolicyRequest,
+    GetPolicyTotalGasUsageRequest,
+    ListPoliciesRequest,
     PoliciesResponse,
     PolicyDeleteResponse,
     PolicyResponse,
     PolicyRuleResponse,
     PolicyRulesResponse,
-    ListPoliciesRequest,
-    GetPolicyRequest,
-    GetAllowFunctionsRequest,
-    GasReport,
     UpdatePolicyAllowFunctionRequest,
-    GetPolicyTotalGasUsageRequest,
-    CreatePolicyRequest,
     UpdatePolicyRequest,
-    CreatePolicyRuleRequest,
 } from "../model";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {PoliciesApi} from "../generated/api/policiesApi";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
