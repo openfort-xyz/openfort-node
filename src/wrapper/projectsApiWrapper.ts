@@ -1,7 +1,7 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {ProjectsApi} from "../generated/api/projectsApi";
-import {UpdateProjectRequest, ProjectResponse, ProjectsResponse, ProjectRequest} from "../model";
+import {ProjectRequest, ProjectResponse, ProjectsResponse, UpdateProjectRequest} from "../model";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {ProjectsApi} from "../generated/api/projectsApi";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class ProjectsApiWrapper extends BaseApiWrapper<ProjectsApi> {

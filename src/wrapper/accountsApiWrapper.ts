@@ -1,19 +1,19 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {AccountsApi} from "../generated/api/accountsApi";
 import {
     AccountResponse,
     AccountsResponse,
-    InventoryResponse,
-    TransactionIntentResponse,
-    GetAccountRequest,
-    GetAccountInventoryRequest,
-    ListAccountsRequest,
-    TransferAccountOwnershipRequest,
     CreateAccountRequest,
-    SignPayloadResponse,
+    GetAccountInventoryRequest,
+    GetAccountRequest,
+    InventoryResponse,
+    ListAccountsRequest,
     SignPayloadRequest,
+    SignPayloadResponse,
+    TransactionIntentResponse,
+    TransferAccountOwnershipRequest,
 } from "../model";
+import {AccountsApi} from "../generated/api/accountsApi";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {

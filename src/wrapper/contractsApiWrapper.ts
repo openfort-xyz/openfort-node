@@ -1,15 +1,15 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {ContractsApi} from "../generated/api/contractsApi";
 import {
+    ContractDeleteResponse,
+    ContractResponse,
+    ContractsResponse,
+    CreateContractRequest,
     GetContractRequest,
     ListContractsRequest,
-    ContractDeleteResponse,
-    ContractsResponse,
-    ContractResponse,
-    CreateContractRequest,
     UpdateContractRequest,
 } from "../model";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {ContractsApi} from "../generated/api/contractsApi";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {

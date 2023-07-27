@@ -1,25 +1,25 @@
-import {httpErrorHandler} from "../utility/httpErrorHandler";
-import {PlayersApi} from "../generated/api/playersApi";
 import {
     AccountResponse,
     AccountsResponse,
+    CreateAccountRequest,
+    CreatePlayerRequest,
+    CreatePlayerSessionRequest,
+    GetPlayerInventoryRequest,
+    GetPlayerRequest,
     InventoryResponse,
+    ListPlayerAccountsRequest,
+    ListPlayersRequest,
     PlayerResponse,
     PlayersResponse,
+    RevokePlayerSessionRequest,
     SessionResponse,
     TransactionIntentResponse,
-    CreatePlayerSessionRequest,
-    GetPlayerRequest,
-    ListPlayerAccountsRequest,
-    GetPlayerInventoryRequest,
-    ListPlayersRequest,
-    RevokePlayerSessionRequest,
     TransferPlayerAccountOwnershipRequest,
     UpdatePlayerRequest,
-    CreatePlayerRequest,
-    CreateAccountRequest,
 } from "../model";
 import {BaseApiWrapper} from "./baseApiWrapper";
+import {PlayersApi} from "../generated/api/playersApi";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {

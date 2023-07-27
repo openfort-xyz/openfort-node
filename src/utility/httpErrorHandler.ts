@@ -1,7 +1,7 @@
 import {HttpError} from "../generated/api/apis";
-import {ValidationError} from "../model/validationError";
 import {Observable} from "./observable";
 import {Observer} from "./observer";
+import {ValidationError} from "../model/validationError";
 
 function parseAndPrepareHttpError<T>(error: T): Error | T {
     if (error instanceof HttpError) {

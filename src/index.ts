@@ -15,20 +15,6 @@ export default class Openfort {
 
     constructor(private readonly apiKey: string, private readonly basePath?: string) {}
 
-    private getOrCreateWrapper<T>(type: new (accessToken: string, basePath?: string) => T): T {
-        const wrapper = this.apiWrappers[type.name];
-        if (wrapper) {
-            return wrapper;
-        }
-
-        const result = new type(this.apiKey, this.basePath);
-        for (const observer of this.observers) {
-            (result as Observable).subscribe?.(observer);
-        }
-        this.apiWrappers[type.name] = result;
-        return result;
-    }
-
     public get accounts(): AccountsApiWrapper {
         return this.getOrCreateWrapper(AccountsApiWrapper);
     }
@@ -66,6 +52,20 @@ export default class Openfort {
         for (const apiWrapper of Object.values(this.apiWrappers)) {
             (apiWrapper as Observable).observers?.push(observer);
         }
+    }
+
+    private getOrCreateWrapper<T>(type: new (accessToken: string, basePath?: string) => T): T {
+        const wrapper = this.apiWrappers[type.name];
+        if (wrapper) {
+            return wrapper;
+        }
+
+        const result = new type(this.apiKey, this.basePath);
+        for (const observer of this.observers) {
+            (result as Observable).subscribe?.(observer);
+        }
+        this.apiWrappers[type.name] = result;
+        return result;
     }
 }
 
