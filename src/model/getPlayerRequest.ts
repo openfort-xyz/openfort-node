@@ -1,4 +1,4 @@
 export interface GetPlayerRequest {
-    id: string;
-    expand?: string[];
+	id: string;
+	expand?: string[];
 }

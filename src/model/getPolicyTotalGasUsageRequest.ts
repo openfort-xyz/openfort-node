@@ -1,3 +1,3 @@
 export interface GetPolicyTotalGasUsageRequest {
-    id: string;
+	id: string;
 }

@@ -1,4 +1,4 @@
 export interface GetPolicyRequest {
-    id: string;
-    expand?: string[];
+	id: string;
+	expand?: string[];
 }
