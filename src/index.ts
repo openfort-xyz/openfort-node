@@ -1,5 +1,7 @@
 import {AccountsApiWrapper} from "./wrapper/accountsApiWrapper";
 import {ContractsApiWrapper} from "./wrapper/contractsApiWrapper";
+import {Observable} from "./utility/observable";
+import {Observer} from "./utility/observer";
 import {PlayersApiWrapper} from "./wrapper/playersApiWrapper";
 import {PoliciesApiWrapper} from "./wrapper/policiesApiWrapper";
 import {PolicyRulesApiWrapper} from "./wrapper/policyRulesApiWrapper";
@@ -8,71 +10,62 @@ import {SessionsApiWrapper} from "./wrapper/sessionsApiWrapper";
 import {TransactionIntentsApiWrapper} from "./wrapper/transactionIntentsApiWrapper";
 
 export default class Openfort {
-    private _accountsApi?: AccountsApiWrapper;
-    private _contractsApi?: ContractsApiWrapper;
-    private _playersApi?: PlayersApiWrapper;
-    private _policiesApi?: PoliciesApiWrapper;
-    private _policyRulesApi?: PolicyRulesApiWrapper;
-    private _projectsApi?: ProjectsApiWrapper;
-    private _sessionsApi?: SessionsApiWrapper;
-    private _transactionIntentsApi?: TransactionIntentsApiWrapper;
+    private readonly apiWrappers = {};
+    private readonly observers: Observer[] = [];
 
     constructor(private readonly apiKey: string, private readonly basePath?: string) {}
 
-    public get accounts(): AccountsApiWrapper {
-        if (!this._accountsApi) {
-            this._accountsApi = new AccountsApiWrapper(this.apiKey, this.basePath);
+    private getOrCreateWrapper<T>(type: new (accessToken: string, basePath?: string) => T): T {
+        const wrapper = this.apiWrappers[type.name];
+        if (wrapper) {
+            return wrapper;
         }
-        return this._accountsApi;
+
+        const result = new type(this.apiKey, this.basePath);
+        for (const observer of this.observers) {
+            (result as Observable).subscribe?.(observer);
+        }
+        this.apiWrappers[type.name] = result;
+        return result;
+    }
+
+    public get accounts(): AccountsApiWrapper {
+        return this.getOrCreateWrapper(AccountsApiWrapper);
     }
 
     public get contracts(): ContractsApiWrapper {
-        if (!this._contractsApi) {
-            this._contractsApi = new ContractsApiWrapper(this.apiKey, this.basePath);
-        }
-        return this._contractsApi;
+        return this.getOrCreateWrapper(ContractsApiWrapper);
     }
 
     public get players(): PlayersApiWrapper {
-        if (!this._playersApi) {
-            this._playersApi = new PlayersApiWrapper(this.apiKey, this.basePath);
-        }
-        return this._playersApi;
+        return this.getOrCreateWrapper(PlayersApiWrapper);
     }
 
     public get policies(): PoliciesApiWrapper {
-        if (!this._policiesApi) {
-            this._policiesApi = new PoliciesApiWrapper(this.apiKey, this.basePath);
-        }
-        return this._policiesApi;
+        return this.getOrCreateWrapper(PoliciesApiWrapper);
     }
 
     public get policyRules(): PolicyRulesApiWrapper {
-        if (!this._policyRulesApi) {
-            this._policyRulesApi = new PolicyRulesApiWrapper(this.apiKey, this.basePath);
-        }
-        return this._policyRulesApi;
+        return this.getOrCreateWrapper(PolicyRulesApiWrapper);
     }
 
     public get projects(): ProjectsApiWrapper {
-        if (!this._projectsApi) {
-            this._projectsApi = new ProjectsApiWrapper(this.apiKey, this.basePath);
-        }
-        return this._projectsApi;
+        return this.getOrCreateWrapper(ProjectsApiWrapper);
     }
 
     public get sessions(): SessionsApiWrapper {
-        if (!this._sessionsApi) {
-            this._sessionsApi = new SessionsApiWrapper(this.apiKey, this.basePath);
-        }
-        return this._sessionsApi;
+        return this.getOrCreateWrapper(SessionsApiWrapper);
     }
 
     public get transactionIntents(): TransactionIntentsApiWrapper {
-        if (!this._transactionIntentsApi) {
-            this._transactionIntentsApi = new TransactionIntentsApiWrapper(this.apiKey, this.basePath);
+        return this.getOrCreateWrapper(TransactionIntentsApiWrapper);
+    }
+
+    public subscribe(observer: Observer): void {
+        this.observers.push(observer);
+        for (const apiWrapper of Object.values(this.apiWrappers)) {
+            (apiWrapper as Observable).observers?.push(observer);
         }
-        return this._transactionIntentsApi;
     }
 }
 

@@ -1,24 +1,20 @@
-import {httpErrorHandler} from "./httpErrorHandler";
+import {httpErrorHandler} from "../utility/httpErrorHandler";
 import {ProjectsApi} from "../generated/api/projectsApi";
 import {UpdateProjectRequest, ProjectResponse, ProjectsResponse, ProjectRequest} from "../model";
-import {PACKAGE, VERSION} from "../version";
+import {BaseApiWrapper} from "./baseApiWrapper";
 
-export class ProjectsApiWrapper {
-    private readonly _api: ProjectsApi;
-
+@httpErrorHandler
+export class ProjectsApiWrapper extends BaseApiWrapper<ProjectsApi> {
     constructor(accessToken: string, basePath?: string) {
-        this._api = new ProjectsApi(basePath);
-        this._api.accessToken = accessToken;
-        this._api.defaultHeaders["User-Agent"] = `${PACKAGE}@${VERSION}`;
+        super(ProjectsApi, accessToken, basePath);
     }
 
     /**
      * Creates a project object.
      * @param req Parameters to create project
      */
-    @httpErrorHandler()
     public async create(req: ProjectRequest): Promise<ProjectResponse> {
-        const response = await this._api.createProject(req);
+        const response = await this.api.createProject(req);
         return response.body;
     }
 
@@ -26,9 +22,8 @@ export class ProjectsApiWrapper {
      * Get project by id
      * @param id Id of the project
      */
-    @httpErrorHandler()
     public async get(id: string): Promise<ProjectResponse> {
-        const response = await this._api.getProject(id);
+        const response = await this.api.getProject(id);
         return response.body;
     }
 
@@ -36,19 +31,18 @@ export class ProjectsApiWrapper {
      * List of projects
      * @param project
      */
-    @httpErrorHandler()
     public async list(): Promise<ProjectsResponse> {
-        const response = await this._api.getProjects();
+        const response = await this.api.getProjects();
         return response.body;
     }
+
     /**
      * Updates a project object.
      * @param req Parameters for update project
      */
-    @httpErrorHandler()
     public async updateProject(req: UpdateProjectRequest): Promise<ProjectResponse> {
         const {id, ...request} = req;
-        const response = await this._api.updateProject(id, request);
+        const response = await this.api.updateProject(id, request);
         return response.body;
     }
 }
