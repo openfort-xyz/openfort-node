@@ -17,9 +17,9 @@ import {
     TransferPlayerAccountOwnershipRequest,
     UpdatePlayerRequest,
 } from "../model";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {PlayersApi} from "../generated/api/playersApi";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { PlayersApi } from "../generated/api/playersApi";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
@@ -41,7 +41,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * @param req Parameters to create a player account.
      */
     public async createAccount(req: CreateAccountRequest): Promise<AccountResponse> {
-        const {player, ...body} = req;
+        const { player, ...body } = req;
         const response = await this.api.createPlayerAccount(player, body);
         return response.body;
     }
@@ -51,7 +51,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * @param req Parameters to create a player session.
      */
     public async createSession(req: CreatePlayerSessionRequest): Promise<SessionResponse> {
-        const {playerId, ...body} = req;
+        const { playerId, ...body } = req;
         const response = await this.api.createPlayerSession(playerId, body);
         return response.body;
     }
@@ -103,7 +103,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * @param req Parameters to revoce the player session.
      */
     public async revokeSession(req: RevokePlayerSessionRequest): Promise<SessionResponse> {
-        const {playerId, ...body} = req;
+        const { playerId, ...body } = req;
         const response = await this.api.revokePlayerSession(playerId, body);
         return response.body;
     }
@@ -115,7 +115,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
     public async transferAccountOwnership(
         req: TransferPlayerAccountOwnershipRequest,
     ): Promise<TransactionIntentResponse> {
-        const {playerId, ...body} = req;
+        const { playerId, ...body } = req;
         const response = await this.api.transferAccountOwnership(playerId, body);
         return response.body;
     }
@@ -125,7 +125,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * @param req Parameters to update player
      */
     public async update(req: UpdatePlayerRequest): Promise<PlayerResponse> {
-        const {id, ...body} = req;
+        const { id, ...body } = req;
         const response = await this.api.updatePlayer(id, body);
         return response.body;
     }

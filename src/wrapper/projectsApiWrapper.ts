@@ -1,7 +1,7 @@
-import {ProjectRequest, ProjectResponse, ProjectsResponse, UpdateProjectRequest} from "../model";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {ProjectsApi} from "../generated/api/projectsApi";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { ProjectRequest, ProjectResponse, ProjectsResponse, UpdateProjectRequest } from "../model";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { ProjectsApi } from "../generated/api/projectsApi";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class ProjectsApiWrapper extends BaseApiWrapper<ProjectsApi> {
@@ -41,7 +41,7 @@ export class ProjectsApiWrapper extends BaseApiWrapper<ProjectsApi> {
      * @param req Parameters for update project
      */
     public async updateProject(req: UpdateProjectRequest): Promise<ProjectResponse> {
-        const {id, ...request} = req;
+        const { id, ...request } = req;
         const response = await this.api.updateProject(id, request);
         return response.body;
     }

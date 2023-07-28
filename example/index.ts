@@ -1,4 +1,4 @@
-import Openfort, {CreatePlayerRequest, CreatePlayerSessionRequest, PlayersResponse} from "@openfort/openfort-node";
+import Openfort, { CreatePlayerRequest, CreatePlayerSessionRequest, PlayersResponse } from "@openfort/openfort-node";
 import * as dotenv from "dotenv";
 
 function getEnvVariable(name: string): string {
@@ -14,14 +14,11 @@ async function example() {
     const createPlayerRequest: CreatePlayerRequest = {
         name: "Test 1234",
     };
-    openfort.subscribe({onError: (e) => {console.log(">-------"); console.dir(e); console.log("<-------");}})
-    const policy = await openfort.policies.get({id: getEnvVariable("OPENFORT_POLICY") + "a"});
-
     const newPlayer = await openfort.players.create(createPlayerRequest);
 
-    const players: PlayersResponse = await openfort.players.list({filter: {name: "Test 1234"}});
+    const players: PlayersResponse = await openfort.players.list({ filter: { name: "Test 1234" } });
     for (const player of players.data) {
-        console.log(player.id);
+        console.info(player.id);
     }
 
     const account = await openfort.accounts.create({
@@ -30,9 +27,10 @@ async function example() {
     });
     console.dir(account);
 
+    const policy = await openfort.policies.get({ id: getEnvVariable("OPENFORT_POLICY") });
     console.dir(policy);
 
-    const contract = await openfort.contracts.get({id: getEnvVariable("OPENFORT_CONTRACT")});
+    const contract = await openfort.contracts.get({ id: getEnvVariable("OPENFORT_CONTRACT") });
     console.dir(contract);
 
     const createSessionRequest: CreatePlayerSessionRequest = {
@@ -47,7 +45,7 @@ async function example() {
 
     const transactionIntents = await openfort.transactionIntents.list();
     for (const intent of transactionIntents.data) {
-        console.log(`Intent ${intent.id} by ${intent.player?.id}`);
+        console.info(`Intent ${intent.id} by ${intent.player?.id}`);
     }
 }
 

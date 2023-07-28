@@ -7,9 +7,9 @@ import {
     ListContractsRequest,
     UpdateContractRequest,
 } from "../model";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {ContractsApi} from "../generated/api/contractsApi";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { ContractsApi } from "../generated/api/contractsApi";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {
@@ -31,7 +31,7 @@ export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {
      * @param req Parameters to update the contract
      */
     public async update(req: UpdateContractRequest): Promise<ContractResponse> {
-        const {id, ...body} = req;
+        const { id, ...body } = req;
         const response = await this.api.updateContract(id, body);
         return response.body;
     }

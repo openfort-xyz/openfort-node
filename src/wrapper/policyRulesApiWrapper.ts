@@ -6,9 +6,9 @@ import {
     PolicyRulesResponse,
     UpdatePolicyRuleRequest,
 } from "../model";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {PolicyRulesApi} from "../generated/api/apis";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { PolicyRulesApi } from "../generated/api/apis";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {
@@ -39,7 +39,7 @@ export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {
      * @param req Parameters to update policy rules
      */
     public async update(req: UpdatePolicyRuleRequest): Promise<PolicyRuleResponse> {
-        const {id, ...request} = req;
+        const { id, ...request } = req;
         const response = await this.api.updatePolicyRules(id, request);
         return response.body;
     }

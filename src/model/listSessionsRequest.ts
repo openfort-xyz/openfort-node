@@ -1,6 +1,6 @@
 export interface ListSessionsRequest {
     player: string;
-    expand?: string[];
+    expandTransactionIntent?: boolean;
     limit?: number;
     filter?: string;
     order?: string;

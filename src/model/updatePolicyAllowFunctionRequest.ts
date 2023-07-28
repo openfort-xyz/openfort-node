@@ -1,4 +1,4 @@
-import {UpdatePolicyRuleRequest} from "../generated/model/updatePolicyRuleRequest";
+import { UpdatePolicyRuleRequest } from "../generated/model/updatePolicyRuleRequest";
 
 export interface UpdatePolicyAllowFunctionRequest extends UpdatePolicyRuleRequest {
     policy: string;

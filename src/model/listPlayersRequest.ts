@@ -1,4 +1,4 @@
-import {SortOrder} from "../generated/model/sortOrder";
+import { SortOrder } from "../generated/model/sortOrder";
 
 export interface ListPlayersRequest {
     expand?: string[];

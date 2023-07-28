@@ -1,4 +1,4 @@
-import {ProjectRequest} from "../generated/model/projectRequest";
+import { ProjectRequest } from "../generated/model/projectRequest";
 
 export interface UpdateProjectRequest extends ProjectRequest {
     id: string;

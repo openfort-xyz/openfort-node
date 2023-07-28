@@ -1,7 +1,7 @@
-import {HttpError} from "../generated/api/apis";
-import {Observable} from "./observable";
-import {Observer} from "./observer";
-import {ValidationError} from "../model/validationError";
+import { HttpError } from "../generated/api/apis";
+import { Observable } from "./observable";
+import { Observer } from "./observer";
+import { ValidationError } from "../model/validationError";
 
 function parseAndPrepareHttpError<T>(error: T): Error | T {
     if (error instanceof HttpError) {
@@ -21,9 +21,11 @@ function parseAndPrepareHttpError<T>(error: T): Error | T {
 function processError(error: unknown, observers: Observer[] | undefined, methodName: string): unknown {
     const parsedError = parseAndPrepareHttpError(error);
     if (observers?.length) {
-        Promise.all(observers.map((observer) => observer.onError?.({message: (parsedError as Error)?.message, methodName})));
+        Promise.all(
+            observers.map((observer) => observer.onError?.({ message: (parsedError as Error)?.message, methodName })),
+        );
         if (parsedError instanceof ValidationError) {
-            Promise.all(observers.map((observer) => observer.onValidationError?.({...parsedError, methodName})));
+            Promise.all(observers.map((observer) => observer.onValidationError?.({ ...parsedError, methodName })));
         }
     }
     return parsedError;
