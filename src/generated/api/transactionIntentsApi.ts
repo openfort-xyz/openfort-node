@@ -170,8 +170,9 @@ export class TransactionIntentsApi {
     /**
      * Retrieves a transaction intent object.
      * @param id 
+     * @param expand 
      */
-    public async getTransactionIntent (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+    public async getTransactionIntent (id: string, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -188,6 +189,10 @@ export class TransactionIntentsApi {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getTransactionIntent.');
+        }
+
+        if (expand !== undefined) {
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'nextAction' | 'policy' | 'player' | 'account'>");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

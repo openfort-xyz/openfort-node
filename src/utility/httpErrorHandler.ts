@@ -21,7 +21,7 @@ function parseAndPrepareHttpError<T>(error: T): Error | T {
 function processError(error: unknown, observers: Observer[] | undefined, methodName: string): unknown {
     const parsedError = parseAndPrepareHttpError(error);
     if (observers?.length) {
-        Promise.all(observers.map((observer) => observer.onError?.(parsedError)));
+        Promise.all(observers.map((observer) => observer.onError?.({message: (parsedError as Error)?.message, methodName})));
         if (parsedError instanceof ValidationError) {
             Promise.all(observers.map((observer) => observer.onValidationError?.({...parsedError, methodName})));
         }
@@ -42,12 +42,12 @@ export function httpErrorHandler(target: Function) {
                 const result = targetMethod.apply(this, args);
                 if (result instanceof Promise) {
                     return result.catch((error) => {
-                        throw processError(error, (this as Observable).observers, propertyName);
+                        throw processError(error, (this as Observable).observers, `${target.name}.${propertyName}`);
                     });
                 }
                 return result;
             } catch (error) {
-                throw processError(error, (this as Observable).observers, propertyName);
+                throw processError(error, (this as Observable).observers, `${target.name}.${propertyName}`);
             }
         };
 

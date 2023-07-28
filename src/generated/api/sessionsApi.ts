@@ -176,7 +176,7 @@ export class SessionsApi {
      * @param order 
      * @param skip 
      */
-    public async getPlayerSessions (player: string, expand?: Array<string>, limit?: number, filter?: string, order?: string, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionsResponse;  }> {
+    public async getPlayerSessions (player: string, expand?: Array<'transactionIntents'>, limit?: number, filter?: string, order?: string, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionsResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -199,7 +199,7 @@ export class SessionsApi {
         }
 
         if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents'>");
         }
 
         if (limit !== undefined) {
@@ -257,6 +257,82 @@ export class SessionsApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "SessionsResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Returns a player session by session id
+     * @param id 
+     * @param expand 
+     */
+    public async getSession (id: string, expand?: Array<'transactionIntents'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionResponse;  }> {
+        const localVarPath = this.basePath + '/v1/sessions/{id}'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getSession.');
+        }
+
+        if (expand !== undefined) {
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents'>");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: SessionResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "SessionResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

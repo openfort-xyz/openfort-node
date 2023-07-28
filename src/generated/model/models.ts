@@ -22,10 +22,14 @@ export * from './createSessionRequest';
 export * from './createTransactionIntentRequest';
 export * from './dataAccountTypes';
 export * from './domainData';
+export * from './editRoleRequest';
 export * from './gasReport';
 export * from './interaction';
 export * from './inventoryResponse';
 export * from './log';
+export * from './memberRemoveResponse';
+export * from './memberRequest';
+export * from './membersResponse';
 export * from './nextActionPayload';
 export * from './nextActionResponse';
 export * from './nextActionType';
@@ -112,10 +116,14 @@ import { CreateSessionRequest } from './createSessionRequest';
 import { CreateTransactionIntentRequest } from './createTransactionIntentRequest';
 import { DataAccountTypes } from './dataAccountTypes';
 import { DomainData } from './domainData';
+import { EditRoleRequest } from './editRoleRequest';
 import { GasReport } from './gasReport';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
 import { Log } from './log';
+import { MemberRemoveResponse } from './memberRemoveResponse';
+import { MemberRequest } from './memberRequest';
+import { MembersResponse } from './membersResponse';
 import { NextActionPayload } from './nextActionPayload';
 import { NextActionResponse } from './nextActionResponse';
 import { NextActionType } from './nextActionType';
@@ -211,10 +219,14 @@ let typeMap: {[index: string]: any} = {
     "CreateSessionRequest": CreateSessionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "DomainData": DomainData,
+    "EditRoleRequest": EditRoleRequest,
     "GasReport": GasReport,
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
     "Log": Log,
+    "MemberRemoveResponse": MemberRemoveResponse,
+    "MemberRequest": MemberRequest,
+    "MembersResponse": MembersResponse,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
     "PickAccountResponseId": PickAccountResponseId,
