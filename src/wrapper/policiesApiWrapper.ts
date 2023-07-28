@@ -14,9 +14,9 @@ import {
     UpdatePolicyAllowFunctionRequest,
     UpdatePolicyRequest,
 } from "../model";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {PoliciesApi} from "../generated/api/policiesApi";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { PoliciesApi } from "../generated/api/policiesApi";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
@@ -38,7 +38,7 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * @param req parameters to create
      */
     public async update(req: UpdatePolicyRequest): Promise<PolicyResponse> {
-        const {id, ...body} = req;
+        const { id, ...body } = req;
         const response = await this.api.updatePolicy(id, body);
         return response.body;
     }
@@ -48,7 +48,7 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * @param req parameters to create
      */
     public async createAllowFunction(req: CreatePolicyRuleRequest): Promise<PolicyRuleResponse> {
-        const {policy, ...body} = req;
+        const { policy, ...body } = req;
         const response = await this.api.createPolicyAllowFunction(policy, body);
         return response.body;
     }
@@ -103,7 +103,7 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * @param req Parameters to update
      */
     public async updateAllowFunction(req: UpdatePolicyAllowFunctionRequest): Promise<PolicyRuleResponse> {
-        const {policy, policyRule, ...body} = req;
+        const { policy, policyRule, ...body } = req;
         const response = await this.api.updatePolicyAllowFunction(policy, policyRule, body);
         return response.body;
     }

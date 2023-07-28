@@ -1,2 +1,2 @@
-export const VERSION = "0.5.6";
+export const VERSION = "0.5.8";
 export const PACKAGE = "@openfort/openfort-node";

@@ -11,9 +11,9 @@ import {
     TransactionIntentResponse,
     TransferAccountOwnershipRequest,
 } from "../model";
-import {AccountsApi} from "../generated/api/accountsApi";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { AccountsApi } from "../generated/api/accountsApi";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
@@ -62,7 +62,7 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Parameters to transfer ownership.
      */
     public async transferOwnership(req: TransferAccountOwnershipRequest): Promise<TransactionIntentResponse> {
-        const {id, ...body} = req;
+        const { id, ...body } = req;
         const response = await this.api.transferOwnership(id, body);
         return response.body;
     }
@@ -72,8 +72,17 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Parameters to sign payload
      */
     public async signPayload(req: SignPayloadRequest): Promise<SignPayloadResponse> {
-        const {id, ...body} = req;
+        const { id, ...body } = req;
         const response = await this.api.signPayload(id, body);
+        return response.body;
+    }
+
+    /**
+     * Sync account state with the blockchain
+     * @param id Specifies the unique account ID.
+     */
+    public async sync(id: string): Promise<AccountResponse> {
+        const response = await this.api.syncAccount(id);
         return response.body;
     }
 }

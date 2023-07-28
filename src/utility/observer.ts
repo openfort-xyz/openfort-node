@@ -1,4 +1,4 @@
-import {ValidationError} from "../model/validationError";
+import { ValidationError } from "../model/validationError";
 
 /**
  * Interface introduce the ability to observe the messages from the observable class

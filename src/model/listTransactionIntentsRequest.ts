@@ -1,4 +1,4 @@
-import {SortOrder} from "../generated/model/sortOrder";
+import { SortOrder } from "../generated/model/sortOrder";
 
 export interface ListTransactionIntentsRequest {
     expand?: Array<"nextAction" | "policy" | "player" | "account">;

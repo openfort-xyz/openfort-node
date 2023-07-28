@@ -7,9 +7,9 @@ import {
     TransactionIntentsResponse,
     UpdateTransactionIntentRequest,
 } from "../model";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {TransactionIntentsApi} from "../generated/api/transactionIntentsApi";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { TransactionIntentsApi } from "../generated/api/transactionIntentsApi";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
 
 @httpErrorHandler
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {
@@ -55,7 +55,7 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
      * @param req Parameters to signature session
      */
     public async signature(req: SignatureTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        const {id, ...body} = req;
+        const { id, ...body } = req;
         const response = await this.api.signature(id, body);
         return response.body;
     }

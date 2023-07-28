@@ -1,13 +1,13 @@
-import {AccountsApiWrapper} from "./wrapper/accountsApiWrapper";
-import {ContractsApiWrapper} from "./wrapper/contractsApiWrapper";
-import {Observable} from "./utility/observable";
-import {Observer} from "./utility/observer";
-import {PlayersApiWrapper} from "./wrapper/playersApiWrapper";
-import {PoliciesApiWrapper} from "./wrapper/policiesApiWrapper";
-import {PolicyRulesApiWrapper} from "./wrapper/policyRulesApiWrapper";
-import {ProjectsApiWrapper} from "./wrapper/projectsApiWrapper";
-import {SessionsApiWrapper} from "./wrapper/sessionsApiWrapper";
-import {TransactionIntentsApiWrapper} from "./wrapper/transactionIntentsApiWrapper";
+import { AccountsApiWrapper } from "./wrapper/accountsApiWrapper";
+import { ContractsApiWrapper } from "./wrapper/contractsApiWrapper";
+import { Observable } from "./utility/observable";
+import { Observer } from "./utility/observer";
+import { PlayersApiWrapper } from "./wrapper/playersApiWrapper";
+import { PoliciesApiWrapper } from "./wrapper/policiesApiWrapper";
+import { PolicyRulesApiWrapper } from "./wrapper/policyRulesApiWrapper";
+import { ProjectsApiWrapper } from "./wrapper/projectsApiWrapper";
+import { SessionsApiWrapper } from "./wrapper/sessionsApiWrapper";
+import { TransactionIntentsApiWrapper } from "./wrapper/transactionIntentsApiWrapper";
 
 export default class Openfort {
     private readonly apiWrappers = {};
@@ -54,7 +54,7 @@ export default class Openfort {
         }
     }
 
-    private getOrCreateWrapper<T>(type: new (accessToken: string, basePath?: string) => T): T {
+    private getOrCreateWrapper<T>(type: new (_accessToken: string, _basePath?: string) => T): T {
         const wrapper = this.apiWrappers[type.name];
         if (wrapper) {
             return wrapper;

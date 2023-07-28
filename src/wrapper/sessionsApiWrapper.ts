@@ -6,9 +6,10 @@ import {
     SessionsResponse,
     SignatureSessionRequest,
 } from "../model";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {SessionsApi} from "../generated/api/sessionsApi";
-import {httpErrorHandler} from "../utility/httpErrorHandler";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { SessionsApi } from "../generated/api/sessionsApi";
+import { httpErrorHandler } from "../utility/httpErrorHandler";
+import { GetSessionRequest } from "../model/getSessionRequest";
 
 @httpErrorHandler
 export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
@@ -32,11 +33,22 @@ export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
     public async list(req: ListSessionsRequest): Promise<SessionsResponse> {
         const response = await this.api.getPlayerSessions(
             req.player,
-            req.expand,
+            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
             req.limit,
             req.filter,
             req.order,
             req.skip,
+        );
+        return response.body;
+    }
+
+    /**
+     * Returns a player session by session id
+     */
+    public async get(req: GetSessionRequest): Promise<SessionResponse> {
+        const response = await this.api.getSession(
+            req.id,
+            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
         );
         return response.body;
     }
@@ -55,7 +67,7 @@ export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
      * @param req: Parameters for session signature
      */
     public async signature(req: SignatureSessionRequest): Promise<SessionResponse> {
-        const {id, ...request} = req;
+        const { id, ...request } = req;
         const response = await this.api.signatureSession(id, request);
         return response.body;
     }

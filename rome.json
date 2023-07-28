@@ -1,0 +1,59 @@
+{
+    "$schema": "https://docs.rome.tools/schemas/12.1.3/schema.json",
+    "files": {
+        "ignore": ["package-lock.json", "dist", "src/generated"]
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentSize": 4,
+        "lineWidth": 120
+    },
+    "linter": {
+        "ignore": ["./src/generated/*"],
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "complexity": {
+                "noExtraSemicolon": "off"
+            },
+            "correctness": {
+                "noUnusedVariables": "error"
+            },
+            "nursery": {
+                "noBannedTypes": "off",
+                "useExhaustiveDependencies": "error",
+                "useGroupedTypeImport": "off",
+                "noConsoleLog": "error"
+            },
+            "performance": {
+                "noDelete": "off"
+            },
+            "style": {
+                "noNonNullAssertion": "off",
+                "useShorthandArrayType": "error"
+            },
+            "suspicious": {
+                "noArrayIndexKey": "off",
+                "noExplicitAny": "off",
+                "noRedeclare": "off"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "double",
+            "trailingComma": "all",
+            "semicolons": "always"
+        }
+    },
+    "organizeImports": {
+        "enabled": false
+    },
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    }
+}
