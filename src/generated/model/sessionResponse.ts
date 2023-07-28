@@ -15,6 +15,7 @@ import { NextActionResponse } from './nextActionResponse';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class SessionResponse {
+    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'id': string;
     'object': string;
     'createdAt': number;
@@ -26,11 +27,15 @@ export class SessionResponse {
     'whitelist'?: Array<string>;
     'limit'?: number;
     'nextAction'?: NextActionResponse;
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -85,11 +90,6 @@ export class SessionResponse {
             "name": "nextAction",
             "baseName": "nextAction",
             "type": "NextActionResponse"
-        },
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
         }    ];
 
     static getAttributeTypeMap() {

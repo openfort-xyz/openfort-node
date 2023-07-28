@@ -14,6 +14,9 @@ async function example() {
     const createPlayerRequest: CreatePlayerRequest = {
         name: "Test 1234",
     };
+    openfort.subscribe({onError: (e) => {console.log(">-------"); console.dir(e); console.log("<-------");}})
+    const policy = await openfort.policies.get({id: getEnvVariable("OPENFORT_POLICY") + "a"});
+
     const newPlayer = await openfort.players.create(createPlayerRequest);
 
     const players: PlayersResponse = await openfort.players.list({filter: {name: "Test 1234"}});
@@ -27,7 +30,6 @@ async function example() {
     });
     console.dir(account);
 
-    const policy = await openfort.policies.get({id: getEnvVariable("OPENFORT_POLICY")});
     console.dir(policy);
 
     const contract = await openfort.contracts.get({id: getEnvVariable("OPENFORT_CONTRACT")});
