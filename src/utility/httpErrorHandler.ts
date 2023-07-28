@@ -21,7 +21,7 @@ function parseAndPrepareHttpError<T>(error: T): Error | T {
 function processError(error: unknown, observers: Observer[] | undefined, methodName: string): unknown {
     const parsedError = parseAndPrepareHttpError(error);
     if (observers?.length) {
-        Promise.all(observers.map((observer) => observer.onError?.(error)));
+        Promise.all(observers.map((observer) => observer.onError?.(parsedError)));
         if (parsedError instanceof ValidationError) {
             Promise.all(observers.map((observer) => observer.onValidationError?.({...parsedError, methodName})));
         }
