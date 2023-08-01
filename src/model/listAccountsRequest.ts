@@ -1,5 +1,5 @@
 export interface ListAccountsRequest {
     player: string;
-    expand?: string[];
     limit?: number;
+    expandTransactionIntent?: boolean;
 }

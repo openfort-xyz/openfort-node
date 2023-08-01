@@ -7,6 +7,7 @@ export * from './accountsResponse';
 export * from './apiKeyResponse';
 export * from './assetInventory';
 export * from './assetType';
+export * from './cancelTransferOwnershipRequest';
 export * from './contractDeleteResponse';
 export * from './contractResponse';
 export * from './contractsResponse';
@@ -41,6 +42,7 @@ export * from './pickPlayerResponseId';
 export * from './pickPolicyResponseId';
 export * from './pickPolicyRuleResponseId';
 export * from './pickTransactionIntentResponseId';
+export * from './playerCancelTransferOwnershipRequest';
 export * from './playerRequest';
 export * from './playerResponse';
 export * from './playerTransferOwnershipRequest';
@@ -101,6 +103,7 @@ import { AccountsResponse } from './accountsResponse';
 import { ApiKeyResponse } from './apiKeyResponse';
 import { AssetInventory } from './assetInventory';
 import { AssetType } from './assetType';
+import { CancelTransferOwnershipRequest } from './cancelTransferOwnershipRequest';
 import { ContractDeleteResponse } from './contractDeleteResponse';
 import { ContractResponse } from './contractResponse';
 import { ContractsResponse } from './contractsResponse';
@@ -135,6 +138,7 @@ import { PickPlayerResponseId } from './pickPlayerResponseId';
 import { PickPolicyResponseId } from './pickPolicyResponseId';
 import { PickPolicyRuleResponseId } from './pickPolicyRuleResponseId';
 import { PickTransactionIntentResponseId } from './pickTransactionIntentResponseId';
+import { PlayerCancelTransferOwnershipRequest } from './playerCancelTransferOwnershipRequest';
 import { PlayerRequest } from './playerRequest';
 import { PlayerResponse } from './playerResponse';
 import { PlayerTransferOwnershipRequest } from './playerTransferOwnershipRequest';
@@ -205,6 +209,7 @@ let typeMap: {[index: string]: any} = {
     "AccountsResponse": AccountsResponse,
     "ApiKeyResponse": ApiKeyResponse,
     "AssetInventory": AssetInventory,
+    "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
     "ContractDeleteResponse": ContractDeleteResponse,
     "ContractResponse": ContractResponse,
     "ContractsResponse": ContractsResponse,
@@ -235,6 +240,7 @@ let typeMap: {[index: string]: any} = {
     "PickPolicyResponseId": PickPolicyResponseId,
     "PickPolicyRuleResponseId": PickPolicyRuleResponseId,
     "PickTransactionIntentResponseId": PickTransactionIntentResponseId,
+    "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
     "PlayerRequest": PlayerRequest,
     "PlayerResponse": PlayerResponse,
     "PlayerTransferOwnershipRequest": PlayerTransferOwnershipRequest,

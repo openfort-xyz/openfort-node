@@ -1,6 +1,7 @@
 import {
     AccountResponse,
     AccountsResponse,
+    CancelTransferOwnershipRequest,
     CreateAccountRequest,
     GetAccountInventoryRequest,
     GetAccountRequest,
@@ -9,7 +10,7 @@ import {
     SignPayloadRequest,
     SignPayloadResponse,
     TransactionIntentResponse,
-    TransferAccountOwnershipRequest,
+    TransferOwnershipRequest,
 } from "../model";
 import { AccountsApi } from "../generated/api/accountsApi";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -35,7 +36,10 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Criteria to get account.
      */
     public async get(req: GetAccountRequest): Promise<AccountResponse> {
-        const response = await this.api.getAccount(req.id, req.expand);
+        const response = await this.api.getAccount(
+            req.id,
+            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
+        );
         return response.body;
     }
 
@@ -53,7 +57,11 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Criteria to get the list of accounts.
      */
     public async list(req: ListAccountsRequest): Promise<AccountsResponse> {
-        const response = await this.api.getAccounts(req.player, req.expand, req.limit);
+        const response = await this.api.getAccounts(
+            req.player,
+            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
+            req.limit,
+        );
         return response.body;
     }
 
@@ -61,9 +69,19 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * Transfers ownership of an account to an address.
      * @param req Parameters to transfer ownership.
      */
-    public async transferOwnership(req: TransferAccountOwnershipRequest): Promise<TransactionIntentResponse> {
-        const { id, ...body } = req;
-        const response = await this.api.transferOwnership(id, body);
+    public async requestTransferOwnership(req: TransferOwnershipRequest): Promise<TransactionIntentResponse> {
+        const { accountId, ...body } = req;
+        const response = await this.api.requestTransferOwnership(accountId, body);
+        return response.body;
+    }
+
+    /**
+     * Cancel transfers ownership of an account to an address.
+     * @param req Parameters to transfer ownership.
+     */
+    public async cancelTransferOwnership(req: CancelTransferOwnershipRequest): Promise<TransactionIntentResponse> {
+        const { accountId, ...body } = req;
+        const response = await this.api.cancelTransferOwnership(accountId, body);
         return response.body;
     }
 

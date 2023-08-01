@@ -21,6 +21,7 @@ import { CreatePlayerAccountRequest } from '../model/createPlayerAccountRequest'
 import { CreatePlayerRequest } from '../model/createPlayerRequest';
 import { CreateSessionPlayerRequest } from '../model/createSessionPlayerRequest';
 import { InventoryResponse } from '../model/inventoryResponse';
+import { PlayerCancelTransferOwnershipRequest } from '../model/playerCancelTransferOwnershipRequest';
 import { PlayerRequest } from '../model/playerRequest';
 import { PlayerResponse } from '../model/playerResponse';
 import { PlayerTransferOwnershipRequest } from '../model/playerTransferOwnershipRequest';
@@ -105,6 +106,84 @@ export class PlayersApi {
         this.interceptors.push(interceptor);
     }
 
+    /**
+     * Request the ownership transfer of an account to a given address.
+     * @param id 
+     * @param playerCancelTransferOwnershipRequest 
+     */
+    public async cancelTransferAccountOwnership (id: string, playerCancelTransferOwnershipRequest: PlayerCancelTransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+        const localVarPath = this.basePath + '/v1/players/{id}/cancel-transfer-ownership'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling cancelTransferAccountOwnership.');
+        }
+
+        // verify required parameter 'playerCancelTransferOwnershipRequest' is not null or undefined
+        if (playerCancelTransferOwnershipRequest === null || playerCancelTransferOwnershipRequest === undefined) {
+            throw new Error('Required parameter playerCancelTransferOwnershipRequest was null or undefined when calling cancelTransferAccountOwnership.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(playerCancelTransferOwnershipRequest, "PlayerCancelTransferOwnershipRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionIntentResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
     /**
      * Creates a player object.
      * @param createPlayerRequest 
@@ -413,7 +492,7 @@ export class PlayersApi {
      * @param id Specifies the unique player ID.
      * @param expand 
      */
-    public async getPlayerAccounts (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
+    public async getPlayerAccounts (id: string, expand?: Array<'transactionIntents'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/accounts'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -433,7 +512,7 @@ export class PlayersApi {
         }
 
         if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents'>");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -655,6 +734,84 @@ export class PlayersApi {
         });
     }
     /**
+     * Transfer ownership of an account to an address.
+     * @param id Specifies the unique player ID.
+     * @param playerTransferOwnershipRequest 
+     */
+    public async requestTransferAccountOwnership (id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+        const localVarPath = this.basePath + '/v1/players/{id}/request-transfer-ownership'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling requestTransferAccountOwnership.');
+        }
+
+        // verify required parameter 'playerTransferOwnershipRequest' is not null or undefined
+        if (playerTransferOwnershipRequest === null || playerTransferOwnershipRequest === undefined) {
+            throw new Error('Required parameter playerTransferOwnershipRequest was null or undefined when calling requestTransferAccountOwnership.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(playerTransferOwnershipRequest, "PlayerTransferOwnershipRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionIntentResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
      * Creates a session object for the given player.
      * @param id Specifies the unique player ID.
      * @param revokeSessionPlayerRequest 
@@ -723,84 +880,6 @@ export class PlayersApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "SessionResponse");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Transfer ownership of an account to an address.
-     * @param id Specifies the unique player ID.
-     * @param playerTransferOwnershipRequest 
-     */
-    public async transferAccountOwnership (id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
-        const localVarPath = this.basePath + '/v1/players/{id}/transfer-ownership'
-            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling transferAccountOwnership.');
-        }
-
-        // verify required parameter 'playerTransferOwnershipRequest' is not null or undefined
-        if (playerTransferOwnershipRequest === null || playerTransferOwnershipRequest === undefined) {
-            throw new Error('Required parameter playerTransferOwnershipRequest was null or undefined when calling transferAccountOwnership.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(playerTransferOwnershipRequest, "PlayerTransferOwnershipRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.pk.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "TransactionIntentResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

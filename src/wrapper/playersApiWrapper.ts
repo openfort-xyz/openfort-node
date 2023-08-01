@@ -14,7 +14,8 @@ import {
     RevokePlayerSessionRequest,
     SessionResponse,
     TransactionIntentResponse,
-    TransferPlayerAccountOwnershipRequest,
+    PlayerCancelTransferOwnershipRequest,
+    PlayerTransferOwnershipRequest,
     UpdatePlayerRequest,
 } from "../model";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -70,7 +71,10 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * @param req Criteria to get the accounts list.
      */
     public async listAccounts(req: ListPlayerAccountsRequest): Promise<AccountsResponse> {
-        const response = await this.api.getPlayerAccounts(req.id, req.expand);
+        const response = await this.api.getPlayerAccounts(
+            req.id,
+            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
+        );
         return response.body;
     }
 
@@ -112,11 +116,23 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * Transfer ownership of an account to an address.
      * @param req Parameters to transfer account ownership.
      */
-    public async transferAccountOwnership(
-        req: TransferPlayerAccountOwnershipRequest,
+    public async requestTransferAccountOwnership(
+        req: PlayerTransferOwnershipRequest,
     ): Promise<TransactionIntentResponse> {
         const { playerId, ...body } = req;
-        const response = await this.api.transferAccountOwnership(playerId, body);
+        const response = await this.api.requestTransferAccountOwnership(playerId, body);
+        return response.body;
+    }
+
+    /**
+     * Transfer ownership of an account to an address.
+     * @param req Parameters to transfer account ownership.
+     */
+    public async cancelTransferAccountOwnership(
+        req: PlayerCancelTransferOwnershipRequest,
+    ): Promise<TransactionIntentResponse> {
+        const { playerId, ...body } = req;
+        const response = await this.api.cancelTransferAccountOwnership(playerId, body);
         return response.body;
     }
 
