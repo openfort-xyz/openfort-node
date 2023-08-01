@@ -21,7 +21,7 @@ export class TransactionIntentResponseAccount {
     'object': string;
     'createdAt': number;
     'address': string;
-    'ownerAddress'?: string;
+    'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
     'chainId': number;
