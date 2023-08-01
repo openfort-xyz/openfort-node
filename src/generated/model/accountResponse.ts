@@ -19,7 +19,7 @@ export class AccountResponse {
     'object': string;
     'createdAt': number;
     'address': string;
-    'ownerAddress'?: string;
+    'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
     'chainId': number;
