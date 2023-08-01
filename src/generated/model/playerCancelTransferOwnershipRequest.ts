@@ -21,10 +21,6 @@ export class PlayerCancelTransferOwnershipRequest {
     * The chain id where the account is.
     */
     'chainId': number;
-    /**
-    * The player ID
-    */
-    'player'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -38,11 +34,6 @@ export class PlayerCancelTransferOwnershipRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number"
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
