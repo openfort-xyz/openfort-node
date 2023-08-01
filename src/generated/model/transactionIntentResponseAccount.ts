@@ -16,20 +16,26 @@ import { PickAccountResponseId } from './pickAccountResponseId';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class TransactionIntentResponseAccount {
+    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'id': string;
     'object': string;
     'createdAt': number;
     'address': string;
-    'ownerAddress': string;
+    'ownerAddress'?: string;
     'deployed': boolean;
     'custodial': boolean;
     'chainId': number;
     'accountType': string;
-    'transactionIntents': Array<PolicyResponseTransactionIntentsInner>;
+    'pendingOwnerAddress'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -76,9 +82,9 @@ export class TransactionIntentResponseAccount {
             "type": "string"
         },
         {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
+            "name": "pendingOwnerAddress",
+            "baseName": "pendingOwnerAddress",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
