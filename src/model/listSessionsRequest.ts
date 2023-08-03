@@ -1,8 +1,9 @@
-export interface ListSessionsRequest {
-    player: string;
-    expandTransactionIntent?: boolean;
-    limit?: number;
-    filter?: string;
-    order?: string;
-    skip?: number;
+import { BaseExpandableListRequest } from "./baseListRequest";
+
+export interface ListSessionsRequest extends BaseExpandableListRequest<ListSessionsFilter, "transactionIntents"> {
+    playerId: string;
+}
+
+interface ListSessionsFilter {
+    address?: string;
 }

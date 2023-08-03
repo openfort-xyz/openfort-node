@@ -59,7 +59,7 @@ export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {
      * @param req Criteria to retrieve list of contracts.
      */
     public async list(req?: ListContractsRequest): Promise<ContractsResponse> {
-        const response = await this.api.getContracts(req?.limit);
+        const response = await this.api.getContracts(req?.limit, req?.skip, req?.order, req?.filter?.name);
         return response.body;
     }
 }

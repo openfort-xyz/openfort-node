@@ -20,6 +20,7 @@ import { RevokeSessionRequest } from '../model/revokeSessionRequest';
 import { SessionResponse } from '../model/sessionResponse';
 import { SessionsResponse } from '../model/sessionsResponse';
 import { SignatureRequest } from '../model/signatureRequest';
+import { SortOrder } from '../model/sortOrder';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -170,13 +171,13 @@ export class SessionsApi {
     /**
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
      * @param player 
-     * @param expand 
      * @param limit 
-     * @param filter 
-     * @param order 
      * @param skip 
+     * @param order 
+     * @param expand 
+     * @param address 
      */
-    public async getPlayerSessions (player: string, expand?: Array<'transactionIntents'>, limit?: number, filter?: string, order?: string, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionsResponse;  }> {
+    public async getPlayerSessions (player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, address?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionsResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -194,6 +195,18 @@ export class SessionsApi {
             throw new Error('Required parameter player was null or undefined when calling getPlayerSessions.');
         }
 
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        }
+
+        if (skip !== undefined) {
+            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
+        }
+
         if (player !== undefined) {
             localVarQueryParameters['player'] = ObjectSerializer.serialize(player, "string");
         }
@@ -202,20 +215,8 @@ export class SessionsApi {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents'>");
         }
 
-        if (limit !== undefined) {
-            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
-        }
-
-        if (filter !== undefined) {
-            localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
-        }
-
-        if (order !== undefined) {
-            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
-        }
-
-        if (skip !== undefined) {
-            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        if (address !== undefined) {
+            localVarQueryParameters['address'] = ObjectSerializer.serialize(address, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

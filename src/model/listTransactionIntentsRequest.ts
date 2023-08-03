@@ -1,9 +1,13 @@
-import { SortOrder } from "../generated/model/sortOrder";
+import { BaseExpandableListRequest } from "./baseListRequest";
 
-export interface ListTransactionIntentsRequest {
-    expand?: Array<"nextAction" | "policy" | "player" | "account">;
-    limit?: number;
-    filter?: string;
-    order?: SortOrder;
-    skip?: number;
+export type ListTransactionIntentsRequest = BaseExpandableListRequest<
+    ListTransactionIntentsFilter,
+    "nextAction" | "policy" | "player" | "account"
+>;
+
+interface ListTransactionIntentsFilter {
+    accountId?: string;
+    chainId?: number;
+    playerId?: string;
+    policyId?: string;
 }

@@ -245,13 +245,16 @@ export class TransactionIntentsApi {
     }
     /**
      * Returns a list of transaction intents for the given project. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param expand 
      * @param limit 
-     * @param filter 
-     * @param order 
      * @param skip 
+     * @param order 
+     * @param expand 
+     * @param accountId 
+     * @param chainId 
+     * @param playerId 
+     * @param policyId 
      */
-    public async getTransactionIntents (expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, limit?: number, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
+    public async getTransactionIntents (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, accountId?: string, chainId?: number, playerId?: string, policyId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -264,24 +267,36 @@ export class TransactionIntentsApi {
         }
         let localVarFormParams: any = {};
 
-        if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'nextAction' | 'policy' | 'player' | 'account'>");
-        }
-
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (filter !== undefined) {
-            localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
+        if (skip !== undefined) {
+            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
         }
 
         if (order !== undefined) {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
         }
 
-        if (skip !== undefined) {
-            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        if (expand !== undefined) {
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'nextAction' | 'policy' | 'player' | 'account'>");
+        }
+
+        if (accountId !== undefined) {
+            localVarQueryParameters['accountId'] = ObjectSerializer.serialize(accountId, "string");
+        }
+
+        if (chainId !== undefined) {
+            localVarQueryParameters['chainId'] = ObjectSerializer.serialize(chainId, "number");
+        }
+
+        if (playerId !== undefined) {
+            localVarQueryParameters['playerId'] = ObjectSerializer.serialize(playerId, "string");
+        }
+
+        if (policyId !== undefined) {
+            localVarQueryParameters['policyId'] = ObjectSerializer.serialize(policyId, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

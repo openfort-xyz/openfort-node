@@ -1,4 +1,10 @@
-import Openfort, { CreatePlayerRequest, CreatePlayerSessionRequest, PlayersResponse } from "@openfort/openfort-node";
+import Openfort, {
+    CreatePlayerRequest,
+    CreatePlayerSessionRequest,
+    PlayersResponse,
+    PolicySchema,
+    SponsorSchema,
+} from "@openfort/openfort-node";
 import * as dotenv from "dotenv";
 
 function getEnvVariable(name: string): string {
@@ -15,6 +21,7 @@ async function example() {
         name: "Test 1234",
     };
     const newPlayer = await openfort.players.create(createPlayerRequest);
+    const chainId = Number(getEnvVariable("OPENFORT_CHAINID"));
 
     const players: PlayersResponse = await openfort.players.list({ filter: { name: "Test 1234" } });
     for (const player of players.data) {
@@ -23,27 +30,45 @@ async function example() {
 
     const account = await openfort.accounts.create({
         player: newPlayer.id,
-        chainId: Number(getEnvVariable("OPENFORT_CHAINID")),
+        chainId,
     });
     console.dir(account);
 
-    const policy = await openfort.policies.get({ id: getEnvVariable("OPENFORT_POLICY") });
+    const policy = await openfort.policies.create({
+        name: "Test policy",
+        chainId,
+        strategy: {
+            sponsorSchema: SponsorSchema.PayForUser,
+        },
+    });
     console.dir(policy);
 
-    const contract = await openfort.contracts.get({ id: getEnvVariable("OPENFORT_CONTRACT") });
+    const policyRule = await openfort.policyRules.create({
+        type: PolicySchema.AccountFunctions,
+        policy: policy.id,
+        functionName: null,
+        contract: null,
+    });
+    console.dir(policyRule);
+
+    const contract = await openfort.contracts.create({
+        name: "Test contract",
+        chainId,
+        address: "0x38090d1636069c0ff1af6bc1737fb996b7f63ac0",
+    });
     console.dir(contract);
 
     const createSessionRequest: CreatePlayerSessionRequest = {
         playerId: newPlayer.id,
         address: "0x9590Ed0C18190a310f4e93CAccc4CC17270bED40",
-        chainId: Number(getEnvVariable("OPENFORT_CHAINID")),
+        chainId,
         validUntil: 281474976710655,
         validAfter: 0,
-        policy: getEnvVariable("OPENFORT_POLICY"),
+        policy: policy.id,
     };
     await openfort.players.createSession(createSessionRequest);
 
-    const transactionIntents = await openfort.transactionIntents.list();
+    const transactionIntents = await openfort.transactionIntents.list({ filter: { playerId: newPlayer.id } });
     for (const intent of transactionIntents.data) {
         console.info(`Intent ${intent.id} by ${intent.player?.id}`);
     }

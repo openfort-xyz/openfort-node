@@ -312,12 +312,15 @@ export class ContractsApi {
     }
     /**
      * Returns a list of your contracts. The contracts are returned sorted by creation date, with the most recently created contracts appearing first.
-     * @param limit amount of results per query
-     * @param order 
+     * @param limit 
      * @param skip 
-     * @param filter 
+     * @param order 
+     * @param name 
+     * @param deleted 
+     * @param chainId 
+     * @param address 
      */
-    public async getContracts (limit?: number, order?: SortOrder, skip?: number, filter?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractsResponse;  }> {
+    public async getContracts (limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, chainId?: number, address?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractsResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -334,16 +337,28 @@ export class ContractsApi {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (order !== undefined) {
-            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
-        }
-
         if (skip !== undefined) {
             localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
         }
 
-        if (filter !== undefined) {
-            localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
+        }
+
+        if (name !== undefined) {
+            localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
+        }
+
+        if (deleted !== undefined) {
+            localVarQueryParameters['deleted'] = ObjectSerializer.serialize(deleted, "boolean");
+        }
+
+        if (chainId !== undefined) {
+            localVarQueryParameters['chainId'] = ObjectSerializer.serialize(chainId, "number");
+        }
+
+        if (address !== undefined) {
+            localVarQueryParameters['address'] = ObjectSerializer.serialize(address, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

@@ -67,7 +67,15 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * @param req Criteria to retrieve the policies by
      */
     public async list(req?: ListPoliciesRequest): Promise<PoliciesResponse> {
-        const response = await this.api.getPolicies(req?.limit, req?.expand);
+        const response = await this.api.getPolicies(
+            req?.limit,
+            req?.skip,
+            req?.order,
+            req?.expand,
+            req?.filter?.name,
+            req?.filter?.deleted,
+            req?.filter?.chainId,
+        );
         return response.body;
     }
 

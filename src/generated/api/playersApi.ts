@@ -416,7 +416,7 @@ export class PlayersApi {
      * @param id Specifies the unique player ID.
      * @param expand 
      */
-    public async getPlayer (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
+    public async getPlayer (id: string, expand?: Array<'transactionIntents' | 'accounts'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayerResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -436,7 +436,7 @@ export class PlayersApi {
         }
 
         if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'accounts'>");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -646,13 +646,13 @@ export class PlayersApi {
     }
     /**
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param expand 
      * @param limit 
-     * @param filter 
-     * @param order 
      * @param skip 
+     * @param order 
+     * @param expand 
+     * @param name 
      */
-    public async getPlayers (expand?: Array<string>, limit?: number, filter?: string, order?: SortOrder, skip?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayersResponse;  }> {
+    public async getPlayers (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'accounts'>, name?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayersResponse;  }> {
         const localVarPath = this.basePath + '/v1/players';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -665,24 +665,24 @@ export class PlayersApi {
         }
         let localVarFormParams: any = {};
 
-        if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
-        }
-
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (filter !== undefined) {
-            localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
+        if (skip !== undefined) {
+            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
         }
 
         if (order !== undefined) {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
         }
 
-        if (skip !== undefined) {
-            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        if (expand !== undefined) {
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'accounts'>");
+        }
+
+        if (name !== undefined) {
+            localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

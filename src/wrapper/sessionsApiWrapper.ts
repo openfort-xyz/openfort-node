@@ -32,12 +32,12 @@ export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
      */
     public async list(req: ListSessionsRequest): Promise<SessionsResponse> {
         const response = await this.api.getPlayerSessions(
-            req.player,
-            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
+            req.playerId,
             req.limit,
-            req.filter,
-            req.order,
             req.skip,
+            req.order,
+            req.expand,
+            req.filter?.address,
         );
         return response.body;
     }

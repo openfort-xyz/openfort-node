@@ -5,7 +5,6 @@ import { Observer } from "./utility/observer";
 import { PlayersApiWrapper } from "./wrapper/playersApiWrapper";
 import { PoliciesApiWrapper } from "./wrapper/policiesApiWrapper";
 import { PolicyRulesApiWrapper } from "./wrapper/policyRulesApiWrapper";
-import { ProjectsApiWrapper } from "./wrapper/projectsApiWrapper";
 import { SessionsApiWrapper } from "./wrapper/sessionsApiWrapper";
 import { TransactionIntentsApiWrapper } from "./wrapper/transactionIntentsApiWrapper";
 
@@ -33,10 +32,6 @@ export default class Openfort {
 
     public get policyRules(): PolicyRulesApiWrapper {
         return this.getOrCreateWrapper(PolicyRulesApiWrapper);
-    }
-
-    public get projects(): ProjectsApiWrapper {
-        return this.getOrCreateWrapper(ProjectsApiWrapper);
     }
 
     public get sessions(): SessionsApiWrapper {

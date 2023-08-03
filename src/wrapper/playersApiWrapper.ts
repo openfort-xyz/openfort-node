@@ -93,11 +93,11 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      */
     public async list(req?: ListPlayersRequest): Promise<PlayersResponse> {
         const response = await this.api.getPlayers(
-            req?.expand,
             req?.limit,
-            req?.filter ? JSON.stringify(req.filter) : undefined,
-            req?.order,
             req?.skip,
+            req?.order,
+            req?.expand,
+            req?.filter ? JSON.stringify(req.filter) : undefined,
         );
         return response.body;
     }
