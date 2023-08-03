@@ -18,6 +18,8 @@ import { PolicyResponseTransactionIntentsInner } from './policyResponseTransacti
 import { PolicyStrategy } from './policyStrategy';
 
 export class TransactionIntentResponsePolicy {
+    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
+    'policyRules'?: Array<PolicyResponsePolicyRulesInner>;
     'id': string;
     'object': string;
     'createdAt': number;
@@ -25,12 +27,20 @@ export class TransactionIntentResponsePolicy {
     'deleted': boolean;
     'chainId': number;
     'strategy': PolicyStrategy;
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'policyRules'?: Array<PolicyResponsePolicyRulesInner>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
+        },
+        {
+            "name": "policyRules",
+            "baseName": "policyRules",
+            "type": "Array<PolicyResponsePolicyRulesInner>"
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -65,16 +75,6 @@ export class TransactionIntentResponsePolicy {
             "name": "strategy",
             "baseName": "strategy",
             "type": "PolicyStrategy"
-        },
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
-        },
-        {
-            "name": "policyRules",
-            "baseName": "policyRules",
-            "type": "Array<PolicyResponsePolicyRulesInner>"
         }    ];
 
     static getAttributeTypeMap() {

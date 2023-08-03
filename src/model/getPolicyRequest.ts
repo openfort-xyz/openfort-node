@@ -1,4 +1,4 @@
 export interface GetPolicyRequest {
     id: string;
-    expand?: string[];
+    expand?: Array<"transactionIntents" | "policyRules">;
 }

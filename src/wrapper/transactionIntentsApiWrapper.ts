@@ -41,11 +41,14 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
      */
     public async list(req?: ListTransactionIntentsRequest): Promise<TransactionIntentsResponse> {
         const response = await this.api.getTransactionIntents(
-            req?.expand,
             req?.limit,
-            req?.filter,
-            req?.order,
             req?.skip,
+            req?.order,
+            req?.expand,
+            req?.filter?.accountId,
+            req?.filter?.chainId,
+            req?.filter?.playerId,
+            req?.filter?.policyId,
         );
         return response.body;
     }

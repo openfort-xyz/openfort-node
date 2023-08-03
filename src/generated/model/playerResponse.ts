@@ -15,19 +15,28 @@ import { PolicyResponseTransactionIntentsInner } from './policyResponseTransacti
 import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 
 export class PlayerResponse {
+    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
+    'accounts'?: Array<TransactionIntentResponseAccount>;
     'id': string;
     'object': string;
     'createdAt': number;
     'name': string | null;
-    'email': string | null;
     'description': string | null;
     'metadata': string;
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'accounts'?: Array<TransactionIntentResponseAccount>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PolicyResponseTransactionIntentsInner>"
+        },
+        {
+            "name": "accounts",
+            "baseName": "accounts",
+            "type": "Array<TransactionIntentResponseAccount>"
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -49,11 +58,6 @@ export class PlayerResponse {
             "type": "string"
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string"
-        },
-        {
             "name": "description",
             "baseName": "description",
             "type": "string"
@@ -62,16 +66,6 @@ export class PlayerResponse {
             "name": "metadata",
             "baseName": "metadata",
             "type": "string"
-        },
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>"
-        },
-        {
-            "name": "accounts",
-            "baseName": "accounts",
-            "type": "Array<TransactionIntentResponseAccount>"
         }    ];
 
     static getAttributeTypeMap() {

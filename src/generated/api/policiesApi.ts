@@ -325,12 +325,14 @@ export class PoliciesApi {
     /**
      * Gets all policy objects for a given project.
      * @param limit 
-     * @param expand 
      * @param skip 
-     * @param filter 
      * @param order 
+     * @param expand 
+     * @param name 
+     * @param deleted 
+     * @param chainId 
      */
-    public async getPolicies (limit?: number, expand?: Array<string>, skip?: number, filter?: string, order?: SortOrder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
+    public async getPolicies (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'policyRules'>, name?: string, deleted?: boolean, chainId?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -347,20 +349,28 @@ export class PoliciesApi {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
-        }
-
         if (skip !== undefined) {
             localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
         }
 
-        if (filter !== undefined) {
-            localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
-        }
-
         if (order !== undefined) {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
+        }
+
+        if (expand !== undefined) {
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'policyRules'>");
+        }
+
+        if (name !== undefined) {
+            localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
+        }
+
+        if (deleted !== undefined) {
+            localVarQueryParameters['deleted'] = ObjectSerializer.serialize(deleted, "boolean");
+        }
+
+        if (chainId !== undefined) {
+            localVarQueryParameters['chainId'] = ObjectSerializer.serialize(chainId, "number");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -416,7 +426,7 @@ export class PoliciesApi {
      * @param id 
      * @param expand 
      */
-    public async getPolicy (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
+    public async getPolicy (id: string, expand?: Array<'transactionIntents' | 'policyRules'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -436,7 +446,7 @@ export class PoliciesApi {
         }
 
         if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'policyRules'>");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

@@ -7,6 +7,7 @@ export * from './accountsResponse';
 export * from './apiKeyResponse';
 export * from './assetInventory';
 export * from './assetType';
+export * from './authResponse';
 export * from './cancelTransferOwnershipRequest';
 export * from './contractDeleteResponse';
 export * from './contractResponse';
@@ -25,9 +26,16 @@ export * from './dataAccountTypes';
 export * from './domainData';
 export * from './editRoleRequest';
 export * from './gasReport';
+export * from './getPlayerByTokenRequest';
 export * from './interaction';
 export * from './inventoryResponse';
+export * from './listContractsQueries';
+export * from './listPlayersQueries';
+export * from './listPoliciesQueries';
+export * from './listSessionsQueries';
+export * from './listTransactionIntentsQueries';
 export * from './log';
+export * from './loginRequest';
 export * from './memberRemoveResponse';
 export * from './memberRequest';
 export * from './membersResponse';
@@ -70,6 +78,7 @@ export * from './sessionsResponse';
 export * from './signPayloadRequest';
 export * from './signPayloadResponse';
 export * from './signatureRequest';
+export * from './signupRequest';
 export * from './sortOrder';
 export * from './sponsorSchema';
 export * from './transactionIntentResponse';
@@ -103,6 +112,7 @@ import { AccountsResponse } from './accountsResponse';
 import { ApiKeyResponse } from './apiKeyResponse';
 import { AssetInventory } from './assetInventory';
 import { AssetType } from './assetType';
+import { AuthResponse } from './authResponse';
 import { CancelTransferOwnershipRequest } from './cancelTransferOwnershipRequest';
 import { ContractDeleteResponse } from './contractDeleteResponse';
 import { ContractResponse } from './contractResponse';
@@ -121,9 +131,16 @@ import { DataAccountTypes } from './dataAccountTypes';
 import { DomainData } from './domainData';
 import { EditRoleRequest } from './editRoleRequest';
 import { GasReport } from './gasReport';
+import { GetPlayerByTokenRequest } from './getPlayerByTokenRequest';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
+import { ListContractsQueries } from './listContractsQueries';
+import { ListPlayersQueries } from './listPlayersQueries';
+import { ListPoliciesQueries } from './listPoliciesQueries';
+import { ListSessionsQueries } from './listSessionsQueries';
+import { ListTransactionIntentsQueries } from './listTransactionIntentsQueries';
 import { Log } from './log';
+import { LoginRequest } from './loginRequest';
 import { MemberRemoveResponse } from './memberRemoveResponse';
 import { MemberRequest } from './memberRequest';
 import { MembersResponse } from './membersResponse';
@@ -166,6 +183,7 @@ import { SessionsResponse } from './sessionsResponse';
 import { SignPayloadRequest } from './signPayloadRequest';
 import { SignPayloadResponse } from './signPayloadResponse';
 import { SignatureRequest } from './signatureRequest';
+import { SignupRequest } from './signupRequest';
 import { SortOrder } from './sortOrder';
 import { SponsorSchema } from './sponsorSchema';
 import { TransactionIntentResponse } from './transactionIntentResponse';
@@ -194,6 +212,10 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "AssetType": AssetType,
         "DataAccountTypes": DataAccountTypes,
+        "ListPlayersQueries.ExpandEnum": ListPlayersQueries.ExpandEnum,
+        "ListPoliciesQueries.ExpandEnum": ListPoliciesQueries.ExpandEnum,
+        "ListSessionsQueries.ExpandEnum": ListSessionsQueries.ExpandEnum,
+        "ListTransactionIntentsQueries.ExpandEnum": ListTransactionIntentsQueries.ExpandEnum,
         "NextActionType": NextActionType,
         "PKLocation": PKLocation,
         "PKPolicy": PKPolicy,
@@ -209,6 +231,7 @@ let typeMap: {[index: string]: any} = {
     "AccountsResponse": AccountsResponse,
     "ApiKeyResponse": ApiKeyResponse,
     "AssetInventory": AssetInventory,
+    "AuthResponse": AuthResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
     "ContractDeleteResponse": ContractDeleteResponse,
     "ContractResponse": ContractResponse,
@@ -226,9 +249,16 @@ let typeMap: {[index: string]: any} = {
     "DomainData": DomainData,
     "EditRoleRequest": EditRoleRequest,
     "GasReport": GasReport,
+    "GetPlayerByTokenRequest": GetPlayerByTokenRequest,
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
+    "ListContractsQueries": ListContractsQueries,
+    "ListPlayersQueries": ListPlayersQueries,
+    "ListPoliciesQueries": ListPoliciesQueries,
+    "ListSessionsQueries": ListSessionsQueries,
+    "ListTransactionIntentsQueries": ListTransactionIntentsQueries,
     "Log": Log,
+    "LoginRequest": LoginRequest,
     "MemberRemoveResponse": MemberRemoveResponse,
     "MemberRequest": MemberRequest,
     "MembersResponse": MembersResponse,
@@ -267,6 +297,7 @@ let typeMap: {[index: string]: any} = {
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
+    "SignupRequest": SignupRequest,
     "TransactionIntentResponse": TransactionIntentResponse,
     "TransactionIntentResponseAccount": TransactionIntentResponseAccount,
     "TransactionIntentResponsePlayer": TransactionIntentResponsePlayer,
