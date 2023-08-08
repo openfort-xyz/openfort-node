@@ -3,15 +3,27 @@ import localVarRequest from 'request';
 export * from './abi';
 export * from './abiType';
 export * from './accountResponse';
-export * from './accountsResponse';
 export * from './apiKeyResponse';
 export * from './assetInventory';
 export * from './assetType';
 export * from './authResponse';
+export * from './baseDeleteEntityResponseEntityTypeCONTRACT';
+export * from './baseDeleteEntityResponseEntityTypePOLICY';
+export * from './baseDeleteEntityResponseEntityTypePOLICYRULE';
+export * from './baseDeleteEntityResponseEntityTypeUSER';
+export * from './baseEntityListResponseAccountResponse';
+export * from './baseEntityListResponseContractResponse';
+export * from './baseEntityListResponseLog';
+export * from './baseEntityListResponseMemberResponse';
+export * from './baseEntityListResponsePlayerResponse';
+export * from './baseEntityListResponsePolicyResponse';
+export * from './baseEntityListResponsePolicyRuleResponse';
+export * from './baseEntityListResponseProjectResponse';
+export * from './baseEntityListResponseSessionResponse';
+export * from './baseEntityListResponseTransactionIntentResponse';
 export * from './cancelTransferOwnershipRequest';
-export * from './contractDeleteResponse';
+export * from './completeRecoveryRequest';
 export * from './contractResponse';
-export * from './contractsResponse';
 export * from './createAccountRequest';
 export * from './createContractRequest';
 export * from './createPlayerAccountRequest';
@@ -25,10 +37,22 @@ export * from './createTransactionIntentRequest';
 export * from './dataAccountTypes';
 export * from './domainData';
 export * from './editRoleRequest';
+export * from './entityTypeACCOUNT';
+export * from './entityTypeCONTRACT';
+export * from './entityTypeINVENTORY';
+export * from './entityTypePLAYER';
+export * from './entityTypePOLICY';
+export * from './entityTypePOLICYRULE';
+export * from './entityTypePROJECT';
+export * from './entityTypeSESSION';
+export * from './entityTypeSIGNATURE';
+export * from './entityTypeTRANSACTIONINTENT';
+export * from './entityTypeUSER';
 export * from './gasReport';
-export * from './getPlayerByTokenRequest';
+export * from './getSigninUrlResponse';
 export * from './interaction';
 export * from './inventoryResponse';
+export * from './invitedMemberResponse';
 export * from './listContractsQueries';
 export * from './listPlayersQueries';
 export * from './listPoliciesQueries';
@@ -36,13 +60,11 @@ export * from './listSessionsQueries';
 export * from './listTransactionIntentsQueries';
 export * from './log';
 export * from './loginRequest';
-export * from './memberRemoveResponse';
 export * from './memberRequest';
-export * from './membersResponse';
+export * from './memberResponse';
 export * from './nextActionPayload';
 export * from './nextActionResponse';
 export * from './nextActionType';
-export * from './pKLocation';
 export * from './pKPolicy';
 export * from './pickAccountResponseId';
 export * from './pickContractResponseId';
@@ -54,38 +76,33 @@ export * from './playerCancelTransferOwnershipRequest';
 export * from './playerRequest';
 export * from './playerResponse';
 export * from './playerTransferOwnershipRequest';
-export * from './playersResponse';
-export * from './policiesResponse';
-export * from './policyDeleteResponse';
 export * from './policyResponse';
 export * from './policyResponsePolicyRulesInner';
 export * from './policyResponseTransactionIntentsInner';
-export * from './policyRuleDeleteResponse';
 export * from './policyRuleResponse';
 export * from './policyRuleResponseContract';
-export * from './policyRulesResponse';
 export * from './policySchema';
 export * from './policyStrategy';
-export * from './projectLogs';
 export * from './projectRequest';
 export * from './projectResponse';
-export * from './projectsResponse';
+export * from './projectRole';
+export * from './providerRequest';
 export * from './responseResponse';
+export * from './responseTypeLIST';
 export * from './revokeSessionPlayerRequest';
 export * from './revokeSessionRequest';
 export * from './sessionResponse';
-export * from './sessionsResponse';
 export * from './signPayloadRequest';
 export * from './signPayloadResponse';
 export * from './signatureRequest';
 export * from './signupRequest';
 export * from './sortOrder';
 export * from './sponsorSchema';
+export * from './startRecoveryRequest';
 export * from './transactionIntentResponse';
 export * from './transactionIntentResponseAccount';
 export * from './transactionIntentResponsePlayer';
 export * from './transactionIntentResponsePolicy';
-export * from './transactionIntentsResponse';
 export * from './transferOwnershipRequest';
 export * from './typedDataField';
 export * from './updateContractRequest';
@@ -108,15 +125,27 @@ export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 import { Abi } from './abi';
 import { AbiType } from './abiType';
 import { AccountResponse } from './accountResponse';
-import { AccountsResponse } from './accountsResponse';
 import { ApiKeyResponse } from './apiKeyResponse';
 import { AssetInventory } from './assetInventory';
 import { AssetType } from './assetType';
 import { AuthResponse } from './authResponse';
+import { BaseDeleteEntityResponseEntityTypeCONTRACT } from './baseDeleteEntityResponseEntityTypeCONTRACT';
+import { BaseDeleteEntityResponseEntityTypePOLICY } from './baseDeleteEntityResponseEntityTypePOLICY';
+import { BaseDeleteEntityResponseEntityTypePOLICYRULE } from './baseDeleteEntityResponseEntityTypePOLICYRULE';
+import { BaseDeleteEntityResponseEntityTypeUSER } from './baseDeleteEntityResponseEntityTypeUSER';
+import { BaseEntityListResponseAccountResponse } from './baseEntityListResponseAccountResponse';
+import { BaseEntityListResponseContractResponse } from './baseEntityListResponseContractResponse';
+import { BaseEntityListResponseLog } from './baseEntityListResponseLog';
+import { BaseEntityListResponseMemberResponse } from './baseEntityListResponseMemberResponse';
+import { BaseEntityListResponsePlayerResponse } from './baseEntityListResponsePlayerResponse';
+import { BaseEntityListResponsePolicyResponse } from './baseEntityListResponsePolicyResponse';
+import { BaseEntityListResponsePolicyRuleResponse } from './baseEntityListResponsePolicyRuleResponse';
+import { BaseEntityListResponseProjectResponse } from './baseEntityListResponseProjectResponse';
+import { BaseEntityListResponseSessionResponse } from './baseEntityListResponseSessionResponse';
+import { BaseEntityListResponseTransactionIntentResponse } from './baseEntityListResponseTransactionIntentResponse';
 import { CancelTransferOwnershipRequest } from './cancelTransferOwnershipRequest';
-import { ContractDeleteResponse } from './contractDeleteResponse';
+import { CompleteRecoveryRequest } from './completeRecoveryRequest';
 import { ContractResponse } from './contractResponse';
-import { ContractsResponse } from './contractsResponse';
 import { CreateAccountRequest } from './createAccountRequest';
 import { CreateContractRequest } from './createContractRequest';
 import { CreatePlayerAccountRequest } from './createPlayerAccountRequest';
@@ -130,10 +159,22 @@ import { CreateTransactionIntentRequest } from './createTransactionIntentRequest
 import { DataAccountTypes } from './dataAccountTypes';
 import { DomainData } from './domainData';
 import { EditRoleRequest } from './editRoleRequest';
+import { EntityTypeACCOUNT } from './entityTypeACCOUNT';
+import { EntityTypeCONTRACT } from './entityTypeCONTRACT';
+import { EntityTypeINVENTORY } from './entityTypeINVENTORY';
+import { EntityTypePLAYER } from './entityTypePLAYER';
+import { EntityTypePOLICY } from './entityTypePOLICY';
+import { EntityTypePOLICYRULE } from './entityTypePOLICYRULE';
+import { EntityTypePROJECT } from './entityTypePROJECT';
+import { EntityTypeSESSION } from './entityTypeSESSION';
+import { EntityTypeSIGNATURE } from './entityTypeSIGNATURE';
+import { EntityTypeTRANSACTIONINTENT } from './entityTypeTRANSACTIONINTENT';
+import { EntityTypeUSER } from './entityTypeUSER';
 import { GasReport } from './gasReport';
-import { GetPlayerByTokenRequest } from './getPlayerByTokenRequest';
+import { GetSigninUrlResponse } from './getSigninUrlResponse';
 import { Interaction } from './interaction';
 import { InventoryResponse } from './inventoryResponse';
+import { InvitedMemberResponse } from './invitedMemberResponse';
 import { ListContractsQueries } from './listContractsQueries';
 import { ListPlayersQueries } from './listPlayersQueries';
 import { ListPoliciesQueries } from './listPoliciesQueries';
@@ -141,13 +182,11 @@ import { ListSessionsQueries } from './listSessionsQueries';
 import { ListTransactionIntentsQueries } from './listTransactionIntentsQueries';
 import { Log } from './log';
 import { LoginRequest } from './loginRequest';
-import { MemberRemoveResponse } from './memberRemoveResponse';
 import { MemberRequest } from './memberRequest';
-import { MembersResponse } from './membersResponse';
+import { MemberResponse } from './memberResponse';
 import { NextActionPayload } from './nextActionPayload';
 import { NextActionResponse } from './nextActionResponse';
 import { NextActionType } from './nextActionType';
-import { PKLocation } from './pKLocation';
 import { PKPolicy } from './pKPolicy';
 import { PickAccountResponseId } from './pickAccountResponseId';
 import { PickContractResponseId } from './pickContractResponseId';
@@ -159,38 +198,33 @@ import { PlayerCancelTransferOwnershipRequest } from './playerCancelTransferOwne
 import { PlayerRequest } from './playerRequest';
 import { PlayerResponse } from './playerResponse';
 import { PlayerTransferOwnershipRequest } from './playerTransferOwnershipRequest';
-import { PlayersResponse } from './playersResponse';
-import { PoliciesResponse } from './policiesResponse';
-import { PolicyDeleteResponse } from './policyDeleteResponse';
 import { PolicyResponse } from './policyResponse';
 import { PolicyResponsePolicyRulesInner } from './policyResponsePolicyRulesInner';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
-import { PolicyRuleDeleteResponse } from './policyRuleDeleteResponse';
 import { PolicyRuleResponse } from './policyRuleResponse';
 import { PolicyRuleResponseContract } from './policyRuleResponseContract';
-import { PolicyRulesResponse } from './policyRulesResponse';
 import { PolicySchema } from './policySchema';
 import { PolicyStrategy } from './policyStrategy';
-import { ProjectLogs } from './projectLogs';
 import { ProjectRequest } from './projectRequest';
 import { ProjectResponse } from './projectResponse';
-import { ProjectsResponse } from './projectsResponse';
+import { ProjectRole } from './projectRole';
+import { ProviderRequest } from './providerRequest';
 import { ResponseResponse } from './responseResponse';
+import { ResponseTypeLIST } from './responseTypeLIST';
 import { RevokeSessionPlayerRequest } from './revokeSessionPlayerRequest';
 import { RevokeSessionRequest } from './revokeSessionRequest';
 import { SessionResponse } from './sessionResponse';
-import { SessionsResponse } from './sessionsResponse';
 import { SignPayloadRequest } from './signPayloadRequest';
 import { SignPayloadResponse } from './signPayloadResponse';
 import { SignatureRequest } from './signatureRequest';
 import { SignupRequest } from './signupRequest';
 import { SortOrder } from './sortOrder';
 import { SponsorSchema } from './sponsorSchema';
+import { StartRecoveryRequest } from './startRecoveryRequest';
 import { TransactionIntentResponse } from './transactionIntentResponse';
 import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from './transactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from './transactionIntentResponsePolicy';
-import { TransactionIntentsResponse } from './transactionIntentsResponse';
 import { TransferOwnershipRequest } from './transferOwnershipRequest';
 import { TypedDataField } from './typedDataField';
 import { UpdateContractRequest } from './updateContractRequest';
@@ -212,14 +246,26 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "AssetType": AssetType,
         "DataAccountTypes": DataAccountTypes,
+        "EntityTypeACCOUNT": EntityTypeACCOUNT,
+        "EntityTypeCONTRACT": EntityTypeCONTRACT,
+        "EntityTypeINVENTORY": EntityTypeINVENTORY,
+        "EntityTypePLAYER": EntityTypePLAYER,
+        "EntityTypePOLICY": EntityTypePOLICY,
+        "EntityTypePOLICYRULE": EntityTypePOLICYRULE,
+        "EntityTypePROJECT": EntityTypePROJECT,
+        "EntityTypeSESSION": EntityTypeSESSION,
+        "EntityTypeSIGNATURE": EntityTypeSIGNATURE,
+        "EntityTypeTRANSACTIONINTENT": EntityTypeTRANSACTIONINTENT,
+        "EntityTypeUSER": EntityTypeUSER,
         "ListPlayersQueries.ExpandEnum": ListPlayersQueries.ExpandEnum,
         "ListPoliciesQueries.ExpandEnum": ListPoliciesQueries.ExpandEnum,
         "ListSessionsQueries.ExpandEnum": ListSessionsQueries.ExpandEnum,
         "ListTransactionIntentsQueries.ExpandEnum": ListTransactionIntentsQueries.ExpandEnum,
         "NextActionType": NextActionType,
-        "PKLocation": PKLocation,
         "PKPolicy": PKPolicy,
         "PolicySchema": PolicySchema,
+        "ProjectRole": ProjectRole,
+        "ResponseTypeLIST": ResponseTypeLIST,
         "SortOrder": SortOrder,
         "SponsorSchema": SponsorSchema,
 }
@@ -228,14 +274,26 @@ let typeMap: {[index: string]: any} = {
     "Abi": Abi,
     "AbiType": AbiType,
     "AccountResponse": AccountResponse,
-    "AccountsResponse": AccountsResponse,
     "ApiKeyResponse": ApiKeyResponse,
     "AssetInventory": AssetInventory,
     "AuthResponse": AuthResponse,
+    "BaseDeleteEntityResponseEntityTypeCONTRACT": BaseDeleteEntityResponseEntityTypeCONTRACT,
+    "BaseDeleteEntityResponseEntityTypePOLICY": BaseDeleteEntityResponseEntityTypePOLICY,
+    "BaseDeleteEntityResponseEntityTypePOLICYRULE": BaseDeleteEntityResponseEntityTypePOLICYRULE,
+    "BaseDeleteEntityResponseEntityTypeUSER": BaseDeleteEntityResponseEntityTypeUSER,
+    "BaseEntityListResponseAccountResponse": BaseEntityListResponseAccountResponse,
+    "BaseEntityListResponseContractResponse": BaseEntityListResponseContractResponse,
+    "BaseEntityListResponseLog": BaseEntityListResponseLog,
+    "BaseEntityListResponseMemberResponse": BaseEntityListResponseMemberResponse,
+    "BaseEntityListResponsePlayerResponse": BaseEntityListResponsePlayerResponse,
+    "BaseEntityListResponsePolicyResponse": BaseEntityListResponsePolicyResponse,
+    "BaseEntityListResponsePolicyRuleResponse": BaseEntityListResponsePolicyRuleResponse,
+    "BaseEntityListResponseProjectResponse": BaseEntityListResponseProjectResponse,
+    "BaseEntityListResponseSessionResponse": BaseEntityListResponseSessionResponse,
+    "BaseEntityListResponseTransactionIntentResponse": BaseEntityListResponseTransactionIntentResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
-    "ContractDeleteResponse": ContractDeleteResponse,
+    "CompleteRecoveryRequest": CompleteRecoveryRequest,
     "ContractResponse": ContractResponse,
-    "ContractsResponse": ContractsResponse,
     "CreateAccountRequest": CreateAccountRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreatePlayerAccountRequest": CreatePlayerAccountRequest,
@@ -249,9 +307,10 @@ let typeMap: {[index: string]: any} = {
     "DomainData": DomainData,
     "EditRoleRequest": EditRoleRequest,
     "GasReport": GasReport,
-    "GetPlayerByTokenRequest": GetPlayerByTokenRequest,
+    "GetSigninUrlResponse": GetSigninUrlResponse,
     "Interaction": Interaction,
     "InventoryResponse": InventoryResponse,
+    "InvitedMemberResponse": InvitedMemberResponse,
     "ListContractsQueries": ListContractsQueries,
     "ListPlayersQueries": ListPlayersQueries,
     "ListPoliciesQueries": ListPoliciesQueries,
@@ -259,9 +318,8 @@ let typeMap: {[index: string]: any} = {
     "ListTransactionIntentsQueries": ListTransactionIntentsQueries,
     "Log": Log,
     "LoginRequest": LoginRequest,
-    "MemberRemoveResponse": MemberRemoveResponse,
     "MemberRequest": MemberRequest,
-    "MembersResponse": MembersResponse,
+    "MemberResponse": MemberResponse,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
     "PickAccountResponseId": PickAccountResponseId,
@@ -274,35 +332,28 @@ let typeMap: {[index: string]: any} = {
     "PlayerRequest": PlayerRequest,
     "PlayerResponse": PlayerResponse,
     "PlayerTransferOwnershipRequest": PlayerTransferOwnershipRequest,
-    "PlayersResponse": PlayersResponse,
-    "PoliciesResponse": PoliciesResponse,
-    "PolicyDeleteResponse": PolicyDeleteResponse,
     "PolicyResponse": PolicyResponse,
     "PolicyResponsePolicyRulesInner": PolicyResponsePolicyRulesInner,
     "PolicyResponseTransactionIntentsInner": PolicyResponseTransactionIntentsInner,
-    "PolicyRuleDeleteResponse": PolicyRuleDeleteResponse,
     "PolicyRuleResponse": PolicyRuleResponse,
     "PolicyRuleResponseContract": PolicyRuleResponseContract,
-    "PolicyRulesResponse": PolicyRulesResponse,
     "PolicyStrategy": PolicyStrategy,
-    "ProjectLogs": ProjectLogs,
     "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
-    "ProjectsResponse": ProjectsResponse,
+    "ProviderRequest": ProviderRequest,
     "ResponseResponse": ResponseResponse,
     "RevokeSessionPlayerRequest": RevokeSessionPlayerRequest,
     "RevokeSessionRequest": RevokeSessionRequest,
     "SessionResponse": SessionResponse,
-    "SessionsResponse": SessionsResponse,
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
     "SignupRequest": SignupRequest,
+    "StartRecoveryRequest": StartRecoveryRequest,
     "TransactionIntentResponse": TransactionIntentResponse,
     "TransactionIntentResponseAccount": TransactionIntentResponseAccount,
     "TransactionIntentResponsePlayer": TransactionIntentResponsePlayer,
     "TransactionIntentResponsePolicy": TransactionIntentResponsePolicy,
-    "TransactionIntentsResponse": TransactionIntentsResponse,
     "TransferOwnershipRequest": TransferOwnershipRequest,
     "TypedDataField": TypedDataField,
     "UpdateContractRequest": UpdateContractRequest,

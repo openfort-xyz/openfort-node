@@ -4,7 +4,7 @@ import {
     ListTransactionIntentsRequest,
     SignatureTransactionIntentRequest,
     TransactionIntentResponse,
-    TransactionIntentsResponse,
+    TransactionIntentListResponse,
     UpdateTransactionIntentRequest,
 } from "../model";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -39,7 +39,7 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
      * Returns a list of transaction intents for the given project. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param req Parameters to get list of the transaction intents
      */
-    public async list(req?: ListTransactionIntentsRequest): Promise<TransactionIntentsResponse> {
+    public async list(req?: ListTransactionIntentsRequest): Promise<TransactionIntentListResponse> {
         const response = await this.api.getTransactionIntents(
             req?.limit,
             req?.skip,
@@ -76,7 +76,7 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
      *
      * @param project
      */
-    public async updateList(): Promise<TransactionIntentsResponse> {
+    public async updateList(): Promise<TransactionIntentListResponse> {
         const response = await this.api.updateTransactionIntentsResponse();
         return response.body;
     }

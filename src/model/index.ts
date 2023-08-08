@@ -32,3 +32,21 @@ export { TransferOwnershipRequest } from "./transferOwnershipRequest";
 export { UpdateContractRequest } from "./updateContractRequest";
 export { UpdatePolicyRequest } from "./updatePolicyRequest";
 export { UpdatePolicyRuleRequest } from "./updatePolicyRuleRequest";
+export { StartRecoveryRequest } from "./startRecoveryRequest";
+export { CompleteRecoveryRequest } from "./completeRecoveryRequest";
+export {
+    BaseDeleteEntityResponseEntityTypeCONTRACT as ContractDeleteResponse,
+    BaseDeleteEntityResponseEntityTypePOLICY as PolicyDeleteResponse,
+    BaseDeleteEntityResponseEntityTypePOLICYRULE as PolicyRuleDeleteResponse,
+    BaseDeleteEntityResponseEntityTypeUSER as UserDeleteResponse,
+    BaseEntityListResponseAccountResponse as AccountListResponse,
+    BaseEntityListResponseContractResponse as ContractListResponse,
+    BaseEntityListResponseLog as LogListResponse,
+    BaseEntityListResponseMemberResponse as MemberListResponse,
+    BaseEntityListResponsePlayerResponse as PlayerListResponse,
+    BaseEntityListResponsePolicyResponse as PolicyListResponse,
+    BaseEntityListResponsePolicyRuleResponse as PolicyRuleListResponse,
+    BaseEntityListResponseProjectResponse as ProjectListResponse,
+    BaseEntityListResponseSessionResponse as SessionListResponse,
+    BaseEntityListResponseTransactionIntentResponse as TransactionIntentListResponse,
+} from "../generated/model/models";

@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypePOLICY } from './entityTypePOLICY';
 import { PickPolicyResponseId } from './pickPolicyResponseId';
 import { PolicyResponse } from './policyResponse';
 import { PolicyResponsePolicyRulesInner } from './policyResponsePolicyRulesInner';
@@ -21,7 +22,7 @@ export class TransactionIntentResponsePolicy {
     'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'policyRules'?: Array<PolicyResponsePolicyRulesInner>;
     'id': string;
-    'object': string;
+    'object': EntityTypePOLICY;
     'createdAt': number;
     'name': string | null;
     'deleted': boolean;
@@ -49,7 +50,7 @@ export class TransactionIntentResponsePolicy {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypePOLICY"
         },
         {
             "name": "createdAt",
@@ -82,3 +83,5 @@ export class TransactionIntentResponsePolicy {
     }
 }
 
+export namespace TransactionIntentResponsePolicy {
+}

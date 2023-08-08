@@ -11,12 +11,13 @@
  */
 
 import { RequestFile } from './models';
-import { PlayerResponse } from './playerResponse';
+import { ProjectResponse } from './projectResponse';
+import { ResponseTypeLIST } from './responseTypeLIST';
 
-export class PlayersResponse {
-    'object': string;
+export class BaseEntityListResponseProjectResponse {
+    'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<PlayerResponse>;
+    'data': Array<ProjectResponse>;
 
     static discriminator: string | undefined = undefined;
 
@@ -24,7 +25,7 @@ export class PlayersResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "ResponseTypeLIST"
         },
         {
             "name": "url",
@@ -34,11 +35,13 @@ export class PlayersResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<PlayerResponse>"
+            "type": "Array<ProjectResponse>"
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayersResponse.attributeTypeMap;
+        return BaseEntityListResponseProjectResponse.attributeTypeMap;
     }
 }
 
+export namespace BaseEntityListResponseProjectResponse {
+}

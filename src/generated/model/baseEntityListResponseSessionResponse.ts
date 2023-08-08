@@ -11,30 +11,37 @@
  */
 
 import { RequestFile } from './models';
-import { PKPolicy } from './pKPolicy';
+import { ResponseTypeLIST } from './responseTypeLIST';
+import { SessionResponse } from './sessionResponse';
 
-export class ProjectRequest {
-    'name': string;
-    'pkPolicy'?: PKPolicy;
+export class BaseEntityListResponseSessionResponse {
+    'object': ResponseTypeLIST;
+    'url': string;
+    'data': Array<SessionResponse>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "object",
+            "baseName": "object",
+            "type": "ResponseTypeLIST"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
             "type": "string"
         },
         {
-            "name": "pkPolicy",
-            "baseName": "pkPolicy",
-            "type": "PKPolicy"
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<SessionResponse>"
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectRequest.attributeTypeMap;
+        return BaseEntityListResponseSessionResponse.attributeTypeMap;
     }
 }
 
-export namespace ProjectRequest {
+export namespace BaseEntityListResponseSessionResponse {
 }

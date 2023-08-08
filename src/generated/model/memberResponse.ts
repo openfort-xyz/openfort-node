@@ -11,33 +11,24 @@
  */
 
 import { RequestFile } from './models';
+import { ProjectRole } from './projectRole';
 
-export class PolicyDeleteResponse {
-    'id': string;
-    'object': string;
-    'deleted': boolean;
+export class MemberResponse {
+    'role': ProjectRole;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
+            "name": "role",
+            "baseName": "role",
+            "type": "ProjectRole"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyDeleteResponse.attributeTypeMap;
+        return MemberResponse.attributeTypeMap;
     }
 }
 
+export namespace MemberResponse {
+}

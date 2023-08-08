@@ -12,9 +12,10 @@
 
 import { RequestFile } from './models';
 import { AssetInventory } from './assetInventory';
+import { EntityTypeINVENTORY } from './entityTypeINVENTORY';
 
 export class InventoryResponse {
-    'object': string;
+    'object': EntityTypeINVENTORY;
     'nftAssets'?: Array<AssetInventory>;
     'nativeAsset'?: AssetInventory;
     'tokenAssets'?: Array<AssetInventory>;
@@ -25,7 +26,7 @@ export class InventoryResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeINVENTORY"
         },
         {
             "name": "nftAssets",
@@ -48,3 +49,5 @@ export class InventoryResponse {
     }
 }
 
+export namespace InventoryResponse {
+}

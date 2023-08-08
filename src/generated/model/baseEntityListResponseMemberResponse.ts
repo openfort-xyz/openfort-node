@@ -11,12 +11,13 @@
  */
 
 import { RequestFile } from './models';
-import { Log } from './log';
+import { MemberResponse } from './memberResponse';
+import { ResponseTypeLIST } from './responseTypeLIST';
 
-export class ProjectLogs {
-    'object': string;
+export class BaseEntityListResponseMemberResponse {
+    'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<Log>;
+    'data': Array<MemberResponse>;
 
     static discriminator: string | undefined = undefined;
 
@@ -24,7 +25,7 @@ export class ProjectLogs {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "ResponseTypeLIST"
         },
         {
             "name": "url",
@@ -34,11 +35,13 @@ export class ProjectLogs {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<Log>"
+            "type": "Array<MemberResponse>"
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectLogs.attributeTypeMap;
+        return BaseEntityListResponseMemberResponse.attributeTypeMap;
     }
 }
 
+export namespace BaseEntityListResponseMemberResponse {
+}

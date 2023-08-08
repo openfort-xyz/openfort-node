@@ -11,12 +11,13 @@
  */
 
 import { RequestFile } from './models';
-import { PolicyRuleResponse } from './policyRuleResponse';
+import { Log } from './log';
+import { ResponseTypeLIST } from './responseTypeLIST';
 
-export class PolicyRulesResponse {
-    'object': string;
+export class BaseEntityListResponseLog {
+    'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<PolicyRuleResponse>;
+    'data': Array<Log>;
 
     static discriminator: string | undefined = undefined;
 
@@ -24,7 +25,7 @@ export class PolicyRulesResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "ResponseTypeLIST"
         },
         {
             "name": "url",
@@ -34,11 +35,13 @@ export class PolicyRulesResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<PolicyRuleResponse>"
+            "type": "Array<Log>"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRulesResponse.attributeTypeMap;
+        return BaseEntityListResponseLog.attributeTypeMap;
     }
 }
 
+export namespace BaseEntityListResponseLog {
+}

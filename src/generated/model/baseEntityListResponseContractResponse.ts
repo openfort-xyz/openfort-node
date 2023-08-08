@@ -11,33 +11,37 @@
  */
 
 import { RequestFile } from './models';
+import { ContractResponse } from './contractResponse';
+import { ResponseTypeLIST } from './responseTypeLIST';
 
-export class ContractDeleteResponse {
-    'id': string;
-    'object': string;
-    'deleted': boolean;
+export class BaseEntityListResponseContractResponse {
+    'object': ResponseTypeLIST;
+    'url': string;
+    'data': Array<ContractResponse>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
             "name": "object",
             "baseName": "object",
+            "type": "ResponseTypeLIST"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
             "type": "string"
         },
         {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<ContractResponse>"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractDeleteResponse.attributeTypeMap;
+        return BaseEntityListResponseContractResponse.attributeTypeMap;
     }
 }
 
+export namespace BaseEntityListResponseContractResponse {
+}

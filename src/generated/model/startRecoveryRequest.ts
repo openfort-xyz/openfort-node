@@ -11,34 +11,33 @@
  */
 
 import { RequestFile } from './models';
-import { SessionResponse } from './sessionResponse';
 
-export class SessionsResponse {
-    'object': string;
-    'url': string;
-    'data': Array<SessionResponse>;
+export class StartRecoveryRequest {
+    /**
+    * Address of the new owner
+    */
+    'newOwnerAddress': string;
+    /**
+    * The policy ID
+    */
+    'policy': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "object",
-            "baseName": "object",
+            "name": "newOwnerAddress",
+            "baseName": "newOwnerAddress",
             "type": "string"
         },
         {
-            "name": "url",
-            "baseName": "url",
+            "name": "policy",
+            "baseName": "policy",
             "type": "string"
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<SessionResponse>"
         }    ];
 
     static getAttributeTypeMap() {
-        return SessionsResponse.attributeTypeMap;
+        return StartRecoveryRequest.attributeTypeMap;
     }
 }
 

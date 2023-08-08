@@ -12,9 +12,6 @@
 
 import { RequestFile } from './models';
 
-export enum DataAccountTypes {
-    Upgradeable = 'Upgradeable',
-    Managed = 'Managed',
-    Erc6551 = 'ERC6551',
-    Recoverable = 'Recoverable'
+export enum EntityTypeSIGNATURE {
+    Signature = 'signature'
 }

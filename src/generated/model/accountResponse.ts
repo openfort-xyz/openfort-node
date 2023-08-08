@@ -11,12 +11,13 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypeACCOUNT } from './entityTypeACCOUNT';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class AccountResponse {
     'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'id': string;
-    'object': string;
+    'object': EntityTypeACCOUNT;
     'createdAt': number;
     'address': string;
     'ownerAddress': string;
@@ -42,7 +43,7 @@ export class AccountResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeACCOUNT"
         },
         {
             "name": "createdAt",
@@ -90,3 +91,5 @@ export class AccountResponse {
     }
 }
 
+export namespace AccountResponse {
+}

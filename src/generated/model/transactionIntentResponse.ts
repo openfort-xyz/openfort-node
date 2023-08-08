@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypeTRANSACTIONINTENT } from './entityTypeTRANSACTIONINTENT';
 import { Interaction } from './interaction';
 import { NextActionResponse } from './nextActionResponse';
 import { ResponseResponse } from './responseResponse';
@@ -24,7 +25,7 @@ export class TransactionIntentResponse {
     'player'?: TransactionIntentResponsePlayer;
     'account'?: TransactionIntentResponseAccount;
     'id': string;
-    'object': string;
+    'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
     'updatedAt': number;
     'chainId': number;
@@ -64,7 +65,7 @@ export class TransactionIntentResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeTRANSACTIONINTENT"
         },
         {
             "name": "createdAt",
@@ -107,3 +108,5 @@ export class TransactionIntentResponse {
     }
 }
 
+export namespace TransactionIntentResponse {
+}

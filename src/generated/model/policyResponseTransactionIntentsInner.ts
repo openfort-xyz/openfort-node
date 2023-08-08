@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypeTRANSACTIONINTENT } from './entityTypeTRANSACTIONINTENT';
 import { Interaction } from './interaction';
 import { NextActionResponse } from './nextActionResponse';
 import { PickTransactionIntentResponseId } from './pickTransactionIntentResponseId';
@@ -26,7 +27,7 @@ export class PolicyResponseTransactionIntentsInner {
     'player'?: TransactionIntentResponsePlayer;
     'account'?: TransactionIntentResponseAccount;
     'id': string;
-    'object': string;
+    'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
     'updatedAt': number;
     'chainId': number;
@@ -66,7 +67,7 @@ export class PolicyResponseTransactionIntentsInner {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeTRANSACTIONINTENT"
         },
         {
             "name": "createdAt",
@@ -109,3 +110,5 @@ export class PolicyResponseTransactionIntentsInner {
     }
 }
 
+export namespace PolicyResponseTransactionIntentsInner {
+}

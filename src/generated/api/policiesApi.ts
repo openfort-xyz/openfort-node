@@ -15,14 +15,14 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { BaseDeleteEntityResponseEntityTypePOLICY } from '../model/baseDeleteEntityResponseEntityTypePOLICY';
+import { BaseEntityListResponsePolicyResponse } from '../model/baseEntityListResponsePolicyResponse';
+import { BaseEntityListResponsePolicyRuleResponse } from '../model/baseEntityListResponsePolicyRuleResponse';
 import { CreatePolicyAllowFunctionRequest } from '../model/createPolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../model/createPolicyRequest';
 import { GasReport } from '../model/gasReport';
-import { PoliciesResponse } from '../model/policiesResponse';
-import { PolicyDeleteResponse } from '../model/policyDeleteResponse';
 import { PolicyResponse } from '../model/policyResponse';
 import { PolicyRuleResponse } from '../model/policyRuleResponse';
-import { PolicyRulesResponse } from '../model/policyRulesResponse';
 import { SortOrder } from '../model/sortOrder';
 import { UpdatePolicyRequest } from '../model/updatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../model/updatePolicyRuleRequest';
@@ -255,7 +255,7 @@ export class PoliciesApi {
      * Deletes a policy object.
      * @param id 
      */
-    public async deletePolicy (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyDeleteResponse;  }> {
+    public async deletePolicy (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseDeleteEntityResponseEntityTypePOLICY;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -306,13 +306,13 @@ export class PoliciesApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PolicyDeleteResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseDeleteEntityResponseEntityTypePOLICY;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "PolicyDeleteResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseDeleteEntityResponseEntityTypePOLICY");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -332,7 +332,7 @@ export class PoliciesApi {
      * @param deleted 
      * @param chainId 
      */
-    public async getPolicies (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'policyRules'>, name?: string, deleted?: boolean, chainId?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }> {
+    public async getPolicies (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'policyRules'>, name?: string, deleted?: boolean, chainId?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -405,13 +405,13 @@ export class PoliciesApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PoliciesResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "PoliciesResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponsePolicyResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -502,7 +502,7 @@ export class PoliciesApi {
      * @param id 
      * @param expand 
      */
-    public async getPolicyAllowFunctions (id: string, expand?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRulesResponse;  }> {
+    public async getPolicyAllowFunctions (id: string, expand?: Array<'contract'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policies/{id}/policy_rules'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -522,7 +522,7 @@ export class PoliciesApi {
         }
 
         if (expand !== undefined) {
-            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<string>");
+            localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'contract'>");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -557,13 +557,13 @@ export class PoliciesApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PolicyRulesResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyRuleResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "PolicyRulesResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponsePolicyRuleResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

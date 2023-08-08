@@ -1,7 +1,7 @@
 import {
     ContractDeleteResponse,
     ContractResponse,
-    ContractsResponse,
+    ContractListResponse,
     CreateContractRequest,
     GetContractRequest,
     ListContractsRequest,
@@ -58,7 +58,7 @@ export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {
      * Returns a list of your contracts. The contracts are returned sorted by creation date, with the most recently created contracts appearing first.
      * @param req Criteria to retrieve list of contracts.
      */
-    public async list(req?: ListContractsRequest): Promise<ContractsResponse> {
+    public async list(req?: ListContractsRequest): Promise<ContractListResponse> {
         const response = await this.api.getContracts(req?.limit, req?.skip, req?.order, req?.filter?.name);
         return response.body;
     }

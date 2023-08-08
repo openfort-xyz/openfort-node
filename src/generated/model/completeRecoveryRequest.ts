@@ -12,32 +12,41 @@
 
 import { RequestFile } from './models';
 
-export class PolicyRuleDeleteResponse {
-    'id': string;
-    'object': string;
-    'deleted': boolean;
+export class CompleteRecoveryRequest {
+    /**
+    * Address of the new owner
+    */
+    'newOwnerAddress': string;
+    /**
+    * Signatures
+    */
+    'signatures'?: Array<string>;
+    /**
+    * The policy ID
+    */
+    'policy': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "newOwnerAddress",
+            "baseName": "newOwnerAddress",
             "type": "string"
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "string"
+            "name": "signatures",
+            "baseName": "signatures",
+            "type": "Array<string>"
         },
         {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleDeleteResponse.attributeTypeMap;
+        return CompleteRecoveryRequest.attributeTypeMap;
     }
 }
 

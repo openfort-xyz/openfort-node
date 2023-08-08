@@ -11,9 +11,10 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypeSIGNATURE } from './entityTypeSIGNATURE';
 
 export class SignPayloadResponse {
-    'object': string;
+    'object': EntityTypeSIGNATURE;
     'account': string;
     'address': string;
     'hash': string;
@@ -25,7 +26,7 @@ export class SignPayloadResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeSIGNATURE"
         },
         {
             "name": "account",
@@ -53,3 +54,5 @@ export class SignPayloadResponse {
     }
 }
 
+export namespace SignPayloadResponse {
+}

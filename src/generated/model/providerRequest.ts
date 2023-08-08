@@ -11,30 +11,27 @@
  */
 
 import { RequestFile } from './models';
-import { PKPolicy } from './pKPolicy';
 
-export class ProjectRequest {
-    'name': string;
-    'pkPolicy'?: PKPolicy;
+export class ProviderRequest {
+    'google_client_id': string;
+    'google_client_secret': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "google_client_id",
+            "baseName": "google_client_id",
             "type": "string"
         },
         {
-            "name": "pkPolicy",
-            "baseName": "pkPolicy",
-            "type": "PKPolicy"
+            "name": "google_client_secret",
+            "baseName": "google_client_secret",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectRequest.attributeTypeMap;
+        return ProviderRequest.attributeTypeMap;
     }
 }
 
-export namespace ProjectRequest {
-}

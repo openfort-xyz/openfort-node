@@ -16,7 +16,8 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { AccountResponse } from '../model/accountResponse';
-import { AccountsResponse } from '../model/accountsResponse';
+import { BaseEntityListResponseAccountResponse } from '../model/baseEntityListResponseAccountResponse';
+import { BaseEntityListResponsePlayerResponse } from '../model/baseEntityListResponsePlayerResponse';
 import { CreatePlayerAccountRequest } from '../model/createPlayerAccountRequest';
 import { CreatePlayerRequest } from '../model/createPlayerRequest';
 import { CreateSessionPlayerRequest } from '../model/createSessionPlayerRequest';
@@ -25,7 +26,6 @@ import { PlayerCancelTransferOwnershipRequest } from '../model/playerCancelTrans
 import { PlayerRequest } from '../model/playerRequest';
 import { PlayerResponse } from '../model/playerResponse';
 import { PlayerTransferOwnershipRequest } from '../model/playerTransferOwnershipRequest';
-import { PlayersResponse } from '../model/playersResponse';
 import { RevokeSessionPlayerRequest } from '../model/revokeSessionPlayerRequest';
 import { SessionResponse } from '../model/sessionResponse';
 import { SortOrder } from '../model/sortOrder';
@@ -492,7 +492,7 @@ export class PlayersApi {
      * @param id Specifies the unique player ID.
      * @param expand 
      */
-    public async getPlayerAccounts (id: string, expand?: Array<'transactionIntents'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
+    public async getPlayerAccounts (id: string, expand?: Array<'transactionIntents'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseAccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/players/{id}/accounts'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -547,13 +547,13 @@ export class PlayersApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseAccountResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "AccountsResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponseAccountResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -652,7 +652,7 @@ export class PlayersApi {
      * @param expand 
      * @param name 
      */
-    public async getPlayers (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'accounts'>, name?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PlayersResponse;  }> {
+    public async getPlayers (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'accounts'>, name?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePlayerResponse;  }> {
         const localVarPath = this.basePath + '/v1/players';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -717,13 +717,13 @@ export class PlayersApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PlayersResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePlayerResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "PlayersResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponsePlayerResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

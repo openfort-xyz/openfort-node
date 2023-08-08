@@ -11,13 +11,14 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypeSESSION } from './entityTypeSESSION';
 import { NextActionResponse } from './nextActionResponse';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 
 export class SessionResponse {
     'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'id': string;
-    'object': string;
+    'object': EntityTypeSESSION;
     'createdAt': number;
     'updatedAt': number;
     'isActive'?: boolean;
@@ -44,7 +45,7 @@ export class SessionResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeSESSION"
         },
         {
             "name": "createdAt",
@@ -97,3 +98,5 @@ export class SessionResponse {
     }
 }
 
+export namespace SessionResponse {
+}

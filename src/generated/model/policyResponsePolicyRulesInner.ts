@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypePOLICYRULE } from './entityTypePOLICYRULE';
 import { PickPolicyRuleResponseId } from './pickPolicyRuleResponseId';
 import { PolicyRuleResponse } from './policyRuleResponse';
 import { PolicyRuleResponseContract } from './policyRuleResponseContract';
@@ -18,11 +19,11 @@ import { PolicySchema } from './policySchema';
 
 export class PolicyResponsePolicyRulesInner {
     'id': string;
-    'object': string;
+    'object': EntityTypePOLICYRULE;
     'createdAt': number;
+    'contract'?: PolicyRuleResponseContract;
     'type': PolicySchema;
     'functionName'?: string;
-    'contract'?: PolicyRuleResponseContract;
 
     static discriminator: string | undefined = undefined;
 
@@ -35,12 +36,17 @@ export class PolicyResponsePolicyRulesInner {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypePOLICYRULE"
         },
         {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "number"
+        },
+        {
+            "name": "contract",
+            "baseName": "contract",
+            "type": "PolicyRuleResponseContract"
         },
         {
             "name": "type",
@@ -51,11 +57,6 @@ export class PolicyResponsePolicyRulesInner {
             "name": "functionName",
             "baseName": "functionName",
             "type": "string"
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "PolicyRuleResponseContract"
         }    ];
 
     static getAttributeTypeMap() {

@@ -12,11 +12,8 @@
 
 import { RequestFile } from './models';
 
-/**
-* Enums
-*/
-export enum PKLocation {
-    Db = 'DB',
-    GcpKms = 'GCP_KMS',
-    User = 'USER'
+export enum ProjectRole {
+    Owner = 'OWNER',
+    Admin = 'ADMIN',
+    Member = 'MEMBER'
 }

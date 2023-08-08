@@ -12,15 +12,14 @@
 
 import { RequestFile } from './models';
 import { ApiKeyResponse } from './apiKeyResponse';
-import { PKPolicy } from './pKPolicy';
+import { EntityTypePROJECT } from './entityTypePROJECT';
 
 export class ProjectResponse {
     'id': string;
-    'object': string;
+    'object': EntityTypePROJECT;
     'createdAt': number;
     'updatedAt': number;
     'name': string;
-    'pkPolicy': PKPolicy;
     'apikeys'?: Array<ApiKeyResponse>;
 
     static discriminator: string | undefined = undefined;
@@ -34,7 +33,7 @@ export class ProjectResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypePROJECT"
         },
         {
             "name": "createdAt",
@@ -50,11 +49,6 @@ export class ProjectResponse {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
-            "name": "pkPolicy",
-            "baseName": "pkPolicy",
-            "type": "PKPolicy"
         },
         {
             "name": "apikeys",
