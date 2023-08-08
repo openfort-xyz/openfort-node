@@ -13,14 +13,15 @@
 import { RequestFile } from './models';
 import { SortOrder } from './sortOrder';
 
-export class ListPoliciesQueries {
+export class TransactionIntentListQueries {
     'limit'?: number;
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<ListPoliciesQueries.ExpandEnum>;
-    'name'?: string;
-    'deleted'?: boolean;
+    'expand'?: Array<TransactionIntentListQueries.ExpandEnum>;
     'chainId'?: number;
+    'accountId'?: Array<string>;
+    'playerId'?: Array<string>;
+    'policyId'?: Array<string>;
 
     static discriminator: string | undefined = undefined;
 
@@ -43,32 +44,39 @@ export class ListPoliciesQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<ListPoliciesQueries.ExpandEnum>"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
+            "type": "Array<TransactionIntentListQueries.ExpandEnum>"
         },
         {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number"
+        },
+        {
+            "name": "accountId",
+            "baseName": "accountId",
+            "type": "Array<string>"
+        },
+        {
+            "name": "playerId",
+            "baseName": "playerId",
+            "type": "Array<string>"
+        },
+        {
+            "name": "policyId",
+            "baseName": "policyId",
+            "type": "Array<string>"
         }    ];
 
     static getAttributeTypeMap() {
-        return ListPoliciesQueries.attributeTypeMap;
+        return TransactionIntentListQueries.attributeTypeMap;
     }
 }
 
-export namespace ListPoliciesQueries {
+export namespace TransactionIntentListQueries {
     export enum ExpandEnum {
-        TransactionIntents = 'transactionIntents',
-        PolicyRules = 'policyRules'
+        NextAction = 'nextAction',
+        Policy = 'policy',
+        Player = 'player',
+        Account = 'account'
     }
 }

@@ -6,13 +6,13 @@ import {
     GetAccountInventoryRequest,
     GetAccountRequest,
     InventoryResponse,
-    ListAccountsRequest,
     SignPayloadRequest,
     SignPayloadResponse,
     TransactionIntentResponse,
     TransferOwnershipRequest,
     StartRecoveryRequest,
     CompleteRecoveryRequest,
+    AccountListQueries,
 } from "../model";
 import { AccountsApi } from "../generated/api/accountsApi";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -58,12 +58,8 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param req Criteria to get the list of accounts.
      */
-    public async list(req: ListAccountsRequest): Promise<AccountListResponse> {
-        const response = await this.api.getAccounts(
-            req.player,
-            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
-            req.limit,
-        );
+    public async list(req: AccountListQueries): Promise<AccountListResponse> {
+        const response = await this.api.getAccounts(req.player, req.limit, req.skip, req.order, req.expand);
         return response.body;
     }
 

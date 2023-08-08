@@ -489,7 +489,7 @@ export class PlayersApi {
     }
     /**
      * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param id Specifies the unique player ID.
+     * @param id 
      * @param expand 
      */
     public async getPlayerAccounts (id: string, expand?: Array<'transactionIntents'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseAccountResponse;  }> {

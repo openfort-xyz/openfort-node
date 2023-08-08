@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 import { SortOrder } from './sortOrder';
 
-export class ListContractsQueries {
+export class ContractListQueries {
     'limit'?: number;
     'skip'?: number;
     'order'?: SortOrder;
@@ -62,9 +62,9 @@ export class ListContractsQueries {
         }    ];
 
     static getAttributeTypeMap() {
-        return ListContractsQueries.attributeTypeMap;
+        return ContractListQueries.attributeTypeMap;
     }
 }
 
-export namespace ListContractsQueries {
+export namespace ContractListQueries {
 }

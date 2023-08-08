@@ -13,12 +13,13 @@
 import { RequestFile } from './models';
 import { SortOrder } from './sortOrder';
 
-export class ListPlayersQueries {
+export class SessionListQueries {
     'limit'?: number;
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<ListPlayersQueries.ExpandEnum>;
-    'name'?: string;
+    'player': string;
+    'expand'?: Array<SessionListQueries.ExpandEnum>;
+    'address'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -39,24 +40,28 @@ export class ListPlayersQueries {
             "type": "SortOrder"
         },
         {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<ListPlayersQueries.ExpandEnum>"
+            "name": "player",
+            "baseName": "player",
+            "type": "string"
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "expand",
+            "baseName": "expand",
+            "type": "Array<SessionListQueries.ExpandEnum>"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return ListPlayersQueries.attributeTypeMap;
+        return SessionListQueries.attributeTypeMap;
     }
 }
 
-export namespace ListPlayersQueries {
+export namespace SessionListQueries {
     export enum ExpandEnum {
-        TransactionIntents = 'transactionIntents',
-        Accounts = 'accounts'
+        TransactionIntents = 'transactionIntents'
     }
 }

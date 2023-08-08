@@ -13,15 +13,12 @@
 import { RequestFile } from './models';
 import { SortOrder } from './sortOrder';
 
-export class ListTransactionIntentsQueries {
+export class PolicyRuleListQueries {
     'limit'?: number;
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<ListTransactionIntentsQueries.ExpandEnum>;
-    'accountId'?: string;
-    'chainId'?: number;
-    'playerId'?: string;
-    'policyId'?: string;
+    'expand'?: Array<PolicyRuleListQueries.ExpandEnum>;
+    'policy': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -44,39 +41,21 @@ export class ListTransactionIntentsQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<ListTransactionIntentsQueries.ExpandEnum>"
+            "type": "Array<PolicyRuleListQueries.ExpandEnum>"
         },
         {
-            "name": "accountId",
-            "baseName": "accountId",
-            "type": "string"
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number"
-        },
-        {
-            "name": "playerId",
-            "baseName": "playerId",
-            "type": "string"
-        },
-        {
-            "name": "policyId",
-            "baseName": "policyId",
+            "name": "policy",
+            "baseName": "policy",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return ListTransactionIntentsQueries.attributeTypeMap;
+        return PolicyRuleListQueries.attributeTypeMap;
     }
 }
 
-export namespace ListTransactionIntentsQueries {
+export namespace PolicyRuleListQueries {
     export enum ExpandEnum {
-        NextAction = 'nextAction',
-        Policy = 'policy',
-        Player = 'player',
-        Account = 'account'
+        Contract = 'contract'
     }
 }

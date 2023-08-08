@@ -18,6 +18,9 @@ export class BaseEntityListResponseMemberResponse {
     'object': ResponseTypeLIST;
     'url': string;
     'data': Array<MemberResponse>;
+    'start': number;
+    'end': number;
+    'total': number;
 
     static discriminator: string | undefined = undefined;
 
@@ -36,6 +39,21 @@ export class BaseEntityListResponseMemberResponse {
             "name": "data",
             "baseName": "data",
             "type": "Array<MemberResponse>"
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number"
         }    ];
 
     static getAttributeTypeMap() {

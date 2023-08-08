@@ -23,6 +23,7 @@ import { CreateAccountRequest } from '../model/createAccountRequest';
 import { InventoryResponse } from '../model/inventoryResponse';
 import { SignPayloadRequest } from '../model/signPayloadRequest';
 import { SignPayloadResponse } from '../model/signPayloadResponse';
+import { SortOrder } from '../model/sortOrder';
 import { StartRecoveryRequest } from '../model/startRecoveryRequest';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
 import { TransferOwnershipRequest } from '../model/transferOwnershipRequest';
@@ -478,11 +479,13 @@ export class AccountsApi {
     }
     /**
      * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param player Specifies the unique player ID.
-     * @param expand whether to expand the response or not
-     * @param limit amount of results per query
+     * @param player 
+     * @param limit 
+     * @param skip 
+     * @param order 
+     * @param expand 
      */
-    public async getAccounts (player: string, expand?: Array<'transactionIntents'>, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseAccountResponse;  }> {
+    public async getAccounts (player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseAccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -500,16 +503,24 @@ export class AccountsApi {
             throw new Error('Required parameter player was null or undefined when calling getAccounts.');
         }
 
-        if (player !== undefined) {
-            localVarQueryParameters['player'] = ObjectSerializer.serialize(player, "string");
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        }
+
+        if (skip !== undefined) {
+            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
         }
 
         if (expand !== undefined) {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'transactionIntents'>");
         }
 
-        if (limit !== undefined) {
-            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        if (player !== undefined) {
+            localVarQueryParameters['player'] = ObjectSerializer.serialize(player, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
