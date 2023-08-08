@@ -1,6 +1,6 @@
 import {
     AccountResponse,
-    AccountsResponse,
+    AccountListResponse,
     CancelTransferOwnershipRequest,
     CreateAccountRequest,
     GetAccountInventoryRequest,
@@ -11,6 +11,8 @@ import {
     SignPayloadResponse,
     TransactionIntentResponse,
     TransferOwnershipRequest,
+    StartRecoveryRequest,
+    CompleteRecoveryRequest,
 } from "../model";
 import { AccountsApi } from "../generated/api/accountsApi";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -56,7 +58,7 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param req Criteria to get the list of accounts.
      */
-    public async list(req: ListAccountsRequest): Promise<AccountsResponse> {
+    public async list(req: ListAccountsRequest): Promise<AccountListResponse> {
         const response = await this.api.getAccounts(
             req.player,
             req.expandTransactionIntent ? ["transactionIntents"] : undefined,
@@ -101,6 +103,24 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      */
     public async sync(id: string): Promise<AccountResponse> {
         const response = await this.api.syncAccount(id);
+        return response.body;
+    }
+
+    /**
+     * Start a recovery process of a recoverable account.
+     */
+    public async startRecovery(req: StartRecoveryRequest): Promise<TransactionIntentResponse> {
+        const { accountId, ...body } = req;
+        const response = await this.api.startRecovery(accountId, body);
+        return response.body;
+    }
+
+    /**
+     * Complete a recovery process of a recoverable account.
+     */
+    public async completeRecovery(req: CompleteRecoveryRequest): Promise<TransactionIntentResponse> {
+        const { accountId, ...body } = req;
+        const response = await this.api.completeRecovery(accountId, body);
         return response.body;
     }
 }

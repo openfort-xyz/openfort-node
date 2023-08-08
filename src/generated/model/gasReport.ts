@@ -11,9 +11,10 @@
  */
 
 import { RequestFile } from './models';
+import { ResponseTypeLIST } from './responseTypeLIST';
 
 export class GasReport {
-    'object': string;
+    'object': ResponseTypeLIST;
     'data': Array<any>;
 
     static discriminator: string | undefined = undefined;
@@ -22,7 +23,7 @@ export class GasReport {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "ResponseTypeLIST"
         },
         {
             "name": "data",
@@ -35,3 +36,5 @@ export class GasReport {
     }
 }
 
+export namespace GasReport {
+}

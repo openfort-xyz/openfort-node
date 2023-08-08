@@ -1,6 +1,6 @@
 import {
     AccountResponse,
-    AccountsResponse,
+    AccountListResponse,
     CreateAccountRequest,
     CreatePlayerRequest,
     CreatePlayerSessionRequest,
@@ -10,7 +10,7 @@ import {
     ListPlayerAccountsRequest,
     ListPlayersRequest,
     PlayerResponse,
-    PlayersResponse,
+    PlayerListResponse,
     RevokePlayerSessionRequest,
     SessionResponse,
     TransactionIntentResponse,
@@ -70,7 +70,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param req Criteria to get the accounts list.
      */
-    public async listAccounts(req: ListPlayerAccountsRequest): Promise<AccountsResponse> {
+    public async listAccounts(req: ListPlayerAccountsRequest): Promise<AccountListResponse> {
         const response = await this.api.getPlayerAccounts(
             req.id,
             req.expandTransactionIntent ? ["transactionIntents"] : undefined,
@@ -91,7 +91,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
      * @param req Criteria to retrieve the list of the players
      */
-    public async list(req?: ListPlayersRequest): Promise<PlayersResponse> {
+    public async list(req?: ListPlayersRequest): Promise<PlayerListResponse> {
         const response = await this.api.getPlayers(
             req?.limit,
             req?.skip,

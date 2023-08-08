@@ -12,10 +12,10 @@
 
 import { RequestFile } from './models';
 
-export class MemberRemoveResponse {
+export class InvitedMemberResponse {
     'id': string;
-    'object': string;
-    'deleted': boolean;
+    'email': string;
+    'role': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -26,18 +26,18 @@ export class MemberRemoveResponse {
             "type": "string"
         },
         {
-            "name": "object",
-            "baseName": "object",
+            "name": "email",
+            "baseName": "email",
             "type": "string"
         },
         {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean"
+            "name": "role",
+            "baseName": "role",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return MemberRemoveResponse.attributeTypeMap;
+        return InvitedMemberResponse.attributeTypeMap;
     }
 }
 

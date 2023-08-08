@@ -12,10 +12,11 @@
 
 import { RequestFile } from './models';
 import { Abi } from './abi';
+import { EntityTypeCONTRACT } from './entityTypeCONTRACT';
 
 export class ContractResponse {
     'id': string;
-    'object': string;
+    'object': EntityTypeCONTRACT;
     'createdAt': number;
     'name': string | null;
     'chainId': number;
@@ -35,7 +36,7 @@ export class ContractResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeCONTRACT"
         },
         {
             "name": "createdAt",
@@ -78,3 +79,5 @@ export class ContractResponse {
     }
 }
 
+export namespace ContractResponse {
+}

@@ -6,11 +6,11 @@ import {
     GetPolicyRequest,
     GetPolicyTotalGasUsageRequest,
     ListPoliciesRequest,
-    PoliciesResponse,
+    PolicyListResponse,
     PolicyDeleteResponse,
     PolicyResponse,
     PolicyRuleResponse,
-    PolicyRulesResponse,
+    PolicyRuleListResponse,
     UpdatePolicyAllowFunctionRequest,
     UpdatePolicyRequest,
 } from "../model";
@@ -66,7 +66,7 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * Gets all policy objects for a given project.
      * @param req Criteria to retrieve the policies by
      */
-    public async list(req?: ListPoliciesRequest): Promise<PoliciesResponse> {
+    public async list(req?: ListPoliciesRequest): Promise<PolicyListResponse> {
         const response = await this.api.getPolicies(
             req?.limit,
             req?.skip,
@@ -92,7 +92,7 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * Gets allows functions
      * @param req Criteria to get allow functions
      */
-    public async getAllowFunctions(req: GetAllowFunctionsRequest): Promise<PolicyRulesResponse> {
+    public async getAllowFunctions(req: GetAllowFunctionsRequest): Promise<PolicyRuleListResponse> {
         const response = await this.api.getPolicyAllowFunctions(req.id, req.expand);
         return response.body;
     }

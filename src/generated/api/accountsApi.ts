@@ -16,12 +16,14 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { AccountResponse } from '../model/accountResponse';
-import { AccountsResponse } from '../model/accountsResponse';
+import { BaseEntityListResponseAccountResponse } from '../model/baseEntityListResponseAccountResponse';
 import { CancelTransferOwnershipRequest } from '../model/cancelTransferOwnershipRequest';
+import { CompleteRecoveryRequest } from '../model/completeRecoveryRequest';
 import { CreateAccountRequest } from '../model/createAccountRequest';
 import { InventoryResponse } from '../model/inventoryResponse';
 import { SignPayloadRequest } from '../model/signPayloadRequest';
 import { SignPayloadResponse } from '../model/signPayloadResponse';
+import { StartRecoveryRequest } from '../model/startRecoveryRequest';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
 import { TransferOwnershipRequest } from '../model/transferOwnershipRequest';
 
@@ -106,7 +108,7 @@ export class AccountsApi {
      * @param cancelTransferOwnershipRequest 
      */
     public async cancelTransferOwnership (id: string, cancelTransferOwnershipRequest: CancelTransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
-        const localVarPath = this.basePath + '/v1/accounts/{id}/cancel-transfer-ownership'
+        const localVarPath = this.basePath + '/v1/accounts/{id}/cancel_transfer_ownership'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -141,6 +143,84 @@ export class AccountsApi {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(cancelTransferOwnershipRequest, "CancelTransferOwnershipRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionIntentResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Complete a recovery process of a recoverable account.
+     * @param id Specifies the unique account ID.
+     * @param completeRecoveryRequest 
+     */
+    public async completeRecovery (id: string, completeRecoveryRequest: CompleteRecoveryRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+        const localVarPath = this.basePath + '/v1/accounts/{id}/complete_recovery'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling completeRecovery.');
+        }
+
+        // verify required parameter 'completeRecoveryRequest' is not null or undefined
+        if (completeRecoveryRequest === null || completeRecoveryRequest === undefined) {
+            throw new Error('Required parameter completeRecoveryRequest was null or undefined when calling completeRecovery.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(completeRecoveryRequest, "CompleteRecoveryRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -402,7 +482,7 @@ export class AccountsApi {
      * @param expand whether to expand the response or not
      * @param limit amount of results per query
      */
-    public async getAccounts (player: string, expand?: Array<'transactionIntents'>, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }> {
+    public async getAccounts (player: string, expand?: Array<'transactionIntents'>, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseAccountResponse;  }> {
         const localVarPath = this.basePath + '/v1/accounts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -464,13 +544,13 @@ export class AccountsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: AccountsResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseAccountResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "AccountsResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponseAccountResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -486,7 +566,7 @@ export class AccountsApi {
      * @param transferOwnershipRequest 
      */
     public async requestTransferOwnership (id: string, transferOwnershipRequest: TransferOwnershipRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
-        const localVarPath = this.basePath + '/v1/accounts/{id}/request-transfer-ownership'
+        const localVarPath = this.basePath + '/v1/accounts/{id}/request_transfer_ownership'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -564,7 +644,7 @@ export class AccountsApi {
      * @param signPayloadRequest 
      */
     public async signPayload (id: string, signPayloadRequest: SignPayloadRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SignPayloadResponse;  }> {
-        const localVarPath = this.basePath + '/v1/accounts/{id}/sign-payload'
+        const localVarPath = this.basePath + '/v1/accounts/{id}/sign_payload'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -627,6 +707,84 @@ export class AccountsApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "SignPayloadResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Start a recovery process of a recoverable account.
+     * @param id Specifies the unique account ID.
+     * @param startRecoveryRequest 
+     */
+    public async startRecovery (id: string, startRecoveryRequest: StartRecoveryRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }> {
+        const localVarPath = this.basePath + '/v1/accounts/{id}/start_recovery'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling startRecovery.');
+        }
+
+        // verify required parameter 'startRecoveryRequest' is not null or undefined
+        if (startRecoveryRequest === null || startRecoveryRequest === undefined) {
+            throw new Error('Required parameter startRecoveryRequest was null or undefined when calling startRecovery.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(startRecoveryRequest, "StartRecoveryRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.pk.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.pk.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: TransactionIntentResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionIntentResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

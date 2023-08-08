@@ -1,7 +1,7 @@
 import Openfort, {
     CreatePlayerRequest,
     CreatePlayerSessionRequest,
-    PlayersResponse,
+    PlayerListResponse,
     PolicySchema,
     SponsorSchema,
 } from "@openfort/openfort-node";
@@ -23,7 +23,7 @@ async function example() {
     const newPlayer = await openfort.players.create(createPlayerRequest);
     const chainId = Number(getEnvVariable("OPENFORT_CHAINID"));
 
-    const players: PlayersResponse = await openfort.players.list({ filter: { name: "Test 1234" } });
+    const players: PlayerListResponse = await openfort.players.list({ filter: { name: "Test 1234" } });
     for (const player of players.data) {
         console.info(player.id);
     }

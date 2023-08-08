@@ -11,21 +11,36 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypeUSER } from './entityTypeUSER';
 
-export class GetPlayerByTokenRequest {
-    'token': string;
+export class BaseDeleteEntityResponseEntityTypeUSER {
+    'id': string;
+    'object': EntityTypeUSER;
+    'deleted': boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "token",
-            "baseName": "token",
+            "name": "id",
+            "baseName": "id",
             "type": "string"
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeUSER"
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
-        return GetPlayerByTokenRequest.attributeTypeMap;
+        return BaseDeleteEntityResponseEntityTypeUSER.attributeTypeMap;
     }
 }
 
+export namespace BaseDeleteEntityResponseEntityTypeUSER {
+}

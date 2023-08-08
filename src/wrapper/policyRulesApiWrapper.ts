@@ -3,7 +3,7 @@ import {
     GetPolicyRulesRequest,
     PolicyRuleDeleteResponse,
     PolicyRuleResponse,
-    PolicyRulesResponse,
+    PolicyRuleListResponse,
     UpdatePolicyRuleRequest,
 } from "../model";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -29,7 +29,7 @@ export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {
      * Returns a list of your allow functions for the given policy. The allow functions are returned sorted by creation date, with the most recently created allow functions appearing first.
      * @param req Criteria to get policy rules by.
      */
-    public async list(req?: GetPolicyRulesRequest): Promise<PolicyRulesResponse> {
+    public async list(req?: GetPolicyRulesRequest): Promise<PolicyRuleListResponse> {
         const response = await this.api.getPolicyRules(req?.expand, req?.policy);
         return response.body;
     }

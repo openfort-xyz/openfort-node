@@ -11,30 +11,36 @@
  */
 
 import { RequestFile } from './models';
-import { PKPolicy } from './pKPolicy';
+import { EntityTypePOLICYRULE } from './entityTypePOLICYRULE';
 
-export class ProjectRequest {
-    'name': string;
-    'pkPolicy'?: PKPolicy;
+export class BaseDeleteEntityResponseEntityTypePOLICYRULE {
+    'id': string;
+    'object': EntityTypePOLICYRULE;
+    'deleted': boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string"
         },
         {
-            "name": "pkPolicy",
-            "baseName": "pkPolicy",
-            "type": "PKPolicy"
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePOLICYRULE"
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectRequest.attributeTypeMap;
+        return BaseDeleteEntityResponseEntityTypePOLICYRULE.attributeTypeMap;
     }
 }
 
-export namespace ProjectRequest {
+export namespace BaseDeleteEntityResponseEntityTypePOLICYRULE {
 }

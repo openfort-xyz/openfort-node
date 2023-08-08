@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { EntityTypePLAYER } from './entityTypePLAYER';
 import { PolicyResponseTransactionIntentsInner } from './policyResponseTransactionIntentsInner';
 import { TransactionIntentResponseAccount } from './transactionIntentResponseAccount';
 
@@ -18,7 +19,7 @@ export class PlayerResponse {
     'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'accounts'?: Array<TransactionIntentResponseAccount>;
     'id': string;
-    'object': string;
+    'object': EntityTypePLAYER;
     'createdAt': number;
     'name': string | null;
     'description': string | null;
@@ -45,7 +46,7 @@ export class PlayerResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypePLAYER"
         },
         {
             "name": "createdAt",
@@ -73,3 +74,5 @@ export class PlayerResponse {
     }
 }
 
+export namespace PlayerResponse {
+}

@@ -15,11 +15,11 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { BaseEntityListResponseTransactionIntentResponse } from '../model/baseEntityListResponseTransactionIntentResponse';
 import { CreateTransactionIntentRequest } from '../model/createTransactionIntentRequest';
 import { SignatureRequest } from '../model/signatureRequest';
 import { SortOrder } from '../model/sortOrder';
 import { TransactionIntentResponse } from '../model/transactionIntentResponse';
-import { TransactionIntentsResponse } from '../model/transactionIntentsResponse';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -254,7 +254,7 @@ export class TransactionIntentsApi {
      * @param playerId 
      * @param policyId 
      */
-    public async getTransactionIntents (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, accountId?: string, chainId?: number, playerId?: string, policyId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
+    public async getTransactionIntents (limit?: number, skip?: number, order?: SortOrder, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, accountId?: string, chainId?: number, playerId?: string, policyId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseTransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -331,13 +331,13 @@ export class TransactionIntentsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseTransactionIntentResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "TransactionIntentsResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponseTransactionIntentResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -499,7 +499,7 @@ export class TransactionIntentsApi {
     /**
      * 
      */
-    public async updateTransactionIntentsResponse (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }> {
+    public async updateTransactionIntentsResponse (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseTransactionIntentResponse;  }> {
         const localVarPath = this.basePath + '/v1/transaction_intents/update_response';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -544,13 +544,13 @@ export class TransactionIntentsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TransactionIntentsResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseTransactionIntentResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "TransactionIntentsResponse");
+                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponseTransactionIntentResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

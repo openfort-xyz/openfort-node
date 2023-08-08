@@ -13,11 +13,12 @@
 import { RequestFile } from './models';
 import { Abi } from './abi';
 import { ContractResponse } from './contractResponse';
+import { EntityTypeCONTRACT } from './entityTypeCONTRACT';
 import { PickContractResponseId } from './pickContractResponseId';
 
 export class PolicyRuleResponseContract {
     'id': string;
-    'object': string;
+    'object': EntityTypeCONTRACT;
     'createdAt': number;
     'name': string | null;
     'chainId': number;
@@ -37,7 +38,7 @@ export class PolicyRuleResponseContract {
         {
             "name": "object",
             "baseName": "object",
-            "type": "string"
+            "type": "EntityTypeCONTRACT"
         },
         {
             "name": "createdAt",
@@ -80,3 +81,5 @@ export class PolicyRuleResponseContract {
     }
 }
 
+export namespace PolicyRuleResponseContract {
+}
