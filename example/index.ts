@@ -23,7 +23,7 @@ async function example() {
     const newPlayer = await openfort.players.create(createPlayerRequest);
     const chainId = Number(getEnvVariable("OPENFORT_CHAINID"));
 
-    const players: PlayerListResponse = await openfort.players.list({ filter: { name: "Test 1234" } });
+    const players: PlayerListResponse = await openfort.players.list({ name: "Test 1234" });
     for (const player of players.data) {
         console.info(player.id);
     }
@@ -68,7 +68,7 @@ async function example() {
     };
     await openfort.players.createSession(createSessionRequest);
 
-    const transactionIntents = await openfort.transactionIntents.list({ filter: { playerId: newPlayer.id } });
+    const transactionIntents = await openfort.transactionIntents.list({ playerId: [newPlayer.id] });
     for (const intent of transactionIntents.data) {
         console.info(`Intent ${intent.id} by ${intent.player?.id}`);
     }

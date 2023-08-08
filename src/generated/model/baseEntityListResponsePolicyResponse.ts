@@ -18,6 +18,9 @@ export class BaseEntityListResponsePolicyResponse {
     'object': ResponseTypeLIST;
     'url': string;
     'data': Array<PolicyResponse>;
+    'start': number;
+    'end': number;
+    'total': number;
 
     static discriminator: string | undefined = undefined;
 
@@ -36,6 +39,21 @@ export class BaseEntityListResponsePolicyResponse {
             "name": "data",
             "baseName": "data",
             "type": "Array<PolicyResponse>"
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number"
         }    ];
 
     static getAttributeTypeMap() {

@@ -19,6 +19,7 @@ import { BaseDeleteEntityResponseEntityTypePOLICYRULE } from '../model/baseDelet
 import { BaseEntityListResponsePolicyRuleResponse } from '../model/baseEntityListResponsePolicyRuleResponse';
 import { CreatePolicyRuleRequest } from '../model/createPolicyRuleRequest';
 import { PolicyRuleResponse } from '../model/policyRuleResponse';
+import { SortOrder } from '../model/sortOrder';
 import { UpdatePolicyRuleRequest } from '../model/updatePolicyRuleRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -240,10 +241,13 @@ export class PolicyRulesApi {
     }
     /**
      * Returns a list of your allow functions for the given policy. The allow functions are returned sorted by creation date, with the most recently created allow functions appearing first.
+     * @param policy 
+     * @param limit 
+     * @param skip 
+     * @param order 
      * @param expand 
-     * @param policy Specifies the unique policy ID.
      */
-    public async getPolicyRules (expand?: Array<'contract'>, policy?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyRuleResponse;  }> {
+    public async getPolicyRules (policy: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'contract'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyRuleResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -255,6 +259,23 @@ export class PolicyRulesApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'policy' is not null or undefined
+        if (policy === null || policy === undefined) {
+            throw new Error('Required parameter policy was null or undefined when calling getPolicyRules.');
+        }
+
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        }
+
+        if (skip !== undefined) {
+            localVarQueryParameters['skip'] = ObjectSerializer.serialize(skip, "number");
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "SortOrder");
+        }
 
         if (expand !== undefined) {
             localVarQueryParameters['expand'] = ObjectSerializer.serialize(expand, "Array<'contract'>");

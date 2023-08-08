@@ -1,10 +1,10 @@
 import {
     CreateSessionRequest,
-    ListSessionsRequest,
     RevokeSessionRequest,
     SessionResponse,
     SessionListResponse,
     SignatureSessionRequest,
+    SessionListQueries,
 } from "../model";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { SessionsApi } from "../generated/api/sessionsApi";
@@ -30,14 +30,14 @@ export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
      * @param req Criteria to retrieve the list of the sessions
      */
-    public async list(req: ListSessionsRequest): Promise<SessionListResponse> {
+    public async list(req: SessionListQueries): Promise<SessionListResponse> {
         const response = await this.api.getPlayerSessions(
-            req.playerId,
+            req.player,
             req.limit,
             req.skip,
             req.order,
             req.expand,
-            req.filter?.address,
+            req.address,
         );
         return response.body;
     }

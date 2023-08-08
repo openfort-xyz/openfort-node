@@ -5,7 +5,6 @@ import {
     GetAllowFunctionsRequest,
     GetPolicyRequest,
     GetPolicyTotalGasUsageRequest,
-    ListPoliciesRequest,
     PolicyListResponse,
     PolicyDeleteResponse,
     PolicyResponse,
@@ -13,6 +12,7 @@ import {
     PolicyRuleListResponse,
     UpdatePolicyAllowFunctionRequest,
     UpdatePolicyRequest,
+    PolicyListQueries,
 } from "../model";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { PoliciesApi } from "../generated/api/policiesApi";
@@ -66,15 +66,15 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * Gets all policy objects for a given project.
      * @param req Criteria to retrieve the policies by
      */
-    public async list(req?: ListPoliciesRequest): Promise<PolicyListResponse> {
+    public async list(req?: PolicyListQueries): Promise<PolicyListResponse> {
         const response = await this.api.getPolicies(
             req?.limit,
             req?.skip,
             req?.order,
             req?.expand,
-            req?.filter?.name,
-            req?.filter?.deleted,
-            req?.filter?.chainId,
+            req?.name,
+            req?.deleted,
+            req?.chainId,
         );
         return response.body;
     }

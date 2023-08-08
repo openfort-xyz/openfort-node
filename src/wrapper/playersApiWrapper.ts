@@ -7,8 +7,6 @@ import {
     GetPlayerInventoryRequest,
     GetPlayerRequest,
     InventoryResponse,
-    ListPlayerAccountsRequest,
-    ListPlayersRequest,
     PlayerResponse,
     PlayerListResponse,
     RevokePlayerSessionRequest,
@@ -17,6 +15,8 @@ import {
     PlayerCancelTransferOwnershipRequest,
     PlayerTransferOwnershipRequest,
     UpdatePlayerRequest,
+    AccountListQueries,
+    PlayerListQueries,
 } from "../model";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { PlayersApi } from "../generated/api/playersApi";
@@ -70,11 +70,8 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
      * @param req Criteria to get the accounts list.
      */
-    public async listAccounts(req: ListPlayerAccountsRequest): Promise<AccountListResponse> {
-        const response = await this.api.getPlayerAccounts(
-            req.id,
-            req.expandTransactionIntent ? ["transactionIntents"] : undefined,
-        );
+    public async listAccounts(req: Pick<AccountListQueries, "player" | "expand">): Promise<AccountListResponse> {
+        const response = await this.api.getPlayerAccounts(req.player, req.expand);
         return response.body;
     }
 
@@ -91,14 +88,8 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
      * @param req Criteria to retrieve the list of the players
      */
-    public async list(req?: ListPlayersRequest): Promise<PlayerListResponse> {
-        const response = await this.api.getPlayers(
-            req?.limit,
-            req?.skip,
-            req?.order,
-            req?.expand,
-            req?.filter ? JSON.stringify(req.filter) : undefined,
-        );
+    public async list(req?: PlayerListQueries): Promise<PlayerListResponse> {
+        const response = await this.api.getPlayers(req?.limit, req?.skip, req?.order, req?.expand, req?.name);
         return response.body;
     }
 
