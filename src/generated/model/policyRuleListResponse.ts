@@ -11,13 +11,13 @@
  */
 
 import { RequestFile } from './models';
+import { PolicyRuleResponse } from './policyRuleResponse';
 import { ResponseTypeLIST } from './responseTypeLIST';
-import { TransactionIntentResponse } from './transactionIntentResponse';
 
-export class BaseEntityListResponseTransactionIntentResponse {
+export class PolicyRuleListResponse {
     'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<TransactionIntentResponse>;
+    'data': Array<PolicyRuleResponse>;
     'start': number;
     'end': number;
     'total': number;
@@ -38,7 +38,7 @@ export class BaseEntityListResponseTransactionIntentResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<TransactionIntentResponse>"
+            "type": "Array<PolicyRuleResponse>"
         },
         {
             "name": "start",
@@ -57,9 +57,9 @@ export class BaseEntityListResponseTransactionIntentResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseEntityListResponseTransactionIntentResponse.attributeTypeMap;
+        return PolicyRuleListResponse.attributeTypeMap;
     }
 }
 
-export namespace BaseEntityListResponseTransactionIntentResponse {
+export namespace PolicyRuleListResponse {
 }

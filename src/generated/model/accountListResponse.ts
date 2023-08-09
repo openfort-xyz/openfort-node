@@ -11,13 +11,13 @@
  */
 
 import { RequestFile } from './models';
-import { PlayerResponse } from './playerResponse';
+import { AccountResponse } from './accountResponse';
 import { ResponseTypeLIST } from './responseTypeLIST';
 
-export class BaseEntityListResponsePlayerResponse {
+export class AccountListResponse {
     'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<PlayerResponse>;
+    'data': Array<AccountResponse>;
     'start': number;
     'end': number;
     'total': number;
@@ -38,7 +38,7 @@ export class BaseEntityListResponsePlayerResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<PlayerResponse>"
+            "type": "Array<AccountResponse>"
         },
         {
             "name": "start",
@@ -57,9 +57,9 @@ export class BaseEntityListResponsePlayerResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseEntityListResponsePlayerResponse.attributeTypeMap;
+        return AccountListResponse.attributeTypeMap;
     }
 }
 
-export namespace BaseEntityListResponsePlayerResponse {
+export namespace AccountListResponse {
 }

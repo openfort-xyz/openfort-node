@@ -11,11 +11,11 @@
  */
 
 import { RequestFile } from './models';
-import { EntityTypeCONTRACT } from './entityTypeCONTRACT';
+import { EntityTypeUSER } from './entityTypeUSER';
 
-export class BaseDeleteEntityResponseEntityTypeCONTRACT {
+export class MemberRemoveResponse {
     'id': string;
-    'object': EntityTypeCONTRACT;
+    'object': EntityTypeUSER;
     'deleted': boolean;
 
     static discriminator: string | undefined = undefined;
@@ -29,7 +29,7 @@ export class BaseDeleteEntityResponseEntityTypeCONTRACT {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypeCONTRACT"
+            "type": "EntityTypeUSER"
         },
         {
             "name": "deleted",
@@ -38,9 +38,9 @@ export class BaseDeleteEntityResponseEntityTypeCONTRACT {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseDeleteEntityResponseEntityTypeCONTRACT.attributeTypeMap;
+        return MemberRemoveResponse.attributeTypeMap;
     }
 }
 
-export namespace BaseDeleteEntityResponseEntityTypeCONTRACT {
+export namespace MemberRemoveResponse {
 }

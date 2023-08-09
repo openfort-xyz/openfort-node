@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 import { EntityTypePOLICY } from './entityTypePOLICY';
 
-export class BaseDeleteEntityResponseEntityTypePOLICY {
+export class PolicyDeleteResponse {
     'id': string;
     'object': EntityTypePOLICY;
     'deleted': boolean;
@@ -38,9 +38,9 @@ export class BaseDeleteEntityResponseEntityTypePOLICY {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseDeleteEntityResponseEntityTypePOLICY.attributeTypeMap;
+        return PolicyDeleteResponse.attributeTypeMap;
     }
 }
 
-export namespace BaseDeleteEntityResponseEntityTypePOLICY {
+export namespace PolicyDeleteResponse {
 }

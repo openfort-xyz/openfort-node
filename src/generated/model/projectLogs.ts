@@ -11,13 +11,13 @@
  */
 
 import { RequestFile } from './models';
+import { Log } from './log';
 import { ResponseTypeLIST } from './responseTypeLIST';
-import { SessionResponse } from './sessionResponse';
 
-export class BaseEntityListResponseSessionResponse {
+export class ProjectLogs {
     'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<SessionResponse>;
+    'data': Array<Log>;
     'start': number;
     'end': number;
     'total': number;
@@ -38,7 +38,7 @@ export class BaseEntityListResponseSessionResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<SessionResponse>"
+            "type": "Array<Log>"
         },
         {
             "name": "start",
@@ -57,9 +57,9 @@ export class BaseEntityListResponseSessionResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseEntityListResponseSessionResponse.attributeTypeMap;
+        return ProjectLogs.attributeTypeMap;
     }
 }
 
-export namespace BaseEntityListResponseSessionResponse {
+export namespace ProjectLogs {
 }
