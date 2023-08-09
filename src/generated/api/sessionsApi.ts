@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { BaseEntityListResponseSessionResponse } from '../model/baseEntityListResponseSessionResponse';
 import { CreateSessionRequest } from '../model/createSessionRequest';
 import { RevokeSessionRequest } from '../model/revokeSessionRequest';
+import { SessionListResponse } from '../model/sessionListResponse';
 import { SessionResponse } from '../model/sessionResponse';
 import { SignatureRequest } from '../model/signatureRequest';
 import { SortOrder } from '../model/sortOrder';
@@ -177,7 +177,7 @@ export class SessionsApi {
      * @param expand 
      * @param address 
      */
-    public async getPlayerSessions (player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, address?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseSessionResponse;  }> {
+    public async getPlayerSessions (player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, address?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SessionListResponse;  }> {
         const localVarPath = this.basePath + '/v1/sessions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -251,13 +251,13 @@ export class SessionsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseSessionResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: SessionListResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponseSessionResponse");
+                            body = ObjectSerializer.deserialize(body, "SessionListResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

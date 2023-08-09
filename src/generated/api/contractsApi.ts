@@ -15,8 +15,8 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { BaseDeleteEntityResponseEntityTypeCONTRACT } from '../model/baseDeleteEntityResponseEntityTypeCONTRACT';
-import { BaseEntityListResponseContractResponse } from '../model/baseEntityListResponseContractResponse';
+import { ContractDeleteResponse } from '../model/contractDeleteResponse';
+import { ContractListResponse } from '../model/contractListResponse';
 import { ContractResponse } from '../model/contractResponse';
 import { CreateContractRequest } from '../model/createContractRequest';
 import { SortOrder } from '../model/sortOrder';
@@ -172,7 +172,7 @@ export class ContractsApi {
      * Deletes a contract object.
      * @param id 
      */
-    public async deleteContract (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseDeleteEntityResponseEntityTypeCONTRACT;  }> {
+    public async deleteContract (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractDeleteResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -223,13 +223,13 @@ export class ContractsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BaseDeleteEntityResponseEntityTypeCONTRACT;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: ContractDeleteResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "BaseDeleteEntityResponseEntityTypeCONTRACT");
+                            body = ObjectSerializer.deserialize(body, "ContractDeleteResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -320,7 +320,7 @@ export class ContractsApi {
      * @param chainId 
      * @param address 
      */
-    public async getContracts (limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, chainId?: number, address?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseContractResponse;  }> {
+    public async getContracts (limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, chainId?: number, address?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ContractListResponse;  }> {
         const localVarPath = this.basePath + '/v1/contracts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -393,13 +393,13 @@ export class ContractsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponseContractResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: ContractListResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponseContractResponse");
+                            body = ObjectSerializer.deserialize(body, "ContractListResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

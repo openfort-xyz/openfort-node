@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { BaseDeleteEntityResponseEntityTypePOLICYRULE } from '../model/baseDeleteEntityResponseEntityTypePOLICYRULE';
-import { BaseEntityListResponsePolicyRuleResponse } from '../model/baseEntityListResponsePolicyRuleResponse';
 import { CreatePolicyRuleRequest } from '../model/createPolicyRuleRequest';
+import { PolicyRuleDeleteResponse } from '../model/policyRuleDeleteResponse';
+import { PolicyRuleListResponse } from '../model/policyRuleListResponse';
 import { PolicyRuleResponse } from '../model/policyRuleResponse';
 import { SortOrder } from '../model/sortOrder';
 import { UpdatePolicyRuleRequest } from '../model/updatePolicyRuleRequest';
@@ -172,7 +172,7 @@ export class PolicyRulesApi {
      * Deletes an polciy rule (allow_functions) object.
      * @param id 
      */
-    public async deletePolicyRules (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseDeleteEntityResponseEntityTypePOLICYRULE;  }> {
+    public async deletePolicyRules (id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleDeleteResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
@@ -223,13 +223,13 @@ export class PolicyRulesApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BaseDeleteEntityResponseEntityTypePOLICYRULE;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: PolicyRuleDeleteResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "BaseDeleteEntityResponseEntityTypePOLICYRULE");
+                            body = ObjectSerializer.deserialize(body, "PolicyRuleDeleteResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -247,7 +247,7 @@ export class PolicyRulesApi {
      * @param order 
      * @param expand 
      */
-    public async getPolicyRules (policy: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'contract'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyRuleResponse;  }> {
+    public async getPolicyRules (policy: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'contract'>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PolicyRuleListResponse;  }> {
         const localVarPath = this.basePath + '/v1/policy_rules';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -317,13 +317,13 @@ export class PolicyRulesApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BaseEntityListResponsePolicyRuleResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: PolicyRuleListResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "BaseEntityListResponsePolicyRuleResponse");
+                            body = ObjectSerializer.deserialize(body, "PolicyRuleListResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

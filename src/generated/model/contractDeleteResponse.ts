@@ -11,11 +11,11 @@
  */
 
 import { RequestFile } from './models';
-import { EntityTypePOLICYRULE } from './entityTypePOLICYRULE';
+import { EntityTypeCONTRACT } from './entityTypeCONTRACT';
 
-export class BaseDeleteEntityResponseEntityTypePOLICYRULE {
+export class ContractDeleteResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeCONTRACT;
     'deleted': boolean;
 
     static discriminator: string | undefined = undefined;
@@ -29,7 +29,7 @@ export class BaseDeleteEntityResponseEntityTypePOLICYRULE {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE"
+            "type": "EntityTypeCONTRACT"
         },
         {
             "name": "deleted",
@@ -38,9 +38,9 @@ export class BaseDeleteEntityResponseEntityTypePOLICYRULE {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseDeleteEntityResponseEntityTypePOLICYRULE.attributeTypeMap;
+        return ContractDeleteResponse.attributeTypeMap;
     }
 }
 
-export namespace BaseDeleteEntityResponseEntityTypePOLICYRULE {
+export namespace ContractDeleteResponse {
 }
