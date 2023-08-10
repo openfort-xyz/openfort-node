@@ -4,9 +4,7 @@ import {
     CreateAccountRequest,
     CreatePlayerRequest,
     CreatePlayerSessionRequest,
-    GetPlayerInventoryRequest,
     GetPlayerRequest,
-    InventoryResponse,
     PlayerResponse,
     PlayerListResponse,
     RevokePlayerSessionRequest,
@@ -72,15 +70,6 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      */
     public async listAccounts(req: Pick<AccountListQueries, "player" | "expand">): Promise<AccountListResponse> {
         const response = await this.api.getPlayerAccounts(req.player, req.expand);
-        return response.body;
-    }
-
-    /**
-     * Retrieves the inventory of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
-     * @param req Criteria to retrieve player inventory.
-     */
-    public async getInventory(req: GetPlayerInventoryRequest): Promise<InventoryResponse> {
-        const response = await this.api.getPlayerInventory(req.id, req.chainId);
         return response.body;
     }
 

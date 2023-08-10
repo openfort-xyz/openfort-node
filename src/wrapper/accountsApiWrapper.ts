@@ -3,9 +3,7 @@ import {
     AccountListResponse,
     CancelTransferOwnershipRequest,
     CreateAccountRequest,
-    GetAccountInventoryRequest,
     GetAccountRequest,
-    InventoryResponse,
     SignPayloadRequest,
     SignPayloadResponse,
     TransactionIntentResponse,
@@ -42,15 +40,6 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
             req.id,
             req.expandTransactionIntent ? ["transactionIntents"] : undefined,
         );
-        return response.body;
-    }
-
-    /**
-     * Retrieves the inventory of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
-     * @param req Criteria to get inventory.
-     */
-    public async getInventory(req: GetAccountInventoryRequest): Promise<InventoryResponse> {
-        const response = await this.api.getAccountInventory(req.id);
         return response.body;
     }
 

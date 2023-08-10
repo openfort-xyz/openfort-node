@@ -13,6 +13,7 @@
 import { RequestFile } from './models';
 import { ApiKeyResponse } from './apiKeyResponse';
 import { EntityTypePROJECT } from './entityTypePROJECT';
+import { ProviderResponse } from './providerResponse';
 
 export class ProjectResponse {
     'id': string;
@@ -21,6 +22,7 @@ export class ProjectResponse {
     'updatedAt': number;
     'name': string;
     'apikeys'?: Array<ApiKeyResponse>;
+    'providers'?: Array<ProviderResponse>;
 
     static discriminator: string | undefined = undefined;
 
@@ -54,6 +56,11 @@ export class ProjectResponse {
             "name": "apikeys",
             "baseName": "apikeys",
             "type": "Array<ApiKeyResponse>"
+        },
+        {
+            "name": "providers",
+            "baseName": "providers",
+            "type": "Array<ProviderResponse>"
         }    ];
 
     static getAttributeTypeMap() {

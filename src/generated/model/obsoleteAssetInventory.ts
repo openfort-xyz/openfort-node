@@ -11,10 +11,10 @@
  */
 
 import { RequestFile } from './models';
-import { AssetType } from './assetType';
+import { ObsoleteAssetType } from './obsoleteAssetType';
 
-export class AssetInventory {
-    'assetType': AssetType;
+export class ObsoleteAssetInventory {
+    'assetType': ObsoleteAssetType;
     'address'?: string;
     'tokenId'?: number;
     /**
@@ -29,7 +29,7 @@ export class AssetInventory {
         {
             "name": "assetType",
             "baseName": "assetType",
-            "type": "AssetType"
+            "type": "ObsoleteAssetType"
         },
         {
             "name": "address",
@@ -53,9 +53,9 @@ export class AssetInventory {
         }    ];
 
     static getAttributeTypeMap() {
-        return AssetInventory.attributeTypeMap;
+        return ObsoleteAssetInventory.attributeTypeMap;
     }
 }
 
-export namespace AssetInventory {
+export namespace ObsoleteAssetInventory {
 }

@@ -2,6 +2,7 @@ import localVarRequest from 'request';
 
 export * from './abi';
 export * from './abiType';
+export * from './accountInventoryListQueries';
 export * from './accountListQueries';
 export * from './accountListResponse';
 export * from './accountResponse';
@@ -42,6 +43,7 @@ export * from './entityTypeUSER';
 export * from './gasReport';
 export * from './getSigninUrlResponse';
 export * from './interaction';
+export * from './inventoryListResponse';
 export * from './inventoryResponse';
 export * from './invitedMemberResponse';
 export * from './log';
@@ -53,6 +55,9 @@ export * from './membersResponse';
 export * from './nextActionPayload';
 export * from './nextActionResponse';
 export * from './nextActionType';
+export * from './obsoleteAssetInventory';
+export * from './obsoleteAssetType';
+export * from './obsoleteInventoryResponse';
 export * from './pKPolicy';
 export * from './pickAccountResponseId';
 export * from './pickContractResponseId';
@@ -61,6 +66,7 @@ export * from './pickPolicyResponseId';
 export * from './pickPolicyRuleResponseId';
 export * from './pickTransactionIntentResponseId';
 export * from './playerCancelTransferOwnershipRequest';
+export * from './playerInventoryListQueries';
 export * from './playerListQueries';
 export * from './playerListResponse';
 export * from './playerRequest';
@@ -85,6 +91,7 @@ export * from './projectRequest';
 export * from './projectResponse';
 export * from './projectRole';
 export * from './providerRequest';
+export * from './providerResponse';
 export * from './responseResponse';
 export * from './responseTypeLIST';
 export * from './revokeSessionPlayerRequest';
@@ -126,6 +133,7 @@ export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 import { Abi } from './abi';
 import { AbiType } from './abiType';
+import { AccountInventoryListQueries } from './accountInventoryListQueries';
 import { AccountListQueries } from './accountListQueries';
 import { AccountListResponse } from './accountListResponse';
 import { AccountResponse } from './accountResponse';
@@ -166,6 +174,7 @@ import { EntityTypeUSER } from './entityTypeUSER';
 import { GasReport } from './gasReport';
 import { GetSigninUrlResponse } from './getSigninUrlResponse';
 import { Interaction } from './interaction';
+import { InventoryListResponse } from './inventoryListResponse';
 import { InventoryResponse } from './inventoryResponse';
 import { InvitedMemberResponse } from './invitedMemberResponse';
 import { Log } from './log';
@@ -177,6 +186,9 @@ import { MembersResponse } from './membersResponse';
 import { NextActionPayload } from './nextActionPayload';
 import { NextActionResponse } from './nextActionResponse';
 import { NextActionType } from './nextActionType';
+import { ObsoleteAssetInventory } from './obsoleteAssetInventory';
+import { ObsoleteAssetType } from './obsoleteAssetType';
+import { ObsoleteInventoryResponse } from './obsoleteInventoryResponse';
 import { PKPolicy } from './pKPolicy';
 import { PickAccountResponseId } from './pickAccountResponseId';
 import { PickContractResponseId } from './pickContractResponseId';
@@ -185,6 +197,7 @@ import { PickPolicyResponseId } from './pickPolicyResponseId';
 import { PickPolicyRuleResponseId } from './pickPolicyRuleResponseId';
 import { PickTransactionIntentResponseId } from './pickTransactionIntentResponseId';
 import { PlayerCancelTransferOwnershipRequest } from './playerCancelTransferOwnershipRequest';
+import { PlayerInventoryListQueries } from './playerInventoryListQueries';
 import { PlayerListQueries } from './playerListQueries';
 import { PlayerListResponse } from './playerListResponse';
 import { PlayerRequest } from './playerRequest';
@@ -209,6 +222,7 @@ import { ProjectRequest } from './projectRequest';
 import { ProjectResponse } from './projectResponse';
 import { ProjectRole } from './projectRole';
 import { ProviderRequest } from './providerRequest';
+import { ProviderResponse } from './providerResponse';
 import { ResponseResponse } from './responseResponse';
 import { ResponseTypeLIST } from './responseTypeLIST';
 import { RevokeSessionPlayerRequest } from './revokeSessionPlayerRequest';
@@ -263,6 +277,7 @@ let enumsMap: {[index: string]: any} = {
         "EntityTypeTRANSACTIONINTENT": EntityTypeTRANSACTIONINTENT,
         "EntityTypeUSER": EntityTypeUSER,
         "NextActionType": NextActionType,
+        "ObsoleteAssetType": ObsoleteAssetType,
         "PKPolicy": PKPolicy,
         "PlayerListQueries.ExpandEnum": PlayerListQueries.ExpandEnum,
         "PolicyListQueries.ExpandEnum": PolicyListQueries.ExpandEnum,
@@ -279,6 +294,7 @@ let enumsMap: {[index: string]: any} = {
 let typeMap: {[index: string]: any} = {
     "Abi": Abi,
     "AbiType": AbiType,
+    "AccountInventoryListQueries": AccountInventoryListQueries,
     "AccountListQueries": AccountListQueries,
     "AccountListResponse": AccountListResponse,
     "AccountResponse": AccountResponse,
@@ -306,6 +322,7 @@ let typeMap: {[index: string]: any} = {
     "GasReport": GasReport,
     "GetSigninUrlResponse": GetSigninUrlResponse,
     "Interaction": Interaction,
+    "InventoryListResponse": InventoryListResponse,
     "InventoryResponse": InventoryResponse,
     "InvitedMemberResponse": InvitedMemberResponse,
     "Log": Log,
@@ -316,6 +333,8 @@ let typeMap: {[index: string]: any} = {
     "MembersResponse": MembersResponse,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
+    "ObsoleteAssetInventory": ObsoleteAssetInventory,
+    "ObsoleteInventoryResponse": ObsoleteInventoryResponse,
     "PickAccountResponseId": PickAccountResponseId,
     "PickContractResponseId": PickContractResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
@@ -323,6 +342,7 @@ let typeMap: {[index: string]: any} = {
     "PickPolicyRuleResponseId": PickPolicyRuleResponseId,
     "PickTransactionIntentResponseId": PickTransactionIntentResponseId,
     "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
+    "PlayerInventoryListQueries": PlayerInventoryListQueries,
     "PlayerListQueries": PlayerListQueries,
     "PlayerListResponse": PlayerListResponse,
     "PlayerRequest": PlayerRequest,
@@ -345,6 +365,7 @@ let typeMap: {[index: string]: any} = {
     "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
     "ProviderRequest": ProviderRequest,
+    "ProviderResponse": ProviderResponse,
     "ResponseResponse": ResponseResponse,
     "RevokeSessionPlayerRequest": RevokeSessionPlayerRequest,
     "RevokeSessionRequest": RevokeSessionRequest,
