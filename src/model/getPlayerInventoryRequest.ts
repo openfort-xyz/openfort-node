@@ -1,4 +1,4 @@
 export interface GetPlayerInventoryRequest {
-    id: string;
+    playerId: string;
     chainId: number;
 }

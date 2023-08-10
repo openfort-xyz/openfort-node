@@ -13,20 +13,26 @@
 import { RequestFile } from './models';
 
 export class ProviderRequest {
-    'google_client_id': string;
-    'google_client_secret': string;
+    'googleClientId': string;
+    'googleEnabled': boolean;
+    'googleClientSecret': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "google_client_id",
-            "baseName": "google_client_id",
+            "name": "googleClientId",
+            "baseName": "googleClientId",
             "type": "string"
         },
         {
-            "name": "google_client_secret",
-            "baseName": "google_client_secret",
+            "name": "googleEnabled",
+            "baseName": "googleEnabled",
+            "type": "boolean"
+        },
+        {
+            "name": "googleClientSecret",
+            "baseName": "googleClientSecret",
             "type": "string"
         }    ];
 

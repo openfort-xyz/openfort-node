@@ -12,12 +12,15 @@
 
 import { RequestFile } from './models';
 import { AssetInventory } from './assetInventory';
-import { EntityTypeINVENTORY } from './entityTypeINVENTORY';
+import { ResponseTypeLIST } from './responseTypeLIST';
 
-export class InventoryResponse {
-    'object': EntityTypeINVENTORY;
+export class InventoryListResponse {
+    'object': ResponseTypeLIST;
     'url': string;
-    'data': AssetInventory;
+    'data': Array<AssetInventory>;
+    'start': number;
+    'end': number;
+    'total': number;
 
     static discriminator: string | undefined = undefined;
 
@@ -25,7 +28,7 @@ export class InventoryResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypeINVENTORY"
+            "type": "ResponseTypeLIST"
         },
         {
             "name": "url",
@@ -35,13 +38,28 @@ export class InventoryResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "AssetInventory"
+            "type": "Array<AssetInventory>"
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number"
         }    ];
 
     static getAttributeTypeMap() {
-        return InventoryResponse.attributeTypeMap;
+        return InventoryListResponse.attributeTypeMap;
     }
 }
 
-export namespace InventoryResponse {
+export namespace InventoryListResponse {
 }

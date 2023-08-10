@@ -12,9 +12,9 @@
 
 import { RequestFile } from './models';
 
-export enum AssetType {
-    Eth = 'ETH',
-    Erc20 = 'ERC20',
-    Erc721 = 'ERC721',
-    Erc1155 = 'ERC1155'
+export enum ObsoleteAssetType {
+    NUMBER_1 = 1,
+    NUMBER_2 = 2,
+    NUMBER_3 = 3,
+    NUMBER_4 = 4
 }

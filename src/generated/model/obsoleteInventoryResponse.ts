@@ -11,13 +11,14 @@
  */
 
 import { RequestFile } from './models';
-import { AssetInventory } from './assetInventory';
 import { EntityTypeINVENTORY } from './entityTypeINVENTORY';
+import { ObsoleteAssetInventory } from './obsoleteAssetInventory';
 
-export class InventoryResponse {
+export class ObsoleteInventoryResponse {
     'object': EntityTypeINVENTORY;
-    'url': string;
-    'data': AssetInventory;
+    'nftAssets'?: Array<ObsoleteAssetInventory>;
+    'nativeAsset'?: ObsoleteAssetInventory;
+    'tokenAssets'?: Array<ObsoleteAssetInventory>;
 
     static discriminator: string | undefined = undefined;
 
@@ -28,20 +29,25 @@ export class InventoryResponse {
             "type": "EntityTypeINVENTORY"
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string"
+            "name": "nftAssets",
+            "baseName": "nftAssets",
+            "type": "Array<ObsoleteAssetInventory>"
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "AssetInventory"
+            "name": "nativeAsset",
+            "baseName": "nativeAsset",
+            "type": "ObsoleteAssetInventory"
+        },
+        {
+            "name": "tokenAssets",
+            "baseName": "tokenAssets",
+            "type": "Array<ObsoleteAssetInventory>"
         }    ];
 
     static getAttributeTypeMap() {
-        return InventoryResponse.attributeTypeMap;
+        return ObsoleteInventoryResponse.attributeTypeMap;
     }
 }
 
-export namespace InventoryResponse {
+export namespace ObsoleteInventoryResponse {
 }
