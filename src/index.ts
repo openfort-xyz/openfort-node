@@ -7,6 +7,7 @@ import { PoliciesApiWrapper } from "./wrapper/policiesApiWrapper";
 import { PolicyRulesApiWrapper } from "./wrapper/policyRulesApiWrapper";
 import { SessionsApiWrapper } from "./wrapper/sessionsApiWrapper";
 import { TransactionIntentsApiWrapper } from "./wrapper/transactionIntentsApiWrapper";
+import { InventoryApiWrapper } from "./wrapper/inventoryApiWrapper";
 
 export default class Openfort {
     private readonly apiWrappers = {};
@@ -40,6 +41,10 @@ export default class Openfort {
 
     public get transactionIntents(): TransactionIntentsApiWrapper {
         return this.getOrCreateWrapper(TransactionIntentsApiWrapper);
+    }
+
+    public get inventories(): InventoryApiWrapper {
+        return this.getOrCreateWrapper(InventoryApiWrapper);
     }
 
     public subscribe(observer: Observer): void {
