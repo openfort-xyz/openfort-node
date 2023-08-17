@@ -2,8 +2,6 @@ import Openfort, {
     CreatePlayerRequest,
     CreatePlayerSessionRequest,
     PlayerListResponse,
-    PolicySchema,
-    SponsorSchema,
 } from "@openfort/openfort-node";
 import * as dotenv from "dotenv";
 
@@ -38,13 +36,13 @@ async function example() {
         name: "Test policy",
         chainId,
         strategy: {
-            sponsorSchema: SponsorSchema.PayForUser,
+            sponsorSchema: "pay_for_user",
         },
     });
     console.dir(policy);
 
     const policyRule = await openfort.policyRules.create({
-        type: PolicySchema.AccountFunctions,
+        type: "account_functions",
         policy: policy.id,
         functionName: null,
         contract: null,

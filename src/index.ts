@@ -1,13 +1,13 @@
-import { AccountsApiWrapper } from "./wrapper/accountsApiWrapper";
-import { ContractsApiWrapper } from "./wrapper/contractsApiWrapper";
-import { Observable } from "./utility/observable";
-import { Observer } from "./utility/observer";
-import { PlayersApiWrapper } from "./wrapper/playersApiWrapper";
-import { PoliciesApiWrapper } from "./wrapper/policiesApiWrapper";
-import { PolicyRulesApiWrapper } from "./wrapper/policyRulesApiWrapper";
-import { SessionsApiWrapper } from "./wrapper/sessionsApiWrapper";
-import { TransactionIntentsApiWrapper } from "./wrapper/transactionIntentsApiWrapper";
-import { InventoryApiWrapper } from "./wrapper/inventoryApiWrapper";
+import { AccountsApiWrapper } from "./apis/accountsApiWrapper";
+import { ContractsApiWrapper } from "./apis/contractsApiWrapper";
+import { Observable } from "./utilities/observable";
+import { Observer } from "./utilities/observer";
+import { PlayersApiWrapper } from "./apis/playersApiWrapper";
+import { PoliciesApiWrapper } from "./apis/policiesApiWrapper";
+import { PolicyRulesApiWrapper } from "./apis/policyRulesApiWrapper";
+import { SessionsApiWrapper } from "./apis/sessionsApiWrapper";
+import { TransactionIntentsApiWrapper } from "./apis/transactionIntentsApiWrapper";
+import { InventoryApiWrapper } from "./apis/inventoryApiWrapper";
 
 export default class Openfort {
     private readonly apiWrappers = {};
@@ -69,4 +69,4 @@ export default class Openfort {
     }
 }
 
-export * from "./model";
+export * from "./models";
