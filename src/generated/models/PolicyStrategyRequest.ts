@@ -11,17 +11,12 @@
  */
 
 import { SponsorSchema } from '../models/SponsorSchema';
-import { TimeIntervalType } from '../models/TimeIntervalType';
 import { HttpFile } from '../http/http';
 
 export class PolicyStrategyRequest {
     'sponsorSchema': SponsorSchema;
     'tokenContract'?: string;
     'tokenContractAmount'?: string;
-    'gasLimit'?: string;
-    'timeIntervalType'?: TimeIntervalType;
-    'timeIntervalValue'?: number;
-    'countLimit'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -43,30 +38,6 @@ export class PolicyStrategyRequest {
             "baseName": "tokenContractAmount",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "gasLimit",
-            "baseName": "gasLimit",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "timeIntervalType",
-            "baseName": "timeIntervalType",
-            "type": "TimeIntervalType",
-            "format": ""
-        },
-        {
-            "name": "timeIntervalValue",
-            "baseName": "timeIntervalValue",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "countLimit",
-            "baseName": "countLimit",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

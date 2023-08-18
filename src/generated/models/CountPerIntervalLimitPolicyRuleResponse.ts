@@ -10,44 +10,53 @@
  * Do not edit the class manually.
  */
 
-import { PolicyRuleType } from '../models/PolicyRuleType';
+import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
+import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
+import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { HttpFile } from '../http/http';
 
-export class CreatePolicyAllowFunctionRequest {
-    'type': PolicyRuleType;
-    'functionName'?: string | null;
-    'contract'?: string | null;
-    'gasLimit'?: string;
-    'countLimit'?: number;
-    'timeIntervalType'?: TimeIntervalType;
-    'timeIntervalValue'?: number;
+export class CountPerIntervalLimitPolicyRuleResponse {
+    'id': string;
+    'object': EntityTypePOLICYRULE;
+    'createdAt': number;
+    'type': PolicyRuleTypeRATELIMIT;
+    'functionName': PolicyRateLimitCOUNTPERINTERVAL;
+    'countLimit': number;
+    'timeIntervalType': TimeIntervalType;
+    'timeIntervalValue': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePOLICYRULE",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "type",
             "baseName": "type",
-            "type": "PolicyRuleType",
+            "type": "PolicyRuleTypeRATELIMIT",
             "format": ""
         },
         {
             "name": "functionName",
             "baseName": "functionName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasLimit",
-            "baseName": "gasLimit",
-            "type": "string",
+            "type": "PolicyRateLimitCOUNTPERINTERVAL",
             "format": ""
         },
         {
@@ -70,7 +79,7 @@ export class CreatePolicyAllowFunctionRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return CreatePolicyAllowFunctionRequest.attributeTypeMap;
+        return CountPerIntervalLimitPolicyRuleResponse.attributeTypeMap;
     }
 
     public constructor() {

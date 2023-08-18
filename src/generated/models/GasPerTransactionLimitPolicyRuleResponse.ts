@@ -10,26 +10,18 @@
  * Do not edit the class manually.
  */
 
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PickPolicyRuleResponseId } from '../models/PickPolicyRuleResponseId';
-import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
-import { PolicyRuleResponse } from '../models/PolicyRuleResponse';
+import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
 import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
-import { TimeIntervalType } from '../models/TimeIntervalType';
 import { HttpFile } from '../http/http';
 
-export class PolicyResponsePolicyRulesInner {
+export class GasPerTransactionLimitPolicyRuleResponse {
     'id': string;
     'object': EntityTypePOLICYRULE;
     'createdAt': number;
     'type': PolicyRuleTypeRATELIMIT;
-    'contract': ContractPolicyRuleResponseContract;
-    'functionName': PolicyRateLimitCOUNTPERINTERVAL;
+    'functionName': PolicyRateLimitGASPERTRANSACTION;
     'gasLimit': string;
-    'timeIntervalType': TimeIntervalType;
-    'timeIntervalValue': number;
-    'countLimit': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -59,15 +51,9 @@ export class PolicyResponsePolicyRulesInner {
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
-            "format": ""
-        },
-        {
             "name": "functionName",
             "baseName": "functionName",
-            "type": "PolicyRateLimitCOUNTPERINTERVAL",
+            "type": "PolicyRateLimitGASPERTRANSACTION",
             "format": ""
         },
         {
@@ -75,28 +61,10 @@ export class PolicyResponsePolicyRulesInner {
             "baseName": "gasLimit",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "timeIntervalType",
-            "baseName": "timeIntervalType",
-            "type": "TimeIntervalType",
-            "format": ""
-        },
-        {
-            "name": "timeIntervalValue",
-            "baseName": "timeIntervalValue",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "countLimit",
-            "baseName": "countLimit",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyResponsePolicyRulesInner.attributeTypeMap;
+        return GasPerTransactionLimitPolicyRuleResponse.attributeTypeMap;
     }
 
     public constructor() {

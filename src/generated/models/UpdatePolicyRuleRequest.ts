@@ -16,8 +16,8 @@ import { HttpFile } from '../http/http';
 
 export class UpdatePolicyRuleRequest {
     'type': PolicyRuleType;
-    'functionName': string | null;
-    'contract': string | null;
+    'functionName'?: string | null;
+    'contract'?: string | null;
     'gasLimit'?: string;
     'countLimit'?: number;
     'timeIntervalType'?: TimeIntervalType;
@@ -54,7 +54,7 @@ export class UpdatePolicyRuleRequest {
             "name": "countLimit",
             "baseName": "countLimit",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "timeIntervalType",
@@ -66,7 +66,7 @@ export class UpdatePolicyRuleRequest {
             "name": "timeIntervalValue",
             "baseName": "timeIntervalValue",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

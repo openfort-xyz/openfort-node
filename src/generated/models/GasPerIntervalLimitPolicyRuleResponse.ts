@@ -10,22 +10,21 @@
  * Do not edit the class manually.
  */
 
-import { Abi } from '../models/Abi';
-import { ContractResponse } from '../models/ContractResponse';
-import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
-import { PickContractResponseId } from '../models/PickContractResponseId';
+import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
+import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
+import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
+import { TimeIntervalType } from '../models/TimeIntervalType';
 import { HttpFile } from '../http/http';
 
-export class PolicyRuleResponseContract {
+export class GasPerIntervalLimitPolicyRuleResponse {
     'id': string;
-    'object': EntityTypeCONTRACT;
+    'object': EntityTypePOLICYRULE;
     'createdAt': number;
-    'name': string | null;
-    'chainId': number;
-    'address': string;
-    'deleted': boolean;
-    'abi': Array<Abi>;
-    'publicVerification': boolean;
+    'type': PolicyRuleTypeRATELIMIT;
+    'functionName': PolicyRateLimitGASPERINTERVAL;
+    'gasLimit': string;
+    'timeIntervalType': TimeIntervalType;
+    'timeIntervalValue': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,7 +38,7 @@ export class PolicyRuleResponseContract {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypeCONTRACT",
+            "type": "EntityTypePOLICYRULE",
             "format": ""
         },
         {
@@ -49,44 +48,38 @@ export class PolicyRuleResponseContract {
             "format": "int32"
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "type",
+            "baseName": "type",
+            "type": "PolicyRuleTypeRATELIMIT",
+            "format": ""
+        },
+        {
+            "name": "functionName",
+            "baseName": "functionName",
+            "type": "PolicyRateLimitGASPERINTERVAL",
+            "format": ""
+        },
+        {
+            "name": "gasLimit",
+            "baseName": "gasLimit",
             "type": "string",
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
+            "name": "timeIntervalType",
+            "baseName": "timeIntervalType",
+            "type": "TimeIntervalType",
+            "format": ""
+        },
+        {
+            "name": "timeIntervalValue",
+            "baseName": "timeIntervalValue",
             "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "Array<Abi>",
-            "format": ""
-        },
-        {
-            "name": "publicVerification",
-            "baseName": "publicVerification",
-            "type": "boolean",
-            "format": ""
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyRuleResponseContract.attributeTypeMap;
+        return GasPerIntervalLimitPolicyRuleResponse.attributeTypeMap;
     }
 
     public constructor() {
