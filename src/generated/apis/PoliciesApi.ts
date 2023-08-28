@@ -16,6 +16,7 @@ import { GasReport } from '../models/GasReport';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListResponse } from '../models/PolicyListResponse';
 import { PolicyResponse } from '../models/PolicyResponse';
+import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyRuleListResponse } from '../models/PolicyRuleListResponse';
 import { PolicyRuleResponse } from '../models/PolicyRuleResponse';
 import { SortOrder } from '../models/SortOrder';
@@ -59,6 +60,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -107,6 +114,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -138,6 +151,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -157,7 +176,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
      * @param deleted 
      * @param chainId 
      */
-    public async getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'policyRules'>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -191,7 +210,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'policyRules'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<PolicyResponseExpandable>", ""));
         }
 
         // Query Params
@@ -210,6 +229,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -224,7 +249,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
      * @param id 
      * @param expand 
      */
-    public async getPolicy(id: string, expand?: Array<'transactionIntents' | 'policyRules'>, _options?: Configuration): Promise<RequestContext> {
+    public async getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -244,10 +269,16 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'policyRules'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<PolicyResponseExpandable>", ""));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -285,6 +316,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -315,6 +352,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -364,6 +407,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -420,6 +469,12 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {

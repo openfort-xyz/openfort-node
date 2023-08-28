@@ -3,20 +3,26 @@ import { Configuration} from '../configuration'
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
+import { Account } from '../models/Account';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
 import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
+import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
 import { AuthResponse } from '../models/AuthResponse';
+import { BalanceResponse } from '../models/BalanceResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
+import { CheckoutRequest } from '../models/CheckoutRequest';
+import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractListQueries } from '../models/ContractListQueries';
@@ -35,9 +41,11 @@ import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DomainData } from '../models/DomainData';
 import { EditRoleRequest } from '../models/EditRoleRequest';
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
@@ -67,6 +75,7 @@ import { MemberRemoveResponse } from '../models/MemberRemoveResponse';
 import { MemberRequest } from '../models/MemberRequest';
 import { MemberResponse } from '../models/MemberResponse';
 import { MembersResponse } from '../models/MembersResponse';
+import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
@@ -75,19 +84,20 @@ import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PKPolicy } from '../models/PKPolicy';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
-import { PickAccountResponseId } from '../models/PickAccountResponseId';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
-import { PickPolicyResponseId } from '../models/PickPolicyResponseId';
-import { PickPolicyRuleResponseId } from '../models/PickPolicyRuleResponseId';
-import { PickTransactionIntentResponseId } from '../models/PickTransactionIntentResponseId';
+import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
 import { PlayerRequest } from '../models/PlayerRequest';
 import { PlayerResponse } from '../models/PlayerResponse';
+import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
+import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { Policy } from '../models/Policy';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
 import { PolicyListResponse } from '../models/PolicyListResponse';
@@ -96,8 +106,8 @@ import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTP
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
 import { PolicyResponse } from '../models/PolicyResponse';
+import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyResponsePolicyRulesInner } from '../models/PolicyResponsePolicyRulesInner';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
 import { PolicyRuleDeleteResponse } from '../models/PolicyRuleDeleteResponse';
 import { PolicyRuleListQueries } from '../models/PolicyRuleListQueries';
 import { PolicyRuleListResponse } from '../models/PolicyRuleListResponse';
@@ -123,6 +133,7 @@ import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
+import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -133,10 +144,11 @@ import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECU
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
+import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
-import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
+import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
@@ -196,10 +208,10 @@ export interface AccountsApiGetAccountRequest {
     id: string
     /**
      * whether to expand the response or not
-     * @type Array&lt;&#39;transactionIntents&#39;&gt;
+     * @type Array&lt;AccountResponseExpandable&gt;
      * @memberof AccountsApigetAccount
      */
-    expand?: Array<'transactionIntents'>
+    expand?: Array<AccountResponseExpandable>
 }
 
 export interface AccountsApiGetAccountsRequest {
@@ -229,10 +241,10 @@ export interface AccountsApiGetAccountsRequest {
     order?: SortOrder
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39;&gt;
+     * @type Array&lt;AccountResponseExpandable&gt;
      * @memberof AccountsApigetAccounts
      */
-    expand?: Array<'transactionIntents'>
+    expand?: Array<AccountResponseExpandable>
 }
 
 export interface AccountsApiRequestTransferOwnershipRequest {
@@ -970,10 +982,10 @@ export interface PlayersApiGetPlayerRequest {
     id: string
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39; | &#39;accounts&#39;&gt;
+     * @type Array&lt;PlayerResponseExpandable&gt;
      * @memberof PlayersApigetPlayer
      */
-    expand?: Array<'transactionIntents' | 'accounts'>
+    expand?: Array<PlayerResponseExpandable>
 }
 
 export interface PlayersApiGetPlayerAccountsRequest {
@@ -985,10 +997,10 @@ export interface PlayersApiGetPlayerAccountsRequest {
     id: string
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39;&gt;
+     * @type Array&lt;AccountResponseExpandable&gt;
      * @memberof PlayersApigetPlayerAccounts
      */
-    expand?: Array<'transactionIntents'>
+    expand?: Array<AccountResponseExpandable>
 }
 
 export interface PlayersApiGetPlayersRequest {
@@ -1012,10 +1024,10 @@ export interface PlayersApiGetPlayersRequest {
     order?: SortOrder
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39; | &#39;accounts&#39;&gt;
+     * @type Array&lt;PlayerResponseExpandable&gt;
      * @memberof PlayersApigetPlayers
      */
-    expand?: Array<'transactionIntents' | 'accounts'>
+    expand?: Array<PlayerResponseExpandable>
     /**
      * 
      * @type string
@@ -1261,10 +1273,10 @@ export interface PoliciesApiGetPoliciesRequest {
     order?: SortOrder
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39; | &#39;policyRules&#39;&gt;
+     * @type Array&lt;PolicyResponseExpandable&gt;
      * @memberof PoliciesApigetPolicies
      */
-    expand?: Array<'transactionIntents' | 'policyRules'>
+    expand?: Array<PolicyResponseExpandable>
     /**
      * 
      * @type string
@@ -1294,10 +1306,10 @@ export interface PoliciesApiGetPolicyRequest {
     id: string
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39; | &#39;policyRules&#39;&gt;
+     * @type Array&lt;PolicyResponseExpandable&gt;
      * @memberof PoliciesApigetPolicy
      */
-    expand?: Array<'transactionIntents' | 'policyRules'>
+    expand?: Array<PolicyResponseExpandable>
 }
 
 export interface PoliciesApiGetPolicyAllowFunctionsRequest {
@@ -1586,10 +1598,10 @@ export interface SessionsApiGetPlayerSessionsRequest {
     order?: SortOrder
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39;&gt;
+     * @type Array&lt;SessionResponseExpandable&gt;
      * @memberof SessionsApigetPlayerSessions
      */
-    expand?: Array<'transactionIntents'>
+    expand?: Array<SessionResponseExpandable>
     /**
      * 
      * @type string
@@ -1607,10 +1619,10 @@ export interface SessionsApiGetSessionRequest {
     id: string
     /**
      * 
-     * @type Array&lt;&#39;transactionIntents&#39;&gt;
+     * @type Array&lt;SessionResponseExpandable&gt;
      * @memberof SessionsApigetSession
      */
-    expand?: Array<'transactionIntents'>
+    expand?: Array<SessionResponseExpandable>
 }
 
 export interface SessionsApiRevokeSessionRequest {
@@ -1707,10 +1719,10 @@ export interface TransactionIntentsApiGetTransactionIntentRequest {
     id: string
     /**
      * 
-     * @type Array&lt;&#39;nextAction&#39; | &#39;policy&#39; | &#39;player&#39; | &#39;account&#39;&gt;
+     * @type Array&lt;TransactionIntentResponseExpandable&gt;
      * @memberof TransactionIntentsApigetTransactionIntent
      */
-    expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>
+    expand?: Array<TransactionIntentResponseExpandable>
 }
 
 export interface TransactionIntentsApiGetTransactionIntentsRequest {
@@ -1734,10 +1746,10 @@ export interface TransactionIntentsApiGetTransactionIntentsRequest {
     order?: SortOrder
     /**
      * 
-     * @type Array&lt;&#39;nextAction&#39; | &#39;policy&#39; | &#39;player&#39; | &#39;account&#39;&gt;
+     * @type Array&lt;TransactionIntentResponseExpandable&gt;
      * @memberof TransactionIntentsApigetTransactionIntents
      */
-    expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>
+    expand?: Array<TransactionIntentResponseExpandable>
     /**
      * 
      * @type number

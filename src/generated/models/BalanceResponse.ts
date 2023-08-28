@@ -10,51 +10,38 @@
  * Do not edit the class manually.
  */
 
+import { Money } from '../models/Money';
 import { HttpFile } from '../http/http';
 
-export class Interaction {
-    'to'?: string;
-    'contract'?: string;
-    'value'?: string;
-    'functionName'?: string;
-    'functionArgs'?: Array<any>;
+export class BalanceResponse {
+    'balance': Money;
+    'expenses': Money;
+    'payments': Money;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "to",
-            "baseName": "to",
-            "type": "string",
+            "name": "balance",
+            "baseName": "balance",
+            "type": "Money",
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "string",
+            "name": "expenses",
+            "baseName": "expenses",
+            "type": "Money",
             "format": ""
         },
         {
-            "name": "value",
-            "baseName": "value",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "functionArgs",
-            "baseName": "functionArgs",
-            "type": "Array<any>",
+            "name": "payments",
+            "baseName": "payments",
+            "type": "Money",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Interaction.attributeTypeMap;
+        return BalanceResponse.attributeTypeMap;
     }
 
     public constructor() {

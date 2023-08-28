@@ -10,30 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { HttpFile } from '../http/http';
 
-export class AuthPlayerResponse {
-    'player'?: AuthPlayerResponsePlayer;
+export class Player {
     'id': string;
     'object': EntityTypePLAYER;
     'createdAt': number;
-    'email'?: string;
-    'updatedAt': number;
-    'lastSignInAt'?: number;
-    'rawAppMetaData'?: PrismaInputJsonValue;
+    'name': string | null;
+    'description': string | null;
+    'metadata': string;
+    'transactionIntents'?: Array<EntityIdResponse>;
+    'accounts'?: Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponsePlayer",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -53,32 +46,38 @@ export class AuthPlayerResponse {
             "format": "int32"
         },
         {
-            "name": "email",
-            "baseName": "email",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "double"
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "lastSignInAt",
-            "baseName": "lastSignInAt",
-            "type": "number",
-            "format": "double"
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "rawAppMetaData",
-            "baseName": "rawAppMetaData",
-            "type": "PrismaInputJsonValue",
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<EntityIdResponse>",
+            "format": ""
+        },
+        {
+            "name": "accounts",
+            "baseName": "accounts",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthPlayerResponse.attributeTypeMap;
+        return Player.attributeTypeMap;
     }
 
     public constructor() {

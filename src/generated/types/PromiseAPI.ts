@@ -3,20 +3,26 @@ import { Configuration} from '../configuration'
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
+import { Account } from '../models/Account';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
 import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
+import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
 import { AuthResponse } from '../models/AuthResponse';
+import { BalanceResponse } from '../models/BalanceResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
+import { CheckoutRequest } from '../models/CheckoutRequest';
+import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractListQueries } from '../models/ContractListQueries';
@@ -35,9 +41,11 @@ import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DomainData } from '../models/DomainData';
 import { EditRoleRequest } from '../models/EditRoleRequest';
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
@@ -67,6 +75,7 @@ import { MemberRemoveResponse } from '../models/MemberRemoveResponse';
 import { MemberRequest } from '../models/MemberRequest';
 import { MemberResponse } from '../models/MemberResponse';
 import { MembersResponse } from '../models/MembersResponse';
+import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
@@ -75,19 +84,20 @@ import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PKPolicy } from '../models/PKPolicy';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
-import { PickAccountResponseId } from '../models/PickAccountResponseId';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
-import { PickPolicyResponseId } from '../models/PickPolicyResponseId';
-import { PickPolicyRuleResponseId } from '../models/PickPolicyRuleResponseId';
-import { PickTransactionIntentResponseId } from '../models/PickTransactionIntentResponseId';
+import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
 import { PlayerRequest } from '../models/PlayerRequest';
 import { PlayerResponse } from '../models/PlayerResponse';
+import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
+import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { Policy } from '../models/Policy';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
 import { PolicyListResponse } from '../models/PolicyListResponse';
@@ -96,8 +106,8 @@ import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTP
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
 import { PolicyResponse } from '../models/PolicyResponse';
+import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyResponsePolicyRulesInner } from '../models/PolicyResponsePolicyRulesInner';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
 import { PolicyRuleDeleteResponse } from '../models/PolicyRuleDeleteResponse';
 import { PolicyRuleListQueries } from '../models/PolicyRuleListQueries';
 import { PolicyRuleListResponse } from '../models/PolicyRuleListResponse';
@@ -123,6 +133,7 @@ import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
+import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -133,10 +144,11 @@ import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECU
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
+import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
-import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
+import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
@@ -192,7 +204,7 @@ export class PromiseAccountsApi {
      * @param id Specifies the unique account ID.
      * @param expand whether to expand the response or not
      */
-    public getAccount(id: string, expand?: Array<'transactionIntents'>, _options?: Configuration): Promise<AccountResponse> {
+    public getAccount(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountResponse> {
         const result = this.api.getAccount(id, expand, _options);
         return result.toPromise();
     }
@@ -205,7 +217,7 @@ export class PromiseAccountsApi {
      * @param order 
      * @param expand 
      */
-    public getAccounts(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, _options?: Configuration): Promise<AccountListResponse> {
+    public getAccounts(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountListResponse> {
         const result = this.api.getAccounts(player, limit, skip, order, expand, _options);
         return result.toPromise();
     }
@@ -599,7 +611,7 @@ export class PromisePlayersApi {
      * @param id Specifies the unique player ID.
      * @param expand 
      */
-    public getPlayer(id: string, expand?: Array<'transactionIntents' | 'accounts'>, _options?: Configuration): Promise<PlayerResponse> {
+    public getPlayer(id: string, expand?: Array<PlayerResponseExpandable>, _options?: Configuration): Promise<PlayerResponse> {
         const result = this.api.getPlayer(id, expand, _options);
         return result.toPromise();
     }
@@ -609,7 +621,7 @@ export class PromisePlayersApi {
      * @param id 
      * @param expand 
      */
-    public getPlayerAccounts(id: string, expand?: Array<'transactionIntents'>, _options?: Configuration): Promise<AccountListResponse> {
+    public getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountListResponse> {
         const result = this.api.getPlayerAccounts(id, expand, _options);
         return result.toPromise();
     }
@@ -622,7 +634,7 @@ export class PromisePlayersApi {
      * @param expand 
      * @param name 
      */
-    public getPlayers(limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'accounts'>, name?: string, _options?: Configuration): Promise<PlayerListResponse> {
+    public getPlayers(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PlayerResponseExpandable>, name?: string, _options?: Configuration): Promise<PlayerListResponse> {
         const result = this.api.getPlayers(limit, skip, order, expand, name, _options);
         return result.toPromise();
     }
@@ -743,7 +755,7 @@ export class PromisePoliciesApi {
      * @param deleted 
      * @param chainId 
      */
-    public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'policyRules'>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<PolicyListResponse> {
+    public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<PolicyListResponse> {
         const result = this.api.getPolicies(limit, skip, order, expand, name, deleted, chainId, _options);
         return result.toPromise();
     }
@@ -753,7 +765,7 @@ export class PromisePoliciesApi {
      * @param id 
      * @param expand 
      */
-    public getPolicy(id: string, expand?: Array<'transactionIntents' | 'policyRules'>, _options?: Configuration): Promise<PolicyResponse> {
+    public getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Promise<PolicyResponse> {
         const result = this.api.getPolicy(id, expand, _options);
         return result.toPromise();
     }
@@ -892,7 +904,7 @@ export class PromiseSessionsApi {
      * @param expand 
      * @param address 
      */
-    public getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, address?: string, _options?: Configuration): Promise<SessionListResponse> {
+    public getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<SessionResponseExpandable>, address?: string, _options?: Configuration): Promise<SessionListResponse> {
         const result = this.api.getPlayerSessions(player, limit, skip, order, expand, address, _options);
         return result.toPromise();
     }
@@ -902,7 +914,7 @@ export class PromiseSessionsApi {
      * @param id 
      * @param expand 
      */
-    public getSession(id: string, expand?: Array<'transactionIntents'>, _options?: Configuration): Promise<SessionResponse> {
+    public getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<SessionResponse> {
         const result = this.api.getSession(id, expand, _options);
         return result.toPromise();
     }
@@ -959,7 +971,7 @@ export class PromiseTransactionIntentsApi {
      * @param id 
      * @param expand 
      */
-    public getTransactionIntent(id: string, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, _options?: Configuration): Promise<TransactionIntentResponse> {
+    public getTransactionIntent(id: string, expand?: Array<TransactionIntentResponseExpandable>, _options?: Configuration): Promise<TransactionIntentResponse> {
         const result = this.api.getTransactionIntent(id, expand, _options);
         return result.toPromise();
     }
@@ -975,7 +987,7 @@ export class PromiseTransactionIntentsApi {
      * @param playerId 
      * @param policyId 
      */
-    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
+    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
         const result = this.api.getTransactionIntents(limit, skip, order, expand, chainId, accountId, playerId, policyId, _options);
         return result.toPromise();
     }

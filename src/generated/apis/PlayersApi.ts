@@ -12,6 +12,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountResponse } from '../models/AccountResponse';
+import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
 import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
@@ -19,6 +20,7 @@ import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTran
 import { PlayerListResponse } from '../models/PlayerListResponse';
 import { PlayerRequest } from '../models/PlayerRequest';
 import { PlayerResponse } from '../models/PlayerResponse';
+import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { SessionResponse } from '../models/SessionResponse';
@@ -70,6 +72,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -111,6 +119,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -160,6 +174,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -209,6 +229,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -223,7 +249,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
      * @param id Specifies the unique player ID.
      * @param expand 
      */
-    public async getPlayer(id: string, expand?: Array<'transactionIntents' | 'accounts'>, _options?: Configuration): Promise<RequestContext> {
+    public async getPlayer(id: string, expand?: Array<PlayerResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -243,10 +269,16 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'accounts'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<PlayerResponseExpandable>", ""));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -261,7 +293,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
      * @param id 
      * @param expand 
      */
-    public async getPlayerAccounts(id: string, expand?: Array<'transactionIntents'>, _options?: Configuration): Promise<RequestContext> {
+    public async getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -281,10 +313,16 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<AccountResponseExpandable>", ""));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -302,7 +340,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
      * @param expand 
      * @param name 
      */
-    public async getPlayers(limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents' | 'accounts'>, name?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getPlayers(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PlayerResponseExpandable>, name?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -334,7 +372,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents' | 'accounts'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<PlayerResponseExpandable>", ""));
         }
 
         // Query Params
@@ -343,6 +381,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -392,6 +436,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -441,6 +491,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -490,6 +546,12 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {

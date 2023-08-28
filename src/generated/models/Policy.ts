@@ -10,30 +10,25 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
-import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
+import { EntityIdResponse } from '../models/EntityIdResponse';
+import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
+import { PolicyStrategy } from '../models/PolicyStrategy';
 import { HttpFile } from '../http/http';
 
-export class AuthPlayerResponse {
-    'player'?: AuthPlayerResponsePlayer;
+export class Policy {
     'id': string;
-    'object': EntityTypePLAYER;
+    'object': EntityTypePOLICY;
     'createdAt': number;
-    'email'?: string;
-    'updatedAt': number;
-    'lastSignInAt'?: number;
-    'rawAppMetaData'?: PrismaInputJsonValue;
+    'name': string | null;
+    'deleted': boolean;
+    'chainId': number;
+    'strategy': PolicyStrategy;
+    'transactionIntents': Array<EntityIdResponse>;
+    'policyRules': Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponsePlayer",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -43,7 +38,7 @@ export class AuthPlayerResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePLAYER",
+            "type": "EntityTypePOLICY",
             "format": ""
         },
         {
@@ -53,32 +48,44 @@ export class AuthPlayerResponse {
             "format": "int32"
         },
         {
-            "name": "email",
-            "baseName": "email",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number",
             "format": "double"
         },
         {
-            "name": "lastSignInAt",
-            "baseName": "lastSignInAt",
-            "type": "number",
-            "format": "double"
+            "name": "strategy",
+            "baseName": "strategy",
+            "type": "PolicyStrategy",
+            "format": ""
         },
         {
-            "name": "rawAppMetaData",
-            "baseName": "rawAppMetaData",
-            "type": "PrismaInputJsonValue",
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<EntityIdResponse>",
+            "format": ""
+        },
+        {
+            "name": "policyRules",
+            "baseName": "policyRules",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthPlayerResponse.attributeTypeMap;
+        return Policy.attributeTypeMap;
     }
 
     public constructor() {

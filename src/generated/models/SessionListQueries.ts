@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
@@ -18,7 +19,7 @@ export class SessionListQueries {
     'skip'?: number;
     'order'?: SortOrder;
     'player': string;
-    'expand'?: Array<SessionListQueriesExpandEnum>;
+    'expand'?: Array<SessionResponseExpandable>;
     'address'?: string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -51,7 +52,7 @@ export class SessionListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<SessionListQueriesExpandEnum>",
+            "type": "Array<SessionResponseExpandable>",
             "format": ""
         },
         {
@@ -70,5 +71,4 @@ export class SessionListQueries {
 }
 
 
-export type SessionListQueriesExpandEnum = "transactionIntents" ;
 

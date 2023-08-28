@@ -13,17 +13,13 @@
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { Interaction } from '../models/Interaction';
 import { NextActionResponse } from '../models/NextActionResponse';
+import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { ResponseResponse } from '../models/ResponseResponse';
-import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { HttpFile } from '../http/http';
 
 export class TransactionIntentResponse {
-    'nextAction'?: NextActionResponse;
-    'policy'?: TransactionIntentResponsePolicy;
-    'player'?: TransactionIntentResponsePlayer;
-    'account'?: TransactionIntentResponseAccount;
     'id': string;
     'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
@@ -33,34 +29,14 @@ export class TransactionIntentResponse {
     'userOperation'?: any | null;
     'response'?: ResponseResponse;
     'interactions'?: Array<Interaction>;
+    'nextAction'?: NextActionResponse;
+    'policy'?: TransactionIntentResponsePolicy;
+    'player': TransactionIntentResponsePlayer;
+    'account': PlayerResponseAccountsInner;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "nextAction",
-            "baseName": "nextAction",
-            "type": "NextActionResponse",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "TransactionIntentResponsePolicy",
-            "format": ""
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "TransactionIntentResponsePlayer",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "TransactionIntentResponseAccount",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -113,6 +89,30 @@ export class TransactionIntentResponse {
             "name": "interactions",
             "baseName": "interactions",
             "type": "Array<Interaction>",
+            "format": ""
+        },
+        {
+            "name": "nextAction",
+            "baseName": "nextAction",
+            "type": "NextActionResponse",
+            "format": ""
+        },
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "TransactionIntentResponsePolicy",
+            "format": ""
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "TransactionIntentResponsePlayer",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "PlayerResponseAccountsInner",
             "format": ""
         }    ];
 
