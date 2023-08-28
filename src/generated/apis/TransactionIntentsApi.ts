@@ -16,6 +16,7 @@ import { SignatureRequest } from '../models/SignatureRequest';
 import { SortOrder } from '../models/SortOrder';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
+import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 
 /**
  * no description
@@ -54,6 +55,12 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -68,7 +75,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param id 
      * @param expand 
      */
-    public async getTransactionIntent(id: string, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, _options?: Configuration): Promise<RequestContext> {
+    public async getTransactionIntent(id: string, expand?: Array<TransactionIntentResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -88,10 +95,16 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'nextAction' | 'policy' | 'player' | 'account'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<TransactionIntentResponseExpandable>", ""));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -112,7 +125,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param playerId 
      * @param policyId 
      */
-    public async getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<'nextAction' | 'policy' | 'player' | 'account'>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -147,7 +160,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'nextAction' | 'policy' | 'player' | 'account'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<TransactionIntentResponseExpandable>", ""));
         }
 
         // Query Params
@@ -171,6 +184,12 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -256,6 +275,12 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -278,6 +303,12 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {

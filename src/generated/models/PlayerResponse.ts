@@ -11,35 +11,23 @@
  */
 
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
-import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
+import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
 
 export class PlayerResponse {
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'accounts'?: Array<TransactionIntentResponseAccount>;
     'id': string;
     'object': EntityTypePLAYER;
     'createdAt': number;
     'name': string | null;
     'description': string | null;
     'metadata': string;
+    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
+    'accounts'?: Array<PlayerResponseAccountsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>",
-            "format": ""
-        },
-        {
-            "name": "accounts",
-            "baseName": "accounts",
-            "type": "Array<TransactionIntentResponseAccount>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -74,6 +62,18 @@ export class PlayerResponse {
             "name": "metadata",
             "baseName": "metadata",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PlayerResponseTransactionIntentsInner>",
+            "format": ""
+        },
+        {
+            "name": "accounts",
+            "baseName": "accounts",
+            "type": "Array<PlayerResponseAccountsInner>",
             "format": ""
         }    ];
 

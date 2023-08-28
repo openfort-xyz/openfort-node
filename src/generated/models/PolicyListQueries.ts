@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
@@ -17,7 +18,7 @@ export class PolicyListQueries {
     'limit'?: number;
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<PolicyListQueriesExpandEnum>;
+    'expand'?: Array<PolicyResponseExpandable>;
     'name'?: string;
     'deleted'?: boolean;
     'chainId'?: number;
@@ -46,7 +47,7 @@ export class PolicyListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<PolicyListQueriesExpandEnum>",
+            "type": "Array<PolicyResponseExpandable>",
             "format": ""
         },
         {
@@ -77,5 +78,4 @@ export class PolicyListQueries {
 }
 
 
-export type PolicyListQueriesExpandEnum = "transactionIntents" | "policyRules" ;
 

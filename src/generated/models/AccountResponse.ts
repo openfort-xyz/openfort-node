@@ -11,11 +11,10 @@
  */
 
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
 
 export class AccountResponse {
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'id': string;
     'object': EntityTypeACCOUNT;
     'createdAt': number;
@@ -26,16 +25,11 @@ export class AccountResponse {
     'chainId': number;
     'accountType': string;
     'pendingOwnerAddress'?: string;
+    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -94,6 +88,12 @@ export class AccountResponse {
             "name": "pendingOwnerAddress",
             "baseName": "pendingOwnerAddress",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PlayerResponseTransactionIntentsInner>",
             "format": ""
         }    ];
 

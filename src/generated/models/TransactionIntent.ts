@@ -10,24 +10,27 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
+import { EntityIdResponse } from '../models/EntityIdResponse';
+import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
+import { Interaction } from '../models/Interaction';
 import { NextActionResponse } from '../models/NextActionResponse';
-import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
+import { ResponseResponse } from '../models/ResponseResponse';
 import { HttpFile } from '../http/http';
 
-export class SessionResponse {
+export class TransactionIntent {
     'id': string;
-    'object': EntityTypeSESSION;
+    'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
     'updatedAt': number;
-    'isActive'?: boolean;
-    'address': string;
-    'validAfter'?: string;
-    'validUntil'?: string;
-    'whitelist'?: Array<string>;
-    'limit'?: number;
+    'chainId': number;
+    'userOperationHash'?: string;
+    'userOperation'?: any | null;
+    'response'?: ResponseResponse;
+    'interactions'?: Array<Interaction>;
     'nextAction'?: NextActionResponse;
-    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
+    'policy'?: EntityIdResponse;
+    'player': EntityIdResponse;
+    'account': EntityIdResponse;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,7 +44,7 @@ export class SessionResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypeSESSION",
+            "type": "EntityTypeTRANSACTIONINTENT",
             "format": ""
         },
         {
@@ -57,40 +60,34 @@ export class SessionResponse {
             "format": "int32"
         },
         {
-            "name": "isActive",
-            "baseName": "isActive",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "validAfter",
-            "baseName": "validAfter",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "validUntil",
-            "baseName": "validUntil",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "whitelist",
-            "baseName": "whitelist",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "limit",
-            "baseName": "limit",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number",
             "format": "double"
+        },
+        {
+            "name": "userOperationHash",
+            "baseName": "userOperationHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "userOperation",
+            "baseName": "userOperation",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "response",
+            "baseName": "response",
+            "type": "ResponseResponse",
+            "format": ""
+        },
+        {
+            "name": "interactions",
+            "baseName": "interactions",
+            "type": "Array<Interaction>",
+            "format": ""
         },
         {
             "name": "nextAction",
@@ -99,14 +96,26 @@ export class SessionResponse {
             "format": ""
         },
         {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PlayerResponseTransactionIntentsInner>",
+            "name": "policy",
+            "baseName": "policy",
+            "type": "EntityIdResponse",
+            "format": ""
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "EntityIdResponse",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "EntityIdResponse",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SessionResponse.attributeTypeMap;
+        return TransactionIntent.attributeTypeMap;
     }
 
     public constructor() {

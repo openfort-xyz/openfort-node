@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
@@ -17,7 +18,7 @@ export class PlayerListQueries {
     'limit'?: number;
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<PlayerListQueriesExpandEnum>;
+    'expand'?: Array<PlayerResponseExpandable>;
     'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -44,7 +45,7 @@ export class PlayerListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<PlayerListQueriesExpandEnum>",
+            "type": "Array<PlayerResponseExpandable>",
             "format": ""
         },
         {
@@ -63,5 +64,4 @@ export class PlayerListQueries {
 }
 
 
-export type PlayerListQueriesExpandEnum = "transactionIntents" | "accounts" ;
 

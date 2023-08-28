@@ -11,8 +11,8 @@
  */
 
 import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PickPolicyRuleResponseId } from '../models/PickPolicyRuleResponseId';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 import { PolicyRuleResponse } from '../models/PolicyRuleResponse';
 import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';

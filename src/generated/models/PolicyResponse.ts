@@ -11,14 +11,12 @@
  */
 
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PolicyResponsePolicyRulesInner } from '../models/PolicyResponsePolicyRulesInner';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
 import { PolicyStrategy } from '../models/PolicyStrategy';
 import { HttpFile } from '../http/http';
 
 export class PolicyResponse {
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'policyRules'?: Array<PolicyResponsePolicyRulesInner>;
     'id': string;
     'object': EntityTypePOLICY;
     'createdAt': number;
@@ -26,22 +24,12 @@ export class PolicyResponse {
     'deleted': boolean;
     'chainId': number;
     'strategy': PolicyStrategy;
+    'transactionIntents': Array<PlayerResponseTransactionIntentsInner>;
+    'policyRules': Array<PolicyResponsePolicyRulesInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>",
-            "format": ""
-        },
-        {
-            "name": "policyRules",
-            "baseName": "policyRules",
-            "type": "Array<PolicyResponsePolicyRulesInner>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -82,6 +70,18 @@ export class PolicyResponse {
             "name": "strategy",
             "baseName": "strategy",
             "type": "PolicyStrategy",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PlayerResponseTransactionIntentsInner>",
+            "format": ""
+        },
+        {
+            "name": "policyRules",
+            "baseName": "policyRules",
+            "type": "Array<PolicyResponsePolicyRulesInner>",
             "format": ""
         }    ];
 

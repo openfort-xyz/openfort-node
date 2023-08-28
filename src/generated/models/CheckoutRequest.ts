@@ -10,54 +10,53 @@
  * Do not edit the class manually.
  */
 
+import { Currency } from '../models/Currency';
 import { HttpFile } from '../http/http';
 
-export class Interaction {
-    'to'?: string;
-    'contract'?: string;
-    'value'?: string;
-    'functionName'?: string;
-    'functionArgs'?: Array<any>;
+export class CheckoutRequest {
+    /**
+    * Ammount in cents
+    */
+    'amount': number;
+    'currency': Currency;
+    'cancelUrl'?: string;
+    'successUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "to",
-            "baseName": "to",
+            "name": "amount",
+            "baseName": "amount",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "currency",
+            "baseName": "currency",
+            "type": "Currency",
+            "format": ""
+        },
+        {
+            "name": "cancelUrl",
+            "baseName": "cancelUrl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
+            "name": "successUrl",
+            "baseName": "successUrl",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "functionArgs",
-            "baseName": "functionArgs",
-            "type": "Array<any>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Interaction.attributeTypeMap;
+        return CheckoutRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

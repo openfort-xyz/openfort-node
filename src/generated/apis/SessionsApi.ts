@@ -14,6 +14,7 @@ import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
+import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SignatureRequest } from '../models/SignatureRequest';
 import { SortOrder } from '../models/SortOrder';
 
@@ -54,6 +55,12 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -72,7 +79,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
      * @param expand 
      * @param address 
      */
-    public async getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, address?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<SessionResponseExpandable>, address?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'player' is not null or undefined
@@ -115,7 +122,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<SessionResponseExpandable>", ""));
         }
 
         // Query Params
@@ -124,6 +131,12 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -138,7 +151,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
      * @param id 
      * @param expand 
      */
-    public async getSession(id: string, expand?: Array<'transactionIntents'>, _options?: Configuration): Promise<RequestContext> {
+    public async getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -158,10 +171,16 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<SessionResponseExpandable>", ""));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -203,6 +222,12 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {

@@ -10,17 +10,13 @@
  * Do not edit the class manually.
  */
 
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
-import { PickPolicyResponseId } from '../models/PickPolicyResponseId';
-import { PolicyResponse } from '../models/PolicyResponse';
-import { PolicyResponsePolicyRulesInner } from '../models/PolicyResponsePolicyRulesInner';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
+import { Policy } from '../models/Policy';
 import { PolicyStrategy } from '../models/PolicyStrategy';
 import { HttpFile } from '../http/http';
 
 export class TransactionIntentResponsePolicy {
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'policyRules'?: Array<PolicyResponsePolicyRulesInner>;
     'id': string;
     'object': EntityTypePOLICY;
     'createdAt': number;
@@ -28,22 +24,12 @@ export class TransactionIntentResponsePolicy {
     'deleted': boolean;
     'chainId': number;
     'strategy': PolicyStrategy;
+    'transactionIntents': Array<EntityIdResponse>;
+    'policyRules': Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>",
-            "format": ""
-        },
-        {
-            "name": "policyRules",
-            "baseName": "policyRules",
-            "type": "Array<PolicyResponsePolicyRulesInner>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -84,6 +70,18 @@ export class TransactionIntentResponsePolicy {
             "name": "strategy",
             "baseName": "strategy",
             "type": "PolicyStrategy",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<EntityIdResponse>",
+            "format": ""
+        },
+        {
+            "name": "policyRules",
+            "baseName": "policyRules",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 

@@ -11,13 +11,14 @@
  */
 
 import { SortOrder } from '../models/SortOrder';
+import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { HttpFile } from '../http/http';
 
 export class TransactionIntentListQueries {
     'limit'?: number;
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<TransactionIntentListQueriesExpandEnum>;
+    'expand'?: Array<TransactionIntentResponseExpandable>;
     'chainId'?: number;
     'accountId'?: Array<string>;
     'playerId'?: Array<string>;
@@ -47,7 +48,7 @@ export class TransactionIntentListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<TransactionIntentListQueriesExpandEnum>",
+            "type": "Array<TransactionIntentResponseExpandable>",
             "format": ""
         },
         {
@@ -84,5 +85,4 @@ export class TransactionIntentListQueries {
 }
 
 
-export type TransactionIntentListQueriesExpandEnum = "nextAction" | "policy" | "player" | "account" ;
 
