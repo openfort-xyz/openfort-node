@@ -18,7 +18,7 @@ export class CreateSessionRequest {
     'externalOwnerAddress'?: string;
     'limit'?: number;
     'optimistic'?: boolean;
-    'policy': string;
+    'policy'?: string;
     'validAfter': number;
     'validUntil': number;
     'whitelist'?: Array<string>;
