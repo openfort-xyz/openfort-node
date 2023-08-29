@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class RevokeSessionPlayerRequest {
     'address': string;
-    'policy': string;
+    'policy'?: string;
     'optimistic'?: boolean;
     'chainId': number;
 

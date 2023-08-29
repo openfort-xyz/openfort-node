@@ -13,33 +13,15 @@
 import { HttpFile } from '../http/http';
 
 export class RevokeSessionRequest {
-    'player': string;
-    'chainId': number;
-    'optimistic'?: boolean;
     'address': string;
-    'policy': string;
+    'policy'?: string;
+    'optimistic'?: boolean;
+    'chainId': number;
+    'player': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "optimistic",
-            "baseName": "optimistic",
-            "type": "boolean",
-            "format": ""
-        },
         {
             "name": "address",
             "baseName": "address",
@@ -49,6 +31,24 @@ export class RevokeSessionRequest {
         {
             "name": "policy",
             "baseName": "policy",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "optimistic",
+            "baseName": "optimistic",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "player",
+            "baseName": "player",
             "type": "string",
             "format": ""
         }    ];
