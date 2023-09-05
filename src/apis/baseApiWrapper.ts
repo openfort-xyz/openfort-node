@@ -14,8 +14,8 @@ export class BaseApiWrapper<T> implements Observable {
                 sk: {
                     tokenProvider: {
                         getToken: () => accessToken,
-                    }
-                }
+                    },
+                },
             },
             promiseMiddleware: [new Middleware()],
         };
