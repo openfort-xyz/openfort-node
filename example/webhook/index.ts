@@ -7,7 +7,7 @@ const app = express();
 const port = getEnvVariable("APP_PORT");
 
 app.post("/webhook/openfort", express.raw({ type: "application/json" }), async (req: Request, _res: Response) => {
-    const openfort = new Openfort(getEnvVariable("OPENFORT_APIKEY"), process.env.OPENFORT_BASEURL);
+    const openfort = new Openfort(getEnvVariable("OPENFORT_APIKEY"));
     try {
         const event = await openfort.constructWebhookEvent(req.body.toString(), req.headers["openfort-signature"]);
         console.info(event.data.id);
