@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 const port = getEnvVariable("APP_PORT");
 
-app.post("/webhook/openfort", express.raw({ type: "application/json" }), async (req: Request, res: Response) => {
+app.post("/webhook/openfort", express.raw({ type: "application/json" }), async (req: Request, _res: Response) => {
     const openfort = new Openfort(getEnvVariable("OPENFORT_APIKEY"), process.env.OPENFORT_BASEURL);
     try {
         const event = await openfort.constructWebhookEvent(req.body.toString(), req.headers["openfort-signature"]);
@@ -17,7 +17,7 @@ app.post("/webhook/openfort", express.raw({ type: "application/json" }), async (
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.info(`Server is running on http://localhost:${port}`);
 });
 
 function getEnvVariable(name: string): string {

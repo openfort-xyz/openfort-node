@@ -1,8 +1,4 @@
-import Openfort, {
-    CreatePlayerRequest,
-    CreatePlayerSessionRequest,
-    PlayerListResponse,
-} from "@openfort/openfort-node";
+import Openfort, { CreatePlayerRequest, CreatePlayerSessionRequest, PlayerListResponse } from "@openfort/openfort-node";
 import * as dotenv from "dotenv";
 
 function getEnvVariable(name: string): string {

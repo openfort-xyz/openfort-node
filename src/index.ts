@@ -72,9 +72,7 @@ export default class Openfort {
 
     public async constructWebhookEvent(body: string, signature: string): Promise<WebHookEvent> {
         const secret = this.apiKey.split("_")[2]?.replace(/-/g, "");
-        const signedPayload = await createHmac('sha256', secret)
-                .update(body, 'utf8')
-                .digest('hex');
+        const signedPayload = await createHmac("sha256", secret).update(body, "utf8").digest("hex");
         if (signedPayload !== signature) {
             throw Error("Invalid signature");
         }
