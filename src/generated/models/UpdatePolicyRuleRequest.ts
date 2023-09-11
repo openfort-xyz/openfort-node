@@ -16,11 +16,26 @@ import { HttpFile } from '../http/http';
 
 export class UpdatePolicyRuleRequest {
     'type': PolicyRuleType;
+    /**
+    * Name of the function in the contract to allow.
+    */
     'functionName'?: string | null;
+    /**
+    * Contract ID to allow.
+    */
     'contract'?: string | null;
+    /**
+    * Gas limit in WEI.
+    */
     'gasLimit'?: string;
+    /**
+    * Number of times the function will be sponsored.
+    */
     'countLimit'?: number;
     'timeIntervalType'?: TimeIntervalType;
+    /**
+    * Time interval value.
+    */
     'timeIntervalValue'?: number;
 
     static readonly discriminator: string | undefined = undefined;

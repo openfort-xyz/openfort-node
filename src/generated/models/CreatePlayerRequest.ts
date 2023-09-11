@@ -13,7 +13,13 @@
 import { HttpFile } from '../http/http';
 
 export class CreatePlayerRequest {
+    /**
+    * Specifies the player name.
+    */
     'name': string;
+    /**
+    * Specifies the player description.
+    */
     'description'?: string;
 
     static readonly discriminator: string | undefined = undefined;

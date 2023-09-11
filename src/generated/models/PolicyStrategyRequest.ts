@@ -15,7 +15,13 @@ import { HttpFile } from '../http/http';
 
 export class PolicyStrategyRequest {
     'sponsorSchema': SponsorSchema;
+    /**
+    * If the user pays in custom tokens, the contract ID of the token contract.
+    */
     'tokenContract'?: string;
+    /**
+    * If the user pays in custom tokens, the amount of tokens to pay in WEI per native token.
+    */
     'tokenContractAmount'?: string;
 
     static readonly discriminator: string | undefined = undefined;

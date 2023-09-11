@@ -15,10 +15,22 @@ import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class PlayerListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * Specifies the fields to expand in the response.
+    */
     'expand'?: Array<PlayerResponseExpandable>;
+    /**
+    * Filter by player name.
+    */
     'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;

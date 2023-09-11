@@ -43,7 +43,7 @@ export class PlayerTransferOwnershipRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "newOwnerAddress",

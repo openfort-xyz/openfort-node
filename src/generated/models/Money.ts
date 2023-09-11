@@ -15,7 +15,7 @@ import { HttpFile } from '../http/http';
 
 export class Money {
     /**
-    * Ammount in cents
+    * Amount in cents
     */
     'amount': number;
     'currency': Currency;

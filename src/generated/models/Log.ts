@@ -22,6 +22,7 @@ export class Log {
     'topics': Array<string>;
     'transactionHash': string;
     'logIndex': number;
+    'orphaned'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -79,6 +80,12 @@ export class Log {
             "baseName": "logIndex",
             "type": "number",
             "format": "double"
+        },
+        {
+            "name": "orphaned",
+            "baseName": "orphaned",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

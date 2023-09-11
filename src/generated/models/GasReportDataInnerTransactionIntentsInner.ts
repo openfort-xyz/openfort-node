@@ -10,53 +10,54 @@
  * Do not edit the class manually.
  */
 
-import { Currency } from '../models/Currency';
 import { HttpFile } from '../http/http';
 
-export class CheckoutRequest {
-    /**
-    * Amount in cents
-    */
-    'amount': number;
-    'currency': Currency;
-    'cancelUrl'?: string;
-    'successUrl'?: string;
+export class GasReportDataInnerTransactionIntentsInner {
+    'gasFeeInUSD': string;
+    'gasUsed': string;
+    'gasPrice': string;
+    'gasFee': string;
+    'transactionIntentId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "amount",
-            "baseName": "amount",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "currency",
-            "baseName": "currency",
-            "type": "Currency",
-            "format": ""
-        },
-        {
-            "name": "cancelUrl",
-            "baseName": "cancelUrl",
+            "name": "gasFeeInUSD",
+            "baseName": "gasFeeInUSD",
             "type": "string",
             "format": ""
         },
         {
-            "name": "successUrl",
-            "baseName": "successUrl",
+            "name": "gasUsed",
+            "baseName": "gasUsed",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "gasPrice",
+            "baseName": "gasPrice",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "gasFee",
+            "baseName": "gasFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntentId",
+            "baseName": "transactionIntentId",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CheckoutRequest.attributeTypeMap;
+        return GasReportDataInnerTransactionIntentsInner.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

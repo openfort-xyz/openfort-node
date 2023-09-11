@@ -12,34 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-export class LoginRequest {
+export class PlayerInventoryQueries {
     /**
-    * The email address of the user.
+    * Filter by chain id.
     */
-    'email': string;
-    /**
-    * The password of the user.
-    */
-    'password': string;
+    'chainId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return LoginRequest.attributeTypeMap;
+        return PlayerInventoryQueries.attributeTypeMap;
     }
 
     public constructor() {

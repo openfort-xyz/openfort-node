@@ -14,14 +14,41 @@ import { Log } from '../models/Log';
 import { HttpFile } from '../http/http';
 
 export class ResponseResponse {
+    /**
+    * The unix timestamp in seconds when the transactionIntent was created.
+    */
     'createdAt': number;
+    /**
+    * The block height (number) of the block including the transaction of this log.
+    */
     'blockNumber'?: number;
+    /**
+    * The transaction hash of the transaction of this log.
+    */
     'transactionHash'?: string;
+    /**
+    * The gas used by the transaction of this log.
+    */
     'l1GasUsed'?: string;
+    /**
+    * The gas used by the transaction of this log.
+    */
     'gasUsed'?: number;
+    /**
+    * The status of the transaction of this log.
+    */
     'status'?: number;
+    /**
+    * The logs of the transaction of this log.
+    */
     'logs'?: Array<Log>;
+    /**
+    * The address of the contract of this log.
+    */
     'to'?: string;
+    /**
+    * The error of the transaction of this log.
+    */
     'error'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
@@ -37,7 +64,7 @@ export class ResponseResponse {
             "name": "blockNumber",
             "baseName": "blockNumber",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "transactionHash",

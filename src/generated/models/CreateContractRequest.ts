@@ -14,10 +14,25 @@ import { Abi } from '../models/Abi';
 import { HttpFile } from '../http/http';
 
 export class CreateContractRequest {
+    /**
+    * Specifies the name of the contract (Only for display purposes).
+    */
     'name': string;
+    /**
+    * Specifies the chain ID of the contract.
+    */
     'chainId': number;
+    /**
+    * Specifies the address of the contract.
+    */
     'address': string;
+    /**
+    * Specifies the ABI of the contract.
+    */
     'abi'?: Array<Abi>;
+    /**
+    * Specifies whether to verify the contract publicly.
+    */
     'publicVerification'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;

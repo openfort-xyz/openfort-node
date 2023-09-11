@@ -13,8 +13,17 @@
 import { HttpFile } from '../http/http';
 
 export class ProviderRequest {
+    /**
+    * The Google client ID.
+    */
     'googleClientId': string;
+    /**
+    * Specifies whether Google Auth is enabled.
+    */
     'googleEnabled': boolean;
+    /**
+    * The Google client secret.
+    */
     'googleClientSecret': string;
 
     static readonly discriminator: string | undefined = undefined;

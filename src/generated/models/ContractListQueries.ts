@@ -14,12 +14,30 @@ import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class ContractListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * Specifies the name of the contract.
+    */
     'name'?: string;
+    /**
+    * Specifies whether to include deleted contracts.
+    */
     'deleted'?: boolean;
+    /**
+    * The chain ID of the contract.
+    */
     'chainId'?: number;
+    /**
+    * Specifies the address of the contract.
+    */
     'address'?: string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -59,7 +77,7 @@ export class ContractListQueries {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "address",

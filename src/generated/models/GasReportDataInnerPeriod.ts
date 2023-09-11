@@ -12,34 +12,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class LoginRequest {
-    /**
-    * The email address of the user.
-    */
-    'email': string;
-    /**
-    * The password of the user.
-    */
-    'password': string;
+export class GasReportDataInnerPeriod {
+    'end': number;
+    'start': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
+            "name": "end",
+            "baseName": "end",
+            "type": "number",
+            "format": "double"
         },
         {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
+            "name": "start",
+            "baseName": "start",
+            "type": "number",
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return LoginRequest.attributeTypeMap;
+        return GasReportDataInnerPeriod.attributeTypeMap;
     }
 
     public constructor() {

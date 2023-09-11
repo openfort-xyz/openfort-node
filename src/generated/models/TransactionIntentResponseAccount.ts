@@ -10,11 +10,15 @@
  * Do not edit the class manually.
  */
 
+import { Account } from '../models/Account';
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
-import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
 
-export class AccountResponse {
+/**
+* The account ID.
+*/
+export class TransactionIntentResponseAccount {
     'id': string;
     'object': EntityTypeACCOUNT;
     'createdAt': number;
@@ -28,7 +32,7 @@ export class AccountResponse {
     'chainId': number;
     'accountType': string;
     'pendingOwnerAddress'?: string;
-    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
+    'transactionIntents'?: Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -96,12 +100,12 @@ export class AccountResponse {
         {
             "name": "transactionIntents",
             "baseName": "transactionIntents",
-            "type": "Array<PlayerResponseTransactionIntentsInner>",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AccountResponse.attributeTypeMap;
+        return TransactionIntentResponseAccount.attributeTypeMap;
     }
 
     public constructor() {

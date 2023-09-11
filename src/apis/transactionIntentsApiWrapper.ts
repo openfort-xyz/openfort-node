@@ -4,7 +4,6 @@ import {
     SignatureTransactionIntentRequest,
     TransactionIntentResponse,
     TransactionIntentListResponse,
-    UpdateTransactionIntentRequest,
     TransactionIntentListQueries,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -57,21 +56,5 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
     public async signature(req: SignatureTransactionIntentRequest): Promise<TransactionIntentResponse> {
         const { id, ...body } = req;
         return await this.api.signature(id, body);
-    }
-
-    /**
-     * Updates transaction intent response
-     * @param req Request to update transaction intent
-     */
-    public async updateResponse(req: UpdateTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        return await this.api.updateTransactionIntentResponse(req.id);
-    }
-
-    /**
-     *
-     * @param project
-     */
-    public async updateList(): Promise<TransactionIntentListResponse> {
-        return await this.api.updateTransactionIntentsResponse();
     }
 }

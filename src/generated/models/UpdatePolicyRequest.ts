@@ -14,9 +14,18 @@ import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
 import { HttpFile } from '../http/http';
 
 export class UpdatePolicyRequest {
+    /**
+    * Specifies the name of the policy.
+    */
     'name'?: string;
+    /**
+    * The chain ID of the policy.
+    */
     'chainId'?: number;
     'strategy'?: PolicyStrategyRequest;
+    /**
+    * Specifies whether to delete the policy.
+    */
     'deleted'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
@@ -32,7 +41,7 @@ export class UpdatePolicyRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "strategy",

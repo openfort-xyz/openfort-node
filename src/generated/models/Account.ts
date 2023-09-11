@@ -22,6 +22,9 @@ export class Account {
     'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'accountType': string;
     'pendingOwnerAddress'?: string;
@@ -76,7 +79,7 @@ export class Account {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "accountType",
