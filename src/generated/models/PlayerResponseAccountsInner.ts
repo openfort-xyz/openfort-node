@@ -23,6 +23,9 @@ export class PlayerResponseAccountsInner {
     'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'accountType': string;
     'pendingOwnerAddress'?: string;
@@ -77,7 +80,7 @@ export class PlayerResponseAccountsInner {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "accountType",

@@ -23,7 +23,8 @@ import { UpdateContractRequest } from '../models/UpdateContractRequest';
 export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates a contract object.
+     * Add a new contract to your project in Openfort
+     * Create contract object.
      * @param createContractRequest 
      */
     public async createContract(createContractRequest: CreateContractRequest, _options?: Configuration): Promise<RequestContext> {
@@ -70,8 +71,9 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Delete a contract from the project by providing its contract id.
      * Deletes a contract object.
-     * @param id 
+     * @param id Specifies the unique contract ID.
      */
     public async deleteContract(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -107,7 +109,8 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the details of an existing contract. Supply the unique contract ID from either a contract creation request or the contract list, and Openfort will return the corresponding contract information.
+     * Retrieve a contract by providing their contract id.
+     * Get a contract.
      * @param id Specifies the unique contract ID.
      */
     public async getContract(id: string, _options?: Configuration): Promise<RequestContext> {
@@ -144,14 +147,15 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of your contracts. The contracts are returned sorted by creation date, with the most recently created contracts appearing first.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param name 
-     * @param deleted 
-     * @param chainId 
-     * @param address 
+     * List of all contracts per project. By default, a maximum of ten contracts are shown.
+     * List contracts.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param name Specifies the name of the contract.
+     * @param deleted Specifies whether to include deleted contracts.
+     * @param chainId The chain ID of the contract.
+     * @param address Specifies the address of the contract.
      */
     public async getContracts(limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, chainId?: number, address?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -197,7 +201,7 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (chainId !== undefined) {
-            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "double"));
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
         }
 
         // Query Params
@@ -223,7 +227,7 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Updates a contract object.
-     * @param id 
+     * @param id Specifies the unique contract ID.
      * @param updateContractRequest 
      */
     public async updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Promise<RequestContext> {

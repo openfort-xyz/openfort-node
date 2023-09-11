@@ -63,6 +63,9 @@ import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
+import { GasReportDataInner } from '../models/GasReportDataInner';
+import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
+import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
@@ -90,6 +93,7 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
+import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
 import { PlayerRequest } from '../models/PlayerRequest';
@@ -149,6 +153,7 @@ import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
+import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
@@ -175,7 +180,8 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * Request the ownership transfer of an account to a given address.
+     * This endpoint allows you to cancel a pending transfer of ownership.
+     * Cancel request of ownership transfer of an account.
      * @param id Specifies the unique account ID.
      * @param cancelTransferOwnershipRequest 
      */
@@ -223,7 +229,8 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * Creates an account object.
+     * This endpoint allows you to add a new account to your Openfort player. Only one account can be active per chain per player.
+     * Create an account object.
      * @param createAccountRequest 
      */
     public createAccount(createAccountRequest: CreateAccountRequest, _options?: Configuration): Observable<AccountResponse> {
@@ -247,8 +254,9 @@ export class ObservableAccountsApi {
 
     /**
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Get existing account.
      * @param id Specifies the unique account ID.
-     * @param expand whether to expand the response or not
+     * @param expand 
      */
     public getAccount(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Observable<AccountResponse> {
         const requestContextPromise = this.requestFactory.getAccount(id, expand, _options);
@@ -270,12 +278,13 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param player 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
+     * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first. By default, a maximum of ten accounts are shown per page.
+     * List accounts of a player.
+     * @param player Specifies the unique player ID
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
      */
     public getAccounts(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Observable<AccountListResponse> {
         const requestContextPromise = this.requestFactory.getAccounts(player, limit, skip, order, expand, _options);
@@ -297,7 +306,8 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * Request the ownership transfer of an account to a given address.
+     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
+     * Request ownership transfer of an account.
      * @param id Specifies the unique account ID.
      * @param transferOwnershipRequest 
      */
@@ -410,6 +420,7 @@ export class ObservableAuthenticationApi {
     }
 
     /**
+     * Login a player.
      * @param loginRequest 
      */
     public login(loginRequest: LoginRequest, _options?: Configuration): Observable<AuthResponse> {
@@ -432,6 +443,7 @@ export class ObservableAuthenticationApi {
     }
 
     /**
+     * Sign up a player.
      * @param signupRequest 
      */
     public signup(signupRequest: SignupRequest, _options?: Configuration): Observable<AuthResponse> {
@@ -454,7 +466,8 @@ export class ObservableAuthenticationApi {
     }
 
     /**
-     * @param token 
+     * Verify an auth token.
+     * @param token Specifies the auth token.
      */
     public verifyAuthToken(token: string, _options?: Configuration): Observable<PlayerResponse> {
         const requestContextPromise = this.requestFactory.verifyAuthToken(token, _options);
@@ -494,7 +507,7 @@ export class ObservableConfigAuthenticationApi {
     }
 
     /**
-     * Google OAuth. Add a google_client_id and a google_client_secret
+     * Configure Google OAuth2.
      * @param providerRequest 
      */
     public editProvider(providerRequest: ProviderRequest, _options?: Configuration): Observable<ProjectResponse> {
@@ -535,7 +548,8 @@ export class ObservableContractsApi {
     }
 
     /**
-     * Creates a contract object.
+     * Add a new contract to your project in Openfort
+     * Create contract object.
      * @param createContractRequest 
      */
     public createContract(createContractRequest: CreateContractRequest, _options?: Configuration): Observable<ContractResponse> {
@@ -558,8 +572,9 @@ export class ObservableContractsApi {
     }
 
     /**
+     * Delete a contract from the project by providing its contract id.
      * Deletes a contract object.
-     * @param id 
+     * @param id Specifies the unique contract ID.
      */
     public deleteContract(id: string, _options?: Configuration): Observable<ContractDeleteResponse> {
         const requestContextPromise = this.requestFactory.deleteContract(id, _options);
@@ -581,7 +596,8 @@ export class ObservableContractsApi {
     }
 
     /**
-     * Retrieves the details of an existing contract. Supply the unique contract ID from either a contract creation request or the contract list, and Openfort will return the corresponding contract information.
+     * Retrieve a contract by providing their contract id.
+     * Get a contract.
      * @param id Specifies the unique contract ID.
      */
     public getContract(id: string, _options?: Configuration): Observable<ContractResponse> {
@@ -604,14 +620,15 @@ export class ObservableContractsApi {
     }
 
     /**
-     * Returns a list of your contracts. The contracts are returned sorted by creation date, with the most recently created contracts appearing first.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param name 
-     * @param deleted 
-     * @param chainId 
-     * @param address 
+     * List of all contracts per project. By default, a maximum of ten contracts are shown.
+     * List contracts.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param name Specifies the name of the contract.
+     * @param deleted Specifies whether to include deleted contracts.
+     * @param chainId The chain ID of the contract.
+     * @param address Specifies the address of the contract.
      */
     public getContracts(limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, chainId?: number, address?: string, _options?: Configuration): Observable<ContractListResponse> {
         const requestContextPromise = this.requestFactory.getContracts(limit, skip, order, name, deleted, chainId, address, _options);
@@ -634,7 +651,7 @@ export class ObservableContractsApi {
 
     /**
      * Updates a contract object.
-     * @param id 
+     * @param id Specifies the unique contract ID.
      * @param updateContractRequest 
      */
     public updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Observable<ContractResponse> {
@@ -675,6 +692,7 @@ export class ObservableGoogleAuthenticationApi {
     }
 
     /**
+     * Get the google oauth signin url.
      */
     public getSigninUrl(_options?: Configuration): Observable<GetSigninUrlResponse> {
         const requestContextPromise = this.requestFactory.getSigninUrl(_options);
@@ -696,7 +714,8 @@ export class ObservableGoogleAuthenticationApi {
     }
 
     /**
-     * @param key 
+     * Get the google oauth token.
+     * @param key Specifies the oauth key.
      */
     public getToken(key: string, _options?: Configuration): Observable<AuthResponse> {
         const requestContextPromise = this.requestFactory.getToken(key, _options);
@@ -736,11 +755,11 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the cryptocurrency assets of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the cryptocurrency assets of an existing account.
      * @param id Specifies the unique account ID.
-     * @param limit 
-     * @param skip 
-     * @param order 
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      * @param contractId 
      */
     public getAccountCryptoCurrencyInventory(id: string, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Observable<InventoryListResponse> {
@@ -763,7 +782,7 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the inventory of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Get inventory of account.
      * @param id Specifies the unique account ID.
      */
     public getAccountInventory(id: string, _options?: Configuration): Observable<ObsoleteInventoryResponse> {
@@ -786,7 +805,7 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the native asset of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the native asset of an existing account.
      * @param id Specifies the unique account ID.
      */
     public getAccountNativeInventory(id: string, _options?: Configuration): Observable<InventoryResponse> {
@@ -809,11 +828,11 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the NFT assets of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the NFT assets of an existing account.
      * @param id Specifies the unique account ID.
-     * @param limit 
-     * @param skip 
-     * @param order 
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      * @param contractId 
      */
     public getAccountNftInventory(id: string, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Observable<InventoryListResponse> {
@@ -836,13 +855,13 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the cruptocurrency assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get cryptocurrency list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param contractId 
+     * @param chainId Filter by chain id.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param contractId Filter by contract ID.
      */
     public getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Observable<InventoryListResponse> {
         const requestContextPromise = this.requestFactory.getPlayerCryptoCurrencyInventory(id, chainId, limit, skip, order, contractId, _options);
@@ -864,9 +883,9 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the inventory of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get inventory of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
+     * @param chainId Filter by chain id.
      */
     public getPlayerInventory(id: string, chainId: number, _options?: Configuration): Observable<ObsoleteInventoryResponse> {
         const requestContextPromise = this.requestFactory.getPlayerInventory(id, chainId, _options);
@@ -888,9 +907,9 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the native assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get native token list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
+     * @param chainId Filter by chain id.
      */
     public getPlayerNativeInventory(id: string, chainId: number, _options?: Configuration): Observable<InventoryResponse> {
         const requestContextPromise = this.requestFactory.getPlayerNativeInventory(id, chainId, _options);
@@ -912,13 +931,13 @@ export class ObservableInventoryApi {
     }
 
     /**
-     * Retrieves the NFT assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get NFTs list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param contractId 
+     * @param chainId Filter by chain id.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param contractId Filter by contract ID.
      */
     public getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Observable<InventoryListResponse> {
         const requestContextPromise = this.requestFactory.getPlayerNftInventory(id, chainId, limit, skip, order, contractId, _options);
@@ -958,7 +977,8 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Request the ownership transfer of an account to a given address.
+     * This endpoint allows you to cancel a pending transfer of ownership.
+     * Cancel request to transfer ownership of an account.
      * @param id 
      * @param playerCancelTransferOwnershipRequest 
      */
@@ -982,7 +1002,8 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Creates a player object.
+     * Add a new player to your player list in Openfort.
+     * Create a player object.
      * @param createPlayerRequest 
      */
     public createPlayer(createPlayerRequest: CreatePlayerRequest, _options?: Configuration): Observable<PlayerResponse> {
@@ -1005,7 +1026,7 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Creates an account object for an existing player.
+     * Create account object for a player.
      * @param id Specifies the unique player ID.
      * @param createPlayerAccountRequest 
      */
@@ -1029,7 +1050,7 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Creates a session object for the given player.
+     * Create session object for a player.
      * @param id Specifies the unique player ID.
      * @param createPlayerSessionRequest 
      */
@@ -1053,9 +1074,9 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Retrieves the details of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Retrieves the details of an existing player.
      * @param id Specifies the unique player ID.
-     * @param expand 
+     * @param expand Specifies the expandable fields.
      */
     public getPlayer(id: string, expand?: Array<PlayerResponseExpandable>, _options?: Configuration): Observable<PlayerResponse> {
         const requestContextPromise = this.requestFactory.getPlayer(id, expand, _options);
@@ -1077,9 +1098,9 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param id 
-     * @param expand 
+     * List of accounts of a player.
+     * @param id Specifies the unique player ID.
+     * @param expand Specifies the expandable fields.
      */
     public getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Observable<AccountListResponse> {
         const requestContextPromise = this.requestFactory.getPlayerAccounts(id, expand, _options);
@@ -1101,12 +1122,13 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param name 
+     * By default, a maximum of ten players are shown.
+     * List players.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param name Filter by player name.
      */
     public getPlayers(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PlayerResponseExpandable>, name?: string, _options?: Configuration): Observable<PlayerListResponse> {
         const requestContextPromise = this.requestFactory.getPlayers(limit, skip, order, expand, name, _options);
@@ -1128,7 +1150,58 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Transfer ownership of an account to an address.
+     * This endpoint allows you to cancel a pending transfer of ownership.
+     * Cancel request to transfer ownership of an account.
+     * @param id 
+     * @param playerCancelTransferOwnershipRequest 
+     */
+    public obsoleteCancelTransferAccountOwnership(id: string, playerCancelTransferOwnershipRequest: PlayerCancelTransferOwnershipRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
+        const requestContextPromise = this.requestFactory.obsoleteCancelTransferAccountOwnership(id, playerCancelTransferOwnershipRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.obsoleteCancelTransferAccountOwnership(rsp)));
+            }));
+    }
+
+    /**
+     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
+     * Request transfer ownership of account.
+     * @param id Specifies the unique player ID.
+     * @param playerTransferOwnershipRequest 
+     */
+    public obsoleteRequestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
+        const requestContextPromise = this.requestFactory.obsoleteRequestTransferAccountOwnership(id, playerTransferOwnershipRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.obsoleteRequestTransferAccountOwnership(rsp)));
+            }));
+    }
+
+    /**
+     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
+     * Request transfer ownership of account.
      * @param id Specifies the unique player ID.
      * @param playerTransferOwnershipRequest 
      */
@@ -1152,7 +1225,7 @@ export class ObservablePlayersApi {
     }
 
     /**
-     * Creates a session object for the given player.
+     * Revoke session object for a player.
      * @param id Specifies the unique player ID.
      * @param revokeSessionPlayerRequest 
      */
@@ -1218,10 +1291,11 @@ export class ObservablePlayersAuthenticationApi {
     }
 
     /**
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param email 
+     * List authenticated players.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param email Specifies the email address of the user.
      */
     public getAuthenticatedPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Observable<AuthPlayerListResponse> {
         const requestContextPromise = this.requestFactory.getAuthenticatedPlayers(limit, skip, order, email, _options);
@@ -1261,7 +1335,7 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * Creates a policy object.
+     * Create a policy object.
      * @param createPolicyRequest 
      */
     public createPolicy(createPolicyRequest: CreatePolicyRequest, _options?: Configuration): Observable<PolicyResponse> {
@@ -1284,7 +1358,8 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * @param id 
+     * Create a policy rule object for a policy.
+     * @param id Specifies the unique policy ID.
      * @param createPolicyAllowFunctionRequest 
      */
     public createPolicyAllowFunction(id: string, createPolicyAllowFunctionRequest: CreatePolicyAllowFunctionRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
@@ -1307,8 +1382,8 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * Deletes a policy object.
-     * @param id 
+     * Delete a policy object.
+     * @param id Specifies the unique policy ID.
      */
     public deletePolicy(id: string, _options?: Configuration): Observable<PolicyDeleteResponse> {
         const requestContextPromise = this.requestFactory.deletePolicy(id, _options);
@@ -1330,14 +1405,14 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * Gets all policy objects for a given project.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param name 
-     * @param deleted 
-     * @param chainId 
+     * List policies.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param name Specifies the name of the policy.
+     * @param deleted Specifies whether to include deleted contracts.
+     * @param chainId The chain ID of the policy.
      */
     public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Observable<PolicyListResponse> {
         const requestContextPromise = this.requestFactory.getPolicies(limit, skip, order, expand, name, deleted, chainId, _options);
@@ -1359,9 +1434,9 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * Gets a policy object for a given project.
-     * @param id 
-     * @param expand 
+     * Get a policy object.
+     * @param id Specifies the unique policy ID.
+     * @param expand Specifies the fields to expand.
      */
     public getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Observable<PolicyResponse> {
         const requestContextPromise = this.requestFactory.getPolicy(id, expand, _options);
@@ -1383,8 +1458,9 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * @param id 
-     * @param expand 
+     * List policy rules of a policy.
+     * @param id Specifies the unique policy ID.
+     * @param expand Specifies the fields to expand.
      */
     public getPolicyAllowFunctions(id: string, expand?: Array<'contract'>, _options?: Configuration): Observable<PolicyRuleListResponse> {
         const requestContextPromise = this.requestFactory.getPolicyAllowFunctions(id, expand, _options);
@@ -1406,7 +1482,8 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * @param id 
+     * List all gas reports of a policy.
+     * @param id Specifies the unique policy ID.
      */
     public getPolicyTotalGasUsage(id: string, _options?: Configuration): Observable<GasReport> {
         const requestContextPromise = this.requestFactory.getPolicyTotalGasUsage(id, _options);
@@ -1428,8 +1505,8 @@ export class ObservablePoliciesApi {
     }
 
     /**
-     * Updates a policy object.
-     * @param id 
+     * Update a policy object.
+     * @param id Specifies the unique policy ID.
      * @param updatePolicyRequest 
      */
     public updatePolicy(id: string, updatePolicyRequest: UpdatePolicyRequest, _options?: Configuration): Observable<PolicyResponse> {
@@ -1452,6 +1529,7 @@ export class ObservablePoliciesApi {
     }
 
     /**
+     * Update a policy rule object of a policy.
      * @param policy 
      * @param policyRule 
      * @param updatePolicyRuleRequest 
@@ -1494,7 +1572,7 @@ export class ObservablePolicyRulesApi {
     }
 
     /**
-     * Creates an allow function object.
+     * Create a policy rule object.
      * @param createPolicyRuleRequest 
      */
     public createPolicyRules(createPolicyRuleRequest: CreatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
@@ -1517,8 +1595,8 @@ export class ObservablePolicyRulesApi {
     }
 
     /**
-     * Deletes an polciy rule (allow_functions) object.
-     * @param id 
+     * Deletes a policy rule object.
+     * @param id Specifies the unique policy rule ID.
      */
     public deletePolicyRules(id: string, _options?: Configuration): Observable<PolicyRuleDeleteResponse> {
         const requestContextPromise = this.requestFactory.deletePolicyRules(id, _options);
@@ -1540,12 +1618,12 @@ export class ObservablePolicyRulesApi {
     }
 
     /**
-     * Returns a list of your allow functions for the given policy. The allow functions are returned sorted by creation date, with the most recently created allow functions appearing first.
-     * @param policy 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
+     * List policy rules of a policy.
+     * @param policy Specifies the unique policy ID.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
      */
     public getPolicyRules(policy: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'contract'>, _options?: Configuration): Observable<PolicyRuleListResponse> {
         const requestContextPromise = this.requestFactory.getPolicyRules(policy, limit, skip, order, expand, _options);
@@ -1567,8 +1645,8 @@ export class ObservablePolicyRulesApi {
     }
 
     /**
-     * Updates an allow functions object.
-     * @param id Specifies the unique allow function ID.
+     * Update a policy rule object.
+     * @param id Specifies the unique policy rule ID.
      * @param updatePolicyRuleRequest 
      */
     public updatePolicyRules(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
@@ -1609,7 +1687,7 @@ export class ObservableSessionsApi {
     }
 
     /**
-     * Creates the session for the account.
+     * Create a session key.
      * @param createSessionRequest 
      */
     public createSession(createSessionRequest: CreateSessionRequest, _options?: Configuration): Observable<SessionResponse> {
@@ -1632,16 +1710,15 @@ export class ObservableSessionsApi {
     }
 
     /**
-     * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param player 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param address 
+     * List session keys of a player.
+     * @param player The player ID
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
      */
-    public getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<SessionResponseExpandable>, address?: string, _options?: Configuration): Observable<SessionListResponse> {
-        const requestContextPromise = this.requestFactory.getPlayerSessions(player, limit, skip, order, expand, address, _options);
+    public getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Observable<SessionListResponse> {
+        const requestContextPromise = this.requestFactory.getPlayerSessions(player, limit, skip, order, expand, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1661,8 +1738,8 @@ export class ObservableSessionsApi {
 
     /**
      * Returns a player session by session id
-     * @param id 
-     * @param expand 
+     * @param id Specifies the unique session ID.
+     * @param expand Specifies the fields to expand.
      */
     public getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Observable<SessionResponse> {
         const requestContextPromise = this.requestFactory.getSession(id, expand, _options);
@@ -1684,7 +1761,7 @@ export class ObservableSessionsApi {
     }
 
     /**
-     * Revokes the session for the account.
+     * Revoke the session session key.
      * @param revokeSessionRequest 
      */
     public revokeSession(revokeSessionRequest: RevokeSessionRequest, _options?: Configuration): Observable<SessionResponse> {
@@ -1708,7 +1785,7 @@ export class ObservableSessionsApi {
 
     /**
      * Confirms the creation of a session with an external owner.
-     * @param id 
+     * @param id Specifies the unique session ID.
      * @param signatureRequest 
      */
     public signatureSession(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Observable<SessionResponse> {
@@ -1749,7 +1826,8 @@ export class ObservableTransactionIntentsApi {
     }
 
     /**
-     * Creates a transaction intent object.
+     * Retrieve a transaction intent by providing their id on Openfort. Transaction intents that have not been processed yet, have the `response` attribute as undefined.
+     * Create a transaction intent object.
      * @param createTransactionIntentRequest 
      */
     public createTransactionIntent(createTransactionIntentRequest: CreateTransactionIntentRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
@@ -1772,9 +1850,9 @@ export class ObservableTransactionIntentsApi {
     }
 
     /**
-     * Retrieves a transaction intent object.
-     * @param id 
-     * @param expand 
+     * Get a transaction intent object.
+     * @param id Specifies the unique transaction intent ID.
+     * @param expand Specifies the expandable fields.
      */
     public getTransactionIntent(id: string, expand?: Array<TransactionIntentResponseExpandable>, _options?: Configuration): Observable<TransactionIntentResponse> {
         const requestContextPromise = this.requestFactory.getTransactionIntent(id, expand, _options);
@@ -1796,15 +1874,15 @@ export class ObservableTransactionIntentsApi {
     }
 
     /**
-     * Returns a list of transaction intents for the given project. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param chainId 
-     * @param accountId 
-     * @param playerId 
-     * @param policyId 
+     * List transaction intents.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param chainId The chain ID.
+     * @param accountId Filter by account ID.
+     * @param playerId Filter by player ID.
+     * @param policyId Filter by policy ID.
      */
     public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Observable<TransactionIntentListResponse> {
         const requestContextPromise = this.requestFactory.getTransactionIntents(limit, skip, order, expand, chainId, accountId, playerId, policyId, _options);
@@ -1826,8 +1904,9 @@ export class ObservableTransactionIntentsApi {
     }
 
     /**
+     * This endpoint is used to put a userOperationHash signature on-chain. This means players that have informed (and use) an [externally-owned account (EOA)](https://ethereum.org/en/developers/docs/accounts/) to authorize operations, such as registering a session key, for their gaming accounts.  Given that players with non-custodial accounts are the only ones in possession of the private key, they must sign the information inside the `nextAction` value received from the `POST` API endpoint that creates a transaction_intent, even with their session-keys. Once signed, the client needs to send the signed message using the `/signature` endpoint or use one of the available client-side libraries to do so.
      * Confirms the creation of a transaction intent with an external owner.
-     * @param id 
+     * @param id Specifies the unique transaction intent ID.
      * @param signatureRequest 
      */
     public signature(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
@@ -1846,49 +1925,6 @@ export class ObservableTransactionIntentsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.signature(rsp)));
-            }));
-    }
-
-    /**
-     * @param id 
-     */
-    public updateTransactionIntentResponse(id: string, _options?: Configuration): Observable<TransactionIntentResponse> {
-        const requestContextPromise = this.requestFactory.updateTransactionIntentResponse(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateTransactionIntentResponse(rsp)));
-            }));
-    }
-
-    /**
-     */
-    public updateTransactionIntentsResponse(_options?: Configuration): Observable<TransactionIntentListResponse> {
-        const requestContextPromise = this.requestFactory.updateTransactionIntentsResponse(_options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateTransactionIntentsResponse(rsp)));
             }));
     }
 

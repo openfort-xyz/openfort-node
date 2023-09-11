@@ -15,10 +15,22 @@ import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class AccountListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * Specifies the fields to expand in the response.
+    */
     'expand'?: Array<AccountResponseExpandable>;
+    /**
+    * Specifies the unique player ID
+    */
     'player': string;
 
     static readonly discriminator: string | undefined = undefined;

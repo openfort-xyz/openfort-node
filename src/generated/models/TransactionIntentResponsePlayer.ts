@@ -15,6 +15,9 @@ import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { Player } from '../models/Player';
 import { HttpFile } from '../http/http';
 
+/**
+* The player ID.
+*/
 export class TransactionIntentResponsePlayer {
     'id': string;
     'object': EntityTypePLAYER;

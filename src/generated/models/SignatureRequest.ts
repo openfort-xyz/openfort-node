@@ -13,7 +13,13 @@
 import { HttpFile } from '../http/http';
 
 export class SignatureRequest {
+    /**
+    * signed userOperationHash by the owner or valid session key
+    */
     'signature': string;
+    /**
+    * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
+    */
     'optimistic'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;

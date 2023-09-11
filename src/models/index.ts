@@ -14,7 +14,6 @@ export * from "./signatureTransactionIntentRequest";
 export * from "./updatePlayerRequest";
 export * from "./updatePolicyAllowFunctionRequest";
 export * from "./updateProjectRequest";
-export * from "./updateTransactionIntentRequest";
 export { AccountInventoryListQueries } from "./accountInventoryListQueries";
 export { CancelTransferOwnershipRequest } from "./cancelTransferOwnershipRequest";
 export { CompleteRecoveryRequest } from "./completeRecoveryRequest";

@@ -13,8 +13,8 @@
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { Interaction } from '../models/Interaction';
 import { NextActionResponse } from '../models/NextActionResponse';
-import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { ResponseResponse } from '../models/ResponseResponse';
+import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { HttpFile } from '../http/http';
@@ -23,8 +23,17 @@ export class TransactionIntentResponse {
     'id': string;
     'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
+    /**
+    * The unix timestamp in seconds when the transactionIntent was created.
+    */
     'updatedAt': number;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
+    /**
+    * The hashed userOperation.
+    */
     'userOperationHash'?: string;
     'userOperation'?: any | null;
     'response'?: ResponseResponse;
@@ -32,7 +41,7 @@ export class TransactionIntentResponse {
     'nextAction'?: NextActionResponse;
     'policy'?: TransactionIntentResponsePolicy;
     'player': TransactionIntentResponsePlayer;
-    'account': PlayerResponseAccountsInner;
+    'account': TransactionIntentResponseAccount;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -65,7 +74,7 @@ export class TransactionIntentResponse {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "userOperationHash",
@@ -112,7 +121,7 @@ export class TransactionIntentResponse {
         {
             "name": "account",
             "baseName": "account",
-            "type": "PlayerResponseAccountsInner",
+            "type": "TransactionIntentResponseAccount",
             "format": ""
         }    ];
 

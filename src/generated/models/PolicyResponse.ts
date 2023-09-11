@@ -22,6 +22,9 @@ export class PolicyResponse {
     'createdAt': number;
     'name': string | null;
     'deleted': boolean;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'strategy': PolicyStrategy;
     'transactionIntents': Array<PlayerResponseTransactionIntentsInner>;
@@ -64,7 +67,7 @@ export class PolicyResponse {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "strategy",

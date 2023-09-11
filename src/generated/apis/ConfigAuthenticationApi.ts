@@ -19,7 +19,7 @@ import { ProviderRequest } from '../models/ProviderRequest';
 export class ConfigAuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Google OAuth. Add a google_client_id and a google_client_secret
+     * Configure Google OAuth2.
      * @param providerRequest 
      */
     public async editProvider(providerRequest: ProviderRequest, _options?: Configuration): Promise<RequestContext> {

@@ -13,10 +13,25 @@
 import { HttpFile } from '../http/http';
 
 export class RevokeSessionRequest {
+    /**
+    * The address of the session key to revoke.
+    */
     'address': string;
+    /**
+    * The policy ID
+    */
     'policy'?: string;
+    /**
+    * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
+    */
     'optimistic'?: boolean;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
+    /**
+    * The player ID.
+    */
     'player': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -44,7 +59,7 @@ export class RevokeSessionRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "player",

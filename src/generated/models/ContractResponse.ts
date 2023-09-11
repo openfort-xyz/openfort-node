@@ -19,6 +19,9 @@ export class ContractResponse {
     'object': EntityTypeCONTRACT;
     'createdAt': number;
     'name': string | null;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'address': string;
     'deleted': boolean;
@@ -56,7 +59,7 @@ export class ContractResponse {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "address",

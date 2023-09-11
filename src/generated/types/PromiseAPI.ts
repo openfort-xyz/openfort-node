@@ -62,6 +62,9 @@ import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
+import { GasReportDataInner } from '../models/GasReportDataInner';
+import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
+import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
@@ -89,6 +92,7 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
+import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
 import { PlayerRequest } from '../models/PlayerRequest';
@@ -148,6 +152,7 @@ import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
+import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
@@ -171,7 +176,8 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * Request the ownership transfer of an account to a given address.
+     * This endpoint allows you to cancel a pending transfer of ownership.
+     * Cancel request of ownership transfer of an account.
      * @param id Specifies the unique account ID.
      * @param cancelTransferOwnershipRequest 
      */
@@ -191,7 +197,8 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * Creates an account object.
+     * This endpoint allows you to add a new account to your Openfort player. Only one account can be active per chain per player.
+     * Create an account object.
      * @param createAccountRequest 
      */
     public createAccount(createAccountRequest: CreateAccountRequest, _options?: Configuration): Promise<AccountResponse> {
@@ -201,8 +208,9 @@ export class PromiseAccountsApi {
 
     /**
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Get existing account.
      * @param id Specifies the unique account ID.
-     * @param expand whether to expand the response or not
+     * @param expand 
      */
     public getAccount(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountResponse> {
         const result = this.api.getAccount(id, expand, _options);
@@ -210,12 +218,13 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param player 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
+     * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first. By default, a maximum of ten accounts are shown per page.
+     * List accounts of a player.
+     * @param player Specifies the unique player ID
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
      */
     public getAccounts(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountListResponse> {
         const result = this.api.getAccounts(player, limit, skip, order, expand, _options);
@@ -223,7 +232,8 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * Request the ownership transfer of an account to a given address.
+     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
+     * Request ownership transfer of an account.
      * @param id Specifies the unique account ID.
      * @param transferOwnershipRequest 
      */
@@ -281,6 +291,7 @@ export class PromiseAuthenticationApi {
     }
 
     /**
+     * Login a player.
      * @param loginRequest 
      */
     public login(loginRequest: LoginRequest, _options?: Configuration): Promise<AuthResponse> {
@@ -289,6 +300,7 @@ export class PromiseAuthenticationApi {
     }
 
     /**
+     * Sign up a player.
      * @param signupRequest 
      */
     public signup(signupRequest: SignupRequest, _options?: Configuration): Promise<AuthResponse> {
@@ -297,7 +309,8 @@ export class PromiseAuthenticationApi {
     }
 
     /**
-     * @param token 
+     * Verify an auth token.
+     * @param token Specifies the auth token.
      */
     public verifyAuthToken(token: string, _options?: Configuration): Promise<PlayerResponse> {
         const result = this.api.verifyAuthToken(token, _options);
@@ -324,7 +337,7 @@ export class PromiseConfigAuthenticationApi {
     }
 
     /**
-     * Google OAuth. Add a google_client_id and a google_client_secret
+     * Configure Google OAuth2.
      * @param providerRequest 
      */
     public editProvider(providerRequest: ProviderRequest, _options?: Configuration): Promise<ProjectResponse> {
@@ -352,7 +365,8 @@ export class PromiseContractsApi {
     }
 
     /**
-     * Creates a contract object.
+     * Add a new contract to your project in Openfort
+     * Create contract object.
      * @param createContractRequest 
      */
     public createContract(createContractRequest: CreateContractRequest, _options?: Configuration): Promise<ContractResponse> {
@@ -361,8 +375,9 @@ export class PromiseContractsApi {
     }
 
     /**
+     * Delete a contract from the project by providing its contract id.
      * Deletes a contract object.
-     * @param id 
+     * @param id Specifies the unique contract ID.
      */
     public deleteContract(id: string, _options?: Configuration): Promise<ContractDeleteResponse> {
         const result = this.api.deleteContract(id, _options);
@@ -370,7 +385,8 @@ export class PromiseContractsApi {
     }
 
     /**
-     * Retrieves the details of an existing contract. Supply the unique contract ID from either a contract creation request or the contract list, and Openfort will return the corresponding contract information.
+     * Retrieve a contract by providing their contract id.
+     * Get a contract.
      * @param id Specifies the unique contract ID.
      */
     public getContract(id: string, _options?: Configuration): Promise<ContractResponse> {
@@ -379,14 +395,15 @@ export class PromiseContractsApi {
     }
 
     /**
-     * Returns a list of your contracts. The contracts are returned sorted by creation date, with the most recently created contracts appearing first.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param name 
-     * @param deleted 
-     * @param chainId 
-     * @param address 
+     * List of all contracts per project. By default, a maximum of ten contracts are shown.
+     * List contracts.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param name Specifies the name of the contract.
+     * @param deleted Specifies whether to include deleted contracts.
+     * @param chainId The chain ID of the contract.
+     * @param address Specifies the address of the contract.
      */
     public getContracts(limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, chainId?: number, address?: string, _options?: Configuration): Promise<ContractListResponse> {
         const result = this.api.getContracts(limit, skip, order, name, deleted, chainId, address, _options);
@@ -395,7 +412,7 @@ export class PromiseContractsApi {
 
     /**
      * Updates a contract object.
-     * @param id 
+     * @param id Specifies the unique contract ID.
      * @param updateContractRequest 
      */
     public updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Promise<ContractResponse> {
@@ -423,6 +440,7 @@ export class PromiseGoogleAuthenticationApi {
     }
 
     /**
+     * Get the google oauth signin url.
      */
     public getSigninUrl(_options?: Configuration): Promise<GetSigninUrlResponse> {
         const result = this.api.getSigninUrl(_options);
@@ -430,7 +448,8 @@ export class PromiseGoogleAuthenticationApi {
     }
 
     /**
-     * @param key 
+     * Get the google oauth token.
+     * @param key Specifies the oauth key.
      */
     public getToken(key: string, _options?: Configuration): Promise<AuthResponse> {
         const result = this.api.getToken(key, _options);
@@ -457,11 +476,11 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the cryptocurrency assets of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the cryptocurrency assets of an existing account.
      * @param id Specifies the unique account ID.
-     * @param limit 
-     * @param skip 
-     * @param order 
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      * @param contractId 
      */
     public getAccountCryptoCurrencyInventory(id: string, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
@@ -470,7 +489,7 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the inventory of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Get inventory of account.
      * @param id Specifies the unique account ID.
      */
     public getAccountInventory(id: string, _options?: Configuration): Promise<ObsoleteInventoryResponse> {
@@ -479,7 +498,7 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the native asset of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the native asset of an existing account.
      * @param id Specifies the unique account ID.
      */
     public getAccountNativeInventory(id: string, _options?: Configuration): Promise<InventoryResponse> {
@@ -488,11 +507,11 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the NFT assets of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the NFT assets of an existing account.
      * @param id Specifies the unique account ID.
-     * @param limit 
-     * @param skip 
-     * @param order 
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      * @param contractId 
      */
     public getAccountNftInventory(id: string, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
@@ -501,13 +520,13 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the cruptocurrency assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get cryptocurrency list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param contractId 
+     * @param chainId Filter by chain id.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param contractId Filter by contract ID.
      */
     public getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
         const result = this.api.getPlayerCryptoCurrencyInventory(id, chainId, limit, skip, order, contractId, _options);
@@ -515,9 +534,9 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the inventory of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get inventory of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
+     * @param chainId Filter by chain id.
      */
     public getPlayerInventory(id: string, chainId: number, _options?: Configuration): Promise<ObsoleteInventoryResponse> {
         const result = this.api.getPlayerInventory(id, chainId, _options);
@@ -525,9 +544,9 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the native assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get native token list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
+     * @param chainId Filter by chain id.
      */
     public getPlayerNativeInventory(id: string, chainId: number, _options?: Configuration): Promise<InventoryResponse> {
         const result = this.api.getPlayerNativeInventory(id, chainId, _options);
@@ -535,13 +554,13 @@ export class PromiseInventoryApi {
     }
 
     /**
-     * Retrieves the NFT assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get NFTs list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param contractId 
+     * @param chainId Filter by chain id.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param contractId Filter by contract ID.
      */
     public getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
         const result = this.api.getPlayerNftInventory(id, chainId, limit, skip, order, contractId, _options);
@@ -568,7 +587,8 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Request the ownership transfer of an account to a given address.
+     * This endpoint allows you to cancel a pending transfer of ownership.
+     * Cancel request to transfer ownership of an account.
      * @param id 
      * @param playerCancelTransferOwnershipRequest 
      */
@@ -578,7 +598,8 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Creates a player object.
+     * Add a new player to your player list in Openfort.
+     * Create a player object.
      * @param createPlayerRequest 
      */
     public createPlayer(createPlayerRequest: CreatePlayerRequest, _options?: Configuration): Promise<PlayerResponse> {
@@ -587,7 +608,7 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Creates an account object for an existing player.
+     * Create account object for a player.
      * @param id Specifies the unique player ID.
      * @param createPlayerAccountRequest 
      */
@@ -597,7 +618,7 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Creates a session object for the given player.
+     * Create session object for a player.
      * @param id Specifies the unique player ID.
      * @param createPlayerSessionRequest 
      */
@@ -607,9 +628,9 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Retrieves the details of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Retrieves the details of an existing player.
      * @param id Specifies the unique player ID.
-     * @param expand 
+     * @param expand Specifies the expandable fields.
      */
     public getPlayer(id: string, expand?: Array<PlayerResponseExpandable>, _options?: Configuration): Promise<PlayerResponse> {
         const result = this.api.getPlayer(id, expand, _options);
@@ -617,9 +638,9 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param id 
-     * @param expand 
+     * List of accounts of a player.
+     * @param id Specifies the unique player ID.
+     * @param expand Specifies the expandable fields.
      */
     public getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountListResponse> {
         const result = this.api.getPlayerAccounts(id, expand, _options);
@@ -627,12 +648,13 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param name 
+     * By default, a maximum of ten players are shown.
+     * List players.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param name Filter by player name.
      */
     public getPlayers(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PlayerResponseExpandable>, name?: string, _options?: Configuration): Promise<PlayerListResponse> {
         const result = this.api.getPlayers(limit, skip, order, expand, name, _options);
@@ -640,7 +662,30 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Transfer ownership of an account to an address.
+     * This endpoint allows you to cancel a pending transfer of ownership.
+     * Cancel request to transfer ownership of an account.
+     * @param id 
+     * @param playerCancelTransferOwnershipRequest 
+     */
+    public obsoleteCancelTransferAccountOwnership(id: string, playerCancelTransferOwnershipRequest: PlayerCancelTransferOwnershipRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
+        const result = this.api.obsoleteCancelTransferAccountOwnership(id, playerCancelTransferOwnershipRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
+     * Request transfer ownership of account.
+     * @param id Specifies the unique player ID.
+     * @param playerTransferOwnershipRequest 
+     */
+    public obsoleteRequestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
+        const result = this.api.obsoleteRequestTransferAccountOwnership(id, playerTransferOwnershipRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
+     * Request transfer ownership of account.
      * @param id Specifies the unique player ID.
      * @param playerTransferOwnershipRequest 
      */
@@ -650,7 +695,7 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Creates a session object for the given player.
+     * Revoke session object for a player.
      * @param id Specifies the unique player ID.
      * @param revokeSessionPlayerRequest 
      */
@@ -689,10 +734,11 @@ export class PromisePlayersAuthenticationApi {
     }
 
     /**
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param email 
+     * List authenticated players.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param email Specifies the email address of the user.
      */
     public getAuthenticatedPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Promise<AuthPlayerListResponse> {
         const result = this.api.getAuthenticatedPlayers(limit, skip, order, email, _options);
@@ -719,7 +765,7 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * Creates a policy object.
+     * Create a policy object.
      * @param createPolicyRequest 
      */
     public createPolicy(createPolicyRequest: CreatePolicyRequest, _options?: Configuration): Promise<PolicyResponse> {
@@ -728,7 +774,8 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * @param id 
+     * Create a policy rule object for a policy.
+     * @param id Specifies the unique policy ID.
      * @param createPolicyAllowFunctionRequest 
      */
     public createPolicyAllowFunction(id: string, createPolicyAllowFunctionRequest: CreatePolicyAllowFunctionRequest, _options?: Configuration): Promise<PolicyRuleResponse> {
@@ -737,8 +784,8 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * Deletes a policy object.
-     * @param id 
+     * Delete a policy object.
+     * @param id Specifies the unique policy ID.
      */
     public deletePolicy(id: string, _options?: Configuration): Promise<PolicyDeleteResponse> {
         const result = this.api.deletePolicy(id, _options);
@@ -746,14 +793,14 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * Gets all policy objects for a given project.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param name 
-     * @param deleted 
-     * @param chainId 
+     * List policies.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param name Specifies the name of the policy.
+     * @param deleted Specifies whether to include deleted contracts.
+     * @param chainId The chain ID of the policy.
      */
     public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<PolicyListResponse> {
         const result = this.api.getPolicies(limit, skip, order, expand, name, deleted, chainId, _options);
@@ -761,9 +808,9 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * Gets a policy object for a given project.
-     * @param id 
-     * @param expand 
+     * Get a policy object.
+     * @param id Specifies the unique policy ID.
+     * @param expand Specifies the fields to expand.
      */
     public getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Promise<PolicyResponse> {
         const result = this.api.getPolicy(id, expand, _options);
@@ -771,8 +818,9 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * @param id 
-     * @param expand 
+     * List policy rules of a policy.
+     * @param id Specifies the unique policy ID.
+     * @param expand Specifies the fields to expand.
      */
     public getPolicyAllowFunctions(id: string, expand?: Array<'contract'>, _options?: Configuration): Promise<PolicyRuleListResponse> {
         const result = this.api.getPolicyAllowFunctions(id, expand, _options);
@@ -780,7 +828,8 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * @param id 
+     * List all gas reports of a policy.
+     * @param id Specifies the unique policy ID.
      */
     public getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<GasReport> {
         const result = this.api.getPolicyTotalGasUsage(id, _options);
@@ -788,8 +837,8 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * Updates a policy object.
-     * @param id 
+     * Update a policy object.
+     * @param id Specifies the unique policy ID.
      * @param updatePolicyRequest 
      */
     public updatePolicy(id: string, updatePolicyRequest: UpdatePolicyRequest, _options?: Configuration): Promise<PolicyResponse> {
@@ -798,6 +847,7 @@ export class PromisePoliciesApi {
     }
 
     /**
+     * Update a policy rule object of a policy.
      * @param policy 
      * @param policyRule 
      * @param updatePolicyRuleRequest 
@@ -827,7 +877,7 @@ export class PromisePolicyRulesApi {
     }
 
     /**
-     * Creates an allow function object.
+     * Create a policy rule object.
      * @param createPolicyRuleRequest 
      */
     public createPolicyRules(createPolicyRuleRequest: CreatePolicyRuleRequest, _options?: Configuration): Promise<PolicyRuleResponse> {
@@ -836,8 +886,8 @@ export class PromisePolicyRulesApi {
     }
 
     /**
-     * Deletes an polciy rule (allow_functions) object.
-     * @param id 
+     * Deletes a policy rule object.
+     * @param id Specifies the unique policy rule ID.
      */
     public deletePolicyRules(id: string, _options?: Configuration): Promise<PolicyRuleDeleteResponse> {
         const result = this.api.deletePolicyRules(id, _options);
@@ -845,12 +895,12 @@ export class PromisePolicyRulesApi {
     }
 
     /**
-     * Returns a list of your allow functions for the given policy. The allow functions are returned sorted by creation date, with the most recently created allow functions appearing first.
-     * @param policy 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
+     * List policy rules of a policy.
+     * @param policy Specifies the unique policy ID.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
      */
     public getPolicyRules(policy: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'contract'>, _options?: Configuration): Promise<PolicyRuleListResponse> {
         const result = this.api.getPolicyRules(policy, limit, skip, order, expand, _options);
@@ -858,8 +908,8 @@ export class PromisePolicyRulesApi {
     }
 
     /**
-     * Updates an allow functions object.
-     * @param id Specifies the unique allow function ID.
+     * Update a policy rule object.
+     * @param id Specifies the unique policy rule ID.
      * @param updatePolicyRuleRequest 
      */
     public updatePolicyRules(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Promise<PolicyRuleResponse> {
@@ -887,7 +937,7 @@ export class PromiseSessionsApi {
     }
 
     /**
-     * Creates the session for the account.
+     * Create a session key.
      * @param createSessionRequest 
      */
     public createSession(createSessionRequest: CreateSessionRequest, _options?: Configuration): Promise<SessionResponse> {
@@ -896,23 +946,22 @@ export class PromiseSessionsApi {
     }
 
     /**
-     * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param player 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param address 
+     * List session keys of a player.
+     * @param player The player ID
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
      */
-    public getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<SessionResponseExpandable>, address?: string, _options?: Configuration): Promise<SessionListResponse> {
-        const result = this.api.getPlayerSessions(player, limit, skip, order, expand, address, _options);
+    public getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<SessionListResponse> {
+        const result = this.api.getPlayerSessions(player, limit, skip, order, expand, _options);
         return result.toPromise();
     }
 
     /**
      * Returns a player session by session id
-     * @param id 
-     * @param expand 
+     * @param id Specifies the unique session ID.
+     * @param expand Specifies the fields to expand.
      */
     public getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<SessionResponse> {
         const result = this.api.getSession(id, expand, _options);
@@ -920,7 +969,7 @@ export class PromiseSessionsApi {
     }
 
     /**
-     * Revokes the session for the account.
+     * Revoke the session session key.
      * @param revokeSessionRequest 
      */
     public revokeSession(revokeSessionRequest: RevokeSessionRequest, _options?: Configuration): Promise<SessionResponse> {
@@ -930,7 +979,7 @@ export class PromiseSessionsApi {
 
     /**
      * Confirms the creation of a session with an external owner.
-     * @param id 
+     * @param id Specifies the unique session ID.
      * @param signatureRequest 
      */
     public signatureSession(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<SessionResponse> {
@@ -958,7 +1007,8 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
-     * Creates a transaction intent object.
+     * Retrieve a transaction intent by providing their id on Openfort. Transaction intents that have not been processed yet, have the `response` attribute as undefined.
+     * Create a transaction intent object.
      * @param createTransactionIntentRequest 
      */
     public createTransactionIntent(createTransactionIntentRequest: CreateTransactionIntentRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
@@ -967,9 +1017,9 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
-     * Retrieves a transaction intent object.
-     * @param id 
-     * @param expand 
+     * Get a transaction intent object.
+     * @param id Specifies the unique transaction intent ID.
+     * @param expand Specifies the expandable fields.
      */
     public getTransactionIntent(id: string, expand?: Array<TransactionIntentResponseExpandable>, _options?: Configuration): Promise<TransactionIntentResponse> {
         const result = this.api.getTransactionIntent(id, expand, _options);
@@ -977,15 +1027,15 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
-     * Returns a list of transaction intents for the given project. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param chainId 
-     * @param accountId 
-     * @param playerId 
-     * @param policyId 
+     * List transaction intents.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param chainId The chain ID.
+     * @param accountId Filter by account ID.
+     * @param playerId Filter by player ID.
+     * @param policyId Filter by policy ID.
      */
     public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
         const result = this.api.getTransactionIntents(limit, skip, order, expand, chainId, accountId, playerId, policyId, _options);
@@ -993,27 +1043,13 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
+     * This endpoint is used to put a userOperationHash signature on-chain. This means players that have informed (and use) an [externally-owned account (EOA)](https://ethereum.org/en/developers/docs/accounts/) to authorize operations, such as registering a session key, for their gaming accounts.  Given that players with non-custodial accounts are the only ones in possession of the private key, they must sign the information inside the `nextAction` value received from the `POST` API endpoint that creates a transaction_intent, even with their session-keys. Once signed, the client needs to send the signed message using the `/signature` endpoint or use one of the available client-side libraries to do so.
      * Confirms the creation of a transaction intent with an external owner.
-     * @param id 
+     * @param id Specifies the unique transaction intent ID.
      * @param signatureRequest 
      */
     public signature(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
         const result = this.api.signature(id, signatureRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * @param id 
-     */
-    public updateTransactionIntentResponse(id: string, _options?: Configuration): Promise<TransactionIntentResponse> {
-        const result = this.api.updateTransactionIntentResponse(id, _options);
-        return result.toPromise();
-    }
-
-    /**
-     */
-    public updateTransactionIntentsResponse(_options?: Configuration): Promise<TransactionIntentListResponse> {
-        const result = this.api.updateTransactionIntentsResponse(_options);
         return result.toPromise();
     }
 

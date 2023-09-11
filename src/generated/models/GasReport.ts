@@ -10,12 +10,13 @@
  * Do not edit the class manually.
  */
 
+import { GasReportDataInner } from '../models/GasReportDataInner';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { HttpFile } from '../http/http';
 
 export class GasReport {
     'object': ResponseTypeLIST;
-    'data': Array<any>;
+    'data': Array<GasReportDataInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,7 +30,7 @@ export class GasReport {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<any>",
+            "type": "Array<GasReportDataInner>",
             "format": ""
         }    ];
 

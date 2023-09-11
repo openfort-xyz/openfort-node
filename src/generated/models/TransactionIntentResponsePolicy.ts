@@ -16,12 +16,18 @@ import { Policy } from '../models/Policy';
 import { PolicyStrategy } from '../models/PolicyStrategy';
 import { HttpFile } from '../http/http';
 
+/**
+* The policy ID.
+*/
 export class TransactionIntentResponsePolicy {
     'id': string;
     'object': EntityTypePOLICY;
     'createdAt': number;
     'name': string | null;
     'deleted': boolean;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'strategy': PolicyStrategy;
     'transactionIntents': Array<EntityIdResponse>;
@@ -64,7 +70,7 @@ export class TransactionIntentResponsePolicy {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "strategy",

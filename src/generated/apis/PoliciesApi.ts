@@ -29,7 +29,7 @@ import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
 export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates a policy object.
+     * Create a policy object.
      * @param createPolicyRequest 
      */
     public async createPolicy(createPolicyRequest: CreatePolicyRequest, _options?: Configuration): Promise<RequestContext> {
@@ -76,7 +76,8 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param id 
+     * Create a policy rule object for a policy.
+     * @param id Specifies the unique policy ID.
      * @param createPolicyAllowFunctionRequest 
      */
     public async createPolicyAllowFunction(id: string, createPolicyAllowFunctionRequest: CreatePolicyAllowFunctionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -130,8 +131,8 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Deletes a policy object.
-     * @param id 
+     * Delete a policy object.
+     * @param id Specifies the unique policy ID.
      */
     public async deletePolicy(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -167,14 +168,14 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Gets all policy objects for a given project.
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param name 
-     * @param deleted 
-     * @param chainId 
+     * List policies.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param name Specifies the name of the policy.
+     * @param deleted Specifies whether to include deleted contracts.
+     * @param chainId The chain ID of the policy.
      */
     public async getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -225,7 +226,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (chainId !== undefined) {
-            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "double"));
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
         }
 
 
@@ -245,9 +246,9 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Gets a policy object for a given project.
-     * @param id 
-     * @param expand 
+     * Get a policy object.
+     * @param id Specifies the unique policy ID.
+     * @param expand Specifies the fields to expand.
      */
     public async getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -289,8 +290,9 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param id 
-     * @param expand 
+     * List policy rules of a policy.
+     * @param id Specifies the unique policy ID.
+     * @param expand Specifies the fields to expand.
      */
     public async getPolicyAllowFunctions(id: string, expand?: Array<'contract'>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -332,7 +334,8 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param id 
+     * List all gas reports of a policy.
+     * @param id Specifies the unique policy ID.
      */
     public async getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -368,8 +371,8 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates a policy object.
-     * @param id 
+     * Update a policy object.
+     * @param id Specifies the unique policy ID.
      * @param updatePolicyRequest 
      */
     public async updatePolicy(id: string, updatePolicyRequest: UpdatePolicyRequest, _options?: Configuration): Promise<RequestContext> {
@@ -423,6 +426,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update a policy rule object of a policy.
      * @param policy 
      * @param policyRule 
      * @param updatePolicyRuleRequest 

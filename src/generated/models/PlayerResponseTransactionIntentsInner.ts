@@ -22,8 +22,17 @@ export class PlayerResponseTransactionIntentsInner {
     'id': string;
     'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
+    /**
+    * The unix timestamp in seconds when the transactionIntent was created.
+    */
     'updatedAt': number;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
+    /**
+    * The hashed userOperation.
+    */
     'userOperationHash'?: string;
     'userOperation'?: any | null;
     'response'?: ResponseResponse;
@@ -64,7 +73,7 @@ export class PlayerResponseTransactionIntentsInner {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "userOperationHash",

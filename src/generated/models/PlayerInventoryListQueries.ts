@@ -14,10 +14,22 @@ import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class PlayerInventoryListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * Filter by contract ID.
+    */
     'contractId'?: Array<string>;
+    /**
+    * Filter by chain id.
+    */
     'chainId': number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -51,7 +63,7 @@ export class PlayerInventoryListQueries {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

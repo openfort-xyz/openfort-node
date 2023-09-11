@@ -21,6 +21,9 @@ export class Policy {
     'createdAt': number;
     'name': string | null;
     'deleted': boolean;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'strategy': PolicyStrategy;
     'transactionIntents': Array<EntityIdResponse>;
@@ -63,7 +66,7 @@ export class Policy {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "strategy",

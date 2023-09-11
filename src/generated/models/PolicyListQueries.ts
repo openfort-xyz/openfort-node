@@ -15,12 +15,30 @@ import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class PolicyListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * Specifies the fields to expand in the response.
+    */
     'expand'?: Array<PolicyResponseExpandable>;
+    /**
+    * Specifies the name of the policy.
+    */
     'name'?: string;
+    /**
+    * Specifies whether to include deleted contracts.
+    */
     'deleted'?: boolean;
+    /**
+    * The chain ID of the policy.
+    */
     'chainId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -66,7 +84,7 @@ export class PolicyListQueries {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

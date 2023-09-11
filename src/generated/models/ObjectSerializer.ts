@@ -59,6 +59,9 @@ export * from '../models/FieldErrorsValue';
 export * from '../models/GasPerIntervalLimitPolicyRuleResponse';
 export * from '../models/GasPerTransactionLimitPolicyRuleResponse';
 export * from '../models/GasReport';
+export * from '../models/GasReportDataInner';
+export * from '../models/GasReportDataInnerPeriod';
+export * from '../models/GasReportDataInnerTransactionIntentsInner';
 export * from '../models/GetSigninUrlResponse';
 export * from '../models/Interaction';
 export * from '../models/InvalidRequestError';
@@ -86,6 +89,7 @@ export * from '../models/PickPlayerResponseId';
 export * from '../models/Player';
 export * from '../models/PlayerCancelTransferOwnershipRequest';
 export * from '../models/PlayerInventoryListQueries';
+export * from '../models/PlayerInventoryQueries';
 export * from '../models/PlayerListQueries';
 export * from '../models/PlayerListResponse';
 export * from '../models/PlayerRequest';
@@ -145,6 +149,7 @@ export * from '../models/TransactionIntent';
 export * from '../models/TransactionIntentListQueries';
 export * from '../models/TransactionIntentListResponse';
 export * from '../models/TransactionIntentResponse';
+export * from '../models/TransactionIntentResponseAccount';
 export * from '../models/TransactionIntentResponseExpandable';
 export * from '../models/TransactionIntentResponsePlayer';
 export * from '../models/TransactionIntentResponsePolicy';
@@ -215,6 +220,9 @@ import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { GasPerIntervalLimitPolicyRuleResponse         } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse       } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport   } from '../models/GasReport';
+import { GasReportDataInner } from '../models/GasReportDataInner';
+import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
+import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError    } from '../models/InvalidRequestError';
@@ -242,6 +250,7 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { Player         } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries      } from '../models/PlayerInventoryListQueries';
+import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries      } from '../models/PlayerListQueries';
 import { PlayerListResponse       } from '../models/PlayerListResponse';
 import { PlayerRequest } from '../models/PlayerRequest';
@@ -283,7 +292,7 @@ import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
-import { SessionListQueries       } from '../models/SessionListQueries';
+import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
@@ -301,6 +310,7 @@ import { TransactionIntent              } from '../models/TransactionIntent';
 import { TransactionIntentListQueries         } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse       } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse              } from '../models/TransactionIntentResponse';
+import { TransactionIntentResponseAccount            } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy          } from '../models/TransactionIntentResponsePolicy';
@@ -417,6 +427,9 @@ let typeMap: {[index: string]: any} = {
     "GasPerIntervalLimitPolicyRuleResponse": GasPerIntervalLimitPolicyRuleResponse,
     "GasPerTransactionLimitPolicyRuleResponse": GasPerTransactionLimitPolicyRuleResponse,
     "GasReport": GasReport,
+    "GasReportDataInner": GasReportDataInner,
+    "GasReportDataInnerPeriod": GasReportDataInnerPeriod,
+    "GasReportDataInnerTransactionIntentsInner": GasReportDataInnerTransactionIntentsInner,
     "GetSigninUrlResponse": GetSigninUrlResponse,
     "Interaction": Interaction,
     "InvalidRequestError": InvalidRequestError,
@@ -441,6 +454,7 @@ let typeMap: {[index: string]: any} = {
     "Player": Player,
     "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
     "PlayerInventoryListQueries": PlayerInventoryListQueries,
+    "PlayerInventoryQueries": PlayerInventoryQueries,
     "PlayerListQueries": PlayerListQueries,
     "PlayerListResponse": PlayerListResponse,
     "PlayerRequest": PlayerRequest,
@@ -482,6 +496,7 @@ let typeMap: {[index: string]: any} = {
     "TransactionIntentListQueries": TransactionIntentListQueries,
     "TransactionIntentListResponse": TransactionIntentListResponse,
     "TransactionIntentResponse": TransactionIntentResponse,
+    "TransactionIntentResponseAccount": TransactionIntentResponseAccount,
     "TransactionIntentResponsePlayer": TransactionIntentResponsePlayer,
     "TransactionIntentResponsePolicy": TransactionIntentResponsePolicy,
     "TransferOwnershipRequest": TransferOwnershipRequest,

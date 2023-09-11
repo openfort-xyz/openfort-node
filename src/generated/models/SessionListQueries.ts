@@ -15,12 +15,23 @@ import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class SessionListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * The player ID
+    */
     'player': string;
+    /**
+    * Specifies the fields to expand in the response.
+    */
     'expand'?: Array<SessionResponseExpandable>;
-    'address'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -53,12 +64,6 @@ export class SessionListQueries {
             "name": "expand",
             "baseName": "expand",
             "type": "Array<SessionResponseExpandable>",
-            "format": ""
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
             "format": ""
         }    ];
 
