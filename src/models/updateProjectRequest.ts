@@ -1,5 +1,5 @@
-import { ProjectRequest } from "../generated";
+import { UpdateProjectRequest as ApiUpdateProjectRequest } from "../generated";
 
-export interface UpdateProjectRequest extends ProjectRequest {
+export interface UpdateProjectRequest extends ApiUpdateProjectRequest {
     id: string;
 }

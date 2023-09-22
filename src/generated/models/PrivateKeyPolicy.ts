@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type ProjectRole = "OWNER" | "ADMIN" | "MEMBER" ;
+export type PrivateKeyPolicy = "INDIVIDUAL" | "PROJECT" ;

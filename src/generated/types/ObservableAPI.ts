@@ -40,6 +40,7 @@ import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest
 import { CreatePolicyAllowFunctionRequest } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
+import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { Currency } from '../models/Currency';
@@ -59,6 +60,7 @@ import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
+import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
@@ -77,8 +79,6 @@ import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
 import { MemberRemoveResponse } from '../models/MemberRemoveResponse';
 import { MemberRequest } from '../models/MemberRequest';
-import { MemberResponse } from '../models/MemberResponse';
-import { MembersResponse } from '../models/MembersResponse';
 import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
@@ -86,7 +86,6 @@ import { NextActionType } from '../models/NextActionType';
 import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
-import { PKPolicy } from '../models/PKPolicy';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
@@ -124,11 +123,11 @@ import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
+import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
-import { ProjectRequest } from '../models/ProjectRequest';
 import { ProjectResponse } from '../models/ProjectResponse';
-import { ProjectRole } from '../models/ProjectRole';
+import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { ProviderRequest } from '../models/ProviderRequest';
 import { ProviderResponse } from '../models/ProviderResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
@@ -162,6 +161,10 @@ import { TypedDataField } from '../models/TypedDataField';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
+import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
+import { UserListResponse } from '../models/UserListResponse';
+import { UserProjectRole } from '../models/UserProjectRole';
+import { UserResponse } from '../models/UserResponse';
 
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
 export class ObservableAccountsApi {
@@ -1846,6 +1849,30 @@ export class ObservableTransactionIntentsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createTransactionIntent(rsp)));
+            }));
+    }
+
+    /**
+     * Estimate the gas cost of creating a transaction intent and putting it onchain.
+     * Estimate gas cost of creating a transaction
+     * @param createTransactionIntentRequest 
+     */
+    public estimateTransactionIntentCost(createTransactionIntentRequest: CreateTransactionIntentRequest, _options?: Configuration): Observable<EstimateTransactionIntentGasResult> {
+        const requestContextPromise = this.requestFactory.estimateTransactionIntentCost(createTransactionIntentRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.estimateTransactionIntentCost(rsp)));
             }));
     }
 

@@ -10,20 +10,19 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyResponse } from '../models/ApiKeyResponse';
-import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
-import { ProviderResponse } from '../models/ProviderResponse';
+import { EntityTypeUSER } from '../models/EntityTypeUSER';
+import { UserProjectRole } from '../models/UserProjectRole';
 import { HttpFile } from '../http/http';
 
-export class ProjectResponse {
+export class UserResponse {
     'id': string;
-    'object': EntityTypePROJECT;
+    'object': EntityTypeUSER;
     'createdAt': number;
     'updatedAt': number;
-    'name': string;
-    'apikeys'?: Array<ApiKeyResponse>;
-    'providers'?: Array<ProviderResponse>;
-    'webhook'?: Array<ProviderResponse>;
+    'first_name': string;
+    'last_name': string;
+    'role': UserProjectRole;
+    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,7 +36,7 @@ export class ProjectResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePROJECT",
+            "type": "EntityTypeUSER",
             "format": ""
         },
         {
@@ -53,32 +52,32 @@ export class ProjectResponse {
             "format": "int32"
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "first_name",
+            "baseName": "first_name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "apikeys",
-            "baseName": "apikeys",
-            "type": "Array<ApiKeyResponse>",
+            "name": "last_name",
+            "baseName": "last_name",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "providers",
-            "baseName": "providers",
-            "type": "Array<ProviderResponse>",
+            "name": "role",
+            "baseName": "role",
+            "type": "UserProjectRole",
             "format": ""
         },
         {
-            "name": "webhook",
-            "baseName": "webhook",
-            "type": "Array<ProviderResponse>",
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectResponse.attributeTypeMap;
+        return UserResponse.attributeTypeMap;
     }
 
     public constructor() {
