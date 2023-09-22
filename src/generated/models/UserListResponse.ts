@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { MemberResponse } from '../models/MemberResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { UserResponse } from '../models/UserResponse';
 import { HttpFile } from '../http/http';
 
-export class MembersResponse {
+export class UserListResponse {
     'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<MemberResponse>;
+    'data': Array<UserResponse>;
     'start': number;
     'end': number;
     'total': number;
@@ -40,7 +40,7 @@ export class MembersResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<MemberResponse>",
+            "type": "Array<UserResponse>",
             "format": ""
         },
         {
@@ -63,7 +63,7 @@ export class MembersResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return MembersResponse.attributeTypeMap;
+        return UserListResponse.attributeTypeMap;
     }
 
     public constructor() {

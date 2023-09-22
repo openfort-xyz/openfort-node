@@ -10,29 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { ProjectRole } from '../models/ProjectRole';
 import { HttpFile } from '../http/http';
 
-export class MemberResponse {
-    'role': ProjectRole;
+export class UpdateProjectRequest {
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "role",
-            "baseName": "role",
-            "type": "ProjectRole",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return MemberResponse.attributeTypeMap;
+        return UpdateProjectRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

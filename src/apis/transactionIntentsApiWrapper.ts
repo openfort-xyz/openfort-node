@@ -5,6 +5,7 @@ import {
     TransactionIntentResponse,
     TransactionIntentListResponse,
     TransactionIntentListQueries,
+    EstimateTransactionIntentGasResult,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { TransactionIntentsApi } from "../generated";
@@ -14,6 +15,14 @@ import { httpErrorHandler } from "../utilities/httpErrorHandler";
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {
     constructor(accessToken: string, basePath?: string) {
         super(TransactionIntentsApi, accessToken, basePath);
+    }
+
+    /**
+     * Estimate the gas cost of creating a transaction intent and putting it onchain.
+     * @param req Parameters to estimate transaction intent
+     */
+    public async estimateCost(req: CreateTransactionIntentRequest): Promise<EstimateTransactionIntentGasResult> {
+        return await this.api.estimateTransactionIntentCost(req);
     }
 
     /**

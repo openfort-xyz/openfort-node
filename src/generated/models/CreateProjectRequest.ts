@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { PKPolicy } from '../models/PKPolicy';
+import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { HttpFile } from '../http/http';
 
-export class ProjectRequest {
+export class CreateProjectRequest {
     'name': string;
-    'pkPolicy'?: PKPolicy;
+    'pkPolicy'?: PrivateKeyPolicy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,12 +29,12 @@ export class ProjectRequest {
         {
             "name": "pkPolicy",
             "baseName": "pkPolicy",
-            "type": "PKPolicy",
+            "type": "PrivateKeyPolicy",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectRequest.attributeTypeMap;
+        return CreateProjectRequest.attributeTypeMap;
     }
 
     public constructor() {

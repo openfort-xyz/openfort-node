@@ -36,6 +36,7 @@ export * from '../models/CreatePlayerSessionRequest';
 export * from '../models/CreatePolicyAllowFunctionRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
+export * from '../models/CreateProjectRequest';
 export * from '../models/CreateSessionRequest';
 export * from '../models/CreateTransactionIntentRequest';
 export * from '../models/Currency';
@@ -55,6 +56,7 @@ export * from '../models/EntityTypeSIGNATURE';
 export * from '../models/EntityTypeTRANSACTIONINTENT';
 export * from '../models/EntityTypeUSER';
 export * from '../models/ErrorTypeINVALIDREQUESTERROR';
+export * from '../models/EstimateTransactionIntentGasResult';
 export * from '../models/FieldErrorsValue';
 export * from '../models/GasPerIntervalLimitPolicyRuleResponse';
 export * from '../models/GasPerTransactionLimitPolicyRuleResponse';
@@ -73,8 +75,6 @@ export * from '../models/Log';
 export * from '../models/LoginRequest';
 export * from '../models/MemberRemoveResponse';
 export * from '../models/MemberRequest';
-export * from '../models/MemberResponse';
-export * from '../models/MembersResponse';
 export * from '../models/Money';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
@@ -82,7 +82,6 @@ export * from '../models/NextActionType';
 export * from '../models/ObsoleteAssetInventory';
 export * from '../models/ObsoleteAssetType';
 export * from '../models/ObsoleteInventoryResponse';
-export * from '../models/PKPolicy';
 export * from '../models/PayForUserPolicyStrategy';
 export * from '../models/PickContractResponseId';
 export * from '../models/PickPlayerResponseId';
@@ -120,11 +119,11 @@ export * from '../models/PolicyRuleTypeRATELIMIT';
 export * from '../models/PolicyStrategy';
 export * from '../models/PolicyStrategyRequest';
 export * from '../models/PrismaInputJsonValue';
+export * from '../models/PrivateKeyPolicy';
 export * from '../models/ProjectListResponse';
 export * from '../models/ProjectLogs';
-export * from '../models/ProjectRequest';
 export * from '../models/ProjectResponse';
-export * from '../models/ProjectRole';
+export * from '../models/ProjectWebhookRequest';
 export * from '../models/ProviderRequest';
 export * from '../models/ProviderResponse';
 export * from '../models/ResponseResponse';
@@ -158,6 +157,10 @@ export * from '../models/TypedDataField';
 export * from '../models/UpdateContractRequest';
 export * from '../models/UpdatePolicyRequest';
 export * from '../models/UpdatePolicyRuleRequest';
+export * from '../models/UpdateProjectRequest';
+export * from '../models/UserListResponse';
+export * from '../models/UserProjectRole';
+export * from '../models/UserResponse';
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
@@ -197,6 +200,7 @@ import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest
 import { CreatePolicyAllowFunctionRequest        } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
+import { CreateProjectRequest   } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { Currency } from '../models/Currency';
@@ -216,6 +220,7 @@ import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
+import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { GasPerIntervalLimitPolicyRuleResponse         } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse       } from '../models/GasPerTransactionLimitPolicyRuleResponse';
@@ -234,8 +239,6 @@ import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
 import { MemberRemoveResponse    } from '../models/MemberRemoveResponse';
 import { MemberRequest } from '../models/MemberRequest';
-import { MemberResponse  } from '../models/MemberResponse';
-import { MembersResponse       } from '../models/MembersResponse';
 import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
@@ -243,7 +246,6 @@ import { NextActionType } from '../models/NextActionType';
 import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse     } from '../models/ObsoleteInventoryResponse';
-import { PKPolicy } from '../models/PKPolicy';
 import { PayForUserPolicyStrategy  } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
@@ -281,11 +283,11 @@ import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy    } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest    } from '../models/PolicyStrategyRequest';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
+import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
 import { ProjectLogs       } from '../models/ProjectLogs';
-import { ProjectRequest   } from '../models/ProjectRequest';
-import { ProjectResponse        } from '../models/ProjectResponse';
-import { ProjectRole } from '../models/ProjectRole';
+import { ProjectResponse         } from '../models/ProjectResponse';
+import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { ProviderRequest } from '../models/ProviderRequest';
 import { ProviderResponse } from '../models/ProviderResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
@@ -319,6 +321,10 @@ import { TypedDataField } from '../models/TypedDataField';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleRequest';
+import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
+import { UserListResponse       } from '../models/UserListResponse';
+import { UserProjectRole } from '../models/UserProjectRole';
+import { UserResponse         } from '../models/UserResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -358,7 +364,6 @@ let enumsMap: Set<string> = new Set<string>([
     "ErrorTypeINVALIDREQUESTERROR",
     "NextActionType",
     "ObsoleteAssetType",
-    "PKPolicy",
     "PlayerResponseExpandable",
     "PolicyRateLimit",
     "PolicyRateLimitCOUNTPERINTERVAL",
@@ -370,7 +375,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PolicyRuleTypeACCOUNT",
     "PolicyRuleTypeCONTRACT",
     "PolicyRuleTypeRATELIMIT",
-    "ProjectRole",
+    "PrivateKeyPolicy",
     "ResponseTypeLIST",
     "SessionResponseExpandable",
     "SortOrder",
@@ -379,6 +384,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SponsorSchemaPAYFORUSER",
     "TimeIntervalType",
     "TransactionIntentResponseExpandable",
+    "UserProjectRole",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -418,11 +424,13 @@ let typeMap: {[index: string]: any} = {
     "CreatePolicyAllowFunctionRequest": CreatePolicyAllowFunctionRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
+    "CreateProjectRequest": CreateProjectRequest,
     "CreateSessionRequest": CreateSessionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "DomainData": DomainData,
     "EditRoleRequest": EditRoleRequest,
     "EntityIdResponse": EntityIdResponse,
+    "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
     "FieldErrorsValue": FieldErrorsValue,
     "GasPerIntervalLimitPolicyRuleResponse": GasPerIntervalLimitPolicyRuleResponse,
     "GasPerTransactionLimitPolicyRuleResponse": GasPerTransactionLimitPolicyRuleResponse,
@@ -441,8 +449,6 @@ let typeMap: {[index: string]: any} = {
     "LoginRequest": LoginRequest,
     "MemberRemoveResponse": MemberRemoveResponse,
     "MemberRequest": MemberRequest,
-    "MemberResponse": MemberResponse,
-    "MembersResponse": MembersResponse,
     "Money": Money,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
@@ -477,8 +483,8 @@ let typeMap: {[index: string]: any} = {
     "PrismaInputJsonValue": PrismaInputJsonValue,
     "ProjectListResponse": ProjectListResponse,
     "ProjectLogs": ProjectLogs,
-    "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
+    "ProjectWebhookRequest": ProjectWebhookRequest,
     "ProviderRequest": ProviderRequest,
     "ProviderResponse": ProviderResponse,
     "ResponseResponse": ResponseResponse,
@@ -504,6 +510,9 @@ let typeMap: {[index: string]: any} = {
     "UpdateContractRequest": UpdateContractRequest,
     "UpdatePolicyRequest": UpdatePolicyRequest,
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
+    "UpdateProjectRequest": UpdateProjectRequest,
+    "UserListResponse": UserListResponse,
+    "UserResponse": UserResponse,
 }
 
 export class ObjectSerializer {
