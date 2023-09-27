@@ -13,9 +13,21 @@
 import { HttpFile } from '../http/http';
 
 export class SignupRequest {
+    /**
+    * The email address of the user.
+    */
     'email': string;
+    /**
+    * The password of the user.
+    */
     'password': string;
+    /**
+    * The name of the user.
+    */
     'name': string;
+    /**
+    * The description of the user.
+    */
     'description'?: string;
 
     static readonly discriminator: string | undefined = undefined;

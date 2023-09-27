@@ -10,29 +10,39 @@
  * Do not edit the class manually.
  */
 
+import { Currency } from '../models/Currency';
 import { HttpFile } from '../http/http';
 
-/**
-* From T, pick a set of properties whose keys are in the union K
-*/
-export class PickPolicyResponseId {
-    'id': string;
+export class Money {
+    /**
+    * Amount in cents
+    */
+    'amount': number;
+    'currency': Currency;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "amount",
+            "baseName": "amount",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "currency",
+            "baseName": "currency",
+            "type": "Currency",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PickPolicyResponseId.attributeTypeMap;
+        return Money.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

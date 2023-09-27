@@ -12,24 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* From T, pick a set of properties whose keys are in the union K
-*/
-export class PickAccountResponseId {
-    'id': string;
+export class PlayerInventoryQueries {
+    /**
+    * Filter by chain id.
+    */
+    'chainId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return PickAccountResponseId.attributeTypeMap;
+        return PlayerInventoryQueries.attributeTypeMap;
     }
 
     public constructor() {

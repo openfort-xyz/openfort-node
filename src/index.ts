@@ -8,6 +8,8 @@ import { PolicyRulesApiWrapper } from "./apis/policyRulesApiWrapper";
 import { SessionsApiWrapper } from "./apis/sessionsApiWrapper";
 import { TransactionIntentsApiWrapper } from "./apis/transactionIntentsApiWrapper";
 import { InventoryApiWrapper } from "./apis/inventoryApiWrapper";
+import { WebHookEvent } from "./models/webHookEvent";
+import { createHmac } from "crypto";
 
 export default class Openfort {
     private readonly apiWrappers = {};
@@ -66,6 +68,15 @@ export default class Openfort {
         }
         this.apiWrappers[type.name] = result;
         return result;
+    }
+
+    public async constructWebhookEvent(body: string, signature: string): Promise<WebHookEvent> {
+        const secret = this.apiKey.split("_")[2]?.replace(/-/g, "");
+        const signedPayload = await createHmac("sha256", secret).update(body, "utf8").digest("hex");
+        if (signedPayload !== signature) {
+            throw Error("Invalid signature");
+        }
+        return JSON.parse(body) as WebHookEvent;
     }
 }
 

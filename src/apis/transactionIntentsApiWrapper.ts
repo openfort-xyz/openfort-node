@@ -4,8 +4,8 @@ import {
     SignatureTransactionIntentRequest,
     TransactionIntentResponse,
     TransactionIntentListResponse,
-    UpdateTransactionIntentRequest,
     TransactionIntentListQueries,
+    EstimateTransactionIntentGasResult,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { TransactionIntentsApi } from "../generated";
@@ -15,6 +15,14 @@ import { httpErrorHandler } from "../utilities/httpErrorHandler";
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {
     constructor(accessToken: string, basePath?: string) {
         super(TransactionIntentsApi, accessToken, basePath);
+    }
+
+    /**
+     * Estimate the gas cost of creating a transaction intent and putting it onchain.
+     * @param req Parameters to estimate transaction intent
+     */
+    public async estimateCost(req: CreateTransactionIntentRequest): Promise<EstimateTransactionIntentGasResult> {
+        return await this.api.estimateTransactionIntentCost(req);
     }
 
     /**
@@ -57,21 +65,5 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
     public async signature(req: SignatureTransactionIntentRequest): Promise<TransactionIntentResponse> {
         const { id, ...body } = req;
         return await this.api.signature(id, body);
-    }
-
-    /**
-     * Updates transaction intent response
-     * @param req Request to update transaction intent
-     */
-    public async updateResponse(req: UpdateTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        return await this.api.updateTransactionIntentResponse(req.id);
-    }
-
-    /**
-     *
-     * @param project
-     */
-    public async updateList(): Promise<TransactionIntentListResponse> {
-        return await this.api.updateTransactionIntentsResponse();
     }
 }

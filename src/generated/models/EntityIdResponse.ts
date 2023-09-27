@@ -12,10 +12,7 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* From T, pick a set of properties whose keys are in the union K
-*/
-export class PickPolicyRuleResponseId {
+export class EntityIdResponse {
     'id': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -29,7 +26,7 @@ export class PickPolicyRuleResponseId {
         }    ];
 
     static getAttributeTypeMap() {
-        return PickPolicyRuleResponseId.attributeTypeMap;
+        return EntityIdResponse.attributeTypeMap;
     }
 
     public constructor() {

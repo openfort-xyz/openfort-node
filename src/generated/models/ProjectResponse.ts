@@ -23,6 +23,7 @@ export class ProjectResponse {
     'name': string;
     'apikeys'?: Array<ApiKeyResponse>;
     'providers'?: Array<ProviderResponse>;
+    'webhook'?: Array<ProviderResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -66,6 +67,12 @@ export class ProjectResponse {
         {
             "name": "providers",
             "baseName": "providers",
+            "type": "Array<ProviderResponse>",
+            "format": ""
+        },
+        {
+            "name": "webhook",
+            "baseName": "webhook",
             "type": "Array<ProviderResponse>",
             "format": ""
         }    ];

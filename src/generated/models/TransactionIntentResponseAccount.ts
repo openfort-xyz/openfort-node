@@ -10,14 +10,15 @@
  * Do not edit the class manually.
  */
 
-import { AccountResponse } from '../models/AccountResponse';
+import { Account } from '../models/Account';
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
-import { PickAccountResponseId } from '../models/PickAccountResponseId';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
 
+/**
+* The account ID.
+*/
 export class TransactionIntentResponseAccount {
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'id': string;
     'object': EntityTypeACCOUNT;
     'createdAt': number;
@@ -25,19 +26,17 @@ export class TransactionIntentResponseAccount {
     'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'accountType': string;
     'pendingOwnerAddress'?: string;
+    'transactionIntents'?: Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -84,7 +83,7 @@ export class TransactionIntentResponseAccount {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "accountType",
@@ -96,6 +95,12 @@ export class TransactionIntentResponseAccount {
             "name": "pendingOwnerAddress",
             "baseName": "pendingOwnerAddress",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 

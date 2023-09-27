@@ -19,6 +19,7 @@ import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 export class GoogleAuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Get the google oauth signin url.
      */
     public async getSigninUrl(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -47,7 +48,8 @@ export class GoogleAuthenticationApiRequestFactory extends BaseAPIRequestFactory
     }
 
     /**
-     * @param key 
+     * Get the google oauth token.
+     * @param key Specifies the oauth key.
      */
     public async getToken(key: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

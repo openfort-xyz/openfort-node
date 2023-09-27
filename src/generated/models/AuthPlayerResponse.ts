@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
+import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
-import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { HttpFile } from '../http/http';
 
 export class AuthPlayerResponse {
-    'player'?: TransactionIntentResponsePlayer;
+    'player'?: AuthPlayerResponsePlayer;
     'id': string;
     'object': EntityTypePLAYER;
     'createdAt': number;
@@ -31,7 +31,7 @@ export class AuthPlayerResponse {
         {
             "name": "player",
             "baseName": "player",
-            "type": "TransactionIntentResponsePlayer",
+            "type": "AuthPlayerResponsePlayer",
             "format": ""
         },
         {

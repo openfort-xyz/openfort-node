@@ -13,14 +13,36 @@
 import { HttpFile } from '../http/http';
 
 export class Interaction {
+    /**
+    * The address of the contract.
+    */
+    'to'?: string;
+    /**
+    * The contract interacting with
+    */
     'contract'?: string;
+    /**
+    * The value of the transaction.
+    */
     'value'?: string;
-    'functionName': string;
-    'functionArgs': Array<any>;
+    /**
+    * The function name of the contract.
+    */
+    'functionName'?: string;
+    /**
+    * The function arguments of the contract.
+    */
+    'functionArgs'?: Array<any>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "to",
+            "baseName": "to",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "contract",
             "baseName": "contract",

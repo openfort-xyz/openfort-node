@@ -10,14 +10,27 @@
  * Do not edit the class manually.
  */
 
+import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class AccountListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<AccountListQueriesExpandEnum>;
+    /**
+    * Specifies the fields to expand in the response.
+    */
+    'expand'?: Array<AccountResponseExpandable>;
+    /**
+    * Specifies the unique player ID
+    */
     'player': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -44,7 +57,7 @@ export class AccountListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<AccountListQueriesExpandEnum>",
+            "type": "Array<AccountResponseExpandable>",
             "format": ""
         },
         {
@@ -63,5 +76,4 @@ export class AccountListQueries {
 }
 
 
-export type AccountListQueriesExpandEnum = "transactionIntents" ;
 

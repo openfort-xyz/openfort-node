@@ -10,29 +10,41 @@
  * Do not edit the class manually.
  */
 
-import { ProjectRole } from '../models/ProjectRole';
+import { Money } from '../models/Money';
 import { HttpFile } from '../http/http';
 
-export class MemberResponse {
-    'role': ProjectRole;
+export class BalanceResponse {
+    'balance': Money;
+    'expenses': Money;
+    'payments': Money;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "role",
-            "baseName": "role",
-            "type": "ProjectRole",
+            "name": "balance",
+            "baseName": "balance",
+            "type": "Money",
+            "format": ""
+        },
+        {
+            "name": "expenses",
+            "baseName": "expenses",
+            "type": "Money",
+            "format": ""
+        },
+        {
+            "name": "payments",
+            "baseName": "payments",
+            "type": "Money",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return MemberResponse.attributeTypeMap;
+        return BalanceResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

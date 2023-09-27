@@ -14,7 +14,13 @@ import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
 import { HttpFile } from '../http/http';
 
 export class CreatePolicyRequest {
+    /**
+    * Specifies the name of the policy.
+    */
     'name': string;
+    /**
+    * The chain ID of the policy.
+    */
     'chainId': number;
     'strategy': PolicyStrategyRequest;
 
@@ -31,7 +37,7 @@ export class CreatePolicyRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "strategy",

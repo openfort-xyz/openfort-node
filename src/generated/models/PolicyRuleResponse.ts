@@ -17,17 +17,18 @@ import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerInter
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
+import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
+import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { HttpFile } from '../http/http';
-import { PolicyRuleType } from './PolicyRuleType';
 
 export class PolicyRuleResponse {
     'id': string;
     'object': EntityTypePOLICYRULE;
     'createdAt': number;
-    'type': PolicyRuleType;
+    'type': PolicyRuleTypeRATELIMIT;
     'contract': ContractPolicyRuleResponseContract;
-    'functionName': string;
+    'functionName': PolicyRateLimitCOUNTPERINTERVAL;
     'gasLimit': string;
     'timeIntervalType': TimeIntervalType;
     'timeIntervalValue': number;

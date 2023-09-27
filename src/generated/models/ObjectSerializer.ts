@@ -1,19 +1,25 @@
 export * from '../models/Abi';
 export * from '../models/AbiType';
+export * from '../models/Account';
 export * from '../models/AccountInventoryListQueries';
 export * from '../models/AccountListQueries';
 export * from '../models/AccountListResponse';
 export * from '../models/AccountPolicyRuleResponse';
 export * from '../models/AccountResponse';
+export * from '../models/AccountResponseExpandable';
 export * from '../models/ApiKeyResponse';
 export * from '../models/AssetInventory';
 export * from '../models/AssetType';
 export * from '../models/AuthPlayerListQueries';
 export * from '../models/AuthPlayerListResponse';
 export * from '../models/AuthPlayerResponse';
+export * from '../models/AuthPlayerResponsePlayer';
 export * from '../models/AuthResponse';
+export * from '../models/BalanceResponse';
 export * from '../models/CancelTransferOwnershipRequest';
 export * from '../models/ChargeCustomTokenPolicyStrategy';
+export * from '../models/CheckoutRequest';
+export * from '../models/CheckoutResponse';
 export * from '../models/CompleteRecoveryRequest';
 export * from '../models/ContractDeleteResponse';
 export * from '../models/ContractListQueries';
@@ -30,11 +36,14 @@ export * from '../models/CreatePlayerSessionRequest';
 export * from '../models/CreatePolicyAllowFunctionRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
+export * from '../models/CreateProjectRequest';
 export * from '../models/CreateSessionRequest';
 export * from '../models/CreateTransactionIntentRequest';
+export * from '../models/Currency';
 export * from '../models/DataAccountTypes';
 export * from '../models/DomainData';
 export * from '../models/EditRoleRequest';
+export * from '../models/EntityIdResponse';
 export * from '../models/EntityTypeACCOUNT';
 export * from '../models/EntityTypeCONTRACT';
 export * from '../models/EntityTypeINVENTORY';
@@ -47,10 +56,14 @@ export * from '../models/EntityTypeSIGNATURE';
 export * from '../models/EntityTypeTRANSACTIONINTENT';
 export * from '../models/EntityTypeUSER';
 export * from '../models/ErrorTypeINVALIDREQUESTERROR';
+export * from '../models/EstimateTransactionIntentGasResult';
 export * from '../models/FieldErrorsValue';
 export * from '../models/GasPerIntervalLimitPolicyRuleResponse';
 export * from '../models/GasPerTransactionLimitPolicyRuleResponse';
 export * from '../models/GasReport';
+export * from '../models/GasReportDataInner';
+export * from '../models/GasReportDataInnerPeriod';
+export * from '../models/GasReportDataInnerTransactionIntentsInner';
 export * from '../models/GetSigninUrlResponse';
 export * from '../models/Interaction';
 export * from '../models/InvalidRequestError';
@@ -62,29 +75,29 @@ export * from '../models/Log';
 export * from '../models/LoginRequest';
 export * from '../models/MemberRemoveResponse';
 export * from '../models/MemberRequest';
-export * from '../models/MemberResponse';
-export * from '../models/MembersResponse';
+export * from '../models/Money';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
 export * from '../models/ObsoleteAssetInventory';
 export * from '../models/ObsoleteAssetType';
 export * from '../models/ObsoleteInventoryResponse';
-export * from '../models/PKPolicy';
 export * from '../models/PayForUserPolicyStrategy';
-export * from '../models/PickAccountResponseId';
 export * from '../models/PickContractResponseId';
 export * from '../models/PickPlayerResponseId';
-export * from '../models/PickPolicyResponseId';
-export * from '../models/PickPolicyRuleResponseId';
-export * from '../models/PickTransactionIntentResponseId';
+export * from '../models/Player';
 export * from '../models/PlayerCancelTransferOwnershipRequest';
 export * from '../models/PlayerInventoryListQueries';
+export * from '../models/PlayerInventoryQueries';
 export * from '../models/PlayerListQueries';
 export * from '../models/PlayerListResponse';
 export * from '../models/PlayerRequest';
 export * from '../models/PlayerResponse';
+export * from '../models/PlayerResponseAccountsInner';
+export * from '../models/PlayerResponseExpandable';
+export * from '../models/PlayerResponseTransactionIntentsInner';
 export * from '../models/PlayerTransferOwnershipRequest';
+export * from '../models/Policy';
 export * from '../models/PolicyDeleteResponse';
 export * from '../models/PolicyListQueries';
 export * from '../models/PolicyListResponse';
@@ -93,8 +106,8 @@ export * from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 export * from '../models/PolicyRateLimitGASPERINTERVAL';
 export * from '../models/PolicyRateLimitGASPERTRANSACTION';
 export * from '../models/PolicyResponse';
+export * from '../models/PolicyResponseExpandable';
 export * from '../models/PolicyResponsePolicyRulesInner';
-export * from '../models/PolicyResponseTransactionIntentsInner';
 export * from '../models/PolicyRuleDeleteResponse';
 export * from '../models/PolicyRuleListQueries';
 export * from '../models/PolicyRuleListResponse';
@@ -106,11 +119,11 @@ export * from '../models/PolicyRuleTypeRATELIMIT';
 export * from '../models/PolicyStrategy';
 export * from '../models/PolicyStrategyRequest';
 export * from '../models/PrismaInputJsonValue';
+export * from '../models/PrivateKeyPolicy';
 export * from '../models/ProjectListResponse';
 export * from '../models/ProjectLogs';
-export * from '../models/ProjectRequest';
 export * from '../models/ProjectResponse';
-export * from '../models/ProjectRole';
+export * from '../models/ProjectWebhookRequest';
 export * from '../models/ProviderRequest';
 export * from '../models/ProviderResponse';
 export * from '../models/ResponseResponse';
@@ -120,6 +133,7 @@ export * from '../models/RevokeSessionRequest';
 export * from '../models/SessionListQueries';
 export * from '../models/SessionListResponse';
 export * from '../models/SessionResponse';
+export * from '../models/SessionResponseExpandable';
 export * from '../models/SignPayloadRequest';
 export * from '../models/SignPayloadResponse';
 export * from '../models/SignatureRequest';
@@ -130,10 +144,12 @@ export * from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
 export * from '../models/SponsorSchemaPAYFORUSER';
 export * from '../models/StartRecoveryRequest';
 export * from '../models/TimeIntervalType';
+export * from '../models/TransactionIntent';
 export * from '../models/TransactionIntentListQueries';
 export * from '../models/TransactionIntentListResponse';
 export * from '../models/TransactionIntentResponse';
 export * from '../models/TransactionIntentResponseAccount';
+export * from '../models/TransactionIntentResponseExpandable';
 export * from '../models/TransactionIntentResponsePlayer';
 export * from '../models/TransactionIntentResponsePolicy';
 export * from '../models/TransferOwnershipRequest';
@@ -141,23 +157,33 @@ export * from '../models/TypedDataField';
 export * from '../models/UpdateContractRequest';
 export * from '../models/UpdatePolicyRequest';
 export * from '../models/UpdatePolicyRuleRequest';
+export * from '../models/UpdateProjectRequest';
+export * from '../models/UserListResponse';
+export * from '../models/UserProjectRole';
+export * from '../models/UserResponse';
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
+import { Account            } from '../models/Account';
 import { AccountInventoryListQueries     } from '../models/AccountInventoryListQueries';
-import { AccountListQueries   , AccountListQueriesExpandEnum    } from '../models/AccountListQueries';
+import { AccountListQueries      } from '../models/AccountListQueries';
 import { AccountListResponse       } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse     } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse            } from '../models/AccountResponse';
+import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { AssetInventory      } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthPlayerListQueries     } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse         } from '../models/AuthPlayerResponse';
+import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePlayer';
 import { AuthResponse } from '../models/AuthResponse';
+import { BalanceResponse } from '../models/BalanceResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy    } from '../models/ChargeCustomTokenPolicyStrategy';
+import { CheckoutRequest     } from '../models/CheckoutRequest';
+import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse    } from '../models/ContractDeleteResponse';
 import { ContractListQueries        } from '../models/ContractListQueries';
@@ -174,11 +200,14 @@ import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest
 import { CreatePolicyAllowFunctionRequest        } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
+import { CreateProjectRequest   } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DomainData } from '../models/DomainData';
 import { EditRoleRequest } from '../models/EditRoleRequest';
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
@@ -191,10 +220,14 @@ import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
+import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { GasPerIntervalLimitPolicyRuleResponse         } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse       } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport   } from '../models/GasReport';
+import { GasReportDataInner } from '../models/GasReportDataInner';
+import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
+import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError    } from '../models/InvalidRequestError';
@@ -206,39 +239,39 @@ import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
 import { MemberRemoveResponse    } from '../models/MemberRemoveResponse';
 import { MemberRequest } from '../models/MemberRequest';
-import { MemberResponse  } from '../models/MemberResponse';
-import { MembersResponse       } from '../models/MembersResponse';
+import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
 import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse     } from '../models/ObsoleteInventoryResponse';
-import { PKPolicy } from '../models/PKPolicy';
 import { PayForUserPolicyStrategy  } from '../models/PayForUserPolicyStrategy';
-import { PickAccountResponseId } from '../models/PickAccountResponseId';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
-import { PickPolicyResponseId } from '../models/PickPolicyResponseId';
-import { PickPolicyRuleResponseId } from '../models/PickPolicyRuleResponseId';
-import { PickTransactionIntentResponseId } from '../models/PickTransactionIntentResponseId';
+import { Player         } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries      } from '../models/PlayerInventoryListQueries';
-import { PlayerListQueries   , PlayerListQueriesExpandEnum    } from '../models/PlayerListQueries';
+import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
+import { PlayerListQueries      } from '../models/PlayerListQueries';
 import { PlayerListResponse       } from '../models/PlayerListResponse';
 import { PlayerRequest } from '../models/PlayerRequest';
 import { PlayerResponse         } from '../models/PlayerResponse';
+import { PlayerResponseAccountsInner            } from '../models/PlayerResponseAccountsInner';
+import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
+import { PlayerResponseTransactionIntentsInner              } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { Policy          } from '../models/Policy';
 import { PolicyDeleteResponse    } from '../models/PolicyDeleteResponse';
-import { PolicyListQueries   , PolicyListQueriesExpandEnum      } from '../models/PolicyListQueries';
+import { PolicyListQueries        } from '../models/PolicyListQueries';
 import { PolicyListResponse       } from '../models/PolicyListResponse';
 import { PolicyRateLimit } from '../models/PolicyRateLimit';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
 import { PolicyResponse          } from '../models/PolicyResponse';
+import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyResponsePolicyRulesInner           } from '../models/PolicyResponsePolicyRulesInner';
-import { PolicyResponseTransactionIntentsInner              } from '../models/PolicyResponseTransactionIntentsInner';
 import { PolicyRuleDeleteResponse    } from '../models/PolicyRuleDeleteResponse';
 import { PolicyRuleListQueries   , PolicyRuleListQueriesExpandEnum    } from '../models/PolicyRuleListQueries';
 import { PolicyRuleListResponse       } from '../models/PolicyRuleListResponse';
@@ -250,20 +283,21 @@ import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy    } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest    } from '../models/PolicyStrategyRequest';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
+import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
 import { ProjectLogs       } from '../models/ProjectLogs';
-import { ProjectRequest   } from '../models/ProjectRequest';
-import { ProjectResponse        } from '../models/ProjectResponse';
-import { ProjectRole } from '../models/ProjectRole';
+import { ProjectResponse         } from '../models/ProjectResponse';
+import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { ProviderRequest } from '../models/ProviderRequest';
 import { ProviderResponse } from '../models/ProviderResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
-import { SessionListQueries    , SessionListQueriesExpandEnum    } from '../models/SessionListQueries';
+import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
+import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse      } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -274,10 +308,12 @@ import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECU
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
-import { TransactionIntentListQueries   , TransactionIntentListQueriesExpandEnum       } from '../models/TransactionIntentListQueries';
+import { TransactionIntent              } from '../models/TransactionIntent';
+import { TransactionIntentListQueries         } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse       } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse              } from '../models/TransactionIntentResponse';
 import { TransactionIntentResponseAccount            } from '../models/TransactionIntentResponseAccount';
+import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy          } from '../models/TransactionIntentResponsePolicy';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
@@ -285,6 +321,10 @@ import { TypedDataField } from '../models/TypedDataField';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleRequest';
+import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
+import { UserListResponse       } from '../models/UserListResponse';
+import { UserProjectRole } from '../models/UserProjectRole';
+import { UserResponse         } from '../models/UserResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -306,8 +346,9 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "AccountListQueriesExpandEnum",
+    "AccountResponseExpandable",
     "AssetType",
+    "Currency",
     "DataAccountTypes",
     "EntityTypeACCOUNT",
     "EntityTypeCONTRACT",
@@ -323,32 +364,33 @@ let enumsMap: Set<string> = new Set<string>([
     "ErrorTypeINVALIDREQUESTERROR",
     "NextActionType",
     "ObsoleteAssetType",
-    "PKPolicy",
-    "PlayerListQueriesExpandEnum",
-    "PolicyListQueriesExpandEnum",
+    "PlayerResponseExpandable",
     "PolicyRateLimit",
     "PolicyRateLimitCOUNTPERINTERVAL",
     "PolicyRateLimitGASPERINTERVAL",
     "PolicyRateLimitGASPERTRANSACTION",
+    "PolicyResponseExpandable",
     "PolicyRuleListQueriesExpandEnum",
     "PolicyRuleType",
     "PolicyRuleTypeACCOUNT",
     "PolicyRuleTypeCONTRACT",
     "PolicyRuleTypeRATELIMIT",
-    "ProjectRole",
+    "PrivateKeyPolicy",
     "ResponseTypeLIST",
-    "SessionListQueriesExpandEnum",
+    "SessionResponseExpandable",
     "SortOrder",
     "SponsorSchema",
     "SponsorSchemaCHARGECUSTOMTOKENS",
     "SponsorSchemaPAYFORUSER",
     "TimeIntervalType",
-    "TransactionIntentListQueriesExpandEnum",
+    "TransactionIntentResponseExpandable",
+    "UserProjectRole",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "Abi": Abi,
     "AbiType": AbiType,
+    "Account": Account,
     "AccountInventoryListQueries": AccountInventoryListQueries,
     "AccountListQueries": AccountListQueries,
     "AccountListResponse": AccountListResponse,
@@ -359,9 +401,13 @@ let typeMap: {[index: string]: any} = {
     "AuthPlayerListQueries": AuthPlayerListQueries,
     "AuthPlayerListResponse": AuthPlayerListResponse,
     "AuthPlayerResponse": AuthPlayerResponse,
+    "AuthPlayerResponsePlayer": AuthPlayerResponsePlayer,
     "AuthResponse": AuthResponse,
+    "BalanceResponse": BalanceResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
     "ChargeCustomTokenPolicyStrategy": ChargeCustomTokenPolicyStrategy,
+    "CheckoutRequest": CheckoutRequest,
+    "CheckoutResponse": CheckoutResponse,
     "CompleteRecoveryRequest": CompleteRecoveryRequest,
     "ContractDeleteResponse": ContractDeleteResponse,
     "ContractListQueries": ContractListQueries,
@@ -378,14 +424,20 @@ let typeMap: {[index: string]: any} = {
     "CreatePolicyAllowFunctionRequest": CreatePolicyAllowFunctionRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
+    "CreateProjectRequest": CreateProjectRequest,
     "CreateSessionRequest": CreateSessionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "DomainData": DomainData,
     "EditRoleRequest": EditRoleRequest,
+    "EntityIdResponse": EntityIdResponse,
+    "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
     "FieldErrorsValue": FieldErrorsValue,
     "GasPerIntervalLimitPolicyRuleResponse": GasPerIntervalLimitPolicyRuleResponse,
     "GasPerTransactionLimitPolicyRuleResponse": GasPerTransactionLimitPolicyRuleResponse,
     "GasReport": GasReport,
+    "GasReportDataInner": GasReportDataInner,
+    "GasReportDataInnerPeriod": GasReportDataInnerPeriod,
+    "GasReportDataInnerTransactionIntentsInner": GasReportDataInnerTransactionIntentsInner,
     "GetSigninUrlResponse": GetSigninUrlResponse,
     "Interaction": Interaction,
     "InvalidRequestError": InvalidRequestError,
@@ -397,32 +449,31 @@ let typeMap: {[index: string]: any} = {
     "LoginRequest": LoginRequest,
     "MemberRemoveResponse": MemberRemoveResponse,
     "MemberRequest": MemberRequest,
-    "MemberResponse": MemberResponse,
-    "MembersResponse": MembersResponse,
+    "Money": Money,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
     "ObsoleteAssetInventory": ObsoleteAssetInventory,
     "ObsoleteInventoryResponse": ObsoleteInventoryResponse,
     "PayForUserPolicyStrategy": PayForUserPolicyStrategy,
-    "PickAccountResponseId": PickAccountResponseId,
     "PickContractResponseId": PickContractResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
-    "PickPolicyResponseId": PickPolicyResponseId,
-    "PickPolicyRuleResponseId": PickPolicyRuleResponseId,
-    "PickTransactionIntentResponseId": PickTransactionIntentResponseId,
+    "Player": Player,
     "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
     "PlayerInventoryListQueries": PlayerInventoryListQueries,
+    "PlayerInventoryQueries": PlayerInventoryQueries,
     "PlayerListQueries": PlayerListQueries,
     "PlayerListResponse": PlayerListResponse,
     "PlayerRequest": PlayerRequest,
     "PlayerResponse": PlayerResponse,
+    "PlayerResponseAccountsInner": PlayerResponseAccountsInner,
+    "PlayerResponseTransactionIntentsInner": PlayerResponseTransactionIntentsInner,
     "PlayerTransferOwnershipRequest": PlayerTransferOwnershipRequest,
+    "Policy": Policy,
     "PolicyDeleteResponse": PolicyDeleteResponse,
     "PolicyListQueries": PolicyListQueries,
     "PolicyListResponse": PolicyListResponse,
     "PolicyResponse": PolicyResponse,
     "PolicyResponsePolicyRulesInner": PolicyResponsePolicyRulesInner,
-    "PolicyResponseTransactionIntentsInner": PolicyResponseTransactionIntentsInner,
     "PolicyRuleDeleteResponse": PolicyRuleDeleteResponse,
     "PolicyRuleListQueries": PolicyRuleListQueries,
     "PolicyRuleListResponse": PolicyRuleListResponse,
@@ -432,8 +483,8 @@ let typeMap: {[index: string]: any} = {
     "PrismaInputJsonValue": PrismaInputJsonValue,
     "ProjectListResponse": ProjectListResponse,
     "ProjectLogs": ProjectLogs,
-    "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
+    "ProjectWebhookRequest": ProjectWebhookRequest,
     "ProviderRequest": ProviderRequest,
     "ProviderResponse": ProviderResponse,
     "ResponseResponse": ResponseResponse,
@@ -447,6 +498,7 @@ let typeMap: {[index: string]: any} = {
     "SignatureRequest": SignatureRequest,
     "SignupRequest": SignupRequest,
     "StartRecoveryRequest": StartRecoveryRequest,
+    "TransactionIntent": TransactionIntent,
     "TransactionIntentListQueries": TransactionIntentListQueries,
     "TransactionIntentListResponse": TransactionIntentListResponse,
     "TransactionIntentResponse": TransactionIntentResponse,
@@ -458,6 +510,9 @@ let typeMap: {[index: string]: any} = {
     "UpdateContractRequest": UpdateContractRequest,
     "UpdatePolicyRequest": UpdatePolicyRequest,
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
+    "UpdateProjectRequest": UpdateProjectRequest,
+    "UserListResponse": UserListResponse,
+    "UserResponse": UserResponse,
 }
 
 export class ObjectSerializer {
