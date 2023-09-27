@@ -39,7 +39,7 @@ export class CreatePlayerAccountRequest {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "externalOwnerAddress",

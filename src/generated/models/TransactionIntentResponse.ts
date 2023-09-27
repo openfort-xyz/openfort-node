@@ -20,47 +20,32 @@ import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResp
 import { HttpFile } from '../http/http';
 
 export class TransactionIntentResponse {
-    'nextAction'?: NextActionResponse;
-    'policy'?: TransactionIntentResponsePolicy;
-    'player'?: TransactionIntentResponsePlayer;
-    'account'?: TransactionIntentResponseAccount;
     'id': string;
     'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
+    /**
+    * The unix timestamp in seconds when the transactionIntent was created.
+    */
     'updatedAt': number;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
+    /**
+    * The hashed userOperation.
+    */
     'userOperationHash'?: string;
     'userOperation'?: any | null;
     'response'?: ResponseResponse;
     'interactions'?: Array<Interaction>;
+    'nextAction'?: NextActionResponse;
+    'policy'?: TransactionIntentResponsePolicy;
+    'player': TransactionIntentResponsePlayer;
+    'account': TransactionIntentResponseAccount;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "nextAction",
-            "baseName": "nextAction",
-            "type": "NextActionResponse",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "TransactionIntentResponsePolicy",
-            "format": ""
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "TransactionIntentResponsePlayer",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "TransactionIntentResponseAccount",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -89,7 +74,7 @@ export class TransactionIntentResponse {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "userOperationHash",
@@ -113,6 +98,30 @@ export class TransactionIntentResponse {
             "name": "interactions",
             "baseName": "interactions",
             "type": "Array<Interaction>",
+            "format": ""
+        },
+        {
+            "name": "nextAction",
+            "baseName": "nextAction",
+            "type": "NextActionResponse",
+            "format": ""
+        },
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "TransactionIntentResponsePolicy",
+            "format": ""
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "TransactionIntentResponsePlayer",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "TransactionIntentResponseAccount",
             "format": ""
         }    ];
 

@@ -13,6 +13,9 @@
 import { HttpFile } from '../http/http';
 
 export class DomainData {
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'name'?: string;
     'version'?: string;
@@ -25,7 +28,7 @@ export class DomainData {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "name",

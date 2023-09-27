@@ -11,16 +11,38 @@
  */
 
 import { SortOrder } from '../models/SortOrder';
+import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { HttpFile } from '../http/http';
 
 export class TransactionIntentListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
-    'expand'?: Array<TransactionIntentListQueriesExpandEnum>;
+    /**
+    * Specifies the fields to expand in the response.
+    */
+    'expand'?: Array<TransactionIntentResponseExpandable>;
+    /**
+    * The chain ID.
+    */
     'chainId'?: number;
+    /**
+    * Filter by account ID.
+    */
     'accountId'?: Array<string>;
+    /**
+    * Filter by player ID.
+    */
     'playerId'?: Array<string>;
+    /**
+    * Filter by policy ID.
+    */
     'policyId'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
@@ -47,14 +69,14 @@ export class TransactionIntentListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<TransactionIntentListQueriesExpandEnum>",
+            "type": "Array<TransactionIntentResponseExpandable>",
             "format": ""
         },
         {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "accountId",
@@ -84,5 +106,4 @@ export class TransactionIntentListQueries {
 }
 
 
-export type TransactionIntentListQueriesExpandEnum = "nextAction" | "policy" | "player" | "account" ;
 

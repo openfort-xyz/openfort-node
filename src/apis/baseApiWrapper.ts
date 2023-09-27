@@ -2,7 +2,6 @@ import { Observable } from "../utilities/observable";
 import { Observer } from "../utilities/observer";
 import { Configuration, ServerConfiguration, createConfiguration } from "../generated";
 import { ConfigurationParameters } from "../generated/configuration";
-import { DefaultSecurityAuthentication } from "../auth/defaultSecurityAuthentication";
 import { Middleware } from "../utilities/middleware";
 
 export class BaseApiWrapper<T> implements Observable {
@@ -12,7 +11,11 @@ export class BaseApiWrapper<T> implements Observable {
     constructor(type: new (_configuration: Configuration) => T, accessToken: string, basePath?: string) {
         const config: ConfigurationParameters = {
             authMethods: {
-                default: new DefaultSecurityAuthentication(accessToken),
+                sk: {
+                    tokenProvider: {
+                        getToken: () => accessToken,
+                    },
+                },
             },
             promiseMiddleware: [new Middleware()],
         };

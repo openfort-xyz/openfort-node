@@ -10,38 +10,27 @@
  * Do not edit the class manually.
  */
 
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
-import { PlayerResponse } from '../models/PlayerResponse';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
-import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
+import { Player } from '../models/Player';
 import { HttpFile } from '../http/http';
 
+/**
+* The player ID.
+*/
 export class TransactionIntentResponsePlayer {
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
-    'accounts'?: Array<TransactionIntentResponseAccount>;
     'id': string;
     'object': EntityTypePLAYER;
     'createdAt': number;
     'name': string | null;
     'description': string | null;
     'metadata': string;
+    'transactionIntents'?: Array<EntityIdResponse>;
+    'accounts'?: Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>",
-            "format": ""
-        },
-        {
-            "name": "accounts",
-            "baseName": "accounts",
-            "type": "Array<TransactionIntentResponseAccount>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -76,6 +65,18 @@ export class TransactionIntentResponsePlayer {
             "name": "metadata",
             "baseName": "metadata",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<EntityIdResponse>",
+            "format": ""
+        },
+        {
+            "name": "accounts",
+            "baseName": "accounts",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 

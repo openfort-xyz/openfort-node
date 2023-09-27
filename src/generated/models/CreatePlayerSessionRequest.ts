@@ -13,14 +13,41 @@
 import { HttpFile } from '../http/http';
 
 export class CreatePlayerSessionRequest {
+    /**
+    * The address of the session key.
+    */
     'address': string;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
+    /**
+    * If no account exists for a given player, create one with this address.
+    */
     'externalOwnerAddress'?: string;
+    /**
+    * Maximum number of times the session key can be used.
+    */
     'limit'?: number;
+    /**
+    * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
+    */
     'optimistic'?: boolean;
-    'policy': string;
+    /**
+    * The policy ID.
+    */
+    'policy'?: string;
+    /**
+    * The unix timestamp in seconds when the session key becomes valid.
+    */
     'validAfter': number;
+    /**
+    * The unix timestamp in seconds when the session key expires.
+    */
     'validUntil': number;
+    /**
+    * The list of whitelisted addresses (contracts the session key can interact with).
+    */
     'whitelist'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;

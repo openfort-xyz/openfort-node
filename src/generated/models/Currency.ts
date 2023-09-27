@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type PKPolicy = "INDIVIDUAL" | "PROJECT" ;
+export type Currency = "usd" ;

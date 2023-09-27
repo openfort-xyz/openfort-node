@@ -6,7 +6,7 @@ The Openfort Node library provides convenient access to the Openfort API from ap
 
 ## Documentation
 
-See the [`openfort-node` API docs](https://openfort.xyz/docs/api?lang=node) for Node.js.
+See the [`openfort-node` API docs]([https://openfort.xyz/docs/api?lang=node](https://www.openfort.xyz/docs/reference/api/introduction)) for Node.js.
 
 ## Requirements
 

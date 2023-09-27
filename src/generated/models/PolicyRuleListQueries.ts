@@ -14,10 +14,22 @@ import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class PolicyRuleListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * Specifies the fields to expand in the response.
+    */
     'expand'?: Array<PolicyRuleListQueriesExpandEnum>;
+    /**
+    * Specifies the unique policy ID.
+    */
     'policy': string;
 
     static readonly discriminator: string | undefined = undefined;

@@ -14,11 +14,30 @@ import { Interaction } from '../models/Interaction';
 import { HttpFile } from '../http/http';
 
 export class CreateTransactionIntentRequest {
+    /**
+    * The player ID.
+    */
     'player': string;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
+    /**
+    * The policy ID.
+    */
     'policy'?: string;
+    /**
+    * If no account exists for a given player, create one with this address.
+    */
     'externalOwnerAddress'?: string;
+    /**
+    * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
+    */
     'optimistic': boolean;
+    /**
+    * Specify the number of blocks after the block with transaction to be assured that transaction is in block. It is possible to use only with optimistic=true
+    */
+    'confirmationBlocks'?: number;
     'interactions': Array<Interaction>;
 
     static readonly discriminator: string | undefined = undefined;
@@ -53,6 +72,12 @@ export class CreateTransactionIntentRequest {
             "baseName": "optimistic",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "confirmationBlocks",
+            "baseName": "confirmationBlocks",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "interactions",

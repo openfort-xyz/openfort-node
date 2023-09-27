@@ -10,16 +10,28 @@
  * Do not edit the class manually.
  */
 
+import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
 export class SessionListQueries {
+    /**
+    * Specifies the maximum number of records to return.
+    */
     'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * The player ID
+    */
     'player': string;
-    'expand'?: Array<SessionListQueriesExpandEnum>;
-    'address'?: string;
+    /**
+    * Specifies the fields to expand in the response.
+    */
+    'expand'?: Array<SessionResponseExpandable>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -51,13 +63,7 @@ export class SessionListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<SessionListQueriesExpandEnum>",
-            "format": ""
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
+            "type": "Array<SessionResponseExpandable>",
             "format": ""
         }    ];
 
@@ -70,5 +76,4 @@ export class SessionListQueries {
 }
 
 
-export type SessionListQueriesExpandEnum = "transactionIntents" ;
 

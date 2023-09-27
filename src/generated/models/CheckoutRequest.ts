@@ -10,31 +10,48 @@
  * Do not edit the class manually.
  */
 
-import { PKPolicy } from '../models/PKPolicy';
+import { Currency } from '../models/Currency';
 import { HttpFile } from '../http/http';
 
-export class ProjectRequest {
-    'name': string;
-    'pkPolicy'?: PKPolicy;
+export class CheckoutRequest {
+    /**
+    * Amount in cents
+    */
+    'amount': number;
+    'currency': Currency;
+    'cancelUrl'?: string;
+    'successUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "amount",
+            "baseName": "amount",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "currency",
+            "baseName": "currency",
+            "type": "Currency",
+            "format": ""
+        },
+        {
+            "name": "cancelUrl",
+            "baseName": "cancelUrl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "pkPolicy",
-            "baseName": "pkPolicy",
-            "type": "PKPolicy",
+            "name": "successUrl",
+            "baseName": "successUrl",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectRequest.attributeTypeMap;
+        return CheckoutRequest.attributeTypeMap;
     }
 
     public constructor() {

@@ -21,11 +21,11 @@ import { SortOrder } from '../models/SortOrder';
 export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Retrieves the cryptocurrency assets of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the cryptocurrency assets of an existing account.
      * @param id Specifies the unique account ID.
-     * @param limit 
-     * @param skip 
-     * @param order 
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      * @param contractId 
      */
     public async getAccountCryptoCurrencyInventory(id: string, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
@@ -70,6 +70,12 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -80,7 +86,7 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the inventory of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Get inventory of account.
      * @param id Specifies the unique account ID.
      */
     public async getAccountInventory(id: string, _options?: Configuration): Promise<RequestContext> {
@@ -101,6 +107,12 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -111,7 +123,7 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the native asset of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the native asset of an existing account.
      * @param id Specifies the unique account ID.
      */
     public async getAccountNativeInventory(id: string, _options?: Configuration): Promise<RequestContext> {
@@ -132,6 +144,12 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -142,11 +160,11 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the NFT assets of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the NFT assets of an existing account.
      * @param id Specifies the unique account ID.
-     * @param limit 
-     * @param skip 
-     * @param order 
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      * @param contractId 
      */
     public async getAccountNftInventory(id: string, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
@@ -191,6 +209,12 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -201,13 +225,13 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the cruptocurrency assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get cryptocurrency list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param contractId 
+     * @param chainId Filter by chain id.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param contractId Filter by contract ID.
      */
     public async getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -258,10 +282,16 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (chainId !== undefined) {
-            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "double"));
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -272,9 +302,9 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the inventory of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get inventory of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
+     * @param chainId Filter by chain id.
      */
     public async getPlayerInventory(id: string, chainId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -301,10 +331,16 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (chainId !== undefined) {
-            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "double"));
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -315,9 +351,9 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the native assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get native token list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
+     * @param chainId Filter by chain id.
      */
     public async getPlayerNativeInventory(id: string, chainId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -344,10 +380,16 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (chainId !== undefined) {
-            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "double"));
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -358,13 +400,13 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the NFT assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
+     * Get NFTs list of player.
      * @param id Specifies the unique player ID.
-     * @param chainId 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param contractId 
+     * @param chainId Filter by chain id.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param contractId Filter by contract ID.
      */
     public async getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -415,10 +457,16 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (chainId !== undefined) {
-            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "double"));
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {

@@ -41,10 +41,31 @@ export class PkAuthentication implements SecurityAuthentication {
     }
 }
 
+/**
+ * Applies http authentication to the request context.
+ */
+export class SkAuthentication implements SecurityAuthentication {
+    /**
+     * Configures the http authentication with the required details.
+     *
+     * @param tokenProvider service that can provide the up-to-date token when needed
+     */
+    public constructor(private tokenProvider: TokenProvider) {}
+
+    public getName(): string {
+        return "sk";
+    }
+
+    public async applySecurityAuthentication(context: RequestContext) {
+        context.setHeaderParam("Authorization", "Bearer " + await this.tokenProvider.getToken());
+    }
+}
+
 
 export type AuthMethods = {
     "default"?: SecurityAuthentication,
-    "pk"?: SecurityAuthentication
+    "pk"?: SecurityAuthentication,
+    "sk"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -54,7 +75,8 @@ export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
     "default"?: SecurityAuthentication,
-    "pk"?: HttpBearerConfiguration
+    "pk"?: HttpBearerConfiguration,
+    "sk"?: HttpBearerConfiguration
 }
 
 /**
@@ -72,6 +94,12 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (config["pk"]) {
         authMethods["pk"] = new PkAuthentication(
             config["pk"]["tokenProvider"]
+        );
+    }
+
+    if (config["sk"]) {
+        authMethods["sk"] = new SkAuthentication(
+            config["sk"]["tokenProvider"]
         );
     }
 

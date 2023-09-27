@@ -21,6 +21,9 @@ export class ContractPolicyRuleResponseContract {
     'object': EntityTypeCONTRACT;
     'createdAt': number;
     'name': string | null;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
     'address': string;
     'deleted': boolean;
@@ -58,7 +61,7 @@ export class ContractPolicyRuleResponseContract {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "address",

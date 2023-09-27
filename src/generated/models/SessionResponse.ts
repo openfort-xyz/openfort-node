@@ -12,11 +12,10 @@
 
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { NextActionResponse } from '../models/NextActionResponse';
-import { PolicyResponseTransactionIntentsInner } from '../models/PolicyResponseTransactionIntentsInner';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
 
 export class SessionResponse {
-    'transactionIntents'?: Array<PolicyResponseTransactionIntentsInner>;
     'id': string;
     'object': EntityTypeSESSION;
     'createdAt': number;
@@ -28,16 +27,11 @@ export class SessionResponse {
     'whitelist'?: Array<string>;
     'limit'?: number;
     'nextAction'?: NextActionResponse;
+    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<PolicyResponseTransactionIntentsInner>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -102,6 +96,12 @@ export class SessionResponse {
             "name": "nextAction",
             "baseName": "nextAction",
             "type": "NextActionResponse",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PlayerResponseTransactionIntentsInner>",
             "format": ""
         }    ];
 

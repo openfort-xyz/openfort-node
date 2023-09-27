@@ -10,59 +10,41 @@
  * Do not edit the class manually.
  */
 
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { Interaction } from '../models/Interaction';
 import { NextActionResponse } from '../models/NextActionResponse';
-import { PickTransactionIntentResponseId } from '../models/PickTransactionIntentResponseId';
 import { ResponseResponse } from '../models/ResponseResponse';
-import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
-import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
-import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
-import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
+import { TransactionIntent } from '../models/TransactionIntent';
 import { HttpFile } from '../http/http';
 
-export class PolicyResponseTransactionIntentsInner {
-    'nextAction'?: NextActionResponse;
-    'policy'?: TransactionIntentResponsePolicy;
-    'player'?: TransactionIntentResponsePlayer;
-    'account'?: TransactionIntentResponseAccount;
+export class PlayerResponseTransactionIntentsInner {
     'id': string;
     'object': EntityTypeTRANSACTIONINTENT;
     'createdAt': number;
+    /**
+    * The unix timestamp in seconds when the transactionIntent was created.
+    */
     'updatedAt': number;
+    /**
+    * The chain ID.
+    */
     'chainId': number;
+    /**
+    * The hashed userOperation.
+    */
     'userOperationHash'?: string;
     'userOperation'?: any | null;
     'response'?: ResponseResponse;
     'interactions'?: Array<Interaction>;
+    'nextAction'?: NextActionResponse;
+    'policy'?: EntityIdResponse;
+    'player': EntityIdResponse;
+    'account': EntityIdResponse;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "nextAction",
-            "baseName": "nextAction",
-            "type": "NextActionResponse",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "TransactionIntentResponsePolicy",
-            "format": ""
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "TransactionIntentResponsePlayer",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "TransactionIntentResponseAccount",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -91,7 +73,7 @@ export class PolicyResponseTransactionIntentsInner {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "userOperationHash",
@@ -116,10 +98,34 @@ export class PolicyResponseTransactionIntentsInner {
             "baseName": "interactions",
             "type": "Array<Interaction>",
             "format": ""
+        },
+        {
+            "name": "nextAction",
+            "baseName": "nextAction",
+            "type": "NextActionResponse",
+            "format": ""
+        },
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "EntityIdResponse",
+            "format": ""
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "EntityIdResponse",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "EntityIdResponse",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyResponseTransactionIntentsInner.attributeTypeMap;
+        return PlayerResponseTransactionIntentsInner.attributeTypeMap;
     }
 
     public constructor() {

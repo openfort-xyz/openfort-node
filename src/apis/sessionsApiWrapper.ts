@@ -30,7 +30,7 @@ export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
      * @param req Criteria to retrieve the list of the sessions
      */
     public async list(req: SessionListQueries): Promise<SessionListResponse> {
-        return await this.api.getPlayerSessions(req.player, req.limit, req.skip, req.order, req.expand, req.address);
+        return await this.api.getPlayerSessions(req.player, req.limit, req.skip, req.order, req.expand);
     }
 
     /**

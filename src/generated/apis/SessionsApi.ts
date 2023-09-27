@@ -14,6 +14,7 @@ import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
+import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SignatureRequest } from '../models/SignatureRequest';
 import { SortOrder } from '../models/SortOrder';
 
@@ -23,7 +24,7 @@ import { SortOrder } from '../models/SortOrder';
 export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates the session for the account.
+     * Create a session key.
      * @param createSessionRequest 
      */
     public async createSession(createSessionRequest: CreateSessionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -54,6 +55,12 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -64,22 +71,20 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
-     * @param player 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param expand 
-     * @param address 
+     * List session keys of a player.
+     * @param player The player ID
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
      */
-    public async getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<'transactionIntents'>, address?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getPlayerSessions(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'player' is not null or undefined
         if (player === null || player === undefined) {
             throw new RequiredError("SessionsApi", "getPlayerSessions", "player");
         }
-
 
 
 
@@ -115,15 +120,16 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents'>", ""));
-        }
-
-        // Query Params
-        if (address !== undefined) {
-            requestContext.setQueryParam("address", ObjectSerializer.serialize(address, "string", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<SessionResponseExpandable>", ""));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -135,10 +141,10 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Returns a player session by session id
-     * @param id 
-     * @param expand 
+     * @param id Specifies the unique session ID.
+     * @param expand Specifies the fields to expand.
      */
-    public async getSession(id: string, expand?: Array<'transactionIntents'>, _options?: Configuration): Promise<RequestContext> {
+    public async getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -158,10 +164,16 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<'transactionIntents'>", ""));
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<SessionResponseExpandable>", ""));
         }
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -172,7 +184,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Revokes the session for the account.
+     * Revoke the session session key.
      * @param revokeSessionRequest 
      */
     public async revokeSession(revokeSessionRequest: RevokeSessionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -203,6 +215,12 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -214,7 +232,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Confirms the creation of a session with an external owner.
-     * @param id 
+     * @param id Specifies the unique session ID.
      * @param signatureRequest 
      */
     public async signatureSession(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<RequestContext> {
@@ -253,6 +271,11 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         // Apply auth methods
         authMethod = _config.authMethods["pk"]
         if (authMethod?.applySecurityAuthentication) {
