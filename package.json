@@ -35,7 +35,9 @@
     "build": "tsc",
     "format": "rome format . --write",
     "lint": "rome check .",
-    "prepublishOnly": "yarn install && yarn build"
+    "prepublishOnly": "yarn install && yarn build",
+    "docs": "typedoc --entryPoints src/index.ts --out tsdocs --includes src/**/*.ts",
+    "docs:json": "typedoc --entryPoints src/index.ts --includes src/**/*.ts --json tsdocs/spec.json --excludeExternals"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -45,6 +47,7 @@
     "@types/node-fetch": "^2.5.7",
     "@types/node": "*",
     "form-data": "^2.5.0",
+    "typedoc": "^0.22.16",
     "es6-promise": "^4.2.4",
     "url-parse": "^1.4.3"
   },
