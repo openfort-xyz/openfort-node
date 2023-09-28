@@ -36,8 +36,8 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "prepublishOnly": "yarn install && yarn build",
-    "docs": "typedoc --entryPoints src/index.ts --out tsdocs --includes src/**/*.ts",
-    "docs:json": "typedoc --entryPoints src/index.ts --includes src/**/*.ts --json tsdocs/spec.json --excludeExternals"
+    "docs": "typedoc --entryPoints src/index.ts --out docs/ --includes src/**/*.ts",
+    "docs:json": "typedoc --entryPoints src/index.ts --includes src/**/*.ts --json docs/spec.json --excludeExternals"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
