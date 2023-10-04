@@ -13,21 +13,21 @@
 import { HttpFile } from '../http/http';
 
 export class ProjectWebhookRequest {
-    'livemode': boolean;
     'url'?: string;
+    'apiKey'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean",
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "url",
-            "baseName": "url",
+            "name": "apiKey",
+            "baseName": "apiKey",
             "type": "string",
             "format": ""
         }    ];

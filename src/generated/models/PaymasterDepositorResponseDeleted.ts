@@ -10,36 +10,40 @@
  * Do not edit the class manually.
  */
 
-import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { HttpFile } from '../http/http';
 
-export class PayForUserPolicyStrategy {
-    'sponsorSchema': SponsorSchemaPAYFORUSER;
-    'depositor'?: string | null;
+export class PaymasterDepositorResponseDeleted {
+    'id': string;
+    'depositorAddress': string;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "sponsorSchema",
-            "baseName": "sponsorSchema",
-            "type": "SponsorSchemaPAYFORUSER",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "depositor",
-            "baseName": "depositor",
+            "name": "depositorAddress",
+            "baseName": "depositorAddress",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PayForUserPolicyStrategy.attributeTypeMap;
+        return PaymasterDepositorResponseDeleted.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

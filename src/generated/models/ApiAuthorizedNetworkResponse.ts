@@ -10,36 +10,47 @@
  * Do not edit the class manually.
  */
 
-import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { HttpFile } from '../http/http';
 
-export class PayForUserPolicyStrategy {
-    'sponsorSchema': SponsorSchemaPAYFORUSER;
-    'depositor'?: string | null;
+export class ApiAuthorizedNetworkResponse {
+    'id': number;
+    'createdAt': number;
+    'name': string;
+    'network': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "sponsorSchema",
-            "baseName": "sponsorSchema",
-            "type": "SponsorSchemaPAYFORUSER",
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "depositor",
-            "baseName": "depositor",
+            "name": "network",
+            "baseName": "network",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PayForUserPolicyStrategy.attributeTypeMap;
+        return ApiAuthorizedNetworkResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

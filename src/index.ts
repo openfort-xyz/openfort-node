@@ -7,7 +7,7 @@ import { PoliciesApiWrapper } from "./apis/policiesApiWrapper";
 import { PolicyRulesApiWrapper } from "./apis/policyRulesApiWrapper";
 import { SessionsApiWrapper } from "./apis/sessionsApiWrapper";
 import { TransactionIntentsApiWrapper } from "./apis/transactionIntentsApiWrapper";
-import { InventoryApiWrapper } from "./apis/inventoryApiWrapper";
+import { InventoriesApiWrapper } from "./apis/inventoriesApiWrapper";
 import { WebHookEvent } from "./models/webHookEvent";
 import { createHmac } from "crypto";
 
@@ -45,8 +45,8 @@ export default class Openfort {
         return this.getOrCreateWrapper(TransactionIntentsApiWrapper);
     }
 
-    public get inventories(): InventoryApiWrapper {
-        return this.getOrCreateWrapper(InventoryApiWrapper);
+    public get inventories(): InventoriesApiWrapper {
+        return this.getOrCreateWrapper(InventoriesApiWrapper);
     }
 
     public subscribe(observer: Observer): void {

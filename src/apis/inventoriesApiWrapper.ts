@@ -7,13 +7,13 @@ import {
     InventoryListResponse,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { InventoryApi } from "../generated";
+import { InventoriesApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
-export class InventoryApiWrapper extends BaseApiWrapper<InventoryApi> {
+export class InventoriesApiWrapper extends BaseApiWrapper<InventoriesApi> {
     constructor(accessToken: string, basePath?: string) {
-        super(InventoryApi, accessToken, basePath);
+        super(InventoriesApi, accessToken, basePath);
     }
 
     /**

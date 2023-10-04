@@ -10,31 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
+import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { HttpFile } from '../http/http';
 
-export class PayForUserPolicyStrategy {
-    'sponsorSchema': SponsorSchemaPAYFORUSER;
-    'depositor'?: string | null;
+export class UserProjectRemoveResponse {
+    'id': string;
+    'object': EntityTypeUSER;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "sponsorSchema",
-            "baseName": "sponsorSchema",
-            "type": "SponsorSchemaPAYFORUSER",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "depositor",
-            "baseName": "depositor",
-            "type": "string",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeUSER",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PayForUserPolicyStrategy.attributeTypeMap;
+        return UserProjectRemoveResponse.attributeTypeMap;
     }
 
     public constructor() {

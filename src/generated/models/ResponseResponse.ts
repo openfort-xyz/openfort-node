@@ -23,9 +23,13 @@ export class ResponseResponse {
     */
     'blockNumber'?: number;
     /**
-    * The transaction hash of the transaction of this log.
-    */
+     * @deprecated Use userOpHash
+     */
     'transactionHash'?: string;
+    /**
+    * The user operation hash of the transaction of this log.
+    */
+    'userOpHash'?: string;
     /**
     * The gas used by the transaction of this log.
     */
@@ -69,6 +73,12 @@ export class ResponseResponse {
         {
             "name": "transactionHash",
             "baseName": "transactionHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "userOpHash",
+            "baseName": "userOpHash",
             "type": "string",
             "format": ""
         },

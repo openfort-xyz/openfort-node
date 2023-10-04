@@ -10,31 +10,31 @@
  * Do not edit the class manually.
  */
 
-import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
+import { ApiKeyType } from '../models/ApiKeyType';
 import { HttpFile } from '../http/http';
 
-export class PayForUserPolicyStrategy {
-    'sponsorSchema': SponsorSchemaPAYFORUSER;
-    'depositor'?: string | null;
+export class UpdateProjectApiKeyRequest {
+    'type': ApiKeyType;
+    'uuid': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "sponsorSchema",
-            "baseName": "sponsorSchema",
-            "type": "SponsorSchemaPAYFORUSER",
+            "name": "type",
+            "baseName": "type",
+            "type": "ApiKeyType",
             "format": ""
         },
         {
-            "name": "depositor",
-            "baseName": "depositor",
+            "name": "uuid",
+            "baseName": "uuid",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PayForUserPolicyStrategy.attributeTypeMap;
+        return UpdateProjectApiKeyRequest.attributeTypeMap;
     }
 
     public constructor() {

@@ -10,23 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { SponsorSchema } from '../models/SponsorSchema';
+import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { HttpFile } from '../http/http';
 
-export class PolicyStrategyRequest {
-    'sponsorSchema': SponsorSchema;
-    /**
-    * If the user pays in custom tokens, the contract ID of the token contract.
-    */
-    'tokenContract'?: string;
-    /**
-    * If the user pays in custom tokens, the amount of tokens to pay in WEI per native token.
-    */
-    'tokenContractAmount'?: string;
-    /**
-    * If the game wants to use their deposited tokens instead of Openfort\'s.
-    */
-    'depositor'?: string;
+export class FixedRateTokenPolicyStrategy {
+    'sponsorSchema': SponsorSchemaFIXEDRATE;
+    'depositor'?: string | null;
+    'tokenContract': string;
+    'tokenContractAmount': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,7 +25,13 @@ export class PolicyStrategyRequest {
         {
             "name": "sponsorSchema",
             "baseName": "sponsorSchema",
-            "type": "SponsorSchema",
+            "type": "SponsorSchemaFIXEDRATE",
+            "format": ""
+        },
+        {
+            "name": "depositor",
+            "baseName": "depositor",
+            "type": "string",
             "format": ""
         },
         {
@@ -48,16 +45,10 @@ export class PolicyStrategyRequest {
             "baseName": "tokenContractAmount",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "depositor",
-            "baseName": "depositor",
-            "type": "string",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyStrategyRequest.attributeTypeMap;
+        return FixedRateTokenPolicyStrategy.attributeTypeMap;
     }
 
     public constructor() {

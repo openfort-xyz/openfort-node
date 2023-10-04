@@ -10,33 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { ApiKeyType } from '../models/ApiKeyType';
 import { HttpFile } from '../http/http';
 
-export class EditRoleRequest {
-    'userId': string;
-    'role': string;
+export class CreateProjectApiKeyRequest {
+    'type': ApiKeyType;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "role",
-            "baseName": "role",
-            "type": "string",
+            "name": "type",
+            "baseName": "type",
+            "type": "ApiKeyType",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return EditRoleRequest.attributeTypeMap;
+        return CreateProjectApiKeyRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

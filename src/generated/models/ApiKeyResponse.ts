@@ -13,6 +13,7 @@
 import { HttpFile } from '../http/http';
 
 export class ApiKeyResponse {
+    'id': number;
     'createdAt': number;
     'token': string;
     'name': string;
@@ -21,6 +22,12 @@ export class ApiKeyResponse {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int32"
+        },
         {
             "name": "createdAt",
             "baseName": "createdAt",

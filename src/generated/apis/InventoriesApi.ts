@@ -18,7 +18,7 @@ import { SortOrder } from '../models/SortOrder';
 /**
  * no description
  */
-export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
+export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Retrieves the cryptocurrency assets of an existing account.
@@ -33,7 +33,7 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getAccountCryptoCurrencyInventory", "id");
+            throw new RequiredError("InventoriesApi", "getAccountCryptoCurrencyInventory", "id");
         }
 
 
@@ -94,7 +94,7 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getAccountInventory", "id");
+            throw new RequiredError("InventoriesApi", "getAccountInventory", "id");
         }
 
 
@@ -131,7 +131,7 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getAccountNativeInventory", "id");
+            throw new RequiredError("InventoriesApi", "getAccountNativeInventory", "id");
         }
 
 
@@ -172,7 +172,7 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getAccountNftInventory", "id");
+            throw new RequiredError("InventoriesApi", "getAccountNftInventory", "id");
         }
 
 
@@ -238,13 +238,13 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerCryptoCurrencyInventory", "id");
+            throw new RequiredError("InventoriesApi", "getPlayerCryptoCurrencyInventory", "id");
         }
 
 
         // verify required parameter 'chainId' is not null or undefined
         if (chainId === null || chainId === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerCryptoCurrencyInventory", "chainId");
+            throw new RequiredError("InventoriesApi", "getPlayerCryptoCurrencyInventory", "chainId");
         }
 
 
@@ -311,13 +311,13 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerInventory", "id");
+            throw new RequiredError("InventoriesApi", "getPlayerInventory", "id");
         }
 
 
         // verify required parameter 'chainId' is not null or undefined
         if (chainId === null || chainId === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerInventory", "chainId");
+            throw new RequiredError("InventoriesApi", "getPlayerInventory", "chainId");
         }
 
 
@@ -360,13 +360,13 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerNativeInventory", "id");
+            throw new RequiredError("InventoriesApi", "getPlayerNativeInventory", "id");
         }
 
 
         // verify required parameter 'chainId' is not null or undefined
         if (chainId === null || chainId === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerNativeInventory", "chainId");
+            throw new RequiredError("InventoriesApi", "getPlayerNativeInventory", "chainId");
         }
 
 
@@ -413,13 +413,13 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerNftInventory", "id");
+            throw new RequiredError("InventoriesApi", "getPlayerNftInventory", "id");
         }
 
 
         // verify required parameter 'chainId' is not null or undefined
         if (chainId === null || chainId === undefined) {
-            throw new RequiredError("InventoryApi", "getPlayerNftInventory", "chainId");
+            throw new RequiredError("InventoriesApi", "getPlayerNftInventory", "chainId");
         }
 
 
@@ -478,7 +478,7 @@ export class InventoryApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class InventoryApiResponseProcessor {
+export class InventoriesApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
