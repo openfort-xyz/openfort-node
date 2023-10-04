@@ -11,7 +11,11 @@ import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { AddDepositorAddressRequest } from '../models/AddDepositorAddressRequest';
+import { ApiAuthorizedNetworkListResponse } from '../models/ApiAuthorizedNetworkListResponse';
+import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
+import { ApiKeyType } from '../models/ApiKeyType';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
@@ -33,6 +37,7 @@ import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRule
 import { ContractResponse } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
+import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
 import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
@@ -40,13 +45,13 @@ import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest
 import { CreatePolicyAllowFunctionRequest } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
+import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DomainData } from '../models/DomainData';
-import { EditRoleRequest } from '../models/EditRoleRequest';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -62,6 +67,7 @@ import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
+import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
@@ -77,7 +83,6 @@ import { InventoryResponse } from '../models/InventoryResponse';
 import { InvitedMemberResponse } from '../models/InvitedMemberResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
-import { MemberRemoveResponse } from '../models/MemberRemoveResponse';
 import { MemberRequest } from '../models/MemberRequest';
 import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
@@ -87,6 +92,9 @@ import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
+import { PaymasterDepositorListResponse } from '../models/PaymasterDepositorListResponse';
+import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
+import { PaymasterDepositorResponseDeleted } from '../models/PaymasterDepositorResponseDeleted';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { Player } from '../models/Player';
@@ -145,6 +153,7 @@ import { SignupRequest } from '../models/SignupRequest';
 import { SortOrder } from '../models/SortOrder';
 import { SponsorSchema } from '../models/SponsorSchema';
 import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
+import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
@@ -161,9 +170,15 @@ import { TypedDataField } from '../models/TypedDataField';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
+import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
+import { UpdateUserProjectRequest } from '../models/UpdateUserProjectRequest';
+import { UpdateUserProjectRequestRole } from '../models/UpdateUserProjectRequestRole';
 import { UserListResponse } from '../models/UserListResponse';
+import { UserProjectRemoveResponse } from '../models/UserProjectRemoveResponse';
 import { UserProjectRole } from '../models/UserProjectRole';
+import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
+import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserResponse } from '../models/UserResponse';
 
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
@@ -741,20 +756,20 @@ export class ObservableGoogleAuthenticationApi {
 
 }
 
-import { InventoryApiRequestFactory, InventoryApiResponseProcessor} from "../apis/InventoryApi";
-export class ObservableInventoryApi {
-    private requestFactory: InventoryApiRequestFactory;
-    private responseProcessor: InventoryApiResponseProcessor;
+import { InventoriesApiRequestFactory, InventoriesApiResponseProcessor} from "../apis/InventoriesApi";
+export class ObservableInventoriesApi {
+    private requestFactory: InventoriesApiRequestFactory;
+    private responseProcessor: InventoriesApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: InventoryApiRequestFactory,
-        responseProcessor?: InventoryApiResponseProcessor
+        requestFactory?: InventoriesApiRequestFactory,
+        responseProcessor?: InventoriesApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new InventoryApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new InventoryApiResponseProcessor();
+        this.requestFactory = requestFactory || new InventoriesApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new InventoriesApiResponseProcessor();
     }
 
     /**

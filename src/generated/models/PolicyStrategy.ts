@@ -11,12 +11,14 @@
  */
 
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
+import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
-import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
+import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { HttpFile } from '../http/http';
 
 export class PolicyStrategy {
-    'sponsorSchema': SponsorSchemaCHARGECUSTOMTOKENS;
+    'sponsorSchema': SponsorSchemaFIXEDRATE;
+    'depositor'?: string | null;
     'tokenContract': string;
     'tokenContractAmount': string;
 
@@ -26,7 +28,13 @@ export class PolicyStrategy {
         {
             "name": "sponsorSchema",
             "baseName": "sponsorSchema",
-            "type": "SponsorSchemaCHARGECUSTOMTOKENS",
+            "type": "SponsorSchemaFIXEDRATE",
+            "format": ""
+        },
+        {
+            "name": "depositor",
+            "baseName": "depositor",
+            "type": "string",
             "format": ""
         },
         {

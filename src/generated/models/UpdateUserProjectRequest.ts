@@ -10,43 +10,34 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeUSER } from '../models/EntityTypeUSER';
+import { UpdateUserProjectRequestRole } from '../models/UpdateUserProjectRequestRole';
 import { HttpFile } from '../http/http';
 
-export class MemberRemoveResponse {
-    'id': string;
-    'object': EntityTypeUSER;
-    'deleted': boolean;
+export class UpdateUserProjectRequest {
+    'userId': string;
+    'role': UpdateUserProjectRequestRole;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "userId",
+            "baseName": "userId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeUSER",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
+            "name": "role",
+            "baseName": "role",
+            "type": "UpdateUserProjectRequestRole",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return MemberRemoveResponse.attributeTypeMap;
+        return UpdateUserProjectRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

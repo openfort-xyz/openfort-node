@@ -10,7 +10,11 @@ import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { AddDepositorAddressRequest } from '../models/AddDepositorAddressRequest';
+import { ApiAuthorizedNetworkListResponse } from '../models/ApiAuthorizedNetworkListResponse';
+import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
+import { ApiKeyType } from '../models/ApiKeyType';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
@@ -32,6 +36,7 @@ import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRule
 import { ContractResponse } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
+import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
 import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
@@ -39,13 +44,13 @@ import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest
 import { CreatePolicyAllowFunctionRequest } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
+import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DomainData } from '../models/DomainData';
-import { EditRoleRequest } from '../models/EditRoleRequest';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -61,6 +66,7 @@ import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
+import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
@@ -76,7 +82,6 @@ import { InventoryResponse } from '../models/InventoryResponse';
 import { InvitedMemberResponse } from '../models/InvitedMemberResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
-import { MemberRemoveResponse } from '../models/MemberRemoveResponse';
 import { MemberRequest } from '../models/MemberRequest';
 import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
@@ -86,6 +91,9 @@ import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
+import { PaymasterDepositorListResponse } from '../models/PaymasterDepositorListResponse';
+import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
+import { PaymasterDepositorResponseDeleted } from '../models/PaymasterDepositorResponseDeleted';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { Player } from '../models/Player';
@@ -144,6 +152,7 @@ import { SignupRequest } from '../models/SignupRequest';
 import { SortOrder } from '../models/SortOrder';
 import { SponsorSchema } from '../models/SponsorSchema';
 import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
+import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
@@ -160,9 +169,15 @@ import { TypedDataField } from '../models/TypedDataField';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
+import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
+import { UpdateUserProjectRequest } from '../models/UpdateUserProjectRequest';
+import { UpdateUserProjectRequestRole } from '../models/UpdateUserProjectRequestRole';
 import { UserListResponse } from '../models/UserListResponse';
+import { UserProjectRemoveResponse } from '../models/UserProjectRemoveResponse';
 import { UserProjectRole } from '../models/UserProjectRole';
+import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
+import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserResponse } from '../models/UserResponse';
 
 import { ObservableAccountsApi } from "./ObservableAPI";
@@ -670,213 +685,213 @@ export class ObjectGoogleAuthenticationApi {
 
 }
 
-import { ObservableInventoryApi } from "./ObservableAPI";
-import { InventoryApiRequestFactory, InventoryApiResponseProcessor} from "../apis/InventoryApi";
+import { ObservableInventoriesApi } from "./ObservableAPI";
+import { InventoriesApiRequestFactory, InventoriesApiResponseProcessor} from "../apis/InventoriesApi";
 
-export interface InventoryApiGetAccountCryptoCurrencyInventoryRequest {
+export interface InventoriesApiGetAccountCryptoCurrencyInventoryRequest {
     /**
      * Specifies the unique account ID.
      * @type string
-     * @memberof InventoryApigetAccountCryptoCurrencyInventory
+     * @memberof InventoriesApigetAccountCryptoCurrencyInventory
      */
     id: string
     /**
      * Specifies the maximum number of records to return.
      * @type number
-     * @memberof InventoryApigetAccountCryptoCurrencyInventory
+     * @memberof InventoriesApigetAccountCryptoCurrencyInventory
      */
     limit?: number
     /**
      * Specifies the offset for the first records to return.
      * @type number
-     * @memberof InventoryApigetAccountCryptoCurrencyInventory
+     * @memberof InventoriesApigetAccountCryptoCurrencyInventory
      */
     skip?: number
     /**
      * Specifies the order in which to sort the results.
      * @type SortOrder
-     * @memberof InventoryApigetAccountCryptoCurrencyInventory
+     * @memberof InventoriesApigetAccountCryptoCurrencyInventory
      */
     order?: SortOrder
     /**
      * 
      * @type Array&lt;string&gt;
-     * @memberof InventoryApigetAccountCryptoCurrencyInventory
+     * @memberof InventoriesApigetAccountCryptoCurrencyInventory
      */
     contractId?: Array<string>
 }
 
-export interface InventoryApiGetAccountInventoryRequest {
+export interface InventoriesApiGetAccountInventoryRequest {
     /**
      * Specifies the unique account ID.
      * @type string
-     * @memberof InventoryApigetAccountInventory
+     * @memberof InventoriesApigetAccountInventory
      */
     id: string
 }
 
-export interface InventoryApiGetAccountNativeInventoryRequest {
+export interface InventoriesApiGetAccountNativeInventoryRequest {
     /**
      * Specifies the unique account ID.
      * @type string
-     * @memberof InventoryApigetAccountNativeInventory
+     * @memberof InventoriesApigetAccountNativeInventory
      */
     id: string
 }
 
-export interface InventoryApiGetAccountNftInventoryRequest {
+export interface InventoriesApiGetAccountNftInventoryRequest {
     /**
      * Specifies the unique account ID.
      * @type string
-     * @memberof InventoryApigetAccountNftInventory
+     * @memberof InventoriesApigetAccountNftInventory
      */
     id: string
     /**
      * Specifies the maximum number of records to return.
      * @type number
-     * @memberof InventoryApigetAccountNftInventory
+     * @memberof InventoriesApigetAccountNftInventory
      */
     limit?: number
     /**
      * Specifies the offset for the first records to return.
      * @type number
-     * @memberof InventoryApigetAccountNftInventory
+     * @memberof InventoriesApigetAccountNftInventory
      */
     skip?: number
     /**
      * Specifies the order in which to sort the results.
      * @type SortOrder
-     * @memberof InventoryApigetAccountNftInventory
+     * @memberof InventoriesApigetAccountNftInventory
      */
     order?: SortOrder
     /**
      * 
      * @type Array&lt;string&gt;
-     * @memberof InventoryApigetAccountNftInventory
+     * @memberof InventoriesApigetAccountNftInventory
      */
     contractId?: Array<string>
 }
 
-export interface InventoryApiGetPlayerCryptoCurrencyInventoryRequest {
+export interface InventoriesApiGetPlayerCryptoCurrencyInventoryRequest {
     /**
      * Specifies the unique player ID.
      * @type string
-     * @memberof InventoryApigetPlayerCryptoCurrencyInventory
+     * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
     id: string
     /**
      * Filter by chain id.
      * @type number
-     * @memberof InventoryApigetPlayerCryptoCurrencyInventory
+     * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
     chainId: number
     /**
      * Specifies the maximum number of records to return.
      * @type number
-     * @memberof InventoryApigetPlayerCryptoCurrencyInventory
+     * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
     limit?: number
     /**
      * Specifies the offset for the first records to return.
      * @type number
-     * @memberof InventoryApigetPlayerCryptoCurrencyInventory
+     * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
     skip?: number
     /**
      * Specifies the order in which to sort the results.
      * @type SortOrder
-     * @memberof InventoryApigetPlayerCryptoCurrencyInventory
+     * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
     order?: SortOrder
     /**
      * Filter by contract ID.
      * @type Array&lt;string&gt;
-     * @memberof InventoryApigetPlayerCryptoCurrencyInventory
+     * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
     contractId?: Array<string>
 }
 
-export interface InventoryApiGetPlayerInventoryRequest {
+export interface InventoriesApiGetPlayerInventoryRequest {
     /**
      * Specifies the unique player ID.
      * @type string
-     * @memberof InventoryApigetPlayerInventory
+     * @memberof InventoriesApigetPlayerInventory
      */
     id: string
     /**
      * Filter by chain id.
      * @type number
-     * @memberof InventoryApigetPlayerInventory
+     * @memberof InventoriesApigetPlayerInventory
      */
     chainId: number
 }
 
-export interface InventoryApiGetPlayerNativeInventoryRequest {
+export interface InventoriesApiGetPlayerNativeInventoryRequest {
     /**
      * Specifies the unique player ID.
      * @type string
-     * @memberof InventoryApigetPlayerNativeInventory
+     * @memberof InventoriesApigetPlayerNativeInventory
      */
     id: string
     /**
      * Filter by chain id.
      * @type number
-     * @memberof InventoryApigetPlayerNativeInventory
+     * @memberof InventoriesApigetPlayerNativeInventory
      */
     chainId: number
 }
 
-export interface InventoryApiGetPlayerNftInventoryRequest {
+export interface InventoriesApiGetPlayerNftInventoryRequest {
     /**
      * Specifies the unique player ID.
      * @type string
-     * @memberof InventoryApigetPlayerNftInventory
+     * @memberof InventoriesApigetPlayerNftInventory
      */
     id: string
     /**
      * Filter by chain id.
      * @type number
-     * @memberof InventoryApigetPlayerNftInventory
+     * @memberof InventoriesApigetPlayerNftInventory
      */
     chainId: number
     /**
      * Specifies the maximum number of records to return.
      * @type number
-     * @memberof InventoryApigetPlayerNftInventory
+     * @memberof InventoriesApigetPlayerNftInventory
      */
     limit?: number
     /**
      * Specifies the offset for the first records to return.
      * @type number
-     * @memberof InventoryApigetPlayerNftInventory
+     * @memberof InventoriesApigetPlayerNftInventory
      */
     skip?: number
     /**
      * Specifies the order in which to sort the results.
      * @type SortOrder
-     * @memberof InventoryApigetPlayerNftInventory
+     * @memberof InventoriesApigetPlayerNftInventory
      */
     order?: SortOrder
     /**
      * Filter by contract ID.
      * @type Array&lt;string&gt;
-     * @memberof InventoryApigetPlayerNftInventory
+     * @memberof InventoriesApigetPlayerNftInventory
      */
     contractId?: Array<string>
 }
 
-export class ObjectInventoryApi {
-    private api: ObservableInventoryApi
+export class ObjectInventoriesApi {
+    private api: ObservableInventoriesApi
 
-    public constructor(configuration: Configuration, requestFactory?: InventoryApiRequestFactory, responseProcessor?: InventoryApiResponseProcessor) {
-        this.api = new ObservableInventoryApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: InventoriesApiRequestFactory, responseProcessor?: InventoriesApiResponseProcessor) {
+        this.api = new ObservableInventoriesApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * Retrieves the cryptocurrency assets of an existing account.
      * @param param the request object
      */
-    public getAccountCryptoCurrencyInventory(param: InventoryApiGetAccountCryptoCurrencyInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
+    public getAccountCryptoCurrencyInventory(param: InventoriesApiGetAccountCryptoCurrencyInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
         return this.api.getAccountCryptoCurrencyInventory(param.id, param.limit, param.skip, param.order, param.contractId,  options).toPromise();
     }
 
@@ -884,7 +899,7 @@ export class ObjectInventoryApi {
      * Get inventory of account.
      * @param param the request object
      */
-    public getAccountInventory(param: InventoryApiGetAccountInventoryRequest, options?: Configuration): Promise<ObsoleteInventoryResponse> {
+    public getAccountInventory(param: InventoriesApiGetAccountInventoryRequest, options?: Configuration): Promise<ObsoleteInventoryResponse> {
         return this.api.getAccountInventory(param.id,  options).toPromise();
     }
 
@@ -892,7 +907,7 @@ export class ObjectInventoryApi {
      * Retrieves the native asset of an existing account.
      * @param param the request object
      */
-    public getAccountNativeInventory(param: InventoryApiGetAccountNativeInventoryRequest, options?: Configuration): Promise<InventoryResponse> {
+    public getAccountNativeInventory(param: InventoriesApiGetAccountNativeInventoryRequest, options?: Configuration): Promise<InventoryResponse> {
         return this.api.getAccountNativeInventory(param.id,  options).toPromise();
     }
 
@@ -900,7 +915,7 @@ export class ObjectInventoryApi {
      * Retrieves the NFT assets of an existing account.
      * @param param the request object
      */
-    public getAccountNftInventory(param: InventoryApiGetAccountNftInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
+    public getAccountNftInventory(param: InventoriesApiGetAccountNftInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
         return this.api.getAccountNftInventory(param.id, param.limit, param.skip, param.order, param.contractId,  options).toPromise();
     }
 
@@ -908,7 +923,7 @@ export class ObjectInventoryApi {
      * Get cryptocurrency list of player.
      * @param param the request object
      */
-    public getPlayerCryptoCurrencyInventory(param: InventoryApiGetPlayerCryptoCurrencyInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
+    public getPlayerCryptoCurrencyInventory(param: InventoriesApiGetPlayerCryptoCurrencyInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
         return this.api.getPlayerCryptoCurrencyInventory(param.id, param.chainId, param.limit, param.skip, param.order, param.contractId,  options).toPromise();
     }
 
@@ -916,7 +931,7 @@ export class ObjectInventoryApi {
      * Get inventory of player.
      * @param param the request object
      */
-    public getPlayerInventory(param: InventoryApiGetPlayerInventoryRequest, options?: Configuration): Promise<ObsoleteInventoryResponse> {
+    public getPlayerInventory(param: InventoriesApiGetPlayerInventoryRequest, options?: Configuration): Promise<ObsoleteInventoryResponse> {
         return this.api.getPlayerInventory(param.id, param.chainId,  options).toPromise();
     }
 
@@ -924,7 +939,7 @@ export class ObjectInventoryApi {
      * Get native token list of player.
      * @param param the request object
      */
-    public getPlayerNativeInventory(param: InventoryApiGetPlayerNativeInventoryRequest, options?: Configuration): Promise<InventoryResponse> {
+    public getPlayerNativeInventory(param: InventoriesApiGetPlayerNativeInventoryRequest, options?: Configuration): Promise<InventoryResponse> {
         return this.api.getPlayerNativeInventory(param.id, param.chainId,  options).toPromise();
     }
 
@@ -932,7 +947,7 @@ export class ObjectInventoryApi {
      * Get NFTs list of player.
      * @param param the request object
      */
-    public getPlayerNftInventory(param: InventoryApiGetPlayerNftInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
+    public getPlayerNftInventory(param: InventoriesApiGetPlayerNftInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
         return this.api.getPlayerNftInventory(param.id, param.chainId, param.limit, param.skip, param.order, param.contractId,  options).toPromise();
     }
 

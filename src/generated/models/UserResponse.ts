@@ -21,6 +21,8 @@ export class UserResponse {
     'updatedAt': number;
     'first_name': string;
     'last_name': string;
+    'firstName': string;
+    'lastName': string;
     'role': UserProjectRole;
     'email': string;
 
@@ -60,6 +62,18 @@ export class UserResponse {
         {
             "name": "last_name",
             "baseName": "last_name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "firstName",
+            "baseName": "firstName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "lastName",
+            "baseName": "lastName",
             "type": "string",
             "format": ""
         },

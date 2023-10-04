@@ -15,6 +15,7 @@ import { HttpFile } from '../http/http';
 
 export class ChargeCustomTokenPolicyStrategy {
     'sponsorSchema': SponsorSchemaCHARGECUSTOMTOKENS;
+    'depositor'?: string | null;
     'tokenContract': string;
     'tokenContractAmount': string;
 
@@ -25,6 +26,12 @@ export class ChargeCustomTokenPolicyStrategy {
             "name": "sponsorSchema",
             "baseName": "sponsorSchema",
             "type": "SponsorSchemaCHARGECUSTOMTOKENS",
+            "format": ""
+        },
+        {
+            "name": "depositor",
+            "baseName": "depositor",
+            "type": "string",
             "format": ""
         },
         {
