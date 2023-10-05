@@ -23,10 +23,6 @@ export class ResponseResponse {
     */
     'blockNumber'?: number;
     /**
-     * @deprecated Use userOpHash
-     */
-    'transactionHash'?: string;
-    /**
     * The user operation hash of the transaction of this log.
     */
     'userOpHash'?: string;

@@ -1342,6 +1342,24 @@ export interface PoliciesApiDeletePolicyRequest {
     id: string
 }
 
+export interface PoliciesApiDisablePolicyRequest {
+    /**
+     * Specifies the unique policy ID.
+     * @type string
+     * @memberof PoliciesApidisablePolicy
+     */
+    id: string
+}
+
+export interface PoliciesApiEnablePolicyRequest {
+    /**
+     * Specifies the unique policy ID.
+     * @type string
+     * @memberof PoliciesApienablePolicy
+     */
+    id: string
+}
+
 export interface PoliciesApiGetPoliciesRequest {
     /**
      * Specifies the maximum number of records to return.
@@ -1385,6 +1403,12 @@ export interface PoliciesApiGetPoliciesRequest {
      * @memberof PoliciesApigetPolicies
      */
     chainId?: number
+    /**
+     * Specifies whether to include enabled contracts.
+     * @type boolean
+     * @memberof PoliciesApigetPolicies
+     */
+    enabled?: boolean
 }
 
 export interface PoliciesApiGetPolicyRequest {
@@ -1494,11 +1518,27 @@ export class ObjectPoliciesApi {
     }
 
     /**
+     * Disable a policy object.
+     * @param param the request object
+     */
+    public disablePolicy(param: PoliciesApiDisablePolicyRequest, options?: Configuration): Promise<PolicyResponse> {
+        return this.api.disablePolicy(param.id,  options).toPromise();
+    }
+
+    /**
+     * Enable a policy object.
+     * @param param the request object
+     */
+    public enablePolicy(param: PoliciesApiEnablePolicyRequest, options?: Configuration): Promise<PolicyResponse> {
+        return this.api.enablePolicy(param.id,  options).toPromise();
+    }
+
+    /**
      * List policies.
      * @param param the request object
      */
     public getPolicies(param: PoliciesApiGetPoliciesRequest = {}, options?: Configuration): Promise<PolicyListResponse> {
-        return this.api.getPolicies(param.limit, param.skip, param.order, param.expand, param.name, param.deleted, param.chainId,  options).toPromise();
+        return this.api.getPolicies(param.limit, param.skip, param.order, param.expand, param.name, param.deleted, param.chainId, param.enabled,  options).toPromise();
     }
 
     /**

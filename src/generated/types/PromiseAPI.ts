@@ -811,6 +811,24 @@ export class PromisePoliciesApi {
     }
 
     /**
+     * Disable a policy object.
+     * @param id Specifies the unique policy ID.
+     */
+    public disablePolicy(id: string, _options?: Configuration): Promise<PolicyResponse> {
+        const result = this.api.disablePolicy(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Enable a policy object.
+     * @param id Specifies the unique policy ID.
+     */
+    public enablePolicy(id: string, _options?: Configuration): Promise<PolicyResponse> {
+        const result = this.api.enablePolicy(id, _options);
+        return result.toPromise();
+    }
+
+    /**
      * List policies.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
@@ -819,9 +837,10 @@ export class PromisePoliciesApi {
      * @param name Specifies the name of the policy.
      * @param deleted Specifies whether to include deleted contracts.
      * @param chainId The chain ID of the policy.
+     * @param enabled Specifies whether to include enabled contracts.
      */
-    public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<PolicyListResponse> {
-        const result = this.api.getPolicies(limit, skip, order, expand, name, deleted, chainId, _options);
+    public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, enabled?: boolean, _options?: Configuration): Promise<PolicyListResponse> {
+        const result = this.api.getPolicies(limit, skip, order, expand, name, deleted, chainId, enabled, _options);
         return result.toPromise();
     }
 

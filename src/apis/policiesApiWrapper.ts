@@ -59,6 +59,21 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
     }
 
     /**
+     * Disable a policy object.
+     * @param id Specifies the unique policy ID.
+     */
+    public async disable(id: string): Promise<PolicyResponse> {
+        return await this.api.disablePolicy(id);
+    }
+    /**
+     * Enable a policy object.
+     * @param id
+     */
+    public async enable(id: string): Promise<PolicyResponse> {
+        return await this.api.enablePolicy(id);
+    }
+
+    /**
      * Gets all policy objects for a given project.
      * @param req Criteria to retrieve the policies by
      */

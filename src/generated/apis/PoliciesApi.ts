@@ -168,6 +168,80 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Disable a policy object.
+     * @param id Specifies the unique policy ID.
+     */
+    public async disablePolicy(id: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("PoliciesApi", "disablePolicy", "id");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/policies/{id}/disable'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Enable a policy object.
+     * @param id Specifies the unique policy ID.
+     */
+    public async enablePolicy(id: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("PoliciesApi", "enablePolicy", "id");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/policies/{id}/enable'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * List policies.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
@@ -176,9 +250,11 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
      * @param name Specifies the name of the policy.
      * @param deleted Specifies whether to include deleted contracts.
      * @param chainId The chain ID of the policy.
+     * @param enabled Specifies whether to include enabled contracts.
      */
-    public async getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, enabled?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -227,6 +303,11 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (chainId !== undefined) {
             requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
+        }
+
+        // Query Params
+        if (enabled !== undefined) {
+            requestContext.setQueryParam("enabled", ObjectSerializer.serialize(enabled, "boolean", ""));
         }
 
 
@@ -591,6 +672,76 @@ export class PoliciesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PolicyDeleteResponse", ""
             ) as PolicyDeleteResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to disablePolicy
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async disablePolicy(response: ResponseContext): Promise<PolicyResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: PolicyResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PolicyResponse", ""
+            ) as PolicyResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: PolicyResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PolicyResponse", ""
+            ) as PolicyResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to enablePolicy
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async enablePolicy(response: ResponseContext): Promise<PolicyResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: PolicyResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PolicyResponse", ""
+            ) as PolicyResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: PolicyResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PolicyResponse", ""
+            ) as PolicyResponse;
             return body;
         }
 

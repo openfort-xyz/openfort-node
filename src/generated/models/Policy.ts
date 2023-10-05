@@ -21,6 +21,7 @@ export class Policy {
     'createdAt': number;
     'name': string | null;
     'deleted': boolean;
+    'enabled': boolean;
     /**
     * The chain ID.
     */
@@ -59,6 +60,12 @@ export class Policy {
         {
             "name": "deleted",
             "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "enabled",
+            "baseName": "enabled",
             "type": "boolean",
             "format": ""
         },
