@@ -284,15 +284,15 @@ import { PlayerResponseAccountsInner            } from '../models/PlayerResponse
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner              } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
-import { Policy          } from '../models/Policy';
+import { Policy           } from '../models/Policy';
 import { PolicyDeleteResponse    } from '../models/PolicyDeleteResponse';
-import { PolicyListQueries        } from '../models/PolicyListQueries';
+import { PolicyListQueries         } from '../models/PolicyListQueries';
 import { PolicyListResponse       } from '../models/PolicyListResponse';
 import { PolicyRateLimit } from '../models/PolicyRateLimit';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
-import { PolicyResponse          } from '../models/PolicyResponse';
+import { PolicyResponse           } from '../models/PolicyResponse';
 import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyResponsePolicyRulesInner           } from '../models/PolicyResponsePolicyRulesInner';
 import { PolicyRuleDeleteResponse    } from '../models/PolicyRuleDeleteResponse';
@@ -339,7 +339,7 @@ import { TransactionIntentResponse              } from '../models/TransactionInt
 import { TransactionIntentResponseAccount            } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
-import { TransactionIntentResponsePolicy          } from '../models/TransactionIntentResponsePolicy';
+import { TransactionIntentResponsePolicy           } from '../models/TransactionIntentResponsePolicy';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TypedDataField } from '../models/TypedDataField';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';

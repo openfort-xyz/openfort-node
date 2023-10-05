@@ -40,6 +40,10 @@ export class PolicyListQueries {
     * The chain ID of the policy.
     */
     'chainId'?: number;
+    /**
+    * Specifies whether to include enabled contracts.
+    */
+    'enabled'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -85,6 +89,12 @@ export class PolicyListQueries {
             "baseName": "chainId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

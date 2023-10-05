@@ -25,6 +25,7 @@ export class TransactionIntentResponsePolicy {
     'createdAt': number;
     'name': string | null;
     'deleted': boolean;
+    'enabled': boolean;
     /**
     * The chain ID.
     */
@@ -63,6 +64,12 @@ export class TransactionIntentResponsePolicy {
         {
             "name": "deleted",
             "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "enabled",
+            "baseName": "enabled",
             "type": "boolean",
             "format": ""
         },

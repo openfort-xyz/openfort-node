@@ -1423,6 +1423,52 @@ export class ObservablePoliciesApi {
     }
 
     /**
+     * Disable a policy object.
+     * @param id Specifies the unique policy ID.
+     */
+    public disablePolicy(id: string, _options?: Configuration): Observable<PolicyResponse> {
+        const requestContextPromise = this.requestFactory.disablePolicy(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.disablePolicy(rsp)));
+            }));
+    }
+
+    /**
+     * Enable a policy object.
+     * @param id Specifies the unique policy ID.
+     */
+    public enablePolicy(id: string, _options?: Configuration): Observable<PolicyResponse> {
+        const requestContextPromise = this.requestFactory.enablePolicy(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.enablePolicy(rsp)));
+            }));
+    }
+
+    /**
      * List policies.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
@@ -1431,9 +1477,10 @@ export class ObservablePoliciesApi {
      * @param name Specifies the name of the policy.
      * @param deleted Specifies whether to include deleted contracts.
      * @param chainId The chain ID of the policy.
+     * @param enabled Specifies whether to include enabled contracts.
      */
-    public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, _options?: Configuration): Observable<PolicyListResponse> {
-        const requestContextPromise = this.requestFactory.getPolicies(limit, skip, order, expand, name, deleted, chainId, _options);
+    public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, enabled?: boolean, _options?: Configuration): Observable<PolicyListResponse> {
+        const requestContextPromise = this.requestFactory.getPolicies(limit, skip, order, expand, name, deleted, chainId, enabled, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
