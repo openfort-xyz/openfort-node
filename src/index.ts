@@ -10,9 +10,10 @@ import { TransactionIntentsApiWrapper } from "./apis/transactionIntentsApiWrappe
 import { InventoriesApiWrapper } from "./apis/inventoriesApiWrapper";
 import { WebHookEvent } from "./models/webHookEvent";
 import { createHmac } from "crypto";
+import { IamApiWrapper } from "./apis/iamApiWrapper";
 
 export default class Openfort {
-    private readonly apiWrappers: {[name: string]: Observable} = {};
+    private readonly apiWrappers: { [name: string]: Observable } = {};
     private readonly observers: Observer[] = [];
 
     constructor(private readonly apiKey: string, private readonly basePath?: string) {}
@@ -47,6 +48,10 @@ export default class Openfort {
 
     public get inventories(): InventoriesApiWrapper {
         return this.getOrCreateWrapper(InventoriesApiWrapper);
+    }
+
+    public get iam(): IamApiWrapper {
+        return this.getOrCreateWrapper(IamApiWrapper);
     }
 
     public subscribe(observer: Observer): void {
