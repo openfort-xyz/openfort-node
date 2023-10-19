@@ -16,15 +16,15 @@ import { HttpFile } from '../http/http';
 export class PolicyStrategyRequest {
     'sponsorSchema': SponsorSchema;
     /**
-    * If the user pays in custom tokens, the contract ID of the token contract.
+    * If the user pays in custom tokens, the contract ID (starts with con_) of the token contract.
     */
     'tokenContract'?: string;
     /**
-    * If the user pays in custom tokens, the amount of tokens to pay in WEI per native token.
+    * If the user pays in ERC20 tokens, this reflects either the exchange rate or the amount in WEI.
     */
     'tokenContractAmount'?: string;
     /**
-    * If the game wants to use their deposited tokens instead of Openfort\'s.
+    * If the you want to use your own native tokens to pay for gas, specify the depositor ID (starts with dep_)
     */
     'depositor'?: string;
 

@@ -73,7 +73,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Estimate the gas cost of creating a transaction intent and putting it onchain.
+     * Estimate the gas cost of creating a transaction intent and putting it on chain. If a policy that includes payment of gas in ERC-20 tokens is provided, an extra field `estimatedTXGasFeeToken` is returned with the estimated amount of tokens.
      * Estimate gas cost of creating a transaction
      * @param createTransactionIntentRequest 
      */
@@ -122,7 +122,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get a transaction intent object.
-     * @param id Specifies the unique transaction intent ID.
+     * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param expand Specifies the expandable fields.
      */
     public async getTransactionIntent(id: string, expand?: Array<TransactionIntentResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
@@ -172,8 +172,8 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param expand Specifies the fields to expand in the response.
      * @param chainId The chain ID.
      * @param accountId Filter by account ID.
-     * @param playerId Filter by player ID.
-     * @param policyId Filter by policy ID.
+     * @param playerId Filter by player ID (starts with pla_).
+     * @param policyId Filter by policy ID (starts with pol_).
      */
     public async getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -250,9 +250,9 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This endpoint is used to put a userOperationHash signature on-chain. This means players that have informed (and use) an [externally-owned account (EOA)](https://ethereum.org/en/developers/docs/accounts/) to authorize operations, such as registering a session key, for their gaming accounts.  Given that players with non-custodial accounts are the only ones in possession of the private key, they must sign the information inside the `nextAction` value received from the `POST` API endpoint that creates a transaction_intent, even with their session-keys. Once signed, the client needs to send the signed message using the `/signature` endpoint or use one of the available client-side libraries to do so.
+     * This endpoint is used to send the signed userOperationHash.  For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
      * Confirms the creation of a transaction intent with an external owner.
-     * @param id Specifies the unique transaction intent ID.
+     * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 
      */
     public async signature(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<RequestContext> {

@@ -3,6 +3,7 @@ import { Configuration} from '../configuration'
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
+import { AccelbyteOauthConfig } from '../models/AccelbyteOauthConfig';
 import { Account } from '../models/Account';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
@@ -87,6 +88,12 @@ import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
+import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
+import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
+import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
+import { OAuthProvider } from '../models/OAuthProvider';
+import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
@@ -239,7 +246,7 @@ export interface AccountsApiGetAccountRequest {
 
 export interface AccountsApiGetAccountsRequest {
     /**
-     * Specifies the unique player ID
+     * Specifies the unique player ID (starts with pla_)
      * @type string
      * @memberof AccountsApigetAccounts
      */
@@ -516,7 +523,7 @@ export interface ContractsApiCreateContractRequest {
 
 export interface ContractsApiDeleteContractRequest {
     /**
-     * Specifies the unique contract ID.
+     * Specifies the unique contract ID (starts with con_).
      * @type string
      * @memberof ContractsApideleteContract
      */
@@ -525,7 +532,7 @@ export interface ContractsApiDeleteContractRequest {
 
 export interface ContractsApiGetContractRequest {
     /**
-     * Specifies the unique contract ID.
+     * Specifies the unique contract ID (starts with con_).
      * @type string
      * @memberof ContractsApigetContract
      */
@@ -579,7 +586,7 @@ export interface ContractsApiGetContractsRequest {
 
 export interface ContractsApiUpdateContractRequest {
     /**
-     * Specifies the unique contract ID.
+     * Specifies the unique contract ID (starts with con_).
      * @type string
      * @memberof ContractsApiupdateContract
      */
@@ -774,7 +781,7 @@ export interface InventoriesApiGetAccountNftInventoryRequest {
 
 export interface InventoriesApiGetPlayerCryptoCurrencyInventoryRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
@@ -804,7 +811,7 @@ export interface InventoriesApiGetPlayerCryptoCurrencyInventoryRequest {
      */
     order?: SortOrder
     /**
-     * Filter by contract ID.
+     * Filter by contract ID (starts with con_).
      * @type Array&lt;string&gt;
      * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
@@ -813,7 +820,7 @@ export interface InventoriesApiGetPlayerCryptoCurrencyInventoryRequest {
 
 export interface InventoriesApiGetPlayerInventoryRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof InventoriesApigetPlayerInventory
      */
@@ -828,7 +835,7 @@ export interface InventoriesApiGetPlayerInventoryRequest {
 
 export interface InventoriesApiGetPlayerNativeInventoryRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof InventoriesApigetPlayerNativeInventory
      */
@@ -843,7 +850,7 @@ export interface InventoriesApiGetPlayerNativeInventoryRequest {
 
 export interface InventoriesApiGetPlayerNftInventoryRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof InventoriesApigetPlayerNftInventory
      */
@@ -873,7 +880,7 @@ export interface InventoriesApiGetPlayerNftInventoryRequest {
      */
     order?: SortOrder
     /**
-     * Filter by contract ID.
+     * Filter by contract ID (starts with con_).
      * @type Array&lt;string&gt;
      * @memberof InventoriesApigetPlayerNftInventory
      */
@@ -953,6 +960,138 @@ export class ObjectInventoriesApi {
 
 }
 
+import { ObservableOAuthApi } from "./ObservableAPI";
+import { OAuthApiRequestFactory, OAuthApiResponseProcessor} from "../apis/OAuthApi";
+
+export interface OAuthApiAuthRequest {
+    /**
+     * OAuth provider
+     * @type OAuthProvider
+     * @memberof OAuthApiauth
+     */
+    provider: OAuthProvider
+    /**
+     * Request body
+     * @type OAuthRequest
+     * @memberof OAuthApiauth
+     */
+    oAuthRequest: OAuthRequest
+}
+
+export interface OAuthApiCreateOAuthConfigRequest {
+    /**
+     * Specifies the oauth provider type.
+     * @type OAuthProvider
+     * @memberof OAuthApicreateOAuthConfig
+     */
+    provider: OAuthProvider
+    /**
+     * Specifies the oauth provider specific configuration.
+     * @type OAuthConfigRequest
+     * @memberof OAuthApicreateOAuthConfig
+     */
+    oAuthConfigRequest: OAuthConfigRequest
+}
+
+export interface OAuthApiDeleteOAuthConfigRequest {
+    /**
+     * Specifies the oauth provider type.
+     * @type OAuthProvider
+     * @memberof OAuthApideleteOAuthConfig
+     */
+    provider: OAuthProvider
+}
+
+export interface OAuthApiGetOAuthConfigRequest {
+    /**
+     * Specifies the oauth provider type.
+     * @type OAuthProvider
+     * @memberof OAuthApigetOAuthConfig
+     */
+    provider: OAuthProvider
+}
+
+export interface OAuthApiListOAuthConfigRequest {
+}
+
+export interface OAuthApiUpdateOAuthConfigRequest {
+    /**
+     * Specifies the oauth provider type.
+     * @type OAuthProvider
+     * @memberof OAuthApiupdateOAuthConfig
+     */
+    provider: OAuthProvider
+    /**
+     * Specifies the oauth provider specific configuration.
+     * @type OAuthConfigRequest
+     * @memberof OAuthApiupdateOAuthConfig
+     */
+    oAuthConfigRequest: OAuthConfigRequest
+}
+
+export class ObjectOAuthApi {
+    private api: ObservableOAuthApi
+
+    public constructor(configuration: Configuration, requestFactory?: OAuthApiRequestFactory, responseProcessor?: OAuthApiResponseProcessor) {
+        this.api = new ObservableOAuthApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
+     * Authorize user with token.
+     * @param param the request object
+     */
+    public auth(param: OAuthApiAuthRequest, options?: Configuration): Promise<AuthResponse> {
+        return this.api.auth(param.provider, param.oAuthRequest,  options).toPromise();
+    }
+
+    /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param param the request object
+     */
+    public createOAuthConfig(param: OAuthApiCreateOAuthConfigRequest, options?: Configuration): Promise<void> {
+        return this.api.createOAuthConfig(param.provider, param.oAuthConfigRequest,  options).toPromise();
+    }
+
+    /**
+     * The endpoint deletes oauth configuration for specified provider for the current project environment.
+     * Delete oauth configuration.
+     * @param param the request object
+     */
+    public deleteOAuthConfig(param: OAuthApiDeleteOAuthConfigRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteOAuthConfig(param.provider,  options).toPromise();
+    }
+
+    /**
+     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
+     * Get oauth configuration.
+     * @param param the request object
+     */
+    public getOAuthConfig(param: OAuthApiGetOAuthConfigRequest, options?: Configuration): Promise<OAuthConfigResponse> {
+        return this.api.getOAuthConfig(param.provider,  options).toPromise();
+    }
+
+    /**
+     * The endpoint retrieves the list of oauth configurations for the current project environment.
+     * List of oauth configurations.
+     * @param param the request object
+     */
+    public listOAuthConfig(param: OAuthApiListOAuthConfigRequest = {}, options?: Configuration): Promise<OAuthConfigListResponse> {
+        return this.api.listOAuthConfig( options).toPromise();
+    }
+
+    /**
+     * The endpoint updates oauth configuration for specified provider for the current project environment.
+     * Update oauth configuration.
+     * @param param the request object
+     */
+    public updateOAuthConfig(param: OAuthApiUpdateOAuthConfigRequest, options?: Configuration): Promise<void> {
+        return this.api.updateOAuthConfig(param.provider, param.oAuthConfigRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservablePlayersApi } from "./ObservableAPI";
 import { PlayersApiRequestFactory, PlayersApiResponseProcessor} from "../apis/PlayersApi";
 
@@ -982,7 +1121,7 @@ export interface PlayersApiCreatePlayerRequest {
 
 export interface PlayersApiCreatePlayerAccountRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApicreatePlayerAccount
      */
@@ -997,7 +1136,7 @@ export interface PlayersApiCreatePlayerAccountRequest {
 
 export interface PlayersApiCreatePlayerSessionRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApicreatePlayerSession
      */
@@ -1012,7 +1151,7 @@ export interface PlayersApiCreatePlayerSessionRequest {
 
 export interface PlayersApiGetPlayerRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApigetPlayer
      */
@@ -1027,7 +1166,7 @@ export interface PlayersApiGetPlayerRequest {
 
 export interface PlayersApiGetPlayerAccountsRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApigetPlayerAccounts
      */
@@ -1090,7 +1229,7 @@ export interface PlayersApiObsoleteCancelTransferAccountOwnershipRequest {
 
 export interface PlayersApiObsoleteRequestTransferAccountOwnershipRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApiobsoleteRequestTransferAccountOwnership
      */
@@ -1105,7 +1244,7 @@ export interface PlayersApiObsoleteRequestTransferAccountOwnershipRequest {
 
 export interface PlayersApiRequestTransferAccountOwnershipRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApirequestTransferAccountOwnership
      */
@@ -1120,7 +1259,7 @@ export interface PlayersApiRequestTransferAccountOwnershipRequest {
 
 export interface PlayersApiRevokePlayerSessionRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApirevokePlayerSession
      */
@@ -1135,7 +1274,7 @@ export interface PlayersApiRevokePlayerSessionRequest {
 
 export interface PlayersApiUpdatePlayerRequest {
     /**
-     * Specifies the unique player ID.
+     * Specifies the unique player ID (starts with pla_).
      * @type string
      * @memberof PlayersApiupdatePlayer
      */
@@ -1320,7 +1459,7 @@ export interface PoliciesApiCreatePolicyRequest {
 
 export interface PoliciesApiCreatePolicyAllowFunctionRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApicreatePolicyAllowFunction
      */
@@ -1335,7 +1474,7 @@ export interface PoliciesApiCreatePolicyAllowFunctionRequest {
 
 export interface PoliciesApiDeletePolicyRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApideletePolicy
      */
@@ -1344,7 +1483,7 @@ export interface PoliciesApiDeletePolicyRequest {
 
 export interface PoliciesApiDisablePolicyRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApidisablePolicy
      */
@@ -1353,7 +1492,7 @@ export interface PoliciesApiDisablePolicyRequest {
 
 export interface PoliciesApiEnablePolicyRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApienablePolicy
      */
@@ -1413,7 +1552,7 @@ export interface PoliciesApiGetPoliciesRequest {
 
 export interface PoliciesApiGetPolicyRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApigetPolicy
      */
@@ -1428,7 +1567,7 @@ export interface PoliciesApiGetPolicyRequest {
 
 export interface PoliciesApiGetPolicyAllowFunctionsRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApigetPolicyAllowFunctions
      */
@@ -1443,7 +1582,7 @@ export interface PoliciesApiGetPolicyAllowFunctionsRequest {
 
 export interface PoliciesApiGetPolicyTotalGasUsageRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApigetPolicyTotalGasUsage
      */
@@ -1452,7 +1591,7 @@ export interface PoliciesApiGetPolicyTotalGasUsageRequest {
 
 export interface PoliciesApiUpdatePolicyRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApiupdatePolicy
      */
@@ -1606,7 +1745,7 @@ export interface PolicyRulesApiDeletePolicyRulesRequest {
 
 export interface PolicyRulesApiGetPolicyRulesRequest {
     /**
-     * Specifies the unique policy ID.
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PolicyRulesApigetPolicyRules
      */
@@ -1707,7 +1846,7 @@ export interface SessionsApiCreateSessionRequest {
 
 export interface SessionsApiGetPlayerSessionsRequest {
     /**
-     * The player ID
+     * The player ID (starts with pla_)
      * @type string
      * @memberof SessionsApigetPlayerSessions
      */
@@ -1740,7 +1879,7 @@ export interface SessionsApiGetPlayerSessionsRequest {
 
 export interface SessionsApiGetSessionRequest {
     /**
-     * Specifies the unique session ID.
+     * Specifies the unique session ID (starts with ses_).
      * @type string
      * @memberof SessionsApigetSession
      */
@@ -1764,7 +1903,7 @@ export interface SessionsApiRevokeSessionRequest {
 
 export interface SessionsApiSignatureSessionRequest {
     /**
-     * Specifies the unique session ID.
+     * Specifies the unique session ID (starts with ses_).
      * @type string
      * @memberof SessionsApisignatureSession
      */
@@ -1849,7 +1988,7 @@ export interface TransactionIntentsApiEstimateTransactionIntentCostRequest {
 
 export interface TransactionIntentsApiGetTransactionIntentRequest {
     /**
-     * Specifies the unique transaction intent ID.
+     * Specifies the unique transaction intent ID (starts with tin_).
      * @type string
      * @memberof TransactionIntentsApigetTransactionIntent
      */
@@ -1900,13 +2039,13 @@ export interface TransactionIntentsApiGetTransactionIntentsRequest {
      */
     accountId?: Array<string>
     /**
-     * Filter by player ID.
+     * Filter by player ID (starts with pla_).
      * @type Array&lt;string&gt;
      * @memberof TransactionIntentsApigetTransactionIntents
      */
     playerId?: Array<string>
     /**
-     * Filter by policy ID.
+     * Filter by policy ID (starts with pol_).
      * @type Array&lt;string&gt;
      * @memberof TransactionIntentsApigetTransactionIntents
      */
@@ -1915,7 +2054,7 @@ export interface TransactionIntentsApiGetTransactionIntentsRequest {
 
 export interface TransactionIntentsApiSignatureRequest {
     /**
-     * Specifies the unique transaction intent ID.
+     * Specifies the unique transaction intent ID (starts with tin_).
      * @type string
      * @memberof TransactionIntentsApisignature
      */
@@ -1945,7 +2084,7 @@ export class ObjectTransactionIntentsApi {
     }
 
     /**
-     * Estimate the gas cost of creating a transaction intent and putting it onchain.
+     * Estimate the gas cost of creating a transaction intent and putting it on chain. If a policy that includes payment of gas in ERC-20 tokens is provided, an extra field `estimatedTXGasFeeToken` is returned with the estimated amount of tokens.
      * Estimate gas cost of creating a transaction
      * @param param the request object
      */
@@ -1970,7 +2109,7 @@ export class ObjectTransactionIntentsApi {
     }
 
     /**
-     * This endpoint is used to put a userOperationHash signature on-chain. This means players that have informed (and use) an [externally-owned account (EOA)](https://ethereum.org/en/developers/docs/accounts/) to authorize operations, such as registering a session key, for their gaming accounts.  Given that players with non-custodial accounts are the only ones in possession of the private key, they must sign the information inside the `nextAction` value received from the `POST` API endpoint that creates a transaction_intent, even with their session-keys. Once signed, the client needs to send the signed message using the `/signature` endpoint or use one of the available client-side libraries to do so.
+     * This endpoint is used to send the signed userOperationHash.  For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
      * Confirms the creation of a transaction intent with an external owner.
      * @param param the request object
      */

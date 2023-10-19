@@ -4,6 +4,7 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
+import { AccelbyteOauthConfig } from '../models/AccelbyteOauthConfig';
 import { Account } from '../models/Account';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
@@ -88,6 +89,12 @@ import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
+import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
+import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
+import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
+import { OAuthProvider } from '../models/OAuthProvider';
+import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
@@ -298,7 +305,7 @@ export class ObservableAccountsApi {
     /**
      * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first. By default, a maximum of ten accounts are shown per page.
      * List accounts of a player.
-     * @param player Specifies the unique player ID
+     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
@@ -592,7 +599,7 @@ export class ObservableContractsApi {
     /**
      * Delete a contract from the project by providing its contract id.
      * Deletes a contract object.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      */
     public deleteContract(id: string, _options?: Configuration): Observable<ContractDeleteResponse> {
         const requestContextPromise = this.requestFactory.deleteContract(id, _options);
@@ -616,7 +623,7 @@ export class ObservableContractsApi {
     /**
      * Retrieve a contract by providing their contract id.
      * Get a contract.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      */
     public getContract(id: string, _options?: Configuration): Observable<ContractResponse> {
         const requestContextPromise = this.requestFactory.getContract(id, _options);
@@ -669,7 +676,7 @@ export class ObservableContractsApi {
 
     /**
      * Updates a contract object.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      * @param updateContractRequest 
      */
     public updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Observable<ContractResponse> {
@@ -874,12 +881,12 @@ export class ObservableInventoriesApi {
 
     /**
      * Get cryptocurrency list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID.
+     * @param contractId Filter by contract ID (starts with con_).
      */
     public getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Observable<InventoryListResponse> {
         const requestContextPromise = this.requestFactory.getPlayerCryptoCurrencyInventory(id, chainId, limit, skip, order, contractId, _options);
@@ -902,7 +909,7 @@ export class ObservableInventoriesApi {
 
     /**
      * Get inventory of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      */
     public getPlayerInventory(id: string, chainId: number, _options?: Configuration): Observable<ObsoleteInventoryResponse> {
@@ -926,7 +933,7 @@ export class ObservableInventoriesApi {
 
     /**
      * Get native token list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      */
     public getPlayerNativeInventory(id: string, chainId: number, _options?: Configuration): Observable<InventoryResponse> {
@@ -950,12 +957,12 @@ export class ObservableInventoriesApi {
 
     /**
      * Get NFTs list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID.
+     * @param contractId Filter by contract ID (starts with con_).
      */
     public getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Observable<InventoryListResponse> {
         const requestContextPromise = this.requestFactory.getPlayerNftInventory(id, chainId, limit, skip, order, contractId, _options);
@@ -973,6 +980,170 @@ export class ObservableInventoriesApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPlayerNftInventory(rsp)));
+            }));
+    }
+
+}
+
+import { OAuthApiRequestFactory, OAuthApiResponseProcessor} from "../apis/OAuthApi";
+export class ObservableOAuthApi {
+    private requestFactory: OAuthApiRequestFactory;
+    private responseProcessor: OAuthApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: OAuthApiRequestFactory,
+        responseProcessor?: OAuthApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new OAuthApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new OAuthApiResponseProcessor();
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
+     * Authorize user with token.
+     * @param provider OAuth provider
+     * @param oAuthRequest Request body
+     */
+    public auth(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.auth(provider, oAuthRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.auth(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     * @param oAuthConfigRequest Specifies the oauth provider specific configuration.
+     */
+    public createOAuthConfig(provider: OAuthProvider, oAuthConfigRequest: OAuthConfigRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.createOAuthConfig(provider, oAuthConfigRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint deletes oauth configuration for specified provider for the current project environment.
+     * Delete oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteOAuthConfig(provider, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
+     * Get oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Observable<OAuthConfigResponse> {
+        const requestContextPromise = this.requestFactory.getOAuthConfig(provider, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint retrieves the list of oauth configurations for the current project environment.
+     * List of oauth configurations.
+     */
+    public listOAuthConfig(_options?: Configuration): Observable<OAuthConfigListResponse> {
+        const requestContextPromise = this.requestFactory.listOAuthConfig(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint updates oauth configuration for specified provider for the current project environment.
+     * Update oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     * @param oAuthConfigRequest Specifies the oauth provider specific configuration.
+     */
+    public updateOAuthConfig(provider: OAuthProvider, oAuthConfigRequest: OAuthConfigRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.updateOAuthConfig(provider, oAuthConfigRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateOAuthConfig(rsp)));
             }));
     }
 
@@ -1045,7 +1216,7 @@ export class ObservablePlayersApi {
 
     /**
      * Create account object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param createPlayerAccountRequest 
      */
     public createPlayerAccount(id: string, createPlayerAccountRequest: CreatePlayerAccountRequest, _options?: Configuration): Observable<AccountResponse> {
@@ -1069,7 +1240,7 @@ export class ObservablePlayersApi {
 
     /**
      * Create session object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param createPlayerSessionRequest 
      */
     public createPlayerSession(id: string, createPlayerSessionRequest: CreatePlayerSessionRequest, _options?: Configuration): Observable<SessionResponse> {
@@ -1093,7 +1264,7 @@ export class ObservablePlayersApi {
 
     /**
      * Retrieves the details of an existing player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
      */
     public getPlayer(id: string, expand?: Array<PlayerResponseExpandable>, _options?: Configuration): Observable<PlayerResponse> {
@@ -1117,7 +1288,7 @@ export class ObservablePlayersApi {
 
     /**
      * List of accounts of a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
      */
     public getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Observable<AccountListResponse> {
@@ -1195,7 +1366,7 @@ export class ObservablePlayersApi {
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerTransferOwnershipRequest 
      */
     public obsoleteRequestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
@@ -1220,7 +1391,7 @@ export class ObservablePlayersApi {
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerTransferOwnershipRequest 
      */
     public requestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
@@ -1244,7 +1415,7 @@ export class ObservablePlayersApi {
 
     /**
      * Revoke session object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param revokeSessionPlayerRequest 
      */
     public revokePlayerSession(id: string, revokeSessionPlayerRequest: RevokeSessionPlayerRequest, _options?: Configuration): Observable<SessionResponse> {
@@ -1268,7 +1439,7 @@ export class ObservablePlayersApi {
 
     /**
      * Updates a player object.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerRequest 
      */
     public updatePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Observable<PlayerResponse> {
@@ -1377,7 +1548,7 @@ export class ObservablePoliciesApi {
 
     /**
      * Create a policy rule object for a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param createPolicyAllowFunctionRequest 
      */
     public createPolicyAllowFunction(id: string, createPolicyAllowFunctionRequest: CreatePolicyAllowFunctionRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
@@ -1401,7 +1572,7 @@ export class ObservablePoliciesApi {
 
     /**
      * Delete a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public deletePolicy(id: string, _options?: Configuration): Observable<PolicyDeleteResponse> {
         const requestContextPromise = this.requestFactory.deletePolicy(id, _options);
@@ -1424,7 +1595,7 @@ export class ObservablePoliciesApi {
 
     /**
      * Disable a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public disablePolicy(id: string, _options?: Configuration): Observable<PolicyResponse> {
         const requestContextPromise = this.requestFactory.disablePolicy(id, _options);
@@ -1447,7 +1618,7 @@ export class ObservablePoliciesApi {
 
     /**
      * Enable a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public enablePolicy(id: string, _options?: Configuration): Observable<PolicyResponse> {
         const requestContextPromise = this.requestFactory.enablePolicy(id, _options);
@@ -1500,7 +1671,7 @@ export class ObservablePoliciesApi {
 
     /**
      * Get a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.
      */
     public getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Observable<PolicyResponse> {
@@ -1524,7 +1695,7 @@ export class ObservablePoliciesApi {
 
     /**
      * List policy rules of a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.
      */
     public getPolicyAllowFunctions(id: string, expand?: Array<'contract'>, _options?: Configuration): Observable<PolicyRuleListResponse> {
@@ -1548,7 +1719,7 @@ export class ObservablePoliciesApi {
 
     /**
      * List all gas reports of a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public getPolicyTotalGasUsage(id: string, _options?: Configuration): Observable<GasReport> {
         const requestContextPromise = this.requestFactory.getPolicyTotalGasUsage(id, _options);
@@ -1571,7 +1742,7 @@ export class ObservablePoliciesApi {
 
     /**
      * Update a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param updatePolicyRequest 
      */
     public updatePolicy(id: string, updatePolicyRequest: UpdatePolicyRequest, _options?: Configuration): Observable<PolicyResponse> {
@@ -1684,7 +1855,7 @@ export class ObservablePolicyRulesApi {
 
     /**
      * List policy rules of a policy.
-     * @param policy Specifies the unique policy ID.
+     * @param policy Specifies the unique policy ID (starts with pol_).
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
@@ -1776,7 +1947,7 @@ export class ObservableSessionsApi {
 
     /**
      * List session keys of a player.
-     * @param player The player ID
+     * @param player The player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
@@ -1803,7 +1974,7 @@ export class ObservableSessionsApi {
 
     /**
      * Returns a player session by session id
-     * @param id Specifies the unique session ID.
+     * @param id Specifies the unique session ID (starts with ses_).
      * @param expand Specifies the fields to expand.
      */
     public getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Observable<SessionResponse> {
@@ -1850,7 +2021,7 @@ export class ObservableSessionsApi {
 
     /**
      * Confirms the creation of a session with an external owner.
-     * @param id Specifies the unique session ID.
+     * @param id Specifies the unique session ID (starts with ses_).
      * @param signatureRequest 
      */
     public signatureSession(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Observable<SessionResponse> {
@@ -1915,7 +2086,7 @@ export class ObservableTransactionIntentsApi {
     }
 
     /**
-     * Estimate the gas cost of creating a transaction intent and putting it onchain.
+     * Estimate the gas cost of creating a transaction intent and putting it on chain. If a policy that includes payment of gas in ERC-20 tokens is provided, an extra field `estimatedTXGasFeeToken` is returned with the estimated amount of tokens.
      * Estimate gas cost of creating a transaction
      * @param createTransactionIntentRequest 
      */
@@ -1940,7 +2111,7 @@ export class ObservableTransactionIntentsApi {
 
     /**
      * Get a transaction intent object.
-     * @param id Specifies the unique transaction intent ID.
+     * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param expand Specifies the expandable fields.
      */
     public getTransactionIntent(id: string, expand?: Array<TransactionIntentResponseExpandable>, _options?: Configuration): Observable<TransactionIntentResponse> {
@@ -1970,8 +2141,8 @@ export class ObservableTransactionIntentsApi {
      * @param expand Specifies the fields to expand in the response.
      * @param chainId The chain ID.
      * @param accountId Filter by account ID.
-     * @param playerId Filter by player ID.
-     * @param policyId Filter by policy ID.
+     * @param playerId Filter by player ID (starts with pla_).
+     * @param policyId Filter by policy ID (starts with pol_).
      */
     public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Observable<TransactionIntentListResponse> {
         const requestContextPromise = this.requestFactory.getTransactionIntents(limit, skip, order, expand, chainId, accountId, playerId, policyId, _options);
@@ -1993,9 +2164,9 @@ export class ObservableTransactionIntentsApi {
     }
 
     /**
-     * This endpoint is used to put a userOperationHash signature on-chain. This means players that have informed (and use) an [externally-owned account (EOA)](https://ethereum.org/en/developers/docs/accounts/) to authorize operations, such as registering a session key, for their gaming accounts.  Given that players with non-custodial accounts are the only ones in possession of the private key, they must sign the information inside the `nextAction` value received from the `POST` API endpoint that creates a transaction_intent, even with their session-keys. Once signed, the client needs to send the signed message using the `/signature` endpoint or use one of the available client-side libraries to do so.
+     * This endpoint is used to send the signed userOperationHash.  For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
      * Confirms the creation of a transaction intent with an external owner.
-     * @param id Specifies the unique transaction intent ID.
+     * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 
      */
     public signature(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Observable<TransactionIntentResponse> {

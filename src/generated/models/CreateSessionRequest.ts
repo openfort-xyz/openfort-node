@@ -34,7 +34,7 @@ export class CreateSessionRequest {
     */
     'optimistic'?: boolean;
     /**
-    * The policy ID.
+    * The policy ID (starts with pol_).
     */
     'policy'?: string;
     /**
@@ -50,7 +50,7 @@ export class CreateSessionRequest {
     */
     'whitelist'?: Array<string>;
     /**
-    * The player ID.
+    * The player ID (starts with pla_).
     */
     'player': string;
 

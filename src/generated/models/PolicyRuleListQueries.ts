@@ -28,7 +28,7 @@ export class PolicyRuleListQueries {
     */
     'expand'?: Array<PolicyRuleListQueriesExpandEnum>;
     /**
-    * Specifies the unique policy ID.
+    * Specifies the unique policy ID (starts with pol_).
     */
     'policy': string;
 

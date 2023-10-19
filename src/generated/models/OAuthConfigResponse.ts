@@ -10,26 +10,27 @@
  * Do not edit the class manually.
  */
 
+import { AccelbyteOauthConfig } from '../models/AccelbyteOauthConfig';
 import { HttpFile } from '../http/http';
 
-export class CancelTransferOwnershipRequest {
-    /**
-    * The policy ID (starts with pol_)
-    */
-    'policy': string;
+/**
+* OAuth provider specific configuration.
+*/
+export class OAuthConfigResponse {
+    'config': AccelbyteOauthConfig;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string",
+            "name": "config",
+            "baseName": "config",
+            "type": "AccelbyteOauthConfig",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CancelTransferOwnershipRequest.attributeTypeMap;
+        return OAuthConfigResponse.attributeTypeMap;
     }
 
     public constructor() {

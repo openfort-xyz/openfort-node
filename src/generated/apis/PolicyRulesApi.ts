@@ -108,7 +108,7 @@ export class PolicyRulesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * List policy rules of a policy.
-     * @param policy Specifies the unique policy ID.
+     * @param policy Specifies the unique policy ID (starts with pol_).
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.

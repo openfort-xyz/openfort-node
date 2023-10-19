@@ -138,7 +138,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create account object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param createPlayerAccountRequest 
      */
     public async createPlayerAccount(id: string, createPlayerAccountRequest: CreatePlayerAccountRequest, _options?: Configuration): Promise<RequestContext> {
@@ -193,7 +193,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create session object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param createPlayerSessionRequest 
      */
     public async createPlayerSession(id: string, createPlayerSessionRequest: CreatePlayerSessionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -248,7 +248,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Retrieves the details of an existing player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
      */
     public async getPlayer(id: string, expand?: Array<PlayerResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
@@ -292,7 +292,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * List of accounts of a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
      */
     public async getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
@@ -458,7 +458,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerTransferOwnershipRequest 
      */
     public async obsoleteRequestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Promise<RequestContext> {
@@ -514,7 +514,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerTransferOwnershipRequest 
      */
     public async requestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Promise<RequestContext> {
@@ -569,7 +569,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Revoke session object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param revokeSessionPlayerRequest 
      */
     public async revokePlayerSession(id: string, revokeSessionPlayerRequest: RevokeSessionPlayerRequest, _options?: Configuration): Promise<RequestContext> {
@@ -624,7 +624,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Updates a player object.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerRequest 
      */
     public async updatePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<RequestContext> {

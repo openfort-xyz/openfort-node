@@ -16,7 +16,7 @@ import { Player } from '../models/Player';
 import { HttpFile } from '../http/http';
 
 /**
-* The player ID.
+* The player ID (starts with pla_).
 */
 export class TransactionIntentResponsePlayer {
     'id': string;

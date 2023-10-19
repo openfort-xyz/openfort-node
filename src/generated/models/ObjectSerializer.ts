@@ -1,5 +1,6 @@
 export * from '../models/Abi';
 export * from '../models/AbiType';
+export * from '../models/AccelbyteOauthConfig';
 export * from '../models/Account';
 export * from '../models/AccountInventoryListQueries';
 export * from '../models/AccountListQueries';
@@ -84,6 +85,12 @@ export * from '../models/Money';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
+export * from '../models/OAuthConfigListResponse';
+export * from '../models/OAuthConfigRequest';
+export * from '../models/OAuthConfigResponse';
+export * from '../models/OAuthProvider';
+export * from '../models/OAuthProviderACCELBYTE';
+export * from '../models/OAuthRequest';
 export * from '../models/ObsoleteAssetInventory';
 export * from '../models/ObsoleteAssetType';
 export * from '../models/ObsoleteInventoryResponse';
@@ -179,6 +186,7 @@ export * from '../models/UserResponse';
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
+import { AccelbyteOauthConfig      } from '../models/AccelbyteOauthConfig';
 import { Account            } from '../models/Account';
 import { AccountInventoryListQueries     } from '../models/AccountInventoryListQueries';
 import { AccountListQueries      } from '../models/AccountListQueries';
@@ -263,6 +271,12 @@ import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
+import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
+import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
+import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
+import { OAuthProvider } from '../models/OAuthProvider';
+import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse     } from '../models/ObsoleteInventoryResponse';
@@ -394,6 +408,8 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeUSER",
     "ErrorTypeINVALIDREQUESTERROR",
     "NextActionType",
+    "OAuthProvider",
+    "OAuthProviderACCELBYTE",
     "ObsoleteAssetType",
     "PlayerResponseExpandable",
     "PolicyRateLimit",
@@ -424,6 +440,7 @@ let enumsMap: Set<string> = new Set<string>([
 let typeMap: {[index: string]: any} = {
     "Abi": Abi,
     "AbiType": AbiType,
+    "AccelbyteOauthConfig": AccelbyteOauthConfig,
     "Account": Account,
     "AccountInventoryListQueries": AccountInventoryListQueries,
     "AccountListQueries": AccountListQueries,
@@ -490,6 +507,10 @@ let typeMap: {[index: string]: any} = {
     "Money": Money,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
+    "OAuthConfigListResponse": OAuthConfigListResponse,
+    "OAuthConfigRequest": OAuthConfigRequest,
+    "OAuthConfigResponse": OAuthConfigResponse,
+    "OAuthRequest": OAuthRequest,
     "ObsoleteAssetInventory": ObsoleteAssetInventory,
     "ObsoleteInventoryResponse": ObsoleteInventoryResponse,
     "PayForUserPolicyStrategy": PayForUserPolicyStrategy,

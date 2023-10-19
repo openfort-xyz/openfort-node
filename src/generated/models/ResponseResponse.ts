@@ -23,9 +23,9 @@ export class ResponseResponse {
     */
     'blockNumber'?: number;
     /**
-    * The user operation hash of the transaction of this log.
+    * The transaction hash of the transaction of this log.
     */
-    'userOpHash'?: string;
+    'transactionHash'?: string;
     /**
     * The gas used by the transaction of this log.
     */

@@ -24,7 +24,7 @@ export class PlayerInventoryListQueries {
     'skip'?: number;
     'order'?: SortOrder;
     /**
-    * Filter by contract ID.
+    * Filter by contract ID (starts with con_).
     */
     'contractId'?: Array<string>;
     /**

@@ -32,7 +32,7 @@ export class CreateAccountRequest {
     */
     'tokenId'?: number;
     /**
-    * The player ID
+    * The player ID (starts with pla_)
     */
     'player': string;
 

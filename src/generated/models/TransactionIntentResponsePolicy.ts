@@ -17,7 +17,7 @@ import { PolicyStrategy } from '../models/PolicyStrategy';
 import { HttpFile } from '../http/http';
 
 /**
-* The policy ID.
+* The policy ID (starts with pol_).
 */
 export class TransactionIntentResponsePolicy {
     'id': string;

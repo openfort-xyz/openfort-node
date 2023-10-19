@@ -13,7 +13,13 @@
 import { HttpFile } from '../http/http';
 
 export class AuthResponse {
+    /**
+    * Player\'s identifier.
+    */
     'playerId': string;
+    /**
+    * JWT token.
+    */
     'token': string;
 
     static readonly discriminator: string | undefined = undefined;

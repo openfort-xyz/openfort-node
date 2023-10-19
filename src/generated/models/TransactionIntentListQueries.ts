@@ -37,11 +37,11 @@ export class TransactionIntentListQueries {
     */
     'accountId'?: Array<string>;
     /**
-    * Filter by player ID.
+    * Filter by player ID (starts with pla_).
     */
     'playerId'?: Array<string>;
     /**
-    * Filter by policy ID.
+    * Filter by policy ID (starts with pol_).
     */
     'policyId'?: Array<string>;
 

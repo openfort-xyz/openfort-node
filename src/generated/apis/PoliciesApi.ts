@@ -77,7 +77,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create a policy rule object for a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param createPolicyAllowFunctionRequest 
      */
     public async createPolicyAllowFunction(id: string, createPolicyAllowFunctionRequest: CreatePolicyAllowFunctionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -132,7 +132,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Delete a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public async deletePolicy(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -169,7 +169,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Disable a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public async disablePolicy(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -206,7 +206,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Enable a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public async enablePolicy(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -328,7 +328,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.
      */
     public async getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
@@ -372,7 +372,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * List policy rules of a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.
      */
     public async getPolicyAllowFunctions(id: string, expand?: Array<'contract'>, _options?: Configuration): Promise<RequestContext> {
@@ -416,7 +416,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * List all gas reports of a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public async getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -453,7 +453,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Update a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param updatePolicyRequest 
      */
     public async updatePolicy(id: string, updatePolicyRequest: UpdatePolicyRequest, _options?: Configuration): Promise<RequestContext> {
