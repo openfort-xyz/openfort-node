@@ -73,7 +73,7 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Delete a contract from the project by providing its contract id.
      * Deletes a contract object.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      */
     public async deleteContract(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -111,7 +111,7 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Retrieve a contract by providing their contract id.
      * Get a contract.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      */
     public async getContract(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -227,7 +227,7 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Updates a contract object.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      * @param updateContractRequest 
      */
     public async updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Promise<RequestContext> {

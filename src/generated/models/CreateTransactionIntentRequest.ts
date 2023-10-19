@@ -15,7 +15,7 @@ import { HttpFile } from '../http/http';
 
 export class CreateTransactionIntentRequest {
     /**
-    * The player ID.
+    * The player ID (starts with pla_).
     */
     'player': string;
     /**
@@ -23,7 +23,7 @@ export class CreateTransactionIntentRequest {
     */
     'chainId': number;
     /**
-    * The policy ID.
+    * The policy ID (starts with pol_).
     */
     'policy'?: string;
     /**

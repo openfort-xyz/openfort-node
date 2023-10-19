@@ -235,7 +235,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first. By default, a maximum of ten accounts are shown per page.
      * List accounts of a player.
-     * @param player Specifies the unique player ID
+     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.

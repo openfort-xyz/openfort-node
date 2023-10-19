@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class PlayerTransferOwnershipRequest {
     /**
-    * The policy ID
+    * The policy ID (starts with pol_)
     */
     'policy': string;
     /**
@@ -26,7 +26,7 @@ export class PlayerTransferOwnershipRequest {
     */
     'newOwnerAddress': string;
     /**
-    * The player ID
+    * The player ID (starts with pla_)
     */
     'player'?: string;
 

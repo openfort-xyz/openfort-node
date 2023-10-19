@@ -12,24 +12,27 @@
 
 import { HttpFile } from '../http/http';
 
-export class CancelTransferOwnershipRequest {
+/**
+* The request to verify access token
+*/
+export class OAuthRequest {
     /**
-    * The policy ID (starts with pol_)
+    * Access token to be verified
     */
-    'policy': string;
+    'token': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "token",
+            "baseName": "token",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CancelTransferOwnershipRequest.attributeTypeMap;
+        return OAuthRequest.attributeTypeMap;
     }
 
     public constructor() {

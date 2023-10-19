@@ -18,7 +18,7 @@ export class RevokeSessionPlayerRequest {
     */
     'address': string;
     /**
-    * The policy ID
+    * The policy ID (starts with pol_)
     */
     'policy'?: string;
     /**

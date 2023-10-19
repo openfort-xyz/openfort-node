@@ -18,7 +18,7 @@ export class StartRecoveryRequest {
     */
     'newOwnerAddress': string;
     /**
-    * The policy ID
+    * The policy ID (starts with pol_)
     */
     'policy': string;
 

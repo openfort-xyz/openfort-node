@@ -22,7 +22,7 @@ export class CompleteRecoveryRequest {
     */
     'signatures'?: Array<string>;
     /**
-    * The policy ID
+    * The policy ID (starts with pol_)
     */
     'policy': string;
 

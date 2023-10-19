@@ -29,7 +29,7 @@ export class AccountListQueries {
     */
     'expand'?: Array<AccountResponseExpandable>;
     /**
-    * Specifies the unique player ID
+    * Specifies the unique player ID (starts with pla_)
     */
     'player': string;
 

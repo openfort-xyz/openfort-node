@@ -34,7 +34,7 @@ export class CreatePlayerSessionRequest {
     */
     'optimistic'?: boolean;
     /**
-    * The policy ID.
+    * The policy ID (starts with pol_).
     */
     'policy'?: string;
     /**

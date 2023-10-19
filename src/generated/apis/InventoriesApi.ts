@@ -226,12 +226,12 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get cryptocurrency list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID.
+     * @param contractId Filter by contract ID (starts with con_).
      */
     public async getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -303,7 +303,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get inventory of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      */
     public async getPlayerInventory(id: string, chainId: number, _options?: Configuration): Promise<RequestContext> {
@@ -352,7 +352,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get native token list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      */
     public async getPlayerNativeInventory(id: string, chainId: number, _options?: Configuration): Promise<RequestContext> {
@@ -401,12 +401,12 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get NFTs list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID.
+     * @param contractId Filter by contract ID (starts with con_).
      */
     public async getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

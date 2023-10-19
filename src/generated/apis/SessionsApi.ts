@@ -72,7 +72,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * List session keys of a player.
-     * @param player The player ID
+     * @param player The player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
@@ -141,7 +141,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Returns a player session by session id
-     * @param id Specifies the unique session ID.
+     * @param id Specifies the unique session ID (starts with ses_).
      * @param expand Specifies the fields to expand.
      */
     public async getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
@@ -232,7 +232,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Confirms the creation of a session with an external owner.
-     * @param id Specifies the unique session ID.
+     * @param id Specifies the unique session ID (starts with ses_).
      * @param signatureRequest 
      */
     public async signatureSession(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<RequestContext> {

@@ -3,6 +3,7 @@ import { Configuration} from '../configuration'
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
+import { AccelbyteOauthConfig } from '../models/AccelbyteOauthConfig';
 import { Account } from '../models/Account';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
@@ -87,6 +88,12 @@ import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
+import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
+import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
+import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
+import { OAuthProvider } from '../models/OAuthProvider';
+import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
@@ -238,7 +245,7 @@ export class PromiseAccountsApi {
     /**
      * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first. By default, a maximum of ten accounts are shown per page.
      * List accounts of a player.
-     * @param player Specifies the unique player ID
+     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
@@ -395,7 +402,7 @@ export class PromiseContractsApi {
     /**
      * Delete a contract from the project by providing its contract id.
      * Deletes a contract object.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      */
     public deleteContract(id: string, _options?: Configuration): Promise<ContractDeleteResponse> {
         const result = this.api.deleteContract(id, _options);
@@ -405,7 +412,7 @@ export class PromiseContractsApi {
     /**
      * Retrieve a contract by providing their contract id.
      * Get a contract.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      */
     public getContract(id: string, _options?: Configuration): Promise<ContractResponse> {
         const result = this.api.getContract(id, _options);
@@ -430,7 +437,7 @@ export class PromiseContractsApi {
 
     /**
      * Updates a contract object.
-     * @param id Specifies the unique contract ID.
+     * @param id Specifies the unique contract ID (starts with con_).
      * @param updateContractRequest 
      */
     public updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Promise<ContractResponse> {
@@ -539,12 +546,12 @@ export class PromiseInventoriesApi {
 
     /**
      * Get cryptocurrency list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID.
+     * @param contractId Filter by contract ID (starts with con_).
      */
     public getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
         const result = this.api.getPlayerCryptoCurrencyInventory(id, chainId, limit, skip, order, contractId, _options);
@@ -553,7 +560,7 @@ export class PromiseInventoriesApi {
 
     /**
      * Get inventory of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      */
     public getPlayerInventory(id: string, chainId: number, _options?: Configuration): Promise<ObsoleteInventoryResponse> {
@@ -563,7 +570,7 @@ export class PromiseInventoriesApi {
 
     /**
      * Get native token list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      */
     public getPlayerNativeInventory(id: string, chainId: number, _options?: Configuration): Promise<InventoryResponse> {
@@ -573,15 +580,96 @@ export class PromiseInventoriesApi {
 
     /**
      * Get NFTs list of player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID.
+     * @param contractId Filter by contract ID (starts with con_).
      */
     public getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
         const result = this.api.getPlayerNftInventory(id, chainId, limit, skip, order, contractId, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableOAuthApi } from './ObservableAPI';
+
+import { OAuthApiRequestFactory, OAuthApiResponseProcessor} from "../apis/OAuthApi";
+export class PromiseOAuthApi {
+    private api: ObservableOAuthApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: OAuthApiRequestFactory,
+        responseProcessor?: OAuthApiResponseProcessor
+    ) {
+        this.api = new ObservableOAuthApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
+     * Authorize user with token.
+     * @param provider OAuth provider
+     * @param oAuthRequest Request body
+     */
+    public auth(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.auth(provider, oAuthRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     * @param oAuthConfigRequest Specifies the oauth provider specific configuration.
+     */
+    public createOAuthConfig(provider: OAuthProvider, oAuthConfigRequest: OAuthConfigRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.createOAuthConfig(provider, oAuthConfigRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint deletes oauth configuration for specified provider for the current project environment.
+     * Delete oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteOAuthConfig(provider, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
+     * Get oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<OAuthConfigResponse> {
+        const result = this.api.getOAuthConfig(provider, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint retrieves the list of oauth configurations for the current project environment.
+     * List of oauth configurations.
+     */
+    public listOAuthConfig(_options?: Configuration): Promise<OAuthConfigListResponse> {
+        const result = this.api.listOAuthConfig(_options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint updates oauth configuration for specified provider for the current project environment.
+     * Update oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     * @param oAuthConfigRequest Specifies the oauth provider specific configuration.
+     */
+    public updateOAuthConfig(provider: OAuthProvider, oAuthConfigRequest: OAuthConfigRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.updateOAuthConfig(provider, oAuthConfigRequest, _options);
         return result.toPromise();
     }
 
@@ -627,7 +715,7 @@ export class PromisePlayersApi {
 
     /**
      * Create account object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param createPlayerAccountRequest 
      */
     public createPlayerAccount(id: string, createPlayerAccountRequest: CreatePlayerAccountRequest, _options?: Configuration): Promise<AccountResponse> {
@@ -637,7 +725,7 @@ export class PromisePlayersApi {
 
     /**
      * Create session object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param createPlayerSessionRequest 
      */
     public createPlayerSession(id: string, createPlayerSessionRequest: CreatePlayerSessionRequest, _options?: Configuration): Promise<SessionResponse> {
@@ -647,7 +735,7 @@ export class PromisePlayersApi {
 
     /**
      * Retrieves the details of an existing player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
      */
     public getPlayer(id: string, expand?: Array<PlayerResponseExpandable>, _options?: Configuration): Promise<PlayerResponse> {
@@ -657,7 +745,7 @@ export class PromisePlayersApi {
 
     /**
      * List of accounts of a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
      */
     public getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountListResponse> {
@@ -693,7 +781,7 @@ export class PromisePlayersApi {
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerTransferOwnershipRequest 
      */
     public obsoleteRequestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
@@ -704,7 +792,7 @@ export class PromisePlayersApi {
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerTransferOwnershipRequest 
      */
     public requestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
@@ -714,7 +802,7 @@ export class PromisePlayersApi {
 
     /**
      * Revoke session object for a player.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param revokeSessionPlayerRequest 
      */
     public revokePlayerSession(id: string, revokeSessionPlayerRequest: RevokeSessionPlayerRequest, _options?: Configuration): Promise<SessionResponse> {
@@ -724,7 +812,7 @@ export class PromisePlayersApi {
 
     /**
      * Updates a player object.
-     * @param id Specifies the unique player ID.
+     * @param id Specifies the unique player ID (starts with pla_).
      * @param playerRequest 
      */
     public updatePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<PlayerResponse> {
@@ -793,7 +881,7 @@ export class PromisePoliciesApi {
 
     /**
      * Create a policy rule object for a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param createPolicyAllowFunctionRequest 
      */
     public createPolicyAllowFunction(id: string, createPolicyAllowFunctionRequest: CreatePolicyAllowFunctionRequest, _options?: Configuration): Promise<PolicyRuleResponse> {
@@ -803,7 +891,7 @@ export class PromisePoliciesApi {
 
     /**
      * Delete a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public deletePolicy(id: string, _options?: Configuration): Promise<PolicyDeleteResponse> {
         const result = this.api.deletePolicy(id, _options);
@@ -812,7 +900,7 @@ export class PromisePoliciesApi {
 
     /**
      * Disable a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public disablePolicy(id: string, _options?: Configuration): Promise<PolicyResponse> {
         const result = this.api.disablePolicy(id, _options);
@@ -821,7 +909,7 @@ export class PromisePoliciesApi {
 
     /**
      * Enable a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public enablePolicy(id: string, _options?: Configuration): Promise<PolicyResponse> {
         const result = this.api.enablePolicy(id, _options);
@@ -846,7 +934,7 @@ export class PromisePoliciesApi {
 
     /**
      * Get a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.
      */
     public getPolicy(id: string, expand?: Array<PolicyResponseExpandable>, _options?: Configuration): Promise<PolicyResponse> {
@@ -856,7 +944,7 @@ export class PromisePoliciesApi {
 
     /**
      * List policy rules of a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.
      */
     public getPolicyAllowFunctions(id: string, expand?: Array<'contract'>, _options?: Configuration): Promise<PolicyRuleListResponse> {
@@ -866,7 +954,7 @@ export class PromisePoliciesApi {
 
     /**
      * List all gas reports of a policy.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      */
     public getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<GasReport> {
         const result = this.api.getPolicyTotalGasUsage(id, _options);
@@ -875,7 +963,7 @@ export class PromisePoliciesApi {
 
     /**
      * Update a policy object.
-     * @param id Specifies the unique policy ID.
+     * @param id Specifies the unique policy ID (starts with pol_).
      * @param updatePolicyRequest 
      */
     public updatePolicy(id: string, updatePolicyRequest: UpdatePolicyRequest, _options?: Configuration): Promise<PolicyResponse> {
@@ -933,7 +1021,7 @@ export class PromisePolicyRulesApi {
 
     /**
      * List policy rules of a policy.
-     * @param policy Specifies the unique policy ID.
+     * @param policy Specifies the unique policy ID (starts with pol_).
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
@@ -984,7 +1072,7 @@ export class PromiseSessionsApi {
 
     /**
      * List session keys of a player.
-     * @param player The player ID
+     * @param player The player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
@@ -997,7 +1085,7 @@ export class PromiseSessionsApi {
 
     /**
      * Returns a player session by session id
-     * @param id Specifies the unique session ID.
+     * @param id Specifies the unique session ID (starts with ses_).
      * @param expand Specifies the fields to expand.
      */
     public getSession(id: string, expand?: Array<SessionResponseExpandable>, _options?: Configuration): Promise<SessionResponse> {
@@ -1016,7 +1104,7 @@ export class PromiseSessionsApi {
 
     /**
      * Confirms the creation of a session with an external owner.
-     * @param id Specifies the unique session ID.
+     * @param id Specifies the unique session ID (starts with ses_).
      * @param signatureRequest 
      */
     public signatureSession(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<SessionResponse> {
@@ -1054,7 +1142,7 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
-     * Estimate the gas cost of creating a transaction intent and putting it onchain.
+     * Estimate the gas cost of creating a transaction intent and putting it on chain. If a policy that includes payment of gas in ERC-20 tokens is provided, an extra field `estimatedTXGasFeeToken` is returned with the estimated amount of tokens.
      * Estimate gas cost of creating a transaction
      * @param createTransactionIntentRequest 
      */
@@ -1065,7 +1153,7 @@ export class PromiseTransactionIntentsApi {
 
     /**
      * Get a transaction intent object.
-     * @param id Specifies the unique transaction intent ID.
+     * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param expand Specifies the expandable fields.
      */
     public getTransactionIntent(id: string, expand?: Array<TransactionIntentResponseExpandable>, _options?: Configuration): Promise<TransactionIntentResponse> {
@@ -1081,8 +1169,8 @@ export class PromiseTransactionIntentsApi {
      * @param expand Specifies the fields to expand in the response.
      * @param chainId The chain ID.
      * @param accountId Filter by account ID.
-     * @param playerId Filter by player ID.
-     * @param policyId Filter by policy ID.
+     * @param playerId Filter by player ID (starts with pla_).
+     * @param policyId Filter by policy ID (starts with pol_).
      */
     public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
         const result = this.api.getTransactionIntents(limit, skip, order, expand, chainId, accountId, playerId, policyId, _options);
@@ -1090,9 +1178,9 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
-     * This endpoint is used to put a userOperationHash signature on-chain. This means players that have informed (and use) an [externally-owned account (EOA)](https://ethereum.org/en/developers/docs/accounts/) to authorize operations, such as registering a session key, for their gaming accounts.  Given that players with non-custodial accounts are the only ones in possession of the private key, they must sign the information inside the `nextAction` value received from the `POST` API endpoint that creates a transaction_intent, even with their session-keys. Once signed, the client needs to send the signed message using the `/signature` endpoint or use one of the available client-side libraries to do so.
+     * This endpoint is used to send the signed userOperationHash.  For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
      * Confirms the creation of a transaction intent with an external owner.
-     * @param id Specifies the unique transaction intent ID.
+     * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 
      */
     public signature(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<TransactionIntentResponse> {

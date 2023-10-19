@@ -12,7 +12,7 @@ import { WebHookEvent } from "./models/webHookEvent";
 import { createHmac } from "crypto";
 
 export default class Openfort {
-    private readonly apiWrappers = {};
+    private readonly apiWrappers: {[name: string]: Observable} = {};
     private readonly observers: Observer[] = [];
 
     constructor(private readonly apiKey: string, private readonly basePath?: string) {}
@@ -52,19 +52,19 @@ export default class Openfort {
     public subscribe(observer: Observer): void {
         this.observers.push(observer);
         for (const apiWrapper of Object.values(this.apiWrappers)) {
-            (apiWrapper as Observable).observers?.push(observer);
+            apiWrapper.observers?.push(observer);
         }
     }
 
-    private getOrCreateWrapper<T>(type: new (_accessToken: string, _basePath?: string) => T): T {
+    private getOrCreateWrapper<T extends Observable>(type: new (_accessToken: string, _basePath?: string) => T): T {
         const wrapper = this.apiWrappers[type.name];
         if (wrapper) {
-            return wrapper;
+            return wrapper as T;
         }
 
         const result = new type(this.apiKey, this.basePath);
         for (const observer of this.observers) {
-            (result as Observable).subscribe?.(observer);
+            result.subscribe?.(observer);
         }
         this.apiWrappers[type.name] = result;
         return result;

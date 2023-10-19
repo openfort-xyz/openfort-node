@@ -25,7 +25,7 @@ export class SessionListQueries {
     'skip'?: number;
     'order'?: SortOrder;
     /**
-    * The player ID
+    * The player ID (starts with pla_)
     */
     'player': string;
     /**

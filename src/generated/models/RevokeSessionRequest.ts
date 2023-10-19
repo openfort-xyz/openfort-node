@@ -18,7 +18,7 @@ export class RevokeSessionRequest {
     */
     'address': string;
     /**
-    * The policy ID
+    * The policy ID (starts with pol_)
     */
     'policy'?: string;
     /**
@@ -30,7 +30,7 @@ export class RevokeSessionRequest {
     */
     'chainId': number;
     /**
-    * The player ID.
+    * The player ID (starts with pla_).
     */
     'player': string;
 
