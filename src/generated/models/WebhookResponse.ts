@@ -12,44 +12,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class ProviderRequest {
-    /**
-    * The Google client ID.
-    */
-    'googleClientId': string;
-    /**
-    * Specifies whether Google Auth is enabled.
-    */
-    'googleEnabled': boolean;
-    /**
-    * The Google client secret.
-    */
-    'googleClientSecret': string;
+export class WebhookResponse {
+    'webhook': string | null;
+    'livemode': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "googleClientId",
-            "baseName": "googleClientId",
+            "name": "webhook",
+            "baseName": "webhook",
             "type": "string",
             "format": ""
         },
         {
-            "name": "googleEnabled",
-            "baseName": "googleEnabled",
+            "name": "livemode",
+            "baseName": "livemode",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "googleClientSecret",
-            "baseName": "googleClientSecret",
-            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ProviderRequest.attributeTypeMap;
+        return WebhookResponse.attributeTypeMap;
     }
 
     public constructor() {

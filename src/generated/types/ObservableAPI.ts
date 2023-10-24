@@ -78,6 +78,7 @@ import { GasReportDataInner } from '../models/GasReportDataInner';
 import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
 import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
+import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -97,6 +98,7 @@ import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
 import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
@@ -148,8 +150,6 @@ import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
-import { ProviderRequest } from '../models/ProviderRequest';
-import { ProviderResponse } from '../models/ProviderResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
@@ -192,6 +192,7 @@ import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserResponse } from '../models/UserResponse';
+import { WebhookResponse } from '../models/WebhookResponse';
 
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
 export class ObservableAccountsApi {
@@ -515,47 +516,6 @@ export class ObservableAuthenticationApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyAuthToken(rsp)));
-            }));
-    }
-
-}
-
-import { ConfigAuthenticationApiRequestFactory, ConfigAuthenticationApiResponseProcessor} from "../apis/ConfigAuthenticationApi";
-export class ObservableConfigAuthenticationApi {
-    private requestFactory: ConfigAuthenticationApiRequestFactory;
-    private responseProcessor: ConfigAuthenticationApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: ConfigAuthenticationApiRequestFactory,
-        responseProcessor?: ConfigAuthenticationApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new ConfigAuthenticationApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new ConfigAuthenticationApiResponseProcessor();
-    }
-
-    /**
-     * Configure Google OAuth2.
-     * @param providerRequest 
-     */
-    public editProvider(providerRequest: ProviderRequest, _options?: Configuration): Observable<ProjectResponse> {
-        const requestContextPromise = this.requestFactory.editProvider(providerRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.editProvider(rsp)));
             }));
     }
 
