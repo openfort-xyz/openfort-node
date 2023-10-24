@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { AccelbyteOauthConfig } from '../models/AccelbyteOauthConfig';
+import { OAuthConfig } from '../models/OAuthConfig';
 import { HttpFile } from '../http/http';
 
 /**
 * Request for the configuration endpoints for the OAuth providers
 */
 export class OAuthConfigRequest {
-    'config': AccelbyteOauthConfig;
+    'config': OAuthConfig;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,7 +25,7 @@ export class OAuthConfigRequest {
         {
             "name": "config",
             "baseName": "config",
-            "type": "AccelbyteOauthConfig",
+            "type": "OAuthConfig",
             "format": ""
         }    ];
 

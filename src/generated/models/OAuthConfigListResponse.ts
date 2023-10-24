@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { AccelbyteOauthConfig } from '../models/AccelbyteOauthConfig';
+import { OAuthConfig } from '../models/OAuthConfig';
 import { HttpFile } from '../http/http';
 
 /**
@@ -20,7 +20,7 @@ export class OAuthConfigListResponse {
     /**
     * List of the OAuth providers configurations
     */
-    'data': Array<AccelbyteOauthConfig>;
+    'data': Array<OAuthConfig>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,7 +28,7 @@ export class OAuthConfigListResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<AccelbyteOauthConfig>",
+            "type": "Array<OAuthConfig>",
             "format": ""
         }    ];
 

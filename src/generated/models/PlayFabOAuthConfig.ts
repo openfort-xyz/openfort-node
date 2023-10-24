@@ -10,30 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { OAuthConfig } from '../models/OAuthConfig';
+import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { HttpFile } from '../http/http';
 
 /**
-* OAuth provider specific configuration.
+* PlayFab oauth configuration
 */
-export class OAuthConfigResponse {
-    'config': OAuthConfig;
+export class PlayFabOAuthConfig {
+    /**
+    * Title ID of your Play Fab gaming service environment.
+    */
+    'titleId': string;
+    'provider': OAuthProviderPLAYFAB;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "config",
-            "baseName": "config",
-            "type": "OAuthConfig",
+            "name": "titleId",
+            "baseName": "titleId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderPLAYFAB",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthConfigResponse.attributeTypeMap;
+        return PlayFabOAuthConfig.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

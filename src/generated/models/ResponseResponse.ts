@@ -26,6 +26,7 @@ export class ResponseResponse {
     * The transaction hash of the transaction of this log.
     */
     'transactionHash'?: string;
+    'userOpHash'?: string;
     /**
     * The gas used by the transaction of this log.
     */

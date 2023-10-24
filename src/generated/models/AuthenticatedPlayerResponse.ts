@@ -10,27 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { OAuthConfig } from '../models/OAuthConfig';
 import { HttpFile } from '../http/http';
 
-/**
-* OAuth provider specific configuration.
-*/
-export class OAuthConfigResponse {
-    'config': OAuthConfig;
+export class AuthenticatedPlayerResponse {
+    /**
+    * Player\'s identifier.
+    */
+    'playerId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "config",
-            "baseName": "config",
-            "type": "OAuthConfig",
+            "name": "playerId",
+            "baseName": "playerId",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthConfigResponse.attributeTypeMap;
+        return AuthenticatedPlayerResponse.attributeTypeMap;
     }
 
     public constructor() {

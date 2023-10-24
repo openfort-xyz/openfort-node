@@ -1,6 +1,6 @@
 export * from '../models/Abi';
 export * from '../models/AbiType';
-export * from '../models/AccelbyteOauthConfig';
+export * from '../models/AccelbyteOAuthConfig';
 export * from '../models/Account';
 export * from '../models/AccountInventoryListQueries';
 export * from '../models/AccountListQueries';
@@ -20,6 +20,8 @@ export * from '../models/AuthPlayerListResponse';
 export * from '../models/AuthPlayerResponse';
 export * from '../models/AuthPlayerResponsePlayer';
 export * from '../models/AuthResponse';
+export * from '../models/AuthenticatedPlayerResponse';
+export * from '../models/AuthorizeWithOAuthToken200Response';
 export * from '../models/BalanceResponse';
 export * from '../models/CancelTransferOwnershipRequest';
 export * from '../models/ChargeCustomTokenPolicyStrategy';
@@ -85,11 +87,13 @@ export * from '../models/Money';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
+export * from '../models/OAuthConfig';
 export * from '../models/OAuthConfigListResponse';
 export * from '../models/OAuthConfigRequest';
 export * from '../models/OAuthConfigResponse';
 export * from '../models/OAuthProvider';
 export * from '../models/OAuthProviderACCELBYTE';
+export * from '../models/OAuthProviderPLAYFAB';
 export * from '../models/OAuthRequest';
 export * from '../models/ObsoleteAssetInventory';
 export * from '../models/ObsoleteAssetType';
@@ -100,6 +104,7 @@ export * from '../models/PaymasterDepositorResponse';
 export * from '../models/PaymasterDepositorResponseDeleted';
 export * from '../models/PickContractResponseId';
 export * from '../models/PickPlayerResponseId';
+export * from '../models/PlayFabOAuthConfig';
 export * from '../models/Player';
 export * from '../models/PlayerCancelTransferOwnershipRequest';
 export * from '../models/PlayerInventoryListQueries';
@@ -186,7 +191,7 @@ export * from '../models/UserResponse';
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
-import { AccelbyteOauthConfig      } from '../models/AccelbyteOauthConfig';
+import { AccelbyteOAuthConfig     } from '../models/AccelbyteOAuthConfig';
 import { Account            } from '../models/Account';
 import { AccountInventoryListQueries     } from '../models/AccountInventoryListQueries';
 import { AccountListQueries      } from '../models/AccountListQueries';
@@ -206,6 +211,8 @@ import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse         } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePlayer';
 import { AuthResponse } from '../models/AuthResponse';
+import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
+import { AuthorizeWithOAuthToken200Response } from '../models/AuthorizeWithOAuthToken200Response';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomTokenPolicyStrategy';
@@ -271,11 +278,13 @@ import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
+import { OAuthConfig      } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
 import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
@@ -286,6 +295,7 @@ import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse
 import { PaymasterDepositorResponseDeleted } from '../models/PaymasterDepositorResponseDeleted';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
+import { PlayFabOAuthConfig   } from '../models/PlayFabOAuthConfig';
 import { Player         } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries      } from '../models/PlayerInventoryListQueries';
@@ -410,6 +420,7 @@ let enumsMap: Set<string> = new Set<string>([
     "NextActionType",
     "OAuthProvider",
     "OAuthProviderACCELBYTE",
+    "OAuthProviderPLAYFAB",
     "ObsoleteAssetType",
     "PlayerResponseExpandable",
     "PolicyRateLimit",
@@ -440,7 +451,7 @@ let enumsMap: Set<string> = new Set<string>([
 let typeMap: {[index: string]: any} = {
     "Abi": Abi,
     "AbiType": AbiType,
-    "AccelbyteOauthConfig": AccelbyteOauthConfig,
+    "AccelbyteOAuthConfig": AccelbyteOAuthConfig,
     "Account": Account,
     "AccountInventoryListQueries": AccountInventoryListQueries,
     "AccountListQueries": AccountListQueries,
@@ -457,6 +468,8 @@ let typeMap: {[index: string]: any} = {
     "AuthPlayerResponse": AuthPlayerResponse,
     "AuthPlayerResponsePlayer": AuthPlayerResponsePlayer,
     "AuthResponse": AuthResponse,
+    "AuthenticatedPlayerResponse": AuthenticatedPlayerResponse,
+    "AuthorizeWithOAuthToken200Response": AuthorizeWithOAuthToken200Response,
     "BalanceResponse": BalanceResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
     "ChargeCustomTokenPolicyStrategy": ChargeCustomTokenPolicyStrategy,
@@ -507,6 +520,7 @@ let typeMap: {[index: string]: any} = {
     "Money": Money,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
+    "OAuthConfig": OAuthConfig,
     "OAuthConfigListResponse": OAuthConfigListResponse,
     "OAuthConfigRequest": OAuthConfigRequest,
     "OAuthConfigResponse": OAuthConfigResponse,
@@ -519,6 +533,7 @@ let typeMap: {[index: string]: any} = {
     "PaymasterDepositorResponseDeleted": PaymasterDepositorResponseDeleted,
     "PickContractResponseId": PickContractResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
+    "PlayFabOAuthConfig": PlayFabOAuthConfig,
     "Player": Player,
     "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
     "PlayerInventoryListQueries": PlayerInventoryListQueries,
