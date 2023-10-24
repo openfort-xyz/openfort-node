@@ -12,7 +12,7 @@
 
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
-import { ProviderResponse } from '../models/ProviderResponse';
+import { WebhookResponse } from '../models/WebhookResponse';
 import { HttpFile } from '../http/http';
 
 export class ProjectResponse {
@@ -22,8 +22,7 @@ export class ProjectResponse {
     'updatedAt': number;
     'name': string;
     'apikeys'?: Array<ApiKeyResponse>;
-    'providers'?: Array<ProviderResponse>;
-    'webhook'?: Array<ProviderResponse>;
+    'webhook'?: Array<WebhookResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -65,15 +64,9 @@ export class ProjectResponse {
             "format": ""
         },
         {
-            "name": "providers",
-            "baseName": "providers",
-            "type": "Array<ProviderResponse>",
-            "format": ""
-        },
-        {
             "name": "webhook",
             "baseName": "webhook",
-            "type": "Array<ProviderResponse>",
+            "type": "Array<WebhookResponse>",
             "format": ""
         }    ];
 

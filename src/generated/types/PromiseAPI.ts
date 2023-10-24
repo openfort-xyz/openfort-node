@@ -77,6 +77,7 @@ import { GasReportDataInner } from '../models/GasReportDataInner';
 import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
 import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
+import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -96,6 +97,7 @@ import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
 import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
@@ -147,8 +149,6 @@ import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
-import { ProviderRequest } from '../models/ProviderRequest';
-import { ProviderResponse } from '../models/ProviderResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
@@ -191,6 +191,7 @@ import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserResponse } from '../models/UserResponse';
+import { WebhookResponse } from '../models/WebhookResponse';
 import { ObservableAccountsApi } from './ObservableAPI';
 
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
@@ -344,34 +345,6 @@ export class PromiseAuthenticationApi {
      */
     public verifyAuthToken(token: string, _options?: Configuration): Promise<PlayerResponse> {
         const result = this.api.verifyAuthToken(token, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableConfigAuthenticationApi } from './ObservableAPI';
-
-import { ConfigAuthenticationApiRequestFactory, ConfigAuthenticationApiResponseProcessor} from "../apis/ConfigAuthenticationApi";
-export class PromiseConfigAuthenticationApi {
-    private api: ObservableConfigAuthenticationApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: ConfigAuthenticationApiRequestFactory,
-        responseProcessor?: ConfigAuthenticationApiResponseProcessor
-    ) {
-        this.api = new ObservableConfigAuthenticationApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Configure Google OAuth2.
-     * @param providerRequest 
-     */
-    public editProvider(providerRequest: ProviderRequest, _options?: Configuration): Promise<ProjectResponse> {
-        const result = this.api.editProvider(providerRequest, _options);
         return result.toPromise();
     }
 

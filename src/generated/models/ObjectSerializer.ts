@@ -74,6 +74,7 @@ export * from '../models/GasReportDataInner';
 export * from '../models/GasReportDataInnerPeriod';
 export * from '../models/GasReportDataInnerTransactionIntentsInner';
 export * from '../models/GetSigninUrlResponse';
+export * from '../models/GoogleOAuthConfig';
 export * from '../models/Interaction';
 export * from '../models/InvalidRequestError';
 export * from '../models/InvalidRequestErrorResponse';
@@ -93,6 +94,7 @@ export * from '../models/OAuthConfigRequest';
 export * from '../models/OAuthConfigResponse';
 export * from '../models/OAuthProvider';
 export * from '../models/OAuthProviderACCELBYTE';
+export * from '../models/OAuthProviderGOOGLE';
 export * from '../models/OAuthProviderPLAYFAB';
 export * from '../models/OAuthRequest';
 export * from '../models/ObsoleteAssetInventory';
@@ -144,8 +146,6 @@ export * from '../models/ProjectListResponse';
 export * from '../models/ProjectLogs';
 export * from '../models/ProjectResponse';
 export * from '../models/ProjectWebhookRequest';
-export * from '../models/ProviderRequest';
-export * from '../models/ProviderResponse';
 export * from '../models/ResponseResponse';
 export * from '../models/ResponseTypeLIST';
 export * from '../models/RevokeSessionPlayerRequest';
@@ -188,6 +188,7 @@ export * from '../models/UserProjectRole';
 export * from '../models/UserProjectRoleADMIN';
 export * from '../models/UserProjectRoleMEMBER';
 export * from '../models/UserResponse';
+export * from '../models/WebhookResponse';
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
@@ -265,6 +266,7 @@ import { GasReportDataInner } from '../models/GasReportDataInner';
 import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
 import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
+import { GoogleOAuthConfig     } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError    } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -278,12 +280,13 @@ import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { OAuthConfig      } from '../models/OAuthConfig';
+import { OAuthConfig       } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
 import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
@@ -333,10 +336,8 @@ import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
 import { ProjectLogs       } from '../models/ProjectLogs';
-import { ProjectResponse         } from '../models/ProjectResponse';
+import { ProjectResponse        } from '../models/ProjectResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
-import { ProviderRequest } from '../models/ProviderRequest';
-import { ProviderResponse } from '../models/ProviderResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
@@ -379,6 +380,7 @@ import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserResponse           } from '../models/UserResponse';
+import { WebhookResponse } from '../models/WebhookResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -420,6 +422,7 @@ let enumsMap: Set<string> = new Set<string>([
     "NextActionType",
     "OAuthProvider",
     "OAuthProviderACCELBYTE",
+    "OAuthProviderGOOGLE",
     "OAuthProviderPLAYFAB",
     "ObsoleteAssetType",
     "PlayerResponseExpandable",
@@ -508,6 +511,7 @@ let typeMap: {[index: string]: any} = {
     "GasReportDataInnerPeriod": GasReportDataInnerPeriod,
     "GasReportDataInnerTransactionIntentsInner": GasReportDataInnerTransactionIntentsInner,
     "GetSigninUrlResponse": GetSigninUrlResponse,
+    "GoogleOAuthConfig": GoogleOAuthConfig,
     "Interaction": Interaction,
     "InvalidRequestError": InvalidRequestError,
     "InvalidRequestErrorResponse": InvalidRequestErrorResponse,
@@ -562,8 +566,6 @@ let typeMap: {[index: string]: any} = {
     "ProjectLogs": ProjectLogs,
     "ProjectResponse": ProjectResponse,
     "ProjectWebhookRequest": ProjectWebhookRequest,
-    "ProviderRequest": ProviderRequest,
-    "ProviderResponse": ProviderResponse,
     "ResponseResponse": ResponseResponse,
     "RevokeSessionPlayerRequest": RevokeSessionPlayerRequest,
     "RevokeSessionRequest": RevokeSessionRequest,
@@ -594,6 +596,7 @@ let typeMap: {[index: string]: any} = {
     "UserListResponse": UserListResponse,
     "UserProjectRemoveResponse": UserProjectRemoveResponse,
     "UserResponse": UserResponse,
+    "WebhookResponse": WebhookResponse,
 }
 
 export class ObjectSerializer {
