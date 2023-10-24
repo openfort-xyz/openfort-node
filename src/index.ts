@@ -8,9 +8,10 @@ import { PolicyRulesApiWrapper } from "./apis/policyRulesApiWrapper";
 import { SessionsApiWrapper } from "./apis/sessionsApiWrapper";
 import { TransactionIntentsApiWrapper } from "./apis/transactionIntentsApiWrapper";
 import { InventoriesApiWrapper } from "./apis/inventoriesApiWrapper";
-import { WebHookEvent } from "./models/webHookEvent";
+import { WebHookEvent } from "./models";
 import { createHmac } from "crypto";
 import { IamApiWrapper } from "./apis/iamApiWrapper";
+import { OAuthApiWrapper } from "./apis/oauthApiWrapper";
 
 export default class Openfort {
     private readonly apiWrappers: { [name: string]: Observable } = {};
@@ -52,6 +53,10 @@ export default class Openfort {
 
     public get iam(): IamApiWrapper {
         return this.getOrCreateWrapper(IamApiWrapper);
+    }
+
+    public get oauth(): OAuthApiWrapper {
+        return this.getOrCreateWrapper(OAuthApiWrapper);
     }
 
     public subscribe(observer: Observer): void {

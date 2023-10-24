@@ -10,13 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
+import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
+import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { HttpFile } from '../http/http';
 
-/**
-* Accelbyte oauth configuration
-*/
-export class AccelbyteOAuthConfig {
+export class OAuthConfig {
     /**
     * Base URI of your accelbyte gaming service environment. E.g. https://mygame.dev.gamingservices.accelbyte.io/
     */
@@ -29,7 +28,11 @@ export class AccelbyteOAuthConfig {
     * Secret of your confidential IAM client.
     */
     'clientSecret': string;
-    'provider': OAuthProviderACCELBYTE;
+    'provider': OAuthProviderPLAYFAB;
+    /**
+    * Title ID of your Play Fab gaming service environment.
+    */
+    'titleId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -55,12 +58,18 @@ export class AccelbyteOAuthConfig {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderACCELBYTE",
+            "type": "OAuthProviderPLAYFAB",
+            "format": ""
+        },
+        {
+            "name": "titleId",
+            "baseName": "titleId",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AccelbyteOAuthConfig.attributeTypeMap;
+        return OAuthConfig.attributeTypeMap;
     }
 
     public constructor() {

@@ -10,27 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { OAuthConfig } from '../models/OAuthConfig';
+import { AuthResponse } from '../models/AuthResponse';
+import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { HttpFile } from '../http/http';
 
-/**
-* OAuth provider specific configuration.
-*/
-export class OAuthConfigResponse {
-    'config': OAuthConfig;
+export class AuthorizeWithOAuthToken200Response {
+    /**
+    * Player\'s identifier.
+    */
+    'playerId': string;
+    /**
+    * JWT token.
+    */
+    'token': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "config",
-            "baseName": "config",
-            "type": "OAuthConfig",
+            "name": "playerId",
+            "baseName": "playerId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthConfigResponse.attributeTypeMap;
+        return AuthorizeWithOAuthToken200Response.attributeTypeMap;
     }
 
     public constructor() {
