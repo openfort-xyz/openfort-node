@@ -41,12 +41,12 @@ export class PlayersAuthenticationApiRequestFactory extends BaseAPIRequestFactor
 
         // Query Params
         if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "double"));
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
         // Query Params
         if (skip !== undefined) {
-            requestContext.setQueryParam("skip", ObjectSerializer.serialize(skip, "number", "double"));
+            requestContext.setQueryParam("skip", ObjectSerializer.serialize(skip, "number", "int32"));
         }
 
         // Query Params

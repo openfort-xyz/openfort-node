@@ -67,7 +67,7 @@ export class CreateAccountRequest {
             "name": "tokenId",
             "baseName": "tokenId",
             "type": "number",
-            "format": "double"
+            "format": "int64"
         },
         {
             "name": "player",

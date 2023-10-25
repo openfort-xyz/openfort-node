@@ -89,13 +89,13 @@ export class ResponseResponse {
             "name": "gasUsed",
             "baseName": "gasUsed",
             "type": "number",
-            "format": "double"
+            "format": "int64"
         },
         {
             "name": "status",
             "baseName": "status",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "logs",

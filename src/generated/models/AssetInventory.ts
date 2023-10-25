@@ -42,7 +42,7 @@ export class AssetInventory {
             "name": "tokenId",
             "baseName": "tokenId",
             "type": "number",
-            "format": "double"
+            "format": "int64"
         },
         {
             "name": "amount",
