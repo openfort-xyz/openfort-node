@@ -25,7 +25,7 @@ export class GoogleAuthenticationApiRequestFactory extends BaseAPIRequestFactory
         let _config = _options || this.configuration;
 
         // Path Params
-        const localVarPath = '/auth/v1/google/signin_url';
+        const localVarPath = '/iam/v1/oauth/google/signin_url';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -61,7 +61,7 @@ export class GoogleAuthenticationApiRequestFactory extends BaseAPIRequestFactory
 
 
         // Path Params
-        const localVarPath = '/auth/v1/google/token';
+        const localVarPath = '/iam/v1/oauth/google/token';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
