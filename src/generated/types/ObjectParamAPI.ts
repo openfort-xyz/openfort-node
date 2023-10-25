@@ -1006,21 +1006,6 @@ export interface OAuthApiGetPlayerByExternalIdRequest {
 export interface OAuthApiListOAuthConfigRequest {
 }
 
-export interface OAuthApiUpdateOAuthConfigRequest {
-    /**
-     * Specifies the oauth provider type.
-     * @type OAuthProvider
-     * @memberof OAuthApiupdateOAuthConfig
-     */
-    provider: OAuthProvider
-    /**
-     * Specifies the oauth provider specific configuration.
-     * @type OAuthConfigRequest
-     * @memberof OAuthApiupdateOAuthConfig
-     */
-    oAuthConfigRequest: OAuthConfigRequest
-}
-
 export interface OAuthApiVerifyOAuthTokenRequest {
     /**
      * OAuth provider
@@ -1095,15 +1080,6 @@ export class ObjectOAuthApi {
      */
     public listOAuthConfig(param: OAuthApiListOAuthConfigRequest = {}, options?: Configuration): Promise<OAuthConfigListResponse> {
         return this.api.listOAuthConfig( options).toPromise();
-    }
-
-    /**
-     * The endpoint updates oauth configuration for specified provider for the current project environment.
-     * Update oauth configuration.
-     * @param param the request object
-     */
-    public updateOAuthConfig(param: OAuthApiUpdateOAuthConfigRequest, options?: Configuration): Promise<void> {
-        return this.api.updateOAuthConfig(param.provider, param.oAuthConfigRequest,  options).toPromise();
     }
 
     /**
