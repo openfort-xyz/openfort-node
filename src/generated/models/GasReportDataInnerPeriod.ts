@@ -23,13 +23,13 @@ export class GasReportDataInnerPeriod {
             "name": "end",
             "baseName": "end",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "start",
             "baseName": "start",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

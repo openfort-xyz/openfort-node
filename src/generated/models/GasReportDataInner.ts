@@ -59,7 +59,7 @@ export class GasReportDataInner {
             "name": "periodNumber",
             "baseName": "periodNumber",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

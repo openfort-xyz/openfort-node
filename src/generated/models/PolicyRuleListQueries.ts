@@ -39,13 +39,13 @@ export class PolicyRuleListQueries {
             "name": "limit",
             "baseName": "limit",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "skip",
             "baseName": "skip",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "order",

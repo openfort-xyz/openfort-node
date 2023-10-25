@@ -90,7 +90,7 @@ export class SessionResponse {
             "name": "limit",
             "baseName": "limit",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "nextAction",

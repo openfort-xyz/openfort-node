@@ -62,13 +62,13 @@ export class AuthPlayerResponse {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "lastSignInAt",
             "baseName": "lastSignInAt",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "rawAppMetaData",
