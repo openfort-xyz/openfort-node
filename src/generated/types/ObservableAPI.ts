@@ -111,6 +111,7 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
@@ -1246,6 +1247,30 @@ export class ObservablePlayersApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createPlayerSession(rsp)));
+            }));
+    }
+
+    /**
+     * Deletes a player object.
+     * @param id Specifies the unique player ID (starts with pla_).
+     * @param playerRequest 
+     */
+    public deletePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Observable<PlayerDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deletePlayer(id, playerRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deletePlayer(rsp)));
             }));
     }
 

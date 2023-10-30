@@ -110,6 +110,7 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
@@ -716,6 +717,16 @@ export class PromisePlayersApi {
      */
     public createPlayerSession(id: string, createPlayerSessionRequest: CreatePlayerSessionRequest, _options?: Configuration): Promise<SessionResponse> {
         const result = this.api.createPlayerSession(id, createPlayerSessionRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Deletes a player object.
+     * @param id Specifies the unique player ID (starts with pla_).
+     * @param playerRequest 
+     */
+    public deletePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<PlayerDeleteResponse> {
+        const result = this.api.deletePlayer(id, playerRequest, _options);
         return result.toPromise();
     }
 

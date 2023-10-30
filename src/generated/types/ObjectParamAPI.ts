@@ -110,6 +110,7 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
@@ -1142,6 +1143,21 @@ export interface PlayersApiCreatePlayerSessionRequest {
     createPlayerSessionRequest: CreatePlayerSessionRequest
 }
 
+export interface PlayersApiDeletePlayerRequest {
+    /**
+     * Specifies the unique player ID (starts with pla_).
+     * @type string
+     * @memberof PlayersApideletePlayer
+     */
+    id: string
+    /**
+     * 
+     * @type PlayerRequest
+     * @memberof PlayersApideletePlayer
+     */
+    playerRequest: PlayerRequest
+}
+
 export interface PlayersApiGetPlayerRequest {
     /**
      * Specifies the unique player ID (starts with pla_).
@@ -1319,6 +1335,14 @@ export class ObjectPlayersApi {
      */
     public createPlayerSession(param: PlayersApiCreatePlayerSessionRequest, options?: Configuration): Promise<SessionResponse> {
         return this.api.createPlayerSession(param.id, param.createPlayerSessionRequest,  options).toPromise();
+    }
+
+    /**
+     * Deletes a player object.
+     * @param param the request object
+     */
+    public deletePlayer(param: PlayersApiDeletePlayerRequest, options?: Configuration): Promise<PlayerDeleteResponse> {
+        return this.api.deletePlayer(param.id, param.playerRequest,  options).toPromise();
     }
 
     /**
