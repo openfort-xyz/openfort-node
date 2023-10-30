@@ -18,6 +18,10 @@ import { HttpFile } from '../http/http';
 */
 export class GoogleOAuthConfig {
     /**
+    * Enable Google OAuth.
+    */
+    'enabled': boolean;
+    /**
     * Google API client ID.
     */
     'clientId': string;
@@ -34,6 +38,12 @@ export class GoogleOAuthConfig {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
         {
             "name": "clientId",
             "baseName": "clientId",

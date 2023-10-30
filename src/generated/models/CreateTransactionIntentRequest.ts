@@ -35,7 +35,7 @@ export class CreateTransactionIntentRequest {
     */
     'optimistic': boolean;
     /**
-    * Specify the number of blocks after the block with transaction to be assured that transaction is in block. It is possible to use only with optimistic=true
+    * Specify the number of blocks after the block with transaction to be assured that transaction is in block
     */
     'confirmationBlocks'?: number;
     'interactions': Array<Interaction>;

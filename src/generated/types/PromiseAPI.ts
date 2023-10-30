@@ -93,8 +93,6 @@ import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
-import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
-import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
@@ -603,11 +601,10 @@ export class PromiseOAuthApi {
     /**
      * The endpoint creates oauth configuration for the current project environment.
      * Create oauth configuration.
-     * @param provider Specifies the oauth provider type.
-     * @param oAuthConfigRequest Specifies the oauth provider specific configuration.
+     * @param body Specifies the oauth provider specific configuration.
      */
-    public createOAuthConfig(provider: OAuthProvider, oAuthConfigRequest: OAuthConfigRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.createOAuthConfig(provider, oAuthConfigRequest, _options);
+    public createOAuthConfig(body: OAuthConfig, _options?: Configuration): Promise<OAuthConfig> {
+        const result = this.api.createOAuthConfig(body, _options);
         return result.toPromise();
     }
 
@@ -626,7 +623,7 @@ export class PromiseOAuthApi {
      * Get oauth configuration.
      * @param provider Specifies the oauth provider type.
      */
-    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<OAuthConfigResponse> {
+    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<OAuthConfig> {
         const result = this.api.getOAuthConfig(provider, _options);
         return result.toPromise();
     }

@@ -18,6 +18,10 @@ import { HttpFile } from '../http/http';
 
 export class OAuthConfig {
     /**
+    * Enable PlayFab Auth.
+    */
+    'enabled': boolean;
+    /**
     * Base URI of your accelbyte gaming service environment. E.g. https://mygame.dev.gamingservices.accelbyte.io/
     */
     'baseUrl': string;
@@ -42,6 +46,12 @@ export class OAuthConfig {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
         {
             "name": "baseUrl",
             "baseName": "baseUrl",

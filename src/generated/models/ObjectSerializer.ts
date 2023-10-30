@@ -90,8 +90,6 @@ export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
 export * from '../models/OAuthConfig';
 export * from '../models/OAuthConfigListResponse';
-export * from '../models/OAuthConfigRequest';
-export * from '../models/OAuthConfigResponse';
 export * from '../models/OAuthProvider';
 export * from '../models/OAuthProviderACCELBYTE';
 export * from '../models/OAuthProviderGOOGLE';
@@ -192,7 +190,7 @@ export * from '../models/WebhookResponse';
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
-import { AccelbyteOAuthConfig     } from '../models/AccelbyteOAuthConfig';
+import { AccelbyteOAuthConfig      } from '../models/AccelbyteOAuthConfig';
 import { Account            } from '../models/Account';
 import { AccountInventoryListQueries     } from '../models/AccountInventoryListQueries';
 import { AccountListQueries      } from '../models/AccountListQueries';
@@ -266,7 +264,7 @@ import { GasReportDataInner } from '../models/GasReportDataInner';
 import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
 import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
-import { GoogleOAuthConfig     } from '../models/GoogleOAuthConfig';
+import { GoogleOAuthConfig      } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError    } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -280,10 +278,8 @@ import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { OAuthConfig       } from '../models/OAuthConfig';
+import { OAuthConfig        } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
-import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
-import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
@@ -298,7 +294,7 @@ import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse
 import { PaymasterDepositorResponseDeleted } from '../models/PaymasterDepositorResponseDeleted';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
-import { PlayFabOAuthConfig   } from '../models/PlayFabOAuthConfig';
+import { PlayFabOAuthConfig    } from '../models/PlayFabOAuthConfig';
 import { Player         } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerInventoryListQueries      } from '../models/PlayerInventoryListQueries';
@@ -526,8 +522,6 @@ let typeMap: {[index: string]: any} = {
     "NextActionResponse": NextActionResponse,
     "OAuthConfig": OAuthConfig,
     "OAuthConfigListResponse": OAuthConfigListResponse,
-    "OAuthConfigRequest": OAuthConfigRequest,
-    "OAuthConfigResponse": OAuthConfigResponse,
     "OAuthRequest": OAuthRequest,
     "ObsoleteAssetInventory": ObsoleteAssetInventory,
     "ObsoleteInventoryResponse": ObsoleteInventoryResponse,

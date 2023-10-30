@@ -34,7 +34,7 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/auth/v1/login';
+        const localVarPath = '/iam/v1/auth/login';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -81,7 +81,7 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/auth/v1/signup';
+        const localVarPath = '/iam/v1/auth/signup';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -128,7 +128,7 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/auth/v1/verify';
+        const localVarPath = '/iam/v1/auth/verify';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
