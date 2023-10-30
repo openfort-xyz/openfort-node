@@ -33,7 +33,7 @@ export class PlayersAuthenticationApiRequestFactory extends BaseAPIRequestFactor
 
 
         // Path Params
-        const localVarPath = '/auth/v1/players';
+        const localVarPath = '/iam/v1/players';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);

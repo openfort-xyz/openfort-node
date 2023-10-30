@@ -93,8 +93,6 @@ import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
-import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
-import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
@@ -957,17 +955,11 @@ export interface OAuthApiAuthorizeWithOAuthTokenRequest {
 
 export interface OAuthApiCreateOAuthConfigRequest {
     /**
-     * Specifies the oauth provider type.
-     * @type OAuthProvider
-     * @memberof OAuthApicreateOAuthConfig
-     */
-    provider: OAuthProvider
-    /**
      * Specifies the oauth provider specific configuration.
-     * @type OAuthConfigRequest
+     * @type OAuthConfig
      * @memberof OAuthApicreateOAuthConfig
      */
-    oAuthConfigRequest: OAuthConfigRequest
+    body: OAuthConfig
 }
 
 export interface OAuthApiDeleteOAuthConfigRequest {
@@ -1042,8 +1034,8 @@ export class ObjectOAuthApi {
      * Create oauth configuration.
      * @param param the request object
      */
-    public createOAuthConfig(param: OAuthApiCreateOAuthConfigRequest, options?: Configuration): Promise<void> {
-        return this.api.createOAuthConfig(param.provider, param.oAuthConfigRequest,  options).toPromise();
+    public createOAuthConfig(param: OAuthApiCreateOAuthConfigRequest, options?: Configuration): Promise<OAuthConfig> {
+        return this.api.createOAuthConfig(param.body,  options).toPromise();
     }
 
     /**
@@ -1060,7 +1052,7 @@ export class ObjectOAuthApi {
      * Get oauth configuration.
      * @param param the request object
      */
-    public getOAuthConfig(param: OAuthApiGetOAuthConfigRequest, options?: Configuration): Promise<OAuthConfigResponse> {
+    public getOAuthConfig(param: OAuthApiGetOAuthConfigRequest, options?: Configuration): Promise<OAuthConfig> {
         return this.api.getOAuthConfig(param.provider,  options).toPromise();
     }
 

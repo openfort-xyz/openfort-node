@@ -18,6 +18,10 @@ import { HttpFile } from '../http/http';
 */
 export class PlayFabOAuthConfig {
     /**
+    * Enable PlayFab Auth.
+    */
+    'enabled': boolean;
+    /**
     * Title ID of your Play Fab gaming service environment.
     */
     'titleId': string;
@@ -26,6 +30,12 @@ export class PlayFabOAuthConfig {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
         {
             "name": "titleId",
             "baseName": "titleId",

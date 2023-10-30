@@ -11,9 +11,8 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { AuthorizeWithOAuthToken200Response } from '../models/AuthorizeWithOAuthToken200Response';
+import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
-import { OAuthConfigRequest } from '../models/OAuthConfigRequest';
-import { OAuthConfigResponse } from '../models/OAuthConfigResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { PlayerResponse } from '../models/PlayerResponse';
@@ -87,27 +86,19 @@ export class OAuthApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * The endpoint creates oauth configuration for the current project environment.
      * Create oauth configuration.
-     * @param provider Specifies the oauth provider type.
-     * @param oAuthConfigRequest Specifies the oauth provider specific configuration.
+     * @param body Specifies the oauth provider specific configuration.
      */
-    public async createOAuthConfig(provider: OAuthProvider, oAuthConfigRequest: OAuthConfigRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createOAuthConfig(body: OAuthConfig, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'provider' is not null or undefined
-        if (provider === null || provider === undefined) {
-            throw new RequiredError("OAuthApi", "createOAuthConfig", "provider");
-        }
-
-
-        // verify required parameter 'oAuthConfigRequest' is not null or undefined
-        if (oAuthConfigRequest === null || oAuthConfigRequest === undefined) {
-            throw new RequiredError("OAuthApi", "createOAuthConfig", "oAuthConfigRequest");
+        // verify required parameter 'body' is not null or undefined
+        if (body === null || body === undefined) {
+            throw new RequiredError("OAuthApi", "createOAuthConfig", "body");
         }
 
 
         // Path Params
-        const localVarPath = '/iam/v1/oauth/{provider}'
-            .replace('{' + 'provider' + '}', encodeURIComponent(String(provider)));
+        const localVarPath = '/iam/v1/oauth';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -120,7 +111,7 @@ export class OAuthApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(oAuthConfigRequest, "OAuthConfigRequest", ""),
+            ObjectSerializer.serialize(body, "OAuthConfig", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -396,21 +387,25 @@ export class OAuthApiResponseProcessor {
      * @params response Response returned by the server for a request to createOAuthConfig
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOAuthConfig(response: ResponseContext): Promise<void > {
+     public async createOAuthConfig(response: ResponseContext): Promise<OAuthConfig > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: OAuthConfig = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "OAuthConfig", ""
+            ) as OAuthConfig;
+            return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
+            const body: OAuthConfig = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
+                "OAuthConfig", ""
+            ) as OAuthConfig;
             return body;
         }
 
@@ -452,13 +447,13 @@ export class OAuthApiResponseProcessor {
      * @params response Response returned by the server for a request to getOAuthConfig
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getOAuthConfig(response: ResponseContext): Promise<OAuthConfigResponse > {
+     public async getOAuthConfig(response: ResponseContext): Promise<OAuthConfig > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: OAuthConfigResponse = ObjectSerializer.deserialize(
+            const body: OAuthConfig = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfigResponse", ""
-            ) as OAuthConfigResponse;
+                "OAuthConfig", ""
+            ) as OAuthConfig;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -467,10 +462,10 @@ export class OAuthApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: OAuthConfigResponse = ObjectSerializer.deserialize(
+            const body: OAuthConfig = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfigResponse", ""
-            ) as OAuthConfigResponse;
+                "OAuthConfig", ""
+            ) as OAuthConfig;
             return body;
         }
 
