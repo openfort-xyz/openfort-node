@@ -107,6 +107,7 @@ export * from '../models/PickPlayerResponseId';
 export * from '../models/PlayFabOAuthConfig';
 export * from '../models/Player';
 export * from '../models/PlayerCancelTransferOwnershipRequest';
+export * from '../models/PlayerDeleteResponse';
 export * from '../models/PlayerInventoryListQueries';
 export * from '../models/PlayerInventoryQueries';
 export * from '../models/PlayerListQueries';
@@ -297,6 +298,7 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig    } from '../models/PlayFabOAuthConfig';
 import { Player         } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerDeleteResponse    } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries      } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries      } from '../models/PlayerListQueries';
@@ -534,6 +536,7 @@ let typeMap: {[index: string]: any} = {
     "PlayFabOAuthConfig": PlayFabOAuthConfig,
     "Player": Player,
     "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
+    "PlayerDeleteResponse": PlayerDeleteResponse,
     "PlayerInventoryListQueries": PlayerInventoryListQueries,
     "PlayerInventoryQueries": PlayerInventoryQueries,
     "PlayerListQueries": PlayerListQueries,
