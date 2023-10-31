@@ -14,15 +14,15 @@ import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
-import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerListResponse } from '../models/PlayerListResponse';
-import { PlayerRequest } from '../models/PlayerRequest';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { SessionResponse } from '../models/SessionResponse';
 import { SortOrder } from '../models/SortOrder';
@@ -92,14 +92,14 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Add a new player to your player list in Openfort.
      * Create a player object.
-     * @param createPlayerRequest 
+     * @param playerCreateRequest 
      */
-    public async createPlayer(createPlayerRequest: CreatePlayerRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createPlayer(playerCreateRequest: PlayerCreateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'createPlayerRequest' is not null or undefined
-        if (createPlayerRequest === null || createPlayerRequest === undefined) {
-            throw new RequiredError("PlayersApi", "createPlayer", "createPlayerRequest");
+        // verify required parameter 'playerCreateRequest' is not null or undefined
+        if (playerCreateRequest === null || playerCreateRequest === undefined) {
+            throw new RequiredError("PlayersApi", "createPlayer", "playerCreateRequest");
         }
 
 
@@ -117,7 +117,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createPlayerRequest, "CreatePlayerRequest", ""),
+            ObjectSerializer.serialize(playerCreateRequest, "PlayerCreateRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -663,9 +663,9 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Updates a player object.
      * @param id Specifies the unique player ID (starts with pla_).
-     * @param playerRequest 
+     * @param playerUpdateRequest 
      */
-    public async updatePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updatePlayer(id: string, playerUpdateRequest: PlayerUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -674,9 +674,9 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'playerRequest' is not null or undefined
-        if (playerRequest === null || playerRequest === undefined) {
-            throw new RequiredError("PlayersApi", "updatePlayer", "playerRequest");
+        // verify required parameter 'playerUpdateRequest' is not null or undefined
+        if (playerUpdateRequest === null || playerUpdateRequest === undefined) {
+            throw new RequiredError("PlayersApi", "updatePlayer", "playerUpdateRequest");
         }
 
 
@@ -695,7 +695,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(playerRequest, "PlayerRequest", ""),
+            ObjectSerializer.serialize(playerUpdateRequest, "PlayerUpdateRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);

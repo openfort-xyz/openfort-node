@@ -42,7 +42,6 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
-import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { CreatePolicyAllowFunctionRequest } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
@@ -110,17 +109,19 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
-import { PlayerRequest } from '../models/PlayerRequest';
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy } from '../models/Policy';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
@@ -1107,10 +1108,10 @@ export interface PlayersApiCancelTransferAccountOwnershipRequest {
 export interface PlayersApiCreatePlayerRequest {
     /**
      * 
-     * @type CreatePlayerRequest
+     * @type PlayerCreateRequest
      * @memberof PlayersApicreatePlayer
      */
-    createPlayerRequest: CreatePlayerRequest
+    playerCreateRequest: PlayerCreateRequest
 }
 
 export interface PlayersApiCreatePlayerAccountRequest {
@@ -1284,10 +1285,10 @@ export interface PlayersApiUpdatePlayerRequest {
     id: string
     /**
      * 
-     * @type PlayerRequest
+     * @type PlayerUpdateRequest
      * @memberof PlayersApiupdatePlayer
      */
-    playerRequest: PlayerRequest
+    playerUpdateRequest: PlayerUpdateRequest
 }
 
 export class ObjectPlayersApi {
@@ -1312,7 +1313,7 @@ export class ObjectPlayersApi {
      * @param param the request object
      */
     public createPlayer(param: PlayersApiCreatePlayerRequest, options?: Configuration): Promise<PlayerResponse> {
-        return this.api.createPlayer(param.createPlayerRequest,  options).toPromise();
+        return this.api.createPlayer(param.playerCreateRequest,  options).toPromise();
     }
 
     /**
@@ -1404,7 +1405,7 @@ export class ObjectPlayersApi {
      * @param param the request object
      */
     public updatePlayer(param: PlayersApiUpdatePlayerRequest, options?: Configuration): Promise<PlayerResponse> {
-        return this.api.updatePlayer(param.id, param.playerRequest,  options).toPromise();
+        return this.api.updatePlayer(param.id, param.playerUpdateRequest,  options).toPromise();
     }
 
 }
