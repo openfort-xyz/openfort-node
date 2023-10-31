@@ -10,17 +10,19 @@
  * Do not edit the class manually.
  */
 
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { HttpFile } from '../http/http';
 
-export class PlayerRequest {
+export class PlayerCreateRequest {
     /**
     * Specifies the player name.
     */
-    'name'?: string;
+    'name': string;
     /**
     * Specifies the player description.
     */
     'description'?: string;
+    'metadata'?: { [key: string]: PlayerMetadataValue; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -36,10 +38,16 @@ export class PlayerRequest {
             "baseName": "description",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "{ [key: string]: PlayerMetadataValue; }",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerRequest.attributeTypeMap;
+        return PlayerCreateRequest.attributeTypeMap;
     }
 
     public constructor() {

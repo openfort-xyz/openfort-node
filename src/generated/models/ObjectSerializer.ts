@@ -39,7 +39,6 @@ export * from '../models/CreateAccountRequest';
 export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateContractRequest';
 export * from '../models/CreatePlayerAccountRequest';
-export * from '../models/CreatePlayerRequest';
 export * from '../models/CreatePlayerSessionRequest';
 export * from '../models/CreatePolicyAllowFunctionRequest';
 export * from '../models/CreatePolicyRequest';
@@ -107,17 +106,19 @@ export * from '../models/PickPlayerResponseId';
 export * from '../models/PlayFabOAuthConfig';
 export * from '../models/Player';
 export * from '../models/PlayerCancelTransferOwnershipRequest';
+export * from '../models/PlayerCreateRequest';
 export * from '../models/PlayerDeleteResponse';
 export * from '../models/PlayerInventoryListQueries';
 export * from '../models/PlayerInventoryQueries';
 export * from '../models/PlayerListQueries';
 export * from '../models/PlayerListResponse';
-export * from '../models/PlayerRequest';
+export * from '../models/PlayerMetadataValue';
 export * from '../models/PlayerResponse';
 export * from '../models/PlayerResponseAccountsInner';
 export * from '../models/PlayerResponseExpandable';
 export * from '../models/PlayerResponseTransactionIntentsInner';
 export * from '../models/PlayerTransferOwnershipRequest';
+export * from '../models/PlayerUpdateRequest';
 export * from '../models/Policy';
 export * from '../models/PolicyDeleteResponse';
 export * from '../models/PolicyListQueries';
@@ -230,7 +231,6 @@ import { CreateAccountRequest       } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest      } from '../models/CreatePlayerAccountRequest';
-import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { CreatePolicyAllowFunctionRequest        } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
@@ -298,17 +298,19 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig    } from '../models/PlayFabOAuthConfig';
 import { Player         } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse    } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries      } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries      } from '../models/PlayerListQueries';
 import { PlayerListResponse       } from '../models/PlayerListResponse';
-import { PlayerRequest } from '../models/PlayerRequest';
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { PlayerResponse         } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner            } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner              } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy           } from '../models/Policy';
 import { PolicyDeleteResponse    } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries         } from '../models/PolicyListQueries';
@@ -488,7 +490,6 @@ let typeMap: {[index: string]: any} = {
     "CreateApiAuthorizedNetworkRequest": CreateApiAuthorizedNetworkRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreatePlayerAccountRequest": CreatePlayerAccountRequest,
-    "CreatePlayerRequest": CreatePlayerRequest,
     "CreatePlayerSessionRequest": CreatePlayerSessionRequest,
     "CreatePolicyAllowFunctionRequest": CreatePolicyAllowFunctionRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
@@ -536,16 +537,18 @@ let typeMap: {[index: string]: any} = {
     "PlayFabOAuthConfig": PlayFabOAuthConfig,
     "Player": Player,
     "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
+    "PlayerCreateRequest": PlayerCreateRequest,
     "PlayerDeleteResponse": PlayerDeleteResponse,
     "PlayerInventoryListQueries": PlayerInventoryListQueries,
     "PlayerInventoryQueries": PlayerInventoryQueries,
     "PlayerListQueries": PlayerListQueries,
     "PlayerListResponse": PlayerListResponse,
-    "PlayerRequest": PlayerRequest,
+    "PlayerMetadataValue": PlayerMetadataValue,
     "PlayerResponse": PlayerResponse,
     "PlayerResponseAccountsInner": PlayerResponseAccountsInner,
     "PlayerResponseTransactionIntentsInner": PlayerResponseTransactionIntentsInner,
     "PlayerTransferOwnershipRequest": PlayerTransferOwnershipRequest,
+    "PlayerUpdateRequest": PlayerUpdateRequest,
     "Policy": Policy,
     "PolicyDeleteResponse": PolicyDeleteResponse,
     "PolicyListQueries": PolicyListQueries,

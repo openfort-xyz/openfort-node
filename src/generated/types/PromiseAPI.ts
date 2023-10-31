@@ -42,7 +42,6 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
-import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { CreatePolicyAllowFunctionRequest } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
@@ -110,17 +109,19 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
-import { PlayerRequest } from '../models/PlayerRequest';
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy } from '../models/Policy';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
@@ -693,10 +694,10 @@ export class PromisePlayersApi {
     /**
      * Add a new player to your player list in Openfort.
      * Create a player object.
-     * @param createPlayerRequest 
+     * @param playerCreateRequest 
      */
-    public createPlayer(createPlayerRequest: CreatePlayerRequest, _options?: Configuration): Promise<PlayerResponse> {
-        const result = this.api.createPlayer(createPlayerRequest, _options);
+    public createPlayer(playerCreateRequest: PlayerCreateRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.createPlayer(playerCreateRequest, _options);
         return result.toPromise();
     }
 
@@ -809,10 +810,10 @@ export class PromisePlayersApi {
     /**
      * Updates a player object.
      * @param id Specifies the unique player ID (starts with pla_).
-     * @param playerRequest 
+     * @param playerUpdateRequest 
      */
-    public updatePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<PlayerResponse> {
-        const result = this.api.updatePlayer(id, playerRequest, _options);
+    public updatePlayer(id: string, playerUpdateRequest: PlayerUpdateRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.updatePlayer(id, playerUpdateRequest, _options);
         return result.toPromise();
     }
 

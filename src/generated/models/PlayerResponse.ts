@@ -11,6 +11,7 @@
  */
 
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
@@ -19,9 +20,9 @@ export class PlayerResponse {
     'id': string;
     'object': EntityTypePLAYER;
     'createdAt': number;
-    'name': string | null;
-    'description': string | null;
-    'metadata': string;
+    'name': string;
+    'description'?: string;
+    'metadata'?: { [key: string]: PlayerMetadataValue; };
     'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
     'accounts'?: Array<PlayerResponseAccountsInner>;
 
@@ -61,7 +62,7 @@ export class PlayerResponse {
         {
             "name": "metadata",
             "baseName": "metadata",
-            "type": "string",
+            "type": "{ [key: string]: PlayerMetadataValue; }",
             "format": ""
         },
         {
