@@ -250,20 +250,13 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Deletes a player object.
      * @param id Specifies the unique player ID (starts with pla_).
-     * @param playerRequest 
      */
-    public async deletePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<RequestContext> {
+    public async deletePlayer(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new RequiredError("PlayersApi", "deletePlayer", "id");
-        }
-
-
-        // verify required parameter 'playerRequest' is not null or undefined
-        if (playerRequest === null || playerRequest === undefined) {
-            throw new RequiredError("PlayersApi", "deletePlayer", "playerRequest");
         }
 
 
@@ -275,17 +268,6 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(playerRequest, "PlayerRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods

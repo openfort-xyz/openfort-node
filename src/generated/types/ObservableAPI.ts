@@ -1253,10 +1253,9 @@ export class ObservablePlayersApi {
     /**
      * Deletes a player object.
      * @param id Specifies the unique player ID (starts with pla_).
-     * @param playerRequest 
      */
-    public deletePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Observable<PlayerDeleteResponse> {
-        const requestContextPromise = this.requestFactory.deletePlayer(id, playerRequest, _options);
+    public deletePlayer(id: string, _options?: Configuration): Observable<PlayerDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deletePlayer(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

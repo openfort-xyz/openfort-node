@@ -1150,12 +1150,6 @@ export interface PlayersApiDeletePlayerRequest {
      * @memberof PlayersApideletePlayer
      */
     id: string
-    /**
-     * 
-     * @type PlayerRequest
-     * @memberof PlayersApideletePlayer
-     */
-    playerRequest: PlayerRequest
 }
 
 export interface PlayersApiGetPlayerRequest {
@@ -1342,7 +1336,7 @@ export class ObjectPlayersApi {
      * @param param the request object
      */
     public deletePlayer(param: PlayersApiDeletePlayerRequest, options?: Configuration): Promise<PlayerDeleteResponse> {
-        return this.api.deletePlayer(param.id, param.playerRequest,  options).toPromise();
+        return this.api.deletePlayer(param.id,  options).toPromise();
     }
 
     /**

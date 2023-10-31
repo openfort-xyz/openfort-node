@@ -723,10 +723,9 @@ export class PromisePlayersApi {
     /**
      * Deletes a player object.
      * @param id Specifies the unique player ID (starts with pla_).
-     * @param playerRequest 
      */
-    public deletePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<PlayerDeleteResponse> {
-        const result = this.api.deletePlayer(id, playerRequest, _options);
+    public deletePlayer(id: string, _options?: Configuration): Promise<PlayerDeleteResponse> {
+        const result = this.api.deletePlayer(id, _options);
         return result.toPromise();
     }
 

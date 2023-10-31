@@ -66,6 +66,9 @@ async function example() {
     for (const intent of transactionIntents.data) {
         console.info(`Intent ${intent.id} by ${intent.player?.id}`);
     }
+
+    const playerDeleteResponse = await openfort.players.delete(newPlayer.id);
+    console.info(playerDeleteResponse);
 }
 
 dotenv.config();
