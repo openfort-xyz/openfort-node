@@ -17,7 +17,7 @@ import {
     PlayerListQueries,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { PlayersApi } from "../generated";
+import { PlayerDeleteResponse, PlayersApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
@@ -114,5 +114,13 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
     public async update(req: UpdatePlayerRequest): Promise<PlayerResponse> {
         const { id, ...body } = req;
         return await this.api.updatePlayer(id, body);
+    }
+
+    /**
+     * Deletes a player object.
+     * @param id Player id to delete
+     */
+    public async delete(id: string): Promise<PlayerDeleteResponse> {
+        return await this.api.deletePlayer(id);
     }
 }
