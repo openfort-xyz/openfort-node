@@ -14,13 +14,11 @@ import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { UserProjectRole } from '../models/UserProjectRole';
 import { HttpFile } from '../http/http';
 
-export class UserResponse {
+export class UserProjectResponse {
     'id': string;
     'object': EntityTypeUSER;
     'createdAt': number;
     'updatedAt': number;
-    'first_name': string;
-    'last_name': string;
     'firstName': string;
     'lastName': string;
     'role': UserProjectRole;
@@ -54,18 +52,6 @@ export class UserResponse {
             "format": "int32"
         },
         {
-            "name": "first_name",
-            "baseName": "first_name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "last_name",
-            "baseName": "last_name",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "firstName",
             "baseName": "firstName",
             "type": "string",
@@ -91,7 +77,7 @@ export class UserResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return UserResponse.attributeTypeMap;
+        return UserProjectResponse.attributeTypeMap;
     }
 
     public constructor() {

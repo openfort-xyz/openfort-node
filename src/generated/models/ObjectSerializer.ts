@@ -8,7 +8,6 @@ export * from '../models/AccountListResponse';
 export * from '../models/AccountPolicyRuleResponse';
 export * from '../models/AccountResponse';
 export * from '../models/AccountResponseExpandable';
-export * from '../models/AddDepositorAddressRequest';
 export * from '../models/ApiAuthorizedNetworkListResponse';
 export * from '../models/ApiAuthorizedNetworkResponse';
 export * from '../models/ApiKeyResponse';
@@ -39,6 +38,7 @@ export * from '../models/CreateAccountRequest';
 export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateContractRequest';
 export * from '../models/CreatePlayerAccountRequest';
+export * from '../models/CreatePlayerRequest';
 export * from '../models/CreatePlayerSessionRequest';
 export * from '../models/CreatePolicyAllowFunctionRequest';
 export * from '../models/CreatePolicyRequest';
@@ -54,6 +54,7 @@ export * from '../models/EntityIdResponse';
 export * from '../models/EntityTypeACCOUNT';
 export * from '../models/EntityTypeCONTRACT';
 export * from '../models/EntityTypeINVENTORY';
+export * from '../models/EntityTypePAYMASTERDEPOSITOR';
 export * from '../models/EntityTypePLAYER';
 export * from '../models/EntityTypePOLICY';
 export * from '../models/EntityTypePOLICYRULE';
@@ -79,10 +80,8 @@ export * from '../models/InvalidRequestError';
 export * from '../models/InvalidRequestErrorResponse';
 export * from '../models/InventoryListResponse';
 export * from '../models/InventoryResponse';
-export * from '../models/InvitedMemberResponse';
 export * from '../models/Log';
 export * from '../models/LoginRequest';
-export * from '../models/MemberRequest';
 export * from '../models/Money';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
@@ -98,27 +97,26 @@ export * from '../models/ObsoleteAssetInventory';
 export * from '../models/ObsoleteAssetType';
 export * from '../models/ObsoleteInventoryResponse';
 export * from '../models/PayForUserPolicyStrategy';
+export * from '../models/PaymasterDepositorCreateRequest';
+export * from '../models/PaymasterDepositorDeleteResponse';
 export * from '../models/PaymasterDepositorListResponse';
 export * from '../models/PaymasterDepositorResponse';
-export * from '../models/PaymasterDepositorResponseDeleted';
 export * from '../models/PickContractResponseId';
 export * from '../models/PickPlayerResponseId';
 export * from '../models/PlayFabOAuthConfig';
 export * from '../models/Player';
 export * from '../models/PlayerCancelTransferOwnershipRequest';
-export * from '../models/PlayerCreateRequest';
 export * from '../models/PlayerDeleteResponse';
 export * from '../models/PlayerInventoryListQueries';
 export * from '../models/PlayerInventoryQueries';
 export * from '../models/PlayerListQueries';
 export * from '../models/PlayerListResponse';
-export * from '../models/PlayerMetadataValue';
+export * from '../models/PlayerRequest';
 export * from '../models/PlayerResponse';
 export * from '../models/PlayerResponseAccountsInner';
 export * from '../models/PlayerResponseExpandable';
 export * from '../models/PlayerResponseTransactionIntentsInner';
 export * from '../models/PlayerTransferOwnershipRequest';
-export * from '../models/PlayerUpdateRequest';
 export * from '../models/Policy';
 export * from '../models/PolicyDeleteResponse';
 export * from '../models/PolicyListQueries';
@@ -154,6 +152,7 @@ export * from '../models/SessionListQueries';
 export * from '../models/SessionListResponse';
 export * from '../models/SessionResponse';
 export * from '../models/SessionResponseExpandable';
+export * from '../models/SettingsWebhookUpdateRequest';
 export * from '../models/SignPayloadRequest';
 export * from '../models/SignPayloadResponse';
 export * from '../models/SignatureRequest';
@@ -180,14 +179,15 @@ export * from '../models/UpdatePolicyRequest';
 export * from '../models/UpdatePolicyRuleRequest';
 export * from '../models/UpdateProjectApiKeyRequest';
 export * from '../models/UpdateProjectRequest';
-export * from '../models/UpdateUserProjectRequest';
-export * from '../models/UpdateUserProjectRequestRole';
-export * from '../models/UserListResponse';
-export * from '../models/UserProjectRemoveResponse';
+export * from '../models/UserProjectCreateRequest';
+export * from '../models/UserProjectCreateRequestRole';
+export * from '../models/UserProjectDeleteResponse';
+export * from '../models/UserProjectListResponse';
+export * from '../models/UserProjectResponse';
 export * from '../models/UserProjectRole';
 export * from '../models/UserProjectRoleADMIN';
 export * from '../models/UserProjectRoleMEMBER';
-export * from '../models/UserResponse';
+export * from '../models/UserProjectUpdateRequest';
 export * from '../models/WebhookResponse';
 
 import { Abi } from '../models/Abi';
@@ -200,7 +200,6 @@ import { AccountListResponse       } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse     } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse            } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
-import { AddDepositorAddressRequest } from '../models/AddDepositorAddressRequest';
 import { ApiAuthorizedNetworkListResponse       } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
@@ -231,6 +230,7 @@ import { CreateAccountRequest       } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest      } from '../models/CreatePlayerAccountRequest';
+import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { CreatePolicyAllowFunctionRequest        } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
@@ -246,6 +246,7 @@ import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
+import { EntityTypePAYMASTERDEPOSITOR } from '../models/EntityTypePAYMASTERDEPOSITOR';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -271,10 +272,8 @@ import { InvalidRequestError    } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
 import { InventoryListResponse       } from '../models/InventoryListResponse';
 import { InventoryResponse    } from '../models/InventoryResponse';
-import { InvitedMemberResponse } from '../models/InvitedMemberResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
-import { MemberRequest } from '../models/MemberRequest';
 import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
@@ -290,27 +289,26 @@ import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse     } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy   } from '../models/PayForUserPolicyStrategy';
+import { PaymasterDepositorCreateRequest } from '../models/PaymasterDepositorCreateRequest';
+import { PaymasterDepositorDeleteResponse    } from '../models/PaymasterDepositorDeleteResponse';
 import { PaymasterDepositorListResponse       } from '../models/PaymasterDepositorListResponse';
 import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
-import { PaymasterDepositorResponseDeleted } from '../models/PaymasterDepositorResponseDeleted';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig    } from '../models/PlayFabOAuthConfig';
 import { Player         } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
-import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse    } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries      } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries      } from '../models/PlayerListQueries';
 import { PlayerListResponse       } from '../models/PlayerListResponse';
-import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
+import { PlayerRequest } from '../models/PlayerRequest';
 import { PlayerResponse         } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner            } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner              } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
-import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy           } from '../models/Policy';
 import { PolicyDeleteResponse    } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries         } from '../models/PolicyListQueries';
@@ -346,6 +344,7 @@ import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
+import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse      } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -372,14 +371,15 @@ import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest   } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
-import { UpdateUserProjectRequest } from '../models/UpdateUserProjectRequest';
-import { UpdateUserProjectRequestRole } from '../models/UpdateUserProjectRequestRole';
-import { UserListResponse       } from '../models/UserListResponse';
-import { UserProjectRemoveResponse    } from '../models/UserProjectRemoveResponse';
+import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
+import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
+import { UserProjectDeleteResponse    } from '../models/UserProjectDeleteResponse';
+import { UserProjectListResponse       } from '../models/UserProjectListResponse';
+import { UserProjectResponse         } from '../models/UserProjectResponse';
 import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
-import { UserResponse           } from '../models/UserResponse';
+import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
 import { WebhookResponse } from '../models/WebhookResponse';
 
 /* tslint:disable:no-unused-variable */
@@ -410,6 +410,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeACCOUNT",
     "EntityTypeCONTRACT",
     "EntityTypeINVENTORY",
+    "EntityTypePAYMASTERDEPOSITOR",
     "EntityTypePLAYER",
     "EntityTypePOLICY",
     "EntityTypePOLICYRULE",
@@ -461,7 +462,6 @@ let typeMap: {[index: string]: any} = {
     "AccountListResponse": AccountListResponse,
     "AccountPolicyRuleResponse": AccountPolicyRuleResponse,
     "AccountResponse": AccountResponse,
-    "AddDepositorAddressRequest": AddDepositorAddressRequest,
     "ApiAuthorizedNetworkListResponse": ApiAuthorizedNetworkListResponse,
     "ApiAuthorizedNetworkResponse": ApiAuthorizedNetworkResponse,
     "ApiKeyResponse": ApiKeyResponse,
@@ -490,6 +490,7 @@ let typeMap: {[index: string]: any} = {
     "CreateApiAuthorizedNetworkRequest": CreateApiAuthorizedNetworkRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreatePlayerAccountRequest": CreatePlayerAccountRequest,
+    "CreatePlayerRequest": CreatePlayerRequest,
     "CreatePlayerSessionRequest": CreatePlayerSessionRequest,
     "CreatePolicyAllowFunctionRequest": CreatePolicyAllowFunctionRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
@@ -516,10 +517,8 @@ let typeMap: {[index: string]: any} = {
     "InvalidRequestErrorResponse": InvalidRequestErrorResponse,
     "InventoryListResponse": InventoryListResponse,
     "InventoryResponse": InventoryResponse,
-    "InvitedMemberResponse": InvitedMemberResponse,
     "Log": Log,
     "LoginRequest": LoginRequest,
-    "MemberRequest": MemberRequest,
     "Money": Money,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
@@ -529,26 +528,25 @@ let typeMap: {[index: string]: any} = {
     "ObsoleteAssetInventory": ObsoleteAssetInventory,
     "ObsoleteInventoryResponse": ObsoleteInventoryResponse,
     "PayForUserPolicyStrategy": PayForUserPolicyStrategy,
+    "PaymasterDepositorCreateRequest": PaymasterDepositorCreateRequest,
+    "PaymasterDepositorDeleteResponse": PaymasterDepositorDeleteResponse,
     "PaymasterDepositorListResponse": PaymasterDepositorListResponse,
     "PaymasterDepositorResponse": PaymasterDepositorResponse,
-    "PaymasterDepositorResponseDeleted": PaymasterDepositorResponseDeleted,
     "PickContractResponseId": PickContractResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
     "PlayFabOAuthConfig": PlayFabOAuthConfig,
     "Player": Player,
     "PlayerCancelTransferOwnershipRequest": PlayerCancelTransferOwnershipRequest,
-    "PlayerCreateRequest": PlayerCreateRequest,
     "PlayerDeleteResponse": PlayerDeleteResponse,
     "PlayerInventoryListQueries": PlayerInventoryListQueries,
     "PlayerInventoryQueries": PlayerInventoryQueries,
     "PlayerListQueries": PlayerListQueries,
     "PlayerListResponse": PlayerListResponse,
-    "PlayerMetadataValue": PlayerMetadataValue,
+    "PlayerRequest": PlayerRequest,
     "PlayerResponse": PlayerResponse,
     "PlayerResponseAccountsInner": PlayerResponseAccountsInner,
     "PlayerResponseTransactionIntentsInner": PlayerResponseTransactionIntentsInner,
     "PlayerTransferOwnershipRequest": PlayerTransferOwnershipRequest,
-    "PlayerUpdateRequest": PlayerUpdateRequest,
     "Policy": Policy,
     "PolicyDeleteResponse": PolicyDeleteResponse,
     "PolicyListQueries": PolicyListQueries,
@@ -572,6 +570,7 @@ let typeMap: {[index: string]: any} = {
     "SessionListQueries": SessionListQueries,
     "SessionListResponse": SessionListResponse,
     "SessionResponse": SessionResponse,
+    "SettingsWebhookUpdateRequest": SettingsWebhookUpdateRequest,
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
@@ -591,11 +590,12 @@ let typeMap: {[index: string]: any} = {
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
     "UpdateProjectApiKeyRequest": UpdateProjectApiKeyRequest,
     "UpdateProjectRequest": UpdateProjectRequest,
-    "UpdateUserProjectRequest": UpdateUserProjectRequest,
-    "UpdateUserProjectRequestRole": UpdateUserProjectRequestRole,
-    "UserListResponse": UserListResponse,
-    "UserProjectRemoveResponse": UserProjectRemoveResponse,
-    "UserResponse": UserResponse,
+    "UserProjectCreateRequest": UserProjectCreateRequest,
+    "UserProjectCreateRequestRole": UserProjectCreateRequestRole,
+    "UserProjectDeleteResponse": UserProjectDeleteResponse,
+    "UserProjectListResponse": UserProjectListResponse,
+    "UserProjectResponse": UserProjectResponse,
+    "UserProjectUpdateRequest": UserProjectUpdateRequest,
     "WebhookResponse": WebhookResponse,
 }
 

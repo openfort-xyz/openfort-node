@@ -10,31 +10,31 @@
  * Do not edit the class manually.
  */
 
-import { UpdateUserProjectRequestRole } from '../models/UpdateUserProjectRequestRole';
+import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { HttpFile } from '../http/http';
 
-export class UpdateUserProjectRequest {
-    'userId': string;
-    'role': UpdateUserProjectRequestRole;
+export class UserProjectCreateRequest {
+    'role'?: UserProjectCreateRequestRole;
+    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "string",
+            "name": "role",
+            "baseName": "role",
+            "type": "UserProjectCreateRequestRole",
             "format": ""
         },
         {
-            "name": "role",
-            "baseName": "role",
-            "type": "UpdateUserProjectRequestRole",
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateUserProjectRequest.attributeTypeMap;
+        return UserProjectCreateRequest.attributeTypeMap;
     }
 
     public constructor() {

@@ -10,37 +10,19 @@
  * Do not edit the class manually.
  */
 
+import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
+import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { HttpFile } from '../http/http';
 
-export class InvitedMemberResponse {
-    'id': string;
-    'email': string;
-    'role': string;
+export class UserProjectCreateRequestRole {
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "role",
-            "baseName": "role",
-            "type": "string",
-            "format": ""
-        }    ];
+    ];
 
     static getAttributeTypeMap() {
-        return InvitedMemberResponse.attributeTypeMap;
+        return UserProjectCreateRequestRole.attributeTypeMap;
     }
 
     public constructor() {

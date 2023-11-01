@@ -10,44 +10,30 @@
  * Do not edit the class manually.
  */
 
-import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { HttpFile } from '../http/http';
 
-export class PlayerUpdateRequest {
-    /**
-    * Specifies the player name.
-    */
-    'name'?: string;
-    /**
-    * Specifies the player description.
-    */
-    'description'?: string;
-    'metadata'?: { [key: string]: PlayerMetadataValue; };
+export class PaymasterDepositorCreateRequest {
+    'depositorAddress': string;
+    'signature': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "depositorAddress",
+            "baseName": "depositorAddress",
             "type": "string",
             "format": ""
         },
         {
-            "name": "description",
-            "baseName": "description",
+            "name": "signature",
+            "baseName": "signature",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "metadata",
-            "baseName": "metadata",
-            "type": "{ [key: string]: PlayerMetadataValue; }",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerUpdateRequest.attributeTypeMap;
+        return PaymasterDepositorCreateRequest.attributeTypeMap;
     }
 
     public constructor() {

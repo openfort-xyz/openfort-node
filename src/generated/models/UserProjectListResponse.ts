@@ -11,13 +11,13 @@
  */
 
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
-import { UserResponse } from '../models/UserResponse';
+import { UserProjectResponse } from '../models/UserProjectResponse';
 import { HttpFile } from '../http/http';
 
-export class UserListResponse {
+export class UserProjectListResponse {
     'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<UserResponse>;
+    'data': Array<UserProjectResponse>;
     'start': number;
     'end': number;
     'total': number;
@@ -40,7 +40,7 @@ export class UserListResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<UserResponse>",
+            "type": "Array<UserProjectResponse>",
             "format": ""
         },
         {
@@ -63,7 +63,7 @@ export class UserListResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return UserListResponse.attributeTypeMap;
+        return UserProjectListResponse.attributeTypeMap;
     }
 
     public constructor() {

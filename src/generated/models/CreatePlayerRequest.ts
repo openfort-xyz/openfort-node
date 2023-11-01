@@ -12,28 +12,34 @@
 
 import { HttpFile } from '../http/http';
 
-export class AddDepositorAddressRequest {
-    'depositorAddress': string;
-    'signature': string;
+export class CreatePlayerRequest {
+    /**
+    * Specifies the player name.
+    */
+    'name': string;
+    /**
+    * Specifies the player description.
+    */
+    'description'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "signature",
-            "baseName": "signature",
+            "name": "description",
+            "baseName": "description",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AddDepositorAddressRequest.attributeTypeMap;
+        return CreatePlayerRequest.attributeTypeMap;
     }
 
     public constructor() {
