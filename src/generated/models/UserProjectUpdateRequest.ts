@@ -10,37 +10,24 @@
  * Do not edit the class manually.
  */
 
+import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorResponseDeleted {
-    'id': string;
-    'depositorAddress': string;
-    'deleted': boolean;
+export class UserProjectUpdateRequest {
+    'role': UserProjectCreateRequestRole;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
+            "name": "role",
+            "baseName": "role",
+            "type": "UserProjectCreateRequestRole",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorResponseDeleted.attributeTypeMap;
+        return UserProjectUpdateRequest.attributeTypeMap;
     }
 
     public constructor() {

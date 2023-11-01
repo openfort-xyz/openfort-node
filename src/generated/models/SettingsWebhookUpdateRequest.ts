@@ -10,19 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
-import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { HttpFile } from '../http/http';
 
-export class UpdateUserProjectRequestRole {
+export class SettingsWebhookUpdateRequest {
+    'url': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-    ];
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        }    ];
 
     static getAttributeTypeMap() {
-        return UpdateUserProjectRequestRole.attributeTypeMap;
+        return SettingsWebhookUpdateRequest.attributeTypeMap;
     }
 
     public constructor() {

@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeUSER } from '../models/EntityTypeUSER';
+import { EntityTypePAYMASTERDEPOSITOR } from '../models/EntityTypePAYMASTERDEPOSITOR';
 import { HttpFile } from '../http/http';
 
-export class UserProjectRemoveResponse {
+export class PaymasterDepositorDeleteResponse {
     'id': string;
-    'object': EntityTypeUSER;
+    'object': EntityTypePAYMASTERDEPOSITOR;
     'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
@@ -30,7 +30,7 @@ export class UserProjectRemoveResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypeUSER",
+            "type": "EntityTypePAYMASTERDEPOSITOR",
             "format": ""
         },
         {
@@ -41,7 +41,7 @@ export class UserProjectRemoveResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return UserProjectRemoveResponse.attributeTypeMap;
+        return PaymasterDepositorDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {

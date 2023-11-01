@@ -11,7 +11,6 @@ import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
-import { AddDepositorAddressRequest } from '../models/AddDepositorAddressRequest';
 import { ApiAuthorizedNetworkListResponse } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
@@ -42,6 +41,7 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
+import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { CreatePolicyAllowFunctionRequest } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
@@ -57,6 +57,7 @@ import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
+import { EntityTypePAYMASTERDEPOSITOR } from '../models/EntityTypePAYMASTERDEPOSITOR';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -82,10 +83,8 @@ import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
 import { InventoryListResponse } from '../models/InventoryListResponse';
 import { InventoryResponse } from '../models/InventoryResponse';
-import { InvitedMemberResponse } from '../models/InvitedMemberResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
-import { MemberRequest } from '../models/MemberRequest';
 import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
@@ -101,27 +100,26 @@ import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
+import { PaymasterDepositorCreateRequest } from '../models/PaymasterDepositorCreateRequest';
+import { PaymasterDepositorDeleteResponse } from '../models/PaymasterDepositorDeleteResponse';
 import { PaymasterDepositorListResponse } from '../models/PaymasterDepositorListResponse';
 import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
-import { PaymasterDepositorResponseDeleted } from '../models/PaymasterDepositorResponseDeleted';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
-import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
-import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
+import { PlayerRequest } from '../models/PlayerRequest';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
-import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy } from '../models/Policy';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
@@ -157,6 +155,7 @@ import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
+import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -183,14 +182,15 @@ import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
-import { UpdateUserProjectRequest } from '../models/UpdateUserProjectRequest';
-import { UpdateUserProjectRequestRole } from '../models/UpdateUserProjectRequestRole';
-import { UserListResponse } from '../models/UserListResponse';
-import { UserProjectRemoveResponse } from '../models/UserProjectRemoveResponse';
+import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
+import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
+import { UserProjectDeleteResponse } from '../models/UserProjectDeleteResponse';
+import { UserProjectListResponse } from '../models/UserProjectListResponse';
+import { UserProjectResponse } from '../models/UserProjectResponse';
 import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
-import { UserResponse } from '../models/UserResponse';
+import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
 import { WebhookResponse } from '../models/WebhookResponse';
 
 import { ObservableAccountsApi } from "./ObservableAPI";
@@ -1108,10 +1108,10 @@ export interface PlayersApiCancelTransferAccountOwnershipRequest {
 export interface PlayersApiCreatePlayerRequest {
     /**
      * 
-     * @type PlayerCreateRequest
+     * @type CreatePlayerRequest
      * @memberof PlayersApicreatePlayer
      */
-    playerCreateRequest: PlayerCreateRequest
+    createPlayerRequest: CreatePlayerRequest
 }
 
 export interface PlayersApiCreatePlayerAccountRequest {
@@ -1285,10 +1285,10 @@ export interface PlayersApiUpdatePlayerRequest {
     id: string
     /**
      * 
-     * @type PlayerUpdateRequest
+     * @type PlayerRequest
      * @memberof PlayersApiupdatePlayer
      */
-    playerUpdateRequest: PlayerUpdateRequest
+    playerRequest: PlayerRequest
 }
 
 export class ObjectPlayersApi {
@@ -1313,7 +1313,7 @@ export class ObjectPlayersApi {
      * @param param the request object
      */
     public createPlayer(param: PlayersApiCreatePlayerRequest, options?: Configuration): Promise<PlayerResponse> {
-        return this.api.createPlayer(param.playerCreateRequest,  options).toPromise();
+        return this.api.createPlayer(param.createPlayerRequest,  options).toPromise();
     }
 
     /**
@@ -1405,7 +1405,7 @@ export class ObjectPlayersApi {
      * @param param the request object
      */
     public updatePlayer(param: PlayersApiUpdatePlayerRequest, options?: Configuration): Promise<PlayerResponse> {
-        return this.api.updatePlayer(param.id, param.playerUpdateRequest,  options).toPromise();
+        return this.api.updatePlayer(param.id, param.playerRequest,  options).toPromise();
     }
 
 }
@@ -1973,6 +1973,91 @@ export class ObjectSessionsApi {
      */
     public signatureSession(param: SessionsApiSignatureSessionRequest, options?: Configuration): Promise<SessionResponse> {
         return this.api.signatureSession(param.id, param.signatureRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableSettingsApi } from "./ObservableAPI";
+import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
+
+export interface SettingsApiAddDepositorAddressRequest {
+    /**
+     * 
+     * @type PaymasterDepositorCreateRequest
+     * @memberof SettingsApiaddDepositorAddress
+     */
+    paymasterDepositorCreateRequest: PaymasterDepositorCreateRequest
+}
+
+export interface SettingsApiGetDepositorAddressesRequest {
+}
+
+export interface SettingsApiRemoveDepositorAddressRequest {
+    /**
+     * 
+     * @type string
+     * @memberof SettingsApiremoveDepositorAddress
+     */
+    id: string
+}
+
+export interface SettingsApiRemoveWebhookRequest {
+}
+
+export interface SettingsApiUpdateWebhookRequest {
+    /**
+     * 
+     * @type SettingsWebhookUpdateRequest
+     * @memberof SettingsApiupdateWebhook
+     */
+    settingsWebhookUpdateRequest: SettingsWebhookUpdateRequest
+}
+
+export class ObjectSettingsApi {
+    private api: ObservableSettingsApi
+
+    public constructor(configuration: Configuration, requestFactory?: SettingsApiRequestFactory, responseProcessor?: SettingsApiResponseProcessor) {
+        this.api = new ObservableSettingsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Adds a depositor address to a project environment.
+     * @param param the request object
+     */
+    public addDepositorAddress(param: SettingsApiAddDepositorAddressRequest, options?: Configuration): Promise<PaymasterDepositorResponse> {
+        return this.api.addDepositorAddress(param.paymasterDepositorCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Lists the depositor addresses of a project.
+     * @param param the request object
+     */
+    public getDepositorAddresses(param: SettingsApiGetDepositorAddressesRequest = {}, options?: Configuration): Promise<PaymasterDepositorListResponse> {
+        return this.api.getDepositorAddresses( options).toPromise();
+    }
+
+    /**
+     * Removes a depositor address from a project.
+     * @param param the request object
+     */
+    public removeDepositorAddress(param: SettingsApiRemoveDepositorAddressRequest, options?: Configuration): Promise<PaymasterDepositorDeleteResponse> {
+        return this.api.removeDepositorAddress(param.id,  options).toPromise();
+    }
+
+    /**
+     * Removes the webhook configuration from the project environment.
+     * @param param the request object
+     */
+    public removeWebhook(param: SettingsApiRemoveWebhookRequest = {}, options?: Configuration): Promise<void> {
+        return this.api.removeWebhook( options).toPromise();
+    }
+
+    /**
+     * Creates or updates webhook address in a project environment configuration.
+     * @param param the request object
+     */
+    public updateWebhook(param: SettingsApiUpdateWebhookRequest, options?: Configuration): Promise<void> {
+        return this.api.updateWebhook(param.settingsWebhookUpdateRequest,  options).toPromise();
     }
 
 }

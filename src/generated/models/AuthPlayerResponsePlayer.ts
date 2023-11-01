@@ -12,7 +12,6 @@
 
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
-import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
@@ -22,9 +21,9 @@ export class AuthPlayerResponsePlayer {
     'id': string;
     'object': EntityTypePLAYER;
     'createdAt': number;
-    'name': string;
-    'description'?: string;
-    'metadata'?: { [key: string]: PlayerMetadataValue; };
+    'name': string | null;
+    'description': string | null;
+    'metadata': string;
     'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
     'accounts'?: Array<PlayerResponseAccountsInner>;
 
@@ -64,7 +63,7 @@ export class AuthPlayerResponsePlayer {
         {
             "name": "metadata",
             "baseName": "metadata",
-            "type": "{ [key: string]: PlayerMetadataValue; }",
+            "type": "string",
             "format": ""
         },
         {

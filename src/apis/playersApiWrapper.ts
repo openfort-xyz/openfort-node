@@ -5,7 +5,7 @@ import {
     CreatePlayerSessionRequest,
     GetPlayerRequest,
     PlayerResponse,
-    PlayerCreateRequest,
+    CreatePlayerRequest,
     PlayerListResponse,
     RevokePlayerSessionRequest,
     SessionResponse,
@@ -30,7 +30,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * Creates a player object.
      * @param req Parameters to create a player
      */
-    public async create(req: PlayerCreateRequest): Promise<PlayerResponse> {
+    public async create(req: CreatePlayerRequest): Promise<PlayerResponse> {
         return await this.api.createPlayer(req);
     }
 
