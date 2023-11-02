@@ -10,20 +10,19 @@
  * Do not edit the class manually.
  */
 
-import { EntityIdResponse } from '../models/EntityIdResponse';
-import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
+import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
+import { Web3ActionStatusEnum } from '../models/Web3ActionStatusEnum';
 import { HttpFile } from '../http/http';
 
-export class Player {
+export class Web3ActionResponse {
     'id': string;
-    'object': EntityTypePLAYER;
+    'object': EntityTypeWEB3ACTION;
     'createdAt': number;
-    'name': string;
-    'description'?: string;
-    'metadata'?: { [key: string]: PlayerMetadataValue; };
-    'transactionIntents'?: Array<EntityIdResponse>;
-    'accounts'?: Array<EntityIdResponse>;
+    /**
+    * The web3_connection ID (starts with web3_).
+    */
+    'web3_connection': string;
+    'status': Web3ActionStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,7 +36,7 @@ export class Player {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePLAYER",
+            "type": "EntityTypeWEB3ACTION",
             "format": ""
         },
         {
@@ -47,38 +46,20 @@ export class Player {
             "format": "int32"
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "web3_connection",
+            "baseName": "web3_connection",
             "type": "string",
             "format": ""
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "metadata",
-            "baseName": "metadata",
-            "type": "{ [key: string]: PlayerMetadataValue; }",
-            "format": ""
-        },
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<EntityIdResponse>",
-            "format": ""
-        },
-        {
-            "name": "accounts",
-            "baseName": "accounts",
-            "type": "Array<EntityIdResponse>",
+            "name": "status",
+            "baseName": "status",
+            "type": "Web3ActionStatusEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Player.attributeTypeMap;
+        return Web3ActionResponse.attributeTypeMap;
     }
 
     public constructor() {

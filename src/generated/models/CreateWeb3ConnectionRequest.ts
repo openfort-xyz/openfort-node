@@ -12,34 +12,44 @@
 
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorCreateRequest {
+export class CreateWeb3ConnectionRequest {
     /**
-    * Paymaster depositor address.
+    * The player ID (starts with pla_).
     */
-    'depositorAddress': string;
+    'player': string;
     /**
-    * Signature to verify the account ownership.
+    * The chain ID.
     */
-    'signature': string;
+    'chainId': number;
+    /**
+    * Specifies the URI of the web3Connection.
+    */
+    'uri': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
+            "name": "player",
+            "baseName": "player",
             "type": "string",
             "format": ""
         },
         {
-            "name": "signature",
-            "baseName": "signature",
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "uri",
+            "baseName": "uri",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorCreateRequest.attributeTypeMap;
+        return CreateWeb3ConnectionRequest.attributeTypeMap;
     }
 
     public constructor() {

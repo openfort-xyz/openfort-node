@@ -38,11 +38,20 @@ export class SettingsApiWrapper extends BaseApiWrapper<SettingsApi> {
     }
 
     /**
+     * Generate message, which should be signed for verification of the address ownership.
+     * @param address Specifies the paymaster depositor address
+     */
+    public async getMessageForSigningDepositorAddress(address: string): Promise<string> {
+        const result = await this.api.getMessageForSigningDepositorAddress(address);
+        return result.message;
+    }
+
+    /**
      * Creates or updates webhook address in a project environment configuration.
      * @param url Url of the webhook
      */
     public async updateWebhook(url: string): Promise<void> {
-        return await this.api.updateWebhook({url});
+        return await this.api.updateWebhook({ url });
     }
 
     /**

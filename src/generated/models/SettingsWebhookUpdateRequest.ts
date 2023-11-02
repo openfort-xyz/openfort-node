@@ -13,6 +13,9 @@
 import { HttpFile } from '../http/http';
 
 export class SettingsWebhookUpdateRequest {
+    /**
+    * The webhook url.
+    */
     'url': string;
 
     static readonly discriminator: string | undefined = undefined;

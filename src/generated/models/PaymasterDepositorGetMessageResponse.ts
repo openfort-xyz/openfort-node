@@ -12,34 +12,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorCreateRequest {
-    /**
-    * Paymaster depositor address.
-    */
+export class PaymasterDepositorGetMessageResponse {
+    'message': string;
     'depositorAddress': string;
-    /**
-    * Signature to verify the account ownership.
-    */
-    'signature': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
+            "name": "message",
+            "baseName": "message",
             "type": "string",
             "format": ""
         },
         {
-            "name": "signature",
-            "baseName": "signature",
+            "name": "depositorAddress",
+            "baseName": "depositorAddress",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorCreateRequest.attributeTypeMap;
+        return PaymasterDepositorGetMessageResponse.attributeTypeMap;
     }
 
     public constructor() {

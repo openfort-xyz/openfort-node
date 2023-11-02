@@ -12,34 +12,34 @@
 
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorCreateRequest {
+export class SubmitWeb3ActionRequest {
     /**
-    * Paymaster depositor address.
+    * True to approve the action, false to reject it.
     */
-    'depositorAddress': string;
+    'approve': boolean;
     /**
-    * Signature to verify the account ownership.
+    * The policy ID (starts with pol_)
     */
-    'signature': string;
+    'policy'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
-            "type": "string",
+            "name": "approve",
+            "baseName": "approve",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "signature",
-            "baseName": "signature",
+            "name": "policy",
+            "baseName": "policy",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorCreateRequest.attributeTypeMap;
+        return SubmitWeb3ActionRequest.attributeTypeMap;
     }
 
     public constructor() {

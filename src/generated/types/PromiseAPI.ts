@@ -41,7 +41,6 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
-import { CreatePlayerRequest } from '../models/CreatePlayerRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { CreatePolicyAllowFunctionRequest } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
@@ -50,6 +49,7 @@ import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DomainData } from '../models/DomainData';
@@ -66,6 +66,8 @@ import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
+import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
+import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
@@ -102,6 +104,7 @@ import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PaymasterDepositorCreateRequest } from '../models/PaymasterDepositorCreateRequest';
 import { PaymasterDepositorDeleteResponse } from '../models/PaymasterDepositorDeleteResponse';
+import { PaymasterDepositorGetMessageResponse } from '../models/PaymasterDepositorGetMessageResponse';
 import { PaymasterDepositorListResponse } from '../models/PaymasterDepositorListResponse';
 import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
@@ -109,17 +112,19 @@ import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
+import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerInventoryListQueries } from '../models/PlayerInventoryListQueries';
 import { PlayerInventoryQueries } from '../models/PlayerInventoryQueries';
 import { PlayerListQueries } from '../models/PlayerListQueries';
 import { PlayerListResponse } from '../models/PlayerListResponse';
-import { PlayerRequest } from '../models/PlayerRequest';
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
+import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy } from '../models/Policy';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
@@ -166,6 +171,7 @@ import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECU
 import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
+import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
@@ -191,6 +197,14 @@ import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
+import { Web3ActionListResponse } from '../models/Web3ActionListResponse';
+import { Web3ActionResponse } from '../models/Web3ActionResponse';
+import { Web3ActionStatusEnum } from '../models/Web3ActionStatusEnum';
+import { Web3ConnectionListQueries } from '../models/Web3ConnectionListQueries';
+import { Web3ConnectionListResponse } from '../models/Web3ConnectionListResponse';
+import { Web3ConnectionResponse } from '../models/Web3ConnectionResponse';
+import { Web3ConnectionResponseExpandable } from '../models/Web3ConnectionResponseExpandable';
+import { Web3ConnectionResponsePlayer } from '../models/Web3ConnectionResponsePlayer';
 import { WebhookResponse } from '../models/WebhookResponse';
 import { ObservableAccountsApi } from './ObservableAPI';
 
@@ -694,10 +708,10 @@ export class PromisePlayersApi {
     /**
      * Add a new player to your player list in Openfort.
      * Create a player object.
-     * @param createPlayerRequest 
+     * @param playerCreateRequest 
      */
-    public createPlayer(createPlayerRequest: CreatePlayerRequest, _options?: Configuration): Promise<PlayerResponse> {
-        const result = this.api.createPlayer(createPlayerRequest, _options);
+    public createPlayer(playerCreateRequest: PlayerCreateRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.createPlayer(playerCreateRequest, _options);
         return result.toPromise();
     }
 
@@ -810,10 +824,10 @@ export class PromisePlayersApi {
     /**
      * Updates a player object.
      * @param id Specifies the unique player ID (starts with pla_).
-     * @param playerRequest 
+     * @param playerUpdateRequest 
      */
-    public updatePlayer(id: string, playerRequest: PlayerRequest, _options?: Configuration): Promise<PlayerResponse> {
-        const result = this.api.updatePlayer(id, playerRequest, _options);
+    public updatePlayer(id: string, playerUpdateRequest: PlayerUpdateRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.updatePlayer(id, playerUpdateRequest, _options);
         return result.toPromise();
     }
 
@@ -1129,7 +1143,8 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Adds a depositor address to a project environment.
+     * Verify signature and add a depositor address to the current project environment.
+     * Add depositor address.
      * @param paymasterDepositorCreateRequest 
      */
     public addDepositorAddress(paymasterDepositorCreateRequest: PaymasterDepositorCreateRequest, _options?: Configuration): Promise<PaymasterDepositorResponse> {
@@ -1138,7 +1153,8 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Lists the depositor addresses of a project.
+     * Retrieve the list of the depositor addresses for the current project environment.
+     * List of depositor addresses.
      */
     public getDepositorAddresses(_options?: Configuration): Promise<PaymasterDepositorListResponse> {
         const result = this.api.getDepositorAddresses(_options);
@@ -1146,8 +1162,19 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Removes a depositor address from a project.
-     * @param id 
+     * Generate message, which should be signed for verification of the address ownership.
+     * Generate message to sign
+     * @param address Specifies the paymaster depositor address
+     */
+    public getMessageForSigningDepositorAddress(address: string, _options?: Configuration): Promise<PaymasterDepositorGetMessageResponse> {
+        const result = this.api.getMessageForSigningDepositorAddress(address, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Remove a depositor address from the current project environment.
+     * Removes depositor address.
+     * @param id Specifies unique identifier of depositor address.
      */
     public removeDepositorAddress(id: string, _options?: Configuration): Promise<PaymasterDepositorDeleteResponse> {
         const result = this.api.removeDepositorAddress(id, _options);
@@ -1155,7 +1182,8 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Removes the webhook configuration from the project environment.
+     * Updated the current project environment settings by removing the webhook address. After that system will stop sending events of the transaction intent state changes
+     * Removes webhook.
      */
     public removeWebhook(_options?: Configuration): Promise<void> {
         const result = this.api.removeWebhook(_options);
@@ -1163,7 +1191,8 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Creates or updates webhook address in a project environment configuration.
+     * Updated the current project environment settings by assigning the webhook address. This address is used to send events about the changes of the transaction intent state.
+     * Update webhook.
      * @param settingsWebhookUpdateRequest 
      */
     public updateWebhook(settingsWebhookUpdateRequest: SettingsWebhookUpdateRequest, _options?: Configuration): Promise<void> {
@@ -1244,6 +1273,82 @@ export class PromiseTransactionIntentsApi {
      */
     public signature(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
         const result = this.api.signature(id, signatureRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableWeb3ConnectionsApi } from './ObservableAPI';
+
+import { Web3ConnectionsApiRequestFactory, Web3ConnectionsApiResponseProcessor} from "../apis/Web3ConnectionsApi";
+export class PromiseWeb3ConnectionsApi {
+    private api: ObservableWeb3ConnectionsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: Web3ConnectionsApiRequestFactory,
+        responseProcessor?: Web3ConnectionsApiResponseProcessor
+    ) {
+        this.api = new ObservableWeb3ConnectionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * This endpoint allows you to create a new web3 connection to your Openfort player. Together with the player ID (pla_), you need to provide a chain ID. The chain to use is required because Openfort needs to make sure the account is deployed, as counterfactual addresses cannot use web3 connections. The `uri` body parameter must contain a WalletConnect pairing URI (see: https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-uri)
+     * Create a Web3 Connection object.
+     * @param createWeb3ConnectionRequest 
+     */
+    public createWeb3Connection(createWeb3ConnectionRequest: CreateWeb3ConnectionRequest, _options?: Configuration): Promise<Web3ConnectionResponse> {
+        const result = this.api.createWeb3Connection(createWeb3ConnectionRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns a list of web3 actions for the given web3 connection. The actions are returned sorted by creation date, with the most recently received action appearing first. By default, a maximum of ten actions are shown per page.
+     * List Web3 actions from a web3 connection.
+     * @param id 
+     */
+    public getWeb3Actions(id: string, _options?: Configuration): Promise<Web3ActionListResponse> {
+        const result = this.api.getWeb3Actions(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieves the details of an existing web3 connection. Supply the unique web3 connection ID from either a web3 connection creation request or the web3 connection list. Openfort will return the corresponding web3 connection information.
+     * Get a web3Connection object.
+     * @param id Specifies the unique web3Connection ID (starts with web3_).
+     * @param expand Specifies the fields to expand.
+     */
+    public getWeb3Connection(id: string, expand?: Array<Web3ConnectionResponseExpandable>, _options?: Configuration): Promise<Web3ConnectionResponse> {
+        const result = this.api.getWeb3Connection(id, expand, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns a list of web3 connections for the given player. The connections are returned sorted by creation date, with the most recently created connections appearing first. By default, a maximum of ten connections are shown per page.
+     * List Web3 connections.
+     * @param player Specifies the unique player ID (starts with pla_)
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param disconnected Specifies connection status
+     */
+    public getWeb3Connections(player: string, limit?: number, skip?: number, order?: SortOrder, disconnected?: boolean, _options?: Configuration): Promise<Web3ConnectionListResponse> {
+        const result = this.api.getWeb3Connections(player, limit, skip, order, disconnected, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Approve or Reject a web3 action for the given web3 connection.
+     * Approve or Reject a web3 action Submit an approval or rejection for a given web3 action.
+     * @param id 
+     * @param web3Action 
+     * @param submitWeb3ActionRequest 
+     */
+    public submitWeb3Action(id: string, web3Action: string, submitWeb3ActionRequest: SubmitWeb3ActionRequest, _options?: Configuration): Promise<Web3ActionResponse> {
+        const result = this.api.submitWeb3Action(id, web3Action, submitWeb3ActionRequest, _options);
         return result.toPromise();
     }
 
