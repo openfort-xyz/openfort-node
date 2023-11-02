@@ -1,23 +1,24 @@
 import {
-    AccountResponse,
+    AccountListQueries,
     AccountListResponse,
+    AccountResponse,
     CreateAccountRequest,
     CreatePlayerSessionRequest,
     GetPlayerRequest,
-    PlayerResponse,
-    CreatePlayerRequest,
+    PlayerCancelTransferOwnershipRequest,
+    PlayerCreateRequest,
+    PlayerDeleteResponse,
+    PlayerListQueries,
     PlayerListResponse,
+    PlayerResponse,
+    PlayerTransferOwnershipRequest,
     RevokePlayerSessionRequest,
     SessionResponse,
     TransactionIntentResponse,
-    PlayerCancelTransferOwnershipRequest,
-    PlayerTransferOwnershipRequest,
     UpdatePlayerRequest,
-    AccountListQueries,
-    PlayerListQueries,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { PlayerDeleteResponse, PlayersApi } from "../generated";
+import { PlayersApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
@@ -30,7 +31,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      * Creates a player object.
      * @param req Parameters to create a player
      */
-    public async create(req: CreatePlayerRequest): Promise<PlayerResponse> {
+    public async create(req: PlayerCreateRequest): Promise<PlayerResponse> {
         return await this.api.createPlayer(req);
     }
 

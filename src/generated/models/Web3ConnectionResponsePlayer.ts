@@ -10,21 +10,24 @@
  * Do not edit the class manually.
  */
 
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
+import { Player } from '../models/Player';
 import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
-import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
-import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
 
-export class PlayerResponse {
+/**
+* The player ID (starts with pla_).
+*/
+export class Web3ConnectionResponsePlayer {
     'id': string;
     'object': EntityTypePLAYER;
     'createdAt': number;
     'name': string;
     'description'?: string;
     'metadata'?: { [key: string]: PlayerMetadataValue; };
-    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
-    'accounts'?: Array<PlayerResponseAccountsInner>;
+    'transactionIntents'?: Array<EntityIdResponse>;
+    'accounts'?: Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -68,18 +71,18 @@ export class PlayerResponse {
         {
             "name": "transactionIntents",
             "baseName": "transactionIntents",
-            "type": "Array<PlayerResponseTransactionIntentsInner>",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         },
         {
             "name": "accounts",
             "baseName": "accounts",
-            "type": "Array<PlayerResponseAccountsInner>",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerResponse.attributeTypeMap;
+        return Web3ConnectionResponsePlayer.attributeTypeMap;
     }
 
     public constructor() {
