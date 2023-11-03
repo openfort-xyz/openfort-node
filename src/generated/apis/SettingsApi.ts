@@ -115,7 +115,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/v1/settings/depositor_addresses/message_to_sigh';
+        const localVarPath = '/v1/settings/depositor_addresses/message_to_sign';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);

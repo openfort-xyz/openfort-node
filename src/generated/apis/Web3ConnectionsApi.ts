@@ -227,7 +227,7 @@ export class Web3ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Approve or Reject a web3 action for the given web3 connection.
-     * Approve or Reject a web3 action Submit an approval or rejection for a given web3 action.
+     * Approve or Reject a web3 action
      * @param id 
      * @param web3Action 
      * @param submitWeb3ActionRequest 
