@@ -2388,7 +2388,7 @@ export class ObjectWeb3ConnectionsApi {
 
     /**
      * Approve or Reject a web3 action for the given web3 connection.
-     * Approve or Reject a web3 action Submit an approval or rejection for a given web3 action.
+     * Approve or Reject a web3 action
      * @param param the request object
      */
     public submitWeb3Action(param: Web3ConnectionsApiSubmitWeb3ActionRequest, options?: Configuration): Promise<Web3ActionResponse> {
