@@ -32,6 +32,8 @@ export * from '../models/ContractListQueries';
 export * from '../models/ContractListResponse';
 export * from '../models/ContractPolicyRuleResponse';
 export * from '../models/ContractPolicyRuleResponseContract';
+export * from '../models/ContractReadQueries';
+export * from '../models/ContractReadResponse';
 export * from '../models/ContractResponse';
 export * from '../models/CountPerIntervalLimitPolicyRuleResponse';
 export * from '../models/CreateAccountRequest';
@@ -59,6 +61,7 @@ export * from '../models/EntityTypePLAYER';
 export * from '../models/EntityTypePOLICY';
 export * from '../models/EntityTypePOLICYRULE';
 export * from '../models/EntityTypePROJECT';
+export * from '../models/EntityTypeREADCONTRACT';
 export * from '../models/EntityTypeSESSION';
 export * from '../models/EntityTypeSIGNATURE';
 export * from '../models/EntityTypeTRANSACTIONINTENT';
@@ -68,6 +71,7 @@ export * from '../models/EntityTypeWEB3CONNECTION';
 export * from '../models/ErrorTypeINVALIDREQUESTERROR';
 export * from '../models/EstimateTransactionIntentGasResult';
 export * from '../models/FieldErrorsValue';
+export * from '../models/FirebaseOAuthConfig';
 export * from '../models/FixedRateTokenPolicyStrategy';
 export * from '../models/GasPerIntervalLimitPolicyRuleResponse';
 export * from '../models/GasPerTransactionLimitPolicyRuleResponse';
@@ -92,6 +96,7 @@ export * from '../models/OAuthConfig';
 export * from '../models/OAuthConfigListResponse';
 export * from '../models/OAuthProvider';
 export * from '../models/OAuthProviderACCELBYTE';
+export * from '../models/OAuthProviderFIREBASE';
 export * from '../models/OAuthProviderGOOGLE';
 export * from '../models/OAuthProviderPLAYFAB';
 export * from '../models/OAuthRequest';
@@ -238,6 +243,8 @@ import { ContractListQueries        } from '../models/ContractListQueries';
 import { ContractListResponse       } from '../models/ContractListResponse';
 import { ContractPolicyRuleResponse       } from '../models/ContractPolicyRuleResponse';
 import { ContractPolicyRuleResponseContract          } from '../models/ContractPolicyRuleResponseContract';
+import { ContractReadQueries } from '../models/ContractReadQueries';
+import { ContractReadResponse      } from '../models/ContractReadResponse';
 import { ContractResponse          } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse         } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest       } from '../models/CreateAccountRequest';
@@ -265,6 +272,7 @@ import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
@@ -274,6 +282,7 @@ import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
+import { FirebaseOAuthConfig    } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy     } from '../models/FixedRateTokenPolicyStrategy';
 import { GasPerIntervalLimitPolicyRuleResponse         } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse       } from '../models/GasPerTransactionLimitPolicyRuleResponse';
@@ -294,10 +303,11 @@ import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { OAuthConfig        } from '../models/OAuthConfig';
+import { OAuthConfig         } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
@@ -443,6 +453,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypePOLICY",
     "EntityTypePOLICYRULE",
     "EntityTypePROJECT",
+    "EntityTypeREADCONTRACT",
     "EntityTypeSESSION",
     "EntityTypeSIGNATURE",
     "EntityTypeTRANSACTIONINTENT",
@@ -453,6 +464,7 @@ let enumsMap: Set<string> = new Set<string>([
     "NextActionType",
     "OAuthProvider",
     "OAuthProviderACCELBYTE",
+    "OAuthProviderFIREBASE",
     "OAuthProviderGOOGLE",
     "OAuthProviderPLAYFAB",
     "ObsoleteAssetType",
@@ -516,6 +528,8 @@ let typeMap: {[index: string]: any} = {
     "ContractListResponse": ContractListResponse,
     "ContractPolicyRuleResponse": ContractPolicyRuleResponse,
     "ContractPolicyRuleResponseContract": ContractPolicyRuleResponseContract,
+    "ContractReadQueries": ContractReadQueries,
+    "ContractReadResponse": ContractReadResponse,
     "ContractResponse": ContractResponse,
     "CountPerIntervalLimitPolicyRuleResponse": CountPerIntervalLimitPolicyRuleResponse,
     "CreateAccountRequest": CreateAccountRequest,
@@ -535,6 +549,7 @@ let typeMap: {[index: string]: any} = {
     "EntityIdResponse": EntityIdResponse,
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
     "FieldErrorsValue": FieldErrorsValue,
+    "FirebaseOAuthConfig": FirebaseOAuthConfig,
     "FixedRateTokenPolicyStrategy": FixedRateTokenPolicyStrategy,
     "GasPerIntervalLimitPolicyRuleResponse": GasPerIntervalLimitPolicyRuleResponse,
     "GasPerTransactionLimitPolicyRuleResponse": GasPerTransactionLimitPolicyRuleResponse,

@@ -35,6 +35,8 @@ import { ContractListQueries } from '../models/ContractListQueries';
 import { ContractListResponse } from '../models/ContractListResponse';
 import { ContractPolicyRuleResponse } from '../models/ContractPolicyRuleResponse';
 import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
+import { ContractReadQueries } from '../models/ContractReadQueries';
+import { ContractReadResponse } from '../models/ContractReadResponse';
 import { ContractResponse } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
@@ -62,6 +64,7 @@ import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
@@ -71,6 +74,7 @@ import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
+import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
@@ -95,6 +99,7 @@ import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
@@ -575,6 +580,27 @@ export interface ContractsApiGetContractsRequest {
     address?: string
 }
 
+export interface ContractsApiReadContractRequest {
+    /**
+     * Specifies the unique contract ID (starts with con_).
+     * @type string
+     * @memberof ContractsApireadContract
+     */
+    id: string
+    /**
+     * The function name of the contract.
+     * @type string
+     * @memberof ContractsApireadContract
+     */
+    functionName: string
+    /**
+     * The function arguments of the contract.
+     * @type Array&lt;any&gt;
+     * @memberof ContractsApireadContract
+     */
+    functionArgs?: Array<any>
+}
+
 export interface ContractsApiUpdateContractRequest {
     /**
      * Specifies the unique contract ID (starts with con_).
@@ -631,6 +657,15 @@ export class ObjectContractsApi {
      */
     public getContracts(param: ContractsApiGetContractsRequest = {}, options?: Configuration): Promise<ContractListResponse> {
         return this.api.getContracts(param.limit, param.skip, param.order, param.name, param.deleted, param.chainId, param.address,  options).toPromise();
+    }
+
+    /**
+     * Using this endpoint, you can get the data returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
+     * Read on chain contract data.
+     * @param param the request object
+     */
+    public readContract(param: ContractsApiReadContractRequest, options?: Configuration): Promise<ContractReadResponse> {
+        return this.api.readContract(param.id, param.functionName, param.functionArgs,  options).toPromise();
     }
 
     /**

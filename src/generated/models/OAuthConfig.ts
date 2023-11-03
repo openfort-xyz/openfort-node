@@ -11,16 +11,18 @@
  */
 
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
+import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
-import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
+import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { HttpFile } from '../http/http';
 
 export class OAuthConfig {
     /**
-    * Enable PlayFab Auth.
+    * Enable OAuth provider.
     */
     'enabled': boolean;
+    'provider': OAuthProviderFIREBASE;
     /**
     * Base URI of your accelbyte gaming service environment. E.g. https://mygame.dev.gamingservices.accelbyte.io/
     */
@@ -33,7 +35,6 @@ export class OAuthConfig {
     * Google API client secret.
     */
     'clientSecret': string;
-    'provider': OAuthProviderPLAYFAB;
     /**
     * The URI to redirect to after completing the auth request. You can use Openfort redirect URL: https://openfort.xyz/auth/v1/google/callback
     */
@@ -42,6 +43,10 @@ export class OAuthConfig {
     * Title ID of your Play Fab gaming service environment.
     */
     'titleId': string;
+    /**
+    * Project ID of your Firebase service environment.
+    */
+    'projectId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -50,6 +55,12 @@ export class OAuthConfig {
             "name": "enabled",
             "baseName": "enabled",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderFIREBASE",
             "format": ""
         },
         {
@@ -71,12 +82,6 @@ export class OAuthConfig {
             "format": ""
         },
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProviderPLAYFAB",
-            "format": ""
-        },
-        {
             "name": "redirectUri",
             "baseName": "redirectUri",
             "type": "string",
@@ -85,6 +90,12 @@ export class OAuthConfig {
         {
             "name": "titleId",
             "baseName": "titleId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "projectId",
+            "baseName": "projectId",
             "type": "string",
             "format": ""
         }    ];

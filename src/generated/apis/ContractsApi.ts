@@ -12,6 +12,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractListResponse } from '../models/ContractListResponse';
+import { ContractReadResponse } from '../models/ContractReadResponse';
 import { ContractResponse } from '../models/ContractResponse';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { SortOrder } from '../models/SortOrder';
@@ -226,6 +227,63 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Using this endpoint, you can get the data returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
+     * Read on chain contract data.
+     * @param id Specifies the unique contract ID (starts with con_).
+     * @param functionName The function name of the contract.
+     * @param functionArgs The function arguments of the contract.
+     */
+    public async readContract(id: string, functionName: string, functionArgs?: Array<any>, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("ContractsApi", "readContract", "id");
+        }
+
+
+        // verify required parameter 'functionName' is not null or undefined
+        if (functionName === null || functionName === undefined) {
+            throw new RequiredError("ContractsApi", "readContract", "functionName");
+        }
+
+
+
+        // Path Params
+        const localVarPath = '/v1/contracts/{id}/read'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (functionName !== undefined) {
+            requestContext.setQueryParam("functionName", ObjectSerializer.serialize(functionName, "string", ""));
+        }
+
+        // Query Params
+        if (functionArgs !== undefined) {
+            requestContext.setQueryParam("functionArgs", ObjectSerializer.serialize(functionArgs, "Array<any>", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Updates a contract object.
      * @param id Specifies the unique contract ID (starts with con_).
      * @param updateContractRequest 
@@ -412,6 +470,41 @@ export class ContractsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ContractListResponse", ""
             ) as ContractListResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to readContract
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async readContract(response: ResponseContext): Promise<ContractReadResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: ContractReadResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ContractReadResponse", ""
+            ) as ContractReadResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: ContractReadResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ContractReadResponse", ""
+            ) as ContractReadResponse;
             return body;
         }
 
