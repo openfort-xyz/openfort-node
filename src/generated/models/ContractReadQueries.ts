@@ -10,52 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { HttpFile } from '../http/http';
 
-/**
-* PlayFab oauth configuration
-*/
-export class PlayFabOAuthConfig {
+export class ContractReadQueries {
     /**
-    * Enable OAuth provider.
+    * The function name of the contract.
     */
-    'enabled': boolean;
-    'provider': OAuthProviderPLAYFAB;
+    'functionName': string;
     /**
-    * Title ID of your Play Fab gaming service environment.
+    * The function arguments of the contract.
     */
-    'titleId': string;
+    'functionArgs'?: Array<any>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProviderPLAYFAB",
-            "format": ""
-        },
-        {
-            "name": "titleId",
-            "baseName": "titleId",
+            "name": "functionName",
+            "baseName": "functionName",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "functionArgs",
+            "baseName": "functionArgs",
+            "type": "Array<any>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayFabOAuthConfig.attributeTypeMap;
+        return ContractReadQueries.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

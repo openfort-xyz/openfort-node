@@ -36,6 +36,8 @@ import { ContractListQueries } from '../models/ContractListQueries';
 import { ContractListResponse } from '../models/ContractListResponse';
 import { ContractPolicyRuleResponse } from '../models/ContractPolicyRuleResponse';
 import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
+import { ContractReadQueries } from '../models/ContractReadQueries';
+import { ContractReadResponse } from '../models/ContractReadResponse';
 import { ContractResponse } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
@@ -63,6 +65,7 @@ import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
@@ -72,6 +75,7 @@ import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
+import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
@@ -96,6 +100,7 @@ import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
@@ -650,6 +655,32 @@ export class ObservableContractsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getContracts(rsp)));
+            }));
+    }
+
+    /**
+     * Using this endpoint, you can get the data returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
+     * Read on chain contract data.
+     * @param id Specifies the unique contract ID (starts with con_).
+     * @param functionName The function name of the contract.
+     * @param functionArgs The function arguments of the contract.
+     */
+    public readContract(id: string, functionName: string, functionArgs?: Array<any>, _options?: Configuration): Observable<ContractReadResponse> {
+        const requestContextPromise = this.requestFactory.readContract(id, functionName, functionArgs, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readContract(rsp)));
             }));
     }
 

@@ -10,30 +10,22 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
+import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { HttpFile } from '../http/http';
 
 /**
-* Google oauth configuration
+* Firebase configuration
 */
-export class GoogleOAuthConfig {
+export class FirebaseOAuthConfig {
     /**
     * Enable OAuth provider.
     */
     'enabled': boolean;
-    'provider': OAuthProviderGOOGLE;
+    'provider': OAuthProviderFIREBASE;
     /**
-    * Google API client ID.
+    * Project ID of your Firebase service environment.
     */
-    'clientId': string;
-    /**
-    * Google API client secret.
-    */
-    'clientSecret': string;
-    /**
-    * The URI to redirect to after completing the auth request. You can use Openfort redirect URL: https://openfort.xyz/auth/v1/google/callback
-    */
-    'redirectUri': string;
+    'projectId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -47,30 +39,18 @@ export class GoogleOAuthConfig {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderGOOGLE",
+            "type": "OAuthProviderFIREBASE",
             "format": ""
         },
         {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientSecret",
-            "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "redirectUri",
-            "baseName": "redirectUri",
+            "name": "projectId",
+            "baseName": "projectId",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return GoogleOAuthConfig.attributeTypeMap;
+        return FirebaseOAuthConfig.attributeTypeMap;
     }
 
     public constructor() {

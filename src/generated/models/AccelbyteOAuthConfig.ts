@@ -18,9 +18,10 @@ import { HttpFile } from '../http/http';
 */
 export class AccelbyteOAuthConfig {
     /**
-    * Enable Accelbyte Auth.
+    * Enable OAuth provider.
     */
     'enabled': boolean;
+    'provider': OAuthProviderACCELBYTE;
     /**
     * Base URI of your accelbyte gaming service environment. E.g. https://mygame.dev.gamingservices.accelbyte.io/
     */
@@ -33,7 +34,6 @@ export class AccelbyteOAuthConfig {
     * Secret of your confidential IAM client.
     */
     'clientSecret': string;
-    'provider': OAuthProviderACCELBYTE;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -42,6 +42,12 @@ export class AccelbyteOAuthConfig {
             "name": "enabled",
             "baseName": "enabled",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderACCELBYTE",
             "format": ""
         },
         {
@@ -60,12 +66,6 @@ export class AccelbyteOAuthConfig {
             "name": "clientSecret",
             "baseName": "clientSecret",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProviderACCELBYTE",
             "format": ""
         }    ];
 
