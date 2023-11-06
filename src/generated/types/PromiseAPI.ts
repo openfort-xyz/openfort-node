@@ -796,28 +796,6 @@ export class PromisePlayersApi {
     }
 
     /**
-     * This endpoint allows you to cancel a pending transfer of ownership.
-     * Cancel request to transfer ownership of an account.
-     * @param id 
-     * @param playerCancelTransferOwnershipRequest 
-     */
-    public obsoleteCancelTransferAccountOwnership(id: string, playerCancelTransferOwnershipRequest: PlayerCancelTransferOwnershipRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
-        const result = this.api.obsoleteCancelTransferAccountOwnership(id, playerCancelTransferOwnershipRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
-     * Request transfer ownership of account.
-     * @param id Specifies the unique player ID (starts with pla_).
-     * @param playerTransferOwnershipRequest 
-     */
-    public obsoleteRequestTransferAccountOwnership(id: string, playerTransferOwnershipRequest: PlayerTransferOwnershipRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
-        const result = this.api.obsoleteRequestTransferAccountOwnership(id, playerTransferOwnershipRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
      * @param id Specifies the unique player ID (starts with pla_).
