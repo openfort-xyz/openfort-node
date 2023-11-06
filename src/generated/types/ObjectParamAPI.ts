@@ -1265,36 +1265,6 @@ export interface PlayersApiGetPlayersRequest {
     name?: string
 }
 
-export interface PlayersApiObsoleteCancelTransferAccountOwnershipRequest {
-    /**
-     * 
-     * @type string
-     * @memberof PlayersApiobsoleteCancelTransferAccountOwnership
-     */
-    id: string
-    /**
-     * 
-     * @type PlayerCancelTransferOwnershipRequest
-     * @memberof PlayersApiobsoleteCancelTransferAccountOwnership
-     */
-    playerCancelTransferOwnershipRequest: PlayerCancelTransferOwnershipRequest
-}
-
-export interface PlayersApiObsoleteRequestTransferAccountOwnershipRequest {
-    /**
-     * Specifies the unique player ID (starts with pla_).
-     * @type string
-     * @memberof PlayersApiobsoleteRequestTransferAccountOwnership
-     */
-    id: string
-    /**
-     * 
-     * @type PlayerTransferOwnershipRequest
-     * @memberof PlayersApiobsoleteRequestTransferAccountOwnership
-     */
-    playerTransferOwnershipRequest: PlayerTransferOwnershipRequest
-}
-
 export interface PlayersApiRequestTransferAccountOwnershipRequest {
     /**
      * Specifies the unique player ID (starts with pla_).
@@ -1412,24 +1382,6 @@ export class ObjectPlayersApi {
      */
     public getPlayers(param: PlayersApiGetPlayersRequest = {}, options?: Configuration): Promise<PlayerListResponse> {
         return this.api.getPlayers(param.limit, param.skip, param.order, param.expand, param.name,  options).toPromise();
-    }
-
-    /**
-     * This endpoint allows you to cancel a pending transfer of ownership.
-     * Cancel request to transfer ownership of an account.
-     * @param param the request object
-     */
-    public obsoleteCancelTransferAccountOwnership(param: PlayersApiObsoleteCancelTransferAccountOwnershipRequest, options?: Configuration): Promise<TransactionIntentResponse> {
-        return this.api.obsoleteCancelTransferAccountOwnership(param.id, param.playerCancelTransferOwnershipRequest,  options).toPromise();
-    }
-
-    /**
-     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
-     * Request transfer ownership of account.
-     * @param param the request object
-     */
-    public obsoleteRequestTransferAccountOwnership(param: PlayersApiObsoleteRequestTransferAccountOwnershipRequest, options?: Configuration): Promise<TransactionIntentResponse> {
-        return this.api.obsoleteRequestTransferAccountOwnership(param.id, param.playerTransferOwnershipRequest,  options).toPromise();
     }
 
     /**
