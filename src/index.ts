@@ -13,6 +13,7 @@ import { createHmac } from "crypto";
 import { IamApiWrapper } from "./apis/iamApiWrapper";
 import { OAuthApiWrapper } from "./apis/oauthApiWrapper";
 import { SettingsApiWrapper } from "./apis/settingsApiWrapper";
+import { Web3ConnectionsApiWrapper } from "./apis/web3ConnectionsApiWrapper";
 
 export default class Openfort {
     private readonly apiWrappers: { [name: string]: Observable } = {};
@@ -50,6 +51,10 @@ export default class Openfort {
 
     public get inventories(): InventoriesApiWrapper {
         return this.getOrCreateWrapper(InventoriesApiWrapper);
+    }
+
+    public get web3Connections(): Web3ConnectionsApiWrapper {
+        return this.getOrCreateWrapper(Web3ConnectionsApiWrapper);
     }
 
     public get settings(): SettingsApiWrapper {
