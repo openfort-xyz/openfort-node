@@ -38,7 +38,7 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
      * @param req Parameters to retrieve transaction intent
      */
     public async get(req: GetTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        return await this.api.getTransactionIntent(req.id);
+        return await this.api.getTransactionIntent(req.id, req.expand);
     }
 
     /**

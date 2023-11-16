@@ -154,8 +154,11 @@ export * from '../models/ProjectListResponse';
 export * from '../models/ProjectLogs';
 export * from '../models/ProjectResponse';
 export * from '../models/ProjectWebhookRequest';
+export * from '../models/RegisterPlayerEncryptedKeyRequest';
+export * from '../models/RegisterPlayerEncryptedKeyResponse';
 export * from '../models/ResponseResponse';
 export * from '../models/ResponseTypeLIST';
+export * from '../models/RetrievePlayerEncryptedKeyResponse';
 export * from '../models/RevokeSessionPlayerRequest';
 export * from '../models/RevokeSessionRequest';
 export * from '../models/SessionListQueries';
@@ -227,7 +230,7 @@ import { AssetInventory      } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthPlayerListQueries     } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
-import { AuthPlayerResponse         } from '../models/AuthPlayerResponse';
+import { AuthPlayerResponse          } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePlayer';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
@@ -365,8 +368,11 @@ import { ProjectListResponse       } from '../models/ProjectListResponse';
 import { ProjectLogs       } from '../models/ProjectLogs';
 import { ProjectResponse        } from '../models/ProjectResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
+import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
+import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { RetrievePlayerEncryptedKeyResponse } from '../models/RetrievePlayerEncryptedKeyResponse';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListQueries      } from '../models/SessionListQueries';
@@ -411,7 +417,7 @@ import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
 import { Web3ActionListResponse       } from '../models/Web3ActionListResponse';
-import { Web3ActionResponse      } from '../models/Web3ActionResponse';
+import { Web3ActionResponse               } from '../models/Web3ActionResponse';
 import { Web3ActionStatusEnum } from '../models/Web3ActionStatusEnum';
 import { Web3ConnectionListQueries      } from '../models/Web3ConnectionListQueries';
 import { Web3ConnectionListResponse       } from '../models/Web3ConnectionListResponse';
@@ -614,7 +620,10 @@ let typeMap: {[index: string]: any} = {
     "ProjectLogs": ProjectLogs,
     "ProjectResponse": ProjectResponse,
     "ProjectWebhookRequest": ProjectWebhookRequest,
+    "RegisterPlayerEncryptedKeyRequest": RegisterPlayerEncryptedKeyRequest,
+    "RegisterPlayerEncryptedKeyResponse": RegisterPlayerEncryptedKeyResponse,
     "ResponseResponse": ResponseResponse,
+    "RetrievePlayerEncryptedKeyResponse": RetrievePlayerEncryptedKeyResponse,
     "RevokeSessionPlayerRequest": RevokeSessionPlayerRequest,
     "RevokeSessionRequest": RevokeSessionRequest,
     "SessionListQueries": SessionListQueries,

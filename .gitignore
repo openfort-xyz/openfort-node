@@ -5,3 +5,5 @@ node_modules
 tsconfig.tsbuildinfo
 yarn-error.log
 updateGeneratedCode.sh
+docs
+.DS_Store

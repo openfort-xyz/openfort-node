@@ -75,7 +75,7 @@ export class Web3ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Returns a list of web3 actions for the given web3 connection. The actions are returned sorted by creation date, with the most recently received action appearing first. By default, a maximum of ten actions are shown per page.
      * List Web3 actions from a web3 connection.
-     * @param id 
+     * @param id Specifies the web3Connection ID (starts with web3_).
      */
     public async getWeb3Actions(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -158,19 +158,14 @@ export class Web3ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Returns a list of web3 connections for the given player. The connections are returned sorted by creation date, with the most recently created connections appearing first. By default, a maximum of ten connections are shown per page.
      * List Web3 connections.
-     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
+     * @param player Specifies the unique player ID (starts with pla_)
      * @param disconnected Specifies connection status
      */
-    public async getWeb3Connections(player: string, limit?: number, skip?: number, order?: SortOrder, disconnected?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getWeb3Connections(limit?: number, skip?: number, order?: SortOrder, player?: string, disconnected?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'player' is not null or undefined
-        if (player === null || player === undefined) {
-            throw new RequiredError("Web3ConnectionsApi", "getWeb3Connections", "player");
-        }
 
 
 
@@ -228,8 +223,8 @@ export class Web3ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Approve or Reject a web3 action for the given web3 connection.
      * Approve or Reject a web3 action
-     * @param id 
-     * @param web3Action 
+     * @param id Specifies the web3Connection ID (starts with web3_).
+     * @param web3Action Specifies web3_action (starts with act_).
      * @param submitWeb3ActionRequest 
      */
     public async submitWeb3Action(id: string, web3Action: string, submitWeb3ActionRequest: SubmitWeb3ActionRequest, _options?: Configuration): Promise<RequestContext> {

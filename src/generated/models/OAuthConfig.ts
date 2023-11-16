@@ -36,7 +36,7 @@ export class OAuthConfig {
     */
     'clientSecret': string;
     /**
-    * The URI to redirect to after completing the auth request. You can use Openfort redirect URL: https://openfort.xyz/auth/v1/google/callback
+    * The URI to redirect to after completing the auth request. You can use Openfort redirect URL: https://openfort.xyz/iam/v1/oauth/google/callback
     */
     'redirectUri': string;
     /**
