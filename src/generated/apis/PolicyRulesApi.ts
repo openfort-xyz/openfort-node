@@ -71,7 +71,7 @@ export class PolicyRulesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Deletes a policy rule object.
-     * @param id Specifies the unique policy rule ID.
+     * @param id Specifies the unique policy rule ID (starts with afu_).
      */
     public async deletePolicyRules(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -177,7 +177,7 @@ export class PolicyRulesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Update a policy rule object.
-     * @param id Specifies the unique policy rule ID.
+     * @param id Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
     public async updatePolicyRules(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Promise<RequestContext> {

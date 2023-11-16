@@ -157,8 +157,11 @@ import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
+import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
+import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { RetrievePlayerEncryptedKeyResponse } from '../models/RetrievePlayerEncryptedKeyResponse';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListQueries } from '../models/SessionListQueries';
@@ -417,6 +420,7 @@ export class ObjectAccountsApi {
     }
 
     /**
+     * Signs the typed data value with types data structure for domain using the EIP-712 (https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param param the request object
      */
@@ -1441,6 +1445,18 @@ export interface PlayersAuthenticationApiGetAuthenticatedPlayersRequest {
     email?: string
 }
 
+export interface PlayersAuthenticationApiRegisterKeyRequest {
+    /**
+     * 
+     * @type RegisterPlayerEncryptedKeyRequest
+     * @memberof PlayersAuthenticationApiregisterKey
+     */
+    registerPlayerEncryptedKeyRequest: RegisterPlayerEncryptedKeyRequest
+}
+
+export interface PlayersAuthenticationApiRetrieveKeyRequest {
+}
+
 export class ObjectPlayersAuthenticationApi {
     private api: ObservablePlayersAuthenticationApi
 
@@ -1454,6 +1470,22 @@ export class ObjectPlayersAuthenticationApi {
      */
     public getAuthenticatedPlayers(param: PlayersAuthenticationApiGetAuthenticatedPlayersRequest = {}, options?: Configuration): Promise<AuthPlayerListResponse> {
         return this.api.getAuthenticatedPlayers(param.limit, param.skip, param.order, param.email,  options).toPromise();
+    }
+
+    /**
+     * Register a key for the authenticated player.
+     * @param param the request object
+     */
+    public registerKey(param: PlayersAuthenticationApiRegisterKeyRequest, options?: Configuration): Promise<RegisterPlayerEncryptedKeyResponse> {
+        return this.api.registerKey(param.registerPlayerEncryptedKeyRequest,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the key for the authenticated player.
+     * @param param the request object
+     */
+    public retrieveKey(param: PlayersAuthenticationApiRetrieveKeyRequest = {}, options?: Configuration): Promise<RetrievePlayerEncryptedKeyResponse> {
+        return this.api.retrieveKey( options).toPromise();
     }
 
 }
@@ -1619,13 +1651,13 @@ export interface PoliciesApiUpdatePolicyRequest {
 
 export interface PoliciesApiUpdatePolicyAllowFunctionRequest {
     /**
-     * 
+     * Specifies the unique policy ID (starts with pol_).
      * @type string
      * @memberof PoliciesApiupdatePolicyAllowFunction
      */
     policy: string
     /**
-     * 
+     * Specifies the unique policy rule ID (starts with afu_).
      * @type string
      * @memberof PoliciesApiupdatePolicyAllowFunction
      */
@@ -1749,7 +1781,7 @@ export interface PolicyRulesApiCreatePolicyRulesRequest {
 
 export interface PolicyRulesApiDeletePolicyRulesRequest {
     /**
-     * Specifies the unique policy rule ID.
+     * Specifies the unique policy rule ID (starts with afu_).
      * @type string
      * @memberof PolicyRulesApideletePolicyRules
      */
@@ -1791,7 +1823,7 @@ export interface PolicyRulesApiGetPolicyRulesRequest {
 
 export interface PolicyRulesApiUpdatePolicyRulesRequest {
     /**
-     * Specifies the unique policy rule ID.
+     * Specifies the unique policy rule ID (starts with afu_).
      * @type string
      * @memberof PolicyRulesApiupdatePolicyRules
      */
@@ -2254,7 +2286,7 @@ export interface Web3ConnectionsApiCreateWeb3ConnectionRequest {
 
 export interface Web3ConnectionsApiGetWeb3ActionsRequest {
     /**
-     * 
+     * Specifies the web3Connection ID (starts with web3_).
      * @type string
      * @memberof Web3ConnectionsApigetWeb3Actions
      */
@@ -2278,12 +2310,6 @@ export interface Web3ConnectionsApiGetWeb3ConnectionRequest {
 
 export interface Web3ConnectionsApiGetWeb3ConnectionsRequest {
     /**
-     * Specifies the unique player ID (starts with pla_)
-     * @type string
-     * @memberof Web3ConnectionsApigetWeb3Connections
-     */
-    player: string
-    /**
      * Specifies the maximum number of records to return.
      * @type number
      * @memberof Web3ConnectionsApigetWeb3Connections
@@ -2302,6 +2328,12 @@ export interface Web3ConnectionsApiGetWeb3ConnectionsRequest {
      */
     order?: SortOrder
     /**
+     * Specifies the unique player ID (starts with pla_)
+     * @type string
+     * @memberof Web3ConnectionsApigetWeb3Connections
+     */
+    player?: string
+    /**
      * Specifies connection status
      * @type boolean
      * @memberof Web3ConnectionsApigetWeb3Connections
@@ -2311,13 +2343,13 @@ export interface Web3ConnectionsApiGetWeb3ConnectionsRequest {
 
 export interface Web3ConnectionsApiSubmitWeb3ActionRequest {
     /**
-     * 
+     * Specifies the web3Connection ID (starts with web3_).
      * @type string
      * @memberof Web3ConnectionsApisubmitWeb3Action
      */
     id: string
     /**
-     * 
+     * Specifies web3_action (starts with act_).
      * @type string
      * @memberof Web3ConnectionsApisubmitWeb3Action
      */
@@ -2369,8 +2401,8 @@ export class ObjectWeb3ConnectionsApi {
      * List Web3 connections.
      * @param param the request object
      */
-    public getWeb3Connections(param: Web3ConnectionsApiGetWeb3ConnectionsRequest, options?: Configuration): Promise<Web3ConnectionListResponse> {
-        return this.api.getWeb3Connections(param.player, param.limit, param.skip, param.order, param.disconnected,  options).toPromise();
+    public getWeb3Connections(param: Web3ConnectionsApiGetWeb3ConnectionsRequest = {}, options?: Configuration): Promise<Web3ConnectionListResponse> {
+        return this.api.getWeb3Connections(param.limit, param.skip, param.order, param.player, param.disconnected,  options).toPromise();
     }
 
     /**

@@ -12,44 +12,42 @@
 
 import { HttpFile } from '../http/http';
 
-export class SubmitWeb3ActionRequest {
-    /**
-    * True to approve the action, false to reject it.
-    */
-    'approve': boolean;
-    /**
-    * The policy ID (starts with pol_)
-    */
-    'policy'?: string;
-    /**
-    * signed data by the owner
-    */
-    'signature'?: string;
+export class RegisterPlayerEncryptedKeyResponse {
+    'player': string;
+    'ownerAddress': string;
+    'createdAt': number;
+    'updatedAt': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "approve",
-            "baseName": "approve",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "player",
+            "baseName": "player",
             "type": "string",
             "format": ""
         },
         {
-            "name": "signature",
-            "baseName": "signature",
+            "name": "ownerAddress",
+            "baseName": "ownerAddress",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "number",
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return SubmitWeb3ActionRequest.attributeTypeMap;
+        return RegisterPlayerEncryptedKeyResponse.attributeTypeMap;
     }
 
     public constructor() {

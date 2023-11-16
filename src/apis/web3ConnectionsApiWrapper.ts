@@ -40,7 +40,7 @@ export class Web3ConnectionsApiWrapper extends BaseApiWrapper<Web3ConnectionsApi
      * @param req Parameters to get list of the web3 connections
      */
     public async list(req: Web3ConnectionListQueries): Promise<Web3ConnectionListResponse> {
-        return await this.api.getWeb3Connections(req.player, req?.limit, req?.skip, req?.order, req?.disconnected);
+        return await this.api.getWeb3Connections(req?.limit, req?.skip, req?.order, req.player, req?.disconnected);
     }
 
     /**

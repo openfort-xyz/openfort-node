@@ -508,8 +508,8 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Update a policy rule object of a policy.
-     * @param policy 
-     * @param policyRule 
+     * @param policy Specifies the unique policy ID (starts with pol_).
+     * @param policyRule Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
     public async updatePolicyAllowFunction(policy: string, policyRule: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Promise<RequestContext> {

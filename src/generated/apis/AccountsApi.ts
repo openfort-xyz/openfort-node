@@ -359,6 +359,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Signs the typed data value with types data structure for domain using the EIP-712 (https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param id Specifies the unique account ID.
      * @param signPayloadRequest 

@@ -146,7 +146,7 @@ export class OAuthApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/iam/v1/oauth/{provider}/config'
+        const localVarPath = '/iam/v1/oauth/{provider}'
             .replace('{' + 'provider' + '}', encodeURIComponent(String(provider)));
 
         // Make Request Context

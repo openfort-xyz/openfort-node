@@ -157,8 +157,11 @@ import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
+import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
+import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { RetrievePlayerEncryptedKeyResponse } from '../models/RetrievePlayerEncryptedKeyResponse';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListQueries } from '../models/SessionListQueries';
@@ -293,6 +296,7 @@ export class PromiseAccountsApi {
     }
 
     /**
+     * Signs the typed data value with types data structure for domain using the EIP-712 (https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param id Specifies the unique account ID.
      * @param signPayloadRequest 
@@ -857,6 +861,23 @@ export class PromisePlayersAuthenticationApi {
         return result.toPromise();
     }
 
+    /**
+     * Register a key for the authenticated player.
+     * @param registerPlayerEncryptedKeyRequest 
+     */
+    public registerKey(registerPlayerEncryptedKeyRequest: RegisterPlayerEncryptedKeyRequest, _options?: Configuration): Promise<RegisterPlayerEncryptedKeyResponse> {
+        const result = this.api.registerKey(registerPlayerEncryptedKeyRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve the key for the authenticated player.
+     */
+    public retrieveKey(_options?: Configuration): Promise<RetrievePlayerEncryptedKeyResponse> {
+        const result = this.api.retrieveKey(_options);
+        return result.toPromise();
+    }
+
 
 }
 
@@ -979,8 +1000,8 @@ export class PromisePoliciesApi {
 
     /**
      * Update a policy rule object of a policy.
-     * @param policy 
-     * @param policyRule 
+     * @param policy Specifies the unique policy ID (starts with pol_).
+     * @param policyRule Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
     public updatePolicyAllowFunction(policy: string, policyRule: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Promise<PolicyRuleResponse> {
@@ -1018,7 +1039,7 @@ export class PromisePolicyRulesApi {
 
     /**
      * Deletes a policy rule object.
-     * @param id Specifies the unique policy rule ID.
+     * @param id Specifies the unique policy rule ID (starts with afu_).
      */
     public deletePolicyRules(id: string, _options?: Configuration): Promise<PolicyRuleDeleteResponse> {
         const result = this.api.deletePolicyRules(id, _options);
@@ -1040,7 +1061,7 @@ export class PromisePolicyRulesApi {
 
     /**
      * Update a policy rule object.
-     * @param id Specifies the unique policy rule ID.
+     * @param id Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
     public updatePolicyRules(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Promise<PolicyRuleResponse> {
@@ -1303,7 +1324,7 @@ export class PromiseWeb3ConnectionsApi {
     /**
      * Returns a list of web3 actions for the given web3 connection. The actions are returned sorted by creation date, with the most recently received action appearing first. By default, a maximum of ten actions are shown per page.
      * List Web3 actions from a web3 connection.
-     * @param id 
+     * @param id Specifies the web3Connection ID (starts with web3_).
      */
     public getWeb3Actions(id: string, _options?: Configuration): Promise<Web3ActionListResponse> {
         const result = this.api.getWeb3Actions(id, _options);
@@ -1324,22 +1345,22 @@ export class PromiseWeb3ConnectionsApi {
     /**
      * Returns a list of web3 connections for the given player. The connections are returned sorted by creation date, with the most recently created connections appearing first. By default, a maximum of ten connections are shown per page.
      * List Web3 connections.
-     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
+     * @param player Specifies the unique player ID (starts with pla_)
      * @param disconnected Specifies connection status
      */
-    public getWeb3Connections(player: string, limit?: number, skip?: number, order?: SortOrder, disconnected?: boolean, _options?: Configuration): Promise<Web3ConnectionListResponse> {
-        const result = this.api.getWeb3Connections(player, limit, skip, order, disconnected, _options);
+    public getWeb3Connections(limit?: number, skip?: number, order?: SortOrder, player?: string, disconnected?: boolean, _options?: Configuration): Promise<Web3ConnectionListResponse> {
+        const result = this.api.getWeb3Connections(limit, skip, order, player, disconnected, _options);
         return result.toPromise();
     }
 
     /**
      * Approve or Reject a web3 action for the given web3 connection.
      * Approve or Reject a web3 action
-     * @param id 
-     * @param web3Action 
+     * @param id Specifies the web3Connection ID (starts with web3_).
+     * @param web3Action Specifies web3_action (starts with act_).
      * @param submitWeb3ActionRequest 
      */
     public submitWeb3Action(id: string, web3Action: string, submitWeb3ActionRequest: SubmitWeb3ActionRequest, _options?: Configuration): Promise<Web3ActionResponse> {

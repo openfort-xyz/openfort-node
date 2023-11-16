@@ -26,7 +26,7 @@ export class Web3ConnectionListQueries {
     /**
     * Specifies the unique player ID (starts with pla_)
     */
-    'player': string;
+    'player'?: string;
     /**
     * Specifies connection status
     */

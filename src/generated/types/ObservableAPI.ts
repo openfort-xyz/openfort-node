@@ -158,8 +158,11 @@ import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
+import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
+import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { RetrievePlayerEncryptedKeyResponse } from '../models/RetrievePlayerEncryptedKeyResponse';
 import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListQueries } from '../models/SessionListQueries';
@@ -381,6 +384,7 @@ export class ObservableAccountsApi {
     }
 
     /**
+     * Signs the typed data value with types data structure for domain using the EIP-712 (https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param id Specifies the unique account ID.
      * @param signPayloadRequest 
@@ -1512,6 +1516,51 @@ export class ObservablePlayersAuthenticationApi {
             }));
     }
 
+    /**
+     * Register a key for the authenticated player.
+     * @param registerPlayerEncryptedKeyRequest 
+     */
+    public registerKey(registerPlayerEncryptedKeyRequest: RegisterPlayerEncryptedKeyRequest, _options?: Configuration): Observable<RegisterPlayerEncryptedKeyResponse> {
+        const requestContextPromise = this.requestFactory.registerKey(registerPlayerEncryptedKeyRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.registerKey(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve the key for the authenticated player.
+     */
+    public retrieveKey(_options?: Configuration): Observable<RetrievePlayerEncryptedKeyResponse> {
+        const requestContextPromise = this.requestFactory.retrieveKey(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.retrieveKey(rsp)));
+            }));
+    }
+
 }
 
 import { PoliciesApiRequestFactory, PoliciesApiResponseProcessor} from "../apis/PoliciesApi";
@@ -1773,8 +1822,8 @@ export class ObservablePoliciesApi {
 
     /**
      * Update a policy rule object of a policy.
-     * @param policy 
-     * @param policyRule 
+     * @param policy Specifies the unique policy ID (starts with pol_).
+     * @param policyRule Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
     public updatePolicyAllowFunction(policy: string, policyRule: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
@@ -1839,7 +1888,7 @@ export class ObservablePolicyRulesApi {
 
     /**
      * Deletes a policy rule object.
-     * @param id Specifies the unique policy rule ID.
+     * @param id Specifies the unique policy rule ID (starts with afu_).
      */
     public deletePolicyRules(id: string, _options?: Configuration): Observable<PolicyRuleDeleteResponse> {
         const requestContextPromise = this.requestFactory.deletePolicyRules(id, _options);
@@ -1889,7 +1938,7 @@ export class ObservablePolicyRulesApi {
 
     /**
      * Update a policy rule object.
-     * @param id Specifies the unique policy rule ID.
+     * @param id Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
     public updatePolicyRules(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
@@ -2400,7 +2449,7 @@ export class ObservableWeb3ConnectionsApi {
     /**
      * Returns a list of web3 actions for the given web3 connection. The actions are returned sorted by creation date, with the most recently received action appearing first. By default, a maximum of ten actions are shown per page.
      * List Web3 actions from a web3 connection.
-     * @param id 
+     * @param id Specifies the web3Connection ID (starts with web3_).
      */
     public getWeb3Actions(id: string, _options?: Configuration): Observable<Web3ActionListResponse> {
         const requestContextPromise = this.requestFactory.getWeb3Actions(id, _options);
@@ -2449,14 +2498,14 @@ export class ObservableWeb3ConnectionsApi {
     /**
      * Returns a list of web3 connections for the given player. The connections are returned sorted by creation date, with the most recently created connections appearing first. By default, a maximum of ten connections are shown per page.
      * List Web3 connections.
-     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
+     * @param player Specifies the unique player ID (starts with pla_)
      * @param disconnected Specifies connection status
      */
-    public getWeb3Connections(player: string, limit?: number, skip?: number, order?: SortOrder, disconnected?: boolean, _options?: Configuration): Observable<Web3ConnectionListResponse> {
-        const requestContextPromise = this.requestFactory.getWeb3Connections(player, limit, skip, order, disconnected, _options);
+    public getWeb3Connections(limit?: number, skip?: number, order?: SortOrder, player?: string, disconnected?: boolean, _options?: Configuration): Observable<Web3ConnectionListResponse> {
+        const requestContextPromise = this.requestFactory.getWeb3Connections(limit, skip, order, player, disconnected, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -2477,8 +2526,8 @@ export class ObservableWeb3ConnectionsApi {
     /**
      * Approve or Reject a web3 action for the given web3 connection.
      * Approve or Reject a web3 action
-     * @param id 
-     * @param web3Action 
+     * @param id Specifies the web3Connection ID (starts with web3_).
+     * @param web3Action Specifies web3_action (starts with act_).
      * @param submitWeb3ActionRequest 
      */
     public submitWeb3Action(id: string, web3Action: string, submitWeb3ActionRequest: SubmitWeb3ActionRequest, _options?: Configuration): Observable<Web3ActionResponse> {

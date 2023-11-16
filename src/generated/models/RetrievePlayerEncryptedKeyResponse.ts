@@ -10,21 +10,15 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
-import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { HttpFile } from '../http/http';
 
-export class AuthPlayerResponse {
-    'player'?: AuthPlayerResponsePlayer;
-    'id': string;
-    'object': EntityTypePLAYER;
+export class RetrievePlayerEncryptedKeyResponse {
+    'player': string;
+    'ownerAddress': string;
     'createdAt': number;
-    'email'?: string;
     'updatedAt': number;
-    'externalUserId'?: string;
-    'provider': string;
-    'metadata'?: PrismaInputJsonValue;
+    'pkCiphertext': string;
+    'salt': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,65 +26,45 @@ export class AuthPlayerResponse {
         {
             "name": "player",
             "baseName": "player",
-            "type": "AuthPlayerResponsePlayer",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePLAYER",
+            "name": "ownerAddress",
+            "baseName": "ownerAddress",
+            "type": "string",
             "format": ""
         },
         {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
+            "format": "double"
         },
         {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
-            "name": "externalUserId",
-            "baseName": "externalUserId",
+            "name": "pkCiphertext",
+            "baseName": "pkCiphertext",
             "type": "string",
             "format": ""
         },
         {
-            "name": "provider",
-            "baseName": "provider",
+            "name": "salt",
+            "baseName": "salt",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "metadata",
-            "baseName": "metadata",
-            "type": "PrismaInputJsonValue",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthPlayerResponse.attributeTypeMap;
+        return RetrievePlayerEncryptedKeyResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

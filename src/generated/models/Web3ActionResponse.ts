@@ -21,8 +21,17 @@ export class Web3ActionResponse {
     /**
     * The web3_connection ID (starts with web3_).
     */
-    'web3_connection': string;
+    'web3Connection': string;
     'status': Web3ActionStatusEnum;
+    'chaindId': string;
+    'method': string;
+    '_from': string;
+    'to'?: string;
+    'data': string;
+    'decodedData': string;
+    'hashedData': string;
+    'value'?: string;
+    'gas'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -46,8 +55,8 @@ export class Web3ActionResponse {
             "format": "int32"
         },
         {
-            "name": "web3_connection",
-            "baseName": "web3_connection",
+            "name": "web3Connection",
+            "baseName": "web3Connection",
             "type": "string",
             "format": ""
         },
@@ -55,6 +64,60 @@ export class Web3ActionResponse {
             "name": "status",
             "baseName": "status",
             "type": "Web3ActionStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "chaindId",
+            "baseName": "chaindId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "method",
+            "baseName": "method",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "_from",
+            "baseName": "from",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "to",
+            "baseName": "to",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "decodedData",
+            "baseName": "decodedData",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "hashedData",
+            "baseName": "hashedData",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "value",
+            "baseName": "value",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "gas",
+            "baseName": "gas",
+            "type": "string",
             "format": ""
         }    ];
 
