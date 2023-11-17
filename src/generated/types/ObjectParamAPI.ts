@@ -54,6 +54,7 @@ import { CreateTransactionIntentRequest } from '../models/CreateTransactionInten
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
+import { DeployRequest } from '../models/DeployRequest';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -257,6 +258,21 @@ export interface AccountsApiCreateAccountRequest {
     createAccountRequest: CreateAccountRequest
 }
 
+export interface AccountsApiDeployAccountRequest {
+    /**
+     * Specifies the unique account ID.
+     * @type string
+     * @memberof AccountsApideployAccount
+     */
+    id: string
+    /**
+     * 
+     * @type DeployRequest
+     * @memberof AccountsApideployAccount
+     */
+    deployRequest: DeployRequest
+}
+
 export interface AccountsApiGetAccountRequest {
     /**
      * Specifies the unique account ID.
@@ -393,6 +409,15 @@ export class ObjectAccountsApi {
     }
 
     /**
+     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * Deploy an account.
+     * @param param the request object
+     */
+    public deployAccount(param: AccountsApiDeployAccountRequest, options?: Configuration): Promise<AccountResponse> {
+        return this.api.deployAccount(param.id, param.deployRequest,  options).toPromise();
+    }
+
+    /**
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * Get existing account.
      * @param param the request object
@@ -437,6 +462,7 @@ export class ObjectAccountsApi {
     }
 
     /**
+     * This endpoint updates the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
      * Sync account state with the blockchain
      * @param param the request object
      */

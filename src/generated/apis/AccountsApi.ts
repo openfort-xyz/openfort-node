@@ -16,6 +16,7 @@ import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
+import { DeployRequest } from '../models/DeployRequest';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SortOrder } from '../models/SortOrder';
@@ -168,6 +169,62 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(createAccountRequest, "CreateAccountRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * Deploy an account.
+     * @param id Specifies the unique account ID.
+     * @param deployRequest 
+     */
+    public async deployAccount(id: string, deployRequest: DeployRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("AccountsApi", "deployAccount", "id");
+        }
+
+
+        // verify required parameter 'deployRequest' is not null or undefined
+        if (deployRequest === null || deployRequest === undefined) {
+            throw new RequiredError("AccountsApi", "deployAccount", "deployRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/accounts/{id}/deploy'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(deployRequest, "DeployRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -470,6 +527,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * This endpoint updates the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
      * Sync account state with the blockchain
      * @param id Specifies the unique account ID.
      */
@@ -601,6 +659,44 @@ export class AccountsApiResponseProcessor {
         }
         if (isCodeInRange("409", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AccountResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountResponse", ""
+            ) as AccountResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deployAccount
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deployAccount(response: ResponseContext): Promise<AccountResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AccountResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountResponse", ""
+            ) as AccountResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Bad request", undefined, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Unauthorized", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Account not found", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml

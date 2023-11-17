@@ -15,6 +15,7 @@ import {
 import { AccountsApi } from "../generated";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
+import { DeployRequest } from "../models/deployRequest";
 
 @httpErrorHandler
 export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
@@ -79,6 +80,17 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      */
     public async sync(id: string): Promise<AccountResponse> {
         return await this.api.syncAccount(id);
+    }
+
+    /**
+     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * Deploy an account.
+     * @param id Specifies the unique account ID.
+     * @param deployRequest
+     */
+    public async deploy(req: DeployRequest): Promise<AccountResponse> {
+        const { id, ...body } = req;
+        return await this.api.deployAccount(id, body);
     }
 
     /**

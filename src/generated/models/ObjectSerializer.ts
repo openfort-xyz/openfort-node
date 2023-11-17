@@ -51,6 +51,7 @@ export * from '../models/CreateTransactionIntentRequest';
 export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
 export * from '../models/DataAccountTypes';
+export * from '../models/DeployRequest';
 export * from '../models/DomainData';
 export * from '../models/EntityIdResponse';
 export * from '../models/EntityTypeACCOUNT';
@@ -265,6 +266,7 @@ import { CreateTransactionIntentRequest } from '../models/CreateTransactionInten
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
+import { DeployRequest } from '../models/DeployRequest';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -551,6 +553,7 @@ let typeMap: {[index: string]: any} = {
     "CreateSessionRequest": CreateSessionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
+    "DeployRequest": DeployRequest,
     "DomainData": DomainData,
     "EntityIdResponse": EntityIdResponse,
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
