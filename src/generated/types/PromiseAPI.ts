@@ -54,6 +54,7 @@ import { CreateTransactionIntentRequest } from '../models/CreateTransactionInten
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
+import { DeployRequest } from '../models/DeployRequest';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -260,6 +261,17 @@ export class PromiseAccountsApi {
     }
 
     /**
+     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * Deploy an account.
+     * @param id Specifies the unique account ID.
+     * @param deployRequest 
+     */
+    public deployAccount(id: string, deployRequest: DeployRequest, _options?: Configuration): Promise<AccountResponse> {
+        const result = this.api.deployAccount(id, deployRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * Get existing account.
      * @param id Specifies the unique account ID.
@@ -317,6 +329,7 @@ export class PromiseAccountsApi {
     }
 
     /**
+     * This endpoint updates the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
      * Sync account state with the blockchain
      * @param id Specifies the unique account ID.
      */

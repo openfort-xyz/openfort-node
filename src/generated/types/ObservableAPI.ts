@@ -55,6 +55,7 @@ import { CreateTransactionIntentRequest } from '../models/CreateTransactionInten
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
+import { DeployRequest } from '../models/DeployRequest';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -306,6 +307,31 @@ export class ObservableAccountsApi {
     }
 
     /**
+     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * Deploy an account.
+     * @param id Specifies the unique account ID.
+     * @param deployRequest 
+     */
+    public deployAccount(id: string, deployRequest: DeployRequest, _options?: Configuration): Observable<AccountResponse> {
+        const requestContextPromise = this.requestFactory.deployAccount(id, deployRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deployAccount(rsp)));
+            }));
+    }
+
+    /**
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * Get existing account.
      * @param id Specifies the unique account ID.
@@ -433,6 +459,7 @@ export class ObservableAccountsApi {
     }
 
     /**
+     * This endpoint updates the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
      * Sync account state with the blockchain
      * @param id Specifies the unique account ID.
      */
