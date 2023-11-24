@@ -1,4 +1,4 @@
 export interface GetTransactionIntentRequest {
     id: string;
-    expand: Array<"nextAction" | "policy" | "player" | "account">;
+    expand?: Array<"policy" | "player" | "account">;
 }
