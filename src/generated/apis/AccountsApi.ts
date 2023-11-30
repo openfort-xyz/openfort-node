@@ -31,7 +31,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * This endpoint allows you to cancel a pending transfer of ownership.
-     * Cancel request of ownership transfer of an account.
+     * Cancel request to transfer ownership of an account.
      * @param id Specifies the unique account ID.
      * @param cancelTransferOwnershipRequest 
      */
@@ -361,7 +361,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
-     * Request ownership transfer of an account.
+     * Request transfer ownership of account.
      * @param id Specifies the unique account ID.
      * @param transferOwnershipRequest 
      */

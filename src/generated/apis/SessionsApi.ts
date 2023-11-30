@@ -231,7 +231,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Confirms the creation of a session with an external owner.
+     * Send signed userOpHash to create session.
      * @param id Specifies the unique session ID (starts with ses_).
      * @param signatureRequest 
      */

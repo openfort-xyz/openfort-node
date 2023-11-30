@@ -250,8 +250,8 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This endpoint is used to send the signed userOperationHash.  For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
-     * Confirms the creation of a transaction intent with an external owner.
+     * For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
+     * Send a signed transaction userOperationHash.
      * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 
      */
