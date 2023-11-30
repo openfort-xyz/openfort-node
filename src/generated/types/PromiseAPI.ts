@@ -92,6 +92,7 @@ import { InventoryListResponse } from '../models/InventoryListResponse';
 import { InventoryResponse } from '../models/InventoryResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
+import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
@@ -102,6 +103,7 @@ import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
 import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
+import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
@@ -231,7 +233,7 @@ export class PromiseAccountsApi {
 
     /**
      * This endpoint allows you to cancel a pending transfer of ownership.
-     * Cancel request of ownership transfer of an account.
+     * Cancel request to transfer ownership of an account.
      * @param id Specifies the unique account ID.
      * @param cancelTransferOwnershipRequest 
      */
@@ -298,7 +300,7 @@ export class PromiseAccountsApi {
 
     /**
      * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
-     * Request ownership transfer of an account.
+     * Request transfer ownership of account.
      * @param id Specifies the unique account ID.
      * @param transferOwnershipRequest 
      */
@@ -1143,7 +1145,7 @@ export class PromiseSessionsApi {
     }
 
     /**
-     * Confirms the creation of a session with an external owner.
+     * Send signed userOpHash to create session.
      * @param id Specifies the unique session ID (starts with ses_).
      * @param signatureRequest 
      */
@@ -1295,8 +1297,8 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
-     * This endpoint is used to send the signed userOperationHash.  For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
-     * Confirms the creation of a transaction intent with an external owner.
+     * For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
+     * Send a signed transaction userOperationHash.
      * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 
      */

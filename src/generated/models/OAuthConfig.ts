@@ -13,7 +13,8 @@
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
-import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
+import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
+import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { HttpFile } from '../http/http';
 
@@ -22,7 +23,7 @@ export class OAuthConfig {
     * Enable OAuth provider.
     */
     'enabled': boolean;
-    'provider': OAuthProviderFIREBASE;
+    'provider': OAuthProviderLOOTLOCKER;
     /**
     * Base URI of your accelbyte gaming service environment. E.g. https://mygame.dev.gamingservices.accelbyte.io/
     */
@@ -60,7 +61,7 @@ export class OAuthConfig {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderFIREBASE",
+            "type": "OAuthProviderLOOTLOCKER",
             "format": ""
         },
         {

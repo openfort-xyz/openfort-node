@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 export class CreatePolicyAllowFunctionRequest {
     'type': PolicyRuleType;
     /**
-    * Name of the function in the contract to allow.
+    * Name of the function in the contract to allow. If you want to allow all functions, use the wildcard \'All functions\'.
     */
     'functionName'?: string | null;
     /**

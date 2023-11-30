@@ -89,6 +89,7 @@ export * from '../models/InventoryListResponse';
 export * from '../models/InventoryResponse';
 export * from '../models/Log';
 export * from '../models/LoginRequest';
+export * from '../models/LootLockerOAuthConfig';
 export * from '../models/Money';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
@@ -99,6 +100,7 @@ export * from '../models/OAuthProvider';
 export * from '../models/OAuthProviderACCELBYTE';
 export * from '../models/OAuthProviderFIREBASE';
 export * from '../models/OAuthProviderGOOGLE';
+export * from '../models/OAuthProviderLOOTLOCKER';
 export * from '../models/OAuthProviderPLAYFAB';
 export * from '../models/OAuthRequest';
 export * from '../models/ObsoleteAssetInventory';
@@ -304,6 +306,7 @@ import { InventoryListResponse       } from '../models/InventoryListResponse';
 import { InventoryResponse    } from '../models/InventoryResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
+import { LootLockerOAuthConfig   } from '../models/LootLockerOAuthConfig';
 import { Money   } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
@@ -314,6 +317,7 @@ import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
 import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
+import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
@@ -474,6 +478,7 @@ let enumsMap: Set<string> = new Set<string>([
     "OAuthProviderACCELBYTE",
     "OAuthProviderFIREBASE",
     "OAuthProviderGOOGLE",
+    "OAuthProviderLOOTLOCKER",
     "OAuthProviderPLAYFAB",
     "ObsoleteAssetType",
     "PlayerResponseExpandable",
@@ -575,6 +580,7 @@ let typeMap: {[index: string]: any} = {
     "InventoryResponse": InventoryResponse,
     "Log": Log,
     "LoginRequest": LoginRequest,
+    "LootLockerOAuthConfig": LootLockerOAuthConfig,
     "Money": Money,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,

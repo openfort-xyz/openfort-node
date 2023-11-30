@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type DataAccountTypes = "Upgradeable" | "Managed" | "ERC6551" | "Recoverable" | "ManagedRecoverableV5" ;
+export type OAuthProviderLOOTLOCKER = "lootlocker" ;
