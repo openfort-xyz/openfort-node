@@ -30,7 +30,7 @@ export class Interaction {
     */
     'functionName'?: string;
     /**
-    * The function arguments of the contract.
+    * The function arguments of the contract, in string format.
     */
     'functionArgs'?: Array<any>;
 

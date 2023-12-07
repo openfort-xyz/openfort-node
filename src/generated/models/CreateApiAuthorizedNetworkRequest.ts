@@ -13,7 +13,13 @@
 import { HttpFile } from '../http/http';
 
 export class CreateApiAuthorizedNetworkRequest {
+    /**
+    * The name of the authorized network.
+    */
     'name': string;
+    /**
+    * The network address.
+    */
     'network': string;
 
     static readonly discriminator: string | undefined = undefined;

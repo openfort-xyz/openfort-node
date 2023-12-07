@@ -13,6 +13,9 @@
 import { HttpFile } from '../http/http';
 
 export class UpdateProjectRequest {
+    /**
+    * Name of the project.
+    */
     'name': string;
 
     static readonly discriminator: string | undefined = undefined;

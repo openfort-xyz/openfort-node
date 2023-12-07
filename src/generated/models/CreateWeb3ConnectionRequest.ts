@@ -22,7 +22,7 @@ export class CreateWeb3ConnectionRequest {
     */
     'chainId': number;
     /**
-    * Specifies the URI of the web3Connection.
+    * Specifies the URI of WalletConnect.
     */
     'uri': string;
 

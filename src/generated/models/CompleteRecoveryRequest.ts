@@ -18,7 +18,7 @@ export class CompleteRecoveryRequest {
     */
     'newOwnerAddress': string;
     /**
-    * Signatures
+    * Signatures by the guardians
     */
     'signatures'?: Array<string>;
     /**

@@ -14,6 +14,9 @@ import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { HttpFile } from '../http/http';
 
 export class CreateProjectRequest {
+    /**
+    * Name of the project.
+    */
     'name': string;
     'pkPolicy'?: PrivateKeyPolicy;
 
