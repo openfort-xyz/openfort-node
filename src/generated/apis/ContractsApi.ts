@@ -231,7 +231,7 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
      * Read on chain contract data.
      * @param id Specifies the unique contract ID (starts with con_).
      * @param functionName The function name of the contract.
-     * @param functionArgs The function arguments of the contract.
+     * @param functionArgs The function arguments of the contract, in string format. (accepts pla_, con_ and acc_ IDs)
      */
     public async readContract(id: string, functionName: string, functionArgs?: Array<any>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

@@ -21,7 +21,7 @@ export class CreatePolicyRuleRequest {
     */
     'functionName'?: string | null;
     /**
-    * Contract ID to allow.
+    * The contract ID (starts with con_).
     */
     'contract'?: string | null;
     /**
@@ -38,7 +38,7 @@ export class CreatePolicyRuleRequest {
     */
     'timeIntervalValue'?: number;
     /**
-    * The unique Policy ID to add the rule to.
+    * The unique Policy ID to add the rule to (starts with pol_).
     */
     'policy': string;
 

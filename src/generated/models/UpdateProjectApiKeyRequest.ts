@@ -15,6 +15,9 @@ import { HttpFile } from '../http/http';
 
 export class UpdateProjectApiKeyRequest {
     'type': ApiKeyType;
+    /**
+    * The API key to update.
+    */
     'uuid': string;
 
     static readonly discriminator: string | undefined = undefined;

@@ -13,6 +13,9 @@
 import { HttpFile } from '../http/http';
 
 export class ProjectWebhookRequest {
+    /**
+    * The webhook url.
+    */
     'url'?: string;
     'apiKey'?: string;
 

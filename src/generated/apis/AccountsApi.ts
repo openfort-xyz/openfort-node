@@ -87,7 +87,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Complete a recovery process of a recoverable account.
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      * @param completeRecoveryRequest 
      */
     public async completeRecovery(id: string, completeRecoveryRequest: CompleteRecoveryRequest, _options?: Configuration): Promise<RequestContext> {
@@ -191,7 +191,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * This endpoint can be used to deploy an account that was counterfactually generated.
      * Deploy an account.
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      * @param deployRequest 
      */
     public async deployAccount(id: string, deployRequest: DeployRequest, _options?: Configuration): Promise<RequestContext> {
@@ -247,7 +247,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * Get existing account.
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      * @param expand 
      */
     public async getAccount(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
@@ -416,7 +416,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Signs the typed data value with types data structure for domain using the EIP-712 (https://eips.ethereum.org/EIPS/eip-712) specification.
+     * Signs the typed data value with types data structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param id Specifies the unique account ID.
      * @param signPayloadRequest 
@@ -473,7 +473,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Start a recovery process of a recoverable account.
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      * @param startRecoveryRequest 
      */
     public async startRecovery(id: string, startRecoveryRequest: StartRecoveryRequest, _options?: Configuration): Promise<RequestContext> {
@@ -529,7 +529,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * This endpoint updates the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
      * Sync account state with the blockchain
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      */
     public async syncAccount(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

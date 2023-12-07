@@ -18,7 +18,7 @@ export class ContractReadQueries {
     */
     'functionName': string;
     /**
-    * The function arguments of the contract.
+    * The function arguments of the contract, in string format. (accepts pla_, con_ and acc_ IDs)
     */
     'functionArgs'?: Array<any>;
 

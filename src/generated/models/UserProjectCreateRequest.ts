@@ -15,6 +15,9 @@ import { HttpFile } from '../http/http';
 
 export class UserProjectCreateRequest {
     'role'?: UserProjectCreateRequestRole;
+    /**
+    * The email of the user to add.
+    */
     'email': string;
 
     static readonly discriminator: string | undefined = undefined;

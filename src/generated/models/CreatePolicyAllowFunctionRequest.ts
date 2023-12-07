@@ -21,7 +21,7 @@ export class CreatePolicyAllowFunctionRequest {
     */
     'functionName'?: string | null;
     /**
-    * Contract ID to allow.
+    * The contract ID (starts with con_).
     */
     'contract'?: string | null;
     /**

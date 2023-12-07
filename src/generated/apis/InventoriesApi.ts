@@ -87,7 +87,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Get inventory of account.
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      */
     public async getAccountInventory(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

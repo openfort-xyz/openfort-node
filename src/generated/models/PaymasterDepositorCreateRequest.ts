@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class PaymasterDepositorCreateRequest {
     /**
-    * Paymaster depositor address.
+    * The address of the wallet that has deposited in the paymaster.
     */
     'depositorAddress': string;
     /**

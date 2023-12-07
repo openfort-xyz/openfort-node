@@ -14,6 +14,9 @@ import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { HttpFile } from '../http/http';
 
+/**
+* The role of the user.
+*/
 export class UserProjectCreateRequestRole {
 
     static readonly discriminator: string | undefined = undefined;
