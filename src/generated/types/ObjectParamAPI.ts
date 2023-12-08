@@ -629,7 +629,7 @@ export interface ContractsApiReadContractRequest {
      */
     functionName: string
     /**
-     * The function arguments of the contract, in string format. (accepts pla_, con_ and acc_ IDs)
+     * The function arguments of the contract, in string format. Accepts pla_, con_ and acc_ IDs.
      * @type Array&lt;any&gt;
      * @memberof ContractsApireadContract
      */

@@ -15,13 +15,13 @@ import { HttpFile } from '../http/http';
 
 export class CreateTransactionIntentRequest {
     /**
-    * The player ID (starts with pla_).
-    */
-    'player': string;
-    /**
     * The chain ID.
     */
     'chainId': number;
+    /**
+    * The player ID (starts with pla_).
+    */
+    'player'?: string;
     /**
     * The policy ID (starts with pol_).
     */
@@ -44,16 +44,16 @@ export class CreateTransactionIntentRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "policy",

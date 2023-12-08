@@ -30,7 +30,7 @@ export class Interaction {
     */
     'functionName'?: string;
     /**
-    * The function arguments of the contract, in string format.
+    * The function arguments of the contract, in string format. Accepts pla_, con_ and acc_ IDs.
     */
     'functionArgs'?: Array<any>;
 
