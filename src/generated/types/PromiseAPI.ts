@@ -459,7 +459,7 @@ export class PromiseContractsApi {
      * Read on chain contract data.
      * @param id Specifies the unique contract ID (starts with con_).
      * @param functionName The function name of the contract.
-     * @param functionArgs The function arguments of the contract, in string format. (accepts pla_, con_ and acc_ IDs)
+     * @param functionArgs The function arguments of the contract, in string format. Accepts pla_, con_ and acc_ IDs.
      */
     public readContract(id: string, functionName: string, functionArgs?: Array<any>, _options?: Configuration): Promise<ContractReadResponse> {
         const result = this.api.readContract(id, functionName, functionArgs, _options);
