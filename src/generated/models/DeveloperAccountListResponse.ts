@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
+import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorListResponse {
+export class DeveloperAccountListResponse {
     'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<PaymasterDepositorResponse>;
+    'data': Array<DeveloperAccountResponse>;
     'start': number;
     'end': number;
     'total': number;
@@ -40,7 +40,7 @@ export class PaymasterDepositorListResponse {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<PaymasterDepositorResponse>",
+            "type": "Array<DeveloperAccountResponse>",
             "format": ""
         },
         {
@@ -63,7 +63,7 @@ export class PaymasterDepositorListResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorListResponse.attributeTypeMap;
+        return DeveloperAccountListResponse.attributeTypeMap;
     }
 
     public constructor() {

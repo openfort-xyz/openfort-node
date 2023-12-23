@@ -1,9 +1,4 @@
-import {
-    PaymasterDepositorCreateRequest,
-    PaymasterDepositorResponse,
-    PaymasterDepositorListResponse,
-    PaymasterDepositorDeleteResponse,
-} from "../models";
+import { DeveloperAccountCreateRequest, DeveloperAccountListResponse, DeveloperAccountDeleteResponse } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { SettingsApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
@@ -15,34 +10,34 @@ export class SettingsApiWrapper extends BaseApiWrapper<SettingsApi> {
     }
 
     /**
-     * Adds a depositor address to a project environment.
+     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
      * @param req Parameters to add a depositor address to s project environment
      */
-    public async addDepositorAddress(req: PaymasterDepositorCreateRequest): Promise<PaymasterDepositorResponse> {
-        return await this.api.addDepositorAddress(req);
+    public async createDeveloperAccount(req: DeveloperAccountCreateRequest): Promise<DeveloperAccountCreateRequest> {
+        return await this.api.createDeveloperAccount(req);
     }
 
     /**
-     * Lists the depositor addresses of a project.
+     * Lists the developer accounts of a project.
      */
-    public async getDepositorAddresses(): Promise<PaymasterDepositorListResponse> {
-        return await this.api.getDepositorAddresses();
+    public async getDeveloperAccounts(): Promise<DeveloperAccountListResponse> {
+        return await this.api.getDeveloperAccounts();
     }
 
     /**
-     * Removes a depositor address from a project.
-     * @param id Id of the depositor address to remove
+     * Delete a developer account from a project.
+     * @param id Id of the developer account
      */
-    public async removeDepositorAddress(id: string): Promise<PaymasterDepositorDeleteResponse> {
-        return await this.api.removeDepositorAddress(id);
+    public async deleteDeveloperAccount(id: string): Promise<DeveloperAccountDeleteResponse> {
+        return await this.api.deleteDeveloperAccount(id);
     }
 
     /**
      * Generate message, which should be signed for verification of the address ownership.
-     * @param address Specifies the paymaster depositor address
+     * @param address Specifies the address
      */
-    public async getMessageForSigningDepositorAddress(address: string): Promise<string> {
-        const result = await this.api.getMessageForSigningDepositorAddress(address);
+    public async getVerificationPayload(address: string): Promise<string> {
+        const result = await this.api.getVerificationPayload(address);
         return result.message;
     }
 

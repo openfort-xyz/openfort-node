@@ -10,38 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypePAYMASTERDEPOSITOR } from '../models/EntityTypePAYMASTERDEPOSITOR';
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorDeleteResponse {
-    'id': string;
-    'object': EntityTypePAYMASTERDEPOSITOR;
-    'deleted': boolean;
+export class ProjectStatsRequest {
+    'timeFrame': ProjectStatsRequestTimeFrameEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePAYMASTERDEPOSITOR",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
+            "name": "timeFrame",
+            "baseName": "timeFrame",
+            "type": "ProjectStatsRequestTimeFrameEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorDeleteResponse.attributeTypeMap;
+        return ProjectStatsRequest.attributeTypeMap;
     }
 
     public constructor() {
@@ -49,4 +34,5 @@ export class PaymasterDepositorDeleteResponse {
 }
 
 
+export type ProjectStatsRequestTimeFrameEnum = "day" | "week" | "month" | "all" ;
 

@@ -23,6 +23,10 @@ export class CreateTransactionIntentRequest {
     */
     'player'?: string;
     /**
+    * The account ID (starts with acc_ or dac_).
+    */
+    'account'?: string;
+    /**
     * The policy ID (starts with pol_).
     */
     'policy'?: string;
@@ -52,6 +56,12 @@ export class CreateTransactionIntentRequest {
         {
             "name": "player",
             "baseName": "player",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
             "type": "string",
             "format": ""
         },

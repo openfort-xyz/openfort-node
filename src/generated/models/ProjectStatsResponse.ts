@@ -10,30 +10,24 @@
  * Do not edit the class manually.
  */
 
+import { Stat } from '../models/Stat';
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorGetMessageResponse {
-    'message': string;
-    'depositorAddress': string;
+export class ProjectStatsResponse {
+    'transactionIntents': Array<Stat>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "message",
-            "baseName": "message",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
-            "type": "string",
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<Stat>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorGetMessageResponse.attributeTypeMap;
+        return ProjectStatsResponse.attributeTypeMap;
     }
 
     public constructor() {

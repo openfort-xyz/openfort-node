@@ -10,11 +10,11 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { PaymasterDepositorCreateRequest } from '../models/PaymasterDepositorCreateRequest';
-import { PaymasterDepositorDeleteResponse } from '../models/PaymasterDepositorDeleteResponse';
-import { PaymasterDepositorGetMessageResponse } from '../models/PaymasterDepositorGetMessageResponse';
-import { PaymasterDepositorListResponse } from '../models/PaymasterDepositorListResponse';
-import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
+import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
+import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
+import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
+import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
+import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
 
 /**
@@ -23,21 +23,21 @@ import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateReq
 export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Verify signature and add a depositor address to the current project environment.
-     * Add depositor address.
-     * @param paymasterDepositorCreateRequest 
+     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
+     * Create a developer account.
+     * @param developerAccountCreateRequest 
      */
-    public async addDepositorAddress(paymasterDepositorCreateRequest: PaymasterDepositorCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createDeveloperAccount(developerAccountCreateRequest: DeveloperAccountCreateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'paymasterDepositorCreateRequest' is not null or undefined
-        if (paymasterDepositorCreateRequest === null || paymasterDepositorCreateRequest === undefined) {
-            throw new RequiredError("SettingsApi", "addDepositorAddress", "paymasterDepositorCreateRequest");
+        // verify required parameter 'developerAccountCreateRequest' is not null or undefined
+        if (developerAccountCreateRequest === null || developerAccountCreateRequest === undefined) {
+            throw new RequiredError("SettingsApi", "createDeveloperAccount", "developerAccountCreateRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/v1/settings/depositor_addresses';
+        const localVarPath = '/v1/settings/developer_accounts';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -50,7 +50,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(paymasterDepositorCreateRequest, "PaymasterDepositorCreateRequest", ""),
+            ObjectSerializer.serialize(developerAccountCreateRequest, "DeveloperAccountCreateRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -71,14 +71,52 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieve the list of the depositor addresses for the current project environment.
-     * List of depositor addresses.
+     * Delete a developer account from the current project.
+     * Delete a developer account.
+     * @param id Specifies a unique developer account.
      */
-    public async getDepositorAddresses(_options?: Configuration): Promise<RequestContext> {
+    public async deleteDeveloperAccount(id: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SettingsApi", "deleteDeveloperAccount", "id");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/settings/developer_accounts/{id}'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Retrieve the list of the developer accounts for the current project.
+     * List of developer accounts.
+     */
+    public async getDeveloperAccounts(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // Path Params
-        const localVarPath = '/v1/settings/depositor_addresses';
+        const localVarPath = '/v1/settings/developer_accounts';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -101,21 +139,21 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Generate message, which should be signed for verification of the address ownership.
+     * Generate message, which should be signed by the account your want to add as a developer account.
      * Generate message to sign
-     * @param address Specifies the paymaster depositor address
+     * @param address Specifies the address
      */
-    public async getMessageForSigningDepositorAddress(address: string, _options?: Configuration): Promise<RequestContext> {
+    public async getVerificationPayload(address: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'address' is not null or undefined
         if (address === null || address === undefined) {
-            throw new RequiredError("SettingsApi", "getMessageForSigningDepositorAddress", "address");
+            throw new RequiredError("SettingsApi", "getVerificationPayload", "address");
         }
 
 
         // Path Params
-        const localVarPath = '/v1/settings/depositor_addresses/message_to_sign';
+        const localVarPath = '/v1/settings/developer_accounts/message_to_sign';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -125,44 +163,6 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         if (address !== undefined) {
             requestContext.setQueryParam("address", ObjectSerializer.serialize(address, "string", ""));
         }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Remove a depositor address from the current project environment.
-     * Removes depositor address.
-     * @param id Specifies unique identifier of depositor address.
-     */
-    public async removeDepositorAddress(id: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new RequiredError("SettingsApi", "removeDepositorAddress", "id");
-        }
-
-
-        // Path Params
-        const localVarPath = '/v1/settings/depositor_addresses/{id}'
-            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -266,16 +266,16 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to addDepositorAddress
+     * @params response Response returned by the server for a request to createDeveloperAccount
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async addDepositorAddress(response: ResponseContext): Promise<PaymasterDepositorResponse > {
+     public async createDeveloperAccount(response: ResponseContext): Promise<DeveloperAccountResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PaymasterDepositorResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorResponse", ""
-            ) as PaymasterDepositorResponse;
+                "DeveloperAccountResponse", ""
+            ) as DeveloperAccountResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -287,10 +287,10 @@ export class SettingsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PaymasterDepositorResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorResponse", ""
-            ) as PaymasterDepositorResponse;
+                "DeveloperAccountResponse", ""
+            ) as DeveloperAccountResponse;
             return body;
         }
 
@@ -301,16 +301,16 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getDepositorAddresses
+     * @params response Response returned by the server for a request to deleteDeveloperAccount
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getDepositorAddresses(response: ResponseContext): Promise<PaymasterDepositorListResponse > {
+     public async deleteDeveloperAccount(response: ResponseContext): Promise<DeveloperAccountDeleteResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PaymasterDepositorListResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorListResponse", ""
-            ) as PaymasterDepositorListResponse;
+                "DeveloperAccountDeleteResponse", ""
+            ) as DeveloperAccountDeleteResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -322,10 +322,10 @@ export class SettingsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PaymasterDepositorListResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorListResponse", ""
-            ) as PaymasterDepositorListResponse;
+                "DeveloperAccountDeleteResponse", ""
+            ) as DeveloperAccountDeleteResponse;
             return body;
         }
 
@@ -336,16 +336,16 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getMessageForSigningDepositorAddress
+     * @params response Response returned by the server for a request to getDeveloperAccounts
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getMessageForSigningDepositorAddress(response: ResponseContext): Promise<PaymasterDepositorGetMessageResponse > {
+     public async getDeveloperAccounts(response: ResponseContext): Promise<DeveloperAccountListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PaymasterDepositorGetMessageResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorGetMessageResponse", ""
-            ) as PaymasterDepositorGetMessageResponse;
+                "DeveloperAccountListResponse", ""
+            ) as DeveloperAccountListResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -357,10 +357,10 @@ export class SettingsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PaymasterDepositorGetMessageResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorGetMessageResponse", ""
-            ) as PaymasterDepositorGetMessageResponse;
+                "DeveloperAccountListResponse", ""
+            ) as DeveloperAccountListResponse;
             return body;
         }
 
@@ -371,16 +371,16 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to removeDepositorAddress
+     * @params response Response returned by the server for a request to getVerificationPayload
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async removeDepositorAddress(response: ResponseContext): Promise<PaymasterDepositorDeleteResponse > {
+     public async getVerificationPayload(response: ResponseContext): Promise<DeveloperAccountGetMessageResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PaymasterDepositorDeleteResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountGetMessageResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorDeleteResponse", ""
-            ) as PaymasterDepositorDeleteResponse;
+                "DeveloperAccountGetMessageResponse", ""
+            ) as DeveloperAccountGetMessageResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -392,10 +392,10 @@ export class SettingsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PaymasterDepositorDeleteResponse = ObjectSerializer.deserialize(
+            const body: DeveloperAccountGetMessageResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PaymasterDepositorDeleteResponse", ""
-            ) as PaymasterDepositorDeleteResponse;
+                "DeveloperAccountGetMessageResponse", ""
+            ) as DeveloperAccountGetMessageResponse;
             return body;
         }
 

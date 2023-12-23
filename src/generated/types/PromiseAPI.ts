@@ -55,12 +55,17 @@ import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionReque
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
+import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
+import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
+import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
+import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
+import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
-import { EntityTypePAYMASTERDEPOSITOR } from '../models/EntityTypePAYMASTERDEPOSITOR';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -110,11 +115,6 @@ import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
-import { PaymasterDepositorCreateRequest } from '../models/PaymasterDepositorCreateRequest';
-import { PaymasterDepositorDeleteResponse } from '../models/PaymasterDepositorDeleteResponse';
-import { PaymasterDepositorGetMessageResponse } from '../models/PaymasterDepositorGetMessageResponse';
-import { PaymasterDepositorListResponse } from '../models/PaymasterDepositorListResponse';
-import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
@@ -159,6 +159,8 @@ import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
+import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
+import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
 import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
@@ -182,6 +184,7 @@ import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECU
 import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
+import { Stat } from '../models/Stat';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent } from '../models/TransactionIntent';
@@ -1177,41 +1180,41 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Verify signature and add a depositor address to the current project environment.
-     * Add depositor address.
-     * @param paymasterDepositorCreateRequest 
+     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
+     * Create a developer account.
+     * @param developerAccountCreateRequest 
      */
-    public addDepositorAddress(paymasterDepositorCreateRequest: PaymasterDepositorCreateRequest, _options?: Configuration): Promise<PaymasterDepositorResponse> {
-        const result = this.api.addDepositorAddress(paymasterDepositorCreateRequest, _options);
+    public createDeveloperAccount(developerAccountCreateRequest: DeveloperAccountCreateRequest, _options?: Configuration): Promise<DeveloperAccountResponse> {
+        const result = this.api.createDeveloperAccount(developerAccountCreateRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * Retrieve the list of the depositor addresses for the current project environment.
-     * List of depositor addresses.
+     * Delete a developer account from the current project.
+     * Delete a developer account.
+     * @param id Specifies a unique developer account.
      */
-    public getDepositorAddresses(_options?: Configuration): Promise<PaymasterDepositorListResponse> {
-        const result = this.api.getDepositorAddresses(_options);
+    public deleteDeveloperAccount(id: string, _options?: Configuration): Promise<DeveloperAccountDeleteResponse> {
+        const result = this.api.deleteDeveloperAccount(id, _options);
         return result.toPromise();
     }
 
     /**
-     * Generate message, which should be signed for verification of the address ownership.
+     * Retrieve the list of the developer accounts for the current project.
+     * List of developer accounts.
+     */
+    public getDeveloperAccounts(_options?: Configuration): Promise<DeveloperAccountListResponse> {
+        const result = this.api.getDeveloperAccounts(_options);
+        return result.toPromise();
+    }
+
+    /**
+     * Generate message, which should be signed by the account your want to add as a developer account.
      * Generate message to sign
-     * @param address Specifies the paymaster depositor address
+     * @param address Specifies the address
      */
-    public getMessageForSigningDepositorAddress(address: string, _options?: Configuration): Promise<PaymasterDepositorGetMessageResponse> {
-        const result = this.api.getMessageForSigningDepositorAddress(address, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Remove a depositor address from the current project environment.
-     * Removes depositor address.
-     * @param id Specifies unique identifier of depositor address.
-     */
-    public removeDepositorAddress(id: string, _options?: Configuration): Promise<PaymasterDepositorDeleteResponse> {
-        const result = this.api.removeDepositorAddress(id, _options);
+    public getVerificationPayload(address: string, _options?: Configuration): Promise<DeveloperAccountGetMessageResponse> {
+        const result = this.api.getVerificationPayload(address, _options);
         return result.toPromise();
     }
 
