@@ -38,7 +38,7 @@ export class TransactionIntent {
     'interactions'?: Array<Interaction>;
     'nextAction'?: NextActionResponse;
     'policy'?: EntityIdResponse;
-    'player': EntityIdResponse;
+    'player'?: EntityIdResponse;
     'account': EntityIdResponse;
 
     static readonly discriminator: string | undefined = undefined;

@@ -14,17 +14,17 @@ import { HttpFile } from '../http/http';
 
 export class Interaction {
     /**
-    * The address of the contract.
+    * The address of the recipient.
     */
     'to'?: string;
-    /**
-    * The contract interacting with
-    */
-    'contract'?: string;
     /**
     * The value of the transaction.
     */
     'value'?: string;
+    /**
+    * The contract interacting with
+    */
+    'contract'?: string;
     /**
     * The function name of the contract.
     */
@@ -44,14 +44,14 @@ export class Interaction {
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
+            "name": "value",
+            "baseName": "value",
             "type": "string",
             "format": ""
         },
         {
-            "name": "value",
-            "baseName": "value",
+            "name": "contract",
+            "baseName": "contract",
             "type": "string",
             "format": ""
         },

@@ -24,7 +24,7 @@ export class PolicyStrategyRequest {
     */
     'tokenContractAmount'?: string;
     /**
-    * If the you want to use your own native tokens to pay for gas, specify the depositor ID (starts with dep_)
+    * If the you want to use your own native tokens to pay for gas, specify the developer account ID (starts with dac_)
     */
     'depositor'?: string;
 

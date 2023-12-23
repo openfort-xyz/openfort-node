@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type EntityTypePAYMASTERDEPOSITOR = "paymasterDepositor" ;
+export type EntityTypeDEVELOPERACCOUNT = "developerAccount" ;

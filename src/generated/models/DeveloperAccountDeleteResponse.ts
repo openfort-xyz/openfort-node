@@ -10,39 +10,43 @@
  * Do not edit the class manually.
  */
 
+import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorCreateRequest {
-    /**
-    * The address of the wallet that has deposited in the paymaster.
-    */
-    'depositorAddress': string;
-    /**
-    * Signature to verify the account ownership.
-    */
-    'signature': string;
+export class DeveloperAccountDeleteResponse {
+    'id': string;
+    'object': EntityTypeDEVELOPERACCOUNT;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "signature",
-            "baseName": "signature",
-            "type": "string",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeDEVELOPERACCOUNT",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorCreateRequest.attributeTypeMap;
+        return DeveloperAccountDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

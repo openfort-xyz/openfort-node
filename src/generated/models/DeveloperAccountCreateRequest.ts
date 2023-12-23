@@ -12,28 +12,44 @@
 
 import { HttpFile } from '../http/http';
 
-export class PaymasterDepositorResponse {
-    'id': string;
-    'depositorAddress': string;
+export class DeveloperAccountCreateRequest {
+    /**
+    * The address of the wallet that has deposited funds in the paymaster.
+    */
+    'address'?: string;
+    /**
+    * Signature to verify the account ownership.
+    */
+    'signature'?: string;
+    /**
+    * The name of the account.
+    */
+    'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "address",
+            "baseName": "address",
             "type": "string",
             "format": ""
         },
         {
-            "name": "depositorAddress",
-            "baseName": "depositorAddress",
+            "name": "signature",
+            "baseName": "signature",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymasterDepositorResponse.attributeTypeMap;
+        return DeveloperAccountCreateRequest.attributeTypeMap;
     }
 
     public constructor() {

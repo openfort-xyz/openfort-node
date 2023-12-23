@@ -56,12 +56,17 @@ import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionReque
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
+import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
+import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
+import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
+import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
+import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
-import { EntityTypePAYMASTERDEPOSITOR } from '../models/EntityTypePAYMASTERDEPOSITOR';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -111,11 +116,6 @@ import { ObsoleteAssetInventory } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
-import { PaymasterDepositorCreateRequest } from '../models/PaymasterDepositorCreateRequest';
-import { PaymasterDepositorDeleteResponse } from '../models/PaymasterDepositorDeleteResponse';
-import { PaymasterDepositorGetMessageResponse } from '../models/PaymasterDepositorGetMessageResponse';
-import { PaymasterDepositorListResponse } from '../models/PaymasterDepositorListResponse';
-import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
@@ -160,6 +160,8 @@ import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
+import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
+import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
 import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
@@ -183,6 +185,7 @@ import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECU
 import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
+import { Stat } from '../models/Stat';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent } from '../models/TransactionIntent';
@@ -2150,12 +2153,12 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Verify signature and add a depositor address to the current project environment.
-     * Add depositor address.
-     * @param paymasterDepositorCreateRequest 
+     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
+     * Create a developer account.
+     * @param developerAccountCreateRequest 
      */
-    public addDepositorAddress(paymasterDepositorCreateRequest: PaymasterDepositorCreateRequest, _options?: Configuration): Observable<PaymasterDepositorResponse> {
-        const requestContextPromise = this.requestFactory.addDepositorAddress(paymasterDepositorCreateRequest, _options);
+    public createDeveloperAccount(developerAccountCreateRequest: DeveloperAccountCreateRequest, _options?: Configuration): Observable<DeveloperAccountResponse> {
+        const requestContextPromise = this.requestFactory.createDeveloperAccount(developerAccountCreateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -2169,16 +2172,17 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.addDepositorAddress(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDeveloperAccount(rsp)));
             }));
     }
 
     /**
-     * Retrieve the list of the depositor addresses for the current project environment.
-     * List of depositor addresses.
+     * Delete a developer account from the current project.
+     * Delete a developer account.
+     * @param id Specifies a unique developer account.
      */
-    public getDepositorAddresses(_options?: Configuration): Observable<PaymasterDepositorListResponse> {
-        const requestContextPromise = this.requestFactory.getDepositorAddresses(_options);
+    public deleteDeveloperAccount(id: string, _options?: Configuration): Observable<DeveloperAccountDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteDeveloperAccount(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -2192,17 +2196,40 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDepositorAddresses(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteDeveloperAccount(rsp)));
             }));
     }
 
     /**
-     * Generate message, which should be signed for verification of the address ownership.
+     * Retrieve the list of the developer accounts for the current project.
+     * List of developer accounts.
+     */
+    public getDeveloperAccounts(_options?: Configuration): Observable<DeveloperAccountListResponse> {
+        const requestContextPromise = this.requestFactory.getDeveloperAccounts(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDeveloperAccounts(rsp)));
+            }));
+    }
+
+    /**
+     * Generate message, which should be signed by the account your want to add as a developer account.
      * Generate message to sign
-     * @param address Specifies the paymaster depositor address
+     * @param address Specifies the address
      */
-    public getMessageForSigningDepositorAddress(address: string, _options?: Configuration): Observable<PaymasterDepositorGetMessageResponse> {
-        const requestContextPromise = this.requestFactory.getMessageForSigningDepositorAddress(address, _options);
+    public getVerificationPayload(address: string, _options?: Configuration): Observable<DeveloperAccountGetMessageResponse> {
+        const requestContextPromise = this.requestFactory.getVerificationPayload(address, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -2216,31 +2243,7 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getMessageForSigningDepositorAddress(rsp)));
-            }));
-    }
-
-    /**
-     * Remove a depositor address from the current project environment.
-     * Removes depositor address.
-     * @param id Specifies unique identifier of depositor address.
-     */
-    public removeDepositorAddress(id: string, _options?: Configuration): Observable<PaymasterDepositorDeleteResponse> {
-        const requestContextPromise = this.requestFactory.removeDepositorAddress(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.removeDepositorAddress(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getVerificationPayload(rsp)));
             }));
     }
 

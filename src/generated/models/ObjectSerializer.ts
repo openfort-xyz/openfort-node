@@ -52,12 +52,17 @@ export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
 export * from '../models/DataAccountTypes';
 export * from '../models/DeployRequest';
+export * from '../models/DeveloperAccountCreateRequest';
+export * from '../models/DeveloperAccountDeleteResponse';
+export * from '../models/DeveloperAccountGetMessageResponse';
+export * from '../models/DeveloperAccountListResponse';
+export * from '../models/DeveloperAccountResponse';
 export * from '../models/DomainData';
 export * from '../models/EntityIdResponse';
 export * from '../models/EntityTypeACCOUNT';
 export * from '../models/EntityTypeCONTRACT';
+export * from '../models/EntityTypeDEVELOPERACCOUNT';
 export * from '../models/EntityTypeINVENTORY';
-export * from '../models/EntityTypePAYMASTERDEPOSITOR';
 export * from '../models/EntityTypePLAYER';
 export * from '../models/EntityTypePOLICY';
 export * from '../models/EntityTypePOLICYRULE';
@@ -107,11 +112,6 @@ export * from '../models/ObsoleteAssetInventory';
 export * from '../models/ObsoleteAssetType';
 export * from '../models/ObsoleteInventoryResponse';
 export * from '../models/PayForUserPolicyStrategy';
-export * from '../models/PaymasterDepositorCreateRequest';
-export * from '../models/PaymasterDepositorDeleteResponse';
-export * from '../models/PaymasterDepositorGetMessageResponse';
-export * from '../models/PaymasterDepositorListResponse';
-export * from '../models/PaymasterDepositorResponse';
 export * from '../models/PickContractResponseId';
 export * from '../models/PickPlayerResponseId';
 export * from '../models/PlayFabOAuthConfig';
@@ -156,6 +156,8 @@ export * from '../models/PrivateKeyPolicy';
 export * from '../models/ProjectListResponse';
 export * from '../models/ProjectLogs';
 export * from '../models/ProjectResponse';
+export * from '../models/ProjectStatsRequest';
+export * from '../models/ProjectStatsResponse';
 export * from '../models/ProjectWebhookRequest';
 export * from '../models/RegisterPlayerEncryptedKeyRequest';
 export * from '../models/RegisterPlayerEncryptedKeyResponse';
@@ -179,6 +181,7 @@ export * from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
 export * from '../models/SponsorSchemaFIXEDRATE';
 export * from '../models/SponsorSchemaPAYFORUSER';
 export * from '../models/StartRecoveryRequest';
+export * from '../models/Stat';
 export * from '../models/SubmitWeb3ActionRequest';
 export * from '../models/TimeIntervalType';
 export * from '../models/TransactionIntent';
@@ -269,12 +272,17 @@ import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionReque
 import { Currency } from '../models/Currency';
 import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
+import { DeveloperAccountDeleteResponse    } from '../models/DeveloperAccountDeleteResponse';
+import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
+import { DeveloperAccountListResponse       } from '../models/DeveloperAccountListResponse';
+import { DeveloperAccountResponse       } from '../models/DeveloperAccountResponse';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
+import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
-import { EntityTypePAYMASTERDEPOSITOR } from '../models/EntityTypePAYMASTERDEPOSITOR';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -324,11 +332,6 @@ import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
 import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
 import { ObsoleteInventoryResponse     } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy   } from '../models/PayForUserPolicyStrategy';
-import { PaymasterDepositorCreateRequest } from '../models/PaymasterDepositorCreateRequest';
-import { PaymasterDepositorDeleteResponse    } from '../models/PaymasterDepositorDeleteResponse';
-import { PaymasterDepositorGetMessageResponse } from '../models/PaymasterDepositorGetMessageResponse';
-import { PaymasterDepositorListResponse       } from '../models/PaymasterDepositorListResponse';
-import { PaymasterDepositorResponse } from '../models/PaymasterDepositorResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig    } from '../models/PlayFabOAuthConfig';
@@ -373,6 +376,8 @@ import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
 import { ProjectLogs       } from '../models/ProjectLogs';
 import { ProjectResponse        } from '../models/ProjectResponse';
+import { ProjectStatsRequest, ProjectStatsRequestTimeFrameEnum   } from '../models/ProjectStatsRequest';
+import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
 import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
@@ -396,6 +401,7 @@ import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECU
 import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
+import { Stat } from '../models/Stat';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent              } from '../models/TransactionIntent';
@@ -459,8 +465,8 @@ let enumsMap: Set<string> = new Set<string>([
     "DataAccountTypes",
     "EntityTypeACCOUNT",
     "EntityTypeCONTRACT",
+    "EntityTypeDEVELOPERACCOUNT",
     "EntityTypeINVENTORY",
-    "EntityTypePAYMASTERDEPOSITOR",
     "EntityTypePLAYER",
     "EntityTypePOLICY",
     "EntityTypePOLICYRULE",
@@ -493,6 +499,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PolicyRuleTypeCONTRACT",
     "PolicyRuleTypeRATELIMIT",
     "PrivateKeyPolicy",
+    "ProjectStatsRequestTimeFrameEnum",
     "ResponseTypeLIST",
     "SessionResponseExpandable",
     "SortOrder",
@@ -559,6 +566,11 @@ let typeMap: {[index: string]: any} = {
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
     "DeployRequest": DeployRequest,
+    "DeveloperAccountCreateRequest": DeveloperAccountCreateRequest,
+    "DeveloperAccountDeleteResponse": DeveloperAccountDeleteResponse,
+    "DeveloperAccountGetMessageResponse": DeveloperAccountGetMessageResponse,
+    "DeveloperAccountListResponse": DeveloperAccountListResponse,
+    "DeveloperAccountResponse": DeveloperAccountResponse,
     "DomainData": DomainData,
     "EntityIdResponse": EntityIdResponse,
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
@@ -590,11 +602,6 @@ let typeMap: {[index: string]: any} = {
     "ObsoleteAssetInventory": ObsoleteAssetInventory,
     "ObsoleteInventoryResponse": ObsoleteInventoryResponse,
     "PayForUserPolicyStrategy": PayForUserPolicyStrategy,
-    "PaymasterDepositorCreateRequest": PaymasterDepositorCreateRequest,
-    "PaymasterDepositorDeleteResponse": PaymasterDepositorDeleteResponse,
-    "PaymasterDepositorGetMessageResponse": PaymasterDepositorGetMessageResponse,
-    "PaymasterDepositorListResponse": PaymasterDepositorListResponse,
-    "PaymasterDepositorResponse": PaymasterDepositorResponse,
     "PickContractResponseId": PickContractResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
     "PlayFabOAuthConfig": PlayFabOAuthConfig,
@@ -628,6 +635,8 @@ let typeMap: {[index: string]: any} = {
     "ProjectListResponse": ProjectListResponse,
     "ProjectLogs": ProjectLogs,
     "ProjectResponse": ProjectResponse,
+    "ProjectStatsRequest": ProjectStatsRequest,
+    "ProjectStatsResponse": ProjectStatsResponse,
     "ProjectWebhookRequest": ProjectWebhookRequest,
     "RegisterPlayerEncryptedKeyRequest": RegisterPlayerEncryptedKeyRequest,
     "RegisterPlayerEncryptedKeyResponse": RegisterPlayerEncryptedKeyResponse,
@@ -644,6 +653,7 @@ let typeMap: {[index: string]: any} = {
     "SignatureRequest": SignatureRequest,
     "SignupRequest": SignupRequest,
     "StartRecoveryRequest": StartRecoveryRequest,
+    "Stat": Stat,
     "SubmitWeb3ActionRequest": SubmitWeb3ActionRequest,
     "TransactionIntent": TransactionIntent,
     "TransactionIntentListQueries": TransactionIntentListQueries,

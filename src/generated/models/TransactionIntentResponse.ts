@@ -40,7 +40,7 @@ export class TransactionIntentResponse {
     'interactions'?: Array<Interaction>;
     'nextAction'?: NextActionResponse;
     'policy'?: TransactionIntentResponsePolicy;
-    'player': TransactionIntentResponsePlayer;
+    'player'?: TransactionIntentResponsePlayer;
     'account': TransactionIntentResponseAccount;
 
     static readonly discriminator: string | undefined = undefined;
