@@ -79,7 +79,7 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
 
     /**
      * Creates a session object for the given player.
-     * @param req Parameters to revoce the player session.
+     * @param req Parameters to revoke the player session.
      */
     public async revokeSession(req: RevokePlayerSessionRequest): Promise<SessionResponse> {
         const { playerId, ...body } = req;
