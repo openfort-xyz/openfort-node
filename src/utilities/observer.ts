@@ -10,7 +10,7 @@ export interface Observer {
      */
     onError?(error: ErrorMessage): Promise<void> | void;
     /**
-     * Triggers when any validation request error is occuring
+     * Triggers when any validation request error is occurring
      * @param error Contains information about calling method and happened error
      */
     onValidationError?(error: ValidationErrorMessage): Promise<void> | void;
