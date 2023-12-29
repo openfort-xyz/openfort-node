@@ -42,7 +42,7 @@ export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {
     }
 
     /**
-     * Deletes a polcy rule (allow_functions) object.
+     * Deletes a policy rule (allow_functions) object.
      * @param id Id of the policy rule
      */
     public async delete(id: string): Promise<PolicyRuleDeleteResponse> {
