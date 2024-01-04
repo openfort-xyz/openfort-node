@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { DataAccountTypes } from '../models/DataAccountTypes';
 import { HttpFile } from '../http/http';
 
 export class CreatePlayerAccountRequest {
@@ -22,7 +21,10 @@ export class CreatePlayerAccountRequest {
     * The address of the external owner
     */
     'externalOwnerAddress'?: string;
-    'accountType'?: DataAccountTypes;
+    /**
+    * The type of smart account that will be created (e.g. \"ERC6551V1\", \"ManagedV5\", \"UpgradeableV5\").
+    */
+    'accountType'?: string;
     /**
     * If ERC6551, the NFT contract to use
     */
@@ -50,7 +52,7 @@ export class CreatePlayerAccountRequest {
         {
             "name": "accountType",
             "baseName": "accountType",
-            "type": "DataAccountTypes",
+            "type": "string",
             "format": ""
         },
         {
@@ -73,6 +75,4 @@ export class CreatePlayerAccountRequest {
     public constructor() {
     }
 }
-
-
 

@@ -50,7 +50,6 @@ export * from '../models/CreateSessionRequest';
 export * from '../models/CreateTransactionIntentRequest';
 export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
-export * from '../models/DataAccountTypes';
 export * from '../models/DeployRequest';
 export * from '../models/DeveloperAccountCreateRequest';
 export * from '../models/DeveloperAccountDeleteResponse';
@@ -256,10 +255,10 @@ import { ContractReadQueries } from '../models/ContractReadQueries';
 import { ContractReadResponse      } from '../models/ContractReadResponse';
 import { ContractResponse          } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse         } from '../models/CountPerIntervalLimitPolicyRuleResponse';
-import { CreateAccountRequest       } from '../models/CreateAccountRequest';
+import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
-import { CreatePlayerAccountRequest      } from '../models/CreatePlayerAccountRequest';
+import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
 import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { CreatePolicyAllowFunctionRequest        } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
@@ -270,7 +269,6 @@ import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
-import { DataAccountTypes } from '../models/DataAccountTypes';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse    } from '../models/DeveloperAccountDeleteResponse';
@@ -462,7 +460,6 @@ let enumsMap: Set<string> = new Set<string>([
     "ApiKeyType",
     "AssetType",
     "Currency",
-    "DataAccountTypes",
     "EntityTypeACCOUNT",
     "EntityTypeCONTRACT",
     "EntityTypeDEVELOPERACCOUNT",
