@@ -15,31 +15,31 @@ import { HttpFile } from '../http/http';
 
 export class CreateTransactionIntentRequest {
     /**
-    * The chain ID.
+    * The chain ID. Must be a [supported chain](/chains).
     */
     'chainId': number;
     /**
-    * The player ID (starts with pla_).
+    * ID of the Player this TransactionIntent belongs to, if one exists (starts with `pla_`).  If you omit this parameter a new Player will be created.
     */
     'player'?: string;
     /**
-    * The account ID (starts with acc_ or dac_).
+    * ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).  When providing a Player and ChainID, you can omit this parameter.
     */
     'account'?: string;
     /**
-    * The policy ID (starts with pol_).
+    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
     */
     'policy'?: string;
     /**
-    * If no account exists for a given player, create one with this address.
+    * Use this parameter to create a new Account for Player with the provided owner address.  If you omit this parameter and no Account exists for the Player, a custodial Account will be created.
     */
     'externalOwnerAddress'?: string;
     /**
-    * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
+    * Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.
     */
-    'optimistic': boolean;
+    'optimistic'?: boolean;
     /**
-    * Specify the number of blocks after the block with transaction to be assured that transaction is in block
+    * Specify the number of confirmation blocks after which the confirmation webhook will be sent when the transaction arrives on-chain. Default is 5.
     */
     'confirmationBlocks'?: number;
     'interactions': Array<Interaction>;

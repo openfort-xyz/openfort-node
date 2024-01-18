@@ -14,23 +14,23 @@ import { HttpFile } from '../http/http';
 
 export class Interaction {
     /**
-    * The address of the recipient.
+    * The address of the recipient of native tokens. Use *only* to transfer native tokens. If you provide one of a `pla_...`,  or `acc_...` it will be converted to the corresponding address.
     */
     'to'?: string;
     /**
-    * The value of the transaction.
+    * The value intended to be sent with the transaction. Use only to transfer native tokens. Should be a stringified number in WEI (i.e. factor 10^18).
     */
     'value'?: string;
     /**
-    * The contract interacting with
+    * The contract ID you want to interact with. Must have been added to Openfort first, starts with `con_`.
     */
     'contract'?: string;
     /**
-    * The function name of the contract.
+    * The function name of the contract. Accepts a a function signature as well (e.g. mint(address)).
     */
     'functionName'?: string;
     /**
-    * The function arguments of the contract, in string format. Accepts pla_, con_ and acc_ IDs.
+    * The function arguments of the contract, in string format. If you provide one of a `pla_...`, `con_...` or `acc_...` it will be converted to the corresponding address.
     */
     'functionArgs'?: Array<any>;
 

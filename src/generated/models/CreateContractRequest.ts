@@ -19,7 +19,7 @@ export class CreateContractRequest {
     */
     'name': string;
     /**
-    * Specifies the chain ID of the contract.
+    * Specifies the chain ID of the contract. Must be a [supported chain](/chains).
     */
     'chainId': number;
     /**

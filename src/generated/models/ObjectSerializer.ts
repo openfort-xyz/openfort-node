@@ -39,9 +39,6 @@ export * from '../models/CountPerIntervalLimitPolicyRuleResponse';
 export * from '../models/CreateAccountRequest';
 export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateContractRequest';
-export * from '../models/CreatePlayerAccountRequest';
-export * from '../models/CreatePlayerSessionRequest';
-export * from '../models/CreatePolicyAllowFunctionRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
@@ -107,9 +104,6 @@ export * from '../models/OAuthProviderGOOGLE';
 export * from '../models/OAuthProviderLOOTLOCKER';
 export * from '../models/OAuthProviderPLAYFAB';
 export * from '../models/OAuthRequest';
-export * from '../models/ObsoleteAssetInventory';
-export * from '../models/ObsoleteAssetType';
-export * from '../models/ObsoleteInventoryResponse';
 export * from '../models/PayForUserPolicyStrategy';
 export * from '../models/PickContractResponseId';
 export * from '../models/PickPlayerResponseId';
@@ -163,7 +157,6 @@ export * from '../models/RegisterPlayerEncryptedKeyResponse';
 export * from '../models/ResponseResponse';
 export * from '../models/ResponseTypeLIST';
 export * from '../models/RetrievePlayerEncryptedKeyResponse';
-export * from '../models/RevokeSessionPlayerRequest';
 export * from '../models/RevokeSessionRequest';
 export * from '../models/SessionListQueries';
 export * from '../models/SessionListResponse';
@@ -258,9 +251,6 @@ import { CountPerIntervalLimitPolicyRuleResponse         } from '../models/Count
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
-import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
-import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
-import { CreatePolicyAllowFunctionRequest        } from '../models/CreatePolicyAllowFunctionRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
@@ -326,9 +316,6 @@ import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
-import { ObsoleteAssetInventory      } from '../models/ObsoleteAssetInventory';
-import { ObsoleteAssetType } from '../models/ObsoleteAssetType';
-import { ObsoleteInventoryResponse     } from '../models/ObsoleteInventoryResponse';
 import { PayForUserPolicyStrategy   } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
@@ -382,7 +369,6 @@ import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncr
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RetrievePlayerEncryptedKeyResponse } from '../models/RetrievePlayerEncryptedKeyResponse';
-import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
@@ -483,7 +469,6 @@ let enumsMap: Set<string> = new Set<string>([
     "OAuthProviderGOOGLE",
     "OAuthProviderLOOTLOCKER",
     "OAuthProviderPLAYFAB",
-    "ObsoleteAssetType",
     "PlayerResponseExpandable",
     "PolicyRateLimit",
     "PolicyRateLimitCOUNTPERINTERVAL",
@@ -552,9 +537,6 @@ let typeMap: {[index: string]: any} = {
     "CreateAccountRequest": CreateAccountRequest,
     "CreateApiAuthorizedNetworkRequest": CreateApiAuthorizedNetworkRequest,
     "CreateContractRequest": CreateContractRequest,
-    "CreatePlayerAccountRequest": CreatePlayerAccountRequest,
-    "CreatePlayerSessionRequest": CreatePlayerSessionRequest,
-    "CreatePolicyAllowFunctionRequest": CreatePolicyAllowFunctionRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
@@ -596,8 +578,6 @@ let typeMap: {[index: string]: any} = {
     "OAuthConfig": OAuthConfig,
     "OAuthConfigListResponse": OAuthConfigListResponse,
     "OAuthRequest": OAuthRequest,
-    "ObsoleteAssetInventory": ObsoleteAssetInventory,
-    "ObsoleteInventoryResponse": ObsoleteInventoryResponse,
     "PayForUserPolicyStrategy": PayForUserPolicyStrategy,
     "PickContractResponseId": PickContractResponseId,
     "PickPlayerResponseId": PickPlayerResponseId,
@@ -639,7 +619,6 @@ let typeMap: {[index: string]: any} = {
     "RegisterPlayerEncryptedKeyResponse": RegisterPlayerEncryptedKeyResponse,
     "ResponseResponse": ResponseResponse,
     "RetrievePlayerEncryptedKeyResponse": RetrievePlayerEncryptedKeyResponse,
-    "RevokeSessionPlayerRequest": RevokeSessionPlayerRequest,
     "RevokeSessionRequest": RevokeSessionRequest,
     "SessionListQueries": SessionListQueries,
     "SessionListResponse": SessionListResponse,

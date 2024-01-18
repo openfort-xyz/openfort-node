@@ -18,7 +18,7 @@ export class SubmitWeb3ActionRequest {
     */
     'approve': boolean;
     /**
-    * The policy ID (starts with pol_)
+    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
     */
     'policy'?: string;
     /**

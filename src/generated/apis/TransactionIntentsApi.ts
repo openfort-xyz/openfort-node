@@ -25,7 +25,7 @@ import { TransactionIntentResponseExpandable } from '../models/TransactionIntent
 export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Retrieve a transaction intent by providing their id on Openfort. Transaction intents that have not been processed yet, have the `response` attribute as undefined.
+     * Creates a TransactionIntent.  A pending TransactionIntent has the `response` attribute as undefined.  After the TransactionIntent is created and broadcasted to the blockchain, `response` will be populated with the transaction hash and a status (1 success, 0 fail).  When using a non-custodial account, a `nextAction` attribute is returned with the `userOperationHash` that must be signed by the owner of the account.
      * Create a transaction intent object.
      * @param createTransactionIntentRequest 
      */
@@ -73,7 +73,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Estimate the gas cost of creating a transaction intent and putting it on chain. If a policy that includes payment of gas in ERC-20 tokens is provided, an extra field `estimatedTXGasFeeToken` is returned with the estimated amount of tokens.
+     * Estimate the gas cost of broadcasting a TransactionIntent.  This is a simulation, it does not send the transaction on-chain.  If a Policy ID is used that includes payment of gas in ERC-20 tokens, an extra field `estimatedTXGasFeeToken` is returned with the estimated amount of tokens that will be used.
      * Estimate gas cost of creating a transaction
      * @param createTransactionIntentRequest 
      */
@@ -121,6 +121,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieves the details of a TransactionIntent that has previously been created.
      * Get a transaction intent object.
      * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param expand Specifies the expandable fields.
@@ -165,12 +166,13 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Returns a list of TransactionIntents.
      * List transaction intents.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
-     * @param chainId The chain ID.
+     * @param chainId The chain ID. Must be a [supported chain](/chains).
      * @param accountId Filter by account ID.
      * @param playerId Filter by player ID (starts with pla_).
      * @param policyId Filter by policy ID (starts with pol_).
@@ -250,7 +252,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * For non-custodial smart accounts, each on chain action using their wallet, they must sign the userOperationHash received from the `POST` API endpoint that creates a transactionIntent.
+     * Broadcasts a signed TransactionIntent to the blockchain.  Use this endpoint to send the signed `userOperationHash`. Openfort will then put it on-chain.
      * Send a signed transaction userOperationHash.
      * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 

@@ -30,9 +30,9 @@ import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * This endpoint allows you to cancel a pending transfer of ownership.
+     * Cancel a pending transfer of ownership.
      * Cancel request to transfer ownership of an account.
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      * @param cancelTransferOwnershipRequest 
      */
     public async cancelTransferOwnership(id: string, cancelTransferOwnershipRequest: CancelTransferOwnershipRequest, _options?: Configuration): Promise<RequestContext> {
@@ -141,7 +141,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This endpoint allows you to add a new account to your Openfort player. Only one account can be active per chain per player.
+     * Creates a new blockchain account for the provided player.  Account creation does not consume any gas. All accounts of a player will use the same address across blockchains.  Only one account can per chain per player.
      * Create an account object.
      * @param createAccountRequest 
      */
@@ -245,7 +245,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the details of an existing account. Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the details of an existing account.  Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
      * Get existing account.
      * @param id Specifies the unique account ID (starts with acc_).
      * @param expand 
@@ -290,7 +290,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first. By default, a maximum of ten accounts are shown per page.
+     * Returns a list of accounts for the given player.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
      * List accounts of a player.
      * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
@@ -360,9 +360,9 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This endpoint allows you to perform a request to change the owner of an account. To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
+     * Perform a request to change the owner of an account.  To perform an update on the owner of an account, first you must provide a new owner address. Once requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.
      * Request transfer ownership of account.
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      * @param transferOwnershipRequest 
      */
     public async requestTransferOwnership(id: string, transferOwnershipRequest: TransferOwnershipRequest, _options?: Configuration): Promise<RequestContext> {
@@ -418,7 +418,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Signs the typed data value with types data structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
-     * @param id Specifies the unique account ID.
+     * @param id Specifies the unique account ID (starts with acc_).
      * @param signPayloadRequest 
      */
     public async signPayload(id: string, signPayloadRequest: SignPayloadRequest, _options?: Configuration): Promise<RequestContext> {
@@ -527,7 +527,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This endpoint updates the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
+     * Synchronize the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
      * Sync account state with the blockchain
      * @param id Specifies the unique account ID (starts with acc_).
      */

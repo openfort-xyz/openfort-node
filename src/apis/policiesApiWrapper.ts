@@ -1,16 +1,11 @@
 import {
     CreatePolicyRequest,
-    CreatePolicyRuleRequest,
     GasReport,
-    GetAllowFunctionsRequest,
     GetPolicyRequest,
     GetPolicyTotalGasUsageRequest,
     PolicyListResponse,
     PolicyDeleteResponse,
     PolicyResponse,
-    PolicyRuleResponse,
-    PolicyRuleListResponse,
-    UpdatePolicyAllowFunctionRequest,
     UpdatePolicyRequest,
     PolicyListQueries,
 } from "../models";
@@ -39,15 +34,6 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
     public async update(req: UpdatePolicyRequest): Promise<PolicyResponse> {
         const { id, ...body } = req;
         return await this.api.updatePolicy(id, body);
-    }
-
-    /**
-     * Creates allow function
-     * @param req parameters to create
-     */
-    public async createAllowFunction(req: CreatePolicyRuleRequest): Promise<PolicyRuleResponse> {
-        const { policy, ...body } = req;
-        return await this.api.createPolicyAllowFunction(policy, body);
     }
 
     /**
@@ -98,27 +84,10 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
     }
 
     /**
-     * Gets allows functions
-     * @param req Criteria to get allow functions
-     */
-    public async getAllowFunctions(req: GetAllowFunctionsRequest): Promise<PolicyRuleListResponse> {
-        return await this.api.getPolicyAllowFunctions(req.id, req.expand);
-    }
-
-    /**
      * Get policy total gas usage
      * @param req Criteria to get usage
      */
     public async getPolicyTotalGasUsage(req: GetPolicyTotalGasUsageRequest): Promise<GasReport> {
         return await this.api.getPolicyTotalGasUsage(req.id);
-    }
-
-    /**
-     * Update policy allow function
-     * @param req Parameters to update
-     */
-    public async updateAllowFunction(req: UpdatePolicyAllowFunctionRequest): Promise<PolicyRuleResponse> {
-        const { policy, policyRule, ...body } = req;
-        return await this.api.updatePolicyAllowFunction(policy, policyRule, body);
     }
 }

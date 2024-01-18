@@ -15,6 +15,14 @@ import { HttpFile } from '../http/http';
 export class NextActionPayload {
     'userOp'?: any | null;
     'userOpHash'?: string;
+    /**
+    * The userOperation.
+    */
+    'userOperation'?: any | null;
+    /**
+    * The hashed userOperation.
+    */
+    'userOperationHash'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,6 +36,18 @@ export class NextActionPayload {
         {
             "name": "userOpHash",
             "baseName": "userOpHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "userOperation",
+            "baseName": "userOperation",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "userOperationHash",
+            "baseName": "userOperationHash",
             "type": "string",
             "format": ""
         }    ];

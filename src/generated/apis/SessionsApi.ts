@@ -24,6 +24,7 @@ import { SortOrder } from '../models/SortOrder';
 export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Creates a Session.
      * Create a session key.
      * @param createSessionRequest 
      */
@@ -71,6 +72,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Returns a list of Sessions.
      * List session keys of a player.
      * @param player The player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
@@ -140,6 +142,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieves the details of a Session that has previously been created.
      * Returns a player session by session id
      * @param id Specifies the unique session ID (starts with ses_).
      * @param expand Specifies the fields to expand.
@@ -231,7 +234,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Send signed userOpHash to create session.
+     * Send signed userOperationHash to create session.
      * @param id Specifies the unique session ID (starts with ses_).
      * @param signatureRequest 
      */

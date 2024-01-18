@@ -29,7 +29,7 @@ export class TransactionIntentListQueries {
     */
     'expand'?: Array<TransactionIntentResponseExpandable>;
     /**
-    * The chain ID.
+    * The chain ID. Must be a [supported chain](/chains).
     */
     'chainId'?: number;
     /**

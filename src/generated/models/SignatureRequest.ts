@@ -18,7 +18,7 @@ export class SignatureRequest {
     */
     'signature': string;
     /**
-    * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
+    * Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.
     */
     'optimistic'?: boolean;
 
