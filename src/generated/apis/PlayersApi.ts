@@ -10,11 +10,6 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { AccountListResponse } from '../models/AccountListResponse';
-import { AccountResponse } from '../models/AccountResponse';
-import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
-import { CreatePlayerAccountRequest } from '../models/CreatePlayerAccountRequest';
-import { CreatePlayerSessionRequest } from '../models/CreatePlayerSessionRequest';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
 import { PlayerCreateRequest } from '../models/PlayerCreateRequest';
 import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
@@ -23,8 +18,6 @@ import { PlayerResponse } from '../models/PlayerResponse';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
-import { RevokeSessionPlayerRequest } from '../models/RevokeSessionPlayerRequest';
-import { SessionResponse } from '../models/SessionResponse';
 import { SortOrder } from '../models/SortOrder';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
 
@@ -90,7 +83,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Add a new player to your player list in Openfort.
+     * Creates a Player.
      * Create a player object.
      * @param playerCreateRequest 
      */
@@ -118,116 +111,6 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(playerCreateRequest, "PlayerCreateRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Create account object for a player.
-     * @param id Specifies the unique player ID (starts with pla_).
-     * @param createPlayerAccountRequest 
-     */
-    public async createPlayerAccount(id: string, createPlayerAccountRequest: CreatePlayerAccountRequest, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new RequiredError("PlayersApi", "createPlayerAccount", "id");
-        }
-
-
-        // verify required parameter 'createPlayerAccountRequest' is not null or undefined
-        if (createPlayerAccountRequest === null || createPlayerAccountRequest === undefined) {
-            throw new RequiredError("PlayersApi", "createPlayerAccount", "createPlayerAccountRequest");
-        }
-
-
-        // Path Params
-        const localVarPath = '/v1/players/{id}/accounts'
-            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createPlayerAccountRequest, "CreatePlayerAccountRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Create session object for a player.
-     * @param id Specifies the unique player ID (starts with pla_).
-     * @param createPlayerSessionRequest 
-     */
-    public async createPlayerSession(id: string, createPlayerSessionRequest: CreatePlayerSessionRequest, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new RequiredError("PlayersApi", "createPlayerSession", "id");
-        }
-
-
-        // verify required parameter 'createPlayerSessionRequest' is not null or undefined
-        if (createPlayerSessionRequest === null || createPlayerSessionRequest === undefined) {
-            throw new RequiredError("PlayersApi", "createPlayerSession", "createPlayerSessionRequest");
-        }
-
-
-        // Path Params
-        const localVarPath = '/v1/players/{id}/sessions'
-            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createPlayerSessionRequest, "CreatePlayerSessionRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -310,50 +193,6 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (expand !== undefined) {
             requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<PlayerResponseExpandable>", ""));
-        }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * List of accounts of a player.
-     * @param id Specifies the unique player ID (starts with pla_).
-     * @param expand Specifies the expandable fields.
-     */
-    public async getPlayerAccounts(id: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new RequiredError("PlayersApi", "getPlayerAccounts", "id");
-        }
-
-
-
-        // Path Params
-        const localVarPath = '/v1/players/{id}/accounts'
-            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<AccountResponseExpandable>", ""));
         }
 
 
@@ -494,61 +333,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Revoke session object for a player.
-     * @param id Specifies the unique player ID (starts with pla_).
-     * @param revokeSessionPlayerRequest 
-     */
-    public async revokePlayerSession(id: string, revokeSessionPlayerRequest: RevokeSessionPlayerRequest, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new RequiredError("PlayersApi", "revokePlayerSession", "id");
-        }
-
-
-        // verify required parameter 'revokeSessionPlayerRequest' is not null or undefined
-        if (revokeSessionPlayerRequest === null || revokeSessionPlayerRequest === undefined) {
-            throw new RequiredError("PlayersApi", "revokePlayerSession", "revokeSessionPlayerRequest");
-        }
-
-
-        // Path Params
-        const localVarPath = '/v1/players/{id}/sessions/revoke'
-            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(revokeSessionPlayerRequest, "RevokeSessionPlayerRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
+     * Updates the specified Player by setting the values of the parameters passed.
      * Updates a player object.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param playerUpdateRequest 
@@ -681,73 +466,6 @@ export class PlayersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createPlayerAccount
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async createPlayerAccount(response: ResponseContext): Promise<AccountResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AccountResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountResponse", ""
-            ) as AccountResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-        if (isCodeInRange("409", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AccountResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountResponse", ""
-            ) as AccountResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to createPlayerSession
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async createPlayerSession(response: ResponseContext): Promise<SessionResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: SessionResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SessionResponse", ""
-            ) as SessionResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: SessionResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SessionResponse", ""
-            ) as SessionResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
      * @params response Response returned by the server for a request to deletePlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -815,38 +533,6 @@ export class PlayersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getPlayerAccounts
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getPlayerAccounts(response: ResponseContext): Promise<AccountListResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AccountListResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountListResponse", ""
-            ) as AccountListResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AccountListResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountListResponse", ""
-            ) as AccountListResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
      * @params response Response returned by the server for a request to getPlayers
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -904,38 +590,6 @@ export class PlayersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TransactionIntentResponse", ""
             ) as TransactionIntentResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to revokePlayerSession
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async revokePlayerSession(response: ResponseContext): Promise<SessionResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: SessionResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SessionResponse", ""
-            ) as SessionResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: SessionResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SessionResponse", ""
-            ) as SessionResponse;
             return body;
         }
 

@@ -21,11 +21,11 @@ export class UpdatePolicyRuleRequest {
     */
     'functionName'?: string | null;
     /**
-    * The contract ID (starts with con_).
+    * The contract ID you want to interact with. Must have been added to Openfort first, starts with `con_`.
     */
     'contract'?: string | null;
     /**
-    * Gas limit in WEI.
+    * Gas limit in WEI (i.e. factor 10^18).
     */
     'gasLimit'?: string;
     /**

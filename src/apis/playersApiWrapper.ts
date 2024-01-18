@@ -1,9 +1,4 @@
 import {
-    AccountListQueries,
-    AccountListResponse,
-    AccountResponse,
-    CreateAccountRequest,
-    CreatePlayerSessionRequest,
     GetPlayerRequest,
     PlayerCancelTransferOwnershipRequest,
     PlayerCreateRequest,
@@ -12,8 +7,6 @@ import {
     PlayerListResponse,
     PlayerResponse,
     PlayerTransferOwnershipRequest,
-    RevokePlayerSessionRequest,
-    SessionResponse,
     TransactionIntentResponse,
     UpdatePlayerRequest,
 } from "../models";
@@ -36,24 +29,6 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
     }
 
     /**
-     * Creates an account object for an existing player.
-     * @param req Parameters to create a player account.
-     */
-    public async createAccount(req: CreateAccountRequest): Promise<AccountResponse> {
-        const { player, ...body } = req;
-        return await this.api.createPlayerAccount(player, body);
-    }
-
-    /**
-     * Creates a session object for the given player.
-     * @param req Parameters to create a player session.
-     */
-    public async createSession(req: CreatePlayerSessionRequest): Promise<SessionResponse> {
-        const { playerId, ...body } = req;
-        return await this.api.createPlayerSession(playerId, body);
-    }
-
-    /**
      * Retrieves the details of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
      * @param req Criteria to get the player.
      */
@@ -62,28 +37,11 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
     }
 
     /**
-     * Returns a list of your accounts for the given player. The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-     * @param req Criteria to get the accounts list.
-     */
-    public async listAccounts(req: Pick<AccountListQueries, "player" | "expand">): Promise<AccountListResponse> {
-        return await this.api.getPlayerAccounts(req.player, req.expand);
-    }
-
-    /**
      * Returns a list of your players. The players are returned sorted by creation date, with the most recently created players appearing first.
      * @param req Criteria to retrieve the list of the players
      */
     public async list(req?: PlayerListQueries): Promise<PlayerListResponse> {
         return await this.api.getPlayers(req?.limit, req?.skip, req?.order, req?.expand, req?.name);
-    }
-
-    /**
-     * Creates a session object for the given player.
-     * @param req Parameters to revoce the player session.
-     */
-    public async revokeSession(req: RevokePlayerSessionRequest): Promise<SessionResponse> {
-        const { playerId, ...body } = req;
-        return await this.api.revokePlayerSession(playerId, body);
     }
 
     /**

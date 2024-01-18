@@ -19,7 +19,7 @@ export class UpdatePolicyRequest {
     */
     'name'?: string;
     /**
-    * The chain ID of the policy.
+    * The chain ID. Must be a [supported chain](/chains).
     */
     'chainId'?: number;
     'strategy'?: PolicyStrategyRequest;

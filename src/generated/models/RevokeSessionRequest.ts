@@ -18,7 +18,7 @@ export class RevokeSessionRequest {
     */
     'address': string;
     /**
-    * The policy ID (starts with pol_)
+    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
     */
     'policy'?: string;
     /**
@@ -26,7 +26,7 @@ export class RevokeSessionRequest {
     */
     'optimistic'?: boolean;
     /**
-    * The chain ID.
+    * The chain ID. Must be a [supported chain](/chains).
     */
     'chainId': number;
     /**

@@ -14,11 +14,11 @@ import { HttpFile } from '../http/http';
 
 export class CreateWeb3ConnectionRequest {
     /**
-    * The player ID (starts with pla_).
+    * ID of the Player this Web3Connection belongs to (starts with `pla_`).
     */
     'player': string;
     /**
-    * The chain ID.
+    * The chain ID. Must be a [supported chain](/chains).
     */
     'chainId': number;
     /**

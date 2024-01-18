@@ -14,27 +14,27 @@ import { HttpFile } from '../http/http';
 
 export class CreateAccountRequest {
     /**
-    * The chain id
+    * The chain ID. Must be a [supported chain](/chains).
     */
     'chainId': number;
     /**
-    * The address of the external owner
+    * Use this parameter to create a new Account for Player with the provided owner address.
     */
     'externalOwnerAddress'?: string;
     /**
-    * The type of smart account that will be created (e.g. \"ERC6551V1\", \"ManagedV5\", \"UpgradeableV5\").
+    * The type of smart account that will be created (e.g. ERC6551V1, ManagedV5, UpgradeableV5). Defaults to UpgradeableV5.
     */
     'accountType'?: string;
     /**
-    * If ERC6551, the NFT contract to use
+    * If ERC6551, the address of the NFT contract to use
     */
     'tokenContract'?: string;
     /**
-    * If ERC6551, the tokenID to serve as owner
+    * If ERC6551, the tokenId from the NFT contract that will serve as owner
     */
     'tokenId'?: number;
     /**
-    * The player ID (starts with pla_)
+    * ID of the Player this Account belongs to (starts with `pla_`).
     */
     'player': string;
 

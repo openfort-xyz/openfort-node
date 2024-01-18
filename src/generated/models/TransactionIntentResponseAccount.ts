@@ -16,7 +16,7 @@ import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { HttpFile } from '../http/http';
 
 /**
-* The account ID.
+* The account ID (starts with acc_).
 */
 export class TransactionIntentResponseAccount {
     'id': string;
