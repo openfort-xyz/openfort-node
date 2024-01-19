@@ -173,11 +173,11 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
      * @param chainId The chain ID. Must be a [supported chain](/chains).
-     * @param accountId Filter by account ID.
-     * @param playerId Filter by player ID (starts with pla_).
-     * @param policyId Filter by policy ID (starts with pol_).
+     * @param account Filter by account ID or developer account (starts with acc_ or dac_ respectively).
+     * @param player Filter by player ID (starts with pla_).
+     * @param policy Filter by policy ID (starts with pol_).
      */
-    public async getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, policy?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -221,18 +221,18 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (accountId !== undefined) {
-            requestContext.setQueryParam("accountId", ObjectSerializer.serialize(accountId, "Array<string>", ""));
+        if (account !== undefined) {
+            requestContext.setQueryParam("account", ObjectSerializer.serialize(account, "Array<string>", ""));
         }
 
         // Query Params
-        if (playerId !== undefined) {
-            requestContext.setQueryParam("playerId", ObjectSerializer.serialize(playerId, "Array<string>", ""));
+        if (player !== undefined) {
+            requestContext.setQueryParam("player", ObjectSerializer.serialize(player, "Array<string>", ""));
         }
 
         // Query Params
-        if (policyId !== undefined) {
-            requestContext.setQueryParam("policyId", ObjectSerializer.serialize(policyId, "Array<string>", ""));
+        if (policy !== undefined) {
+            requestContext.setQueryParam("policy", ObjectSerializer.serialize(policy, "Array<string>", ""));
         }
 
 

@@ -10,31 +10,18 @@
  * Do not edit the class manually.
  */
 
-import { Account } from '../models/Account';
-import { DeveloperAccount } from '../models/DeveloperAccount';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { HttpFile } from '../http/http';
 
-/**
-* The account ID (starts with acc_).
-*/
-export class TransactionIntentResponseAccount {
+export class DeveloperAccount {
     'id': string;
     'object': EntityTypeDEVELOPERACCOUNT;
     'createdAt': number;
     'address': string;
-    'ownerAddress': string;
-    'deployed': boolean;
     'custodial': boolean;
-    /**
-    * The chain ID.
-    */
-    'chainId': number;
-    'accountType': string;
-    'pendingOwnerAddress'?: string;
-    'transactionIntents'?: Array<EntityIdResponse>;
     'name'?: string;
+    'transactionIntents'?: Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -64,38 +51,14 @@ export class TransactionIntentResponseAccount {
             "format": ""
         },
         {
-            "name": "ownerAddress",
-            "baseName": "ownerAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "deployed",
-            "baseName": "deployed",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "custodial",
             "baseName": "custodial",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "accountType",
-            "baseName": "accountType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "pendingOwnerAddress",
-            "baseName": "pendingOwnerAddress",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -104,16 +67,10 @@ export class TransactionIntentResponseAccount {
             "baseName": "transactionIntents",
             "type": "Array<EntityIdResponse>",
             "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TransactionIntentResponseAccount.attributeTypeMap;
+        return DeveloperAccount.attributeTypeMap;
     }
 
     public constructor() {

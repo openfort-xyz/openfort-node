@@ -11,19 +11,27 @@
  */
 
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
 
 export class DeveloperAccountResponse {
+    'id': string;
     'object': EntityTypeDEVELOPERACCOUNT;
     'createdAt': number;
-    'id': string;
     'address': string;
     'custodial': boolean;
     'name'?: string;
+    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "object",
             "baseName": "object",
@@ -35,12 +43,6 @@ export class DeveloperAccountResponse {
             "baseName": "createdAt",
             "type": "number",
             "format": "double"
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
         },
         {
             "name": "address",
@@ -58,6 +60,12 @@ export class DeveloperAccountResponse {
             "name": "name",
             "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PlayerResponseTransactionIntentsInner>",
             "format": ""
         }    ];
 

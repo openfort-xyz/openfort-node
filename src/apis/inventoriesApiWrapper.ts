@@ -26,7 +26,7 @@ export class InventoriesApiWrapper extends BaseApiWrapper<InventoriesApi> {
             req.limit,
             req.skip,
             req.order,
-            req.contractId,
+            req.contract,
         );
     }
 
@@ -47,7 +47,7 @@ export class InventoriesApiWrapper extends BaseApiWrapper<InventoriesApi> {
             req.limit,
             req.skip,
             req.order,
-            req.contractId,
+            req.contract,
         );
     }
 

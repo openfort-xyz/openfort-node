@@ -193,9 +193,9 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID (starts with con_).
+     * @param contract Filter by contract ID (starts with con_).
      */
-    public async getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contract?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -238,8 +238,8 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (contractId !== undefined) {
-            requestContext.setQueryParam("contractId", ObjectSerializer.serialize(contractId, "Array<string>", ""));
+        if (contract !== undefined) {
+            requestContext.setQueryParam("contract", ObjectSerializer.serialize(contract, "Array<string>", ""));
         }
 
         // Query Params
@@ -319,9 +319,9 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID (starts with con_).
+     * @param contract Filter by contract ID (starts with con_).
      */
-    public async getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contract?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -364,8 +364,8 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (contractId !== undefined) {
-            requestContext.setQueryParam("contractId", ObjectSerializer.serialize(contractId, "Array<string>", ""));
+        if (contract !== undefined) {
+            requestContext.setQueryParam("contract", ObjectSerializer.serialize(contract, "Array<string>", ""));
         }
 
         // Query Params

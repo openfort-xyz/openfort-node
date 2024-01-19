@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
+import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
 import { SortOrder } from '../models/SortOrder';
-import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { HttpFile } from '../http/http';
 
-export class TransactionIntentListQueries {
+export class DeveloperAccountListQueries {
     /**
     * Specifies the maximum number of records to return.
     */
@@ -27,23 +27,7 @@ export class TransactionIntentListQueries {
     /**
     * Specifies the fields to expand in the response.
     */
-    'expand'?: Array<TransactionIntentResponseExpandable>;
-    /**
-    * The chain ID. Must be a [supported chain](/chains).
-    */
-    'chainId'?: number;
-    /**
-    * Filter by account ID or developer account (starts with acc_ or dac_ respectively).
-    */
-    'account'?: Array<string>;
-    /**
-    * Filter by player ID (starts with pla_).
-    */
-    'player'?: Array<string>;
-    /**
-    * Filter by policy ID (starts with pol_).
-    */
-    'policy'?: Array<string>;
+    'expand'?: Array<DeveloperAccountResponseExpandable>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -69,36 +53,12 @@ export class TransactionIntentListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<TransactionIntentResponseExpandable>",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "Array<string>",
+            "type": "Array<DeveloperAccountResponseExpandable>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TransactionIntentListQueries.attributeTypeMap;
+        return DeveloperAccountListQueries.attributeTypeMap;
     }
 
     public constructor() {
