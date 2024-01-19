@@ -51,11 +51,14 @@ import { CreateTransactionIntentRequest } from '../models/CreateTransactionInten
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeveloperAccount } from '../models/DeveloperAccount';
 import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
+import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueries';
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
+import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -862,7 +865,7 @@ export interface InventoriesApiGetPlayerCryptoCurrencyInventoryRequest {
      * @type Array&lt;string&gt;
      * @memberof InventoriesApigetPlayerCryptoCurrencyInventory
      */
-    contractId?: Array<string>
+    contract?: Array<string>
 }
 
 export interface InventoriesApiGetPlayerNativeInventoryRequest {
@@ -916,7 +919,7 @@ export interface InventoriesApiGetPlayerNftInventoryRequest {
      * @type Array&lt;string&gt;
      * @memberof InventoriesApigetPlayerNftInventory
      */
-    contractId?: Array<string>
+    contract?: Array<string>
 }
 
 export class ObjectInventoriesApi {
@@ -955,7 +958,7 @@ export class ObjectInventoriesApi {
      * @param param the request object
      */
     public getPlayerCryptoCurrencyInventory(param: InventoriesApiGetPlayerCryptoCurrencyInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
-        return this.api.getPlayerCryptoCurrencyInventory(param.id, param.chainId, param.limit, param.skip, param.order, param.contractId,  options).toPromise();
+        return this.api.getPlayerCryptoCurrencyInventory(param.id, param.chainId, param.limit, param.skip, param.order, param.contract,  options).toPromise();
     }
 
     /**
@@ -971,7 +974,7 @@ export class ObjectInventoriesApi {
      * @param param the request object
      */
     public getPlayerNftInventory(param: InventoriesApiGetPlayerNftInventoryRequest, options?: Configuration): Promise<InventoryListResponse> {
-        return this.api.getPlayerNftInventory(param.id, param.chainId, param.limit, param.skip, param.order, param.contractId,  options).toPromise();
+        return this.api.getPlayerNftInventory(param.id, param.chainId, param.limit, param.skip, param.order, param.contract,  options).toPromise();
     }
 
 }
@@ -1856,7 +1859,46 @@ export interface SettingsApiDeleteDeveloperAccountRequest {
     id: string
 }
 
+export interface SettingsApiGetDeveloperAccountRequest {
+    /**
+     * 
+     * @type string
+     * @memberof SettingsApigetDeveloperAccount
+     */
+    id: string
+    /**
+     * 
+     * @type Array&lt;DeveloperAccountResponseExpandable&gt;
+     * @memberof SettingsApigetDeveloperAccount
+     */
+    expand?: Array<DeveloperAccountResponseExpandable>
+}
+
 export interface SettingsApiGetDeveloperAccountsRequest {
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof SettingsApigetDeveloperAccounts
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof SettingsApigetDeveloperAccounts
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof SettingsApigetDeveloperAccounts
+     */
+    order?: SortOrder
+    /**
+     * Specifies the fields to expand in the response.
+     * @type Array&lt;DeveloperAccountResponseExpandable&gt;
+     * @memberof SettingsApigetDeveloperAccounts
+     */
+    expand?: Array<DeveloperAccountResponseExpandable>
 }
 
 export interface SettingsApiGetVerificationPayloadRequest {
@@ -1907,11 +1949,20 @@ export class ObjectSettingsApi {
 
     /**
      * Retrieve the list of the developer accounts for the current project.
+     * Get existing developer account.
+     * @param param the request object
+     */
+    public getDeveloperAccount(param: SettingsApiGetDeveloperAccountRequest, options?: Configuration): Promise<DeveloperAccountResponse> {
+        return this.api.getDeveloperAccount(param.id, param.expand,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the list of the developer accounts for the current project.  By default, a maximum of 10 accounts are shown per page.
      * List of developer accounts.
      * @param param the request object
      */
     public getDeveloperAccounts(param: SettingsApiGetDeveloperAccountsRequest = {}, options?: Configuration): Promise<DeveloperAccountListResponse> {
-        return this.api.getDeveloperAccounts( options).toPromise();
+        return this.api.getDeveloperAccounts(param.limit, param.skip, param.order, param.expand,  options).toPromise();
     }
 
     /**
@@ -2011,23 +2062,23 @@ export interface TransactionIntentsApiGetTransactionIntentsRequest {
      */
     chainId?: number
     /**
-     * Filter by account ID.
+     * Filter by account ID or developer account (starts with acc_ or dac_ respectively).
      * @type Array&lt;string&gt;
      * @memberof TransactionIntentsApigetTransactionIntents
      */
-    accountId?: Array<string>
+    account?: Array<string>
     /**
      * Filter by player ID (starts with pla_).
      * @type Array&lt;string&gt;
      * @memberof TransactionIntentsApigetTransactionIntents
      */
-    playerId?: Array<string>
+    player?: Array<string>
     /**
      * Filter by policy ID (starts with pol_).
      * @type Array&lt;string&gt;
      * @memberof TransactionIntentsApigetTransactionIntents
      */
-    policyId?: Array<string>
+    policy?: Array<string>
 }
 
 export interface TransactionIntentsApiSignatureRequest {
@@ -2085,7 +2136,7 @@ export class ObjectTransactionIntentsApi {
      * @param param the request object
      */
     public getTransactionIntents(param: TransactionIntentsApiGetTransactionIntentsRequest = {}, options?: Configuration): Promise<TransactionIntentListResponse> {
-        return this.api.getTransactionIntents(param.limit, param.skip, param.order, param.expand, param.chainId, param.accountId, param.playerId, param.policyId,  options).toPromise();
+        return this.api.getTransactionIntents(param.limit, param.skip, param.order, param.expand, param.chainId, param.account, param.player, param.policy,  options).toPromise();
     }
 
     /**

@@ -2,6 +2,7 @@ import { DeveloperAccountCreateRequest, DeveloperAccountListResponse, DeveloperA
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { DeveloperAccountResponse, SettingsApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
+import { GetDeveloperAccountRequest } from "../models/getDeveloperAccountRequest";
 
 @httpErrorHandler
 export class SettingsApiWrapper extends BaseApiWrapper<SettingsApi> {
@@ -22,6 +23,13 @@ export class SettingsApiWrapper extends BaseApiWrapper<SettingsApi> {
      */
     public async getDeveloperAccounts(): Promise<DeveloperAccountListResponse> {
         return await this.api.getDeveloperAccounts();
+    }
+
+    /**
+     * Retrieve the list of the developer accounts for the current project
+     */
+    public async getDeveloperAccount(req: GetDeveloperAccountRequest): Promise<DeveloperAccountResponse> {
+        return await this.api.getDeveloperAccount(req.id, req.expand);
     }
 
     /**

@@ -51,11 +51,14 @@ import { CreateTransactionIntentRequest } from '../models/CreateTransactionInten
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeveloperAccount } from '../models/DeveloperAccount';
 import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
+import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueries';
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
+import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -568,10 +571,10 @@ export class PromiseInventoriesApi {
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID (starts with con_).
+     * @param contract Filter by contract ID (starts with con_).
      */
-    public getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
-        const result = this.api.getPlayerCryptoCurrencyInventory(id, chainId, limit, skip, order, contractId, _options);
+    public getPlayerCryptoCurrencyInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contract?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
+        const result = this.api.getPlayerCryptoCurrencyInventory(id, chainId, limit, skip, order, contract, _options);
         return result.toPromise();
     }
 
@@ -592,10 +595,10 @@ export class PromiseInventoriesApi {
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param contractId Filter by contract ID (starts with con_).
+     * @param contract Filter by contract ID (starts with con_).
      */
-    public getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contractId?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
-        const result = this.api.getPlayerNftInventory(id, chainId, limit, skip, order, contractId, _options);
+    public getPlayerNftInventory(id: string, chainId: number, limit?: number, skip?: number, order?: SortOrder, contract?: Array<string>, _options?: Configuration): Promise<InventoryListResponse> {
+        const result = this.api.getPlayerNftInventory(id, chainId, limit, skip, order, contract, _options);
         return result.toPromise();
     }
 
@@ -1109,10 +1112,25 @@ export class PromiseSettingsApi {
 
     /**
      * Retrieve the list of the developer accounts for the current project.
-     * List of developer accounts.
+     * Get existing developer account.
+     * @param id 
+     * @param expand 
      */
-    public getDeveloperAccounts(_options?: Configuration): Promise<DeveloperAccountListResponse> {
-        const result = this.api.getDeveloperAccounts(_options);
+    public getDeveloperAccount(id: string, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Promise<DeveloperAccountResponse> {
+        const result = this.api.getDeveloperAccount(id, expand, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve the list of the developer accounts for the current project.  By default, a maximum of 10 accounts are shown per page.
+     * List of developer accounts.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     */
+    public getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Promise<DeveloperAccountListResponse> {
+        const result = this.api.getDeveloperAccounts(limit, skip, order, expand, _options);
         return result.toPromise();
     }
 
@@ -1203,12 +1221,12 @@ export class PromiseTransactionIntentsApi {
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
      * @param chainId The chain ID. Must be a [supported chain](/chains).
-     * @param accountId Filter by account ID.
-     * @param playerId Filter by player ID (starts with pla_).
-     * @param policyId Filter by policy ID (starts with pol_).
+     * @param account Filter by account ID or developer account (starts with acc_ or dac_ respectively).
+     * @param player Filter by player ID (starts with pla_).
+     * @param policy Filter by policy ID (starts with pol_).
      */
-    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, accountId?: Array<string>, playerId?: Array<string>, policyId?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
-        const result = this.api.getTransactionIntents(limit, skip, order, expand, chainId, accountId, playerId, policyId, _options);
+    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, policy?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
+        const result = this.api.getTransactionIntents(limit, skip, order, expand, chainId, account, player, policy, _options);
         return result.toPromise();
     }
 

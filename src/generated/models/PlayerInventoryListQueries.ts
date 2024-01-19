@@ -26,7 +26,7 @@ export class PlayerInventoryListQueries {
     /**
     * Filter by contract ID (starts with con_).
     */
-    'contractId'?: Array<string>;
+    'contract'?: Array<string>;
     /**
     * Filter by chain id.
     */
@@ -54,8 +54,8 @@ export class PlayerInventoryListQueries {
             "format": ""
         },
         {
-            "name": "contractId",
-            "baseName": "contractId",
+            "name": "contract",
+            "baseName": "contract",
             "type": "Array<string>",
             "format": ""
         },

@@ -48,11 +48,14 @@ export * from '../models/CreateTransactionIntentRequest';
 export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
 export * from '../models/DeployRequest';
+export * from '../models/DeveloperAccount';
 export * from '../models/DeveloperAccountCreateRequest';
 export * from '../models/DeveloperAccountDeleteResponse';
 export * from '../models/DeveloperAccountGetMessageResponse';
+export * from '../models/DeveloperAccountListQueries';
 export * from '../models/DeveloperAccountListResponse';
 export * from '../models/DeveloperAccountResponse';
+export * from '../models/DeveloperAccountResponseExpandable';
 export * from '../models/DomainData';
 export * from '../models/EntityIdResponse';
 export * from '../models/EntityTypeACCOUNT';
@@ -260,11 +263,14 @@ import { CreateTransactionIntentRequest } from '../models/CreateTransactionInten
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeveloperAccount        } from '../models/DeveloperAccount';
 import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse    } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
+import { DeveloperAccountListQueries     } from '../models/DeveloperAccountListQueries';
 import { DeveloperAccountListResponse       } from '../models/DeveloperAccountListResponse';
-import { DeveloperAccountResponse       } from '../models/DeveloperAccountResponse';
+import { DeveloperAccountResponse        } from '../models/DeveloperAccountResponse';
+import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -392,7 +398,7 @@ import { TransactionIntent              } from '../models/TransactionIntent';
 import { TransactionIntentListQueries         } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse       } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse              } from '../models/TransactionIntentResponse';
-import { TransactionIntentResponseAccount            } from '../models/TransactionIntentResponseAccount';
+import { TransactionIntentResponseAccount             } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy           } from '../models/TransactionIntentResponsePolicy';
@@ -446,6 +452,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ApiKeyType",
     "AssetType",
     "Currency",
+    "DeveloperAccountResponseExpandable",
     "EntityTypeACCOUNT",
     "EntityTypeCONTRACT",
     "EntityTypeDEVELOPERACCOUNT",
@@ -545,9 +552,11 @@ let typeMap: {[index: string]: any} = {
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
     "DeployRequest": DeployRequest,
+    "DeveloperAccount": DeveloperAccount,
     "DeveloperAccountCreateRequest": DeveloperAccountCreateRequest,
     "DeveloperAccountDeleteResponse": DeveloperAccountDeleteResponse,
     "DeveloperAccountGetMessageResponse": DeveloperAccountGetMessageResponse,
+    "DeveloperAccountListQueries": DeveloperAccountListQueries,
     "DeveloperAccountListResponse": DeveloperAccountListResponse,
     "DeveloperAccountResponse": DeveloperAccountResponse,
     "DomainData": DomainData,
