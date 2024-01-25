@@ -10,18 +10,18 @@
  * Do not edit the class manually.
  */
 
-import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { EntityIdResponse } from '../models/EntityIdResponse';
+import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
+import { NotificationSubscription } from '../models/NotificationSubscription';
+import { SubscriptionType } from '../models/SubscriptionType';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class NotificationResponseSubscriptionsInner {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeNOTIFICATIONSUBSCRIPTION;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractNotificationTriggerResponseContract;
-    'functionName': string;
+    'target': string;
+    'method': SubscriptionType;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,7 +35,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeNOTIFICATIONSUBSCRIPTION",
             "format": ""
         },
         {
@@ -45,26 +45,20 @@ export class ContractPolicyRuleResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
-            "format": ""
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractNotificationTriggerResponseContract",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
+            "name": "target",
+            "baseName": "target",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "method",
+            "baseName": "method",
+            "type": "SubscriptionType",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return NotificationResponseSubscriptionsInner.attributeTypeMap;
     }
 
     public constructor() {

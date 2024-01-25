@@ -11,17 +11,19 @@
  */
 
 import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
+import { NotificationTriggerTypeCONTRACTTRIGGER } from '../models/NotificationTriggerTypeCONTRACTTRIGGER';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class ContractNotificationTriggerResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeNOTIFICATIONTRIGGER;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
+    'type': NotificationTriggerTypeCONTRACTTRIGGER;
+    'threshold': string;
     'contract': ContractNotificationTriggerResponseContract;
     'functionName': string;
+    'functionArgs': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,7 +37,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeNOTIFICATIONTRIGGER",
             "format": ""
         },
         {
@@ -47,7 +49,13 @@ export class ContractPolicyRuleResponse {
         {
             "name": "type",
             "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
+            "type": "NotificationTriggerTypeCONTRACTTRIGGER",
+            "format": ""
+        },
+        {
+            "name": "threshold",
+            "baseName": "threshold",
+            "type": "string",
             "format": ""
         },
         {
@@ -61,10 +69,16 @@ export class ContractPolicyRuleResponse {
             "baseName": "functionName",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "functionArgs",
+            "baseName": "functionArgs",
+            "type": "Array<string>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return ContractNotificationTriggerResponse.attributeTypeMap;
     }
 
     public constructor() {

@@ -190,9 +190,9 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
      * @param name Specifies the name of the policy.
-     * @param deleted Specifies whether to include deleted contracts.
+     * @param deleted Specifies whether to include deleted policies.
      * @param chainId The chain ID of the policy.
-     * @param enabled Specifies whether to include enabled contracts.
+     * @param enabled Specifies whether to include enabled policies.
      */
     public async getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, enabled?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

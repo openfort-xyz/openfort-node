@@ -16,7 +16,7 @@ import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponseContract {
+export class ContractNotificationTriggerResponseContract {
     'id': string;
     'object': EntityTypeCONTRACT;
     'createdAt': number;
@@ -89,7 +89,7 @@ export class ContractPolicyRuleResponseContract {
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponseContract.attributeTypeMap;
+        return ContractNotificationTriggerResponseContract.attributeTypeMap;
     }
 
     public constructor() {

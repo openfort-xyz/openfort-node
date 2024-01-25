@@ -10,59 +10,59 @@
  * Do not edit the class manually.
  */
 
+import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
-export class PlayerTransferOwnershipRequest {
+export class NotificationSubscriptionListQueries {
     /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
+    * Specifies the maximum number of records to return.
     */
-    'policy': string;
+    'limit'?: number;
     /**
-    * The chain ID. Must be a [supported chain](/chains).
+    * Specifies the offset for the first records to return.
     */
-    'chainId': number;
+    'skip'?: number;
+    'order'?: SortOrder;
     /**
-    * The address of the new owner
+    * Specifies the unique notification ID (starts with not_).
     */
-    'newOwnerAddress': string;
-    /**
-    * ID of the Player that has the Account you want to transfer ownership from (starts with `pla_`).
-    */
-    'player'?: string;
+    'notification': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
+            "name": "limit",
+            "baseName": "limit",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "newOwnerAddress",
-            "baseName": "newOwnerAddress",
-            "type": "string",
+            "name": "skip",
+            "baseName": "skip",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "order",
+            "baseName": "order",
+            "type": "SortOrder",
             "format": ""
         },
         {
-            "name": "player",
-            "baseName": "player",
+            "name": "notification",
+            "baseName": "notification",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerTransferOwnershipRequest.attributeTypeMap;
+        return NotificationSubscriptionListQueries.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

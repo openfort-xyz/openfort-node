@@ -8,6 +8,8 @@ import { Account } from '../models/Account';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
 import { AccountListResponse } from '../models/AccountListResponse';
+import { AccountNotificationTriggerResponse } from '../models/AccountNotificationTriggerResponse';
+import { AccountNotificationTriggerResponseAccount } from '../models/AccountNotificationTriggerResponseAccount';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
@@ -24,6 +26,7 @@ import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { AuthorizeWithOAuthToken200Response } from '../models/AuthorizeWithOAuthToken200Response';
+import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
@@ -33,8 +36,9 @@ import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractListQueries } from '../models/ContractListQueries';
 import { ContractListResponse } from '../models/ContractListResponse';
+import { ContractNotificationTriggerResponse } from '../models/ContractNotificationTriggerResponse';
+import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
 import { ContractPolicyRuleResponse } from '../models/ContractPolicyRuleResponse';
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
 import { ContractReadQueries } from '../models/ContractReadQueries';
 import { ContractReadResponse } from '../models/ContractReadResponse';
 import { ContractResponse } from '../models/ContractResponse';
@@ -42,12 +46,15 @@ import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerInter
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
+import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
@@ -65,6 +72,9 @@ import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
+import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
+import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
+import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -101,6 +111,25 @@ import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
+import { NotificationDeleteResponse } from '../models/NotificationDeleteResponse';
+import { NotificationListQueries } from '../models/NotificationListQueries';
+import { NotificationListResponse } from '../models/NotificationListResponse';
+import { NotificationResponse } from '../models/NotificationResponse';
+import { NotificationResponseExpandable } from '../models/NotificationResponseExpandable';
+import { NotificationResponseSubscriptionsInner } from '../models/NotificationResponseSubscriptionsInner';
+import { NotificationResponseTriggersInner } from '../models/NotificationResponseTriggersInner';
+import { NotificationSubscription } from '../models/NotificationSubscription';
+import { NotificationSubscriptionDeleteResponse } from '../models/NotificationSubscriptionDeleteResponse';
+import { NotificationSubscriptionListQueries } from '../models/NotificationSubscriptionListQueries';
+import { NotificationSubscriptionListResponse } from '../models/NotificationSubscriptionListResponse';
+import { NotificationTriggerDeleteResponse } from '../models/NotificationTriggerDeleteResponse';
+import { NotificationTriggerListQueries } from '../models/NotificationTriggerListQueries';
+import { NotificationTriggerListResponse } from '../models/NotificationTriggerListResponse';
+import { NotificationTriggerResponse } from '../models/NotificationTriggerResponse';
+import { NotificationTriggerType } from '../models/NotificationTriggerType';
+import { NotificationTriggerTypeCONTRACTTRIGGER } from '../models/NotificationTriggerTypeCONTRACTTRIGGER';
+import { NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER } from '../models/NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER';
+import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
@@ -112,6 +141,7 @@ import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
+import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
@@ -181,6 +211,7 @@ import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
+import { SubscriptionType } from '../models/SubscriptionType';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
@@ -400,7 +431,7 @@ export class ObjectAccountsApi {
     }
 
     /**
-     * Creates a new blockchain account for the provided player.  Account creation does not consume any gas. All accounts of a player will use the same address across blockchains.  Only one account can per chain per player.
+     * Creates a new blockchain account for the provided player.  Account creation does not consume any gas. All accounts of a player will use the same address across blockchains.  Each player can only have one account per chain.
      * Create an account object.
      * @param param the request object
      */
@@ -979,6 +1010,306 @@ export class ObjectInventoriesApi {
 
 }
 
+import { ObservableNotificationsApi } from "./ObservableAPI";
+import { NotificationsApiRequestFactory, NotificationsApiResponseProcessor} from "../apis/NotificationsApi";
+
+export interface NotificationsApiCreateNotificationRequest {
+    /**
+     * 
+     * @type CreateNotificationRequest
+     * @memberof NotificationsApicreateNotification
+     */
+    createNotificationRequest: CreateNotificationRequest
+}
+
+export interface NotificationsApiCreateNotificationSubscriptionRequest {
+    /**
+     * 
+     * @type CreateSubscriptionRequest
+     * @memberof NotificationsApicreateNotificationSubscription
+     */
+    createSubscriptionRequest: CreateSubscriptionRequest
+}
+
+export interface NotificationsApiCreateNotificationTriggerRequest {
+    /**
+     * 
+     * @type CreateTriggerRequest
+     * @memberof NotificationsApicreateNotificationTrigger
+     */
+    createTriggerRequest: CreateTriggerRequest
+}
+
+export interface NotificationsApiDeleteNotificationRequest {
+    /**
+     * Specifies the unique notification ID (starts with not_).
+     * @type string
+     * @memberof NotificationsApideleteNotification
+     */
+    id: string
+}
+
+export interface NotificationsApiDeleteNotificationSubscriptionRequest {
+    /**
+     * Specifies the unique notification subscription ID (starts with ntr_).
+     * @type string
+     * @memberof NotificationsApideleteNotificationSubscription
+     */
+    id: string
+}
+
+export interface NotificationsApiDeleteNotificationTriggerRequest {
+    /**
+     * Specifies the unique notification trigger ID (starts with ntr_).
+     * @type string
+     * @memberof NotificationsApideleteNotificationTrigger
+     */
+    id: string
+}
+
+export interface NotificationsApiGetNotificationRequest {
+    /**
+     * Specifies the unique account ID (starts with not_).
+     * @type string
+     * @memberof NotificationsApigetNotification
+     */
+    id: string
+    /**
+     * 
+     * @type Array&lt;NotificationResponseExpandable&gt;
+     * @memberof NotificationsApigetNotification
+     */
+    expand?: Array<NotificationResponseExpandable>
+}
+
+export interface NotificationsApiGetNotificationSubscriptionRequest {
+    /**
+     * Specifies the unique notification subscription ID (starts with not_).
+     * @type string
+     * @memberof NotificationsApigetNotificationSubscription
+     */
+    id: string
+}
+
+export interface NotificationsApiGetNotificationSubscriptionsRequest {
+    /**
+     * Specifies the unique notification ID (starts with not_).
+     * @type string
+     * @memberof NotificationsApigetNotificationSubscriptions
+     */
+    notification: string
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof NotificationsApigetNotificationSubscriptions
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof NotificationsApigetNotificationSubscriptions
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof NotificationsApigetNotificationSubscriptions
+     */
+    order?: SortOrder
+}
+
+export interface NotificationsApiGetNotificationTriggerRequest {
+    /**
+     * Specifies the unique notification trigger ID (starts with ntr_).
+     * @type string
+     * @memberof NotificationsApigetNotificationTrigger
+     */
+    id: string
+}
+
+export interface NotificationsApiGetNotificationTriggersRequest {
+    /**
+     * Specifies the unique notification ID (starts with not_).
+     * @type string
+     * @memberof NotificationsApigetNotificationTriggers
+     */
+    notification: string
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof NotificationsApigetNotificationTriggers
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof NotificationsApigetNotificationTriggers
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof NotificationsApigetNotificationTriggers
+     */
+    order?: SortOrder
+}
+
+export interface NotificationsApiGetNotificationsRequest {
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof NotificationsApigetNotifications
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof NotificationsApigetNotifications
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof NotificationsApigetNotifications
+     */
+    order?: SortOrder
+    /**
+     * Specifies the fields to expand in the response.
+     * @type Array&lt;NotificationResponseExpandable&gt;
+     * @memberof NotificationsApigetNotifications
+     */
+    expand?: Array<NotificationResponseExpandable>
+    /**
+     * Specifies whether to include deleted notifications.
+     * @type boolean
+     * @memberof NotificationsApigetNotifications
+     */
+    deleted?: boolean
+    /**
+     * Specifies the name of the notifications.
+     * @type string
+     * @memberof NotificationsApigetNotifications
+     */
+    name?: string
+}
+
+export class ObjectNotificationsApi {
+    private api: ObservableNotificationsApi
+
+    public constructor(configuration: Configuration, requestFactory?: NotificationsApiRequestFactory, responseProcessor?: NotificationsApiResponseProcessor) {
+        this.api = new ObservableNotificationsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create a notification object.
+     * Create a notification object.
+     * @param param the request object
+     */
+    public createNotification(param: NotificationsApiCreateNotificationRequest, options?: Configuration): Promise<NotificationResponse> {
+        return this.api.createNotification(param.createNotificationRequest,  options).toPromise();
+    }
+
+    /**
+     * Create a subscription for the provided notification.
+     * Create a notification subscription object.
+     * @param param the request object
+     */
+    public createNotificationSubscription(param: NotificationsApiCreateNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscription> {
+        return this.api.createNotificationSubscription(param.createSubscriptionRequest,  options).toPromise();
+    }
+
+    /**
+     * Create a trigger for the provided notification.
+     * Create a notification trigger object.
+     * @param param the request object
+     */
+    public createNotificationTrigger(param: NotificationsApiCreateNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerResponse> {
+        return this.api.createNotificationTrigger(param.createTriggerRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete a notification by providing its notification id.
+     * Deletes a notification object.
+     * @param param the request object
+     */
+    public deleteNotification(param: NotificationsApiDeleteNotificationRequest, options?: Configuration): Promise<NotificationDeleteResponse> {
+        return this.api.deleteNotification(param.id,  options).toPromise();
+    }
+
+    /**
+     * Delete a notification subscription by providing its notification subscription id.
+     * Deletes a notification subscription object.
+     * @param param the request object
+     */
+    public deleteNotificationSubscription(param: NotificationsApiDeleteNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscriptionDeleteResponse> {
+        return this.api.deleteNotificationSubscription(param.id,  options).toPromise();
+    }
+
+    /**
+     * Delete a notification trigger by providing its notification trigger id.
+     * Deletes a notification trigger object.
+     * @param param the request object
+     */
+    public deleteNotificationTrigger(param: NotificationsApiDeleteNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerDeleteResponse> {
+        return this.api.deleteNotificationTrigger(param.id,  options).toPromise();
+    }
+
+    /**
+     * Retrieves the details of an existing account.  Supply the unique notification ID.
+     * Get existing account.
+     * @param param the request object
+     */
+    public getNotification(param: NotificationsApiGetNotificationRequest, options?: Configuration): Promise<NotificationResponse> {
+        return this.api.getNotification(param.id, param.expand,  options).toPromise();
+    }
+
+    /**
+     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
+     * Get existing notification subscription.
+     * @param param the request object
+     */
+    public getNotificationSubscription(param: NotificationsApiGetNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscription> {
+        return this.api.getNotificationSubscription(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of subscriptions of a notification.  The subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
+     * List notification subscriptions of a notification.
+     * @param param the request object
+     */
+    public getNotificationSubscriptions(param: NotificationsApiGetNotificationSubscriptionsRequest, options?: Configuration): Promise<NotificationSubscriptionListResponse> {
+        return this.api.getNotificationSubscriptions(param.notification, param.limit, param.skip, param.order,  options).toPromise();
+    }
+
+    /**
+     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
+     * Get existing notification trigger.
+     * @param param the request object
+     */
+    public getNotificationTrigger(param: NotificationsApiGetNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerResponse> {
+        return this.api.getNotificationTrigger(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of triggers of a notification.  The triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
+     * List notification triggers of a notification.
+     * @param param the request object
+     */
+    public getNotificationTriggers(param: NotificationsApiGetNotificationTriggersRequest, options?: Configuration): Promise<NotificationTriggerListResponse> {
+        return this.api.getNotificationTriggers(param.notification, param.limit, param.skip, param.order,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of notifications.  The notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
+     * List notifications.
+     * @param param the request object
+     */
+    public getNotifications(param: NotificationsApiGetNotificationsRequest = {}, options?: Configuration): Promise<NotificationListResponse> {
+        return this.api.getNotifications(param.limit, param.skip, param.order, param.expand, param.deleted, param.name,  options).toPromise();
+    }
+
+}
+
 import { ObservableOAuthApi } from "./ObservableAPI";
 import { OAuthApiRequestFactory, OAuthApiResponseProcessor} from "../apis/OAuthApi";
 
@@ -1459,7 +1790,7 @@ export interface PoliciesApiGetPoliciesRequest {
      */
     name?: string
     /**
-     * Specifies whether to include deleted contracts.
+     * Specifies whether to include deleted policies.
      * @type boolean
      * @memberof PoliciesApigetPolicies
      */
@@ -1471,7 +1802,7 @@ export interface PoliciesApiGetPoliciesRequest {
      */
     chainId?: number
     /**
-     * Specifies whether to include enabled contracts.
+     * Specifies whether to include enabled policies.
      * @type boolean
      * @memberof PoliciesApigetPolicies
      */
@@ -1595,20 +1926,20 @@ export class ObjectPoliciesApi {
 import { ObservablePolicyRulesApi } from "./ObservableAPI";
 import { PolicyRulesApiRequestFactory, PolicyRulesApiResponseProcessor} from "../apis/PolicyRulesApi";
 
-export interface PolicyRulesApiCreatePolicyRulesRequest {
+export interface PolicyRulesApiCreatePolicyRuleRequest {
     /**
      * 
      * @type CreatePolicyRuleRequest
-     * @memberof PolicyRulesApicreatePolicyRules
+     * @memberof PolicyRulesApicreatePolicyRule
      */
     createPolicyRuleRequest: CreatePolicyRuleRequest
 }
 
-export interface PolicyRulesApiDeletePolicyRulesRequest {
+export interface PolicyRulesApiDeletePolicyRuleRequest {
     /**
      * Specifies the unique policy rule ID (starts with afu_).
      * @type string
-     * @memberof PolicyRulesApideletePolicyRules
+     * @memberof PolicyRulesApideletePolicyRule
      */
     id: string
 }
@@ -1646,17 +1977,17 @@ export interface PolicyRulesApiGetPolicyRulesRequest {
     expand?: Array<'contract'>
 }
 
-export interface PolicyRulesApiUpdatePolicyRulesRequest {
+export interface PolicyRulesApiUpdatePolicyRuleRequest {
     /**
      * Specifies the unique policy rule ID (starts with afu_).
      * @type string
-     * @memberof PolicyRulesApiupdatePolicyRules
+     * @memberof PolicyRulesApiupdatePolicyRule
      */
     id: string
     /**
      * 
      * @type UpdatePolicyRuleRequest
-     * @memberof PolicyRulesApiupdatePolicyRules
+     * @memberof PolicyRulesApiupdatePolicyRule
      */
     updatePolicyRuleRequest: UpdatePolicyRuleRequest
 }
@@ -1672,19 +2003,20 @@ export class ObjectPolicyRulesApi {
      * Create a policy rule object.
      * @param param the request object
      */
-    public createPolicyRules(param: PolicyRulesApiCreatePolicyRulesRequest, options?: Configuration): Promise<PolicyRuleResponse> {
-        return this.api.createPolicyRules(param.createPolicyRuleRequest,  options).toPromise();
+    public createPolicyRule(param: PolicyRulesApiCreatePolicyRuleRequest, options?: Configuration): Promise<PolicyRuleResponse> {
+        return this.api.createPolicyRule(param.createPolicyRuleRequest,  options).toPromise();
     }
 
     /**
      * Deletes a policy rule object.
      * @param param the request object
      */
-    public deletePolicyRules(param: PolicyRulesApiDeletePolicyRulesRequest, options?: Configuration): Promise<PolicyRuleDeleteResponse> {
-        return this.api.deletePolicyRules(param.id,  options).toPromise();
+    public deletePolicyRule(param: PolicyRulesApiDeletePolicyRuleRequest, options?: Configuration): Promise<PolicyRuleDeleteResponse> {
+        return this.api.deletePolicyRule(param.id,  options).toPromise();
     }
 
     /**
+     * Returns a list of policy rules of a policy.  The policy rules are returned sorted by creation date, with the most recently created policy rules appearing first.  By default, a maximum of 10 policy rules are shown per page.
      * List policy rules of a policy.
      * @param param the request object
      */
@@ -1696,8 +2028,8 @@ export class ObjectPolicyRulesApi {
      * Update a policy rule object.
      * @param param the request object
      */
-    public updatePolicyRules(param: PolicyRulesApiUpdatePolicyRulesRequest, options?: Configuration): Promise<PolicyRuleResponse> {
-        return this.api.updatePolicyRules(param.id, param.updatePolicyRuleRequest,  options).toPromise();
+    public updatePolicyRule(param: PolicyRulesApiUpdatePolicyRuleRequest, options?: Configuration): Promise<PolicyRuleResponse> {
+        return this.api.updatePolicyRule(param.id, param.updatePolicyRuleRequest,  options).toPromise();
     }
 
 }
@@ -1852,7 +2184,7 @@ export interface SettingsApiCreateDeveloperAccountRequest {
 
 export interface SettingsApiDeleteDeveloperAccountRequest {
     /**
-     * Specifies a unique developer account.
+     * Specifies a unique developer account (starts with dac_).
      * @type string
      * @memberof SettingsApideleteDeveloperAccount
      */
@@ -1861,7 +2193,7 @@ export interface SettingsApiDeleteDeveloperAccountRequest {
 
 export interface SettingsApiGetDeveloperAccountRequest {
     /**
-     * 
+     * Specifies the unique developer account ID (starts with dac_).
      * @type string
      * @memberof SettingsApigetDeveloperAccount
      */
@@ -1948,7 +2280,7 @@ export class ObjectSettingsApi {
     }
 
     /**
-     * Retrieve the list of the developer accounts for the current project.
+     * Retrieve a developer account.
      * Get existing developer account.
      * @param param the request object
      */

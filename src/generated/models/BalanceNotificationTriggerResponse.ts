@@ -10,18 +10,16 @@
  * Do not edit the class manually.
  */
 
-import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
+import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class BalanceNotificationTriggerResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeNOTIFICATIONTRIGGER;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractNotificationTriggerResponseContract;
-    'functionName': string;
+    'type': NotificationTriggerTypePROJECTBALANCETRIGGER;
+    'threshold': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,7 +33,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeNOTIFICATIONTRIGGER",
             "format": ""
         },
         {
@@ -47,24 +45,18 @@ export class ContractPolicyRuleResponse {
         {
             "name": "type",
             "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
+            "type": "NotificationTriggerTypePROJECTBALANCETRIGGER",
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractNotificationTriggerResponseContract",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
+            "name": "threshold",
+            "baseName": "threshold",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return BalanceNotificationTriggerResponse.attributeTypeMap;
     }
 
     public constructor() {

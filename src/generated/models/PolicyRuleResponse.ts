@@ -11,8 +11,8 @@
  */
 
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
+import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
 import { ContractPolicyRuleResponse } from '../models/ContractPolicyRuleResponse';
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
 import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
@@ -27,7 +27,7 @@ export class PolicyRuleResponse {
     'object': EntityTypePOLICYRULE;
     'createdAt': number;
     'type': PolicyRuleTypeRATELIMIT;
-    'contract': ContractPolicyRuleResponseContract;
+    'contract': ContractNotificationTriggerResponseContract;
     'functionName': PolicyRateLimitCOUNTPERINTERVAL;
     'gasLimit': string;
     'timeIntervalType': TimeIntervalType;
@@ -64,7 +64,7 @@ export class PolicyRuleResponse {
         {
             "name": "contract",
             "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
+            "type": "ContractNotificationTriggerResponseContract",
             "format": ""
         },
         {

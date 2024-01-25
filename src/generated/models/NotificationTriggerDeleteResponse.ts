@@ -10,39 +10,43 @@
  * Do not edit the class manually.
  */
 
+import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
 import { HttpFile } from '../http/http';
 
-export class PlayerCancelTransferOwnershipRequest {
-    /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
-    */
-    'policy': string;
-    /**
-    * The chain ID. Must be a [supported chain](/chains).
-    */
-    'chainId': number;
+export class NotificationTriggerDeleteResponse {
+    'id': string;
+    'object': EntityTypeNOTIFICATIONTRIGGER;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeNOTIFICATIONTRIGGER",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerCancelTransferOwnershipRequest.attributeTypeMap;
+        return NotificationTriggerDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

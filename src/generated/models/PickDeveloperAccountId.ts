@@ -12,34 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-export class PlayerCancelTransferOwnershipRequest {
-    /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
-    */
-    'policy': string;
-    /**
-    * The chain ID. Must be a [supported chain](/chains).
-    */
-    'chainId': number;
+/**
+* From T, pick a set of properties whose keys are in the union K
+*/
+export class PickDeveloperAccountId {
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerCancelTransferOwnershipRequest.attributeTypeMap;
+        return PickDeveloperAccountId.attributeTypeMap;
     }
 
     public constructor() {

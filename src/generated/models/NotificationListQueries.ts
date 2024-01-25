@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
+import { NotificationResponseExpandable } from '../models/NotificationResponseExpandable';
 import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
-export class PolicyListQueries {
+export class NotificationListQueries {
     /**
     * Specifies the maximum number of records to return.
     */
@@ -27,23 +27,15 @@ export class PolicyListQueries {
     /**
     * Specifies the fields to expand in the response.
     */
-    'expand'?: Array<PolicyResponseExpandable>;
+    'expand'?: Array<NotificationResponseExpandable>;
     /**
-    * Specifies the name of the policy.
-    */
-    'name'?: string;
-    /**
-    * Specifies whether to include deleted policies.
+    * Specifies whether to include deleted notifications.
     */
     'deleted'?: boolean;
     /**
-    * The chain ID of the policy.
+    * Specifies the name of the notifications.
     */
-    'chainId'?: number;
-    /**
-    * Specifies whether to include enabled policies.
-    */
-    'enabled'?: boolean;
+    'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -69,13 +61,7 @@ export class PolicyListQueries {
         {
             "name": "expand",
             "baseName": "expand",
-            "type": "Array<PolicyResponseExpandable>",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "type": "Array<NotificationResponseExpandable>",
             "format": ""
         },
         {
@@ -85,20 +71,14 @@ export class PolicyListQueries {
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyListQueries.attributeTypeMap;
+        return NotificationListQueries.attributeTypeMap;
     }
 
     public constructor() {

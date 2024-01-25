@@ -9,6 +9,8 @@ import { Account } from '../models/Account';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
 import { AccountListResponse } from '../models/AccountListResponse';
+import { AccountNotificationTriggerResponse } from '../models/AccountNotificationTriggerResponse';
+import { AccountNotificationTriggerResponseAccount } from '../models/AccountNotificationTriggerResponseAccount';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
@@ -25,6 +27,7 @@ import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { AuthorizeWithOAuthToken200Response } from '../models/AuthorizeWithOAuthToken200Response';
+import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
@@ -34,8 +37,9 @@ import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractListQueries } from '../models/ContractListQueries';
 import { ContractListResponse } from '../models/ContractListResponse';
+import { ContractNotificationTriggerResponse } from '../models/ContractNotificationTriggerResponse';
+import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
 import { ContractPolicyRuleResponse } from '../models/ContractPolicyRuleResponse';
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
 import { ContractReadQueries } from '../models/ContractReadQueries';
 import { ContractReadResponse } from '../models/ContractReadResponse';
 import { ContractResponse } from '../models/ContractResponse';
@@ -43,12 +47,15 @@ import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerInter
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
+import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
@@ -66,6 +73,9 @@ import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
+import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
+import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
+import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -102,6 +112,25 @@ import { Money } from '../models/Money';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
+import { NotificationDeleteResponse } from '../models/NotificationDeleteResponse';
+import { NotificationListQueries } from '../models/NotificationListQueries';
+import { NotificationListResponse } from '../models/NotificationListResponse';
+import { NotificationResponse } from '../models/NotificationResponse';
+import { NotificationResponseExpandable } from '../models/NotificationResponseExpandable';
+import { NotificationResponseSubscriptionsInner } from '../models/NotificationResponseSubscriptionsInner';
+import { NotificationResponseTriggersInner } from '../models/NotificationResponseTriggersInner';
+import { NotificationSubscription } from '../models/NotificationSubscription';
+import { NotificationSubscriptionDeleteResponse } from '../models/NotificationSubscriptionDeleteResponse';
+import { NotificationSubscriptionListQueries } from '../models/NotificationSubscriptionListQueries';
+import { NotificationSubscriptionListResponse } from '../models/NotificationSubscriptionListResponse';
+import { NotificationTriggerDeleteResponse } from '../models/NotificationTriggerDeleteResponse';
+import { NotificationTriggerListQueries } from '../models/NotificationTriggerListQueries';
+import { NotificationTriggerListResponse } from '../models/NotificationTriggerListResponse';
+import { NotificationTriggerResponse } from '../models/NotificationTriggerResponse';
+import { NotificationTriggerType } from '../models/NotificationTriggerType';
+import { NotificationTriggerTypeCONTRACTTRIGGER } from '../models/NotificationTriggerTypeCONTRACTTRIGGER';
+import { NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER } from '../models/NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER';
+import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
@@ -113,6 +142,7 @@ import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
+import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
@@ -182,6 +212,7 @@ import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
+import { SubscriptionType } from '../models/SubscriptionType';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
@@ -283,7 +314,7 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * Creates a new blockchain account for the provided player.  Account creation does not consume any gas. All accounts of a player will use the same address across blockchains.  Only one account can per chain per player.
+     * Creates a new blockchain account for the provided player.  Account creation does not consume any gas. All accounts of a player will use the same address across blockchains.  Each player can only have one account per chain.
      * Create an account object.
      * @param createAccountRequest 
      */
@@ -982,6 +1013,324 @@ export class ObservableInventoriesApi {
 
 }
 
+import { NotificationsApiRequestFactory, NotificationsApiResponseProcessor} from "../apis/NotificationsApi";
+export class ObservableNotificationsApi {
+    private requestFactory: NotificationsApiRequestFactory;
+    private responseProcessor: NotificationsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: NotificationsApiRequestFactory,
+        responseProcessor?: NotificationsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new NotificationsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new NotificationsApiResponseProcessor();
+    }
+
+    /**
+     * Create a notification object.
+     * Create a notification object.
+     * @param createNotificationRequest 
+     */
+    public createNotification(createNotificationRequest: CreateNotificationRequest, _options?: Configuration): Observable<NotificationResponse> {
+        const requestContextPromise = this.requestFactory.createNotification(createNotificationRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotification(rsp)));
+            }));
+    }
+
+    /**
+     * Create a subscription for the provided notification.
+     * Create a notification subscription object.
+     * @param createSubscriptionRequest 
+     */
+    public createNotificationSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Observable<NotificationSubscription> {
+        const requestContextPromise = this.requestFactory.createNotificationSubscription(createSubscriptionRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Create a trigger for the provided notification.
+     * Create a notification trigger object.
+     * @param createTriggerRequest 
+     */
+    public createNotificationTrigger(createTriggerRequest: CreateTriggerRequest, _options?: Configuration): Observable<NotificationTriggerResponse> {
+        const requestContextPromise = this.requestFactory.createNotificationTrigger(createTriggerRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Delete a notification by providing its notification id.
+     * Deletes a notification object.
+     * @param id Specifies the unique notification ID (starts with not_).
+     */
+    public deleteNotification(id: string, _options?: Configuration): Observable<NotificationDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteNotification(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotification(rsp)));
+            }));
+    }
+
+    /**
+     * Delete a notification subscription by providing its notification subscription id.
+     * Deletes a notification subscription object.
+     * @param id Specifies the unique notification subscription ID (starts with ntr_).
+     */
+    public deleteNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscriptionDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteNotificationSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Delete a notification trigger by providing its notification trigger id.
+     * Deletes a notification trigger object.
+     * @param id Specifies the unique notification trigger ID (starts with ntr_).
+     */
+    public deleteNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteNotificationTrigger(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieves the details of an existing account.  Supply the unique notification ID.
+     * Get existing account.
+     * @param id Specifies the unique account ID (starts with not_).
+     * @param expand 
+     */
+    public getNotification(id: string, expand?: Array<NotificationResponseExpandable>, _options?: Configuration): Observable<NotificationResponse> {
+        const requestContextPromise = this.requestFactory.getNotification(id, expand, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotification(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
+     * Get existing notification subscription.
+     * @param id Specifies the unique notification subscription ID (starts with not_).
+     */
+    public getNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscription> {
+        const requestContextPromise = this.requestFactory.getNotificationSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of subscriptions of a notification.  The subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
+     * List notification subscriptions of a notification.
+     * @param notification Specifies the unique notification ID (starts with not_).
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     */
+    public getNotificationSubscriptions(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationSubscriptionListResponse> {
+        const requestContextPromise = this.requestFactory.getNotificationSubscriptions(notification, limit, skip, order, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscriptions(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
+     * Get existing notification trigger.
+     * @param id Specifies the unique notification trigger ID (starts with ntr_).
+     */
+    public getNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerResponse> {
+        const requestContextPromise = this.requestFactory.getNotificationTrigger(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of triggers of a notification.  The triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
+     * List notification triggers of a notification.
+     * @param notification Specifies the unique notification ID (starts with not_).
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     */
+    public getNotificationTriggers(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationTriggerListResponse> {
+        const requestContextPromise = this.requestFactory.getNotificationTriggers(notification, limit, skip, order, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTriggers(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of notifications.  The notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
+     * List notifications.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param expand Specifies the fields to expand in the response.
+     * @param deleted Specifies whether to include deleted notifications.
+     * @param name Specifies the name of the notifications.
+     */
+    public getNotifications(limit?: number, skip?: number, order?: SortOrder, expand?: Array<NotificationResponseExpandable>, deleted?: boolean, name?: string, _options?: Configuration): Observable<NotificationListResponse> {
+        const requestContextPromise = this.requestFactory.getNotifications(limit, skip, order, expand, deleted, name, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotifications(rsp)));
+            }));
+    }
+
+}
+
 import { OAuthApiRequestFactory, OAuthApiResponseProcessor} from "../apis/OAuthApi";
 export class ObservableOAuthApi {
     private requestFactory: OAuthApiRequestFactory;
@@ -1567,9 +1916,9 @@ export class ObservablePoliciesApi {
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
      * @param name Specifies the name of the policy.
-     * @param deleted Specifies whether to include deleted contracts.
+     * @param deleted Specifies whether to include deleted policies.
      * @param chainId The chain ID of the policy.
-     * @param enabled Specifies whether to include enabled contracts.
+     * @param enabled Specifies whether to include enabled policies.
      */
     public getPolicies(limit?: number, skip?: number, order?: SortOrder, expand?: Array<PolicyResponseExpandable>, name?: string, deleted?: boolean, chainId?: number, enabled?: boolean, _options?: Configuration): Observable<PolicyListResponse> {
         const requestContextPromise = this.requestFactory.getPolicies(limit, skip, order, expand, name, deleted, chainId, enabled, _options);
@@ -1684,8 +2033,8 @@ export class ObservablePolicyRulesApi {
      * Create a policy rule object.
      * @param createPolicyRuleRequest 
      */
-    public createPolicyRules(createPolicyRuleRequest: CreatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
-        const requestContextPromise = this.requestFactory.createPolicyRules(createPolicyRuleRequest, _options);
+    public createPolicyRule(createPolicyRuleRequest: CreatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
+        const requestContextPromise = this.requestFactory.createPolicyRule(createPolicyRuleRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1699,7 +2048,7 @@ export class ObservablePolicyRulesApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createPolicyRules(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createPolicyRule(rsp)));
             }));
     }
 
@@ -1707,8 +2056,8 @@ export class ObservablePolicyRulesApi {
      * Deletes a policy rule object.
      * @param id Specifies the unique policy rule ID (starts with afu_).
      */
-    public deletePolicyRules(id: string, _options?: Configuration): Observable<PolicyRuleDeleteResponse> {
-        const requestContextPromise = this.requestFactory.deletePolicyRules(id, _options);
+    public deletePolicyRule(id: string, _options?: Configuration): Observable<PolicyRuleDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deletePolicyRule(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1722,11 +2071,12 @@ export class ObservablePolicyRulesApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deletePolicyRules(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deletePolicyRule(rsp)));
             }));
     }
 
     /**
+     * Returns a list of policy rules of a policy.  The policy rules are returned sorted by creation date, with the most recently created policy rules appearing first.  By default, a maximum of 10 policy rules are shown per page.
      * List policy rules of a policy.
      * @param policy Specifies the unique policy ID (starts with pol_).
      * @param limit Specifies the maximum number of records to return.
@@ -1758,8 +2108,8 @@ export class ObservablePolicyRulesApi {
      * @param id Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
-    public updatePolicyRules(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
-        const requestContextPromise = this.requestFactory.updatePolicyRules(id, updatePolicyRuleRequest, _options);
+    public updatePolicyRule(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Observable<PolicyRuleResponse> {
+        const requestContextPromise = this.requestFactory.updatePolicyRule(id, updatePolicyRuleRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1773,7 +2123,7 @@ export class ObservablePolicyRulesApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updatePolicyRules(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updatePolicyRule(rsp)));
             }));
     }
 
@@ -1964,7 +2314,7 @@ export class ObservableSettingsApi {
     /**
      * Delete a developer account from the current project.
      * Delete a developer account.
-     * @param id Specifies a unique developer account.
+     * @param id Specifies a unique developer account (starts with dac_).
      */
     public deleteDeveloperAccount(id: string, _options?: Configuration): Observable<DeveloperAccountDeleteResponse> {
         const requestContextPromise = this.requestFactory.deleteDeveloperAccount(id, _options);
@@ -1986,9 +2336,9 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Retrieve the list of the developer accounts for the current project.
+     * Retrieve a developer account.
      * Get existing developer account.
-     * @param id 
+     * @param id Specifies the unique developer account ID (starts with dac_).
      * @param expand 
      */
     public getDeveloperAccount(id: string, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Observable<DeveloperAccountResponse> {

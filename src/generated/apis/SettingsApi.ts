@@ -75,7 +75,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Delete a developer account from the current project.
      * Delete a developer account.
-     * @param id Specifies a unique developer account.
+     * @param id Specifies a unique developer account (starts with dac_).
      */
     public async deleteDeveloperAccount(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -111,9 +111,9 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieve the list of the developer accounts for the current project.
+     * Retrieve a developer account.
      * Get existing developer account.
-     * @param id 
+     * @param id Specifies the unique developer account ID (starts with dac_).
      * @param expand 
      */
     public async getDeveloperAccount(id: string, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {

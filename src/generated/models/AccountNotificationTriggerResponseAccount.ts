@@ -10,18 +10,20 @@
  * Do not edit the class manually.
  */
 
-import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { DeveloperAccount } from '../models/DeveloperAccount';
+import { EntityIdResponse } from '../models/EntityIdResponse';
+import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
+import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class AccountNotificationTriggerResponseAccount {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeDEVELOPERACCOUNT;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractNotificationTriggerResponseContract;
-    'functionName': string;
+    'address': string;
+    'custodial': boolean;
+    'name'?: string;
+    'transactionIntents'?: Array<EntityIdResponse>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,36 +37,42 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeDEVELOPERACCOUNT",
             "format": ""
         },
         {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
-            "format": ""
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractNotificationTriggerResponseContract",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
+            "name": "address",
+            "baseName": "address",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "custodial",
+            "baseName": "custodial",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<EntityIdResponse>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return AccountNotificationTriggerResponseAccount.attributeTypeMap;
     }
 
     public constructor() {

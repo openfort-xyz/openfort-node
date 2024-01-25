@@ -10,39 +10,49 @@
  * Do not edit the class manually.
  */
 
+import { SubscriptionType } from '../models/SubscriptionType';
 import { HttpFile } from '../http/http';
 
-export class PlayerCancelTransferOwnershipRequest {
+export class CreateSubscriptionRequest {
     /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
+    * The notification ID (starts with not_).
     */
-    'policy': string;
+    'notification': string;
+    'method': SubscriptionType;
     /**
-    * The chain ID. Must be a [supported chain](/chains).
+    * The receiver of notifications.
     */
-    'chainId': number;
+    'target': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "notification",
+            "baseName": "notification",
             "type": "string",
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
+            "name": "method",
+            "baseName": "method",
+            "type": "SubscriptionType",
+            "format": ""
+        },
+        {
+            "name": "target",
+            "baseName": "target",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerCancelTransferOwnershipRequest.attributeTypeMap;
+        return CreateSubscriptionRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 
