@@ -10,34 +10,33 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
-import { NotificationDeleteResponse } from '../models/NotificationDeleteResponse';
-import { NotificationListResponse } from '../models/NotificationListResponse';
-import { NotificationResponse } from '../models/NotificationResponse';
-import { NotificationResponseExpandable } from '../models/NotificationResponseExpandable';
+import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
+import { NotificationSubscription } from '../models/NotificationSubscription';
+import { NotificationSubscriptionDeleteResponse } from '../models/NotificationSubscriptionDeleteResponse';
+import { NotificationSubscriptionListResponse } from '../models/NotificationSubscriptionListResponse';
 import { SortOrder } from '../models/SortOrder';
 
 /**
  * no description
  */
-export class NotificationsApiRequestFactory extends BaseAPIRequestFactory {
+export class NotificationSubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Create a notification object.
-     * Create a notification object.
-     * @param createNotificationRequest 
+     * Create a subscription for the provided notification.
+     * Create a notification subscription object.
+     * @param createSubscriptionRequest 
      */
-    public async createNotification(createNotificationRequest: CreateNotificationRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createNotificationSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'createNotificationRequest' is not null or undefined
-        if (createNotificationRequest === null || createNotificationRequest === undefined) {
-            throw new RequiredError("NotificationsApi", "createNotification", "createNotificationRequest");
+        // verify required parameter 'createSubscriptionRequest' is not null or undefined
+        if (createSubscriptionRequest === null || createSubscriptionRequest === undefined) {
+            throw new RequiredError("NotificationSubscriptionsApi", "createNotificationSubscription", "createSubscriptionRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/v1/notifications';
+        const localVarPath = '/v1/notification_subscriptions';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -50,7 +49,7 @@ export class NotificationsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createNotificationRequest, "CreateNotificationRequest", ""),
+            ObjectSerializer.serialize(createSubscriptionRequest, "CreateSubscriptionRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -71,21 +70,21 @@ export class NotificationsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Delete a notification by providing its notification id.
-     * Deletes a notification object.
-     * @param id Specifies the unique notification ID (starts with not_).
+     * Delete a notification subscription by providing its notification subscription id.
+     * Deletes a notification subscription object.
+     * @param id Specifies the unique notification subscription ID (starts with ntr_).
      */
-    public async deleteNotification(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async deleteNotificationSubscription(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("NotificationsApi", "deleteNotification", "id");
+            throw new RequiredError("NotificationSubscriptionsApi", "deleteNotificationSubscription", "id");
         }
 
 
         // Path Params
-        const localVarPath = '/v1/notifications/{id}'
+        const localVarPath = '/v1/notification_subscriptions/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
@@ -109,33 +108,26 @@ export class NotificationsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the details of an existing notification.  Supply the unique notification ID.
-     * Get existing notification.
-     * @param id Specifies the unique notification ID (starts with not_).
-     * @param expand 
+     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
+     * Get existing notification subscription.
+     * @param id Specifies the unique notification subscription ID (starts with not_).
      */
-    public async getNotification(id: string, expand?: Array<NotificationResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
+    public async getNotificationSubscription(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("NotificationsApi", "getNotification", "id");
+            throw new RequiredError("NotificationSubscriptionsApi", "getNotificationSubscription", "id");
         }
 
 
-
         // Path Params
-        const localVarPath = '/v1/notifications/{id}'
+        const localVarPath = '/v1/notification_subscriptions/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<NotificationResponseExpandable>", ""));
-        }
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -154,26 +146,27 @@ export class NotificationsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of notifications.  Notifications are useful to get notified about events that happen on-chain or in your Openfort account.  Notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
-     * List notifications.
+     * Returns a list of subscriptions of a notification.  Subscriptions define the the way you will get notified and the target of the notification.  Subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
+     * List notification subscriptions of a notification.
+     * @param notification Specifies the unique notification ID (starts with not_).
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param expand Specifies the fields to expand in the response.
-     * @param deleted Specifies whether to include deleted notifications.
-     * @param name Specifies the name of the notifications.
      */
-    public async getNotifications(limit?: number, skip?: number, order?: SortOrder, expand?: Array<NotificationResponseExpandable>, deleted?: boolean, name?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getNotificationSubscriptions(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-
+        // verify required parameter 'notification' is not null or undefined
+        if (notification === null || notification === undefined) {
+            throw new RequiredError("NotificationSubscriptionsApi", "getNotificationSubscriptions", "notification");
+        }
 
 
 
 
 
         // Path Params
-        const localVarPath = '/v1/notifications';
+        const localVarPath = '/v1/notification_subscriptions';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -195,18 +188,8 @@ export class NotificationsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<NotificationResponseExpandable>", ""));
-        }
-
-        // Query Params
-        if (deleted !== undefined) {
-            requestContext.setQueryParam("deleted", ObjectSerializer.serialize(deleted, "boolean", ""));
-        }
-
-        // Query Params
-        if (name !== undefined) {
-            requestContext.setQueryParam("name", ObjectSerializer.serialize(name, "string", ""));
+        if (notification !== undefined) {
+            requestContext.setQueryParam("notification", ObjectSerializer.serialize(notification, "string", ""));
         }
 
 
@@ -227,22 +210,22 @@ export class NotificationsApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class NotificationsApiResponseProcessor {
+export class NotificationSubscriptionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createNotification
+     * @params response Response returned by the server for a request to createNotificationSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createNotification(response: ResponseContext): Promise<NotificationResponse > {
+     public async createNotificationSubscription(response: ResponseContext): Promise<NotificationSubscription > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: NotificationResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscription = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationResponse", ""
-            ) as NotificationResponse;
+                "NotificationSubscription", ""
+            ) as NotificationSubscription;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -254,10 +237,10 @@ export class NotificationsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: NotificationResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscription = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationResponse", ""
-            ) as NotificationResponse;
+                "NotificationSubscription", ""
+            ) as NotificationSubscription;
             return body;
         }
 
@@ -268,16 +251,16 @@ export class NotificationsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to deleteNotification
+     * @params response Response returned by the server for a request to deleteNotificationSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteNotification(response: ResponseContext): Promise<NotificationDeleteResponse > {
+     public async deleteNotificationSubscription(response: ResponseContext): Promise<NotificationSubscriptionDeleteResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: NotificationDeleteResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscriptionDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationDeleteResponse", ""
-            ) as NotificationDeleteResponse;
+                "NotificationSubscriptionDeleteResponse", ""
+            ) as NotificationSubscriptionDeleteResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -289,10 +272,10 @@ export class NotificationsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: NotificationDeleteResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscriptionDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationDeleteResponse", ""
-            ) as NotificationDeleteResponse;
+                "NotificationSubscriptionDeleteResponse", ""
+            ) as NotificationSubscriptionDeleteResponse;
             return body;
         }
 
@@ -303,16 +286,16 @@ export class NotificationsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getNotification
+     * @params response Response returned by the server for a request to getNotificationSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getNotification(response: ResponseContext): Promise<NotificationResponse > {
+     public async getNotificationSubscription(response: ResponseContext): Promise<NotificationSubscription > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: NotificationResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscription = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationResponse", ""
-            ) as NotificationResponse;
+                "NotificationSubscription", ""
+            ) as NotificationSubscription;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -321,10 +304,10 @@ export class NotificationsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: NotificationResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscription = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationResponse", ""
-            ) as NotificationResponse;
+                "NotificationSubscription", ""
+            ) as NotificationSubscription;
             return body;
         }
 
@@ -335,16 +318,16 @@ export class NotificationsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getNotifications
+     * @params response Response returned by the server for a request to getNotificationSubscriptions
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getNotifications(response: ResponseContext): Promise<NotificationListResponse > {
+     public async getNotificationSubscriptions(response: ResponseContext): Promise<NotificationSubscriptionListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: NotificationListResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscriptionListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationListResponse", ""
-            ) as NotificationListResponse;
+                "NotificationSubscriptionListResponse", ""
+            ) as NotificationSubscriptionListResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -353,10 +336,10 @@ export class NotificationsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: NotificationListResponse = ObjectSerializer.deserialize(
+            const body: NotificationSubscriptionListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationListResponse", ""
-            ) as NotificationListResponse;
+                "NotificationSubscriptionListResponse", ""
+            ) as NotificationSubscriptionListResponse;
             return body;
         }
 

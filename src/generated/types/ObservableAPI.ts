@@ -1013,6 +1013,240 @@ export class ObservableInventoriesApi {
 
 }
 
+import { NotificationSubscriptionsApiRequestFactory, NotificationSubscriptionsApiResponseProcessor} from "../apis/NotificationSubscriptionsApi";
+export class ObservableNotificationSubscriptionsApi {
+    private requestFactory: NotificationSubscriptionsApiRequestFactory;
+    private responseProcessor: NotificationSubscriptionsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: NotificationSubscriptionsApiRequestFactory,
+        responseProcessor?: NotificationSubscriptionsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new NotificationSubscriptionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new NotificationSubscriptionsApiResponseProcessor();
+    }
+
+    /**
+     * Create a subscription for the provided notification.
+     * Create a notification subscription object.
+     * @param createSubscriptionRequest 
+     */
+    public createNotificationSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Observable<NotificationSubscription> {
+        const requestContextPromise = this.requestFactory.createNotificationSubscription(createSubscriptionRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Delete a notification subscription by providing its notification subscription id.
+     * Deletes a notification subscription object.
+     * @param id Specifies the unique notification subscription ID (starts with ntr_).
+     */
+    public deleteNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscriptionDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteNotificationSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
+     * Get existing notification subscription.
+     * @param id Specifies the unique notification subscription ID (starts with not_).
+     */
+    public getNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscription> {
+        const requestContextPromise = this.requestFactory.getNotificationSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of subscriptions of a notification.  Subscriptions define the the way you will get notified and the target of the notification.  Subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
+     * List notification subscriptions of a notification.
+     * @param notification Specifies the unique notification ID (starts with not_).
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     */
+    public getNotificationSubscriptions(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationSubscriptionListResponse> {
+        const requestContextPromise = this.requestFactory.getNotificationSubscriptions(notification, limit, skip, order, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscriptions(rsp)));
+            }));
+    }
+
+}
+
+import { NotificationTriggersApiRequestFactory, NotificationTriggersApiResponseProcessor} from "../apis/NotificationTriggersApi";
+export class ObservableNotificationTriggersApi {
+    private requestFactory: NotificationTriggersApiRequestFactory;
+    private responseProcessor: NotificationTriggersApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: NotificationTriggersApiRequestFactory,
+        responseProcessor?: NotificationTriggersApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new NotificationTriggersApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new NotificationTriggersApiResponseProcessor();
+    }
+
+    /**
+     * Create a trigger for the provided notification.
+     * Create a notification trigger object.
+     * @param createTriggerRequest 
+     */
+    public createNotificationTrigger(createTriggerRequest: CreateTriggerRequest, _options?: Configuration): Observable<NotificationTriggerResponse> {
+        const requestContextPromise = this.requestFactory.createNotificationTrigger(createTriggerRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Delete a notification trigger by providing its notification trigger id.
+     * Deletes a notification trigger object.
+     * @param id Specifies the unique notification trigger ID (starts with ntr_).
+     */
+    public deleteNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteNotificationTrigger(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
+     * Get existing notification trigger.
+     * @param id Specifies the unique notification trigger ID (starts with ntr_).
+     */
+    public getNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerResponse> {
+        const requestContextPromise = this.requestFactory.getNotificationTrigger(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of triggers of a notification.  Triggers define the conditions that will trigger a notification.  Triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
+     * List notification triggers of a notification.
+     * @param notification Specifies the unique notification ID (starts with not_).
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     */
+    public getNotificationTriggers(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationTriggerListResponse> {
+        const requestContextPromise = this.requestFactory.getNotificationTriggers(notification, limit, skip, order, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTriggers(rsp)));
+            }));
+    }
+
+}
+
 import { NotificationsApiRequestFactory, NotificationsApiResponseProcessor} from "../apis/NotificationsApi";
 export class ObservableNotificationsApi {
     private requestFactory: NotificationsApiRequestFactory;
@@ -1054,54 +1288,6 @@ export class ObservableNotificationsApi {
     }
 
     /**
-     * Create a subscription for the provided notification.
-     * Create a notification subscription object.
-     * @param createSubscriptionRequest 
-     */
-    public createNotificationSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Observable<NotificationSubscription> {
-        const requestContextPromise = this.requestFactory.createNotificationSubscription(createSubscriptionRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationSubscription(rsp)));
-            }));
-    }
-
-    /**
-     * Create a trigger for the provided notification.
-     * Create a notification trigger object.
-     * @param createTriggerRequest 
-     */
-    public createNotificationTrigger(createTriggerRequest: CreateTriggerRequest, _options?: Configuration): Observable<NotificationTriggerResponse> {
-        const requestContextPromise = this.requestFactory.createNotificationTrigger(createTriggerRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationTrigger(rsp)));
-            }));
-    }
-
-    /**
      * Delete a notification by providing its notification id.
      * Deletes a notification object.
      * @param id Specifies the unique notification ID (starts with not_).
@@ -1126,57 +1312,9 @@ export class ObservableNotificationsApi {
     }
 
     /**
-     * Delete a notification subscription by providing its notification subscription id.
-     * Deletes a notification subscription object.
-     * @param id Specifies the unique notification subscription ID (starts with ntr_).
-     */
-    public deleteNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscriptionDeleteResponse> {
-        const requestContextPromise = this.requestFactory.deleteNotificationSubscription(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationSubscription(rsp)));
-            }));
-    }
-
-    /**
-     * Delete a notification trigger by providing its notification trigger id.
-     * Deletes a notification trigger object.
-     * @param id Specifies the unique notification trigger ID (starts with ntr_).
-     */
-    public deleteNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerDeleteResponse> {
-        const requestContextPromise = this.requestFactory.deleteNotificationTrigger(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationTrigger(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieves the details of an existing account.  Supply the unique notification ID.
-     * Get existing account.
-     * @param id Specifies the unique account ID (starts with not_).
+     * Retrieves the details of an existing notification.  Supply the unique notification ID.
+     * Get existing notification.
+     * @param id Specifies the unique notification ID (starts with not_).
      * @param expand 
      */
     public getNotification(id: string, expand?: Array<NotificationResponseExpandable>, _options?: Configuration): Observable<NotificationResponse> {
@@ -1199,109 +1337,7 @@ export class ObservableNotificationsApi {
     }
 
     /**
-     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
-     * Get existing notification subscription.
-     * @param id Specifies the unique notification subscription ID (starts with not_).
-     */
-    public getNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscription> {
-        const requestContextPromise = this.requestFactory.getNotificationSubscription(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscription(rsp)));
-            }));
-    }
-
-    /**
-     * Returns a list of subscriptions of a notification.  The subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
-     * List notification subscriptions of a notification.
-     * @param notification Specifies the unique notification ID (starts with not_).
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     */
-    public getNotificationSubscriptions(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationSubscriptionListResponse> {
-        const requestContextPromise = this.requestFactory.getNotificationSubscriptions(notification, limit, skip, order, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscriptions(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
-     * Get existing notification trigger.
-     * @param id Specifies the unique notification trigger ID (starts with ntr_).
-     */
-    public getNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerResponse> {
-        const requestContextPromise = this.requestFactory.getNotificationTrigger(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTrigger(rsp)));
-            }));
-    }
-
-    /**
-     * Returns a list of triggers of a notification.  The triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
-     * List notification triggers of a notification.
-     * @param notification Specifies the unique notification ID (starts with not_).
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     */
-    public getNotificationTriggers(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationTriggerListResponse> {
-        const requestContextPromise = this.requestFactory.getNotificationTriggers(notification, limit, skip, order, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTriggers(rsp)));
-            }));
-    }
-
-    /**
-     * Returns a list of notifications.  The notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
+     * Returns a list of notifications.  Notifications are useful to get notified about events that happen on-chain or in your Openfort account.  Notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
      * List notifications.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
