@@ -18,7 +18,7 @@ export class Interaction {
     */
     'to'?: string;
     /**
-    * The value intended to be sent with the transaction. Should be a stringified number in WEI (i.e. factor 10^18).
+    * The value intended to be sent with the transaction. Should be a stringified number in WEI (i.e. factor 10^18). * @example \"1000000000000000000\"
     */
     'value'?: string;
     /**

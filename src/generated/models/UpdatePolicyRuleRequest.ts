@@ -19,11 +19,11 @@ export class UpdatePolicyRuleRequest {
     /**
     * Name of the function in the contract to allow. If you want to allow all functions, use the wildcard \'All functions\'.
     */
-    'functionName'?: string | null;
+    'functionName'?: string;
     /**
     * The contract ID you want to interact with. Must have been added to Openfort first, starts with `con_`.
     */
-    'contract'?: string | null;
+    'contract'?: string;
     /**
     * Gas limit in WEI (i.e. factor 10^18).
     */

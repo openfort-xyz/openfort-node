@@ -12,34 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-export class PlayerCancelTransferOwnershipRequest {
+export class CreateNotificationRequest {
     /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
+    * The name of the notification.
     */
-    'policy': string;
-    /**
-    * The chain ID. Must be a [supported chain](/chains).
-    */
-    'chainId': number;
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerCancelTransferOwnershipRequest.attributeTypeMap;
+        return CreateNotificationRequest.attributeTypeMap;
     }
 
     public constructor() {

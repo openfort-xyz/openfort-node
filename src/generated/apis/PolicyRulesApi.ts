@@ -26,12 +26,12 @@ export class PolicyRulesApiRequestFactory extends BaseAPIRequestFactory {
      * Create a policy rule object.
      * @param createPolicyRuleRequest 
      */
-    public async createPolicyRules(createPolicyRuleRequest: CreatePolicyRuleRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createPolicyRule(createPolicyRuleRequest: CreatePolicyRuleRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'createPolicyRuleRequest' is not null or undefined
         if (createPolicyRuleRequest === null || createPolicyRuleRequest === undefined) {
-            throw new RequiredError("PolicyRulesApi", "createPolicyRules", "createPolicyRuleRequest");
+            throw new RequiredError("PolicyRulesApi", "createPolicyRule", "createPolicyRuleRequest");
         }
 
 
@@ -73,12 +73,12 @@ export class PolicyRulesApiRequestFactory extends BaseAPIRequestFactory {
      * Deletes a policy rule object.
      * @param id Specifies the unique policy rule ID (starts with afu_).
      */
-    public async deletePolicyRules(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async deletePolicyRule(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("PolicyRulesApi", "deletePolicyRules", "id");
+            throw new RequiredError("PolicyRulesApi", "deletePolicyRule", "id");
         }
 
 
@@ -107,6 +107,7 @@ export class PolicyRulesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Returns a list of policy rules of a policy.  The policy rules are returned sorted by creation date, with the most recently created policy rules appearing first.  By default, a maximum of 10 policy rules are shown per page.
      * List policy rules of a policy.
      * @param policy Specifies the unique policy ID (starts with pol_).
      * @param limit Specifies the maximum number of records to return.
@@ -180,18 +181,18 @@ export class PolicyRulesApiRequestFactory extends BaseAPIRequestFactory {
      * @param id Specifies the unique policy rule ID (starts with afu_).
      * @param updatePolicyRuleRequest 
      */
-    public async updatePolicyRules(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updatePolicyRule(id: string, updatePolicyRuleRequest: UpdatePolicyRuleRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("PolicyRulesApi", "updatePolicyRules", "id");
+            throw new RequiredError("PolicyRulesApi", "updatePolicyRule", "id");
         }
 
 
         // verify required parameter 'updatePolicyRuleRequest' is not null or undefined
         if (updatePolicyRuleRequest === null || updatePolicyRuleRequest === undefined) {
-            throw new RequiredError("PolicyRulesApi", "updatePolicyRules", "updatePolicyRuleRequest");
+            throw new RequiredError("PolicyRulesApi", "updatePolicyRule", "updatePolicyRuleRequest");
         }
 
 
@@ -238,10 +239,10 @@ export class PolicyRulesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createPolicyRules
+     * @params response Response returned by the server for a request to createPolicyRule
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createPolicyRules(response: ResponseContext): Promise<PolicyRuleResponse > {
+     public async createPolicyRule(response: ResponseContext): Promise<PolicyRuleResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PolicyRuleResponse = ObjectSerializer.deserialize(
@@ -273,10 +274,10 @@ export class PolicyRulesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to deletePolicyRules
+     * @params response Response returned by the server for a request to deletePolicyRule
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deletePolicyRules(response: ResponseContext): Promise<PolicyRuleDeleteResponse > {
+     public async deletePolicyRule(response: ResponseContext): Promise<PolicyRuleDeleteResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PolicyRuleDeleteResponse = ObjectSerializer.deserialize(
@@ -340,10 +341,10 @@ export class PolicyRulesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to updatePolicyRules
+     * @params response Response returned by the server for a request to updatePolicyRule
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updatePolicyRules(response: ResponseContext): Promise<PolicyRuleResponse > {
+     public async updatePolicyRule(response: ResponseContext): Promise<PolicyRuleResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PolicyRuleResponse = ObjectSerializer.deserialize(

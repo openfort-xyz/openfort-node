@@ -17,15 +17,15 @@ export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {
     }
 
     /**
-     * Creates an allow function object.
-     * @param req Parameters to create policy rules.
+     * Creates an policy rule object.
+     * @param req Parameters to create policy rule.
      */
     public async create(req: CreatePolicyRuleRequest): Promise<PolicyRuleResponse> {
-        return await this.api.createPolicyRules(req);
+        return await this.api.createPolicyRule(req);
     }
 
     /**
-     * Returns a list of your allow functions for the given policy. The allow functions are returned sorted by creation date, with the most recently created allow functions appearing first.
+     * Returns a list of your policy rule for the given policy. The policy rule are returned sorted by creation date, with the most recently created policy rule appearing first.
      * @param req Criteria to get policy rules by.
      */
     public async list(req: PolicyRuleListQueries): Promise<PolicyRuleListResponse> {
@@ -33,19 +33,19 @@ export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {
     }
 
     /**
-     * Updates your allow functions object.
-     * @param req Parameters to update policy rules
+     * Updates your policy rule object.
+     * @param req Parameters to update policy rule
      */
     public async update(req: UpdatePolicyRuleRequest): Promise<PolicyRuleResponse> {
         const { id, ...request } = req;
-        return await this.api.updatePolicyRules(id, request);
+        return await this.api.updatePolicyRule(id, request);
     }
 
     /**
-     * Deletes a polcy rule (allow_functions) object.
+     * Deletes a policy rule (allow_functions) object.
      * @param id Id of the policy rule
      */
     public async delete(id: string): Promise<PolicyRuleDeleteResponse> {
-        return await this.api.deletePolicyRules(id);
+        return await this.api.deletePolicyRule(id);
     }
 }

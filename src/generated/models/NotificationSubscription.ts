@@ -10,59 +10,58 @@
  * Do not edit the class manually.
  */
 
+import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
+import { SubscriptionType } from '../models/SubscriptionType';
 import { HttpFile } from '../http/http';
 
-export class PlayerTransferOwnershipRequest {
-    /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
-    */
-    'policy': string;
-    /**
-    * The chain ID. Must be a [supported chain](/chains).
-    */
-    'chainId': number;
-    /**
-    * The address of the new owner
-    */
-    'newOwnerAddress': string;
-    /**
-    * ID of the Player that has the Account you want to transfer ownership from (starts with `pla_`).
-    */
-    'player'?: string;
+export class NotificationSubscription {
+    'id': string;
+    'object': EntityTypeNOTIFICATIONSUBSCRIPTION;
+    'createdAt': number;
+    'target': string;
+    'method': SubscriptionType;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "policy",
-            "baseName": "policy",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeNOTIFICATIONSUBSCRIPTION",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "newOwnerAddress",
-            "baseName": "newOwnerAddress",
+            "name": "target",
+            "baseName": "target",
             "type": "string",
             "format": ""
         },
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "string",
+            "name": "method",
+            "baseName": "method",
+            "type": "SubscriptionType",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayerTransferOwnershipRequest.attributeTypeMap;
+        return NotificationSubscription.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

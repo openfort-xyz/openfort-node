@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class CancelTransferOwnershipRequest {
     /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
+    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
     */
     'policy': string;
 

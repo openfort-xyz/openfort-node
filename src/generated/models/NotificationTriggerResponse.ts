@@ -10,18 +10,26 @@
  * Do not edit the class manually.
  */
 
+import { AccountNotificationTriggerResponse } from '../models/AccountNotificationTriggerResponse';
+import { AccountNotificationTriggerResponseAccount } from '../models/AccountNotificationTriggerResponseAccount';
+import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
+import { ContractNotificationTriggerResponse } from '../models/ContractNotificationTriggerResponse';
 import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
+import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class NotificationTriggerResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeNOTIFICATIONTRIGGER;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
+    'type': NotificationTriggerTypePROJECTBALANCETRIGGER;
+    'threshold': string;
     'contract': ContractNotificationTriggerResponseContract;
     'functionName': string;
+    'functionArgs': Array<string>;
+    'account': AccountNotificationTriggerResponseAccount;
+    'chainId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,7 +43,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeNOTIFICATIONTRIGGER",
             "format": ""
         },
         {
@@ -47,7 +55,13 @@ export class ContractPolicyRuleResponse {
         {
             "name": "type",
             "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
+            "type": "NotificationTriggerTypePROJECTBALANCETRIGGER",
+            "format": ""
+        },
+        {
+            "name": "threshold",
+            "baseName": "threshold",
+            "type": "string",
             "format": ""
         },
         {
@@ -61,10 +75,28 @@ export class ContractPolicyRuleResponse {
             "baseName": "functionName",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "functionArgs",
+            "baseName": "functionArgs",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "AccountNotificationTriggerResponseAccount",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return NotificationTriggerResponse.attributeTypeMap;
     }
 
     public constructor() {
