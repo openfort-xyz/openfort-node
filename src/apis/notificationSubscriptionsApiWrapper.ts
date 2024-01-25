@@ -5,15 +5,15 @@ import {
     NotificationSubscriptionDeleteResponse,
     NotificationSubscriptionListQueries,
     NotificationSubscriptionListResponse,
+    NotificationSubscriptionsApi,
 } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
-import { NotificationsApi } from "../generated";
 import { GetNotificationSubscriptionRequest } from "../models/getNotificationSubscriptionRequest";
 
 @httpErrorHandler
-export class NotificationSubscriptionsApiWrapper extends BaseApiWrapper<NotificationsApi> {
+export class NotificationSubscriptionsApiWrapper extends BaseApiWrapper<NotificationSubscriptionsApi> {
     constructor(accessToken: string, basePath?: string) {
-        super(NotificationsApi, accessToken, basePath);
+        super(NotificationSubscriptionsApi, accessToken, basePath);
     }
 
     /**

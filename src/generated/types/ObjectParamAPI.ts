@@ -1010,6 +1010,210 @@ export class ObjectInventoriesApi {
 
 }
 
+import { ObservableNotificationSubscriptionsApi } from "./ObservableAPI";
+import { NotificationSubscriptionsApiRequestFactory, NotificationSubscriptionsApiResponseProcessor} from "../apis/NotificationSubscriptionsApi";
+
+export interface NotificationSubscriptionsApiCreateNotificationSubscriptionRequest {
+    /**
+     * 
+     * @type CreateSubscriptionRequest
+     * @memberof NotificationSubscriptionsApicreateNotificationSubscription
+     */
+    createSubscriptionRequest: CreateSubscriptionRequest
+}
+
+export interface NotificationSubscriptionsApiDeleteNotificationSubscriptionRequest {
+    /**
+     * Specifies the unique notification subscription ID (starts with ntr_).
+     * @type string
+     * @memberof NotificationSubscriptionsApideleteNotificationSubscription
+     */
+    id: string
+}
+
+export interface NotificationSubscriptionsApiGetNotificationSubscriptionRequest {
+    /**
+     * Specifies the unique notification subscription ID (starts with not_).
+     * @type string
+     * @memberof NotificationSubscriptionsApigetNotificationSubscription
+     */
+    id: string
+}
+
+export interface NotificationSubscriptionsApiGetNotificationSubscriptionsRequest {
+    /**
+     * Specifies the unique notification ID (starts with not_).
+     * @type string
+     * @memberof NotificationSubscriptionsApigetNotificationSubscriptions
+     */
+    notification: string
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof NotificationSubscriptionsApigetNotificationSubscriptions
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof NotificationSubscriptionsApigetNotificationSubscriptions
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof NotificationSubscriptionsApigetNotificationSubscriptions
+     */
+    order?: SortOrder
+}
+
+export class ObjectNotificationSubscriptionsApi {
+    private api: ObservableNotificationSubscriptionsApi
+
+    public constructor(configuration: Configuration, requestFactory?: NotificationSubscriptionsApiRequestFactory, responseProcessor?: NotificationSubscriptionsApiResponseProcessor) {
+        this.api = new ObservableNotificationSubscriptionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create a subscription for the provided notification.
+     * Create a notification subscription object.
+     * @param param the request object
+     */
+    public createNotificationSubscription(param: NotificationSubscriptionsApiCreateNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscription> {
+        return this.api.createNotificationSubscription(param.createSubscriptionRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete a notification subscription by providing its notification subscription id.
+     * Deletes a notification subscription object.
+     * @param param the request object
+     */
+    public deleteNotificationSubscription(param: NotificationSubscriptionsApiDeleteNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscriptionDeleteResponse> {
+        return this.api.deleteNotificationSubscription(param.id,  options).toPromise();
+    }
+
+    /**
+     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
+     * Get existing notification subscription.
+     * @param param the request object
+     */
+    public getNotificationSubscription(param: NotificationSubscriptionsApiGetNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscription> {
+        return this.api.getNotificationSubscription(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of subscriptions of a notification.  Subscriptions define the the way you will get notified and the target of the notification.  Subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
+     * List notification subscriptions of a notification.
+     * @param param the request object
+     */
+    public getNotificationSubscriptions(param: NotificationSubscriptionsApiGetNotificationSubscriptionsRequest, options?: Configuration): Promise<NotificationSubscriptionListResponse> {
+        return this.api.getNotificationSubscriptions(param.notification, param.limit, param.skip, param.order,  options).toPromise();
+    }
+
+}
+
+import { ObservableNotificationTriggersApi } from "./ObservableAPI";
+import { NotificationTriggersApiRequestFactory, NotificationTriggersApiResponseProcessor} from "../apis/NotificationTriggersApi";
+
+export interface NotificationTriggersApiCreateNotificationTriggerRequest {
+    /**
+     * 
+     * @type CreateTriggerRequest
+     * @memberof NotificationTriggersApicreateNotificationTrigger
+     */
+    createTriggerRequest: CreateTriggerRequest
+}
+
+export interface NotificationTriggersApiDeleteNotificationTriggerRequest {
+    /**
+     * Specifies the unique notification trigger ID (starts with ntr_).
+     * @type string
+     * @memberof NotificationTriggersApideleteNotificationTrigger
+     */
+    id: string
+}
+
+export interface NotificationTriggersApiGetNotificationTriggerRequest {
+    /**
+     * Specifies the unique notification trigger ID (starts with ntr_).
+     * @type string
+     * @memberof NotificationTriggersApigetNotificationTrigger
+     */
+    id: string
+}
+
+export interface NotificationTriggersApiGetNotificationTriggersRequest {
+    /**
+     * Specifies the unique notification ID (starts with not_).
+     * @type string
+     * @memberof NotificationTriggersApigetNotificationTriggers
+     */
+    notification: string
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof NotificationTriggersApigetNotificationTriggers
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof NotificationTriggersApigetNotificationTriggers
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof NotificationTriggersApigetNotificationTriggers
+     */
+    order?: SortOrder
+}
+
+export class ObjectNotificationTriggersApi {
+    private api: ObservableNotificationTriggersApi
+
+    public constructor(configuration: Configuration, requestFactory?: NotificationTriggersApiRequestFactory, responseProcessor?: NotificationTriggersApiResponseProcessor) {
+        this.api = new ObservableNotificationTriggersApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create a trigger for the provided notification.
+     * Create a notification trigger object.
+     * @param param the request object
+     */
+    public createNotificationTrigger(param: NotificationTriggersApiCreateNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerResponse> {
+        return this.api.createNotificationTrigger(param.createTriggerRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete a notification trigger by providing its notification trigger id.
+     * Deletes a notification trigger object.
+     * @param param the request object
+     */
+    public deleteNotificationTrigger(param: NotificationTriggersApiDeleteNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerDeleteResponse> {
+        return this.api.deleteNotificationTrigger(param.id,  options).toPromise();
+    }
+
+    /**
+     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
+     * Get existing notification trigger.
+     * @param param the request object
+     */
+    public getNotificationTrigger(param: NotificationTriggersApiGetNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerResponse> {
+        return this.api.getNotificationTrigger(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of triggers of a notification.  Triggers define the conditions that will trigger a notification.  Triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
+     * List notification triggers of a notification.
+     * @param param the request object
+     */
+    public getNotificationTriggers(param: NotificationTriggersApiGetNotificationTriggersRequest, options?: Configuration): Promise<NotificationTriggerListResponse> {
+        return this.api.getNotificationTriggers(param.notification, param.limit, param.skip, param.order,  options).toPromise();
+    }
+
+}
+
 import { ObservableNotificationsApi } from "./ObservableAPI";
 import { NotificationsApiRequestFactory, NotificationsApiResponseProcessor} from "../apis/NotificationsApi";
 
@@ -1022,24 +1226,6 @@ export interface NotificationsApiCreateNotificationRequest {
     createNotificationRequest: CreateNotificationRequest
 }
 
-export interface NotificationsApiCreateNotificationSubscriptionRequest {
-    /**
-     * 
-     * @type CreateSubscriptionRequest
-     * @memberof NotificationsApicreateNotificationSubscription
-     */
-    createSubscriptionRequest: CreateSubscriptionRequest
-}
-
-export interface NotificationsApiCreateNotificationTriggerRequest {
-    /**
-     * 
-     * @type CreateTriggerRequest
-     * @memberof NotificationsApicreateNotificationTrigger
-     */
-    createTriggerRequest: CreateTriggerRequest
-}
-
 export interface NotificationsApiDeleteNotificationRequest {
     /**
      * Specifies the unique notification ID (starts with not_).
@@ -1049,27 +1235,9 @@ export interface NotificationsApiDeleteNotificationRequest {
     id: string
 }
 
-export interface NotificationsApiDeleteNotificationSubscriptionRequest {
-    /**
-     * Specifies the unique notification subscription ID (starts with ntr_).
-     * @type string
-     * @memberof NotificationsApideleteNotificationSubscription
-     */
-    id: string
-}
-
-export interface NotificationsApiDeleteNotificationTriggerRequest {
-    /**
-     * Specifies the unique notification trigger ID (starts with ntr_).
-     * @type string
-     * @memberof NotificationsApideleteNotificationTrigger
-     */
-    id: string
-}
-
 export interface NotificationsApiGetNotificationRequest {
     /**
-     * Specifies the unique account ID (starts with not_).
+     * Specifies the unique notification ID (starts with not_).
      * @type string
      * @memberof NotificationsApigetNotification
      */
@@ -1080,78 +1248,6 @@ export interface NotificationsApiGetNotificationRequest {
      * @memberof NotificationsApigetNotification
      */
     expand?: Array<NotificationResponseExpandable>
-}
-
-export interface NotificationsApiGetNotificationSubscriptionRequest {
-    /**
-     * Specifies the unique notification subscription ID (starts with not_).
-     * @type string
-     * @memberof NotificationsApigetNotificationSubscription
-     */
-    id: string
-}
-
-export interface NotificationsApiGetNotificationSubscriptionsRequest {
-    /**
-     * Specifies the unique notification ID (starts with not_).
-     * @type string
-     * @memberof NotificationsApigetNotificationSubscriptions
-     */
-    notification: string
-    /**
-     * Specifies the maximum number of records to return.
-     * @type number
-     * @memberof NotificationsApigetNotificationSubscriptions
-     */
-    limit?: number
-    /**
-     * Specifies the offset for the first records to return.
-     * @type number
-     * @memberof NotificationsApigetNotificationSubscriptions
-     */
-    skip?: number
-    /**
-     * Specifies the order in which to sort the results.
-     * @type SortOrder
-     * @memberof NotificationsApigetNotificationSubscriptions
-     */
-    order?: SortOrder
-}
-
-export interface NotificationsApiGetNotificationTriggerRequest {
-    /**
-     * Specifies the unique notification trigger ID (starts with ntr_).
-     * @type string
-     * @memberof NotificationsApigetNotificationTrigger
-     */
-    id: string
-}
-
-export interface NotificationsApiGetNotificationTriggersRequest {
-    /**
-     * Specifies the unique notification ID (starts with not_).
-     * @type string
-     * @memberof NotificationsApigetNotificationTriggers
-     */
-    notification: string
-    /**
-     * Specifies the maximum number of records to return.
-     * @type number
-     * @memberof NotificationsApigetNotificationTriggers
-     */
-    limit?: number
-    /**
-     * Specifies the offset for the first records to return.
-     * @type number
-     * @memberof NotificationsApigetNotificationTriggers
-     */
-    skip?: number
-    /**
-     * Specifies the order in which to sort the results.
-     * @type SortOrder
-     * @memberof NotificationsApigetNotificationTriggers
-     */
-    order?: SortOrder
 }
 
 export interface NotificationsApiGetNotificationsRequest {
@@ -1210,24 +1306,6 @@ export class ObjectNotificationsApi {
     }
 
     /**
-     * Create a subscription for the provided notification.
-     * Create a notification subscription object.
-     * @param param the request object
-     */
-    public createNotificationSubscription(param: NotificationsApiCreateNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscription> {
-        return this.api.createNotificationSubscription(param.createSubscriptionRequest,  options).toPromise();
-    }
-
-    /**
-     * Create a trigger for the provided notification.
-     * Create a notification trigger object.
-     * @param param the request object
-     */
-    public createNotificationTrigger(param: NotificationsApiCreateNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerResponse> {
-        return this.api.createNotificationTrigger(param.createTriggerRequest,  options).toPromise();
-    }
-
-    /**
      * Delete a notification by providing its notification id.
      * Deletes a notification object.
      * @param param the request object
@@ -1237,26 +1315,8 @@ export class ObjectNotificationsApi {
     }
 
     /**
-     * Delete a notification subscription by providing its notification subscription id.
-     * Deletes a notification subscription object.
-     * @param param the request object
-     */
-    public deleteNotificationSubscription(param: NotificationsApiDeleteNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscriptionDeleteResponse> {
-        return this.api.deleteNotificationSubscription(param.id,  options).toPromise();
-    }
-
-    /**
-     * Delete a notification trigger by providing its notification trigger id.
-     * Deletes a notification trigger object.
-     * @param param the request object
-     */
-    public deleteNotificationTrigger(param: NotificationsApiDeleteNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerDeleteResponse> {
-        return this.api.deleteNotificationTrigger(param.id,  options).toPromise();
-    }
-
-    /**
-     * Retrieves the details of an existing account.  Supply the unique notification ID.
-     * Get existing account.
+     * Retrieves the details of an existing notification.  Supply the unique notification ID.
+     * Get existing notification.
      * @param param the request object
      */
     public getNotification(param: NotificationsApiGetNotificationRequest, options?: Configuration): Promise<NotificationResponse> {
@@ -1264,43 +1324,7 @@ export class ObjectNotificationsApi {
     }
 
     /**
-     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
-     * Get existing notification subscription.
-     * @param param the request object
-     */
-    public getNotificationSubscription(param: NotificationsApiGetNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscription> {
-        return this.api.getNotificationSubscription(param.id,  options).toPromise();
-    }
-
-    /**
-     * Returns a list of subscriptions of a notification.  The subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
-     * List notification subscriptions of a notification.
-     * @param param the request object
-     */
-    public getNotificationSubscriptions(param: NotificationsApiGetNotificationSubscriptionsRequest, options?: Configuration): Promise<NotificationSubscriptionListResponse> {
-        return this.api.getNotificationSubscriptions(param.notification, param.limit, param.skip, param.order,  options).toPromise();
-    }
-
-    /**
-     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
-     * Get existing notification trigger.
-     * @param param the request object
-     */
-    public getNotificationTrigger(param: NotificationsApiGetNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerResponse> {
-        return this.api.getNotificationTrigger(param.id,  options).toPromise();
-    }
-
-    /**
-     * Returns a list of triggers of a notification.  The triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
-     * List notification triggers of a notification.
-     * @param param the request object
-     */
-    public getNotificationTriggers(param: NotificationsApiGetNotificationTriggersRequest, options?: Configuration): Promise<NotificationTriggerListResponse> {
-        return this.api.getNotificationTriggers(param.notification, param.limit, param.skip, param.order,  options).toPromise();
-    }
-
-    /**
-     * Returns a list of notifications.  The notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
+     * Returns a list of notifications.  Notifications are useful to get notified about events that happen on-chain or in your Openfort account.  Notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
      * List notifications.
      * @param param the request object
      */

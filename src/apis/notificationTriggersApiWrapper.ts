@@ -5,15 +5,15 @@ import {
     NotificationTriggerListQueries,
     NotificationTriggerListResponse,
     NotificationTriggerResponse,
+    NotificationTriggersApi,
 } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
-import { NotificationsApi } from "../generated";
 import { GetNotificationTriggerRequest } from "../models/getNotificationTriggerRequest";
 
 @httpErrorHandler
-export class NotificationTriggersApiWrapper extends BaseApiWrapper<NotificationsApi> {
+export class NotificationTriggersApiWrapper extends BaseApiWrapper<NotificationTriggersApi> {
     constructor(accessToken: string, basePath?: string) {
-        super(NotificationsApi, accessToken, basePath);
+        super(NotificationTriggersApi, accessToken, basePath);
     }
 
     /**
