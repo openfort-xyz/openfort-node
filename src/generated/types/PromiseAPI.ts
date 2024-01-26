@@ -47,14 +47,14 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
+import { CreateNotificationSubscriptionRequest } from '../models/CreateNotificationSubscriptionRequest';
+import { CreateNotificationTriggerRequest } from '../models/CreateNotificationTriggerRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
-import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
@@ -655,10 +655,10 @@ export class PromiseNotificationSubscriptionsApi {
     /**
      * Create a subscription for the provided notification.
      * Create a notification subscription object.
-     * @param createSubscriptionRequest 
+     * @param createNotificationSubscriptionRequest 
      */
-    public createNotificationSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Promise<NotificationSubscription> {
-        const result = this.api.createNotificationSubscription(createSubscriptionRequest, _options);
+    public createNotificationSubscription(createNotificationSubscriptionRequest: CreateNotificationSubscriptionRequest, _options?: Configuration): Promise<NotificationSubscription> {
+        const result = this.api.createNotificationSubscription(createNotificationSubscriptionRequest, _options);
         return result.toPromise();
     }
 
@@ -717,10 +717,10 @@ export class PromiseNotificationTriggersApi {
     /**
      * Create a trigger for the provided notification.
      * Create a notification trigger object.
-     * @param createTriggerRequest 
+     * @param createNotificationTriggerRequest 
      */
-    public createNotificationTrigger(createTriggerRequest: CreateTriggerRequest, _options?: Configuration): Promise<NotificationTriggerResponse> {
-        const result = this.api.createNotificationTrigger(createTriggerRequest, _options);
+    public createNotificationTrigger(createNotificationTriggerRequest: CreateNotificationTriggerRequest, _options?: Configuration): Promise<NotificationTriggerResponse> {
+        const result = this.api.createNotificationTrigger(createNotificationTriggerRequest, _options);
         return result.toPromise();
     }
 

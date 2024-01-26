@@ -47,14 +47,14 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
+import { CreateNotificationSubscriptionRequest } from '../models/CreateNotificationSubscriptionRequest';
+import { CreateNotificationTriggerRequest } from '../models/CreateNotificationTriggerRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
-import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
@@ -1016,10 +1016,10 @@ import { NotificationSubscriptionsApiRequestFactory, NotificationSubscriptionsAp
 export interface NotificationSubscriptionsApiCreateNotificationSubscriptionRequest {
     /**
      * 
-     * @type CreateSubscriptionRequest
+     * @type CreateNotificationSubscriptionRequest
      * @memberof NotificationSubscriptionsApicreateNotificationSubscription
      */
-    createSubscriptionRequest: CreateSubscriptionRequest
+    createNotificationSubscriptionRequest: CreateNotificationSubscriptionRequest
 }
 
 export interface NotificationSubscriptionsApiDeleteNotificationSubscriptionRequest {
@@ -1080,7 +1080,7 @@ export class ObjectNotificationSubscriptionsApi {
      * @param param the request object
      */
     public createNotificationSubscription(param: NotificationSubscriptionsApiCreateNotificationSubscriptionRequest, options?: Configuration): Promise<NotificationSubscription> {
-        return this.api.createNotificationSubscription(param.createSubscriptionRequest,  options).toPromise();
+        return this.api.createNotificationSubscription(param.createNotificationSubscriptionRequest,  options).toPromise();
     }
 
     /**
@@ -1118,10 +1118,10 @@ import { NotificationTriggersApiRequestFactory, NotificationTriggersApiResponseP
 export interface NotificationTriggersApiCreateNotificationTriggerRequest {
     /**
      * 
-     * @type CreateTriggerRequest
+     * @type CreateNotificationTriggerRequest
      * @memberof NotificationTriggersApicreateNotificationTrigger
      */
-    createTriggerRequest: CreateTriggerRequest
+    createNotificationTriggerRequest: CreateNotificationTriggerRequest
 }
 
 export interface NotificationTriggersApiDeleteNotificationTriggerRequest {
@@ -1182,7 +1182,7 @@ export class ObjectNotificationTriggersApi {
      * @param param the request object
      */
     public createNotificationTrigger(param: NotificationTriggersApiCreateNotificationTriggerRequest, options?: Configuration): Promise<NotificationTriggerResponse> {
-        return this.api.createNotificationTrigger(param.createTriggerRequest,  options).toPromise();
+        return this.api.createNotificationTrigger(param.createNotificationTriggerRequest,  options).toPromise();
     }
 
     /**

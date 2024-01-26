@@ -10,7 +10,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
+import { CreateNotificationSubscriptionRequest } from '../models/CreateNotificationSubscriptionRequest';
 import { NotificationSubscription } from '../models/NotificationSubscription';
 import { NotificationSubscriptionDeleteResponse } from '../models/NotificationSubscriptionDeleteResponse';
 import { NotificationSubscriptionListResponse } from '../models/NotificationSubscriptionListResponse';
@@ -24,14 +24,14 @@ export class NotificationSubscriptionsApiRequestFactory extends BaseAPIRequestFa
     /**
      * Create a subscription for the provided notification.
      * Create a notification subscription object.
-     * @param createSubscriptionRequest 
+     * @param createNotificationSubscriptionRequest 
      */
-    public async createNotificationSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createNotificationSubscription(createNotificationSubscriptionRequest: CreateNotificationSubscriptionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'createSubscriptionRequest' is not null or undefined
-        if (createSubscriptionRequest === null || createSubscriptionRequest === undefined) {
-            throw new RequiredError("NotificationSubscriptionsApi", "createNotificationSubscription", "createSubscriptionRequest");
+        // verify required parameter 'createNotificationSubscriptionRequest' is not null or undefined
+        if (createNotificationSubscriptionRequest === null || createNotificationSubscriptionRequest === undefined) {
+            throw new RequiredError("NotificationSubscriptionsApi", "createNotificationSubscription", "createNotificationSubscriptionRequest");
         }
 
 
@@ -49,7 +49,7 @@ export class NotificationSubscriptionsApiRequestFactory extends BaseAPIRequestFa
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createSubscriptionRequest, "CreateSubscriptionRequest", ""),
+            ObjectSerializer.serialize(createNotificationSubscriptionRequest, "CreateNotificationSubscriptionRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
