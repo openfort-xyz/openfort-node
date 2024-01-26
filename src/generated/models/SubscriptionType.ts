@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type SubscriptionType = "EMAIL" | "WEBHOOK" ;
+export type SubscriptionType = "Email" | "Webhook" ;
