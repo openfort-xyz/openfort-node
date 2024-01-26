@@ -13,7 +13,7 @@
 import { NotificationTriggerType } from '../models/NotificationTriggerType';
 import { HttpFile } from '../http/http';
 
-export class CreateTriggerRequest {
+export class CreateNotificationTriggerRequest {
     /**
     * The notification ID (starts with not_).
     */
@@ -97,7 +97,7 @@ export class CreateTriggerRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateTriggerRequest.attributeTypeMap;
+        return CreateNotificationTriggerRequest.attributeTypeMap;
     }
 
     public constructor() {

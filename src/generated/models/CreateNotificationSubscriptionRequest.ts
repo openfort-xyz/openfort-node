@@ -13,7 +13,7 @@
 import { SubscriptionType } from '../models/SubscriptionType';
 import { HttpFile } from '../http/http';
 
-export class CreateSubscriptionRequest {
+export class CreateNotificationSubscriptionRequest {
     /**
     * The notification ID (starts with not_).
     */
@@ -47,7 +47,7 @@ export class CreateSubscriptionRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateSubscriptionRequest.attributeTypeMap;
+        return CreateNotificationSubscriptionRequest.attributeTypeMap;
     }
 
     public constructor() {

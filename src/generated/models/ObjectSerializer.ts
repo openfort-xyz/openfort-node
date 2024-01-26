@@ -44,14 +44,14 @@ export * from '../models/CreateAccountRequest';
 export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateContractRequest';
 export * from '../models/CreateNotificationRequest';
+export * from '../models/CreateNotificationSubscriptionRequest';
+export * from '../models/CreateNotificationTriggerRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
 export * from '../models/CreateProjectRequest';
 export * from '../models/CreateSessionRequest';
-export * from '../models/CreateSubscriptionRequest';
 export * from '../models/CreateTransactionIntentRequest';
-export * from '../models/CreateTriggerRequest';
 export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
 export * from '../models/DeployRequest';
@@ -290,14 +290,14 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
+import { CreateNotificationSubscriptionRequest    } from '../models/CreateNotificationSubscriptionRequest';
+import { CreateNotificationTriggerRequest         } from '../models/CreateNotificationTriggerRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest   } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateSubscriptionRequest    } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
-import { CreateTriggerRequest         } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
@@ -620,14 +620,14 @@ let typeMap: {[index: string]: any} = {
     "CreateApiAuthorizedNetworkRequest": CreateApiAuthorizedNetworkRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreateNotificationRequest": CreateNotificationRequest,
+    "CreateNotificationSubscriptionRequest": CreateNotificationSubscriptionRequest,
+    "CreateNotificationTriggerRequest": CreateNotificationTriggerRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
     "CreateProjectRequest": CreateProjectRequest,
     "CreateSessionRequest": CreateSessionRequest,
-    "CreateSubscriptionRequest": CreateSubscriptionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
-    "CreateTriggerRequest": CreateTriggerRequest,
     "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
     "DeployRequest": DeployRequest,
     "DeveloperAccount": DeveloperAccount,

@@ -1,6 +1,6 @@
 import { BaseApiWrapper } from "./baseApiWrapper";
 import {
-    CreateTriggerRequest,
+    CreateNotificationTriggerRequest,
     NotificationTriggerDeleteResponse,
     NotificationTriggerListQueries,
     NotificationTriggerListResponse,
@@ -20,7 +20,7 @@ export class NotificationTriggersApiWrapper extends BaseApiWrapper<NotificationT
      * Create a trigger for the provided notification.
      * @param req Parameters to create a notification trigger.
      */
-    public async create(req: CreateTriggerRequest): Promise<NotificationTriggerResponse> {
+    public async create(req: CreateNotificationTriggerRequest): Promise<NotificationTriggerResponse> {
         return await this.api.createNotificationTrigger(req);
     }
 

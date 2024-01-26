@@ -1,6 +1,6 @@
 import { BaseApiWrapper } from "./baseApiWrapper";
 import {
-    CreateSubscriptionRequest,
+    CreateNotificationSubscriptionRequest,
     NotificationSubscription,
     NotificationSubscriptionDeleteResponse,
     NotificationSubscriptionListQueries,
@@ -20,7 +20,7 @@ export class NotificationSubscriptionsApiWrapper extends BaseApiWrapper<Notifica
      * Create a subscription for the provided notification.
      * @param req Parameters to create a notification subscription.
      */
-    public async create(req: CreateSubscriptionRequest): Promise<NotificationSubscription> {
+    public async create(req: CreateNotificationSubscriptionRequest): Promise<NotificationSubscription> {
         return await this.api.createNotificationSubscription(req);
     }
 

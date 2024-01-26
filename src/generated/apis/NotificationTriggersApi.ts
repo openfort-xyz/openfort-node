@@ -10,7 +10,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
+import { CreateNotificationTriggerRequest } from '../models/CreateNotificationTriggerRequest';
 import { NotificationTriggerDeleteResponse } from '../models/NotificationTriggerDeleteResponse';
 import { NotificationTriggerListResponse } from '../models/NotificationTriggerListResponse';
 import { NotificationTriggerResponse } from '../models/NotificationTriggerResponse';
@@ -24,14 +24,14 @@ export class NotificationTriggersApiRequestFactory extends BaseAPIRequestFactory
     /**
      * Create a trigger for the provided notification.
      * Create a notification trigger object.
-     * @param createTriggerRequest 
+     * @param createNotificationTriggerRequest 
      */
-    public async createNotificationTrigger(createTriggerRequest: CreateTriggerRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createNotificationTrigger(createNotificationTriggerRequest: CreateNotificationTriggerRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'createTriggerRequest' is not null or undefined
-        if (createTriggerRequest === null || createTriggerRequest === undefined) {
-            throw new RequiredError("NotificationTriggersApi", "createNotificationTrigger", "createTriggerRequest");
+        // verify required parameter 'createNotificationTriggerRequest' is not null or undefined
+        if (createNotificationTriggerRequest === null || createNotificationTriggerRequest === undefined) {
+            throw new RequiredError("NotificationTriggersApi", "createNotificationTrigger", "createNotificationTriggerRequest");
         }
 
 
@@ -49,7 +49,7 @@ export class NotificationTriggersApiRequestFactory extends BaseAPIRequestFactory
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createTriggerRequest, "CreateTriggerRequest", ""),
+            ObjectSerializer.serialize(createNotificationTriggerRequest, "CreateNotificationTriggerRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
