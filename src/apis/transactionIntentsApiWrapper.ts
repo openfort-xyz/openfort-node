@@ -54,6 +54,7 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
             req?.chainId,
             req?.account,
             req?.player,
+            req?.status,
             req?.policy,
         );
     }

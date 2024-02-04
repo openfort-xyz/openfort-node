@@ -91,9 +91,8 @@ export * from '../models/FixedRateTokenPolicyStrategy';
 export * from '../models/GasPerIntervalLimitPolicyRuleResponse';
 export * from '../models/GasPerTransactionLimitPolicyRuleResponse';
 export * from '../models/GasReport';
-export * from '../models/GasReportDataInner';
-export * from '../models/GasReportDataInnerPeriod';
-export * from '../models/GasReportDataInnerTransactionIntentsInner';
+export * from '../models/GasReportListResponse';
+export * from '../models/GasReportTransactionIntentsInner';
 export * from '../models/GetSigninUrlResponse';
 export * from '../models/GoogleOAuthConfig';
 export * from '../models/Interaction';
@@ -105,6 +104,7 @@ export * from '../models/Log';
 export * from '../models/LoginRequest';
 export * from '../models/LootLockerOAuthConfig';
 export * from '../models/Money';
+export * from '../models/MonthRange';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
@@ -157,6 +157,7 @@ export * from '../models/PlayerResponseTransactionIntentsInner';
 export * from '../models/PlayerTransferOwnershipRequest';
 export * from '../models/PlayerUpdateRequest';
 export * from '../models/Policy';
+export * from '../models/PolicyBalanceWithdrawResponse';
 export * from '../models/PolicyDeleteResponse';
 export * from '../models/PolicyListQueries';
 export * from '../models/PolicyListResponse';
@@ -243,6 +244,7 @@ export * from '../models/Web3ConnectionResponse';
 export * from '../models/Web3ConnectionResponseExpandable';
 export * from '../models/Web3ConnectionResponsePlayer';
 export * from '../models/WebhookResponse';
+export * from '../models/WithdrawalPolicyRequest';
 
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
@@ -305,7 +307,7 @@ import { DeveloperAccount        } from '../models/DeveloperAccount';
 import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse    } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
-import { DeveloperAccountListQueries     } from '../models/DeveloperAccountListQueries';
+import { DeveloperAccountListQueries      } from '../models/DeveloperAccountListQueries';
 import { DeveloperAccountListResponse       } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse        } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
@@ -336,10 +338,9 @@ import { FirebaseOAuthConfig    } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy     } from '../models/FixedRateTokenPolicyStrategy';
 import { GasPerIntervalLimitPolicyRuleResponse         } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse       } from '../models/GasPerTransactionLimitPolicyRuleResponse';
-import { GasReport   } from '../models/GasReport';
-import { GasReportDataInner } from '../models/GasReportDataInner';
-import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
-import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
+import { GasReport } from '../models/GasReport';
+import { GasReportListResponse       } from '../models/GasReportListResponse';
+import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { GoogleOAuthConfig      } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
@@ -351,6 +352,7 @@ import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
 import { LootLockerOAuthConfig   } from '../models/LootLockerOAuthConfig';
 import { Money   } from '../models/Money';
+import { MonthRange } from '../models/MonthRange';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
@@ -403,6 +405,7 @@ import { PlayerResponseTransactionIntentsInner              } from '../models/Pl
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy           } from '../models/Policy';
+import { PolicyBalanceWithdrawResponse } from '../models/PolicyBalanceWithdrawResponse';
 import { PolicyDeleteResponse    } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries         } from '../models/PolicyListQueries';
 import { PolicyListResponse       } from '../models/PolicyListResponse';
@@ -457,7 +460,7 @@ import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionType } from '../models/SubscriptionType';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent              } from '../models/TransactionIntent';
-import { TransactionIntentListQueries         } from '../models/TransactionIntentListQueries';
+import { TransactionIntentListQueries          } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse       } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse              } from '../models/TransactionIntentResponse';
 import { TransactionIntentResponseAccount             } from '../models/TransactionIntentResponseAccount';
@@ -489,6 +492,7 @@ import { Web3ConnectionResponse      } from '../models/Web3ConnectionResponse';
 import { Web3ConnectionResponseExpandable } from '../models/Web3ConnectionResponseExpandable';
 import { Web3ConnectionResponsePlayer         } from '../models/Web3ConnectionResponsePlayer';
 import { WebhookResponse } from '../models/WebhookResponse';
+import { WithdrawalPolicyRequest } from '../models/WithdrawalPolicyRequest';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -646,9 +650,8 @@ let typeMap: {[index: string]: any} = {
     "GasPerIntervalLimitPolicyRuleResponse": GasPerIntervalLimitPolicyRuleResponse,
     "GasPerTransactionLimitPolicyRuleResponse": GasPerTransactionLimitPolicyRuleResponse,
     "GasReport": GasReport,
-    "GasReportDataInner": GasReportDataInner,
-    "GasReportDataInnerPeriod": GasReportDataInnerPeriod,
-    "GasReportDataInnerTransactionIntentsInner": GasReportDataInnerTransactionIntentsInner,
+    "GasReportListResponse": GasReportListResponse,
+    "GasReportTransactionIntentsInner": GasReportTransactionIntentsInner,
     "GetSigninUrlResponse": GetSigninUrlResponse,
     "GoogleOAuthConfig": GoogleOAuthConfig,
     "Interaction": Interaction,
@@ -660,6 +663,7 @@ let typeMap: {[index: string]: any} = {
     "LoginRequest": LoginRequest,
     "LootLockerOAuthConfig": LootLockerOAuthConfig,
     "Money": Money,
+    "MonthRange": MonthRange,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
     "NotificationDeleteResponse": NotificationDeleteResponse,
@@ -699,6 +703,7 @@ let typeMap: {[index: string]: any} = {
     "PlayerTransferOwnershipRequest": PlayerTransferOwnershipRequest,
     "PlayerUpdateRequest": PlayerUpdateRequest,
     "Policy": Policy,
+    "PolicyBalanceWithdrawResponse": PolicyBalanceWithdrawResponse,
     "PolicyDeleteResponse": PolicyDeleteResponse,
     "PolicyListQueries": PolicyListQueries,
     "PolicyListResponse": PolicyListResponse,
@@ -760,6 +765,7 @@ let typeMap: {[index: string]: any} = {
     "Web3ConnectionResponse": Web3ConnectionResponse,
     "Web3ConnectionResponsePlayer": Web3ConnectionResponsePlayer,
     "WebhookResponse": WebhookResponse,
+    "WithdrawalPolicyRequest": WithdrawalPolicyRequest,
 }
 
 export class ObjectSerializer {

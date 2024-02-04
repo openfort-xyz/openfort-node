@@ -12,28 +12,35 @@
 
 import { HttpFile } from '../http/http';
 
-export class GasReportDataInnerPeriod {
-    'end': number;
-    'start': number;
+export class PolicyBalanceWithdrawResponse {
+    'policy': string;
+    'balance': string;
+    'contract': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "end",
-            "baseName": "end",
-            "type": "number",
-            "format": "int32"
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "start",
-            "baseName": "start",
-            "type": "number",
-            "format": "int32"
+            "name": "balance",
+            "baseName": "balance",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contract",
+            "baseName": "contract",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return GasReportDataInnerPeriod.attributeTypeMap;
+        return PolicyBalanceWithdrawResponse.attributeTypeMap;
     }
 
     public constructor() {

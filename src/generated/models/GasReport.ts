@@ -10,27 +10,55 @@
  * Do not edit the class manually.
  */
 
-import { GasReportDataInner } from '../models/GasReportDataInner';
-import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
+import { MonthRange } from '../models/MonthRange';
 import { HttpFile } from '../http/http';
 
 export class GasReport {
-    'object': ResponseTypeLIST;
-    'data': Array<GasReportDataInner>;
+    'period': MonthRange;
+    'averageTransactionFee': string;
+    'totalTransactionFeeInCustomTokens': string;
+    'totalTransactionFee': string;
+    'totalTransactionFeeInUSD': string;
+    'transactionIntents': Array<GasReportTransactionIntentsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "ResponseTypeLIST",
+            "name": "period",
+            "baseName": "period",
+            "type": "MonthRange",
             "format": ""
         },
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<GasReportDataInner>",
+            "name": "averageTransactionFee",
+            "baseName": "averageTransactionFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "totalTransactionFeeInCustomTokens",
+            "baseName": "totalTransactionFeeInCustomTokens",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "totalTransactionFee",
+            "baseName": "totalTransactionFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "totalTransactionFeeInUSD",
+            "baseName": "totalTransactionFeeInUSD",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<GasReportTransactionIntentsInner>",
             "format": ""
         }    ];
 
@@ -41,6 +69,4 @@ export class GasReport {
     public constructor() {
     }
 }
-
-
 

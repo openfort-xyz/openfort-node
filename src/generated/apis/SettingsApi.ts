@@ -162,9 +162,11 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
+     * @param deleted Specifies whether to include deleted dev accounts.
      */
-    public async getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
+    public async getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, deleted?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -195,6 +197,11 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (expand !== undefined) {
             requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<DeveloperAccountResponseExpandable>", ""));
+        }
+
+        // Query Params
+        if (deleted !== undefined) {
+            requestContext.setQueryParam("deleted", ObjectSerializer.serialize(deleted, "boolean", ""));
         }
 
 

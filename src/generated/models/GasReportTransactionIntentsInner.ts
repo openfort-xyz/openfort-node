@@ -12,12 +12,12 @@
 
 import { HttpFile } from '../http/http';
 
-export class GasReportDataInnerTransactionIntentsInner {
+export class GasReportTransactionIntentsInner {
     'gasFeeInUSD': string;
     'gasUsed': string;
     'gasPrice': string;
     'gasFee': string;
-    'transactionIntentId': string;
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -47,14 +47,14 @@ export class GasReportDataInnerTransactionIntentsInner {
             "format": ""
         },
         {
-            "name": "transactionIntentId",
-            "baseName": "transactionIntentId",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return GasReportDataInnerTransactionIntentsInner.attributeTypeMap;
+        return GasReportTransactionIntentsInner.attributeTypeMap;
     }
 
     public constructor() {

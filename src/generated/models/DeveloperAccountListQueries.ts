@@ -28,6 +28,10 @@ export class DeveloperAccountListQueries {
     * Specifies the fields to expand in the response.
     */
     'expand'?: Array<DeveloperAccountResponseExpandable>;
+    /**
+    * Specifies whether to include deleted dev accounts.
+    */
+    'deleted'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -54,6 +58,12 @@ export class DeveloperAccountListQueries {
             "name": "expand",
             "baseName": "expand",
             "type": "Array<DeveloperAccountResponseExpandable>",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
             "format": ""
         }    ];
 

@@ -175,10 +175,12 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param chainId The chain ID. Must be a [supported chain](/chains).
      * @param account Filter by account ID or developer account (starts with acc_ or dac_ respectively).
      * @param player Filter by player ID (starts with pla_).
+     * @param status Filter by successful (1) or failed (0) transaction intents.
      * @param policy Filter by policy ID (starts with pol_).
      */
-    public async getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, policy?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, status?: number, policy?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -228,6 +230,11 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (player !== undefined) {
             requestContext.setQueryParam("player", ObjectSerializer.serialize(player, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (status !== undefined) {
+            requestContext.setQueryParam("status", ObjectSerializer.serialize(status, "number", "double"));
         }
 
         // Query Params

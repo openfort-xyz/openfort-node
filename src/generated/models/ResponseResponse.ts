@@ -27,13 +27,21 @@ export class ResponseResponse {
     */
     'transactionHash'?: string;
     /**
-    * The gas used by the transaction of this log.
+    * The l1 gas used by the transaction of this log.
     */
     'l1GasUsed'?: string;
     /**
     * The gas used by the transaction of this log.
     */
     'gasUsed'?: number;
+    /**
+    * The gas fee by the transaction of this log.
+    */
+    'gasFee'?: string;
+    /**
+    * The l1 gas fee by the transaction of this log.
+    */
+    'l1GasFee'?: string;
     /**
     * The status of the transaction of this log.
     */
@@ -83,6 +91,18 @@ export class ResponseResponse {
             "baseName": "gasUsed",
             "type": "number",
             "format": "int64"
+        },
+        {
+            "name": "gasFee",
+            "baseName": "gasFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "l1GasFee",
+            "baseName": "l1GasFee",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "status",
