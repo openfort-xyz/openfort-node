@@ -86,7 +86,7 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * Get policy total gas usage
      * @param req Criteria to get usage
      */
-    public async getPolicyTotalGasUsage(req: GetPolicyTotalGasUsageRequest): Promise<GasReportListResponse> {
+    public async getTotalGasUsage(req: GetPolicyTotalGasUsageRequest): Promise<GasReportListResponse> {
         return await this.api.getPolicyTotalGasUsage(req.id);
     }
 }
