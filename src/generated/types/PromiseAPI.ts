@@ -94,9 +94,8 @@ import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStra
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
-import { GasReportDataInner } from '../models/GasReportDataInner';
-import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
-import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
+import { GasReportListResponse } from '../models/GasReportListResponse';
+import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
@@ -108,6 +107,7 @@ import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { Money } from '../models/Money';
+import { MonthRange } from '../models/MonthRange';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
@@ -160,6 +160,7 @@ import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseT
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy } from '../models/Policy';
+import { PolicyBalanceWithdrawResponse } from '../models/PolicyBalanceWithdrawResponse';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
 import { PolicyListResponse } from '../models/PolicyListResponse';
@@ -246,6 +247,7 @@ import { Web3ConnectionResponse } from '../models/Web3ConnectionResponse';
 import { Web3ConnectionResponseExpandable } from '../models/Web3ConnectionResponseExpandable';
 import { Web3ConnectionResponsePlayer } from '../models/Web3ConnectionResponsePlayer';
 import { WebhookResponse } from '../models/WebhookResponse';
+import { WithdrawalPolicyRequest } from '../models/WithdrawalPolicyRequest';
 import { ObservableAccountsApi } from './ObservableAPI';
 
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
@@ -561,6 +563,7 @@ export class PromiseInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the cryptocurrency assets of an existing account.
      * @param id Specifies the unique account ID.
      * @param limit Specifies the maximum number of records to return.
@@ -574,6 +577,7 @@ export class PromiseInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the native asset of an existing account.
      * @param id Specifies the unique account ID.
      */
@@ -583,6 +587,7 @@ export class PromiseInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the NFT assets of an existing account.
      * @param id Specifies the unique account ID.
      * @param limit Specifies the maximum number of records to return.
@@ -596,6 +601,7 @@ export class PromiseInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get cryptocurrency list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -610,6 +616,7 @@ export class PromiseInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get native token list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -620,6 +627,7 @@ export class PromiseInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get NFTs list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -1085,6 +1093,16 @@ export class PromisePoliciesApi {
     }
 
     /**
+     * List all gas reports of a policy.
+     * @param id Specifies the unique policy ID (starts with pol_).
+     * @param withdrawalPolicyRequest 
+     */
+    public createPolicyWithdrawal(id: string, withdrawalPolicyRequest: WithdrawalPolicyRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
+        const result = this.api.createPolicyWithdrawal(id, withdrawalPolicyRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Delete a policy object.
      * @param id Specifies the unique policy ID (starts with pol_).
      */
@@ -1143,7 +1161,16 @@ export class PromisePoliciesApi {
      * List all gas reports of a policy.
      * @param id Specifies the unique policy ID (starts with pol_).
      */
-    public getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<GasReport> {
+    public getPolicyBalance(id: string, _options?: Configuration): Promise<PolicyBalanceWithdrawResponse> {
+        const result = this.api.getPolicyBalance(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * List all gas reports of a policy.
+     * @param id Specifies the unique policy ID (starts with pol_).
+     */
+    public getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<GasReportListResponse> {
         const result = this.api.getPolicyTotalGasUsage(id, _options);
         return result.toPromise();
     }
@@ -1349,9 +1376,10 @@ export class PromiseSettingsApi {
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
+     * @param deleted Specifies whether to include deleted dev accounts.
      */
-    public getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Promise<DeveloperAccountListResponse> {
-        const result = this.api.getDeveloperAccounts(limit, skip, order, expand, _options);
+    public getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, deleted?: boolean, _options?: Configuration): Promise<DeveloperAccountListResponse> {
+        const result = this.api.getDeveloperAccounts(limit, skip, order, expand, deleted, _options);
         return result.toPromise();
     }
 
@@ -1444,10 +1472,11 @@ export class PromiseTransactionIntentsApi {
      * @param chainId The chain ID. Must be a [supported chain](/chains).
      * @param account Filter by account ID or developer account (starts with acc_ or dac_ respectively).
      * @param player Filter by player ID (starts with pla_).
+     * @param status Filter by successful (1) or failed (0) transaction intents.
      * @param policy Filter by policy ID (starts with pol_).
      */
-    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, policy?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
-        const result = this.api.getTransactionIntents(limit, skip, order, expand, chainId, account, player, policy, _options);
+    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, status?: number, policy?: Array<string>, _options?: Configuration): Promise<TransactionIntentListResponse> {
+        const result = this.api.getTransactionIntents(limit, skip, order, expand, chainId, account, player, status, policy, _options);
         return result.toPromise();
     }
 

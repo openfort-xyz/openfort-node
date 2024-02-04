@@ -95,9 +95,8 @@ import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStra
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
-import { GasReportDataInner } from '../models/GasReportDataInner';
-import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
-import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
+import { GasReportListResponse } from '../models/GasReportListResponse';
+import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
@@ -109,6 +108,7 @@ import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { Money } from '../models/Money';
+import { MonthRange } from '../models/MonthRange';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
@@ -161,6 +161,7 @@ import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseT
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy } from '../models/Policy';
+import { PolicyBalanceWithdrawResponse } from '../models/PolicyBalanceWithdrawResponse';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
 import { PolicyListResponse } from '../models/PolicyListResponse';
@@ -247,6 +248,7 @@ import { Web3ConnectionResponse } from '../models/Web3ConnectionResponse';
 import { Web3ConnectionResponseExpandable } from '../models/Web3ConnectionResponseExpandable';
 import { Web3ConnectionResponsePlayer } from '../models/Web3ConnectionResponsePlayer';
 import { WebhookResponse } from '../models/WebhookResponse';
+import { WithdrawalPolicyRequest } from '../models/WithdrawalPolicyRequest';
 
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
 export class ObservableAccountsApi {
@@ -855,6 +857,7 @@ export class ObservableInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the cryptocurrency assets of an existing account.
      * @param id Specifies the unique account ID.
      * @param limit Specifies the maximum number of records to return.
@@ -882,6 +885,7 @@ export class ObservableInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the native asset of an existing account.
      * @param id Specifies the unique account ID.
      */
@@ -905,6 +909,7 @@ export class ObservableInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the NFT assets of an existing account.
      * @param id Specifies the unique account ID.
      * @param limit Specifies the maximum number of records to return.
@@ -932,6 +937,7 @@ export class ObservableInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get cryptocurrency list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -960,6 +966,7 @@ export class ObservableInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get native token list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -984,6 +991,7 @@ export class ObservableInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get NFTs list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -1876,6 +1884,30 @@ export class ObservablePoliciesApi {
     }
 
     /**
+     * List all gas reports of a policy.
+     * @param id Specifies the unique policy ID (starts with pol_).
+     * @param withdrawalPolicyRequest 
+     */
+    public createPolicyWithdrawal(id: string, withdrawalPolicyRequest: WithdrawalPolicyRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
+        const requestContextPromise = this.requestFactory.createPolicyWithdrawal(id, withdrawalPolicyRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createPolicyWithdrawal(rsp)));
+            }));
+    }
+
+    /**
      * Delete a policy object.
      * @param id Specifies the unique policy ID (starts with pol_).
      */
@@ -2004,7 +2036,30 @@ export class ObservablePoliciesApi {
      * List all gas reports of a policy.
      * @param id Specifies the unique policy ID (starts with pol_).
      */
-    public getPolicyTotalGasUsage(id: string, _options?: Configuration): Observable<GasReport> {
+    public getPolicyBalance(id: string, _options?: Configuration): Observable<PolicyBalanceWithdrawResponse> {
+        const requestContextPromise = this.requestFactory.getPolicyBalance(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPolicyBalance(rsp)));
+            }));
+    }
+
+    /**
+     * List all gas reports of a policy.
+     * @param id Specifies the unique policy ID (starts with pol_).
+     */
+    public getPolicyTotalGasUsage(id: string, _options?: Configuration): Observable<GasReportListResponse> {
         const requestContextPromise = this.requestFactory.getPolicyTotalGasUsage(id, _options);
 
         // build promise chain
@@ -2403,9 +2458,10 @@ export class ObservableSettingsApi {
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
+     * @param deleted Specifies whether to include deleted dev accounts.
      */
-    public getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Observable<DeveloperAccountListResponse> {
-        const requestContextPromise = this.requestFactory.getDeveloperAccounts(limit, skip, order, expand, _options);
+    public getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, deleted?: boolean, _options?: Configuration): Observable<DeveloperAccountListResponse> {
+        const requestContextPromise = this.requestFactory.getDeveloperAccounts(limit, skip, order, expand, deleted, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -2595,10 +2651,11 @@ export class ObservableTransactionIntentsApi {
      * @param chainId The chain ID. Must be a [supported chain](/chains).
      * @param account Filter by account ID or developer account (starts with acc_ or dac_ respectively).
      * @param player Filter by player ID (starts with pla_).
+     * @param status Filter by successful (1) or failed (0) transaction intents.
      * @param policy Filter by policy ID (starts with pol_).
      */
-    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, policy?: Array<string>, _options?: Configuration): Observable<TransactionIntentListResponse> {
-        const requestContextPromise = this.requestFactory.getTransactionIntents(limit, skip, order, expand, chainId, account, player, policy, _options);
+    public getTransactionIntents(limit?: number, skip?: number, order?: SortOrder, expand?: Array<TransactionIntentResponseExpandable>, chainId?: number, account?: Array<string>, player?: Array<string>, status?: number, policy?: Array<string>, _options?: Configuration): Observable<TransactionIntentListResponse> {
+        const requestContextPromise = this.requestFactory.getTransactionIntents(limit, skip, order, expand, chainId, account, player, status, policy, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

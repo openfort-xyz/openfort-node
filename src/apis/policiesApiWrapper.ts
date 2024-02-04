@@ -1,6 +1,5 @@
 import {
     CreatePolicyRequest,
-    GasReport,
     GetPolicyRequest,
     GetPolicyTotalGasUsageRequest,
     PolicyListResponse,
@@ -10,7 +9,7 @@ import {
     PolicyListQueries,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { PoliciesApi } from "../generated";
+import { GasReportListResponse, PoliciesApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
@@ -87,7 +86,7 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * Get policy total gas usage
      * @param req Criteria to get usage
      */
-    public async getPolicyTotalGasUsage(req: GetPolicyTotalGasUsageRequest): Promise<GasReport> {
+    public async getPolicyTotalGasUsage(req: GetPolicyTotalGasUsageRequest): Promise<GasReportListResponse> {
         return await this.api.getPolicyTotalGasUsage(req.id);
     }
 }

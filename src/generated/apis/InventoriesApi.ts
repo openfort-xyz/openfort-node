@@ -20,6 +20,7 @@ import { SortOrder } from '../models/SortOrder';
 export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the cryptocurrency assets of an existing account.
      * @param id Specifies the unique account ID.
      * @param limit Specifies the maximum number of records to return.
@@ -85,6 +86,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the native asset of an existing account.
      * @param id Specifies the unique account ID.
      */
@@ -122,6 +124,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the NFT assets of an existing account.
      * @param id Specifies the unique account ID.
      * @param limit Specifies the maximum number of records to return.
@@ -187,6 +190,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get cryptocurrency list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -264,6 +268,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get native token list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.
@@ -313,6 +318,7 @@ export class InventoriesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get NFTs list of player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param chainId Filter by chain id.

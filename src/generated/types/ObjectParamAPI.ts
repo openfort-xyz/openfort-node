@@ -94,9 +94,8 @@ import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStra
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
-import { GasReportDataInner } from '../models/GasReportDataInner';
-import { GasReportDataInnerPeriod } from '../models/GasReportDataInnerPeriod';
-import { GasReportDataInnerTransactionIntentsInner } from '../models/GasReportDataInnerTransactionIntentsInner';
+import { GasReportListResponse } from '../models/GasReportListResponse';
+import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
@@ -108,6 +107,7 @@ import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { Money } from '../models/Money';
+import { MonthRange } from '../models/MonthRange';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
@@ -160,6 +160,7 @@ import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseT
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy } from '../models/Policy';
+import { PolicyBalanceWithdrawResponse } from '../models/PolicyBalanceWithdrawResponse';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries } from '../models/PolicyListQueries';
 import { PolicyListResponse } from '../models/PolicyListResponse';
@@ -246,6 +247,7 @@ import { Web3ConnectionResponse } from '../models/Web3ConnectionResponse';
 import { Web3ConnectionResponseExpandable } from '../models/Web3ConnectionResponseExpandable';
 import { Web3ConnectionResponsePlayer } from '../models/Web3ConnectionResponsePlayer';
 import { WebhookResponse } from '../models/WebhookResponse';
+import { WithdrawalPolicyRequest } from '../models/WithdrawalPolicyRequest';
 
 import { ObservableAccountsApi } from "./ObservableAPI";
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
@@ -961,6 +963,7 @@ export class ObjectInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the cryptocurrency assets of an existing account.
      * @param param the request object
      */
@@ -969,6 +972,7 @@ export class ObjectInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the native asset of an existing account.
      * @param param the request object
      */
@@ -977,6 +981,7 @@ export class ObjectInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Retrieves the NFT assets of an existing account.
      * @param param the request object
      */
@@ -985,6 +990,7 @@ export class ObjectInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get cryptocurrency list of player.
      * @param param the request object
      */
@@ -993,6 +999,7 @@ export class ObjectInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get native token list of player.
      * @param param the request object
      */
@@ -1001,6 +1008,7 @@ export class ObjectInventoriesApi {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
      * Get NFTs list of player.
      * @param param the request object
      */
@@ -1755,6 +1763,21 @@ export interface PoliciesApiCreatePolicyRequest {
     createPolicyRequest: CreatePolicyRequest
 }
 
+export interface PoliciesApiCreatePolicyWithdrawalRequest {
+    /**
+     * Specifies the unique policy ID (starts with pol_).
+     * @type string
+     * @memberof PoliciesApicreatePolicyWithdrawal
+     */
+    id: string
+    /**
+     * 
+     * @type WithdrawalPolicyRequest
+     * @memberof PoliciesApicreatePolicyWithdrawal
+     */
+    withdrawalPolicyRequest: WithdrawalPolicyRequest
+}
+
 export interface PoliciesApiDeletePolicyRequest {
     /**
      * Specifies the unique policy ID (starts with pol_).
@@ -1848,6 +1871,15 @@ export interface PoliciesApiGetPolicyRequest {
     expand?: Array<PolicyResponseExpandable>
 }
 
+export interface PoliciesApiGetPolicyBalanceRequest {
+    /**
+     * Specifies the unique policy ID (starts with pol_).
+     * @type string
+     * @memberof PoliciesApigetPolicyBalance
+     */
+    id: string
+}
+
 export interface PoliciesApiGetPolicyTotalGasUsageRequest {
     /**
      * Specifies the unique policy ID (starts with pol_).
@@ -1885,6 +1917,14 @@ export class ObjectPoliciesApi {
      */
     public createPolicy(param: PoliciesApiCreatePolicyRequest, options?: Configuration): Promise<PolicyResponse> {
         return this.api.createPolicy(param.createPolicyRequest,  options).toPromise();
+    }
+
+    /**
+     * List all gas reports of a policy.
+     * @param param the request object
+     */
+    public createPolicyWithdrawal(param: PoliciesApiCreatePolicyWithdrawalRequest, options?: Configuration): Promise<TransactionIntentResponse> {
+        return this.api.createPolicyWithdrawal(param.id, param.withdrawalPolicyRequest,  options).toPromise();
     }
 
     /**
@@ -1933,7 +1973,15 @@ export class ObjectPoliciesApi {
      * List all gas reports of a policy.
      * @param param the request object
      */
-    public getPolicyTotalGasUsage(param: PoliciesApiGetPolicyTotalGasUsageRequest, options?: Configuration): Promise<GasReport> {
+    public getPolicyBalance(param: PoliciesApiGetPolicyBalanceRequest, options?: Configuration): Promise<PolicyBalanceWithdrawResponse> {
+        return this.api.getPolicyBalance(param.id,  options).toPromise();
+    }
+
+    /**
+     * List all gas reports of a policy.
+     * @param param the request object
+     */
+    public getPolicyTotalGasUsage(param: PoliciesApiGetPolicyTotalGasUsageRequest, options?: Configuration): Promise<GasReportListResponse> {
         return this.api.getPolicyTotalGasUsage(param.id,  options).toPromise();
     }
 
@@ -2255,6 +2303,12 @@ export interface SettingsApiGetDeveloperAccountsRequest {
      * @memberof SettingsApigetDeveloperAccounts
      */
     expand?: Array<DeveloperAccountResponseExpandable>
+    /**
+     * Specifies whether to include deleted dev accounts.
+     * @type boolean
+     * @memberof SettingsApigetDeveloperAccounts
+     */
+    deleted?: boolean
 }
 
 export interface SettingsApiGetVerificationPayloadRequest {
@@ -2318,7 +2372,7 @@ export class ObjectSettingsApi {
      * @param param the request object
      */
     public getDeveloperAccounts(param: SettingsApiGetDeveloperAccountsRequest = {}, options?: Configuration): Promise<DeveloperAccountListResponse> {
-        return this.api.getDeveloperAccounts(param.limit, param.skip, param.order, param.expand,  options).toPromise();
+        return this.api.getDeveloperAccounts(param.limit, param.skip, param.order, param.expand, param.deleted,  options).toPromise();
     }
 
     /**
@@ -2430,6 +2484,12 @@ export interface TransactionIntentsApiGetTransactionIntentsRequest {
      */
     player?: Array<string>
     /**
+     * Filter by successful (1) or failed (0) transaction intents.
+     * @type number
+     * @memberof TransactionIntentsApigetTransactionIntents
+     */
+    status?: number
+    /**
      * Filter by policy ID (starts with pol_).
      * @type Array&lt;string&gt;
      * @memberof TransactionIntentsApigetTransactionIntents
@@ -2492,7 +2552,7 @@ export class ObjectTransactionIntentsApi {
      * @param param the request object
      */
     public getTransactionIntents(param: TransactionIntentsApiGetTransactionIntentsRequest = {}, options?: Configuration): Promise<TransactionIntentListResponse> {
-        return this.api.getTransactionIntents(param.limit, param.skip, param.order, param.expand, param.chainId, param.account, param.player, param.policy,  options).toPromise();
+        return this.api.getTransactionIntents(param.limit, param.skip, param.order, param.expand, param.chainId, param.account, param.player, param.status, param.policy,  options).toPromise();
     }
 
     /**

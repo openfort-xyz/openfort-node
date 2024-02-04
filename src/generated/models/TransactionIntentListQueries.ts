@@ -41,6 +41,10 @@ export class TransactionIntentListQueries {
     */
     'player'?: Array<string>;
     /**
+    * Filter by successful (1) or failed (0) transaction intents.
+    */
+    'status'?: number;
+    /**
     * Filter by policy ID (starts with pol_).
     */
     'policy'?: Array<string>;
@@ -89,6 +93,12 @@ export class TransactionIntentListQueries {
             "baseName": "player",
             "type": "Array<string>",
             "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "number",
+            "format": "double"
         },
         {
             "name": "policy",
