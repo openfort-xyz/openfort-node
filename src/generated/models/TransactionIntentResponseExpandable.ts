@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type TransactionIntentResponseExpandable = "policy" | "player" | "account" ;
+export type TransactionIntentResponseExpandable = "player" | "policy" | "account" ;

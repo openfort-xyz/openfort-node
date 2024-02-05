@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type AccountResponseExpandable = "transactionIntents" ;
+export type AccountResponseExpandable = "transactionIntents" | "player" ;
