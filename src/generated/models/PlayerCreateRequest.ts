@@ -17,7 +17,7 @@ export class PlayerCreateRequest {
     /**
     * Specifies the player name.
     */
-    'name': string;
+    'name'?: string;
     /**
     * Specifies the player description.
     */

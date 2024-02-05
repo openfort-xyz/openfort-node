@@ -34,6 +34,7 @@ export class TransactionIntentResponseAccount {
     'accountType': string;
     'pendingOwnerAddress'?: string;
     'transactionIntents'?: Array<EntityIdResponse>;
+    'player': EntityIdResponse;
     'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -103,6 +104,12 @@ export class TransactionIntentResponseAccount {
             "name": "transactionIntents",
             "baseName": "transactionIntents",
             "type": "Array<EntityIdResponse>",
+            "format": ""
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "EntityIdResponse",
             "format": ""
         },
         {
