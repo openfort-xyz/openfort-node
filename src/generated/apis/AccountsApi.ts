@@ -141,7 +141,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates a new blockchain account for the provided player.  Account creation does not consume any gas. All accounts of a player will use the same address across blockchains.  Each player can only have one account per chain.
+     * Creates a new blockchain account for the provided player. If not player is provided, a new one will be created.  Account creation does not consume any gas. All accounts of a player will use the same address across blockchains.  Each player can only have one account per chain.
      * Create an account object.
      * @param createAccountRequest 
      */
