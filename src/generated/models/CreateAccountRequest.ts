@@ -36,7 +36,7 @@ export class CreateAccountRequest {
     /**
     * ID of the Player this Account belongs to (starts with `pla_`).
     */
-    'player': string;
+    'player'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
