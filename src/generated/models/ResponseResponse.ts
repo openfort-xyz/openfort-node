@@ -33,7 +33,7 @@ export class ResponseResponse {
     /**
     * The gas used by the transaction of this log.
     */
-    'gasUsed'?: number;
+    'gasUsed'?: string;
     /**
     * The gas fee by the transaction of this log.
     */
@@ -89,8 +89,8 @@ export class ResponseResponse {
         {
             "name": "gasUsed",
             "baseName": "gasUsed",
-            "type": "number",
-            "format": "int64"
+            "type": "string",
+            "format": ""
         },
         {
             "name": "gasFee",
