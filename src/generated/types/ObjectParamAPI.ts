@@ -1920,7 +1920,8 @@ export class ObjectPoliciesApi {
     }
 
     /**
-     * List all gas reports of a policy.
+     * Transfer ERC-20 tokens paid in gas to another account.  When using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas. This is specific to a policy that doesn\'t use your own deposited tokens in the paymaster.
+     * .
      * @param param the request object
      */
     public createPolicyWithdrawal(param: PoliciesApiCreatePolicyWithdrawalRequest, options?: Configuration): Promise<TransactionIntentResponse> {
@@ -1970,7 +1971,8 @@ export class ObjectPoliciesApi {
     }
 
     /**
-     * List all gas reports of a policy.
+     * Get the amount of ERC-20 tokens paid as gas for a policy.  When using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas. This is specific to a policy that doesn\'t use your own deposited tokens in the paymaster.
+     * Get amount of tokens paid for gas policy.
      * @param param the request object
      */
     public getPolicyBalance(param: PoliciesApiGetPolicyBalanceRequest, options?: Configuration): Promise<PolicyBalanceWithdrawResponse> {
