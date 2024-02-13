@@ -8,8 +8,9 @@ import {
     ContractListQueries,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { ContractsApi } from "../generated";
+import { ContractReadResponse, ContractsApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
+import { ReadContractRequest } from "../models/readContractRequest";
 
 @httpErrorHandler
 export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {
@@ -40,6 +41,14 @@ export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {
      */
     public async delete(id: string): Promise<ContractDeleteResponse> {
         return await this.api.deleteContract(id);
+    }
+
+    /**
+     * Read on chain contract data.
+     * @param req Parameters to get the contract data
+     */
+    public async read(req: ReadContractRequest): Promise<ContractReadResponse> {
+        return await this.api.readContract(req.id, req.functionName, req?.functionArgs);
     }
 
     /**
