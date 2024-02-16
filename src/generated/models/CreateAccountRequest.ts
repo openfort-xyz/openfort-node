@@ -26,6 +26,10 @@ export class CreateAccountRequest {
     */
     'accountType'?: string;
     /**
+    * For account types that support social recovery, wether to enable Openfort as guardian or not. Defaults to false.
+    */
+    'defaultGuardian'?: boolean;
+    /**
     * If ERC6551, the address of the NFT contract to use
     */
     'tokenContract'?: string;
@@ -57,6 +61,12 @@ export class CreateAccountRequest {
             "name": "accountType",
             "baseName": "accountType",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "defaultGuardian",
+            "baseName": "defaultGuardian",
+            "type": "boolean",
             "format": ""
         },
         {
