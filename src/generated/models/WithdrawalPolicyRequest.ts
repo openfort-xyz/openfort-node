@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class WithdrawalPolicyRequest {
     /**
-    * ID of the Dev Account this TransactionIntent is executed with (starts with `dac_`).
+    * ID of the Dev Account this TransactionIntent will send the specified amount of tokens to (starts with `dac_`).
     */
     'account': string;
     /**
