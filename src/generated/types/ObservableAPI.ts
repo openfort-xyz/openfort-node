@@ -586,7 +586,7 @@ export class ObservableAdminAuthenticationApi {
      * Deletes a player auth object.
      * @param id Specifies the unique player ID (starts with pla_).
      */
-    public deleteAuthPlayer(id: string, _options?: Configuration): Observable<PlayerDeleteResponse> {
+    public deleteAuthPlayer(id: string, _options?: Configuration): Observable<AuthPlayerResponse> {
         const requestContextPromise = this.requestFactory.deleteAuthPlayer(id, _options);
 
         // build promise chain

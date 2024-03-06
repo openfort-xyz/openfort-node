@@ -2,12 +2,12 @@ import {
     AdminAuthenticationApi,
     AuthPlayerListQueries,
     AuthPlayerListResponse,
+    AuthPlayerResponse,
     AuthSessionResponse,
     AuthenticateOAuthRequest,
     OAuthConfig,
     OAuthConfigListResponse,
     OAuthProvider,
-    PlayerDeleteResponse,
     PlayerResponse,
 } from "../generated";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -49,7 +49,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      * Deletes a player auth object.
      * @param id Specifies the unique player ID (starts with pla_).
      */
-    public async deleteAuthPlayer(id: string): Promise<PlayerDeleteResponse> {
+    public async deleteAuthPlayer(id: string): Promise<AuthPlayerResponse> {
         return await this.api.deleteAuthPlayer(id);
     }
 
@@ -70,7 +70,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      * @param order Specifies the order in which to sort the results.
      * @param email Specifies the email address of the user.
      */
-    public async listAuthPlayers(req: AuthPlayerListQueries): Promise<AuthPlayerListResponse> {
+    public async getAuthPlayers(req: AuthPlayerListQueries): Promise<AuthPlayerListResponse> {
         return await this.api.getAuthPlayers(req.limit, req.skip, req.order, req.email);
     }
 

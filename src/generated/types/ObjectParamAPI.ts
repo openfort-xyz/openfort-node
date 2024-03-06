@@ -652,7 +652,7 @@ export class ObjectAdminAuthenticationApi {
      * Deletes a player auth object.
      * @param param the request object
      */
-    public deleteAuthPlayer(param: AdminAuthenticationApiDeleteAuthPlayerRequest, options?: Configuration): Promise<PlayerDeleteResponse> {
+    public deleteAuthPlayer(param: AdminAuthenticationApiDeleteAuthPlayerRequest, options?: Configuration): Promise<AuthPlayerResponse> {
         return this.api.deleteAuthPlayer(param.id,  options).toPromise();
     }
 
