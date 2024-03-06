@@ -12,42 +12,35 @@
 
 import { HttpFile } from '../http/http';
 
-export class RegisterPlayerEncryptedKeyResponse {
-    'player': string;
-    'ownerAddress': string;
-    'createdAt': number;
-    'updatedAt': number;
+export class CheckoutSubscriptionRequest {
+    'plan': string;
+    'cancelUrl'?: string;
+    'successUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
+            "name": "plan",
+            "baseName": "plan",
             "type": "string",
             "format": ""
         },
         {
-            "name": "ownerAddress",
-            "baseName": "ownerAddress",
+            "name": "cancelUrl",
+            "baseName": "cancelUrl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "double"
+            "name": "successUrl",
+            "baseName": "successUrl",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return RegisterPlayerEncryptedKeyResponse.attributeTypeMap;
+        return CheckoutSubscriptionRequest.attributeTypeMap;
     }
 
     public constructor() {

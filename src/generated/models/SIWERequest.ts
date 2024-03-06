@@ -10,38 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { AuthResponse } from '../models/AuthResponse';
-import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { HttpFile } from '../http/http';
 
-export class AuthorizeWithOAuthToken200Response {
+export class SIWERequest {
     /**
-    * Player\'s identifier.
+    * The address of the user.
     */
-    'playerId': string;
-    /**
-    * JWT token.
-    */
-    'token': string;
+    'address': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "playerId",
-            "baseName": "playerId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "address",
+            "baseName": "address",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthorizeWithOAuthToken200Response.attributeTypeMap;
+        return SIWERequest.attributeTypeMap;
     }
 
     public constructor() {

@@ -10,47 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { HttpFile } from '../http/http';
 
-export class AuthResponse {
-    'player': AuthPlayerResponse;
-    /**
-    * JWT access token.
-    */
-    'token': string;
-    /**
-    * Refresh token.
-    */
-    'refreshToken': string;
+export class Plan {
+    'id': string;
+    'name': string;
+    'price': number;
+    'is_current': boolean;
+    'change_type': PlanChangeTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "price",
+            "baseName": "price",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "is_current",
+            "baseName": "is_current",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "change_type",
+            "baseName": "change_type",
+            "type": "PlanChangeTypeEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthResponse.attributeTypeMap;
+        return Plan.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
+export type PlanChangeTypeEnum = "upgrade" | "downgrade" | "none" ;
 

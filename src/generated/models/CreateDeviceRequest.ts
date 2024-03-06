@@ -10,44 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { HttpFile } from '../http/http';
 
-export class AuthResponse {
-    'player': AuthPlayerResponse;
+export class CreateDeviceRequest {
     /**
-    * JWT access token.
+    * Specifies the unique account ID (starts with acc_)
     */
-    'token': string;
-    /**
-    * Refresh token.
-    */
-    'refreshToken': string;
+    'account': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
+            "name": "account",
+            "baseName": "account",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthResponse.attributeTypeMap;
+        return CreateDeviceRequest.attributeTypeMap;
     }
 
     public constructor() {

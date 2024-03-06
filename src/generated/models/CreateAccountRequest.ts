@@ -38,7 +38,7 @@ export class CreateAccountRequest {
     */
     'tokenId'?: number;
     /**
-    * ID of the Player this Account belongs to (starts with `pla_`).
+    * ID of the player this account belongs to (starts with `pla_`). If none is provided, a new player will be created.
     */
     'player'?: string;
 

@@ -10,49 +10,42 @@
  * Do not edit the class manually.
  */
 
+import { OAuthProvider } from '../models/OAuthProvider';
 import { HttpFile } from '../http/http';
 
-export class RegisterPlayerEncryptedKeyRequest {
+/**
+* The request to verify access token
+*/
+export class LinkRequest {
+    'provider': OAuthProvider;
     /**
-    * The cipher text of the key to register.
+    * external user id
     */
-    'pk_ciphertext': string;
-    /**
-    * The salt used expand the password of the user.
-    */
-    'salt': string;
-    /**
-    * The address of the owner.
-    */
-    'owner_address': string;
+    'externalUserId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "pk_ciphertext",
-            "baseName": "pk_ciphertext",
-            "type": "string",
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProvider",
             "format": ""
         },
         {
-            "name": "salt",
-            "baseName": "salt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "owner_address",
-            "baseName": "owner_address",
+            "name": "externalUserId",
+            "baseName": "externalUserId",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return RegisterPlayerEncryptedKeyRequest.attributeTypeMap;
+        return LinkRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

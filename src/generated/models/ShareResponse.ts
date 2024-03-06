@@ -10,27 +10,21 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
-import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
+import { EntityTypeSHARE } from '../models/EntityTypeSHARE';
+import { ShareType } from '../models/ShareType';
 import { HttpFile } from '../http/http';
 
-export class AuthPlayerResponse {
-    'player'?: AuthPlayerResponsePlayer;
+export class ShareResponse {
     'id': string;
-    'object': EntityTypePLAYER;
+    'object': EntityTypeSHARE;
     'createdAt': number;
-    'linkedAccounts': Array<LinkedAccountResponse>;
+    'share': string;
+    'userEntropy': boolean;
+    'type': ShareType;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponsePlayer",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -40,7 +34,7 @@ export class AuthPlayerResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePLAYER",
+            "type": "EntityTypeSHARE",
             "format": ""
         },
         {
@@ -50,14 +44,26 @@ export class AuthPlayerResponse {
             "format": "int32"
         },
         {
-            "name": "linkedAccounts",
-            "baseName": "linkedAccounts",
-            "type": "Array<LinkedAccountResponse>",
+            "name": "share",
+            "baseName": "share",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "userEntropy",
+            "baseName": "userEntropy",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "ShareType",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthPlayerResponse.attributeTypeMap;
+        return ShareResponse.attributeTypeMap;
     }
 
     public constructor() {

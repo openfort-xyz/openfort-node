@@ -189,7 +189,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param id Specifies the unique account ID (starts with acc_).
      * @param deployRequest 
@@ -290,7 +290,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of accounts for the given player.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
+     * Returns a list of accounts for the given player.  This object represents a player\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
      * List accounts of a player.
      * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
