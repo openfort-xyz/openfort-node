@@ -11,13 +11,13 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
+import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthRequest } from '../models/OAuthRequest';
-import { PlayerDeleteResponse } from '../models/PlayerDeleteResponse';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { SortOrder } from '../models/SortOrder';
 
@@ -465,13 +465,13 @@ export class AdminAuthenticationApiResponseProcessor {
      * @params response Response returned by the server for a request to deleteAuthPlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteAuthPlayer(response: ResponseContext): Promise<PlayerDeleteResponse > {
+     public async deleteAuthPlayer(response: ResponseContext): Promise<AuthPlayerResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PlayerDeleteResponse = ObjectSerializer.deserialize(
+            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlayerDeleteResponse", ""
-            ) as PlayerDeleteResponse;
+                "AuthPlayerResponse", ""
+            ) as AuthPlayerResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -483,10 +483,10 @@ export class AdminAuthenticationApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PlayerDeleteResponse = ObjectSerializer.deserialize(
+            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlayerDeleteResponse", ""
-            ) as PlayerDeleteResponse;
+                "AuthPlayerResponse", ""
+            ) as AuthPlayerResponse;
             return body;
         }
 

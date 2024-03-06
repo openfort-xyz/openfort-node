@@ -429,7 +429,7 @@ export class PromiseAdminAuthenticationApi {
      * Deletes a player auth object.
      * @param id Specifies the unique player ID (starts with pla_).
      */
-    public deleteAuthPlayer(id: string, _options?: Configuration): Promise<PlayerDeleteResponse> {
+    public deleteAuthPlayer(id: string, _options?: Configuration): Promise<AuthPlayerResponse> {
         const result = this.api.deleteAuthPlayer(id, _options);
         return result.toPromise();
     }
