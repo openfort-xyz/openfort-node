@@ -32,7 +32,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      * @param token Specifies the auth token.
      */
     public async verifyOAuthToken(req: AuthenticateOAuthRequest): Promise<PlayerResponse> {
-        return await this.api.verifyOAuthToken(req.provider, req);
+        return await this.api.verifyOAuthToken(req);
     }
 
     /**
