@@ -23,15 +23,19 @@ import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
+import { AuthProvider } from '../models/AuthProvider';
 import { AuthResponse } from '../models/AuthResponse';
-import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
-import { AuthorizeWithOAuthToken200Response } from '../models/AuthorizeWithOAuthToken200Response';
+import { AuthSessionResponse } from '../models/AuthSessionResponse';
+import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
+import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
+import { BaseEntityListResponseShareResponse } from '../models/BaseEntityListResponseShareResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
+import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractListQueries } from '../models/ContractListQueries';
@@ -46,6 +50,7 @@ import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerInter
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
+import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
 import { CreateNotificationSubscriptionRequest } from '../models/CreateNotificationSubscriptionRequest';
 import { CreateNotificationTriggerRequest } from '../models/CreateNotificationTriggerRequest';
@@ -54,10 +59,12 @@ import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateShareRequest } from '../models/CreateShareRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
 import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
@@ -66,11 +73,14 @@ import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueri
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
+import { DeviceListQueries } from '../models/DeviceListQueries';
+import { DeviceResponse } from '../models/DeviceResponse';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
+import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
 import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
@@ -81,6 +91,7 @@ import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
+import { EntityTypeSHARE } from '../models/EntityTypeSHARE';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
@@ -103,8 +114,13 @@ import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
 import { InventoryListResponse } from '../models/InventoryListResponse';
 import { InventoryResponse } from '../models/InventoryResponse';
+import { JwtKey } from '../models/JwtKey';
+import { JwtKeyResponse } from '../models/JwtKeyResponse';
+import { LinkRequest } from '../models/LinkRequest';
+import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
+import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { Money } from '../models/Money';
 import { MonthRange } from '../models/MonthRange';
@@ -132,6 +148,7 @@ import { NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER } from '../models/Notifi
 import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
+import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
 import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
@@ -143,6 +160,8 @@ import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
+import { Plan } from '../models/Plan';
+import { PlansResponse } from '../models/PlansResponse';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
@@ -189,17 +208,20 @@ import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
-import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
-import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
+import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
-import { RetrievePlayerEncryptedKeyResponse } from '../models/RetrievePlayerEncryptedKeyResponse';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
+import { SIWEAuthenticateRequest } from '../models/SIWEAuthenticateRequest';
+import { SIWEInitResponse } from '../models/SIWEInitResponse';
+import { SIWERequest } from '../models/SIWERequest';
 import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
+import { ShareResponse } from '../models/ShareResponse';
+import { ShareType } from '../models/ShareType';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -212,6 +234,8 @@ import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
+import { SubscriptionResponse } from '../models/SubscriptionResponse';
+import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SubscriptionType } from '../models/SubscriptionType';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent } from '../models/TransactionIntent';
@@ -294,7 +318,7 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param id Specifies the unique account ID (starts with acc_).
      * @param deployRequest 
@@ -316,7 +340,7 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * Returns a list of accounts for the given player.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
+     * Returns a list of accounts for the given player.  This object represents a player\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
      * List accounts of a player.
      * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
@@ -376,6 +400,118 @@ export class PromiseAccountsApi {
 
 
 
+import { ObservableAdminAuthenticationApi } from './ObservableAPI';
+
+import { AdminAuthenticationApiRequestFactory, AdminAuthenticationApiResponseProcessor} from "../apis/AdminAuthenticationApi";
+export class PromiseAdminAuthenticationApi {
+    private api: ObservableAdminAuthenticationApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: AdminAuthenticationApiRequestFactory,
+        responseProcessor?: AdminAuthenticationApiResponseProcessor
+    ) {
+        this.api = new ObservableAdminAuthenticationApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param body Specifies the oauth provider specific configuration.
+     */
+    public createOAuthConfig(body: OAuthConfig, _options?: Configuration): Promise<OAuthConfig> {
+        const result = this.api.createOAuthConfig(body, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Deletes a player auth object.  It will delete all linked accounts the player is authenticated with.
+     * Deletes a player auth object.
+     * @param id Specifies the unique player ID (starts with pla_).
+     */
+    public deleteAuthPlayer(id: string, _options?: Configuration): Promise<PlayerDeleteResponse> {
+        const result = this.api.deleteAuthPlayer(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint deletes oauth configuration for specified provider for the current project environment.
+     * Delete oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteOAuthConfig(provider, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieves a list of authenticated players.  Players have linked accounts and are authenticated with a provider.
+     * List authenticated players.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param email Specifies the email address of the user.
+     */
+    public getAuthPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Promise<AuthPlayerListResponse> {
+        const result = this.api.getAuthPlayers(limit, skip, order, email, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
+     * Get oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<OAuthConfig> {
+        const result = this.api.getOAuthConfig(provider, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * List configured OAuth methods for the current project environment.
+     * List of oauth configurations.
+     */
+    public listOAuthConfig(_options?: Configuration): Promise<OAuthConfigListResponse> {
+        const result = this.api.listOAuthConfig(_options);
+        return result.toPromise();
+    }
+
+    /**
+     * Verifies the token generated by Openfort Auth.
+     * Verify auth token.
+     * @param token Specifies the auth token.
+     */
+    public verifyAuthToken(token: string, _options?: Configuration): Promise<AuthSessionResponse> {
+        const result = this.api.verifyAuthToken(token, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by oauth token.
+     * @param authenticateOAuthRequest 
+     */
+    public verifyOAuth(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.verifyOAuth(authenticateOAuthRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by token.
+     * @param provider OAuth provider
+     * @param oAuthRequest 
+     */
+    public verifyOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.verifyOAuthToken(provider, oAuthRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
 import { ObservableAuthenticationApi } from './ObservableAPI';
 
 import { AuthenticationApiRequestFactory, AuthenticationApiResponseProcessor} from "../apis/AuthenticationApi";
@@ -391,32 +527,148 @@ export class PromiseAuthenticationApi {
     }
 
     /**
-     * When using Openfort Auth, the endpoint authenticates the player based on his email, and returns the jwt token for the player together with the player id.
-     * Login a player.
+     * Authenticate player with oauth token.
+     * @param authenticateOAuthRequest 
+     */
+    public authenticateOAuth(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.authenticateOAuth(authenticateOAuthRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Authenticate player with SIWE
+     * @param sIWEAuthenticateRequest 
+     */
+    public authenticateSIWE(sIWEAuthenticateRequest: SIWEAuthenticateRequest, _options?: Configuration): Promise<void | AuthResponse> {
+        const result = this.api.authenticateSIWE(sIWEAuthenticateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
+     * Authorize player with token.
+     * @param provider OAuth provider
+     * @param oAuthRequest 
+     */
+    public authorizeWithOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<DeprecatedAuthenticatedPlayerResponse> {
+        const result = this.api.authorizeWithOAuthToken(provider, oAuthRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get the jwks.json file.  You can use the jwks.json file to verify the signature of a JWT token issued by Openfort Auth.
+     * Get the jwks.json file.
+     * @param publishableKey Specifies the project publishable key (starts with pk_).
+     */
+    public getJwks(publishableKey: string, _options?: Configuration): Promise<JwtKeyResponse> {
+        const result = this.api.getJwks(publishableKey, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Initialize OAuth.
+     * @param oAuthInitRequest 
+     */
+    public initOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Promise<GetSigninUrlResponse> {
+        const result = this.api.initOAuth(oAuthInitRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a challenge to link external wallet to the player.
+     * Initialize SIWE.
+     * @param sIWERequest 
+     */
+    public initSIWE(sIWERequest: SIWERequest, _options?: Configuration): Promise<SIWEInitResponse> {
+        const result = this.api.initSIWE(sIWERequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Link external wallet.
+     * @param sIWEAuthenticateRequest 
+     */
+    public linkSIWE(sIWEAuthenticateRequest: SIWEAuthenticateRequest, _options?: Configuration): Promise<AuthPlayerResponse | void> {
+        const result = this.api.linkSIWE(sIWEAuthenticateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Authenticate a player based on email and password.
+     * Email and password login.
      * @param loginRequest 
      */
-    public login(loginRequest: LoginRequest, _options?: Configuration): Promise<AuthResponse> {
-        const result = this.api.login(loginRequest, _options);
+    public loginEmailPassword(loginRequest: LoginRequest, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.loginEmailPassword(loginRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * When using Openfort Auth, the endpoint creates a player based on his email, and returns the jwt token for the player together with the player id.
-     * Sign up a player.
+     * When using Openfort Auth, the endpoint logs out the player.
+     * Log out a player.
+     * @param logoutRequest 
+     */
+    public logout(logoutRequest: LogoutRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.logout(logoutRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get or create a new session for the player based on the refresh token.
+     * Refresh or create auth session.
+     * @param refreshTokenRequest 
+     */
+    public refresh(refreshTokenRequest: RefreshTokenRequest, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.refresh(refreshTokenRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create and authenticate a player based on email and password.
+     * Email and password signup.
      * @param signupRequest 
      */
-    public signup(signupRequest: SignupRequest, _options?: Configuration): Promise<AuthResponse> {
-        const result = this.api.signup(signupRequest, _options);
+    public signupEmailPassword(signupRequest: SignupRequest, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.signupEmailPassword(signupRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * When using Openfort Auth, the endpoint verifies the token generated by Openfort Auth and retrieves a corresponding player.
-     * Verify an auth token.
-     * @param token Specifies the auth token.
+     * Unlink OAuth account
+     * @param linkRequest 
      */
-    public verifyAuthToken(token: string, _options?: Configuration): Promise<PlayerResponse> {
-        const result = this.api.verifyAuthToken(token, _options);
+    public unlinkOAuth(linkRequest: LinkRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.unlinkOAuth(linkRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Unlink external wallet.
+     * @param sIWERequest 
+     */
+    public unlinkSIWE(sIWERequest: SIWERequest, _options?: Configuration): Promise<AuthPlayerResponse | void> {
+        const result = this.api.unlinkSIWE(sIWERequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by oauth token.
+     * @param authenticateOAuthRequest 
+     */
+    public verifyOAuth(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.verifyOAuth(authenticateOAuthRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by token.
+     * @param provider OAuth provider
+     * @param oAuthRequest 
+     */
+    public verifyOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
+        const result = this.api.verifyOAuthToken(provider, oAuthRequest, _options);
         return result.toPromise();
     }
 
@@ -512,34 +764,62 @@ export class PromiseContractsApi {
 
 
 
-import { ObservableGoogleAuthenticationApi } from './ObservableAPI';
+import { ObservableEmbeddedApi } from './ObservableAPI';
 
-import { GoogleAuthenticationApiRequestFactory, GoogleAuthenticationApiResponseProcessor} from "../apis/GoogleAuthenticationApi";
-export class PromiseGoogleAuthenticationApi {
-    private api: ObservableGoogleAuthenticationApi
+import { EmbeddedApiRequestFactory, EmbeddedApiResponseProcessor} from "../apis/EmbeddedApi";
+export class PromiseEmbeddedApi {
+    private api: ObservableEmbeddedApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: GoogleAuthenticationApiRequestFactory,
-        responseProcessor?: GoogleAuthenticationApiResponseProcessor
+        requestFactory?: EmbeddedApiRequestFactory,
+        responseProcessor?: EmbeddedApiResponseProcessor
     ) {
-        this.api = new ObservableGoogleAuthenticationApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableEmbeddedApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Get the google oauth signin url.
+     * Creates a new device for a given account.  This object represents the device that the account owner uses to store the device share. It has an equivalent auth share and recovery share associated with it.
+     * Create a device object.
+     * @param createDeviceRequest 
      */
-    public getSigninUrl(_options?: Configuration): Promise<GetSigninUrlResponse> {
-        const result = this.api.getSigninUrl(_options);
+    public createDevice(createDeviceRequest: CreateDeviceRequest, _options?: Configuration): Promise<DeviceResponse> {
+        const result = this.api.createDevice(createDeviceRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * Get the google oauth token.
-     * @param key Specifies the oauth key.
+     * Add the share of for existing device.
+     * Create a device share.
+     * @param id Specifies the unique device ID (starts with dev_).
+     * @param createShareRequest 
      */
-    public getToken(key: string, _options?: Configuration): Promise<AuthResponse> {
-        const result = this.api.getToken(key, _options);
+    public createDeviceShare(id: string, createShareRequest: CreateShareRequest, _options?: Configuration): Promise<ShareResponse> {
+        const result = this.api.createDeviceShare(id, createShareRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieves the shares of an existing device.
+     * Get existing device shares.
+     * @param id Specifies the unique device ID (starts with dev_).
+     * @param shareType Specifies the type of the share ID
+     */
+    public getDeviceShares(id: string, shareType?: string, _options?: Configuration): Promise<BaseEntityListResponseShareResponse> {
+        const result = this.api.getDeviceShares(id, shareType, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns a list of devices for the given account.  This object represents the devices where the account owner has device share stored.  Devices are returned sorted by creation date, with the most recently created devices appearing first.  By default, a maximum of 10 devices are shown per page.
+     * List devices of account.
+     * @param account Specifies the unique account ID (starts with acc_)
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     */
+    public getDevices(account: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Promise<BaseEntityListResponseDeviceResponse> {
+        const result = this.api.getDevices(account, limit, skip, order, _options);
         return result.toPromise();
     }
 
@@ -835,97 +1115,6 @@ export class PromiseNotificationsApi {
 
 
 
-import { ObservableOAuthApi } from './ObservableAPI';
-
-import { OAuthApiRequestFactory, OAuthApiResponseProcessor} from "../apis/OAuthApi";
-export class PromiseOAuthApi {
-    private api: ObservableOAuthApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: OAuthApiRequestFactory,
-        responseProcessor?: OAuthApiResponseProcessor
-    ) {
-        this.api = new ObservableOAuthApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
-     * Authorize player with token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
-     */
-    public authorizeWithOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<AuthorizeWithOAuthToken200Response> {
-        const result = this.api.authorizeWithOAuthToken(provider, oAuthRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * The endpoint creates oauth configuration for the current project environment.
-     * Create oauth configuration.
-     * @param body Specifies the oauth provider specific configuration.
-     */
-    public createOAuthConfig(body: OAuthConfig, _options?: Configuration): Promise<OAuthConfig> {
-        const result = this.api.createOAuthConfig(body, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * The endpoint deletes oauth configuration for specified provider for the current project environment.
-     * Delete oauth configuration.
-     * @param provider Specifies the oauth provider type.
-     */
-    public deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<void> {
-        const result = this.api.deleteOAuthConfig(provider, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
-     * Get oauth configuration.
-     * @param provider Specifies the oauth provider type.
-     */
-    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<OAuthConfig> {
-        const result = this.api.getOAuthConfig(provider, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieves the player based on his id in the external provider system.
-     * Retrieve player by external id.
-     * @param provider OAuth provider
-     * @param externalUserId External user id
-     */
-    public getPlayerByExternalId(provider: OAuthProvider, externalUserId: string, _options?: Configuration): Promise<PlayerResponse> {
-        const result = this.api.getPlayerByExternalId(provider, externalUserId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * The endpoint retrieves the list of oauth configurations for the current project environment.
-     * List of oauth configurations.
-     */
-    public listOAuthConfig(_options?: Configuration): Promise<OAuthConfigListResponse> {
-        const result = this.api.listOAuthConfig(_options);
-        return result.toPromise();
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
-     * Retrieve player by token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
-     */
-    public verifyOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
-        const result = this.api.verifyOAuthToken(provider, oAuthRequest, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservablePlayersApi } from './ObservableAPI';
 
 import { PlayersApiRequestFactory, PlayersApiResponseProcessor} from "../apis/PlayersApi";
@@ -1013,54 +1202,6 @@ export class PromisePlayersApi {
      */
     public updatePlayer(id: string, playerUpdateRequest: PlayerUpdateRequest, _options?: Configuration): Promise<PlayerResponse> {
         const result = this.api.updatePlayer(id, playerUpdateRequest, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservablePlayersAuthenticationApi } from './ObservableAPI';
-
-import { PlayersAuthenticationApiRequestFactory, PlayersAuthenticationApiResponseProcessor} from "../apis/PlayersAuthenticationApi";
-export class PromisePlayersAuthenticationApi {
-    private api: ObservablePlayersAuthenticationApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PlayersAuthenticationApiRequestFactory,
-        responseProcessor?: PlayersAuthenticationApiResponseProcessor
-    ) {
-        this.api = new ObservablePlayersAuthenticationApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * List authenticated players.
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     * @param email Specifies the email address of the user.
-     */
-    public getAuthenticatedPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Promise<AuthPlayerListResponse> {
-        const result = this.api.getAuthenticatedPlayers(limit, skip, order, email, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Register a key for the authenticated player.
-     * @param registerPlayerEncryptedKeyRequest 
-     */
-    public registerKey(registerPlayerEncryptedKeyRequest: RegisterPlayerEncryptedKeyRequest, _options?: Configuration): Promise<RegisterPlayerEncryptedKeyResponse> {
-        const result = this.api.registerKey(registerPlayerEncryptedKeyRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieve the key for the authenticated player.
-     */
-    public retrieveKey(_options?: Configuration): Promise<RetrievePlayerEncryptedKeyResponse> {
-        const result = this.api.retrieveKey(_options);
         return result.toPromise();
     }
 

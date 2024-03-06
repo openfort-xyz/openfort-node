@@ -24,15 +24,19 @@ import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
+import { AuthProvider } from '../models/AuthProvider';
 import { AuthResponse } from '../models/AuthResponse';
-import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
-import { AuthorizeWithOAuthToken200Response } from '../models/AuthorizeWithOAuthToken200Response';
+import { AuthSessionResponse } from '../models/AuthSessionResponse';
+import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
+import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
+import { BaseEntityListResponseShareResponse } from '../models/BaseEntityListResponseShareResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
+import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractListQueries } from '../models/ContractListQueries';
@@ -47,6 +51,7 @@ import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerInter
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
+import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
 import { CreateNotificationSubscriptionRequest } from '../models/CreateNotificationSubscriptionRequest';
 import { CreateNotificationTriggerRequest } from '../models/CreateNotificationTriggerRequest';
@@ -55,10 +60,12 @@ import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateShareRequest } from '../models/CreateShareRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { DeployRequest } from '../models/DeployRequest';
+import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
 import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
@@ -67,11 +74,14 @@ import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueri
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
+import { DeviceListQueries } from '../models/DeviceListQueries';
+import { DeviceResponse } from '../models/DeviceResponse';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
+import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
 import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
@@ -82,6 +92,7 @@ import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
+import { EntityTypeSHARE } from '../models/EntityTypeSHARE';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
@@ -104,8 +115,13 @@ import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
 import { InventoryListResponse } from '../models/InventoryListResponse';
 import { InventoryResponse } from '../models/InventoryResponse';
+import { JwtKey } from '../models/JwtKey';
+import { JwtKeyResponse } from '../models/JwtKeyResponse';
+import { LinkRequest } from '../models/LinkRequest';
+import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
+import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { Money } from '../models/Money';
 import { MonthRange } from '../models/MonthRange';
@@ -133,6 +149,7 @@ import { NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER } from '../models/Notifi
 import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
+import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
 import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
@@ -144,6 +161,8 @@ import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
+import { Plan } from '../models/Plan';
+import { PlansResponse } from '../models/PlansResponse';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { Player } from '../models/Player';
 import { PlayerCancelTransferOwnershipRequest } from '../models/PlayerCancelTransferOwnershipRequest';
@@ -190,17 +209,20 @@ import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
-import { RegisterPlayerEncryptedKeyRequest } from '../models/RegisterPlayerEncryptedKeyRequest';
-import { RegisterPlayerEncryptedKeyResponse } from '../models/RegisterPlayerEncryptedKeyResponse';
+import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
-import { RetrievePlayerEncryptedKeyResponse } from '../models/RetrievePlayerEncryptedKeyResponse';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
+import { SIWEAuthenticateRequest } from '../models/SIWEAuthenticateRequest';
+import { SIWEInitResponse } from '../models/SIWEInitResponse';
+import { SIWERequest } from '../models/SIWERequest';
 import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
+import { ShareResponse } from '../models/ShareResponse';
+import { ShareType } from '../models/ShareType';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -213,6 +235,8 @@ import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
+import { SubscriptionResponse } from '../models/SubscriptionResponse';
+import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SubscriptionType } from '../models/SubscriptionType';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TransactionIntent } from '../models/TransactionIntent';
@@ -340,7 +364,7 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * This endpoint can be used to deploy an account that was counterfactually generated.
+     * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param id Specifies the unique account ID (starts with acc_).
      * @param deployRequest 
@@ -390,7 +414,7 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * Returns a list of accounts for the given player.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
+     * Returns a list of accounts for the given player.  This object represents a player\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
      * List accounts of a player.
      * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
@@ -517,6 +541,243 @@ export class ObservableAccountsApi {
 
 }
 
+import { AdminAuthenticationApiRequestFactory, AdminAuthenticationApiResponseProcessor} from "../apis/AdminAuthenticationApi";
+export class ObservableAdminAuthenticationApi {
+    private requestFactory: AdminAuthenticationApiRequestFactory;
+    private responseProcessor: AdminAuthenticationApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: AdminAuthenticationApiRequestFactory,
+        responseProcessor?: AdminAuthenticationApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new AdminAuthenticationApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new AdminAuthenticationApiResponseProcessor();
+    }
+
+    /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param body Specifies the oauth provider specific configuration.
+     */
+    public createOAuthConfig(body: OAuthConfig, _options?: Configuration): Observable<OAuthConfig> {
+        const requestContextPromise = this.requestFactory.createOAuthConfig(body, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * Deletes a player auth object.  It will delete all linked accounts the player is authenticated with.
+     * Deletes a player auth object.
+     * @param id Specifies the unique player ID (starts with pla_).
+     */
+    public deleteAuthPlayer(id: string, _options?: Configuration): Observable<PlayerDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteAuthPlayer(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteAuthPlayer(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint deletes oauth configuration for specified provider for the current project environment.
+     * Delete oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteOAuthConfig(provider, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieves a list of authenticated players.  Players have linked accounts and are authenticated with a provider.
+     * List authenticated players.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param email Specifies the email address of the user.
+     */
+    public getAuthPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Observable<AuthPlayerListResponse> {
+        const requestContextPromise = this.requestFactory.getAuthPlayers(limit, skip, order, email, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAuthPlayers(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
+     * Get oauth configuration.
+     * @param provider Specifies the oauth provider type.
+     */
+    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Observable<OAuthConfig> {
+        const requestContextPromise = this.requestFactory.getOAuthConfig(provider, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * List configured OAuth methods for the current project environment.
+     * List of oauth configurations.
+     */
+    public listOAuthConfig(_options?: Configuration): Observable<OAuthConfigListResponse> {
+        const requestContextPromise = this.requestFactory.listOAuthConfig(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listOAuthConfig(rsp)));
+            }));
+    }
+
+    /**
+     * Verifies the token generated by Openfort Auth.
+     * Verify auth token.
+     * @param token Specifies the auth token.
+     */
+    public verifyAuthToken(token: string, _options?: Configuration): Observable<AuthSessionResponse> {
+        const requestContextPromise = this.requestFactory.verifyAuthToken(token, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyAuthToken(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by oauth token.
+     * @param authenticateOAuthRequest 
+     */
+    public verifyOAuth(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Observable<PlayerResponse> {
+        const requestContextPromise = this.requestFactory.verifyOAuth(authenticateOAuthRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyOAuth(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by token.
+     * @param provider OAuth provider
+     * @param oAuthRequest 
+     */
+    public verifyOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<PlayerResponse> {
+        const requestContextPromise = this.requestFactory.verifyOAuthToken(provider, oAuthRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyOAuthToken(rsp)));
+            }));
+    }
+
+}
+
 import { AuthenticationApiRequestFactory, AuthenticationApiResponseProcessor} from "../apis/AuthenticationApi";
 export class ObservableAuthenticationApi {
     private requestFactory: AuthenticationApiRequestFactory;
@@ -534,12 +795,177 @@ export class ObservableAuthenticationApi {
     }
 
     /**
-     * When using Openfort Auth, the endpoint authenticates the player based on his email, and returns the jwt token for the player together with the player id.
-     * Login a player.
+     * Authenticate player with oauth token.
+     * @param authenticateOAuthRequest 
+     */
+    public authenticateOAuth(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.authenticateOAuth(authenticateOAuthRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authenticateOAuth(rsp)));
+            }));
+    }
+
+    /**
+     * Authenticate player with SIWE
+     * @param sIWEAuthenticateRequest 
+     */
+    public authenticateSIWE(sIWEAuthenticateRequest: SIWEAuthenticateRequest, _options?: Configuration): Observable<void | AuthResponse> {
+        const requestContextPromise = this.requestFactory.authenticateSIWE(sIWEAuthenticateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authenticateSIWE(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
+     * Authorize player with token.
+     * @param provider OAuth provider
+     * @param oAuthRequest 
+     */
+    public authorizeWithOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<DeprecatedAuthenticatedPlayerResponse> {
+        const requestContextPromise = this.requestFactory.authorizeWithOAuthToken(provider, oAuthRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authorizeWithOAuthToken(rsp)));
+            }));
+    }
+
+    /**
+     * Get the jwks.json file.  You can use the jwks.json file to verify the signature of a JWT token issued by Openfort Auth.
+     * Get the jwks.json file.
+     * @param publishableKey Specifies the project publishable key (starts with pk_).
+     */
+    public getJwks(publishableKey: string, _options?: Configuration): Observable<JwtKeyResponse> {
+        const requestContextPromise = this.requestFactory.getJwks(publishableKey, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getJwks(rsp)));
+            }));
+    }
+
+    /**
+     * Initialize OAuth.
+     * @param oAuthInitRequest 
+     */
+    public initOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Observable<GetSigninUrlResponse> {
+        const requestContextPromise = this.requestFactory.initOAuth(oAuthInitRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.initOAuth(rsp)));
+            }));
+    }
+
+    /**
+     * Create a challenge to link external wallet to the player.
+     * Initialize SIWE.
+     * @param sIWERequest 
+     */
+    public initSIWE(sIWERequest: SIWERequest, _options?: Configuration): Observable<SIWEInitResponse> {
+        const requestContextPromise = this.requestFactory.initSIWE(sIWERequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.initSIWE(rsp)));
+            }));
+    }
+
+    /**
+     * Link external wallet.
+     * @param sIWEAuthenticateRequest 
+     */
+    public linkSIWE(sIWEAuthenticateRequest: SIWEAuthenticateRequest, _options?: Configuration): Observable<AuthPlayerResponse | void> {
+        const requestContextPromise = this.requestFactory.linkSIWE(sIWEAuthenticateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.linkSIWE(rsp)));
+            }));
+    }
+
+    /**
+     * Authenticate a player based on email and password.
+     * Email and password login.
      * @param loginRequest 
      */
-    public login(loginRequest: LoginRequest, _options?: Configuration): Observable<AuthResponse> {
-        const requestContextPromise = this.requestFactory.login(loginRequest, _options);
+    public loginEmailPassword(loginRequest: LoginRequest, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.loginEmailPassword(loginRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -553,17 +979,65 @@ export class ObservableAuthenticationApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.login(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.loginEmailPassword(rsp)));
             }));
     }
 
     /**
-     * When using Openfort Auth, the endpoint creates a player based on his email, and returns the jwt token for the player together with the player id.
-     * Sign up a player.
+     * When using Openfort Auth, the endpoint logs out the player.
+     * Log out a player.
+     * @param logoutRequest 
+     */
+    public logout(logoutRequest: LogoutRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.logout(logoutRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.logout(rsp)));
+            }));
+    }
+
+    /**
+     * Get or create a new session for the player based on the refresh token.
+     * Refresh or create auth session.
+     * @param refreshTokenRequest 
+     */
+    public refresh(refreshTokenRequest: RefreshTokenRequest, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.refresh(refreshTokenRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.refresh(rsp)));
+            }));
+    }
+
+    /**
+     * Create and authenticate a player based on email and password.
+     * Email and password signup.
      * @param signupRequest 
      */
-    public signup(signupRequest: SignupRequest, _options?: Configuration): Observable<AuthResponse> {
-        const requestContextPromise = this.requestFactory.signup(signupRequest, _options);
+    public signupEmailPassword(signupRequest: SignupRequest, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.signupEmailPassword(signupRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -577,17 +1051,16 @@ export class ObservableAuthenticationApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.signup(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.signupEmailPassword(rsp)));
             }));
     }
 
     /**
-     * When using Openfort Auth, the endpoint verifies the token generated by Openfort Auth and retrieves a corresponding player.
-     * Verify an auth token.
-     * @param token Specifies the auth token.
+     * Unlink OAuth account
+     * @param linkRequest 
      */
-    public verifyAuthToken(token: string, _options?: Configuration): Observable<PlayerResponse> {
-        const requestContextPromise = this.requestFactory.verifyAuthToken(token, _options);
+    public unlinkOAuth(linkRequest: LinkRequest, _options?: Configuration): Observable<AuthPlayerResponse> {
+        const requestContextPromise = this.requestFactory.unlinkOAuth(linkRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -601,7 +1074,79 @@ export class ObservableAuthenticationApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyAuthToken(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.unlinkOAuth(rsp)));
+            }));
+    }
+
+    /**
+     * Unlink external wallet.
+     * @param sIWERequest 
+     */
+    public unlinkSIWE(sIWERequest: SIWERequest, _options?: Configuration): Observable<AuthPlayerResponse | void> {
+        const requestContextPromise = this.requestFactory.unlinkSIWE(sIWERequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.unlinkSIWE(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by oauth token.
+     * @param authenticateOAuthRequest 
+     */
+    public verifyOAuth(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Observable<PlayerResponse> {
+        const requestContextPromise = this.requestFactory.verifyOAuth(authenticateOAuthRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyOAuth(rsp)));
+            }));
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Retrieve player by token.
+     * @param provider OAuth provider
+     * @param oAuthRequest 
+     */
+    public verifyOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<PlayerResponse> {
+        const requestContextPromise = this.requestFactory.verifyOAuthToken(provider, oAuthRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyOAuthToken(rsp)));
             }));
     }
 
@@ -777,27 +1322,29 @@ export class ObservableContractsApi {
 
 }
 
-import { GoogleAuthenticationApiRequestFactory, GoogleAuthenticationApiResponseProcessor} from "../apis/GoogleAuthenticationApi";
-export class ObservableGoogleAuthenticationApi {
-    private requestFactory: GoogleAuthenticationApiRequestFactory;
-    private responseProcessor: GoogleAuthenticationApiResponseProcessor;
+import { EmbeddedApiRequestFactory, EmbeddedApiResponseProcessor} from "../apis/EmbeddedApi";
+export class ObservableEmbeddedApi {
+    private requestFactory: EmbeddedApiRequestFactory;
+    private responseProcessor: EmbeddedApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: GoogleAuthenticationApiRequestFactory,
-        responseProcessor?: GoogleAuthenticationApiResponseProcessor
+        requestFactory?: EmbeddedApiRequestFactory,
+        responseProcessor?: EmbeddedApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new GoogleAuthenticationApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new GoogleAuthenticationApiResponseProcessor();
+        this.requestFactory = requestFactory || new EmbeddedApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new EmbeddedApiResponseProcessor();
     }
 
     /**
-     * Get the google oauth signin url.
+     * Creates a new device for a given account.  This object represents the device that the account owner uses to store the device share. It has an equivalent auth share and recovery share associated with it.
+     * Create a device object.
+     * @param createDeviceRequest 
      */
-    public getSigninUrl(_options?: Configuration): Observable<GetSigninUrlResponse> {
-        const requestContextPromise = this.requestFactory.getSigninUrl(_options);
+    public createDevice(createDeviceRequest: CreateDeviceRequest, _options?: Configuration): Observable<DeviceResponse> {
+        const requestContextPromise = this.requestFactory.createDevice(createDeviceRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -811,16 +1358,18 @@ export class ObservableGoogleAuthenticationApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSigninUrl(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDevice(rsp)));
             }));
     }
 
     /**
-     * Get the google oauth token.
-     * @param key Specifies the oauth key.
+     * Add the share of for existing device.
+     * Create a device share.
+     * @param id Specifies the unique device ID (starts with dev_).
+     * @param createShareRequest 
      */
-    public getToken(key: string, _options?: Configuration): Observable<AuthResponse> {
-        const requestContextPromise = this.requestFactory.getToken(key, _options);
+    public createDeviceShare(id: string, createShareRequest: CreateShareRequest, _options?: Configuration): Observable<ShareResponse> {
+        const requestContextPromise = this.requestFactory.createDeviceShare(id, createShareRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -834,7 +1383,59 @@ export class ObservableGoogleAuthenticationApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getToken(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDeviceShare(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieves the shares of an existing device.
+     * Get existing device shares.
+     * @param id Specifies the unique device ID (starts with dev_).
+     * @param shareType Specifies the type of the share ID
+     */
+    public getDeviceShares(id: string, shareType?: string, _options?: Configuration): Observable<BaseEntityListResponseShareResponse> {
+        const requestContextPromise = this.requestFactory.getDeviceShares(id, shareType, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDeviceShares(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of devices for the given account.  This object represents the devices where the account owner has device share stored.  Devices are returned sorted by creation date, with the most recently created devices appearing first.  By default, a maximum of 10 devices are shown per page.
+     * List devices of account.
+     * @param account Specifies the unique account ID (starts with acc_)
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     */
+    public getDevices(account: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<BaseEntityListResponseDeviceResponse> {
+        const requestContextPromise = this.requestFactory.getDevices(account, limit, skip, order, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDevices(rsp)));
             }));
     }
 
@@ -1375,194 +1976,6 @@ export class ObservableNotificationsApi {
 
 }
 
-import { OAuthApiRequestFactory, OAuthApiResponseProcessor} from "../apis/OAuthApi";
-export class ObservableOAuthApi {
-    private requestFactory: OAuthApiRequestFactory;
-    private responseProcessor: OAuthApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: OAuthApiRequestFactory,
-        responseProcessor?: OAuthApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new OAuthApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new OAuthApiResponseProcessor();
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
-     * Authorize player with token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
-     */
-    public authorizeWithOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<AuthorizeWithOAuthToken200Response> {
-        const requestContextPromise = this.requestFactory.authorizeWithOAuthToken(provider, oAuthRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authorizeWithOAuthToken(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint creates oauth configuration for the current project environment.
-     * Create oauth configuration.
-     * @param body Specifies the oauth provider specific configuration.
-     */
-    public createOAuthConfig(body: OAuthConfig, _options?: Configuration): Observable<OAuthConfig> {
-        const requestContextPromise = this.requestFactory.createOAuthConfig(body, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOAuthConfig(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint deletes oauth configuration for specified provider for the current project environment.
-     * Delete oauth configuration.
-     * @param provider Specifies the oauth provider type.
-     */
-    public deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.deleteOAuthConfig(provider, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteOAuthConfig(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
-     * Get oauth configuration.
-     * @param provider Specifies the oauth provider type.
-     */
-    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Observable<OAuthConfig> {
-        const requestContextPromise = this.requestFactory.getOAuthConfig(provider, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getOAuthConfig(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieves the player based on his id in the external provider system.
-     * Retrieve player by external id.
-     * @param provider OAuth provider
-     * @param externalUserId External user id
-     */
-    public getPlayerByExternalId(provider: OAuthProvider, externalUserId: string, _options?: Configuration): Observable<PlayerResponse> {
-        const requestContextPromise = this.requestFactory.getPlayerByExternalId(provider, externalUserId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPlayerByExternalId(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint retrieves the list of oauth configurations for the current project environment.
-     * List of oauth configurations.
-     */
-    public listOAuthConfig(_options?: Configuration): Observable<OAuthConfigListResponse> {
-        const requestContextPromise = this.requestFactory.listOAuthConfig(_options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listOAuthConfig(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
-     * Retrieve player by token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
-     */
-    public verifyOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<PlayerResponse> {
-        const requestContextPromise = this.requestFactory.verifyOAuthToken(provider, oAuthRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyOAuthToken(rsp)));
-            }));
-    }
-
-}
-
 import { PlayersApiRequestFactory, PlayersApiResponseProcessor} from "../apis/PlayersApi";
 export class ObservablePlayersApi {
     private requestFactory: PlayersApiRequestFactory;
@@ -1750,95 +2163,6 @@ export class ObservablePlayersApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updatePlayer(rsp)));
-            }));
-    }
-
-}
-
-import { PlayersAuthenticationApiRequestFactory, PlayersAuthenticationApiResponseProcessor} from "../apis/PlayersAuthenticationApi";
-export class ObservablePlayersAuthenticationApi {
-    private requestFactory: PlayersAuthenticationApiRequestFactory;
-    private responseProcessor: PlayersAuthenticationApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PlayersAuthenticationApiRequestFactory,
-        responseProcessor?: PlayersAuthenticationApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new PlayersAuthenticationApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PlayersAuthenticationApiResponseProcessor();
-    }
-
-    /**
-     * List authenticated players.
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     * @param email Specifies the email address of the user.
-     */
-    public getAuthenticatedPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Observable<AuthPlayerListResponse> {
-        const requestContextPromise = this.requestFactory.getAuthenticatedPlayers(limit, skip, order, email, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAuthenticatedPlayers(rsp)));
-            }));
-    }
-
-    /**
-     * Register a key for the authenticated player.
-     * @param registerPlayerEncryptedKeyRequest 
-     */
-    public registerKey(registerPlayerEncryptedKeyRequest: RegisterPlayerEncryptedKeyRequest, _options?: Configuration): Observable<RegisterPlayerEncryptedKeyResponse> {
-        const requestContextPromise = this.requestFactory.registerKey(registerPlayerEncryptedKeyRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.registerKey(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieve the key for the authenticated player.
-     */
-    public retrieveKey(_options?: Configuration): Observable<RetrievePlayerEncryptedKeyResponse> {
-        const requestContextPromise = this.requestFactory.retrieveKey(_options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.retrieveKey(rsp)));
             }));
     }
 

@@ -12,11 +12,15 @@
 
 import { HttpFile } from '../http/http';
 
-export class AuthenticatedPlayerResponse {
+export class DeprecatedAuthenticatedPlayerResponse {
     /**
     * Player\'s identifier.
     */
     'playerId': string;
+    /**
+    * JWT access token.
+    */
+    'token': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,10 +30,16 @@ export class AuthenticatedPlayerResponse {
             "baseName": "playerId",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthenticatedPlayerResponse.attributeTypeMap;
+        return DeprecatedAuthenticatedPlayerResponse.attributeTypeMap;
     }
 
     public constructor() {

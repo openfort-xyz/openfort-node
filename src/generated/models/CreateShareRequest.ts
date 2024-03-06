@@ -10,47 +10,49 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { ShareType } from '../models/ShareType';
 import { HttpFile } from '../http/http';
 
-export class AuthResponse {
-    'player': AuthPlayerResponse;
+export class CreateShareRequest {
     /**
-    * JWT access token.
+    * Specifies the unique share ID (starts with sha_)
     */
-    'token': string;
+    'share': string;
+    'shareType': ShareType;
     /**
-    * Refresh token.
+    * Specifies if the recovery share is encrypted by user entropy
     */
-    'refreshToken': string;
+    'userEntropy': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "share",
+            "baseName": "share",
             "type": "string",
             "format": ""
         },
         {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
-            "type": "string",
+            "name": "shareType",
+            "baseName": "shareType",
+            "type": "ShareType",
+            "format": ""
+        },
+        {
+            "name": "userEntropy",
+            "baseName": "userEntropy",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthResponse.attributeTypeMap;
+        return CreateShareRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

@@ -11,7 +11,6 @@ import { InventoriesApiWrapper } from "./apis/inventoriesApiWrapper";
 import { WebHookEvent } from "./models";
 import { createHmac } from "crypto";
 import { IamApiWrapper } from "./apis/iamApiWrapper";
-import { OAuthApiWrapper } from "./apis/oauthApiWrapper";
 import { SettingsApiWrapper } from "./apis/settingsApiWrapper";
 import { Web3ConnectionsApiWrapper } from "./apis/web3ConnectionsApiWrapper";
 import { NotificationsApiWrapper } from "./apis/notificationsApiWrapper";
@@ -66,10 +65,6 @@ export default class Openfort {
 
     public get iam(): IamApiWrapper {
         return this.getOrCreateWrapper(IamApiWrapper);
-    }
-
-    public get oauth(): OAuthApiWrapper {
-        return this.getOrCreateWrapper(OAuthApiWrapper);
     }
 
     public get notifications(): NotificationsApiWrapper {

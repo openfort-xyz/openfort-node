@@ -10,29 +10,19 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { OAuthProvider } from '../models/OAuthProvider';
 import { HttpFile } from '../http/http';
 
-export class AuthResponse {
-    'player': AuthPlayerResponse;
+export class OAuthInitRequest {
     /**
-    * JWT access token.
+    * Access token to be verified
     */
     'token': string;
-    /**
-    * Refresh token.
-    */
-    'refreshToken': string;
+    'provider': OAuthProvider;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
         {
             "name": "token",
             "baseName": "token",
@@ -40,17 +30,19 @@ export class AuthResponse {
             "format": ""
         },
         {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
-            "type": "string",
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProvider",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthResponse.attributeTypeMap;
+        return OAuthInitRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

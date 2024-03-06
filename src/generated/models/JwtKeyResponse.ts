@@ -10,44 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { JwtKey } from '../models/JwtKey';
 import { HttpFile } from '../http/http';
 
-export class AuthResponse {
-    'player': AuthPlayerResponse;
-    /**
-    * JWT access token.
-    */
-    'token': string;
-    /**
-    * Refresh token.
-    */
-    'refreshToken': string;
+export class JwtKeyResponse {
+    'keys': Array<JwtKey>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
-            "type": "string",
+            "name": "keys",
+            "baseName": "keys",
+            "type": "Array<JwtKey>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthResponse.attributeTypeMap;
+        return JwtKeyResponse.attributeTypeMap;
     }
 
     public constructor() {

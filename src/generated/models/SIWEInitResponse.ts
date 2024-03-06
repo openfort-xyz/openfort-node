@@ -10,44 +10,40 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { HttpFile } from '../http/http';
 
-export class AuthResponse {
-    'player': AuthPlayerResponse;
+export class SIWEInitResponse {
     /**
-    * JWT access token.
+    * The address of the player.
     */
-    'token': string;
-    /**
-    * Refresh token.
-    */
-    'refreshToken': string;
+    'address': string;
+    'nonce': string;
+    'expiresAt': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "address",
+            "baseName": "address",
             "type": "string",
             "format": ""
         },
         {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
+            "name": "nonce",
+            "baseName": "nonce",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "number",
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthResponse.attributeTypeMap;
+        return SIWEInitResponse.attributeTypeMap;
     }
 
     public constructor() {

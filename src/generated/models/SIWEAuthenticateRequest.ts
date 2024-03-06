@@ -12,56 +12,54 @@
 
 import { HttpFile } from '../http/http';
 
-export class RetrievePlayerEncryptedKeyResponse {
-    'player': string;
-    'ownerAddress': string;
-    'createdAt': number;
-    'updatedAt': number;
-    'pkCiphertext': string;
-    'salt': string;
+export class SIWEAuthenticateRequest {
+    /**
+    * Signature of the EIP-712 message with the user\'s wallet.
+    */
+    'signature': string;
+    /**
+    * The EIP-712 message to sign.
+    */
+    'message': string;
+    /**
+    * The wallet client of the user
+    */
+    'walletClientType': string;
+    /**
+    * The connector type of the user
+    */
+    'connectorType': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "player",
-            "baseName": "player",
+            "name": "signature",
+            "baseName": "signature",
             "type": "string",
             "format": ""
         },
         {
-            "name": "ownerAddress",
-            "baseName": "ownerAddress",
+            "name": "message",
+            "baseName": "message",
             "type": "string",
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "pkCiphertext",
-            "baseName": "pkCiphertext",
+            "name": "walletClientType",
+            "baseName": "walletClientType",
             "type": "string",
             "format": ""
         },
         {
-            "name": "salt",
-            "baseName": "salt",
+            "name": "connectorType",
+            "baseName": "connectorType",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return RetrievePlayerEncryptedKeyResponse.attributeTypeMap;
+        return SIWEAuthenticateRequest.attributeTypeMap;
     }
 
     public constructor() {
