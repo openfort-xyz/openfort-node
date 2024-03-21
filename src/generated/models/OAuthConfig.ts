@@ -11,10 +11,12 @@
  */
 
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
+import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
+import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { HttpFile } from '../http/http';
 
@@ -24,6 +26,18 @@ export class OAuthConfig {
     */
     'enabled': boolean;
     'provider': OAuthProviderLOOTLOCKER;
+    /**
+    * PEM encoded public key to verify the JWT token
+    */
+    'publicVerificationKey'?: string;
+    /**
+    * Audience of the JWT token
+    */
+    'aud': string;
+    /**
+    * JWKS URL to fetch the public key
+    */
+    'jwksUrl'?: string;
     /**
     * Base URI of your accelbyte gaming service environment. E.g. https://mygame.dev.gamingservices.accelbyte.io/
     */
@@ -37,10 +51,6 @@ export class OAuthConfig {
     */
     'clientSecret': string;
     /**
-    * The URI to redirect to after completing the auth request. You can use Openfort redirect URL: https://openfort.xyz/iam/v1/oauth/google/callback
-    */
-    'redirectUri': string;
-    /**
     * Title ID of your Play Fab gaming service environment.
     */
     'titleId': string;
@@ -48,6 +58,14 @@ export class OAuthConfig {
     * Project ID of your Firebase service environment.
     */
     'projectId': string;
+    /**
+    * Headers to send with the request
+    */
+    'headers'?: string;
+    /**
+    * URL to send the request to to verify the payload
+    */
+    'authenticationUrl': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -62,6 +80,24 @@ export class OAuthConfig {
             "name": "provider",
             "baseName": "provider",
             "type": "OAuthProviderLOOTLOCKER",
+            "format": ""
+        },
+        {
+            "name": "publicVerificationKey",
+            "baseName": "publicVerificationKey",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "aud",
+            "baseName": "aud",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "jwksUrl",
+            "baseName": "jwksUrl",
+            "type": "string",
             "format": ""
         },
         {
@@ -83,12 +119,6 @@ export class OAuthConfig {
             "format": ""
         },
         {
-            "name": "redirectUri",
-            "baseName": "redirectUri",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "titleId",
             "baseName": "titleId",
             "type": "string",
@@ -97,6 +127,18 @@ export class OAuthConfig {
         {
             "name": "projectId",
             "baseName": "projectId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "headers",
+            "baseName": "headers",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "authenticationUrl",
+            "baseName": "authenticationUrl",
             "type": "string",
             "format": ""
         }    ];

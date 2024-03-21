@@ -10,59 +10,69 @@
  * Do not edit the class manually.
  */
 
+import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
 import { HttpFile } from '../http/http';
 
-export class SignupRequest {
+export class OIDCAuthConfig {
     /**
-    * The email address of the player.
+    * Enable OAuth provider.
     */
-    'email': string;
+    'enabled': boolean;
+    'provider': OAuthProviderOIDC;
     /**
-    * The password of the player.
+    * PEM encoded public key to verify the JWT token
     */
-    'password': string;
+    'publicVerificationKey'?: string;
     /**
-    * The name of the player.
+    * Audience of the JWT token
     */
-    'name'?: string;
+    'aud': string;
     /**
-    * The description of the player.
+    * JWKS URL to fetch the public key
     */
-    'description'?: string;
+    'jwksUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "email",
-            "baseName": "email",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderOIDC",
+            "format": ""
+        },
+        {
+            "name": "publicVerificationKey",
+            "baseName": "publicVerificationKey",
             "type": "string",
             "format": ""
         },
         {
-            "name": "password",
-            "baseName": "password",
+            "name": "aud",
+            "baseName": "aud",
             "type": "string",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
+            "name": "jwksUrl",
+            "baseName": "jwksUrl",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SignupRequest.attributeTypeMap;
+        return OIDCAuthConfig.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

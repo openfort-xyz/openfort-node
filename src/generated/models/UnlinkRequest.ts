@@ -16,12 +16,8 @@ import { HttpFile } from '../http/http';
 /**
 * The request to verify access token
 */
-export class LinkRequest {
+export class UnlinkRequest {
     'provider': OAuthProvider;
-    /**
-    * external user id
-    */
-    'externalUserId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,16 +27,10 @@ export class LinkRequest {
             "baseName": "provider",
             "type": "OAuthProvider",
             "format": ""
-        },
-        {
-            "name": "externalUserId",
-            "baseName": "externalUserId",
-            "type": "string",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return LinkRequest.attributeTypeMap;
+        return UnlinkRequest.attributeTypeMap;
     }
 
     public constructor() {

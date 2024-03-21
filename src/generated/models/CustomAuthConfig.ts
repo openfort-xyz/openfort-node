@@ -10,59 +10,59 @@
  * Do not edit the class manually.
  */
 
+import { OAuthProviderCUSTOM } from '../models/OAuthProviderCUSTOM';
 import { HttpFile } from '../http/http';
 
-export class SignupRequest {
+export class CustomAuthConfig {
     /**
-    * The email address of the player.
+    * Enable OAuth provider.
     */
-    'email': string;
+    'enabled': boolean;
+    'provider': OAuthProviderCUSTOM;
     /**
-    * The password of the player.
+    * Headers to send with the request
     */
-    'password': string;
+    'headers'?: string;
     /**
-    * The name of the player.
+    * URL to send the request to to verify the payload
     */
-    'name'?: string;
-    /**
-    * The description of the player.
-    */
-    'description'?: string;
+    'authenticationUrl': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "email",
-            "baseName": "email",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderCUSTOM",
+            "format": ""
+        },
+        {
+            "name": "headers",
+            "baseName": "headers",
             "type": "string",
             "format": ""
         },
         {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
+            "name": "authenticationUrl",
+            "baseName": "authenticationUrl",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SignupRequest.attributeTypeMap;
+        return CustomAuthConfig.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

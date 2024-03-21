@@ -14,20 +14,20 @@ import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
-import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
-import { LinkRequest } from '../models/LinkRequest';
 import { LoginRequest } from '../models/LoginRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthRequest } from '../models/OAuthRequest';
+import { OAuthResponse } from '../models/OAuthResponse';
 import { PlayerResponse } from '../models/PlayerResponse';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { SIWEAuthenticateRequest } from '../models/SIWEAuthenticateRequest';
 import { SIWEInitResponse } from '../models/SIWEInitResponse';
 import { SIWERequest } from '../models/SIWERequest';
 import { SignupRequest } from '../models/SignupRequest';
+import { UnlinkRequest } from '../models/UnlinkRequest';
 
 /**
  * no description
@@ -539,14 +539,14 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Unlink OAuth account
-     * @param linkRequest 
+     * @param unlinkRequest 
      */
-    public async unlinkOAuth(linkRequest: LinkRequest, _options?: Configuration): Promise<RequestContext> {
+    public async unlinkOAuth(unlinkRequest: UnlinkRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'linkRequest' is not null or undefined
-        if (linkRequest === null || linkRequest === undefined) {
-            throw new RequiredError("AuthenticationApi", "unlinkOAuth", "linkRequest");
+        // verify required parameter 'unlinkRequest' is not null or undefined
+        if (unlinkRequest === null || unlinkRequest === undefined) {
+            throw new RequiredError("AuthenticationApi", "unlinkOAuth", "unlinkRequest");
         }
 
 
@@ -564,7 +564,7 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(linkRequest, "LinkRequest", ""),
+            ObjectSerializer.serialize(unlinkRequest, "UnlinkRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -862,13 +862,13 @@ export class AuthenticationApiResponseProcessor {
      * @params response Response returned by the server for a request to initOAuth
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async initOAuth(response: ResponseContext): Promise<GetSigninUrlResponse > {
+     public async initOAuth(response: ResponseContext): Promise<OAuthResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: GetSigninUrlResponse = ObjectSerializer.deserialize(
+            const body: OAuthResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "GetSigninUrlResponse", ""
-            ) as GetSigninUrlResponse;
+                "OAuthResponse", ""
+            ) as OAuthResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -877,10 +877,10 @@ export class AuthenticationApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: GetSigninUrlResponse = ObjectSerializer.deserialize(
+            const body: OAuthResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "GetSigninUrlResponse", ""
-            ) as GetSigninUrlResponse;
+                "OAuthResponse", ""
+            ) as OAuthResponse;
             return body;
         }
 

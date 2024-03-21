@@ -12,54 +12,54 @@
 
 import { HttpFile } from '../http/http';
 
-export class SignupRequest {
+export class OAuthInitRequestOptions {
     /**
-    * The email address of the player.
+    * If set to true does not immediately redirect the current browser context to visit the OAuth authorization page for the provider.
     */
-    'email': string;
+    'skipBrowserRedirect'?: boolean;
     /**
-    * The password of the player.
+    * An object of query params
     */
-    'password': string;
+    'queryParams'?: { [key: string]: string; };
     /**
-    * The name of the player.
+    * A space-separated list of scopes granted to the OAuth application.
     */
-    'name'?: string;
+    'scopes'?: string;
     /**
-    * The description of the player.
+    * A URL to send the user to after they are confirmed.
     */
-    'description'?: string;
+    'redirectTo'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "email",
-            "baseName": "email",
+            "name": "skipBrowserRedirect",
+            "baseName": "skipBrowserRedirect",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "queryParams",
+            "baseName": "queryParams",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "scopes",
+            "baseName": "scopes",
             "type": "string",
             "format": ""
         },
         {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
+            "name": "redirectTo",
+            "baseName": "redirectTo",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SignupRequest.attributeTypeMap;
+        return OAuthInitRequestOptions.attributeTypeMap;
     }
 
     public constructor() {

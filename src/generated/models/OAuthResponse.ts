@@ -12,7 +12,7 @@
 
 import { HttpFile } from '../http/http';
 
-export class GetSigninUrlResponse {
+export class OAuthResponse {
     'url': string;
     'key': string;
 
@@ -33,7 +33,7 @@ export class GetSigninUrlResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return GetSigninUrlResponse.attributeTypeMap;
+        return OAuthResponse.attributeTypeMap;
     }
 
     public constructor() {

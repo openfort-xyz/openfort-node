@@ -11,6 +11,7 @@
  */
 
 import { OAuthProvider } from '../models/OAuthProvider';
+import { TokenType } from '../models/TokenType';
 import { HttpFile } from '../http/http';
 
 export class AuthenticateOAuthRequest {
@@ -19,6 +20,7 @@ export class AuthenticateOAuthRequest {
     * Token to be verified
     */
     'token': string;
+    'tokenType': TokenType;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -33,6 +35,12 @@ export class AuthenticateOAuthRequest {
             "name": "token",
             "baseName": "token",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenType",
+            "baseName": "tokenType",
+            "type": "TokenType",
             "format": ""
         }    ];
 
