@@ -64,6 +64,7 @@ import { CreateShareRequest } from '../models/CreateShareRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
+import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
@@ -108,7 +109,6 @@ import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransa
 import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
-import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
@@ -117,7 +117,6 @@ import { InventoryListResponse } from '../models/InventoryListResponse';
 import { InventoryResponse } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
-import { LinkRequest } from '../models/LinkRequest';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
@@ -150,13 +149,18 @@ import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/Notifica
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
+import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderCUSTOM } from '../models/OAuthProviderCUSTOM';
 import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
+import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
+import { OAuthResponse } from '../models/OAuthResponse';
+import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
@@ -239,6 +243,7 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SubscriptionType } from '../models/SubscriptionType';
 import { TimeIntervalType } from '../models/TimeIntervalType';
+import { TokenType } from '../models/TokenType';
 import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
@@ -249,6 +254,7 @@ import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResp
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TypedDataField } from '../models/TypedDataField';
+import { UnlinkRequest } from '../models/UnlinkRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
@@ -893,7 +899,7 @@ export class ObservableAuthenticationApi {
      * Initialize OAuth.
      * @param oAuthInitRequest 
      */
-    public initOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Observable<GetSigninUrlResponse> {
+    public initOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Observable<OAuthResponse> {
         const requestContextPromise = this.requestFactory.initOAuth(oAuthInitRequest, _options);
 
         // build promise chain
@@ -1057,10 +1063,10 @@ export class ObservableAuthenticationApi {
 
     /**
      * Unlink OAuth account
-     * @param linkRequest 
+     * @param unlinkRequest 
      */
-    public unlinkOAuth(linkRequest: LinkRequest, _options?: Configuration): Observable<AuthPlayerResponse> {
-        const requestContextPromise = this.requestFactory.unlinkOAuth(linkRequest, _options);
+    public unlinkOAuth(unlinkRequest: UnlinkRequest, _options?: Configuration): Observable<AuthPlayerResponse> {
+        const requestContextPromise = this.requestFactory.unlinkOAuth(unlinkRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1317,125 +1323,6 @@ export class ObservableContractsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateContract(rsp)));
-            }));
-    }
-
-}
-
-import { EmbeddedApiRequestFactory, EmbeddedApiResponseProcessor} from "../apis/EmbeddedApi";
-export class ObservableEmbeddedApi {
-    private requestFactory: EmbeddedApiRequestFactory;
-    private responseProcessor: EmbeddedApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: EmbeddedApiRequestFactory,
-        responseProcessor?: EmbeddedApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new EmbeddedApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new EmbeddedApiResponseProcessor();
-    }
-
-    /**
-     * Creates a new device for a given account.  This object represents the device that the account owner uses to store the device share. It has an equivalent auth share and recovery share associated with it.
-     * Create a device object.
-     * @param createDeviceRequest 
-     */
-    public createDevice(createDeviceRequest: CreateDeviceRequest, _options?: Configuration): Observable<DeviceResponse> {
-        const requestContextPromise = this.requestFactory.createDevice(createDeviceRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDevice(rsp)));
-            }));
-    }
-
-    /**
-     * Add the share of for existing device.
-     * Create a device share.
-     * @param id Specifies the unique device ID (starts with dev_).
-     * @param createShareRequest 
-     */
-    public createDeviceShare(id: string, createShareRequest: CreateShareRequest, _options?: Configuration): Observable<ShareResponse> {
-        const requestContextPromise = this.requestFactory.createDeviceShare(id, createShareRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDeviceShare(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieves the shares of an existing device.
-     * Get existing device shares.
-     * @param id Specifies the unique device ID (starts with dev_).
-     * @param shareType Specifies the type of the share ID
-     */
-    public getDeviceShares(id: string, shareType?: string, _options?: Configuration): Observable<BaseEntityListResponseShareResponse> {
-        const requestContextPromise = this.requestFactory.getDeviceShares(id, shareType, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDeviceShares(rsp)));
-            }));
-    }
-
-    /**
-     * Returns a list of devices for the given account.  This object represents the devices where the account owner has device share stored.  Devices are returned sorted by creation date, with the most recently created devices appearing first.  By default, a maximum of 10 devices are shown per page.
-     * List devices of account.
-     * @param account Specifies the unique account ID (starts with acc_)
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     */
-    public getDevices(account: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<BaseEntityListResponseDeviceResponse> {
-        const requestContextPromise = this.requestFactory.getDevices(account, limit, skip, order, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDevices(rsp)));
             }));
     }
 

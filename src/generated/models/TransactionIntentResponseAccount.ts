@@ -27,6 +27,7 @@ export class TransactionIntentResponseAccount {
     'ownerAddress': string;
     'deployed': boolean;
     'custodial': boolean;
+    'embeddedSigner': boolean;
     /**
     * The chain ID.
     */
@@ -79,6 +80,12 @@ export class TransactionIntentResponseAccount {
         {
             "name": "custodial",
             "baseName": "custodial",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "embeddedSigner",
+            "baseName": "embeddedSigner",
             "type": "boolean",
             "format": ""
         },

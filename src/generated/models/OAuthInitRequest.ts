@@ -10,23 +10,21 @@
  * Do not edit the class manually.
  */
 
+import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { HttpFile } from '../http/http';
 
 export class OAuthInitRequest {
-    /**
-    * Access token to be verified
-    */
-    'token': string;
+    'options'?: OAuthInitRequestOptions;
     'provider': OAuthProvider;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
+            "name": "options",
+            "baseName": "options",
+            "type": "OAuthInitRequestOptions",
             "format": ""
         },
         {

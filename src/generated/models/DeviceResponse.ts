@@ -17,7 +17,7 @@ export class DeviceResponse {
     'id': string;
     'object': EntityTypeDEVICE;
     'createdAt': number;
-    'accountID': string;
+    'account': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,8 +41,8 @@ export class DeviceResponse {
             "format": "int32"
         },
         {
-            "name": "accountID",
-            "baseName": "accountID",
+            "name": "account",
+            "baseName": "account",
             "type": "string",
             "format": ""
         }    ];

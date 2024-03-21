@@ -30,10 +30,6 @@ export class GoogleOAuthConfig {
     * Google API client secret.
     */
     'clientSecret': string;
-    /**
-    * The URI to redirect to after completing the auth request. You can use Openfort redirect URL: https://openfort.xyz/iam/v1/oauth/google/callback
-    */
-    'redirectUri': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -59,12 +55,6 @@ export class GoogleOAuthConfig {
         {
             "name": "clientSecret",
             "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "redirectUri",
-            "baseName": "redirectUri",
             "type": "string",
             "format": ""
         }    ];

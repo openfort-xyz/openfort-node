@@ -63,6 +63,7 @@ import { CreateShareRequest } from '../models/CreateShareRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
+import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
@@ -107,7 +108,6 @@ import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransa
 import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
-import { GetSigninUrlResponse } from '../models/GetSigninUrlResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
@@ -116,7 +116,6 @@ import { InventoryListResponse } from '../models/InventoryListResponse';
 import { InventoryResponse } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
-import { LinkRequest } from '../models/LinkRequest';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { Log } from '../models/Log';
 import { LoginRequest } from '../models/LoginRequest';
@@ -149,13 +148,18 @@ import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/Notifica
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
+import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { OAuthProviderCUSTOM } from '../models/OAuthProviderCUSTOM';
 import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
+import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
 import { OAuthRequest } from '../models/OAuthRequest';
+import { OAuthResponse } from '../models/OAuthResponse';
+import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
@@ -238,6 +242,7 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SubscriptionType } from '../models/SubscriptionType';
 import { TimeIntervalType } from '../models/TimeIntervalType';
+import { TokenType } from '../models/TokenType';
 import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
@@ -248,6 +253,7 @@ import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResp
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TypedDataField } from '../models/TypedDataField';
+import { UnlinkRequest } from '../models/UnlinkRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
@@ -569,7 +575,7 @@ export class PromiseAuthenticationApi {
      * Initialize OAuth.
      * @param oAuthInitRequest 
      */
-    public initOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Promise<GetSigninUrlResponse> {
+    public initOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Promise<OAuthResponse> {
         const result = this.api.initOAuth(oAuthInitRequest, _options);
         return result.toPromise();
     }
@@ -635,10 +641,10 @@ export class PromiseAuthenticationApi {
 
     /**
      * Unlink OAuth account
-     * @param linkRequest 
+     * @param unlinkRequest 
      */
-    public unlinkOAuth(linkRequest: LinkRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
-        const result = this.api.unlinkOAuth(linkRequest, _options);
+    public unlinkOAuth(unlinkRequest: UnlinkRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.unlinkOAuth(unlinkRequest, _options);
         return result.toPromise();
     }
 
@@ -756,70 +762,6 @@ export class PromiseContractsApi {
      */
     public updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Promise<ContractResponse> {
         const result = this.api.updateContract(id, updateContractRequest, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableEmbeddedApi } from './ObservableAPI';
-
-import { EmbeddedApiRequestFactory, EmbeddedApiResponseProcessor} from "../apis/EmbeddedApi";
-export class PromiseEmbeddedApi {
-    private api: ObservableEmbeddedApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: EmbeddedApiRequestFactory,
-        responseProcessor?: EmbeddedApiResponseProcessor
-    ) {
-        this.api = new ObservableEmbeddedApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Creates a new device for a given account.  This object represents the device that the account owner uses to store the device share. It has an equivalent auth share and recovery share associated with it.
-     * Create a device object.
-     * @param createDeviceRequest 
-     */
-    public createDevice(createDeviceRequest: CreateDeviceRequest, _options?: Configuration): Promise<DeviceResponse> {
-        const result = this.api.createDevice(createDeviceRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Add the share of for existing device.
-     * Create a device share.
-     * @param id Specifies the unique device ID (starts with dev_).
-     * @param createShareRequest 
-     */
-    public createDeviceShare(id: string, createShareRequest: CreateShareRequest, _options?: Configuration): Promise<ShareResponse> {
-        const result = this.api.createDeviceShare(id, createShareRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieves the shares of an existing device.
-     * Get existing device shares.
-     * @param id Specifies the unique device ID (starts with dev_).
-     * @param shareType Specifies the type of the share ID
-     */
-    public getDeviceShares(id: string, shareType?: string, _options?: Configuration): Promise<BaseEntityListResponseShareResponse> {
-        const result = this.api.getDeviceShares(id, shareType, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns a list of devices for the given account.  This object represents the devices where the account owner has device share stored.  Devices are returned sorted by creation date, with the most recently created devices appearing first.  By default, a maximum of 10 devices are shown per page.
-     * List devices of account.
-     * @param account Specifies the unique account ID (starts with acc_)
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     */
-    public getDevices(account: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Promise<BaseEntityListResponseDeviceResponse> {
-        const result = this.api.getDevices(account, limit, skip, order, _options);
         return result.toPromise();
     }
 

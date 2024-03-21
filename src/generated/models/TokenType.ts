@@ -15,4 +15,4 @@ import { HttpFile } from '../http/http';
 /**
 * Enum of the supporting OAuth providers.
 */
-export type OAuthProvider = "accelbyte" | "firebase" | "google" | "lootlocker" | "playfab" | "custom" | "oidc" ;
+export type TokenType = "idToken" | "customToken" ;
