@@ -1,3 +1,3 @@
 export interface GetAccountInventoryRequest {
-    accountId: string;
+    id: string;
 }

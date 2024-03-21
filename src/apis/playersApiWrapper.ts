@@ -1,13 +1,10 @@
 import {
     GetPlayerRequest,
-    PlayerCancelTransferOwnershipRequest,
     PlayerCreateRequest,
     PlayerDeleteResponse,
     PlayerListQueries,
     PlayerListResponse,
     PlayerResponse,
-    PlayerTransferOwnershipRequest,
-    TransactionIntentResponse,
     UpdatePlayerRequest,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
@@ -42,28 +39,6 @@ export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
      */
     public async list(req?: PlayerListQueries): Promise<PlayerListResponse> {
         return await this.api.getPlayers(req?.limit, req?.skip, req?.order, req?.expand, req?.name);
-    }
-
-    /**
-     * Transfer ownership of an account to an address.
-     * @param req Parameters to transfer account ownership.
-     */
-    public async requestTransferAccountOwnership(
-        req: PlayerTransferOwnershipRequest,
-    ): Promise<TransactionIntentResponse> {
-        const { playerId, ...body } = req;
-        return await this.api.requestTransferAccountOwnership(playerId, body);
-    }
-
-    /**
-     * Transfer ownership of an account to an address.
-     * @param req Parameters to transfer account ownership.
-     */
-    public async cancelTransferAccountOwnership(
-        req: PlayerCancelTransferOwnershipRequest,
-    ): Promise<TransactionIntentResponse> {
-        const { playerId, ...body } = req;
-        return await this.api.cancelTransferAccountOwnership(playerId, body);
     }
 
     /**

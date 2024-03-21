@@ -52,8 +52,8 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Parameters to transfer ownership.
      */
     public async requestTransferOwnership(req: TransferOwnershipRequest): Promise<TransactionIntentResponse> {
-        const { accountId, ...body } = req;
-        return await this.api.requestTransferOwnership(accountId, body);
+        const { id, ...body } = req;
+        return await this.api.requestTransferOwnership(id, body);
     }
 
     /**
@@ -61,8 +61,8 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Parameters to transfer ownership.
      */
     public async cancelTransferOwnership(req: CancelTransferOwnershipRequest): Promise<TransactionIntentResponse> {
-        const { accountId, ...body } = req;
-        return await this.api.cancelTransferOwnership(accountId, body);
+        const { id, ...body } = req;
+        return await this.api.cancelTransferOwnership(id, body);
     }
 
     /**
@@ -97,15 +97,15 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * Start a recovery process of a recoverable account.
      */
     public async startRecovery(req: StartRecoveryRequest): Promise<TransactionIntentResponse> {
-        const { accountId, ...body } = req;
-        return await this.api.startRecovery(accountId, body);
+        const { id, ...body } = req;
+        return await this.api.startRecovery(id, body);
     }
 
     /**
      * Complete a recovery process of a recoverable account.
      */
     public async completeRecovery(req: CompleteRecoveryRequest): Promise<TransactionIntentResponse> {
-        const { accountId, ...body } = req;
-        return await this.api.completeRecovery(accountId, body);
+        const { id, ...body } = req;
+        return await this.api.completeRecovery(id, body);
     }
 }
