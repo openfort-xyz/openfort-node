@@ -30,7 +30,6 @@ import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
-import { BaseEntityListResponseShareResponse } from '../models/BaseEntityListResponseShareResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
@@ -59,7 +58,6 @@ import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateShareRequest } from '../models/CreateShareRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
@@ -92,7 +90,6 @@ import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
-import { EntityTypeSHARE } from '../models/EntityTypeSHARE';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
@@ -157,6 +154,7 @@ import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
+import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
@@ -224,8 +222,6 @@ import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
-import { ShareResponse } from '../models/ShareResponse';
-import { ShareType } from '../models/ShareType';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -241,6 +237,9 @@ import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SubscriptionType } from '../models/SubscriptionType';
+import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
+import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TokenType } from '../models/TokenType';
 import { TransactionIntent } from '../models/TransactionIntent';
@@ -590,6 +589,12 @@ export interface AdminAuthenticationApiGetAuthPlayersRequest {
      * @memberof AdminAuthenticationApigetAuthPlayers
      */
     email?: string
+    /**
+     * Specifies the external user ID.
+     * @type string
+     * @memberof AdminAuthenticationApigetAuthPlayers
+     */
+    externalUserId?: string
 }
 
 export interface AdminAuthenticationApiGetOAuthConfigRequest {
@@ -677,7 +682,7 @@ export class ObjectAdminAuthenticationApi {
      * @param param the request object
      */
     public getAuthPlayers(param: AdminAuthenticationApiGetAuthPlayersRequest = {}, options?: Configuration): Promise<AuthPlayerListResponse> {
-        return this.api.getAuthPlayers(param.limit, param.skip, param.order, param.email,  options).toPromise();
+        return this.api.getAuthPlayers(param.limit, param.skip, param.order, param.email, param.externalUserId,  options).toPromise();
     }
 
     /**
@@ -817,6 +822,9 @@ export interface AuthenticationApiLogoutRequest {
     logoutRequest: LogoutRequest
 }
 
+export interface AuthenticationApiMeRequest {
+}
+
 export interface AuthenticationApiRefreshRequest {
     /**
      * 
@@ -833,6 +841,15 @@ export interface AuthenticationApiSignupEmailPasswordRequest {
      * @memberof AuthenticationApisignupEmailPassword
      */
     signupRequest: SignupRequest
+}
+
+export interface AuthenticationApiThirdPartyRequest {
+    /**
+     * 
+     * @type ThirdPartyOAuthRequest
+     * @memberof AuthenticationApithirdParty
+     */
+    thirdPartyOAuthRequest: ThirdPartyOAuthRequest
 }
 
 export interface AuthenticationApiUnlinkOAuthRequest {
@@ -962,6 +979,13 @@ export class ObjectAuthenticationApi {
     }
 
     /**
+     * @param param the request object
+     */
+    public me(param: AuthenticationApiMeRequest = {}, options?: Configuration): Promise<AuthPlayerResponse> {
+        return this.api.me( options).toPromise();
+    }
+
+    /**
      * Get or create a new session for the player based on the refresh token.
      * Refresh or create auth session.
      * @param param the request object
@@ -977,6 +1001,14 @@ export class ObjectAuthenticationApi {
      */
     public signupEmailPassword(param: AuthenticationApiSignupEmailPasswordRequest, options?: Configuration): Promise<AuthResponse> {
         return this.api.signupEmailPassword(param.signupRequest,  options).toPromise();
+    }
+
+    /**
+     * Verify oauth token of a third party auth provider.
+     * @param param the request object
+     */
+    public thirdParty(param: AuthenticationApiThirdPartyRequest, options?: Configuration): Promise<AuthPlayerResponse> {
+        return this.api.thirdParty(param.thirdPartyOAuthRequest,  options).toPromise();
     }
 
     /**

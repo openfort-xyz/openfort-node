@@ -30,7 +30,6 @@ import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
-import { BaseEntityListResponseShareResponse } from '../models/BaseEntityListResponseShareResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
@@ -59,7 +58,6 @@ import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateShareRequest } from '../models/CreateShareRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
@@ -92,7 +90,6 @@ import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
-import { EntityTypeSHARE } from '../models/EntityTypeSHARE';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
@@ -157,6 +154,7 @@ import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
+import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
@@ -224,8 +222,6 @@ import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
-import { ShareResponse } from '../models/ShareResponse';
-import { ShareType } from '../models/ShareType';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -241,6 +237,9 @@ import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SubscriptionType } from '../models/SubscriptionType';
+import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
+import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TokenType } from '../models/TokenType';
 import { TransactionIntent } from '../models/TransactionIntent';
@@ -457,9 +456,10 @@ export class PromiseAdminAuthenticationApi {
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param email Specifies the email address of the user.
+     * @param externalUserId Specifies the external user ID.
      */
-    public getAuthPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Promise<AuthPlayerListResponse> {
-        const result = this.api.getAuthPlayers(limit, skip, order, email, _options);
+    public getAuthPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, externalUserId?: string, _options?: Configuration): Promise<AuthPlayerListResponse> {
+        const result = this.api.getAuthPlayers(limit, skip, order, email, externalUserId, _options);
         return result.toPromise();
     }
 
@@ -620,6 +620,13 @@ export class PromiseAuthenticationApi {
     }
 
     /**
+     */
+    public me(_options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.me(_options);
+        return result.toPromise();
+    }
+
+    /**
      * Get or create a new session for the player based on the refresh token.
      * Refresh or create auth session.
      * @param refreshTokenRequest 
@@ -636,6 +643,15 @@ export class PromiseAuthenticationApi {
      */
     public signupEmailPassword(signupRequest: SignupRequest, _options?: Configuration): Promise<AuthResponse> {
         const result = this.api.signupEmailPassword(signupRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Verify oauth token of a third party auth provider.
+     * @param thirdPartyOAuthRequest 
+     */
+    public thirdParty(thirdPartyOAuthRequest: ThirdPartyOAuthRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.thirdParty(thirdPartyOAuthRequest, _options);
         return result.toPromise();
     }
 

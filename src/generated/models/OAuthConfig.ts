@@ -18,6 +18,7 @@ import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
+import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
 import { HttpFile } from '../http/http';
 
 export class OAuthConfig {
@@ -26,6 +27,14 @@ export class OAuthConfig {
     */
     'enabled': boolean;
     'provider': OAuthProviderLOOTLOCKER;
+    /**
+    * The unique Supabase URL which is supplied when you create a new project in your project dashboard.
+    */
+    'url': string;
+    /**
+    * The unique Supabase Key which is supplied when you create a new project in your project dashboard.
+    */
+    'key': string;
     /**
     * PEM encoded public key to verify the JWT token
     */
@@ -80,6 +89,18 @@ export class OAuthConfig {
             "name": "provider",
             "baseName": "provider",
             "type": "OAuthProviderLOOTLOCKER",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "key",
+            "baseName": "key",
+            "type": "string",
             "format": ""
         },
         {

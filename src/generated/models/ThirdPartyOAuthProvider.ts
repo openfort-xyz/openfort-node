@@ -12,4 +12,7 @@
 
 import { HttpFile } from '../http/http';
 
-export type EntityTypeSHARE = "share" ;
+/**
+* Enum of the supporting third party auth providers.
+*/
+export type ThirdPartyOAuthProvider = "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;

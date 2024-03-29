@@ -18,6 +18,8 @@ export class DeviceResponse {
     'object': EntityTypeDEVICE;
     'createdAt': number;
     'account': string;
+    'share': string;
+    'isPrimary': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,6 +46,18 @@ export class DeviceResponse {
             "name": "account",
             "baseName": "account",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "share",
+            "baseName": "share",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "isPrimary",
+            "baseName": "isPrimary",
+            "type": "boolean",
             "format": ""
         }    ];
 

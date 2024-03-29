@@ -17,6 +17,10 @@ export class CreateDeviceRequest {
     * Specifies the unique account ID (starts with acc_)
     */
     'account': string;
+    /**
+    * Specifies the share data
+    */
+    'share': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,6 +28,12 @@ export class CreateDeviceRequest {
         {
             "name": "account",
             "baseName": "account",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "share",
+            "baseName": "share",
             "type": "string",
             "format": ""
         }    ];

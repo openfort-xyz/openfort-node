@@ -27,6 +27,10 @@ export class AuthPlayerListQueries {
     * Specifies the email address of the user.
     */
     'email'?: string;
+    /**
+    * Specifies the external user ID.
+    */
+    'externalUserId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -52,6 +56,12 @@ export class AuthPlayerListQueries {
         {
             "name": "email",
             "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "externalUserId",
+            "baseName": "externalUserId",
             "type": "string",
             "format": ""
         }    ];
