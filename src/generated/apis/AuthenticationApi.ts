@@ -27,6 +27,7 @@ import { SIWEAuthenticateRequest } from '../models/SIWEAuthenticateRequest';
 import { SIWEInitResponse } from '../models/SIWEInitResponse';
 import { SIWERequest } from '../models/SIWERequest';
 import { SignupRequest } from '../models/SignupRequest';
+import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { UnlinkRequest } from '../models/UnlinkRequest';
 
 /**
@@ -448,6 +449,28 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     */
+    public async me(_options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // Path Params
+        const localVarPath = '/iam/v1/me';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Get or create a new session for the player based on the refresh token.
      * Refresh or create auth session.
      * @param refreshTokenRequest 
@@ -518,6 +541,53 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(signupRequest, "SignupRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["pk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Verify oauth token of a third party auth provider.
+     * @param thirdPartyOAuthRequest 
+     */
+    public async thirdParty(thirdPartyOAuthRequest: ThirdPartyOAuthRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'thirdPartyOAuthRequest' is not null or undefined
+        if (thirdPartyOAuthRequest === null || thirdPartyOAuthRequest === undefined) {
+            throw new RequiredError("AuthenticationApi", "thirdParty", "thirdPartyOAuthRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/iam/v1/oauth/third_party';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(thirdPartyOAuthRequest, "ThirdPartyOAuthRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -1018,6 +1088,38 @@ export class AuthenticationApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to me
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async me(response: ResponseContext): Promise<AuthPlayerResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AuthPlayerResponse", ""
+            ) as AuthPlayerResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AuthPlayerResponse", ""
+            ) as AuthPlayerResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to refresh
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1075,6 +1177,38 @@ export class AuthenticationApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "AuthResponse", ""
             ) as AuthResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to thirdParty
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async thirdParty(response: ResponseContext): Promise<AuthPlayerResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AuthPlayerResponse", ""
+            ) as AuthPlayerResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AuthPlayerResponse", ""
+            ) as AuthPlayerResponse;
             return body;
         }
 

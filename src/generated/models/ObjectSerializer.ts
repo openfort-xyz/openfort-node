@@ -27,7 +27,6 @@ export * from '../models/AuthenticateOAuthRequest';
 export * from '../models/BalanceNotificationTriggerResponse';
 export * from '../models/BalanceResponse';
 export * from '../models/BaseEntityListResponseDeviceResponse';
-export * from '../models/BaseEntityListResponseShareResponse';
 export * from '../models/CancelTransferOwnershipRequest';
 export * from '../models/ChargeCustomTokenPolicyStrategy';
 export * from '../models/CheckoutRequest';
@@ -56,7 +55,6 @@ export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
 export * from '../models/CreateProjectRequest';
 export * from '../models/CreateSessionRequest';
-export * from '../models/CreateShareRequest';
 export * from '../models/CreateTransactionIntentRequest';
 export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
@@ -89,7 +87,6 @@ export * from '../models/EntityTypePOLICYRULE';
 export * from '../models/EntityTypePROJECT';
 export * from '../models/EntityTypeREADCONTRACT';
 export * from '../models/EntityTypeSESSION';
-export * from '../models/EntityTypeSHARE';
 export * from '../models/EntityTypeSIGNATURE';
 export * from '../models/EntityTypeTRANSACTIONINTENT';
 export * from '../models/EntityTypeUSER';
@@ -154,6 +151,7 @@ export * from '../models/OAuthProviderGOOGLE';
 export * from '../models/OAuthProviderLOOTLOCKER';
 export * from '../models/OAuthProviderOIDC';
 export * from '../models/OAuthProviderPLAYFAB';
+export * from '../models/OAuthProviderSUPABASE';
 export * from '../models/OAuthRequest';
 export * from '../models/OAuthResponse';
 export * from '../models/OIDCAuthConfig';
@@ -221,8 +219,6 @@ export * from '../models/SessionListResponse';
 export * from '../models/SessionResponse';
 export * from '../models/SessionResponseExpandable';
 export * from '../models/SettingsWebhookUpdateRequest';
-export * from '../models/ShareResponse';
-export * from '../models/ShareType';
 export * from '../models/SignPayloadRequest';
 export * from '../models/SignPayloadResponse';
 export * from '../models/SignatureRequest';
@@ -238,6 +234,9 @@ export * from '../models/SubmitWeb3ActionRequest';
 export * from '../models/SubscriptionResponse';
 export * from '../models/SubscriptionResponsePlan';
 export * from '../models/SubscriptionType';
+export * from '../models/SupabaseAuthConfig';
+export * from '../models/ThirdPartyOAuthProvider';
+export * from '../models/ThirdPartyOAuthRequest';
 export * from '../models/TimeIntervalType';
 export * from '../models/TokenType';
 export * from '../models/TransactionIntent';
@@ -294,7 +293,7 @@ import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
 import { AssetInventory      } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
-import { AuthPlayerListQueries     } from '../models/AuthPlayerListQueries';
+import { AuthPlayerListQueries      } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse      } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePlayer';
@@ -305,7 +304,6 @@ import { AuthenticateOAuthRequest    } from '../models/AuthenticateOAuthRequest'
 import { BalanceNotificationTriggerResponse      } from '../models/BalanceNotificationTriggerResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse       } from '../models/BaseEntityListResponseDeviceResponse';
-import { BaseEntityListResponseShareResponse       } from '../models/BaseEntityListResponseShareResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest     } from '../models/CheckoutRequest';
@@ -334,7 +332,6 @@ import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleReque
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest   } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateShareRequest    } from '../models/CreateShareRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
@@ -350,7 +347,7 @@ import { DeveloperAccountListResponse       } from '../models/DeveloperAccountLi
 import { DeveloperAccountResponse        } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
 import { DeviceListQueries     } from '../models/DeviceListQueries';
-import { DeviceResponse     } from '../models/DeviceResponse';
+import { DeviceResponse       } from '../models/DeviceResponse';
 import { DomainData } from '../models/DomainData';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
@@ -367,7 +364,6 @@ import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
-import { EntityTypeSHARE } from '../models/EntityTypeSHARE';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
@@ -420,7 +416,7 @@ import { NotificationTriggerType } from '../models/NotificationTriggerType';
 import { NotificationTriggerTypeCONTRACTTRIGGER } from '../models/NotificationTriggerTypeCONTRACTTRIGGER';
 import { NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER } from '../models/NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER';
 import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
-import { OAuthConfig             } from '../models/OAuthConfig';
+import { OAuthConfig               } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest   } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
@@ -432,6 +428,7 @@ import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
 import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
+import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig      } from '../models/OIDCAuthConfig';
@@ -499,8 +496,6 @@ import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
 import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
-import { ShareResponse       } from '../models/ShareResponse';
-import { ShareType } from '../models/ShareType';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse      } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -516,6 +511,9 @@ import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SubscriptionType } from '../models/SubscriptionType';
+import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
+import { ThirdPartyOAuthRequest    } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { TokenType } from '../models/TokenType';
 import { TransactionIntent              } from '../models/TransactionIntent';
@@ -594,7 +592,6 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypePROJECT",
     "EntityTypeREADCONTRACT",
     "EntityTypeSESSION",
-    "EntityTypeSHARE",
     "EntityTypeSIGNATURE",
     "EntityTypeTRANSACTIONINTENT",
     "EntityTypeUSER",
@@ -615,6 +612,7 @@ let enumsMap: Set<string> = new Set<string>([
     "OAuthProviderLOOTLOCKER",
     "OAuthProviderOIDC",
     "OAuthProviderPLAYFAB",
+    "OAuthProviderSUPABASE",
     "PlanChangeTypeEnum",
     "PlayerResponseExpandable",
     "PolicyRateLimit",
@@ -631,13 +629,13 @@ let enumsMap: Set<string> = new Set<string>([
     "ProjectStatsRequestTimeFrameEnum",
     "ResponseTypeLIST",
     "SessionResponseExpandable",
-    "ShareType",
     "SortOrder",
     "SponsorSchema",
     "SponsorSchemaCHARGECUSTOMTOKENS",
     "SponsorSchemaFIXEDRATE",
     "SponsorSchemaPAYFORUSER",
     "SubscriptionType",
+    "ThirdPartyOAuthProvider",
     "TimeIntervalType",
     "TokenType",
     "TransactionIntentResponseExpandable",
@@ -674,7 +672,6 @@ let typeMap: {[index: string]: any} = {
     "BalanceNotificationTriggerResponse": BalanceNotificationTriggerResponse,
     "BalanceResponse": BalanceResponse,
     "BaseEntityListResponseDeviceResponse": BaseEntityListResponseDeviceResponse,
-    "BaseEntityListResponseShareResponse": BaseEntityListResponseShareResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
     "ChargeCustomTokenPolicyStrategy": ChargeCustomTokenPolicyStrategy,
     "CheckoutRequest": CheckoutRequest,
@@ -703,7 +700,6 @@ let typeMap: {[index: string]: any} = {
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
     "CreateProjectRequest": CreateProjectRequest,
     "CreateSessionRequest": CreateSessionRequest,
-    "CreateShareRequest": CreateShareRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
     "CustomAuthConfig": CustomAuthConfig,
@@ -818,7 +814,6 @@ let typeMap: {[index: string]: any} = {
     "SessionListResponse": SessionListResponse,
     "SessionResponse": SessionResponse,
     "SettingsWebhookUpdateRequest": SettingsWebhookUpdateRequest,
-    "ShareResponse": ShareResponse,
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
@@ -828,6 +823,8 @@ let typeMap: {[index: string]: any} = {
     "SubmitWeb3ActionRequest": SubmitWeb3ActionRequest,
     "SubscriptionResponse": SubscriptionResponse,
     "SubscriptionResponsePlan": SubscriptionResponsePlan,
+    "SupabaseAuthConfig": SupabaseAuthConfig,
+    "ThirdPartyOAuthRequest": ThirdPartyOAuthRequest,
     "TransactionIntent": TransactionIntent,
     "TransactionIntentListQueries": TransactionIntentListQueries,
     "TransactionIntentListResponse": TransactionIntentListResponse,

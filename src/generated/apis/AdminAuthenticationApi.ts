@@ -157,9 +157,11 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param email Specifies the email address of the user.
+     * @param externalUserId Specifies the external user ID.
      */
-    public async getAuthPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAuthPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, externalUserId?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -190,6 +192,11 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
         // Query Params
         if (email !== undefined) {
             requestContext.setQueryParam("email", ObjectSerializer.serialize(email, "string", ""));
+        }
+
+        // Query Params
+        if (externalUserId !== undefined) {
+            requestContext.setQueryParam("externalUserId", ObjectSerializer.serialize(externalUserId, "string", ""));
         }
 
 

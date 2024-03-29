@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type ShareType = "auth" | "recovery" ;
+export type OAuthProviderSUPABASE = "supabase" ;

@@ -10,44 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { ShareType } from '../models/ShareType';
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
+import { TokenType } from '../models/TokenType';
 import { HttpFile } from '../http/http';
 
-export class CreateShareRequest {
+export class ThirdPartyOAuthRequest {
+    'provider': ThirdPartyOAuthProvider;
     /**
-    * Specifies the unique share ID (starts with sha_)
+    * Token to be verified
     */
-    'share': string;
-    'shareType': ShareType;
-    /**
-    * Specifies if the recovery share is encrypted by user entropy
-    */
-    'userEntropy': boolean;
+    'token': string;
+    'tokenType': TokenType;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "share",
-            "baseName": "share",
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProvider",
+            "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
             "type": "string",
             "format": ""
         },
         {
-            "name": "shareType",
-            "baseName": "shareType",
-            "type": "ShareType",
-            "format": ""
-        },
-        {
-            "name": "userEntropy",
-            "baseName": "userEntropy",
-            "type": "boolean",
+            "name": "tokenType",
+            "baseName": "tokenType",
+            "type": "TokenType",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateShareRequest.attributeTypeMap;
+        return ThirdPartyOAuthRequest.attributeTypeMap;
     }
 
     public constructor() {
