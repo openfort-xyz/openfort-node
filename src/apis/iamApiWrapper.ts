@@ -71,7 +71,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      * @param email Specifies the email address of the user.
      */
     public async getAuthPlayers(req: AuthPlayerListQueries): Promise<AuthPlayerListResponse> {
-        return await this.api.getAuthPlayers(req.limit, req.skip, req.order, req.email);
+        return await this.api.getAuthPlayers(req.limit, req.skip, req.order, req.email, req.externalUserId);
     }
 
     /**
