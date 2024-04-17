@@ -247,6 +247,7 @@ export * from '../models/TransactionIntentResponseAccount';
 export * from '../models/TransactionIntentResponseExpandable';
 export * from '../models/TransactionIntentResponsePlayer';
 export * from '../models/TransactionIntentResponsePolicy';
+export * from '../models/TransactionStat';
 export * from '../models/TransferOwnershipRequest';
 export * from '../models/TypedDataField';
 export * from '../models/UnlinkRequest';
@@ -524,6 +525,7 @@ import { TransactionIntentResponseAccount               } from '../models/Transa
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy           } from '../models/TransactionIntentResponsePolicy';
+import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TypedDataField } from '../models/TypedDataField';
 import { UnlinkRequest  } from '../models/UnlinkRequest';
@@ -832,6 +834,7 @@ let typeMap: {[index: string]: any} = {
     "TransactionIntentResponseAccount": TransactionIntentResponseAccount,
     "TransactionIntentResponsePlayer": TransactionIntentResponsePlayer,
     "TransactionIntentResponsePolicy": TransactionIntentResponsePolicy,
+    "TransactionStat": TransactionStat,
     "TransferOwnershipRequest": TransferOwnershipRequest,
     "TypedDataField": TypedDataField,
     "UnlinkRequest": UnlinkRequest,

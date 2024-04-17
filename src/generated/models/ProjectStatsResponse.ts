@@ -11,10 +11,12 @@
  */
 
 import { Stat } from '../models/Stat';
+import { TransactionStat } from '../models/TransactionStat';
 import { HttpFile } from '../http/http';
 
 export class ProjectStatsResponse {
-    'transactionIntents': Array<Stat>;
+    'transactionIntents': Array<TransactionStat>;
+    'devices': Array<Stat>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,6 +24,12 @@ export class ProjectStatsResponse {
         {
             "name": "transactionIntents",
             "baseName": "transactionIntents",
+            "type": "Array<TransactionStat>",
+            "format": ""
+        },
+        {
+            "name": "devices",
+            "baseName": "devices",
             "type": "Array<Stat>",
             "format": ""
         }    ];
