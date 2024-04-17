@@ -12,9 +12,11 @@
 
 import { HttpFile } from '../http/http';
 
-export class Stat {
+export class TransactionStat {
     'timestamp': string;
     'total': number;
+    'successful': number;
+    'gasUsed': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,10 +32,22 @@ export class Stat {
             "baseName": "total",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "successful",
+            "baseName": "successful",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "gasUsed",
+            "baseName": "gasUsed",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Stat.attributeTypeMap;
+        return TransactionStat.attributeTypeMap;
     }
 
     public constructor() {

@@ -33,6 +33,10 @@ export class Interaction {
     * The function arguments of the contract, in string format. If you provide one of a `pla_...`, `con_...` or `acc_...` it will be converted to the corresponding address.
     */
     'functionArgs'?: Array<any>;
+    /**
+    * Data to append to the end of the calldata. Useful for [adding a \"domain\" tag](https://opensea.notion.site/opensea/Seaport-Order-Attributions-ec2d69bf455041a5baa490941aad307f)
+    */
+    'dataSuffix'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -65,6 +69,12 @@ export class Interaction {
             "name": "functionArgs",
             "baseName": "functionArgs",
             "type": "Array<any>",
+            "format": ""
+        },
+        {
+            "name": "dataSuffix",
+            "baseName": "dataSuffix",
+            "type": "string",
             "format": ""
         }    ];
 
