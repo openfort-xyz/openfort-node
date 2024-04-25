@@ -10,6 +10,7 @@ export * from '../models/AccountNotificationTriggerResponseAccount';
 export * from '../models/AccountPolicyRuleResponse';
 export * from '../models/AccountResponse';
 export * from '../models/AccountResponseExpandable';
+export * from '../models/Amount';
 export * from '../models/ApiAuthorizedNetworkListResponse';
 export * from '../models/ApiAuthorizedNetworkResponse';
 export * from '../models/ApiKeyResponse';
@@ -47,9 +48,11 @@ export * from '../models/CreateAccountRequest';
 export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateContractRequest';
 export * from '../models/CreateDeviceRequest';
+export * from '../models/CreateExchangeRequest';
 export * from '../models/CreateNotificationRequest';
 export * from '../models/CreateNotificationSubscriptionRequest';
 export * from '../models/CreateNotificationTriggerRequest';
+export * from '../models/CreatePaymasterRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
@@ -81,6 +84,7 @@ export * from '../models/EntityTypeINVENTORY';
 export * from '../models/EntityTypeNOTIFICATION';
 export * from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
 export * from '../models/EntityTypeNOTIFICATIONTRIGGER';
+export * from '../models/EntityTypePAYMASTER';
 export * from '../models/EntityTypePLAYER';
 export * from '../models/EntityTypePOLICY';
 export * from '../models/EntityTypePOLICYRULE';
@@ -94,6 +98,7 @@ export * from '../models/EntityTypeWEB3ACTION';
 export * from '../models/EntityTypeWEB3CONNECTION';
 export * from '../models/ErrorTypeINVALIDREQUESTERROR';
 export * from '../models/EstimateTransactionIntentGasResult';
+export * from '../models/Fee';
 export * from '../models/FieldErrorsValue';
 export * from '../models/FirebaseOAuthConfig';
 export * from '../models/FixedRateTokenPolicyStrategy';
@@ -155,7 +160,10 @@ export * from '../models/OAuthProviderSUPABASE';
 export * from '../models/OAuthRequest';
 export * from '../models/OAuthResponse';
 export * from '../models/OIDCAuthConfig';
+export * from '../models/PagingQueries';
 export * from '../models/PayForUserPolicyStrategy';
+export * from '../models/PaymasterDeleteResponse';
+export * from '../models/PaymasterResponse';
 export * from '../models/PickContractResponseId';
 export * from '../models/PickDeveloperAccountId';
 export * from '../models/PickPlayerResponseId';
@@ -207,6 +215,7 @@ export * from '../models/ProjectResponse';
 export * from '../models/ProjectStatsRequest';
 export * from '../models/ProjectStatsResponse';
 export * from '../models/ProjectWebhookRequest';
+export * from '../models/QuoteExchangeResult';
 export * from '../models/RefreshTokenRequest';
 export * from '../models/ResponseResponse';
 export * from '../models/ResponseTypeLIST';
@@ -238,7 +247,9 @@ export * from '../models/SupabaseAuthConfig';
 export * from '../models/ThirdPartyOAuthProvider';
 export * from '../models/ThirdPartyOAuthRequest';
 export * from '../models/TimeIntervalType';
+export * from '../models/Token';
 export * from '../models/TokenType';
+export * from '../models/TradeType';
 export * from '../models/TransactionIntent';
 export * from '../models/TransactionIntentListQueries';
 export * from '../models/TransactionIntentListResponse';
@@ -288,6 +299,7 @@ import { AccountNotificationTriggerResponseAccount        } from '../models/Acco
 import { AccountPolicyRuleResponse     } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse              } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkListResponse       } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
@@ -325,9 +337,11 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateExchangeRequest            } from '../models/CreateExchangeRequest';
 import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
 import { CreateNotificationSubscriptionRequest    } from '../models/CreateNotificationSubscriptionRequest';
 import { CreateNotificationTriggerRequest         } from '../models/CreateNotificationTriggerRequest';
+import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
@@ -359,6 +373,7 @@ import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
 import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
 import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
+import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -372,6 +387,7 @@ import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
 import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
+import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig    } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy     } from '../models/FixedRateTokenPolicyStrategy';
@@ -433,7 +449,10 @@ import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig      } from '../models/OIDCAuthConfig';
+import { PagingQueries    } from '../models/PagingQueries';
 import { PayForUserPolicyStrategy   } from '../models/PayForUserPolicyStrategy';
+import { PaymasterDeleteResponse    } from '../models/PaymasterDeleteResponse';
+import { PaymasterResponse       } from '../models/PaymasterResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
@@ -455,7 +474,7 @@ import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner              } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
-import { Policy           } from '../models/Policy';
+import { Policy            } from '../models/Policy';
 import { PolicyBalanceWithdrawResponse } from '../models/PolicyBalanceWithdrawResponse';
 import { PolicyDeleteResponse    } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries         } from '../models/PolicyListQueries';
@@ -464,7 +483,7 @@ import { PolicyRateLimit } from '../models/PolicyRateLimit';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
-import { PolicyResponse           } from '../models/PolicyResponse';
+import { PolicyResponse            } from '../models/PolicyResponse';
 import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyResponsePolicyRulesInner           } from '../models/PolicyResponsePolicyRulesInner';
 import { PolicyRuleDeleteResponse    } from '../models/PolicyRuleDeleteResponse';
@@ -485,6 +504,7 @@ import { ProjectResponse        } from '../models/ProjectResponse';
 import { ProjectStatsRequest, ProjectStatsRequestTimeFrameEnum   } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
+import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
@@ -516,7 +536,9 @@ import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthRequest    } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
+import { Token } from '../models/Token';
 import { TokenType } from '../models/TokenType';
+import { TradeType } from '../models/TradeType';
 import { TransactionIntent              } from '../models/TransactionIntent';
 import { TransactionIntentListQueries          } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse       } from '../models/TransactionIntentListResponse';
@@ -524,7 +546,7 @@ import { TransactionIntentResponse              } from '../models/TransactionInt
 import { TransactionIntentResponseAccount               } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
-import { TransactionIntentResponsePolicy           } from '../models/TransactionIntentResponsePolicy';
+import { TransactionIntentResponsePolicy            } from '../models/TransactionIntentResponsePolicy';
 import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TypedDataField } from '../models/TypedDataField';
@@ -588,6 +610,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeNOTIFICATION",
     "EntityTypeNOTIFICATIONSUBSCRIPTION",
     "EntityTypeNOTIFICATIONTRIGGER",
+    "EntityTypePAYMASTER",
     "EntityTypePLAYER",
     "EntityTypePOLICY",
     "EntityTypePOLICYRULE",
@@ -640,6 +663,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ThirdPartyOAuthProvider",
     "TimeIntervalType",
     "TokenType",
+    "TradeType",
     "TransactionIntentResponseExpandable",
     "UserProjectRole",
     "UserProjectRoleADMIN",
@@ -660,6 +684,7 @@ let typeMap: {[index: string]: any} = {
     "AccountNotificationTriggerResponseAccount": AccountNotificationTriggerResponseAccount,
     "AccountPolicyRuleResponse": AccountPolicyRuleResponse,
     "AccountResponse": AccountResponse,
+    "Amount": Amount,
     "ApiAuthorizedNetworkListResponse": ApiAuthorizedNetworkListResponse,
     "ApiAuthorizedNetworkResponse": ApiAuthorizedNetworkResponse,
     "ApiKeyResponse": ApiKeyResponse,
@@ -694,9 +719,11 @@ let typeMap: {[index: string]: any} = {
     "CreateApiAuthorizedNetworkRequest": CreateApiAuthorizedNetworkRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreateDeviceRequest": CreateDeviceRequest,
+    "CreateExchangeRequest": CreateExchangeRequest,
     "CreateNotificationRequest": CreateNotificationRequest,
     "CreateNotificationSubscriptionRequest": CreateNotificationSubscriptionRequest,
     "CreateNotificationTriggerRequest": CreateNotificationTriggerRequest,
+    "CreatePaymasterRequest": CreatePaymasterRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
@@ -719,6 +746,7 @@ let typeMap: {[index: string]: any} = {
     "DomainData": DomainData,
     "EntityIdResponse": EntityIdResponse,
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
+    "Fee": Fee,
     "FieldErrorsValue": FieldErrorsValue,
     "FirebaseOAuthConfig": FirebaseOAuthConfig,
     "FixedRateTokenPolicyStrategy": FixedRateTokenPolicyStrategy,
@@ -765,7 +793,10 @@ let typeMap: {[index: string]: any} = {
     "OAuthRequest": OAuthRequest,
     "OAuthResponse": OAuthResponse,
     "OIDCAuthConfig": OIDCAuthConfig,
+    "PagingQueries": PagingQueries,
     "PayForUserPolicyStrategy": PayForUserPolicyStrategy,
+    "PaymasterDeleteResponse": PaymasterDeleteResponse,
+    "PaymasterResponse": PaymasterResponse,
     "PickContractResponseId": PickContractResponseId,
     "PickDeveloperAccountId": PickDeveloperAccountId,
     "PickPlayerResponseId": PickPlayerResponseId,
@@ -806,6 +837,7 @@ let typeMap: {[index: string]: any} = {
     "ProjectStatsRequest": ProjectStatsRequest,
     "ProjectStatsResponse": ProjectStatsResponse,
     "ProjectWebhookRequest": ProjectWebhookRequest,
+    "QuoteExchangeResult": QuoteExchangeResult,
     "RefreshTokenRequest": RefreshTokenRequest,
     "ResponseResponse": ResponseResponse,
     "RevokeSessionRequest": RevokeSessionRequest,
@@ -827,6 +859,7 @@ let typeMap: {[index: string]: any} = {
     "SubscriptionResponsePlan": SubscriptionResponsePlan,
     "SupabaseAuthConfig": SupabaseAuthConfig,
     "ThirdPartyOAuthRequest": ThirdPartyOAuthRequest,
+    "Token": Token,
     "TransactionIntent": TransactionIntent,
     "TransactionIntentListQueries": TransactionIntentListQueries,
     "TransactionIntentListResponse": TransactionIntentListResponse,

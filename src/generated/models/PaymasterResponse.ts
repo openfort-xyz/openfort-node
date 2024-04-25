@@ -10,67 +10,64 @@
  * Do not edit the class manually.
  */
 
-import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
+import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
 import { HttpFile } from '../http/http';
 
-export class UpdatePolicyRequest {
-    /**
-    * Specifies the name of the policy.
-    */
-    'name'?: string;
-    /**
-    * The chain ID. Must be a [supported chain](/chains).
-    */
-    'chainId'?: number;
-    'strategy'?: PolicyStrategyRequest;
-    /**
-    * The ID of the paymaster.
-    */
-    'paymaster'?: string;
-    /**
-    * Specifies whether to delete the policy.
-    */
-    'deleted'?: boolean;
+export class PaymasterResponse {
+    'id': string;
+    'object': EntityTypePAYMASTER;
+    'createdAt': number;
+    'address': string;
+    'url': string;
+    'context'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePAYMASTER",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "strategy",
-            "baseName": "strategy",
-            "type": "PolicyStrategyRequest",
-            "format": ""
-        },
-        {
-            "name": "paymaster",
-            "baseName": "paymaster",
+            "name": "address",
+            "baseName": "address",
             "type": "string",
             "format": ""
         },
         {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "context",
+            "baseName": "context",
+            "type": "any",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdatePolicyRequest.attributeTypeMap;
+        return PaymasterResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

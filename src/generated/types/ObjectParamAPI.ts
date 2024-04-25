@@ -13,6 +13,7 @@ import { AccountNotificationTriggerResponseAccount } from '../models/AccountNoti
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkListResponse } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
@@ -50,9 +51,11 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
 import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
 import { CreateNotificationSubscriptionRequest } from '../models/CreateNotificationSubscriptionRequest';
 import { CreateNotificationTriggerRequest } from '../models/CreateNotificationTriggerRequest';
+import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
@@ -84,6 +87,7 @@ import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
 import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
 import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
+import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
@@ -97,6 +101,7 @@ import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
 import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
+import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
@@ -158,7 +163,10 @@ import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
+import { PagingQueries } from '../models/PagingQueries';
 import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
+import { PaymasterDeleteResponse } from '../models/PaymasterDeleteResponse';
+import { PaymasterResponse } from '../models/PaymasterResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
 import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
@@ -210,6 +218,7 @@ import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
+import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
@@ -241,7 +250,9 @@ import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
+import { Token } from '../models/Token';
 import { TokenType } from '../models/TokenType';
+import { TradeType } from '../models/TradeType';
 import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
@@ -250,6 +261,7 @@ import { TransactionIntentResponseAccount } from '../models/TransactionIntentRes
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
+import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TypedDataField } from '../models/TypedDataField';
 import { UnlinkRequest } from '../models/UnlinkRequest';
@@ -507,7 +519,7 @@ export class ObjectAccountsApi {
     }
 
     /**
-     * Signs the typed data value with types data structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
+     * **Custodial Accounts only** - Signs the typed data value with types data structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param param the request object
      */
@@ -1220,6 +1232,54 @@ export class ObjectContractsApi {
 
 }
 
+import { ObservableExchangeApi } from "./ObservableAPI";
+import { ExchangeApiRequestFactory, ExchangeApiResponseProcessor} from "../apis/ExchangeApi";
+
+export interface ExchangeApiCreateSwapRequest {
+    /**
+     * 
+     * @type CreateExchangeRequest
+     * @memberof ExchangeApicreateSwap
+     */
+    createExchangeRequest: CreateExchangeRequest
+}
+
+export interface ExchangeApiQuoteSwapRequest {
+    /**
+     * 
+     * @type CreateExchangeRequest
+     * @memberof ExchangeApiquoteSwap
+     */
+    createExchangeRequest: CreateExchangeRequest
+}
+
+export class ObjectExchangeApi {
+    private api: ObservableExchangeApi
+
+    public constructor(configuration: Configuration, requestFactory?: ExchangeApiRequestFactory, responseProcessor?: ExchangeApiResponseProcessor) {
+        this.api = new ObservableExchangeApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Creates token swap.
+     * Create token swap.
+     * @param param the request object
+     */
+    public createSwap(param: ExchangeApiCreateSwapRequest, options?: Configuration): Promise<TransactionIntentResponse> {
+        return this.api.createSwap(param.createExchangeRequest,  options).toPromise();
+    }
+
+    /**
+     * Quote token swap.
+     * Quote token swap.
+     * @param param the request object
+     */
+    public quoteSwap(param: ExchangeApiQuoteSwapRequest, options?: Configuration): Promise<QuoteExchangeResult> {
+        return this.api.quoteSwap(param.createExchangeRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservableInventoriesApi } from "./ObservableAPI";
 import { InventoriesApiRequestFactory, InventoriesApiResponseProcessor} from "../apis/InventoriesApi";
 
@@ -1774,6 +1834,126 @@ export class ObjectNotificationsApi {
      */
     public getNotifications(param: NotificationsApiGetNotificationsRequest = {}, options?: Configuration): Promise<NotificationListResponse> {
         return this.api.getNotifications(param.limit, param.skip, param.order, param.expand, param.deleted, param.name,  options).toPromise();
+    }
+
+}
+
+import { ObservablePaymasterApi } from "./ObservableAPI";
+import { PaymasterApiRequestFactory, PaymasterApiResponseProcessor} from "../apis/PaymasterApi";
+
+export interface PaymasterApiCreatePaymasterRequest {
+    /**
+     * 
+     * @type CreatePaymasterRequest
+     * @memberof PaymasterApicreatePaymaster
+     */
+    createPaymasterRequest: CreatePaymasterRequest
+}
+
+export interface PaymasterApiDeletePaymasterRequest {
+    /**
+     * 
+     * @type string
+     * @memberof PaymasterApideletePaymaster
+     */
+    id: string
+}
+
+export interface PaymasterApiGetPaymasterRequest {
+    /**
+     * 
+     * @type string
+     * @memberof PaymasterApigetPaymaster
+     */
+    id: string
+}
+
+export interface PaymasterApiListPaymastersRequest {
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof PaymasterApilistPaymasters
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof PaymasterApilistPaymasters
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof PaymasterApilistPaymasters
+     */
+    order?: SortOrder
+}
+
+export interface PaymasterApiUpdatePaymasterRequest {
+    /**
+     * 
+     * @type string
+     * @memberof PaymasterApiupdatePaymaster
+     */
+    id: string
+    /**
+     * 
+     * @type CreatePaymasterRequest
+     * @memberof PaymasterApiupdatePaymaster
+     */
+    createPaymasterRequest: CreatePaymasterRequest
+}
+
+export class ObjectPaymasterApi {
+    private api: ObservablePaymasterApi
+
+    public constructor(configuration: Configuration, requestFactory?: PaymasterApiRequestFactory, responseProcessor?: PaymasterApiResponseProcessor) {
+        this.api = new ObservablePaymasterApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create a new paymaster.  This object represents the paymaster that will be used to pay the gas fees of the transactions.
+     * Create a new paymaster.
+     * @param param the request object
+     */
+    public createPaymaster(param: PaymasterApiCreatePaymasterRequest, options?: Configuration): Promise<PaymasterResponse> {
+        return this.api.createPaymaster(param.createPaymasterRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete the paymaster with the given id.  This object represents the paymaster that will be used to pay the gas fees for the transactions.
+     * Delete paymaster by id.
+     * @param param the request object
+     */
+    public deletePaymaster(param: PaymasterApiDeletePaymasterRequest, options?: Configuration): Promise<PaymasterDeleteResponse> {
+        return this.api.deletePaymaster(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns the paymaster with the given id.  This object represents the paymaster that will be used to pay the gas fees for the transactions.
+     * Get paymaster by id.
+     * @param param the request object
+     */
+    public getPaymaster(param: PaymasterApiGetPaymasterRequest, options?: Configuration): Promise<PaymasterResponse> {
+        return this.api.getPaymaster(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of paymasters.  This object represents the paymasters that will be used to pay the gas fees for the transactions.  By default, a maximum of 10 paymasters are shown per page.
+     * List paymasters.
+     * @param param the request object
+     */
+    public listPaymasters(param: PaymasterApiListPaymastersRequest = {}, options?: Configuration): Promise<Array<PaymasterResponse>> {
+        return this.api.listPaymasters(param.limit, param.skip, param.order,  options).toPromise();
+    }
+
+    /**
+     * Update a paymaster.  This object represents the paymaster that will be used to pay the gas fees of the transactions.
+     * Update a paymaster.
+     * @param param the request object
+     */
+    public updatePaymaster(param: PaymasterApiUpdatePaymasterRequest, options?: Configuration): Promise<PaymasterResponse> {
+        return this.api.updatePaymaster(param.id, param.createPaymasterRequest,  options).toPromise();
     }
 
 }
