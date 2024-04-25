@@ -10,54 +10,46 @@
  * Do not edit the class manually.
  */
 
-import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
 import { HttpFile } from '../http/http';
 
-export class CreatePolicyRequest {
+export class CreatePaymasterRequest {
     /**
-    * Specifies the name of the policy.
+    * Specifies the address of the paymaster
     */
-    'name': string;
+    'address': string;
     /**
-    * The chain ID. Must be a [supported chain](/chains).
+    * Specifies the paymaster URL
     */
-    'chainId': number;
-    'strategy': PolicyStrategyRequest;
+    'url': string;
     /**
-    * The ID of the paymaster.
+    * Specifies the context, that is, the arbitrary data that the specific paymaster may require
     */
-    'paymaster'?: string;
+    'context'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "address",
+            "baseName": "address",
             "type": "string",
             "format": ""
         },
         {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "strategy",
-            "baseName": "strategy",
-            "type": "PolicyStrategyRequest",
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "paymaster",
-            "baseName": "paymaster",
-            "type": "string",
+            "name": "context",
+            "baseName": "context",
+            "type": "any",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreatePolicyRequest.attributeTypeMap;
+        return CreatePaymasterRequest.attributeTypeMap;
     }
 
     public constructor() {

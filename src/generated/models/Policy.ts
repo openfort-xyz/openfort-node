@@ -26,6 +26,7 @@ export class Policy {
     * The chain ID.
     */
     'chainId': number;
+    'paymaster'?: EntityIdResponse;
     'strategy': PolicyStrategy;
     'transactionIntents': Array<EntityIdResponse>;
     'policyRules': Array<EntityIdResponse>;
@@ -74,6 +75,12 @@ export class Policy {
             "baseName": "chainId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "paymaster",
+            "baseName": "paymaster",
+            "type": "EntityIdResponse",
+            "format": ""
         },
         {
             "name": "strategy",

@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { PolicyResponsePolicyRulesInner } from '../models/PolicyResponsePolicyRulesInner';
@@ -27,6 +28,7 @@ export class PolicyResponse {
     * The chain ID.
     */
     'chainId': number;
+    'paymaster'?: EntityIdResponse;
     'strategy': PolicyStrategy;
     'transactionIntents': Array<PlayerResponseTransactionIntentsInner>;
     'policyRules': Array<PolicyResponsePolicyRulesInner>;
@@ -75,6 +77,12 @@ export class PolicyResponse {
             "baseName": "chainId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "paymaster",
+            "baseName": "paymaster",
+            "type": "EntityIdResponse",
+            "format": ""
         },
         {
             "name": "strategy",

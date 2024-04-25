@@ -10,23 +10,17 @@
  * Do not edit the class manually.
  */
 
-import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
 import { HttpFile } from '../http/http';
 
-export class CreatePolicyRequest {
-    /**
-    * Specifies the name of the policy.
-    */
-    'name': string;
-    /**
-    * The chain ID. Must be a [supported chain](/chains).
-    */
+/**
+* Type representing a token
+*/
+export class Token {
+    'name'?: string;
+    'symbol'?: string;
+    'decimals': number;
+    'address': string;
     'chainId': number;
-    'strategy': PolicyStrategyRequest;
-    /**
-    * The ID of the paymaster.
-    */
-    'paymaster'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -38,26 +32,32 @@ export class CreatePolicyRequest {
             "format": ""
         },
         {
+            "name": "symbol",
+            "baseName": "symbol",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "decimals",
+            "baseName": "decimals",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "chainId",
             "baseName": "chainId",
             "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "strategy",
-            "baseName": "strategy",
-            "type": "PolicyStrategyRequest",
-            "format": ""
-        },
-        {
-            "name": "paymaster",
-            "baseName": "paymaster",
-            "type": "string",
-            "format": ""
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return CreatePolicyRequest.attributeTypeMap;
+        return Token.attributeTypeMap;
     }
 
     public constructor() {

@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type ApiKeyType = "pk" | "sk" | "pk_shield" | "sk_shield" ;
+export type TradeType = "EXACT_INPUT" | "EXACT_OUTPUT" ;

@@ -37,6 +37,10 @@ export class Interaction {
     * Data to append to the end of the calldata. Useful for [adding a \"domain\" tag](https://opensea.notion.site/opensea/Seaport-Order-Attributions-ec2d69bf455041a5baa490941aad307f)
     */
     'dataSuffix'?: string;
+    /**
+    * The encoded calldata of the contract.
+    */
+    'data'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -74,6 +78,12 @@ export class Interaction {
         {
             "name": "dataSuffix",
             "baseName": "dataSuffix",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
             "type": "string",
             "format": ""
         }    ];
