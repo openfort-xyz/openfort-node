@@ -16,6 +16,7 @@ import { Web3ConnectionsApiWrapper } from "./apis/web3ConnectionsApiWrapper";
 import { NotificationsApiWrapper } from "./apis/notificationsApiWrapper";
 import { NotificationTriggersApiWrapper } from "./apis/notificationTriggersApiWrapper";
 import { NotificationSubscriptionsApiWrapper } from "./apis/notificationSubscriptionsApiWrapper";
+import { ExchangeApiWrapper } from "./apis/exchangeApiWrapper";
 
 export default class Openfort {
     private readonly apiWrappers: { [name: string]: Observable } = {};
@@ -77,6 +78,10 @@ export default class Openfort {
 
     public get notificationTriggers(): NotificationTriggersApiWrapper {
         return this.getOrCreateWrapper(NotificationTriggersApiWrapper);
+    }
+
+    public get exchange(): ExchangeApiWrapper {
+        return this.getOrCreateWrapper(ExchangeApiWrapper);
     }
 
     public subscribe(observer: Observer): void {
