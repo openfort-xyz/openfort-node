@@ -29,6 +29,7 @@ import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
+import { AuthPlayerResponseWithRecoveryShare } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthProvider } from '../models/AuthProvider';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
@@ -36,9 +37,7 @@ import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { BalanceEventResponse } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
-import { BaseEntityListResponseEventResponse } from '../models/BaseEntityListResponseEventResponse';
 import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
-import { BaseEntityListResponseSubscriptionResponse } from '../models/BaseEntityListResponseSubscriptionResponse';
 import { BaseEntityListResponseTriggerResponse } from '../models/BaseEntityListResponseTriggerResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
@@ -114,6 +113,7 @@ import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTE
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { EventDeleteResponse } from '../models/EventDeleteResponse';
 import { EventListQueries } from '../models/EventListQueries';
+import { EventListResponse } from '../models/EventListResponse';
 import { EventResponse } from '../models/EventResponse';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
@@ -206,7 +206,6 @@ import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
 import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
-import { PreGenerateEmbeddedAccountsConfiguration } from '../models/PreGenerateEmbeddedAccountsConfiguration';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse } from '../models/ProjectListResponse';
@@ -240,6 +239,7 @@ import { Stat } from '../models/Stat';
 import { Status } from '../models/Status';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionDeleteResponse } from '../models/SubscriptionDeleteResponse';
+import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
@@ -435,7 +435,7 @@ export class PromiseAdminAuthenticationApi {
      * Create an authenticated player for a third party authentication provider.
      * @param createAuthPlayerRequest 
      */
-    public createAuthPlayer(createAuthPlayerRequest: CreateAuthPlayerRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
+    public createAuthPlayer(createAuthPlayerRequest: CreateAuthPlayerRequest, _options?: Configuration): Promise<AuthPlayerResponseWithRecoveryShare> {
         const result = this.api.createAuthPlayer(createAuthPlayerRequest, _options);
         return result.toPromise();
     }
@@ -861,7 +861,7 @@ export class PromiseEventsApi {
      * @param type Specifies the event type (BALANCE or TRANSACTION)
      * @param deleted Specifies if display deleted events
      */
-    public getEvents(limit?: number, skip?: number, order?: SortOrder, name?: string, type?: string, deleted?: boolean, _options?: Configuration): Promise<BaseEntityListResponseEventResponse> {
+    public getEvents(limit?: number, skip?: number, order?: SortOrder, name?: string, type?: string, deleted?: boolean, _options?: Configuration): Promise<EventListResponse> {
         const result = this.api.getEvents(limit, skip, order, name, type, deleted, _options);
         return result.toPromise();
     }
@@ -1576,7 +1576,7 @@ export class PromiseSubscriptionsApi {
      * Returns a list of subscriptions for the given project.  This object represents the subscriptions where the project owner has subscribed to.  Subscriptions are returned sorted by creation date, with the most recently created subscriptions appearing first.  By default, a maximum of 10 subscriptions are shown per page.
      * List subscriptions of project.
      */
-    public getSubscriptions(_options?: Configuration): Promise<BaseEntityListResponseSubscriptionResponse> {
+    public getSubscriptions(_options?: Configuration): Promise<SubscriptionListResponse> {
         const result = this.api.getSubscriptions(_options);
         return result.toPromise();
     }

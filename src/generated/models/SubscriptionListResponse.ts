@@ -14,7 +14,7 @@ import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { HttpFile } from '../http/http';
 
-export class BaseEntityListResponseSubscriptionResponse {
+export class SubscriptionListResponse {
     'object': ResponseTypeLIST;
     'url': string;
     'data': Array<SubscriptionResponse>;
@@ -63,7 +63,7 @@ export class BaseEntityListResponseSubscriptionResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseEntityListResponseSubscriptionResponse.attributeTypeMap;
+        return SubscriptionListResponse.attributeTypeMap;
     }
 
     public constructor() {

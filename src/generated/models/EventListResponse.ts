@@ -14,7 +14,7 @@ import { EventResponse } from '../models/EventResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { HttpFile } from '../http/http';
 
-export class BaseEntityListResponseEventResponse {
+export class EventListResponse {
     'object': ResponseTypeLIST;
     'url': string;
     'data': Array<EventResponse>;
@@ -63,7 +63,7 @@ export class BaseEntityListResponseEventResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BaseEntityListResponseEventResponse.attributeTypeMap;
+        return EventListResponse.attributeTypeMap;
     }
 
     public constructor() {

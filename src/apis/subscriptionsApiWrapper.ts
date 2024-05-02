@@ -1,9 +1,9 @@
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
 import {
-    BaseEntityListResponseSubscriptionResponse,
     CreateSubscriptionRequest,
     SubscriptionDeleteResponse,
+    SubscriptionListResponse,
     SubscriptionResponse,
     SubscriptionsApi,
 } from "../generated";
@@ -27,7 +27,7 @@ export class SubscriptionsApiWrapper extends BaseApiWrapper<SubscriptionsApi> {
      * Returns a list of subscriptions of a notification.  The subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
      * @param req Criteria to get notification subscriptions by.
      */
-    public async list(): Promise<BaseEntityListResponseSubscriptionResponse> {
+    public async list(): Promise<SubscriptionListResponse> {
         return await this.api.getSubscriptions();
     }
 
