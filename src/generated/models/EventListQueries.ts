@@ -28,10 +28,6 @@ export class EventListQueries {
     */
     'name'?: string;
     /**
-    * Specifies the event type (BALANCE or TRANSACTION)
-    */
-    'type'?: string;
-    /**
     * Specifies if display deleted events
     */
     'deleted'?: boolean;
@@ -60,12 +56,6 @@ export class EventListQueries {
         {
             "name": "name",
             "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
             "type": "string",
             "format": ""
         },

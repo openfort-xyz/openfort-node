@@ -397,7 +397,7 @@ import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { EventDeleteResponse    } from '../models/EventDeleteResponse';
-import { EventListQueries       } from '../models/EventListQueries';
+import { EventListQueries      } from '../models/EventListQueries';
 import { EventListResponse       } from '../models/EventListResponse';
 import { EventResponse            } from '../models/EventResponse';
 import { Fee } from '../models/Fee';

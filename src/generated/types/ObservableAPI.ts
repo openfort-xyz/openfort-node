@@ -1502,11 +1502,10 @@ export class ObservableEventsApi {
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param name Specifies the name of the event
-     * @param type Specifies the event type (BALANCE or TRANSACTION)
      * @param deleted Specifies if display deleted events
      */
-    public getEvents(limit?: number, skip?: number, order?: SortOrder, name?: string, type?: string, deleted?: boolean, _options?: Configuration): Observable<EventListResponse> {
-        const requestContextPromise = this.requestFactory.getEvents(limit, skip, order, name, type, deleted, _options);
+    public getEvents(limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, _options?: Configuration): Observable<EventListResponse> {
+        const requestContextPromise = this.requestFactory.getEvents(limit, skip, order, name, deleted, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
