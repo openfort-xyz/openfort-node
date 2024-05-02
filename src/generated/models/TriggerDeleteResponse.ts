@@ -10,44 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyType } from '../models/ApiKeyType';
+import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
 import { HttpFile } from '../http/http';
 
-export class UpdateProjectApiKeyRequest {
-    'type': ApiKeyType;
-    /**
-    * The API key to update.
-    */
-    'uuid': string;
-    /**
-    * Whether key to use to sign webhooks.
-    */
-    'use_for_webhooks'?: boolean;
+export class TriggerDeleteResponse {
+    'id': string;
+    'object': EntityTypeTRIGGER;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "ApiKeyType",
-            "format": ""
-        },
-        {
-            "name": "uuid",
-            "baseName": "uuid",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "use_for_webhooks",
-            "baseName": "use_for_webhooks",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeTRIGGER",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
             "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProjectApiKeyRequest.attributeTypeMap;
+        return TriggerDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {

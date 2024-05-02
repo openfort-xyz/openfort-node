@@ -1,12 +1,17 @@
+export * from '../models/APITopic';
+export * from '../models/APITopicBALANCECONTRACT';
+export * from '../models/APITopicBALANCEDEVACCOUNT';
+export * from '../models/APITopicBALANCEPROJECT';
+export * from '../models/APITopicTRANSACTIONSUCCESSFUL';
+export * from '../models/APITriggerType';
 export * from '../models/Abi';
 export * from '../models/AbiType';
 export * from '../models/AccelbyteOAuthConfig';
 export * from '../models/Account';
+export * from '../models/AccountEventResponse';
 export * from '../models/AccountInventoryListQueries';
 export * from '../models/AccountListQueries';
 export * from '../models/AccountListResponse';
-export * from '../models/AccountNotificationTriggerResponse';
-export * from '../models/AccountNotificationTriggerResponseAccount';
 export * from '../models/AccountPolicyRuleResponse';
 export * from '../models/AccountResponse';
 export * from '../models/AccountResponseExpandable';
@@ -25,9 +30,13 @@ export * from '../models/AuthProvider';
 export * from '../models/AuthResponse';
 export * from '../models/AuthSessionResponse';
 export * from '../models/AuthenticateOAuthRequest';
-export * from '../models/BalanceNotificationTriggerResponse';
+export * from '../models/BalanceEventResponse';
 export * from '../models/BalanceResponse';
 export * from '../models/BaseEntityListResponseDeviceResponse';
+export * from '../models/BaseEntityListResponseEventResponse';
+export * from '../models/BaseEntityListResponseLogResponse';
+export * from '../models/BaseEntityListResponseSubscriptionResponse';
+export * from '../models/BaseEntityListResponseTriggerResponse';
 export * from '../models/CancelTransferOwnershipRequest';
 export * from '../models/ChargeCustomTokenPolicyStrategy';
 export * from '../models/CheckoutRequest';
@@ -35,30 +44,31 @@ export * from '../models/CheckoutResponse';
 export * from '../models/CheckoutSubscriptionRequest';
 export * from '../models/CompleteRecoveryRequest';
 export * from '../models/ContractDeleteResponse';
+export * from '../models/ContractEventResponse';
 export * from '../models/ContractListQueries';
 export * from '../models/ContractListResponse';
-export * from '../models/ContractNotificationTriggerResponse';
-export * from '../models/ContractNotificationTriggerResponseContract';
 export * from '../models/ContractPolicyRuleResponse';
+export * from '../models/ContractPolicyRuleResponseContract';
 export * from '../models/ContractReadQueries';
 export * from '../models/ContractReadResponse';
 export * from '../models/ContractResponse';
 export * from '../models/CountPerIntervalLimitPolicyRuleResponse';
 export * from '../models/CreateAccountRequest';
 export * from '../models/CreateApiAuthorizedNetworkRequest';
+export * from '../models/CreateAuthPlayerRequest';
 export * from '../models/CreateContractRequest';
 export * from '../models/CreateDeviceRequest';
+export * from '../models/CreateEventRequest';
 export * from '../models/CreateExchangeRequest';
-export * from '../models/CreateNotificationRequest';
-export * from '../models/CreateNotificationSubscriptionRequest';
-export * from '../models/CreateNotificationTriggerRequest';
 export * from '../models/CreatePaymasterRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
 export * from '../models/CreateProjectRequest';
 export * from '../models/CreateSessionRequest';
+export * from '../models/CreateSubscriptionRequest';
 export * from '../models/CreateTransactionIntentRequest';
+export * from '../models/CreateTriggerRequest';
 export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
 export * from '../models/CustomAuthConfig';
@@ -80,10 +90,9 @@ export * from '../models/EntityTypeACCOUNT';
 export * from '../models/EntityTypeCONTRACT';
 export * from '../models/EntityTypeDEVELOPERACCOUNT';
 export * from '../models/EntityTypeDEVICE';
+export * from '../models/EntityTypeEVENT';
 export * from '../models/EntityTypeINVENTORY';
-export * from '../models/EntityTypeNOTIFICATION';
-export * from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
-export * from '../models/EntityTypeNOTIFICATIONTRIGGER';
+export * from '../models/EntityTypeLOG';
 export * from '../models/EntityTypePAYMASTER';
 export * from '../models/EntityTypePLAYER';
 export * from '../models/EntityTypePOLICY';
@@ -92,12 +101,17 @@ export * from '../models/EntityTypePROJECT';
 export * from '../models/EntityTypeREADCONTRACT';
 export * from '../models/EntityTypeSESSION';
 export * from '../models/EntityTypeSIGNATURE';
+export * from '../models/EntityTypeSUBSCRIPTION';
 export * from '../models/EntityTypeTRANSACTIONINTENT';
+export * from '../models/EntityTypeTRIGGER';
 export * from '../models/EntityTypeUSER';
 export * from '../models/EntityTypeWEB3ACTION';
 export * from '../models/EntityTypeWEB3CONNECTION';
 export * from '../models/ErrorTypeINVALIDREQUESTERROR';
 export * from '../models/EstimateTransactionIntentGasResult';
+export * from '../models/EventDeleteResponse';
+export * from '../models/EventListQueries';
+export * from '../models/EventResponse';
 export * from '../models/Fee';
 export * from '../models/FieldErrorsValue';
 export * from '../models/FirebaseOAuthConfig';
@@ -116,7 +130,9 @@ export * from '../models/InventoryResponse';
 export * from '../models/JwtKey';
 export * from '../models/JwtKeyResponse';
 export * from '../models/LinkedAccountResponse';
+export * from '../models/ListSubscriptionLogsRequest';
 export * from '../models/Log';
+export * from '../models/LogResponse';
 export * from '../models/LoginRequest';
 export * from '../models/LogoutRequest';
 export * from '../models/LootLockerOAuthConfig';
@@ -125,25 +141,6 @@ export * from '../models/MonthRange';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
-export * from '../models/NotificationDeleteResponse';
-export * from '../models/NotificationListQueries';
-export * from '../models/NotificationListResponse';
-export * from '../models/NotificationResponse';
-export * from '../models/NotificationResponseExpandable';
-export * from '../models/NotificationResponseSubscriptionsInner';
-export * from '../models/NotificationResponseTriggersInner';
-export * from '../models/NotificationSubscription';
-export * from '../models/NotificationSubscriptionDeleteResponse';
-export * from '../models/NotificationSubscriptionListQueries';
-export * from '../models/NotificationSubscriptionListResponse';
-export * from '../models/NotificationTriggerDeleteResponse';
-export * from '../models/NotificationTriggerListQueries';
-export * from '../models/NotificationTriggerListResponse';
-export * from '../models/NotificationTriggerResponse';
-export * from '../models/NotificationTriggerType';
-export * from '../models/NotificationTriggerTypeCONTRACTTRIGGER';
-export * from '../models/NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER';
-export * from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 export * from '../models/OAuthConfig';
 export * from '../models/OAuthConfigListResponse';
 export * from '../models/OAuthInitRequest';
@@ -165,7 +162,6 @@ export * from '../models/PayForUserPolicyStrategy';
 export * from '../models/PaymasterDeleteResponse';
 export * from '../models/PaymasterResponse';
 export * from '../models/PickContractResponseId';
-export * from '../models/PickDeveloperAccountId';
 export * from '../models/PickPlayerResponseId';
 export * from '../models/Plan';
 export * from '../models/PlansResponse';
@@ -207,6 +203,7 @@ export * from '../models/PolicyRuleTypeCONTRACT';
 export * from '../models/PolicyRuleTypeRATELIMIT';
 export * from '../models/PolicyStrategy';
 export * from '../models/PolicyStrategyRequest';
+export * from '../models/PreGenerateEmbeddedAccountsConfiguration';
 export * from '../models/PrismaInputJsonValue';
 export * from '../models/PrivateKeyPolicy';
 export * from '../models/ProjectListResponse';
@@ -214,7 +211,6 @@ export * from '../models/ProjectLogs';
 export * from '../models/ProjectResponse';
 export * from '../models/ProjectStatsRequest';
 export * from '../models/ProjectStatsResponse';
-export * from '../models/ProjectWebhookRequest';
 export * from '../models/QuoteExchangeResult';
 export * from '../models/RefreshTokenRequest';
 export * from '../models/ResponseResponse';
@@ -227,7 +223,6 @@ export * from '../models/SessionListQueries';
 export * from '../models/SessionListResponse';
 export * from '../models/SessionResponse';
 export * from '../models/SessionResponseExpandable';
-export * from '../models/SettingsWebhookUpdateRequest';
 export * from '../models/SignPayloadRequest';
 export * from '../models/SignPayloadResponse';
 export * from '../models/SignatureRequest';
@@ -239,10 +234,11 @@ export * from '../models/SponsorSchemaFIXEDRATE';
 export * from '../models/SponsorSchemaPAYFORUSER';
 export * from '../models/StartRecoveryRequest';
 export * from '../models/Stat';
+export * from '../models/Status';
 export * from '../models/SubmitWeb3ActionRequest';
+export * from '../models/SubscriptionDeleteResponse';
 export * from '../models/SubscriptionResponse';
 export * from '../models/SubscriptionResponsePlan';
-export * from '../models/SubscriptionType';
 export * from '../models/SupabaseAuthConfig';
 export * from '../models/ThirdPartyOAuthProvider';
 export * from '../models/ThirdPartyOAuthRequest';
@@ -250,6 +246,7 @@ export * from '../models/TimeIntervalType';
 export * from '../models/Token';
 export * from '../models/TokenType';
 export * from '../models/TradeType';
+export * from '../models/TransactionConfirmedEventResponse';
 export * from '../models/TransactionIntent';
 export * from '../models/TransactionIntentListQueries';
 export * from '../models/TransactionIntentListResponse';
@@ -260,6 +257,8 @@ export * from '../models/TransactionIntentResponsePlayer';
 export * from '../models/TransactionIntentResponsePolicy';
 export * from '../models/TransactionStat';
 export * from '../models/TransferOwnershipRequest';
+export * from '../models/TriggerDeleteResponse';
+export * from '../models/TriggerResponse';
 export * from '../models/TypedDataField';
 export * from '../models/UnlinkRequest';
 export * from '../models/UpdateContractRequest';
@@ -287,15 +286,20 @@ export * from '../models/Web3ConnectionResponsePlayer';
 export * from '../models/WebhookResponse';
 export * from '../models/WithdrawalPolicyRequest';
 
+import { APITopic } from '../models/APITopic';
+import { APITopicBALANCECONTRACT } from '../models/APITopicBALANCECONTRACT';
+import { APITopicBALANCEDEVACCOUNT } from '../models/APITopicBALANCEDEVACCOUNT';
+import { APITopicBALANCEPROJECT } from '../models/APITopicBALANCEPROJECT';
+import { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL';
+import { APITriggerType } from '../models/APITriggerType';
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig      } from '../models/AccelbyteOAuthConfig';
 import { Account              } from '../models/Account';
+import { AccountEventResponse        } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries     } from '../models/AccountInventoryListQueries';
 import { AccountListQueries      } from '../models/AccountListQueries';
 import { AccountListResponse       } from '../models/AccountListResponse';
-import { AccountNotificationTriggerResponse        } from '../models/AccountNotificationTriggerResponse';
-import { AccountNotificationTriggerResponseAccount        } from '../models/AccountNotificationTriggerResponseAccount';
 import { AccountPolicyRuleResponse     } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse              } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
@@ -313,10 +317,14 @@ import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePl
 import { AuthProvider } from '../models/AuthProvider';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
-import { AuthenticateOAuthRequest    } from '../models/AuthenticateOAuthRequest';
-import { BalanceNotificationTriggerResponse      } from '../models/BalanceNotificationTriggerResponse';
+import { AuthenticateOAuthRequest     } from '../models/AuthenticateOAuthRequest';
+import { BalanceEventResponse      } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse       } from '../models/BaseEntityListResponseDeviceResponse';
+import { BaseEntityListResponseEventResponse       } from '../models/BaseEntityListResponseEventResponse';
+import { BaseEntityListResponseLogResponse       } from '../models/BaseEntityListResponseLogResponse';
+import { BaseEntityListResponseSubscriptionResponse       } from '../models/BaseEntityListResponseSubscriptionResponse';
+import { BaseEntityListResponseTriggerResponse       } from '../models/BaseEntityListResponseTriggerResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest     } from '../models/CheckoutRequest';
@@ -324,30 +332,31 @@ import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse    } from '../models/ContractDeleteResponse';
+import { ContractEventResponse         } from '../models/ContractEventResponse';
 import { ContractListQueries        } from '../models/ContractListQueries';
 import { ContractListResponse       } from '../models/ContractListResponse';
-import { ContractNotificationTriggerResponse         } from '../models/ContractNotificationTriggerResponse';
-import { ContractNotificationTriggerResponseContract          } from '../models/ContractNotificationTriggerResponseContract';
 import { ContractPolicyRuleResponse       } from '../models/ContractPolicyRuleResponse';
+import { ContractPolicyRuleResponseContract          } from '../models/ContractPolicyRuleResponseContract';
 import { ContractReadQueries } from '../models/ContractReadQueries';
 import { ContractReadResponse      } from '../models/ContractReadResponse';
 import { ContractResponse          } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse         } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
+import { CreateAuthPlayerRequest     } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateEventRequest          } from '../models/CreateEventRequest';
 import { CreateExchangeRequest            } from '../models/CreateExchangeRequest';
-import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
-import { CreateNotificationSubscriptionRequest    } from '../models/CreateNotificationSubscriptionRequest';
-import { CreateNotificationTriggerRequest         } from '../models/CreateNotificationTriggerRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest   } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateSubscriptionRequest   } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { CreateTriggerRequest    } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { CustomAuthConfig     } from '../models/CustomAuthConfig';
@@ -369,10 +378,9 @@ import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
-import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
-import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
-import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
+import { EntityTypeLOG } from '../models/EntityTypeLOG';
 import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
@@ -381,12 +389,17 @@ import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
+import { EntityTypeSUBSCRIPTION } from '../models/EntityTypeSUBSCRIPTION';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
+import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
 import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
+import { EventDeleteResponse    } from '../models/EventDeleteResponse';
+import { EventListQueries       } from '../models/EventListQueries';
+import { EventResponse            } from '../models/EventResponse';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig    } from '../models/FirebaseOAuthConfig';
@@ -405,7 +418,9 @@ import { InventoryResponse    } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LinkedAccountResponse        } from '../models/LinkedAccountResponse';
+import { ListSubscriptionLogsRequest          } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
+import { LogResponse         } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig   } from '../models/LootLockerOAuthConfig';
@@ -414,25 +429,6 @@ import { MonthRange } from '../models/MonthRange';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { NotificationDeleteResponse    } from '../models/NotificationDeleteResponse';
-import { NotificationListQueries       } from '../models/NotificationListQueries';
-import { NotificationListResponse       } from '../models/NotificationListResponse';
-import { NotificationResponse         } from '../models/NotificationResponse';
-import { NotificationResponseExpandable } from '../models/NotificationResponseExpandable';
-import { NotificationResponseSubscriptionsInner      } from '../models/NotificationResponseSubscriptionsInner';
-import { NotificationResponseTriggersInner           } from '../models/NotificationResponseTriggersInner';
-import { NotificationSubscription      } from '../models/NotificationSubscription';
-import { NotificationSubscriptionDeleteResponse    } from '../models/NotificationSubscriptionDeleteResponse';
-import { NotificationSubscriptionListQueries     } from '../models/NotificationSubscriptionListQueries';
-import { NotificationSubscriptionListResponse       } from '../models/NotificationSubscriptionListResponse';
-import { NotificationTriggerDeleteResponse    } from '../models/NotificationTriggerDeleteResponse';
-import { NotificationTriggerListQueries     } from '../models/NotificationTriggerListQueries';
-import { NotificationTriggerListResponse       } from '../models/NotificationTriggerListResponse';
-import { NotificationTriggerResponse           } from '../models/NotificationTriggerResponse';
-import { NotificationTriggerType } from '../models/NotificationTriggerType';
-import { NotificationTriggerTypeCONTRACTTRIGGER } from '../models/NotificationTriggerTypeCONTRACTTRIGGER';
-import { NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER } from '../models/NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER';
-import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { OAuthConfig               } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest   } from '../models/OAuthInitRequest';
@@ -454,7 +450,6 @@ import { PayForUserPolicyStrategy   } from '../models/PayForUserPolicyStrategy';
 import { PaymasterDeleteResponse    } from '../models/PaymasterDeleteResponse';
 import { PaymasterResponse       } from '../models/PaymasterResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
-import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { Plan    , PlanChangeTypeEnum   } from '../models/Plan';
 import { PlansResponse } from '../models/PlansResponse';
@@ -496,6 +491,7 @@ import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
 import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy     } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest     } from '../models/PolicyStrategyRequest';
+import { PreGenerateEmbeddedAccountsConfiguration } from '../models/PreGenerateEmbeddedAccountsConfiguration';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
@@ -503,7 +499,6 @@ import { ProjectLogs       } from '../models/ProjectLogs';
 import { ProjectResponse        } from '../models/ProjectResponse';
 import { ProjectStatsRequest, ProjectStatsRequestTimeFrameEnum   } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
-import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
@@ -516,7 +511,6 @@ import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
-import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse      } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -528,10 +522,11 @@ import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
+import { Status } from '../models/Status';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
+import { SubscriptionDeleteResponse    } from '../models/SubscriptionDeleteResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
-import { SubscriptionType } from '../models/SubscriptionType';
 import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthRequest    } from '../models/ThirdPartyOAuthRequest';
@@ -539,6 +534,7 @@ import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
 import { TokenType } from '../models/TokenType';
 import { TradeType } from '../models/TradeType';
+import { TransactionConfirmedEventResponse      } from '../models/TransactionConfirmedEventResponse';
 import { TransactionIntent              } from '../models/TransactionIntent';
 import { TransactionIntentListQueries          } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse       } from '../models/TransactionIntentListResponse';
@@ -549,12 +545,14 @@ import { TransactionIntentResponsePlayer         } from '../models/TransactionIn
 import { TransactionIntentResponsePolicy            } from '../models/TransactionIntentResponsePolicy';
 import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
+import { TriggerDeleteResponse    } from '../models/TriggerDeleteResponse';
+import { TriggerResponse        } from '../models/TriggerResponse';
 import { TypedDataField } from '../models/TypedDataField';
 import { UnlinkRequest  } from '../models/UnlinkRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleRequest';
-import { UpdateProjectApiKeyRequest   } from '../models/UpdateProjectApiKeyRequest';
+import { UpdateProjectApiKeyRequest    } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
@@ -596,6 +594,12 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "APITopic",
+    "APITopicBALANCECONTRACT",
+    "APITopicBALANCEDEVACCOUNT",
+    "APITopicBALANCEPROJECT",
+    "APITopicTRANSACTIONSUCCESSFUL",
+    "APITriggerType",
     "AccountResponseExpandable",
     "ApiKeyType",
     "AssetType",
@@ -606,10 +610,9 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeCONTRACT",
     "EntityTypeDEVELOPERACCOUNT",
     "EntityTypeDEVICE",
+    "EntityTypeEVENT",
     "EntityTypeINVENTORY",
-    "EntityTypeNOTIFICATION",
-    "EntityTypeNOTIFICATIONSUBSCRIPTION",
-    "EntityTypeNOTIFICATIONTRIGGER",
+    "EntityTypeLOG",
     "EntityTypePAYMASTER",
     "EntityTypePLAYER",
     "EntityTypePOLICY",
@@ -618,17 +621,14 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeREADCONTRACT",
     "EntityTypeSESSION",
     "EntityTypeSIGNATURE",
+    "EntityTypeSUBSCRIPTION",
     "EntityTypeTRANSACTIONINTENT",
+    "EntityTypeTRIGGER",
     "EntityTypeUSER",
     "EntityTypeWEB3ACTION",
     "EntityTypeWEB3CONNECTION",
     "ErrorTypeINVALIDREQUESTERROR",
     "NextActionType",
-    "NotificationResponseExpandable",
-    "NotificationTriggerType",
-    "NotificationTriggerTypeCONTRACTTRIGGER",
-    "NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER",
-    "NotificationTriggerTypePROJECTBALANCETRIGGER",
     "OAuthProvider",
     "OAuthProviderACCELBYTE",
     "OAuthProviderCUSTOM",
@@ -659,7 +659,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SponsorSchemaCHARGECUSTOMTOKENS",
     "SponsorSchemaFIXEDRATE",
     "SponsorSchemaPAYFORUSER",
-    "SubscriptionType",
+    "Status",
     "ThirdPartyOAuthProvider",
     "TimeIntervalType",
     "TokenType",
@@ -677,11 +677,10 @@ let typeMap: {[index: string]: any} = {
     "AbiType": AbiType,
     "AccelbyteOAuthConfig": AccelbyteOAuthConfig,
     "Account": Account,
+    "AccountEventResponse": AccountEventResponse,
     "AccountInventoryListQueries": AccountInventoryListQueries,
     "AccountListQueries": AccountListQueries,
     "AccountListResponse": AccountListResponse,
-    "AccountNotificationTriggerResponse": AccountNotificationTriggerResponse,
-    "AccountNotificationTriggerResponseAccount": AccountNotificationTriggerResponseAccount,
     "AccountPolicyRuleResponse": AccountPolicyRuleResponse,
     "AccountResponse": AccountResponse,
     "Amount": Amount,
@@ -696,9 +695,13 @@ let typeMap: {[index: string]: any} = {
     "AuthResponse": AuthResponse,
     "AuthSessionResponse": AuthSessionResponse,
     "AuthenticateOAuthRequest": AuthenticateOAuthRequest,
-    "BalanceNotificationTriggerResponse": BalanceNotificationTriggerResponse,
+    "BalanceEventResponse": BalanceEventResponse,
     "BalanceResponse": BalanceResponse,
     "BaseEntityListResponseDeviceResponse": BaseEntityListResponseDeviceResponse,
+    "BaseEntityListResponseEventResponse": BaseEntityListResponseEventResponse,
+    "BaseEntityListResponseLogResponse": BaseEntityListResponseLogResponse,
+    "BaseEntityListResponseSubscriptionResponse": BaseEntityListResponseSubscriptionResponse,
+    "BaseEntityListResponseTriggerResponse": BaseEntityListResponseTriggerResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
     "ChargeCustomTokenPolicyStrategy": ChargeCustomTokenPolicyStrategy,
     "CheckoutRequest": CheckoutRequest,
@@ -706,30 +709,31 @@ let typeMap: {[index: string]: any} = {
     "CheckoutSubscriptionRequest": CheckoutSubscriptionRequest,
     "CompleteRecoveryRequest": CompleteRecoveryRequest,
     "ContractDeleteResponse": ContractDeleteResponse,
+    "ContractEventResponse": ContractEventResponse,
     "ContractListQueries": ContractListQueries,
     "ContractListResponse": ContractListResponse,
-    "ContractNotificationTriggerResponse": ContractNotificationTriggerResponse,
-    "ContractNotificationTriggerResponseContract": ContractNotificationTriggerResponseContract,
     "ContractPolicyRuleResponse": ContractPolicyRuleResponse,
+    "ContractPolicyRuleResponseContract": ContractPolicyRuleResponseContract,
     "ContractReadQueries": ContractReadQueries,
     "ContractReadResponse": ContractReadResponse,
     "ContractResponse": ContractResponse,
     "CountPerIntervalLimitPolicyRuleResponse": CountPerIntervalLimitPolicyRuleResponse,
     "CreateAccountRequest": CreateAccountRequest,
     "CreateApiAuthorizedNetworkRequest": CreateApiAuthorizedNetworkRequest,
+    "CreateAuthPlayerRequest": CreateAuthPlayerRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreateDeviceRequest": CreateDeviceRequest,
+    "CreateEventRequest": CreateEventRequest,
     "CreateExchangeRequest": CreateExchangeRequest,
-    "CreateNotificationRequest": CreateNotificationRequest,
-    "CreateNotificationSubscriptionRequest": CreateNotificationSubscriptionRequest,
-    "CreateNotificationTriggerRequest": CreateNotificationTriggerRequest,
     "CreatePaymasterRequest": CreatePaymasterRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
     "CreateProjectRequest": CreateProjectRequest,
     "CreateSessionRequest": CreateSessionRequest,
+    "CreateSubscriptionRequest": CreateSubscriptionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
+    "CreateTriggerRequest": CreateTriggerRequest,
     "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
     "CustomAuthConfig": CustomAuthConfig,
     "DeployRequest": DeployRequest,
@@ -746,6 +750,9 @@ let typeMap: {[index: string]: any} = {
     "DomainData": DomainData,
     "EntityIdResponse": EntityIdResponse,
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
+    "EventDeleteResponse": EventDeleteResponse,
+    "EventListQueries": EventListQueries,
+    "EventResponse": EventResponse,
     "Fee": Fee,
     "FieldErrorsValue": FieldErrorsValue,
     "FirebaseOAuthConfig": FirebaseOAuthConfig,
@@ -764,7 +771,9 @@ let typeMap: {[index: string]: any} = {
     "JwtKey": JwtKey,
     "JwtKeyResponse": JwtKeyResponse,
     "LinkedAccountResponse": LinkedAccountResponse,
+    "ListSubscriptionLogsRequest": ListSubscriptionLogsRequest,
     "Log": Log,
+    "LogResponse": LogResponse,
     "LoginRequest": LoginRequest,
     "LogoutRequest": LogoutRequest,
     "LootLockerOAuthConfig": LootLockerOAuthConfig,
@@ -772,20 +781,6 @@ let typeMap: {[index: string]: any} = {
     "MonthRange": MonthRange,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
-    "NotificationDeleteResponse": NotificationDeleteResponse,
-    "NotificationListQueries": NotificationListQueries,
-    "NotificationListResponse": NotificationListResponse,
-    "NotificationResponse": NotificationResponse,
-    "NotificationResponseSubscriptionsInner": NotificationResponseSubscriptionsInner,
-    "NotificationResponseTriggersInner": NotificationResponseTriggersInner,
-    "NotificationSubscription": NotificationSubscription,
-    "NotificationSubscriptionDeleteResponse": NotificationSubscriptionDeleteResponse,
-    "NotificationSubscriptionListQueries": NotificationSubscriptionListQueries,
-    "NotificationSubscriptionListResponse": NotificationSubscriptionListResponse,
-    "NotificationTriggerDeleteResponse": NotificationTriggerDeleteResponse,
-    "NotificationTriggerListQueries": NotificationTriggerListQueries,
-    "NotificationTriggerListResponse": NotificationTriggerListResponse,
-    "NotificationTriggerResponse": NotificationTriggerResponse,
     "OAuthConfig": OAuthConfig,
     "OAuthConfigListResponse": OAuthConfigListResponse,
     "OAuthInitRequest": OAuthInitRequest,
@@ -798,7 +793,6 @@ let typeMap: {[index: string]: any} = {
     "PaymasterDeleteResponse": PaymasterDeleteResponse,
     "PaymasterResponse": PaymasterResponse,
     "PickContractResponseId": PickContractResponseId,
-    "PickDeveloperAccountId": PickDeveloperAccountId,
     "PickPlayerResponseId": PickPlayerResponseId,
     "Plan": Plan,
     "PlansResponse": PlansResponse,
@@ -830,13 +824,13 @@ let typeMap: {[index: string]: any} = {
     "PolicyRuleResponse": PolicyRuleResponse,
     "PolicyStrategy": PolicyStrategy,
     "PolicyStrategyRequest": PolicyStrategyRequest,
+    "PreGenerateEmbeddedAccountsConfiguration": PreGenerateEmbeddedAccountsConfiguration,
     "PrismaInputJsonValue": PrismaInputJsonValue,
     "ProjectListResponse": ProjectListResponse,
     "ProjectLogs": ProjectLogs,
     "ProjectResponse": ProjectResponse,
     "ProjectStatsRequest": ProjectStatsRequest,
     "ProjectStatsResponse": ProjectStatsResponse,
-    "ProjectWebhookRequest": ProjectWebhookRequest,
     "QuoteExchangeResult": QuoteExchangeResult,
     "RefreshTokenRequest": RefreshTokenRequest,
     "ResponseResponse": ResponseResponse,
@@ -847,7 +841,6 @@ let typeMap: {[index: string]: any} = {
     "SessionListQueries": SessionListQueries,
     "SessionListResponse": SessionListResponse,
     "SessionResponse": SessionResponse,
-    "SettingsWebhookUpdateRequest": SettingsWebhookUpdateRequest,
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
@@ -855,11 +848,13 @@ let typeMap: {[index: string]: any} = {
     "StartRecoveryRequest": StartRecoveryRequest,
     "Stat": Stat,
     "SubmitWeb3ActionRequest": SubmitWeb3ActionRequest,
+    "SubscriptionDeleteResponse": SubscriptionDeleteResponse,
     "SubscriptionResponse": SubscriptionResponse,
     "SubscriptionResponsePlan": SubscriptionResponsePlan,
     "SupabaseAuthConfig": SupabaseAuthConfig,
     "ThirdPartyOAuthRequest": ThirdPartyOAuthRequest,
     "Token": Token,
+    "TransactionConfirmedEventResponse": TransactionConfirmedEventResponse,
     "TransactionIntent": TransactionIntent,
     "TransactionIntentListQueries": TransactionIntentListQueries,
     "TransactionIntentListResponse": TransactionIntentListResponse,
@@ -869,6 +864,8 @@ let typeMap: {[index: string]: any} = {
     "TransactionIntentResponsePolicy": TransactionIntentResponsePolicy,
     "TransactionStat": TransactionStat,
     "TransferOwnershipRequest": TransferOwnershipRequest,
+    "TriggerDeleteResponse": TriggerDeleteResponse,
+    "TriggerResponse": TriggerResponse,
     "TypedDataField": TypedDataField,
     "UnlinkRequest": UnlinkRequest,
     "UpdateContractRequest": UpdateContractRequest,

@@ -10,26 +10,27 @@
  * Do not edit the class manually.
  */
 
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
+import { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL';
+import { AccountEventResponse } from '../models/AccountEventResponse';
+import { BalanceEventResponse } from '../models/BalanceEventResponse';
+import { ContractEventResponse } from '../models/ContractEventResponse';
 import { EntityIdResponse } from '../models/EntityIdResponse';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
-import { PolicyRuleResponse } from '../models/PolicyRuleResponse';
-import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
-import { TimeIntervalType } from '../models/TimeIntervalType';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
+import { TransactionConfirmedEventResponse } from '../models/TransactionConfirmedEventResponse';
 import { HttpFile } from '../http/http';
 
-export class PolicyResponsePolicyRulesInner {
+export class EventResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': PolicyRuleTypeRATELIMIT;
-    'contract': ContractPolicyRuleResponseContract;
-    'functionName': PolicyRateLimitCOUNTPERINTERVAL;
-    'gasLimit': string;
-    'timeIntervalType': TimeIntervalType;
-    'timeIntervalValue': number;
-    'countLimit': number;
+    'type': APITopicTRANSACTIONSUCCESSFUL;
+    'threshold': string;
+    'contract': EntityIdResponse;
+    'functionName': string;
+    'functionArgs': Array<string>;
+    'developerAccount': EntityIdResponse;
+    'chainId': number;
+    'numberOfBlocks': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -43,7 +44,7 @@ export class PolicyResponsePolicyRulesInner {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeEVENT",
             "format": ""
         },
         {
@@ -55,48 +56,54 @@ export class PolicyResponsePolicyRulesInner {
         {
             "name": "type",
             "baseName": "type",
-            "type": "PolicyRuleTypeRATELIMIT",
+            "type": "APITopicTRANSACTIONSUCCESSFUL",
+            "format": ""
+        },
+        {
+            "name": "threshold",
+            "baseName": "threshold",
+            "type": "string",
             "format": ""
         },
         {
             "name": "contract",
             "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
+            "type": "EntityIdResponse",
             "format": ""
         },
         {
             "name": "functionName",
             "baseName": "functionName",
-            "type": "PolicyRateLimitCOUNTPERINTERVAL",
-            "format": ""
-        },
-        {
-            "name": "gasLimit",
-            "baseName": "gasLimit",
             "type": "string",
             "format": ""
         },
         {
-            "name": "timeIntervalType",
-            "baseName": "timeIntervalType",
-            "type": "TimeIntervalType",
+            "name": "functionArgs",
+            "baseName": "functionArgs",
+            "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "timeIntervalValue",
-            "baseName": "timeIntervalValue",
-            "type": "number",
-            "format": "int32"
+            "name": "developerAccount",
+            "baseName": "developerAccount",
+            "type": "EntityIdResponse",
+            "format": ""
         },
         {
-            "name": "countLimit",
-            "baseName": "countLimit",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number",
-            "format": "int32"
+            "format": "double"
+        },
+        {
+            "name": "numberOfBlocks",
+            "baseName": "numberOfBlocks",
+            "type": "number",
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyResponsePolicyRulesInner.attributeTypeMap;
+        return EventResponse.attributeTypeMap;
     }
 
     public constructor() {

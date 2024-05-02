@@ -13,9 +13,8 @@ import { createHmac } from "crypto";
 import { IamApiWrapper } from "./apis/iamApiWrapper";
 import { SettingsApiWrapper } from "./apis/settingsApiWrapper";
 import { Web3ConnectionsApiWrapper } from "./apis/web3ConnectionsApiWrapper";
-import { NotificationsApiWrapper } from "./apis/notificationsApiWrapper";
-import { NotificationTriggersApiWrapper } from "./apis/notificationTriggersApiWrapper";
-import { NotificationSubscriptionsApiWrapper } from "./apis/notificationSubscriptionsApiWrapper";
+import { EventsApiWrapper } from "./apis/eventsApiWrapper";
+import { SubscriptionsApiWrapper } from "./apis/subscriptionsApiWrapper";
 import { ExchangeApiWrapper } from "./apis/exchangeApiWrapper";
 
 export default class Openfort {
@@ -68,16 +67,12 @@ export default class Openfort {
         return this.getOrCreateWrapper(IamApiWrapper);
     }
 
-    public get notifications(): NotificationsApiWrapper {
-        return this.getOrCreateWrapper(NotificationsApiWrapper);
+    public get subscriptions(): SubscriptionsApiWrapper {
+        return this.getOrCreateWrapper(SubscriptionsApiWrapper);
     }
 
-    public get notificationSubscriptions(): NotificationSubscriptionsApiWrapper {
-        return this.getOrCreateWrapper(NotificationSubscriptionsApiWrapper);
-    }
-
-    public get notificationTriggers(): NotificationTriggersApiWrapper {
-        return this.getOrCreateWrapper(NotificationTriggersApiWrapper);
+    public get triggers(): EventsApiWrapper {
+        return this.getOrCreateWrapper(EventsApiWrapper);
     }
 
     public get exchange(): ExchangeApiWrapper {

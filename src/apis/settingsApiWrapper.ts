@@ -48,19 +48,4 @@ export class SettingsApiWrapper extends BaseApiWrapper<SettingsApi> {
         const result = await this.api.getVerificationPayload(address);
         return result.message;
     }
-
-    /**
-     * Creates or updates webhook address in a project environment configuration.
-     * @param url Url of the webhook
-     */
-    public async updateWebhook(url: string): Promise<void> {
-        return await this.api.updateWebhook({ url });
-    }
-
-    /**
-     * Removes the webhook configuration from the project environment.
-     */
-    public async removeWebhook(): Promise<void> {
-        return await this.api.removeWebhook();
-    }
 }

@@ -10,18 +10,20 @@
  * Do not edit the class manually.
  */
 
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { APITopic } from '../models/APITopic';
+import { EntityTypeLOG } from '../models/EntityTypeLOG';
+import { Status } from '../models/Status';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class LogResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeLOG;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractPolicyRuleResponseContract;
-    'functionName': string;
+    'topic': APITopic;
+    'status': Status;
+    'subscription': string;
+    'trigger': string;
+    'requestID': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,36 +37,48 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeLOG",
             "format": ""
         },
         {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopic",
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
+            "name": "status",
+            "baseName": "status",
+            "type": "Status",
             "format": ""
         },
         {
-            "name": "functionName",
-            "baseName": "functionName",
+            "name": "subscription",
+            "baseName": "subscription",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "trigger",
+            "baseName": "trigger",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "requestID",
+            "baseName": "requestID",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return LogResponse.attributeTypeMap;
     }
 
     public constructor() {
