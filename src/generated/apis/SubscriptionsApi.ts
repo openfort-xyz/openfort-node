@@ -10,39 +10,40 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
-import { AuthSessionResponse } from '../models/AuthSessionResponse';
-import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
-import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
-import { OAuthConfig } from '../models/OAuthConfig';
-import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
-import { OAuthProvider } from '../models/OAuthProvider';
-import { OAuthRequest } from '../models/OAuthRequest';
-import { PlayerResponse } from '../models/PlayerResponse';
+import { APITopic } from '../models/APITopic';
+import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
+import { BaseEntityListResponseSubscriptionResponse } from '../models/BaseEntityListResponseSubscriptionResponse';
+import { BaseEntityListResponseTriggerResponse } from '../models/BaseEntityListResponseTriggerResponse';
+import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
+import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { SortOrder } from '../models/SortOrder';
+import { Status } from '../models/Status';
+import { SubscriptionDeleteResponse } from '../models/SubscriptionDeleteResponse';
+import { SubscriptionResponse } from '../models/SubscriptionResponse';
+import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
+import { TriggerResponse } from '../models/TriggerResponse';
 
 /**
  * no description
  */
-export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory {
+export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates an authenticated player for a third party authentication provider.  The player will be authenticated with the provider and an embedded account can be pre generated.
-     * Create an authenticated player for a third party authentication provider.
-     * @param createAuthPlayerRequest 
+     * Creates a subscription for the given project.  This object represents the subscription where the project owner has subscribed to.
+     * Create subscription for project.
+     * @param createSubscriptionRequest 
      */
-    public async createAuthPlayer(createAuthPlayerRequest: CreateAuthPlayerRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'createAuthPlayerRequest' is not null or undefined
-        if (createAuthPlayerRequest === null || createAuthPlayerRequest === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "createAuthPlayer", "createAuthPlayerRequest");
+        // verify required parameter 'createSubscriptionRequest' is not null or undefined
+        if (createSubscriptionRequest === null || createSubscriptionRequest === undefined) {
+            throw new RequiredError("SubscriptionsApi", "createSubscription", "createSubscriptionRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/iam/v1/players';
+        const localVarPath = '/v1/subscriptions';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -55,7 +56,7 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createAuthPlayerRequest, "CreateAuthPlayerRequest", ""),
+            ObjectSerializer.serialize(createSubscriptionRequest, "CreateSubscriptionRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -76,69 +77,77 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
     }
 
     /**
-     * The endpoint creates oauth configuration for the current project environment.
-     * Create oauth configuration.
-     * @param body Specifies the oauth provider specific configuration.
+     * Creates a trigger for the given subscription.  This object represents the trigger where the subscription owner has subscribed to.
+     * Create trigger for subscription.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     * @param createTriggerRequest 
      */
-    public async createOAuthConfig(body: OAuthConfig, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'body' is not null or undefined
-        if (body === null || body === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "createOAuthConfig", "body");
-        }
-
-
-        // Path Params
-        const localVarPath = '/iam/v1/oauth';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(body, "OAuthConfig", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Deletes a player auth object.  It will delete all linked accounts the player is authenticated with.
-     * Deletes a player auth object.
-     * @param id Specifies the unique player ID (starts with pla_).
-     */
-    public async deleteAuthPlayer(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async createTrigger(id: string, createTriggerRequest: CreateTriggerRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "deleteAuthPlayer", "id");
+            throw new RequiredError("SubscriptionsApi", "createTrigger", "id");
+        }
+
+
+        // verify required parameter 'createTriggerRequest' is not null or undefined
+        if (createTriggerRequest === null || createTriggerRequest === undefined) {
+            throw new RequiredError("SubscriptionsApi", "createTrigger", "createTriggerRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/iam/v1/players/{id}'
+        const localVarPath = '/v1/subscriptions/{id}/triggers'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(createTriggerRequest, "CreateTriggerRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Deletes a subscription for the given project.  This object represents the subscription where the project owner has subscribed to.
+     * Delete subscription of project.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     */
+    public async deleteSubscription(id: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SubscriptionsApi", "deleteSubscription", "id");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/subscriptions/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
@@ -162,22 +171,30 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
     }
 
     /**
-     * The endpoint deletes oauth configuration for specified provider for the current project environment.
-     * Delete oauth configuration.
-     * @param provider Specifies the oauth provider type.
+     * Deletes a trigger for the given subscription.  This object represents the trigger where the subscription owner has subscribed to.
+     * Delete trigger of subscription.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     * @param triggerId Specifies the unique subscription ID (starts with sub_).
      */
-    public async deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<RequestContext> {
+    public async deleteTrigger(id: string, triggerId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'provider' is not null or undefined
-        if (provider === null || provider === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "deleteOAuthConfig", "provider");
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SubscriptionsApi", "deleteTrigger", "id");
+        }
+
+
+        // verify required parameter 'triggerId' is not null or undefined
+        if (triggerId === null || triggerId === undefined) {
+            throw new RequiredError("SubscriptionsApi", "deleteTrigger", "triggerId");
         }
 
 
         // Path Params
-        const localVarPath = '/iam/v1/oauth/{provider}'
-            .replace('{' + 'provider' + '}', encodeURIComponent(String(provider)));
+        const localVarPath = '/v1/subscriptions/{id}/triggers/{triggerId}'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)))
+            .replace('{' + 'triggerId' + '}', encodeURIComponent(String(triggerId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -200,15 +217,171 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
     }
 
     /**
-     * Retrieves a list of authenticated players.  Players have linked accounts and are authenticated with a provider.
-     * List authenticated players.
+     * Returns a subscription for the given project.  This object represents the subscription where the project owner has subscribed to.
+     * Get subscription of project.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     */
+    public async getSubscription(id: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SubscriptionsApi", "getSubscription", "id");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/subscriptions/{id}'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Returns a list of subscriptions for the given project.  This object represents the subscriptions where the project owner has subscribed to.  Subscriptions are returned sorted by creation date, with the most recently created subscriptions appearing first.  By default, a maximum of 10 subscriptions are shown per page.
+     * List subscriptions of project.
+     */
+    public async getSubscriptions(_options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // Path Params
+        const localVarPath = '/v1/subscriptions';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Returns a trigger for the given id.  This object represents the trigger where the subscription owner has subscribed to.
+     * Get trigger by id.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     * @param triggerId Specifies the unique subscription ID (starts with sub_).
+     */
+    public async getTrigger(id: string, triggerId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SubscriptionsApi", "getTrigger", "id");
+        }
+
+
+        // verify required parameter 'triggerId' is not null or undefined
+        if (triggerId === null || triggerId === undefined) {
+            throw new RequiredError("SubscriptionsApi", "getTrigger", "triggerId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/subscriptions/{id}/triggers/{triggerId}'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)))
+            .replace('{' + 'triggerId' + '}', encodeURIComponent(String(triggerId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Returns a list of triggers for the given subscription.  This object represents the triggers where the subscription owner has subscribed to.  Triggers are returned sorted by creation date, with the most recently created triggers appearing first.  By default, a maximum of 10 triggers are shown per page.
+     * List triggers of subscription.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     */
+    public async getTriggers(id: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SubscriptionsApi", "getTriggers", "id");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/subscriptions/{id}/triggers'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Lists logs of the triggered subscriptions for the given project.  This object represents the logs of the triggered subscriptions where the project owner has subscribed to.
+     * List logs of triggered subscriptions.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param email Specifies the email address of the user.
-     * @param externalUserId Specifies the external user ID.
+     * @param topic Specifies the topic of the subscription logs
+     * @param status Specifies the status of the subscription logs
+     * @param object Specifies the object ID of the object related to triggered notification
+     * @param subscription Specifies the subscription ID
+     * @param trigger Specifies the trigger ID
+     * @param requestID Specifies the request ID
      */
-    public async getAuthPlayers(limit?: number, skip?: number, order?: SortOrder, email?: string, externalUserId?: string, _options?: Configuration): Promise<RequestContext> {
+    public async listSubscriptionLogs(limit?: number, skip?: number, order?: SortOrder, topic?: APITopic, status?: Status, object?: string, subscription?: string, trigger?: string, requestID?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -216,8 +389,12 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
 
 
 
+
+
+
+
         // Path Params
-        const localVarPath = '/iam/v1/players';
+        const localVarPath = '/v1/subscriptions/logs';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -239,123 +416,33 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
         }
 
         // Query Params
-        if (email !== undefined) {
-            requestContext.setQueryParam("email", ObjectSerializer.serialize(email, "string", ""));
+        if (topic !== undefined) {
+            requestContext.setQueryParam("topic", ObjectSerializer.serialize(topic, "APITopic", ""));
         }
 
         // Query Params
-        if (externalUserId !== undefined) {
-            requestContext.setQueryParam("externalUserId", ObjectSerializer.serialize(externalUserId, "string", ""));
+        if (status !== undefined) {
+            requestContext.setQueryParam("status", ObjectSerializer.serialize(status, "Status", ""));
         }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * The endpoint retrieves oauth configuration for specified provider for the current project environment.
-     * Get oauth configuration.
-     * @param provider Specifies the oauth provider type.
-     */
-    public async getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'provider' is not null or undefined
-        if (provider === null || provider === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "getOAuthConfig", "provider");
-        }
-
-
-        // Path Params
-        const localVarPath = '/iam/v1/oauth/{provider}'
-            .replace('{' + 'provider' + '}', encodeURIComponent(String(provider)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * List configured OAuth methods for the current project environment.
-     * List of oauth configurations.
-     */
-    public async listOAuthConfig(_options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // Path Params
-        const localVarPath = '/iam/v1/oauth';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Verifies the token generated by Openfort Auth.
-     * Verify auth token.
-     * @param token Specifies the auth token.
-     */
-    public async verifyAuthToken(token: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'token' is not null or undefined
-        if (token === null || token === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "verifyAuthToken", "token");
-        }
-
-
-        // Path Params
-        const localVarPath = '/iam/v1/verify';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (token !== undefined) {
-            requestContext.setQueryParam("token", ObjectSerializer.serialize(token, "string", ""));
+        if (object !== undefined) {
+            requestContext.setQueryParam("object", ObjectSerializer.serialize(object, "string", ""));
+        }
+
+        // Query Params
+        if (subscription !== undefined) {
+            requestContext.setQueryParam("subscription", ObjectSerializer.serialize(subscription, "string", ""));
+        }
+
+        // Query Params
+        if (trigger !== undefined) {
+            requestContext.setQueryParam("trigger", ObjectSerializer.serialize(trigger, "string", ""));
+        }
+
+        // Query Params
+        if (requestID !== undefined) {
+            requestContext.setQueryParam("requestID", ObjectSerializer.serialize(requestID, "string", ""));
         }
 
 
@@ -375,93 +462,19 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
     }
 
     /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
-     * Retrieve player by token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
+     * Test a trigger  Returns a trigger for the given id.
+     * Test trigger by id.
      */
-    public async verifyOAuth(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<RequestContext> {
+    public async testTrigger(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'provider' is not null or undefined
-        if (provider === null || provider === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "verifyOAuth", "provider");
-        }
-
-
-        // verify required parameter 'oAuthRequest' is not null or undefined
-        if (oAuthRequest === null || oAuthRequest === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "verifyOAuth", "oAuthRequest");
-        }
-
-
         // Path Params
-        const localVarPath = '/iam/v1/oauth/{provider}/verify'
-            .replace('{' + 'provider' + '}', encodeURIComponent(String(provider)));
+        const localVarPath = '/v1/subscriptions/test';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(oAuthRequest, "OAuthRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
-     * Retrieve player by oauth token.
-     * @param authenticateOAuthRequest 
-     */
-    public async verifyOAuthToken(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'authenticateOAuthRequest' is not null or undefined
-        if (authenticateOAuthRequest === null || authenticateOAuthRequest === undefined) {
-            throw new RequiredError("AdminAuthenticationApi", "verifyOAuthToken", "authenticateOAuthRequest");
-        }
-
-
-        // Path Params
-        const localVarPath = '/iam/v1/oauth/verify';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(authenticateOAuthRequest, "AuthenticateOAuthRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -480,37 +493,34 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
 
 }
 
-export class AdminAuthenticationApiResponseProcessor {
+export class SubscriptionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createAuthPlayer
+     * @params response Response returned by the server for a request to createSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createAuthPlayer(response: ResponseContext): Promise<AuthPlayerResponse > {
+     public async createSubscription(response: ResponseContext): Promise<SubscriptionResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: SubscriptionResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerResponse", ""
-            ) as AuthPlayerResponse;
+                "SubscriptionResponse", ""
+            ) as SubscriptionResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
-        if (isCodeInRange("409", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+            const body: SubscriptionResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerResponse", ""
-            ) as AuthPlayerResponse;
+                "SubscriptionResponse", ""
+            ) as SubscriptionResponse;
             return body;
         }
 
@@ -521,28 +531,31 @@ export class AdminAuthenticationApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createOAuthConfig
+     * @params response Response returned by the server for a request to createTrigger
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOAuthConfig(response: ResponseContext): Promise<OAuthConfig > {
+     public async createTrigger(response: ResponseContext): Promise<TriggerResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: TriggerResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
+                "TriggerResponse", ""
+            ) as TriggerResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Subscription not found.", undefined, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
+            const body: TriggerResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
+                "TriggerResponse", ""
+            ) as TriggerResponse;
             return body;
         }
 
@@ -553,31 +566,31 @@ export class AdminAuthenticationApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to deleteAuthPlayer
+     * @params response Response returned by the server for a request to deleteSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteAuthPlayer(response: ResponseContext): Promise<AuthPlayerResponse > {
+     public async deleteSubscription(response: ResponseContext): Promise<SubscriptionDeleteResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: SubscriptionDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerResponse", ""
-            ) as AuthPlayerResponse;
+                "SubscriptionDeleteResponse", ""
+            ) as SubscriptionDeleteResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
-        if (isCodeInRange("409", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Subscription not found.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+            const body: SubscriptionDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerResponse", ""
-            ) as AuthPlayerResponse;
+                "SubscriptionDeleteResponse", ""
+            ) as SubscriptionDeleteResponse;
             return body;
         }
 
@@ -588,16 +601,223 @@ export class AdminAuthenticationApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to deleteOAuthConfig
+     * @params response Response returned by the server for a request to deleteTrigger
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteOAuthConfig(response: ResponseContext): Promise<void > {
+     public async deleteTrigger(response: ResponseContext): Promise<TriggerDeleteResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("204", response.httpStatusCode)) {
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: TriggerDeleteResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TriggerDeleteResponse", ""
+            ) as TriggerDeleteResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Trigger not found.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: TriggerDeleteResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TriggerDeleteResponse", ""
+            ) as TriggerDeleteResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getSubscription
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getSubscription(response: ResponseContext): Promise<SubscriptionResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: SubscriptionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SubscriptionResponse", ""
+            ) as SubscriptionResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Subscription not found.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SubscriptionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SubscriptionResponse", ""
+            ) as SubscriptionResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getSubscriptions
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getSubscriptions(response: ResponseContext): Promise<BaseEntityListResponseSubscriptionResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: BaseEntityListResponseSubscriptionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BaseEntityListResponseSubscriptionResponse", ""
+            ) as BaseEntityListResponseSubscriptionResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: BaseEntityListResponseSubscriptionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BaseEntityListResponseSubscriptionResponse", ""
+            ) as BaseEntityListResponseSubscriptionResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getTrigger
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getTrigger(response: ResponseContext): Promise<TriggerResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: TriggerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TriggerResponse", ""
+            ) as TriggerResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Trigger not found.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: TriggerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TriggerResponse", ""
+            ) as TriggerResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getTriggers
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getTriggers(response: ResponseContext): Promise<BaseEntityListResponseTriggerResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: BaseEntityListResponseTriggerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BaseEntityListResponseTriggerResponse", ""
+            ) as BaseEntityListResponseTriggerResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Subscription not found.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: BaseEntityListResponseTriggerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BaseEntityListResponseTriggerResponse", ""
+            ) as BaseEntityListResponseTriggerResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to listSubscriptionLogs
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async listSubscriptionLogs(response: ResponseContext): Promise<BaseEntityListResponseLogResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: BaseEntityListResponseLogResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BaseEntityListResponseLogResponse", ""
+            ) as BaseEntityListResponseLogResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: BaseEntityListResponseLogResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BaseEntityListResponseLogResponse", ""
+            ) as BaseEntityListResponseLogResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to testTrigger
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async testTrigger(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
             return;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Trigger not found.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -606,198 +826,6 @@ export class AdminAuthenticationApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to getAuthPlayers
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getAuthPlayers(response: ResponseContext): Promise<AuthPlayerListResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AuthPlayerListResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerListResponse", ""
-            ) as AuthPlayerListResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AuthPlayerListResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerListResponse", ""
-            ) as AuthPlayerListResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to getOAuthConfig
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getOAuthConfig(response: ResponseContext): Promise<OAuthConfig > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to listOAuthConfig
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async listOAuthConfig(response: ResponseContext): Promise<OAuthConfigListResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: OAuthConfigListResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfigListResponse", ""
-            ) as OAuthConfigListResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: OAuthConfigListResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfigListResponse", ""
-            ) as OAuthConfigListResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to verifyAuthToken
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async verifyAuthToken(response: ResponseContext): Promise<AuthSessionResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AuthSessionResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthSessionResponse", ""
-            ) as AuthSessionResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AuthSessionResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthSessionResponse", ""
-            ) as AuthSessionResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to verifyOAuth
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async verifyOAuth(response: ResponseContext): Promise<PlayerResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PlayerResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlayerResponse", ""
-            ) as PlayerResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PlayerResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlayerResponse", ""
-            ) as PlayerResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to verifyOAuthToken
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async verifyOAuthToken(response: ResponseContext): Promise<PlayerResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PlayerResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlayerResponse", ""
-            ) as PlayerResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PlayerResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "PlayerResponse", ""
-            ) as PlayerResponse;
             return body;
         }
 

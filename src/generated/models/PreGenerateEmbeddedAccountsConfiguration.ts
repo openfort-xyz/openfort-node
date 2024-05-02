@@ -10,58 +10,59 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvider } from '../models/OAuthProvider';
-import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
-import { TokenType } from '../models/TokenType';
 import { HttpFile } from '../http/http';
 
-export class AuthenticateOAuthRequest {
-    'provider': OAuthProvider;
+export class PreGenerateEmbeddedAccountsConfiguration {
     /**
-    * Token to be verified
+    * The shield auth provider. (openfort or custom)
     */
-    'token': string;
-    'tokenType': TokenType;
+    'shieldAuthProvider': string;
     /**
-    * Specifies the fields to expand in the response.
+    * The shield api key.
     */
-    'expand'?: Array<PlayerResponseExpandable>;
+    'apiKey': string;
+    /**
+    * The shield api secret.
+    */
+    'apiSecret': string;
+    /**
+    * The shield encryption part.
+    */
+    'encryptionPart'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProvider",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "shieldAuthProvider",
+            "baseName": "shieldAuthProvider",
             "type": "string",
             "format": ""
         },
         {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "TokenType",
+            "name": "apiKey",
+            "baseName": "apiKey",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<PlayerResponseExpandable>",
+            "name": "apiSecret",
+            "baseName": "apiSecret",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "encryptionPart",
+            "baseName": "encryptionPart",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthenticateOAuthRequest.attributeTypeMap;
+        return PreGenerateEmbeddedAccountsConfiguration.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

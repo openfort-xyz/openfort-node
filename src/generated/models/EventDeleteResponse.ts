@@ -10,44 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyType } from '../models/ApiKeyType';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
 import { HttpFile } from '../http/http';
 
-export class UpdateProjectApiKeyRequest {
-    'type': ApiKeyType;
-    /**
-    * The API key to update.
-    */
-    'uuid': string;
-    /**
-    * Whether key to use to sign webhooks.
-    */
-    'use_for_webhooks'?: boolean;
+export class EventDeleteResponse {
+    'id': string;
+    'object': EntityTypeEVENT;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "ApiKeyType",
-            "format": ""
-        },
-        {
-            "name": "uuid",
-            "baseName": "uuid",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "use_for_webhooks",
-            "baseName": "use_for_webhooks",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeEVENT",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
             "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProjectApiKeyRequest.attributeTypeMap;
+        return EventDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {

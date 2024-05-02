@@ -31,8 +31,8 @@ export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
      * @param req parameters to create
      */
     public async update(req: UpdatePolicyRequest): Promise<PolicyResponse> {
-        const { id, ...body } = req;
-        return await this.api.updatePolicy(id, body);
+        const { id } = req;
+        return await this.api.updatePolicy(id, req);
     }
 
     /**

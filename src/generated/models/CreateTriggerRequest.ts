@@ -10,44 +10,44 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyType } from '../models/ApiKeyType';
+import { APITriggerType } from '../models/APITriggerType';
 import { HttpFile } from '../http/http';
 
-export class UpdateProjectApiKeyRequest {
-    'type': ApiKeyType;
+export class CreateTriggerRequest {
     /**
-    * The API key to update.
+    * Specifies the target of the trigger
     */
-    'uuid': string;
+    'target': string;
+    'type': APITriggerType;
     /**
-    * Whether key to use to sign webhooks.
+    * Specifies the subscription ID
     */
-    'use_for_webhooks'?: boolean;
+    'subscription'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "ApiKeyType",
-            "format": ""
-        },
-        {
-            "name": "uuid",
-            "baseName": "uuid",
+            "name": "target",
+            "baseName": "target",
             "type": "string",
             "format": ""
         },
         {
-            "name": "use_for_webhooks",
-            "baseName": "use_for_webhooks",
-            "type": "boolean",
+            "name": "type",
+            "baseName": "type",
+            "type": "APITriggerType",
+            "format": ""
+        },
+        {
+            "name": "subscription",
+            "baseName": "subscription",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProjectApiKeyRequest.attributeTypeMap;
+        return CreateTriggerRequest.attributeTypeMap;
     }
 
     public constructor() {

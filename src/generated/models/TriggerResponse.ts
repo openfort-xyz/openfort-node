@@ -10,18 +10,18 @@
  * Do not edit the class manually.
  */
 
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { APITriggerType } from '../models/APITriggerType';
+import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class TriggerResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeTRIGGER;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractPolicyRuleResponseContract;
-    'functionName': string;
+    'target': string;
+    'type': APITriggerType;
+    'subscription': string;
+    'updatedAt'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,7 +35,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeTRIGGER",
             "format": ""
         },
         {
@@ -45,26 +45,32 @@ export class ContractPolicyRuleResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
-            "format": ""
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
+            "name": "target",
+            "baseName": "target",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "APITriggerType",
+            "format": ""
+        },
+        {
+            "name": "subscription",
+            "baseName": "subscription",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "number",
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return TriggerResponse.attributeTypeMap;
     }
 
     public constructor() {
