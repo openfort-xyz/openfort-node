@@ -10,18 +10,20 @@
  * Do not edit the class manually.
  */
 
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { APITopicBALANCECONTRACT } from '../models/APITopicBALANCECONTRACT';
+import { EntityIdResponse } from '../models/EntityIdResponse';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class ContractEventResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractPolicyRuleResponseContract;
+    'topic': APITopicBALANCECONTRACT;
+    'threshold': string;
+    'contract': EntityIdResponse;
     'functionName': string;
+    'functionArgs': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,7 +37,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeEVENT",
             "format": ""
         },
         {
@@ -45,15 +47,21 @@ export class ContractPolicyRuleResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopicBALANCECONTRACT",
+            "format": ""
+        },
+        {
+            "name": "threshold",
+            "baseName": "threshold",
+            "type": "string",
             "format": ""
         },
         {
             "name": "contract",
             "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
+            "type": "EntityIdResponse",
             "format": ""
         },
         {
@@ -61,10 +69,16 @@ export class ContractPolicyRuleResponse {
             "baseName": "functionName",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "functionArgs",
+            "baseName": "functionArgs",
+            "type": "Array<string>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return ContractEventResponse.attributeTypeMap;
     }
 
     public constructor() {

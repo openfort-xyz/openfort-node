@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
+import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
@@ -24,7 +24,7 @@ export class PolicyResponsePolicyRulesInner {
     'object': EntityTypePOLICYRULE;
     'createdAt': number;
     'type': PolicyRuleTypeRATELIMIT;
-    'contract': ContractNotificationTriggerResponseContract;
+    'contract': ContractPolicyRuleResponseContract;
     'functionName': PolicyRateLimitCOUNTPERINTERVAL;
     'gasLimit': string;
     'timeIntervalType': TimeIntervalType;
@@ -61,7 +61,7 @@ export class PolicyResponsePolicyRulesInner {
         {
             "name": "contract",
             "baseName": "contract",
-            "type": "ContractNotificationTriggerResponseContract",
+            "type": "ContractPolicyRuleResponseContract",
             "format": ""
         },
         {

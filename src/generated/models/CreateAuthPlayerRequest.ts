@@ -10,44 +10,44 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyType } from '../models/ApiKeyType';
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { HttpFile } from '../http/http';
 
-export class UpdateProjectApiKeyRequest {
-    'type': ApiKeyType;
+export class CreateAuthPlayerRequest {
     /**
-    * The API key to update.
+    * The third party user id.
     */
-    'uuid': string;
+    'thirdPartyUserId': string;
+    'thirdPartyProvider': ThirdPartyOAuthProvider;
     /**
-    * Whether key to use to sign webhooks.
+    * Pre generate embedded account.
     */
-    'use_for_webhooks'?: boolean;
+    'preGenerateEmbeddedAccount': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "ApiKeyType",
-            "format": ""
-        },
-        {
-            "name": "uuid",
-            "baseName": "uuid",
+            "name": "thirdPartyUserId",
+            "baseName": "thirdPartyUserId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "use_for_webhooks",
-            "baseName": "use_for_webhooks",
+            "name": "thirdPartyProvider",
+            "baseName": "thirdPartyProvider",
+            "type": "ThirdPartyOAuthProvider",
+            "format": ""
+        },
+        {
+            "name": "preGenerateEmbeddedAccount",
+            "baseName": "preGenerateEmbeddedAccount",
             "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateProjectApiKeyRequest.attributeTypeMap;
+        return CreateAuthPlayerRequest.attributeTypeMap;
     }
 
     public constructor() {
