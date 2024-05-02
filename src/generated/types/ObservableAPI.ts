@@ -2,15 +2,20 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
+import { APITopic } from '../models/APITopic';
+import { APITopicBALANCECONTRACT } from '../models/APITopicBALANCECONTRACT';
+import { APITopicBALANCEDEVACCOUNT } from '../models/APITopicBALANCEDEVACCOUNT';
+import { APITopicBALANCEPROJECT } from '../models/APITopicBALANCEPROJECT';
+import { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL';
+import { APITriggerType } from '../models/APITriggerType';
 import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { Account } from '../models/Account';
+import { AccountEventResponse } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
 import { AccountListResponse } from '../models/AccountListResponse';
-import { AccountNotificationTriggerResponse } from '../models/AccountNotificationTriggerResponse';
-import { AccountNotificationTriggerResponseAccount } from '../models/AccountNotificationTriggerResponseAccount';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
@@ -25,13 +30,16 @@ import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
+import { AuthPlayerResponseWithRecoveryShare } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthProvider } from '../models/AuthProvider';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
-import { BalanceNotificationTriggerResponse } from '../models/BalanceNotificationTriggerResponse';
+import { BalanceEventResponse } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
+import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
+import { BaseEntityListResponseTriggerResponse } from '../models/BaseEntityListResponseTriggerResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
@@ -39,30 +47,31 @@ import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
+import { ContractEventResponse } from '../models/ContractEventResponse';
 import { ContractListQueries } from '../models/ContractListQueries';
 import { ContractListResponse } from '../models/ContractListResponse';
-import { ContractNotificationTriggerResponse } from '../models/ContractNotificationTriggerResponse';
-import { ContractNotificationTriggerResponseContract } from '../models/ContractNotificationTriggerResponseContract';
 import { ContractPolicyRuleResponse } from '../models/ContractPolicyRuleResponse';
+import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
 import { ContractReadQueries } from '../models/ContractReadQueries';
 import { ContractReadResponse } from '../models/ContractReadResponse';
 import { ContractResponse } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
+import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
-import { CreateNotificationRequest } from '../models/CreateNotificationRequest';
-import { CreateNotificationSubscriptionRequest } from '../models/CreateNotificationSubscriptionRequest';
-import { CreateNotificationTriggerRequest } from '../models/CreateNotificationTriggerRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
+import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
@@ -84,10 +93,9 @@ import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
-import { EntityTypeNOTIFICATION } from '../models/EntityTypeNOTIFICATION';
-import { EntityTypeNOTIFICATIONSUBSCRIPTION } from '../models/EntityTypeNOTIFICATIONSUBSCRIPTION';
-import { EntityTypeNOTIFICATIONTRIGGER } from '../models/EntityTypeNOTIFICATIONTRIGGER';
+import { EntityTypeLOG } from '../models/EntityTypeLOG';
 import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { EntityTypePOLICY } from '../models/EntityTypePOLICY';
@@ -96,12 +104,18 @@ import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
+import { EntityTypeSUBSCRIPTION } from '../models/EntityTypeSUBSCRIPTION';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
+import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
 import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
 import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
+import { EventDeleteResponse } from '../models/EventDeleteResponse';
+import { EventListQueries } from '../models/EventListQueries';
+import { EventListResponse } from '../models/EventListResponse';
+import { EventResponse } from '../models/EventResponse';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
@@ -120,7 +134,9 @@ import { InventoryResponse } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
+import { ListSubscriptionLogsRequest } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
+import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
@@ -129,25 +145,6 @@ import { MonthRange } from '../models/MonthRange';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { NotificationDeleteResponse } from '../models/NotificationDeleteResponse';
-import { NotificationListQueries } from '../models/NotificationListQueries';
-import { NotificationListResponse } from '../models/NotificationListResponse';
-import { NotificationResponse } from '../models/NotificationResponse';
-import { NotificationResponseExpandable } from '../models/NotificationResponseExpandable';
-import { NotificationResponseSubscriptionsInner } from '../models/NotificationResponseSubscriptionsInner';
-import { NotificationResponseTriggersInner } from '../models/NotificationResponseTriggersInner';
-import { NotificationSubscription } from '../models/NotificationSubscription';
-import { NotificationSubscriptionDeleteResponse } from '../models/NotificationSubscriptionDeleteResponse';
-import { NotificationSubscriptionListQueries } from '../models/NotificationSubscriptionListQueries';
-import { NotificationSubscriptionListResponse } from '../models/NotificationSubscriptionListResponse';
-import { NotificationTriggerDeleteResponse } from '../models/NotificationTriggerDeleteResponse';
-import { NotificationTriggerListQueries } from '../models/NotificationTriggerListQueries';
-import { NotificationTriggerListResponse } from '../models/NotificationTriggerListResponse';
-import { NotificationTriggerResponse } from '../models/NotificationTriggerResponse';
-import { NotificationTriggerType } from '../models/NotificationTriggerType';
-import { NotificationTriggerTypeCONTRACTTRIGGER } from '../models/NotificationTriggerTypeCONTRACTTRIGGER';
-import { NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER } from '../models/NotificationTriggerTypeDEVELOPERACCOUNTTRIGGER';
-import { NotificationTriggerTypePROJECTBALANCETRIGGER } from '../models/NotificationTriggerTypePROJECTBALANCETRIGGER';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
@@ -169,7 +166,6 @@ import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
 import { PaymasterDeleteResponse } from '../models/PaymasterDeleteResponse';
 import { PaymasterResponse } from '../models/PaymasterResponse';
 import { PickContractResponseId } from '../models/PickContractResponseId';
-import { PickDeveloperAccountId } from '../models/PickDeveloperAccountId';
 import { PickPlayerResponseId } from '../models/PickPlayerResponseId';
 import { Plan } from '../models/Plan';
 import { PlansResponse } from '../models/PlansResponse';
@@ -218,7 +214,6 @@ import { ProjectLogs } from '../models/ProjectLogs';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
-import { ProjectWebhookRequest } from '../models/ProjectWebhookRequest';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
@@ -231,7 +226,6 @@ import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
-import { SettingsWebhookUpdateRequest } from '../models/SettingsWebhookUpdateRequest';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
@@ -243,10 +237,12 @@ import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
+import { Status } from '../models/Status';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
+import { SubscriptionDeleteResponse } from '../models/SubscriptionDeleteResponse';
+import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
-import { SubscriptionType } from '../models/SubscriptionType';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
@@ -254,6 +250,7 @@ import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
 import { TokenType } from '../models/TokenType';
 import { TradeType } from '../models/TradeType';
+import { TransactionConfirmedEventResponse } from '../models/TransactionConfirmedEventResponse';
 import { TransactionIntent } from '../models/TransactionIntent';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
@@ -264,6 +261,8 @@ import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResp
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
+import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
+import { TriggerResponse } from '../models/TriggerResponse';
 import { TypedDataField } from '../models/TypedDataField';
 import { UnlinkRequest } from '../models/UnlinkRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
@@ -572,6 +571,30 @@ export class ObservableAdminAuthenticationApi {
         this.configuration = configuration;
         this.requestFactory = requestFactory || new AdminAuthenticationApiRequestFactory(configuration);
         this.responseProcessor = responseProcessor || new AdminAuthenticationApiResponseProcessor();
+    }
+
+    /**
+     * Creates an authenticated player for a third party authentication provider.  The player will be authenticated with the provider and an embedded account can be pre generated.
+     * Create an authenticated player for a third party authentication provider.
+     * @param createAuthPlayerRequest 
+     */
+    public createAuthPlayer(createAuthPlayerRequest: CreateAuthPlayerRequest, _options?: Configuration): Observable<AuthPlayerResponseWithRecoveryShare> {
+        const requestContextPromise = this.requestFactory.createAuthPlayer(createAuthPlayerRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createAuthPlayer(rsp)));
+            }));
     }
 
     /**
@@ -1384,6 +1407,124 @@ export class ObservableContractsApi {
 
 }
 
+import { EventsApiRequestFactory, EventsApiResponseProcessor} from "../apis/EventsApi";
+export class ObservableEventsApi {
+    private requestFactory: EventsApiRequestFactory;
+    private responseProcessor: EventsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: EventsApiRequestFactory,
+        responseProcessor?: EventsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new EventsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new EventsApiResponseProcessor();
+    }
+
+    /**
+     * Create a new event.
+     * Create a new event.
+     * @param createEventRequest 
+     */
+    public createEvent(createEventRequest: CreateEventRequest, _options?: Configuration): Observable<EventResponse> {
+        const requestContextPromise = this.requestFactory.createEvent(createEventRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createEvent(rsp)));
+            }));
+    }
+
+    /**
+     * Delete an event.
+     * Delete an event.
+     * @param id Specifies the unique event ID (starts with eve_).
+     */
+    public deleteEvent(id: string, _options?: Configuration): Observable<EventDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteEvent(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteEvent(rsp)));
+            }));
+    }
+
+    /**
+     * Get a single event.
+     * Get a single event.
+     * @param id Specifies the unique event ID (starts with eve_).
+     */
+    public getEvent(id: string, _options?: Configuration): Observable<EventResponse> {
+        const requestContextPromise = this.requestFactory.getEvent(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getEvent(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of events.  By default, a maximum of 10 events are shown per page.
+     * List notifications.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param name Specifies the name of the event
+     * @param deleted Specifies if display deleted events
+     */
+    public getEvents(limit?: number, skip?: number, order?: SortOrder, name?: string, deleted?: boolean, _options?: Configuration): Observable<EventListResponse> {
+        const requestContextPromise = this.requestFactory.getEvents(limit, skip, order, name, deleted, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getEvents(rsp)));
+            }));
+    }
+
+}
+
 import { ExchangeApiRequestFactory, ExchangeApiResponseProcessor} from "../apis/ExchangeApi";
 export class ObservableExchangeApi {
     private requestFactory: ExchangeApiRequestFactory;
@@ -1626,360 +1767,6 @@ export class ObservableInventoriesApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPlayerNftInventory(rsp)));
-            }));
-    }
-
-}
-
-import { NotificationSubscriptionsApiRequestFactory, NotificationSubscriptionsApiResponseProcessor} from "../apis/NotificationSubscriptionsApi";
-export class ObservableNotificationSubscriptionsApi {
-    private requestFactory: NotificationSubscriptionsApiRequestFactory;
-    private responseProcessor: NotificationSubscriptionsApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: NotificationSubscriptionsApiRequestFactory,
-        responseProcessor?: NotificationSubscriptionsApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new NotificationSubscriptionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new NotificationSubscriptionsApiResponseProcessor();
-    }
-
-    /**
-     * Create a subscription for the provided notification.
-     * Create a notification subscription object.
-     * @param createNotificationSubscriptionRequest 
-     */
-    public createNotificationSubscription(createNotificationSubscriptionRequest: CreateNotificationSubscriptionRequest, _options?: Configuration): Observable<NotificationSubscription> {
-        const requestContextPromise = this.requestFactory.createNotificationSubscription(createNotificationSubscriptionRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationSubscription(rsp)));
-            }));
-    }
-
-    /**
-     * Delete a notification subscription by providing its notification subscription id.
-     * Deletes a notification subscription object.
-     * @param id Specifies the unique notification subscription ID (starts with ntr_).
-     */
-    public deleteNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscriptionDeleteResponse> {
-        const requestContextPromise = this.requestFactory.deleteNotificationSubscription(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationSubscription(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
-     * Get existing notification subscription.
-     * @param id Specifies the unique notification subscription ID (starts with not_).
-     */
-    public getNotificationSubscription(id: string, _options?: Configuration): Observable<NotificationSubscription> {
-        const requestContextPromise = this.requestFactory.getNotificationSubscription(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscription(rsp)));
-            }));
-    }
-
-    /**
-     * Returns a list of subscriptions of a notification.  Subscriptions define the the way you will get notified and the target of the notification.  Subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
-     * List notification subscriptions of a notification.
-     * @param notification Specifies the unique notification ID (starts with not_).
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     */
-    public getNotificationSubscriptions(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationSubscriptionListResponse> {
-        const requestContextPromise = this.requestFactory.getNotificationSubscriptions(notification, limit, skip, order, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationSubscriptions(rsp)));
-            }));
-    }
-
-}
-
-import { NotificationTriggersApiRequestFactory, NotificationTriggersApiResponseProcessor} from "../apis/NotificationTriggersApi";
-export class ObservableNotificationTriggersApi {
-    private requestFactory: NotificationTriggersApiRequestFactory;
-    private responseProcessor: NotificationTriggersApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: NotificationTriggersApiRequestFactory,
-        responseProcessor?: NotificationTriggersApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new NotificationTriggersApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new NotificationTriggersApiResponseProcessor();
-    }
-
-    /**
-     * Create a trigger for the provided notification.
-     * Create a notification trigger object.
-     * @param createNotificationTriggerRequest 
-     */
-    public createNotificationTrigger(createNotificationTriggerRequest: CreateNotificationTriggerRequest, _options?: Configuration): Observable<NotificationTriggerResponse> {
-        const requestContextPromise = this.requestFactory.createNotificationTrigger(createNotificationTriggerRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotificationTrigger(rsp)));
-            }));
-    }
-
-    /**
-     * Delete a notification trigger by providing its notification trigger id.
-     * Deletes a notification trigger object.
-     * @param id Specifies the unique notification trigger ID (starts with ntr_).
-     */
-    public deleteNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerDeleteResponse> {
-        const requestContextPromise = this.requestFactory.deleteNotificationTrigger(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotificationTrigger(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
-     * Get existing notification trigger.
-     * @param id Specifies the unique notification trigger ID (starts with ntr_).
-     */
-    public getNotificationTrigger(id: string, _options?: Configuration): Observable<NotificationTriggerResponse> {
-        const requestContextPromise = this.requestFactory.getNotificationTrigger(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTrigger(rsp)));
-            }));
-    }
-
-    /**
-     * Returns a list of triggers of a notification.  Triggers define the conditions that will trigger a notification.  Triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
-     * List notification triggers of a notification.
-     * @param notification Specifies the unique notification ID (starts with not_).
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     */
-    public getNotificationTriggers(notification: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Observable<NotificationTriggerListResponse> {
-        const requestContextPromise = this.requestFactory.getNotificationTriggers(notification, limit, skip, order, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotificationTriggers(rsp)));
-            }));
-    }
-
-}
-
-import { NotificationsApiRequestFactory, NotificationsApiResponseProcessor} from "../apis/NotificationsApi";
-export class ObservableNotificationsApi {
-    private requestFactory: NotificationsApiRequestFactory;
-    private responseProcessor: NotificationsApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: NotificationsApiRequestFactory,
-        responseProcessor?: NotificationsApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new NotificationsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new NotificationsApiResponseProcessor();
-    }
-
-    /**
-     * Create a notification object.
-     * Create a notification object.
-     * @param createNotificationRequest 
-     */
-    public createNotification(createNotificationRequest: CreateNotificationRequest, _options?: Configuration): Observable<NotificationResponse> {
-        const requestContextPromise = this.requestFactory.createNotification(createNotificationRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createNotification(rsp)));
-            }));
-    }
-
-    /**
-     * Delete a notification by providing its notification id.
-     * Deletes a notification object.
-     * @param id Specifies the unique notification ID (starts with not_).
-     */
-    public deleteNotification(id: string, _options?: Configuration): Observable<NotificationDeleteResponse> {
-        const requestContextPromise = this.requestFactory.deleteNotification(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteNotification(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieves the details of an existing notification.  Supply the unique notification ID.
-     * Get existing notification.
-     * @param id Specifies the unique notification ID (starts with not_).
-     * @param expand 
-     */
-    public getNotification(id: string, expand?: Array<NotificationResponseExpandable>, _options?: Configuration): Observable<NotificationResponse> {
-        const requestContextPromise = this.requestFactory.getNotification(id, expand, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotification(rsp)));
-            }));
-    }
-
-    /**
-     * Returns a list of notifications.  Notifications are useful to get notified about events that happen on-chain or in your Openfort account.  Notifications are returned sorted by creation date, with the most recently created notifications appearing first.  By default, a maximum of 10 notifications are shown per page.
-     * List notifications.
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     * @param expand Specifies the fields to expand in the response.
-     * @param deleted Specifies whether to include deleted notifications.
-     * @param name Specifies the name of the notifications.
-     */
-    public getNotifications(limit?: number, skip?: number, order?: SortOrder, expand?: Array<NotificationResponseExpandable>, deleted?: boolean, name?: string, _options?: Configuration): Observable<NotificationListResponse> {
-        const requestContextPromise = this.requestFactory.getNotifications(limit, skip, order, expand, deleted, name, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getNotifications(rsp)));
             }));
     }
 
@@ -2979,12 +2766,31 @@ export class ObservableSettingsApi {
             }));
     }
 
+}
+
+import { SubscriptionsApiRequestFactory, SubscriptionsApiResponseProcessor} from "../apis/SubscriptionsApi";
+export class ObservableSubscriptionsApi {
+    private requestFactory: SubscriptionsApiRequestFactory;
+    private responseProcessor: SubscriptionsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SubscriptionsApiRequestFactory,
+        responseProcessor?: SubscriptionsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new SubscriptionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new SubscriptionsApiResponseProcessor();
+    }
+
     /**
-     * Updated the current project environment settings by removing the webhook address. After that system will stop sending events of the transaction intent state changes
-     * Removes webhook.
+     * Creates a subscription for the given project.  This object represents the subscription where the project owner has subscribed to.
+     * Create subscription for project.
+     * @param createSubscriptionRequest 
      */
-    public removeWebhook(_options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.removeWebhook(_options);
+    public createSubscription(createSubscriptionRequest: CreateSubscriptionRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.createSubscription(createSubscriptionRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -2998,17 +2804,18 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.removeWebhook(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createSubscription(rsp)));
             }));
     }
 
     /**
-     * Updated the current project environment settings by assigning the webhook address. This address is used to send events about the changes of the transaction intent state.
-     * Update webhook.
-     * @param settingsWebhookUpdateRequest 
+     * Creates a trigger for the given subscription.  This object represents the trigger where the subscription owner has subscribed to.
+     * Create trigger for subscription.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     * @param createTriggerRequest 
      */
-    public updateWebhook(settingsWebhookUpdateRequest: SettingsWebhookUpdateRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.updateWebhook(settingsWebhookUpdateRequest, _options);
+    public createTrigger(id: string, createTriggerRequest: CreateTriggerRequest, _options?: Configuration): Observable<TriggerResponse> {
+        const requestContextPromise = this.requestFactory.createTrigger(id, createTriggerRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -3022,7 +2829,207 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWebhook(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Deletes a subscription for the given project.  This object represents the subscription where the project owner has subscribed to.
+     * Delete subscription of project.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     */
+    public deleteSubscription(id: string, _options?: Configuration): Observable<SubscriptionDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Deletes a trigger for the given subscription.  This object represents the trigger where the subscription owner has subscribed to.
+     * Delete trigger of subscription.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     * @param triggerId Specifies the unique subscription ID (starts with sub_).
+     */
+    public deleteTrigger(id: string, triggerId: string, _options?: Configuration): Observable<TriggerDeleteResponse> {
+        const requestContextPromise = this.requestFactory.deleteTrigger(id, triggerId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a subscription for the given project.  This object represents the subscription where the project owner has subscribed to.
+     * Get subscription of project.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     */
+    public getSubscription(id: string, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.getSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of subscriptions for the given project.  This object represents the subscriptions where the project owner has subscribed to.  Subscriptions are returned sorted by creation date, with the most recently created subscriptions appearing first.  By default, a maximum of 10 subscriptions are shown per page.
+     * List subscriptions of project.
+     */
+    public getSubscriptions(_options?: Configuration): Observable<SubscriptionListResponse> {
+        const requestContextPromise = this.requestFactory.getSubscriptions(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSubscriptions(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a trigger for the given id.  This object represents the trigger where the subscription owner has subscribed to.
+     * Get trigger by id.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     * @param triggerId Specifies the unique subscription ID (starts with sub_).
+     */
+    public getTrigger(id: string, triggerId: string, _options?: Configuration): Observable<TriggerResponse> {
+        const requestContextPromise = this.requestFactory.getTrigger(id, triggerId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getTrigger(rsp)));
+            }));
+    }
+
+    /**
+     * Returns a list of triggers for the given subscription.  This object represents the triggers where the subscription owner has subscribed to.  Triggers are returned sorted by creation date, with the most recently created triggers appearing first.  By default, a maximum of 10 triggers are shown per page.
+     * List triggers of subscription.
+     * @param id Specifies the unique subscription ID (starts with sub_).
+     */
+    public getTriggers(id: string, _options?: Configuration): Observable<BaseEntityListResponseTriggerResponse> {
+        const requestContextPromise = this.requestFactory.getTriggers(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getTriggers(rsp)));
+            }));
+    }
+
+    /**
+     * Lists logs of the triggered subscriptions for the given project.  This object represents the logs of the triggered subscriptions where the project owner has subscribed to.
+     * List logs of triggered subscriptions.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param topic Specifies the topic of the subscription logs
+     * @param status Specifies the status of the subscription logs
+     * @param object Specifies the object ID of the object related to triggered notification
+     * @param subscription Specifies the subscription ID
+     * @param trigger Specifies the trigger ID
+     * @param requestID Specifies the request ID
+     */
+    public listSubscriptionLogs(limit?: number, skip?: number, order?: SortOrder, topic?: APITopic, status?: Status, object?: string, subscription?: string, trigger?: string, requestID?: string, _options?: Configuration): Observable<BaseEntityListResponseLogResponse> {
+        const requestContextPromise = this.requestFactory.listSubscriptionLogs(limit, skip, order, topic, status, object, subscription, trigger, requestID, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listSubscriptionLogs(rsp)));
+            }));
+    }
+
+    /**
+     * Test a trigger  Returns a trigger for the given id.
+     * Test trigger by id.
+     */
+    public testTrigger(_options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.testTrigger(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.testTrigger(rsp)));
             }));
     }
 

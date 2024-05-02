@@ -11,6 +11,7 @@
  */
 
 import { OAuthProvider } from '../models/OAuthProvider';
+import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { TokenType } from '../models/TokenType';
 import { HttpFile } from '../http/http';
 
@@ -21,6 +22,10 @@ export class AuthenticateOAuthRequest {
     */
     'token': string;
     'tokenType': TokenType;
+    /**
+    * Specifies the fields to expand in the response.
+    */
+    'expand'?: Array<PlayerResponseExpandable>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,6 +46,12 @@ export class AuthenticateOAuthRequest {
             "name": "tokenType",
             "baseName": "tokenType",
             "type": "TokenType",
+            "format": ""
+        },
+        {
+            "name": "expand",
+            "baseName": "expand",
+            "type": "Array<PlayerResponseExpandable>",
             "format": ""
         }    ];
 

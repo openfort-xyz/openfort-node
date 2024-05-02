@@ -1,22 +1,80 @@
 import {
     AdminAuthenticationApi,
+    AuthenticateOAuthRequest,
     AuthPlayerListQueries,
     AuthPlayerListResponse,
     AuthPlayerResponse,
     AuthSessionResponse,
-    AuthenticateOAuthRequest,
+    CreateAuthPlayerRequest,
     OAuthConfig,
     OAuthConfigListResponse,
     OAuthProvider,
     PlayerResponse,
 } from "../generated";
-import { BaseApiWrapper } from "./baseApiWrapper";
-import { httpErrorHandler } from "../utilities/httpErrorHandler";
+import {BaseApiWrapper} from "./baseApiWrapper";
+import {httpErrorHandler} from "../utilities/httpErrorHandler";
+import {
+    PreGenerateEmbeddedAccountsConfiguration,
+    ShieldAuthProvider
+} from "../models/preGenerateEmbeddedAccountRequest";
+import {
+    entropy,
+    Share,
+    ShieldAuthOptions,
+    ShieldAuthProvider as ShieldJSAuthProvider,
+    ShieldSDK
+} from "@openfort/shield-js";
 
 @httpErrorHandler
 export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
     constructor(accessToken: string, basePath?: string) {
         super(AdminAuthenticationApi, accessToken, basePath);
+    }
+
+
+    /**
+     * The endpoint creates a player auth object.  It will link the player to an authentication provider.
+     * You can also pre-generate an embedded account for the player.
+     *
+     * Creates a player auth object.
+     * @param req Specifies the player auth object.
+     * @param embeddedReq Specifies the shield configuration for pre-generating an embedded account.
+     */
+    public async createAuthPlayer(req: CreateAuthPlayerRequest, embeddedReq?: PreGenerateEmbeddedAccountsConfiguration): Promise<AuthPlayerResponse> {
+        if (req.preGenerateEmbeddedAccount && !embeddedReq) {
+            throw new Error("Pre-generating embedded account requires additional configuration.");
+        }
+
+        const {recoveryShare, ...resp} = await this.api.createAuthPlayer(req);
+
+        if (recoveryShare) {
+            let authProvider: ShieldJSAuthProvider;
+            if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.Openfort) {
+                authProvider = ShieldJSAuthProvider.OPENFORT;
+            } else if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.Custom) {
+                authProvider = ShieldJSAuthProvider.CUSTOM;
+            } else {
+                throw new Error("Invalid Shield auth provider.");
+            }
+
+            const authOptions: ShieldAuthOptions = {
+                authProvider: authProvider,
+                encryptionPart: embeddedReq.encryptionPart,
+                externalUserId: req.thirdPartyUserId,
+                apiKey: embeddedReq.apiKey,
+                apiSecret: embeddedReq.apiSecret,
+            };
+
+            const share: Share = {
+                secret: recoveryShare,
+                entropy: embeddedReq.encryptionPart ? entropy.project : entropy.none,
+            };
+
+            const shieldSDK = new ShieldSDK({apiKey: embeddedReq.apiKey})
+            await shieldSDK.preRegister(share, authOptions);
+        }
+
+        return resp;
     }
 
     /**

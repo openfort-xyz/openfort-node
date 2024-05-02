@@ -10,18 +10,16 @@
  * Do not edit the class manually.
  */
 
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class TransactionConfirmedEventResponse {
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractPolicyRuleResponseContract;
-    'functionName': string;
+    'topic': APITopicTRANSACTIONSUCCESSFUL;
+    'numberOfBlocks': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,7 +33,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypeEVENT",
             "format": ""
         },
         {
@@ -45,26 +43,20 @@ export class ContractPolicyRuleResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopicTRANSACTIONSUCCESSFUL",
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
-            "type": "string",
-            "format": ""
+            "name": "numberOfBlocks",
+            "baseName": "numberOfBlocks",
+            "type": "number",
+            "format": "double"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return TransactionConfirmedEventResponse.attributeTypeMap;
     }
 
     public constructor() {

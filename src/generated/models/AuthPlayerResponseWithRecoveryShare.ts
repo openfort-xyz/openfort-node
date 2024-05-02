@@ -10,22 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
+import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
+import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { HttpFile } from '../http/http';
 
-export class ContractPolicyRuleResponse {
+export class AuthPlayerResponseWithRecoveryShare {
+    'player'?: AuthPlayerResponsePlayer;
     'id': string;
-    'object': EntityTypePOLICYRULE;
+    'object': EntityTypePLAYER;
     'createdAt': number;
-    'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractPolicyRuleResponseContract;
-    'functionName': string;
+    'linkedAccounts': Array<LinkedAccountResponse>;
+    'recoveryShare'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "AuthPlayerResponsePlayer",
+            "format": ""
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -35,7 +41,7 @@ export class ContractPolicyRuleResponse {
         {
             "name": "object",
             "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
+            "type": "EntityTypePLAYER",
             "format": ""
         },
         {
@@ -45,26 +51,20 @@ export class ContractPolicyRuleResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeCONTRACT",
+            "name": "linkedAccounts",
+            "baseName": "linkedAccounts",
+            "type": "Array<LinkedAccountResponse>",
             "format": ""
         },
         {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "ContractPolicyRuleResponseContract",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
+            "name": "recoveryShare",
+            "baseName": "recoveryShare",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ContractPolicyRuleResponse.attributeTypeMap;
+        return AuthPlayerResponseWithRecoveryShare.attributeTypeMap;
     }
 
     public constructor() {
