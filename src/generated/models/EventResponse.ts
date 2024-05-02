@@ -23,7 +23,7 @@ export class EventResponse {
     'id': string;
     'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': APITopicTRANSACTIONSUCCESSFUL;
+    'topic': APITopicTRANSACTIONSUCCESSFUL;
     'threshold': string;
     'contract': EntityIdResponse;
     'functionName': string;
@@ -54,8 +54,8 @@ export class EventResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "topic",
+            "baseName": "topic",
             "type": "APITopicTRANSACTIONSUCCESSFUL",
             "format": ""
         },

@@ -1305,12 +1305,6 @@ export interface EventsApiGetEventsRequest {
      */
     name?: string
     /**
-     * Specifies the event type (BALANCE or TRANSACTION)
-     * @type string
-     * @memberof EventsApigetEvents
-     */
-    type?: string
-    /**
      * Specifies if display deleted events
      * @type boolean
      * @memberof EventsApigetEvents
@@ -1358,7 +1352,7 @@ export class ObjectEventsApi {
      * @param param the request object
      */
     public getEvents(param: EventsApiGetEventsRequest = {}, options?: Configuration): Promise<EventListResponse> {
-        return this.api.getEvents(param.limit, param.skip, param.order, param.name, param.type, param.deleted,  options).toPromise();
+        return this.api.getEvents(param.limit, param.skip, param.order, param.name, param.deleted,  options).toPromise();
     }
 
 }
