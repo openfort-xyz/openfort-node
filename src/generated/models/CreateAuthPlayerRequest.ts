@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { PreGenerateEmbeddedAccountsConfiguration } from '../models/PreGenerateEmbeddedAccountsConfiguration';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { HttpFile } from '../http/http';
 
@@ -24,7 +23,6 @@ export class CreateAuthPlayerRequest {
     * Pre generate embedded account.
     */
     'preGenerateEmbeddedAccount': boolean;
-    'preGenerateEmbeddedAccountsConfiguration'?: PreGenerateEmbeddedAccountsConfiguration;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -45,12 +43,6 @@ export class CreateAuthPlayerRequest {
             "name": "preGenerateEmbeddedAccount",
             "baseName": "preGenerateEmbeddedAccount",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "preGenerateEmbeddedAccountsConfiguration",
-            "baseName": "preGenerateEmbeddedAccountsConfiguration",
-            "type": "PreGenerateEmbeddedAccountsConfiguration",
             "format": ""
         }    ];
 

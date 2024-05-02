@@ -26,6 +26,7 @@ export * from '../models/AuthPlayerListQueries';
 export * from '../models/AuthPlayerListResponse';
 export * from '../models/AuthPlayerResponse';
 export * from '../models/AuthPlayerResponsePlayer';
+export * from '../models/AuthPlayerResponseWithRecoveryShare';
 export * from '../models/AuthProvider';
 export * from '../models/AuthResponse';
 export * from '../models/AuthSessionResponse';
@@ -33,9 +34,7 @@ export * from '../models/AuthenticateOAuthRequest';
 export * from '../models/BalanceEventResponse';
 export * from '../models/BalanceResponse';
 export * from '../models/BaseEntityListResponseDeviceResponse';
-export * from '../models/BaseEntityListResponseEventResponse';
 export * from '../models/BaseEntityListResponseLogResponse';
-export * from '../models/BaseEntityListResponseSubscriptionResponse';
 export * from '../models/BaseEntityListResponseTriggerResponse';
 export * from '../models/CancelTransferOwnershipRequest';
 export * from '../models/ChargeCustomTokenPolicyStrategy';
@@ -111,6 +110,7 @@ export * from '../models/ErrorTypeINVALIDREQUESTERROR';
 export * from '../models/EstimateTransactionIntentGasResult';
 export * from '../models/EventDeleteResponse';
 export * from '../models/EventListQueries';
+export * from '../models/EventListResponse';
 export * from '../models/EventResponse';
 export * from '../models/Fee';
 export * from '../models/FieldErrorsValue';
@@ -203,7 +203,6 @@ export * from '../models/PolicyRuleTypeCONTRACT';
 export * from '../models/PolicyRuleTypeRATELIMIT';
 export * from '../models/PolicyStrategy';
 export * from '../models/PolicyStrategyRequest';
-export * from '../models/PreGenerateEmbeddedAccountsConfiguration';
 export * from '../models/PrismaInputJsonValue';
 export * from '../models/PrivateKeyPolicy';
 export * from '../models/ProjectListResponse';
@@ -237,6 +236,7 @@ export * from '../models/Stat';
 export * from '../models/Status';
 export * from '../models/SubmitWeb3ActionRequest';
 export * from '../models/SubscriptionDeleteResponse';
+export * from '../models/SubscriptionListResponse';
 export * from '../models/SubscriptionResponse';
 export * from '../models/SubscriptionResponsePlan';
 export * from '../models/SupabaseAuthConfig';
@@ -314,6 +314,7 @@ import { AuthPlayerListQueries      } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse      } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePlayer';
+import { AuthPlayerResponseWithRecoveryShare       } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthProvider } from '../models/AuthProvider';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
@@ -321,9 +322,7 @@ import { AuthenticateOAuthRequest     } from '../models/AuthenticateOAuthRequest
 import { BalanceEventResponse      } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse       } from '../models/BaseEntityListResponseDeviceResponse';
-import { BaseEntityListResponseEventResponse       } from '../models/BaseEntityListResponseEventResponse';
 import { BaseEntityListResponseLogResponse       } from '../models/BaseEntityListResponseLogResponse';
-import { BaseEntityListResponseSubscriptionResponse       } from '../models/BaseEntityListResponseSubscriptionResponse';
 import { BaseEntityListResponseTriggerResponse       } from '../models/BaseEntityListResponseTriggerResponse';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomTokenPolicyStrategy';
@@ -343,7 +342,7 @@ import { ContractResponse          } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse         } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
-import { CreateAuthPlayerRequest     } from '../models/CreateAuthPlayerRequest';
+import { CreateAuthPlayerRequest    } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateEventRequest          } from '../models/CreateEventRequest';
@@ -399,6 +398,7 @@ import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTE
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
 import { EventDeleteResponse    } from '../models/EventDeleteResponse';
 import { EventListQueries       } from '../models/EventListQueries';
+import { EventListResponse       } from '../models/EventListResponse';
 import { EventResponse            } from '../models/EventResponse';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
@@ -491,7 +491,6 @@ import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
 import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy     } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest     } from '../models/PolicyStrategyRequest';
-import { PreGenerateEmbeddedAccountsConfiguration } from '../models/PreGenerateEmbeddedAccountsConfiguration';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
@@ -525,6 +524,7 @@ import { Stat } from '../models/Stat';
 import { Status } from '../models/Status';
 import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionDeleteResponse    } from '../models/SubscriptionDeleteResponse';
+import { SubscriptionListResponse       } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
@@ -692,15 +692,14 @@ let typeMap: {[index: string]: any} = {
     "AuthPlayerListResponse": AuthPlayerListResponse,
     "AuthPlayerResponse": AuthPlayerResponse,
     "AuthPlayerResponsePlayer": AuthPlayerResponsePlayer,
+    "AuthPlayerResponseWithRecoveryShare": AuthPlayerResponseWithRecoveryShare,
     "AuthResponse": AuthResponse,
     "AuthSessionResponse": AuthSessionResponse,
     "AuthenticateOAuthRequest": AuthenticateOAuthRequest,
     "BalanceEventResponse": BalanceEventResponse,
     "BalanceResponse": BalanceResponse,
     "BaseEntityListResponseDeviceResponse": BaseEntityListResponseDeviceResponse,
-    "BaseEntityListResponseEventResponse": BaseEntityListResponseEventResponse,
     "BaseEntityListResponseLogResponse": BaseEntityListResponseLogResponse,
-    "BaseEntityListResponseSubscriptionResponse": BaseEntityListResponseSubscriptionResponse,
     "BaseEntityListResponseTriggerResponse": BaseEntityListResponseTriggerResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
     "ChargeCustomTokenPolicyStrategy": ChargeCustomTokenPolicyStrategy,
@@ -752,6 +751,7 @@ let typeMap: {[index: string]: any} = {
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
     "EventDeleteResponse": EventDeleteResponse,
     "EventListQueries": EventListQueries,
+    "EventListResponse": EventListResponse,
     "EventResponse": EventResponse,
     "Fee": Fee,
     "FieldErrorsValue": FieldErrorsValue,
@@ -824,7 +824,6 @@ let typeMap: {[index: string]: any} = {
     "PolicyRuleResponse": PolicyRuleResponse,
     "PolicyStrategy": PolicyStrategy,
     "PolicyStrategyRequest": PolicyStrategyRequest,
-    "PreGenerateEmbeddedAccountsConfiguration": PreGenerateEmbeddedAccountsConfiguration,
     "PrismaInputJsonValue": PrismaInputJsonValue,
     "ProjectListResponse": ProjectListResponse,
     "ProjectLogs": ProjectLogs,
@@ -849,6 +848,7 @@ let typeMap: {[index: string]: any} = {
     "Stat": Stat,
     "SubmitWeb3ActionRequest": SubmitWeb3ActionRequest,
     "SubscriptionDeleteResponse": SubscriptionDeleteResponse,
+    "SubscriptionListResponse": SubscriptionListResponse,
     "SubscriptionResponse": SubscriptionResponse,
     "SubscriptionResponsePlan": SubscriptionResponsePlan,
     "SupabaseAuthConfig": SupabaseAuthConfig,

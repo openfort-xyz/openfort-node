@@ -12,6 +12,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { AuthPlayerResponseWithRecoveryShare } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
@@ -489,13 +490,13 @@ export class AdminAuthenticationApiResponseProcessor {
      * @params response Response returned by the server for a request to createAuthPlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createAuthPlayer(response: ResponseContext): Promise<AuthPlayerResponse > {
+     public async createAuthPlayer(response: ResponseContext): Promise<AuthPlayerResponseWithRecoveryShare > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+            const body: AuthPlayerResponseWithRecoveryShare = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerResponse", ""
-            ) as AuthPlayerResponse;
+                "AuthPlayerResponseWithRecoveryShare", ""
+            ) as AuthPlayerResponseWithRecoveryShare;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -507,10 +508,10 @@ export class AdminAuthenticationApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AuthPlayerResponse = ObjectSerializer.deserialize(
+            const body: AuthPlayerResponseWithRecoveryShare = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AuthPlayerResponse", ""
-            ) as AuthPlayerResponse;
+                "AuthPlayerResponseWithRecoveryShare", ""
+            ) as AuthPlayerResponseWithRecoveryShare;
             return body;
         }
 

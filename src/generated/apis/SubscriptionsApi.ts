@@ -12,13 +12,13 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { APITopic } from '../models/APITopic';
 import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
-import { BaseEntityListResponseSubscriptionResponse } from '../models/BaseEntityListResponseSubscriptionResponse';
 import { BaseEntityListResponseTriggerResponse } from '../models/BaseEntityListResponseTriggerResponse';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { SortOrder } from '../models/SortOrder';
 import { Status } from '../models/Status';
 import { SubscriptionDeleteResponse } from '../models/SubscriptionDeleteResponse';
+import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
 import { TriggerResponse } from '../models/TriggerResponse';
@@ -674,13 +674,13 @@ export class SubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getSubscriptions
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getSubscriptions(response: ResponseContext): Promise<BaseEntityListResponseSubscriptionResponse > {
+     public async getSubscriptions(response: ResponseContext): Promise<SubscriptionListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BaseEntityListResponseSubscriptionResponse = ObjectSerializer.deserialize(
+            const body: SubscriptionListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BaseEntityListResponseSubscriptionResponse", ""
-            ) as BaseEntityListResponseSubscriptionResponse;
+                "SubscriptionListResponse", ""
+            ) as SubscriptionListResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -689,10 +689,10 @@ export class SubscriptionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BaseEntityListResponseSubscriptionResponse = ObjectSerializer.deserialize(
+            const body: SubscriptionListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BaseEntityListResponseSubscriptionResponse", ""
-            ) as BaseEntityListResponseSubscriptionResponse;
+                "SubscriptionListResponse", ""
+            ) as SubscriptionListResponse;
             return body;
         }
 

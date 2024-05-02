@@ -1,9 +1,9 @@
 import { BaseApiWrapper } from "./baseApiWrapper";
 import {
-    BaseEntityListResponseEventResponse,
     CreateEventRequest,
     EventDeleteResponse,
     EventListQueries,
+    EventListResponse,
     EventResponse,
     EventsApi,
 } from "../generated";
@@ -28,7 +28,7 @@ export class EventsApiWrapper extends BaseApiWrapper<EventsApi> {
      * Returns a list of triggers of a notification.  The triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
      * @param req Criteria to get notification triggers by.
      */
-    public async list(req: EventListQueries): Promise<BaseEntityListResponseEventResponse> {
+    public async list(req: EventListQueries): Promise<EventListResponse> {
         return await this.api.getEvents(req.limit, req.skip, req.order, req.name, req.type);
     }
 

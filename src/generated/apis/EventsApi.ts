@@ -10,9 +10,9 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { BaseEntityListResponseEventResponse } from '../models/BaseEntityListResponseEventResponse';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { EventDeleteResponse } from '../models/EventDeleteResponse';
+import { EventListResponse } from '../models/EventListResponse';
 import { EventResponse } from '../models/EventResponse';
 import { SortOrder } from '../models/SortOrder';
 
@@ -330,13 +330,13 @@ export class EventsApiResponseProcessor {
      * @params response Response returned by the server for a request to getEvents
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getEvents(response: ResponseContext): Promise<BaseEntityListResponseEventResponse > {
+     public async getEvents(response: ResponseContext): Promise<EventListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BaseEntityListResponseEventResponse = ObjectSerializer.deserialize(
+            const body: EventListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BaseEntityListResponseEventResponse", ""
-            ) as BaseEntityListResponseEventResponse;
+                "EventListResponse", ""
+            ) as EventListResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -345,10 +345,10 @@ export class EventsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BaseEntityListResponseEventResponse = ObjectSerializer.deserialize(
+            const body: EventListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BaseEntityListResponseEventResponse", ""
-            ) as BaseEntityListResponseEventResponse;
+                "EventListResponse", ""
+            ) as EventListResponse;
             return body;
         }
 
