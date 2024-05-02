@@ -17,34 +17,34 @@ export class EventsApiWrapper extends BaseApiWrapper<EventsApi> {
     }
 
     /**
-     * Create a trigger for the provided notification.
-     * @param req Parameters to create a notification trigger.
+     * Create a event.
+     * @param req Parameters to create a event.
      */
     public async create(req: CreateEventRequest): Promise<EventResponse> {
         return await this.api.createEvent(req);
     }
 
     /**
-     * Returns a list of triggers of a notification.  The triggers are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification triggers are shown per page.
-     * @param req Criteria to get notification triggers by.
+     * Returns a list of events.  The events are returned sorted by creation date, with the most recently created appearing first.  By default, a maximum of 10 events are shown per page.
+     * @param req Criteria to get events by.
      */
     public async list(req: EventListQueries): Promise<EventListResponse> {
-        return await this.api.getEvents(req.limit, req.skip, req.order, req.name, req.type);
+        return await this.api.getEvents(req.limit, req.skip, req.order, req.name);
     }
 
     /**
-     * Retrieves the details of an existing notification trigger.  Supply the unique notification trigger ID.
+     * Retrieves the details of an existing event.  Supply the unique event ID.
      *
-     * Supply the unique notification trigger ID.
-     * @param req Criteria to get notification trigger by.
+     * Supply the unique event ID.
+     * @param req Criteria to get event by.
      */
     public async get(req: GetEventRequest): Promise<EventResponse> {
         return await this.api.getEvent(req.id);
     }
 
     /**
-     * Delete a notification trigger by providing its notification trigger id.
-     * @param id Id of the notification trigger
+     * Delete a event by providing its event id.
+     * @param id Id of the event
      */
     public async delete(id: string): Promise<EventDeleteResponse> {
         return await this.api.deleteEvent(id);

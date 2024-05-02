@@ -19,7 +19,7 @@ export class ContractEventResponse {
     'id': string;
     'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': APITopicBALANCECONTRACT;
+    'topic': APITopicBALANCECONTRACT;
     'threshold': string;
     'contract': EntityIdResponse;
     'functionName': string;
@@ -47,8 +47,8 @@ export class ContractEventResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "topic",
+            "baseName": "topic",
             "type": "APITopicBALANCECONTRACT",
             "format": ""
         },

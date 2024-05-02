@@ -19,7 +19,7 @@ export class AccountEventResponse {
     'id': string;
     'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': APITopicBALANCEDEVACCOUNT;
+    'topic': APITopicBALANCEDEVACCOUNT;
     'threshold': string;
     'developerAccount': EntityIdResponse;
     'chainId': number;
@@ -46,8 +46,8 @@ export class AccountEventResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "topic",
+            "baseName": "topic",
             "type": "APITopicBALANCEDEVACCOUNT",
             "format": ""
         },

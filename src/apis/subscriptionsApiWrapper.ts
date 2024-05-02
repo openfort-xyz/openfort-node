@@ -16,34 +16,34 @@ export class SubscriptionsApiWrapper extends BaseApiWrapper<SubscriptionsApi> {
     }
 
     /**
-     * Create a subscription for the provided notification.
-     * @param req Parameters to create a notification subscription.
+     * Create a subscription.
+     * @param req Parameters to create a subscription.
      */
     public async create(req: CreateSubscriptionRequest): Promise<SubscriptionResponse> {
         return await this.api.createSubscription(req);
     }
 
     /**
-     * Returns a list of subscriptions of a notification.  The subscriptions are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 notification subscriptions are shown per page.
-     * @param req Criteria to get notification subscriptions by.
+     * Returns a list of subscriptions.  The subscriptions are returned sorted by creation date, with the most recently created appearing first.  By default, a maximum of 10 subscriptions are shown per page.
+     * @param req Criteria to get subscriptions by.
      */
     public async list(): Promise<SubscriptionListResponse> {
         return await this.api.getSubscriptions();
     }
 
     /**
-     * Retrieves the details of an existing notification subscription.  Supply the unique notification subscription ID.
+     * Retrieves the details of an existing subscription.  Supply the unique subscription ID.
      *
-     * Supply the unique notification subscription ID.
-     * @param req Criteria to get notification subscription by.
+     * Supply the unique subscription ID.
+     * @param req Criteria to get subscription by.
      */
     public async get(req: GetSubscriptionRequest): Promise<SubscriptionResponse> {
         return await this.api.getSubscription(req.id);
     }
 
     /**
-     *  Delete a notification subscription by providing its notification subscription id.
-     * @param id Id of the notification subscription
+     *  Delete a subscription by providing its subscription id.
+     * @param id Id of the subscription
      */
     public async delete(id: string): Promise<SubscriptionDeleteResponse> {
         return await this.api.deleteSubscription(id);
