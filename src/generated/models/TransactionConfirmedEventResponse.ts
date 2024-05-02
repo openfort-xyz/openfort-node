@@ -18,7 +18,7 @@ export class TransactionConfirmedEventResponse {
     'id': string;
     'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': APITopicTRANSACTIONSUCCESSFUL;
+    'topic': APITopicTRANSACTIONSUCCESSFUL;
     'numberOfBlocks': number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -43,8 +43,8 @@ export class TransactionConfirmedEventResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "topic",
+            "baseName": "topic",
             "type": "APITopicTRANSACTIONSUCCESSFUL",
             "format": ""
         },

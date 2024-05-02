@@ -18,7 +18,7 @@ export class CreateEventRequest {
     * Specifies the name of the event
     */
     'name': string;
-    'type': APITopic;
+    'topic': APITopic;
     /**
     * Specifies the contract id (if the event is a contract event)
     */
@@ -58,8 +58,8 @@ export class CreateEventRequest {
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "topic",
+            "baseName": "topic",
             "type": "APITopic",
             "format": ""
         },

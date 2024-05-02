@@ -18,7 +18,7 @@ export class BalanceEventResponse {
     'id': string;
     'object': EntityTypeEVENT;
     'createdAt': number;
-    'type': APITopicBALANCEPROJECT;
+    'topic': APITopicBALANCEPROJECT;
     'threshold': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -43,8 +43,8 @@ export class BalanceEventResponse {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "topic",
+            "baseName": "topic",
             "type": "APITopicBALANCEPROJECT",
             "format": ""
         },
