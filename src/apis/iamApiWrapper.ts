@@ -11,18 +11,18 @@ import {
     OAuthProvider,
     PlayerResponse,
 } from "../generated";
-import {BaseApiWrapper} from "./baseApiWrapper";
-import {httpErrorHandler} from "../utilities/httpErrorHandler";
+import { BaseApiWrapper } from "./baseApiWrapper";
+import { httpErrorHandler } from "../utilities/httpErrorHandler";
 import {
     PreGenerateEmbeddedAccountsConfiguration,
-    ShieldAuthProvider
+    ShieldAuthProvider,
 } from "../models/preGenerateEmbeddedAccountRequest";
 import {
     entropy,
     Share,
     ShieldAuthOptions,
     ShieldAuthProvider as ShieldJSAuthProvider,
-    ShieldSDK
+    ShieldSDK,
 } from "@openfort/shield-js";
 
 @httpErrorHandler
@@ -30,7 +30,6 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
     constructor(accessToken: string, basePath?: string) {
         super(AdminAuthenticationApi, accessToken, basePath);
     }
-
 
     /**
      * The endpoint creates a player auth object.  It will link the player to an authentication provider.
@@ -40,12 +39,15 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      * @param req Specifies the player auth object.
      * @param embeddedReq Specifies the shield configuration for pre-generating an embedded account.
      */
-    public async createAuthPlayer(req: CreateAuthPlayerRequest, embeddedReq?: PreGenerateEmbeddedAccountsConfiguration): Promise<AuthPlayerResponse> {
+    public async createAuthPlayer(
+        req: CreateAuthPlayerRequest,
+        embeddedReq?: PreGenerateEmbeddedAccountsConfiguration,
+    ): Promise<AuthPlayerResponse> {
         if (req.preGenerateEmbeddedAccount && !embeddedReq) {
             throw new Error("Pre-generating embedded account requires additional configuration.");
         }
 
-        const {recoveryShare, ...resp} = await this.api.createAuthPlayer(req);
+        const { recoveryShare, ...resp } = await this.api.createAuthPlayer(req);
 
         if (recoveryShare) {
             let authProvider: ShieldJSAuthProvider;
@@ -70,7 +72,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
                 entropy: embeddedReq.encryptionPart ? entropy.project : entropy.none,
             };
 
-            const shieldSDK = new ShieldSDK({apiKey: embeddedReq.apiKey})
+            const shieldSDK = new ShieldSDK({ apiKey: embeddedReq.apiKey });
             await shieldSDK.preRegister(share, authOptions);
         }
 
