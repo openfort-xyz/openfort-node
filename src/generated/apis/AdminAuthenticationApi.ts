@@ -29,8 +29,8 @@ import { SortOrder } from '../models/SortOrder';
 export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates an authenticated player for a third party authentication provider.  The player will be authenticated with the provider and an embedded account can be pre generated.
-     * Create an authenticated player for a third party authentication provider.
+     * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
+     * Create an authenticated player.
      * @param createAuthPlayerRequest 
      */
     public async createAuthPlayer(createAuthPlayerRequest: CreateAuthPlayerRequest, _options?: Configuration): Promise<RequestContext> {
