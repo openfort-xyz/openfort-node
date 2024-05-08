@@ -574,8 +574,8 @@ export class ObservableAdminAuthenticationApi {
     }
 
     /**
-     * Creates an authenticated player for a third party authentication provider.  The player will be authenticated with the provider and an embedded account can be pre generated.
-     * Create an authenticated player for a third party authentication provider.
+     * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
+     * Create an authenticated player.
      * @param createAuthPlayerRequest 
      */
     public createAuthPlayer(createAuthPlayerRequest: CreateAuthPlayerRequest, _options?: Configuration): Observable<AuthPlayerResponseWithRecoveryShare> {
@@ -1497,7 +1497,7 @@ export class ObservableEventsApi {
 
     /**
      * Returns a list of events.  By default, a maximum of 10 events are shown per page.
-     * List notifications.
+     * List events.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.

@@ -147,7 +147,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Returns a list of events.  By default, a maximum of 10 events are shown per page.
-     * List notifications.
+     * List events.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
