@@ -10,42 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 import { HttpFile } from '../http/http';
 
-/**
-* LootLocker oauth configuration
-*/
-export class LootLockerOAuthConfig {
+export class CodeChallengeVerify {
     /**
-    * Enable OAuth provider.
+    * The code verifier.
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderLOOTLOCKER;
+    'codeVerifier': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderLOOTLOCKER",
+            "name": "codeVerifier",
+            "baseName": "codeVerifier",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return LootLockerOAuthConfig.attributeTypeMap;
+        return CodeChallengeVerify.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

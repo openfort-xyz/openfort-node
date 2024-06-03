@@ -10,54 +10,54 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
+import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { HttpFile } from '../http/http';
 
-export class CustomAuthConfig {
+export class UpdateEmailSampleRequest {
     /**
-    * Enable OAuth provider.
+    * Specifies the name
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderCUSTOM;
+    'name'?: string;
     /**
-    * Headers to send with the request
+    * Specifies the subject
     */
-    'headers'?: string;
+    'subject'?: string;
     /**
-    * URL to send the request to to verify the payload
+    * Specifies the body
     */
-    'authenticationUrl': string;
+    'body'?: string;
+    'type'?: EmailTypeRequest;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderCUSTOM",
-            "format": ""
-        },
-        {
-            "name": "headers",
-            "baseName": "headers",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "authenticationUrl",
-            "baseName": "authenticationUrl",
+            "name": "subject",
+            "baseName": "subject",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "body",
+            "baseName": "body",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "EmailTypeRequest",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CustomAuthConfig.attributeTypeMap;
+        return UpdateEmailSampleRequest.attributeTypeMap;
     }
 
     public constructor() {

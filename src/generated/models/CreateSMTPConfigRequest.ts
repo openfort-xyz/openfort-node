@@ -10,69 +10,79 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { HttpFile } from '../http/http';
 
-export class OIDCAuthConfig {
+export class CreateSMTPConfigRequest {
     /**
-    * Enable OAuth provider.
+    * Specifies the user name
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderOIDC;
+    'user': string;
     /**
-    * PEM encoded public key to verify the JWT token
+    * Specifies the password
     */
-    'publicVerificationKey'?: string;
+    'pass': string;
     /**
-    * Audience of the JWT token
+    * Specifies the host
     */
-    'aud': string;
+    'host': string;
     /**
-    * JWKS URL to fetch the public key
+    * Specifies the from
     */
-    'jwksUrl'?: string;
+    '_from': string;
+    /**
+    * Specifies the port
+    */
+    'port': number;
+    /**
+    * Specifies the use SSL
+    */
+    'useSSL': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
+            "name": "user",
+            "baseName": "user",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pass",
+            "baseName": "pass",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "host",
+            "baseName": "host",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "_from",
+            "baseName": "from",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "port",
+            "baseName": "port",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "useSSL",
+            "baseName": "useSSL",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderOIDC",
-            "format": ""
-        },
-        {
-            "name": "publicVerificationKey",
-            "baseName": "publicVerificationKey",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "aud",
-            "baseName": "aud",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "jwksUrl",
-            "baseName": "jwksUrl",
-            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OIDCAuthConfig.attributeTypeMap;
+        return CreateSMTPConfigRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

@@ -12,7 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* Enum of the supporting OAuth providers.
-*/
-export type OAuthProvider = "google" | "twitter" | "facebook" ;
+export type EmailTypeRequest = "emailVerification" | "passwordReset" ;

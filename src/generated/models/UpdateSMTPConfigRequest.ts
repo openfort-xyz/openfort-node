@@ -10,59 +10,69 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
 import { HttpFile } from '../http/http';
 
-export class CustomAuthConfig {
+export class UpdateSMTPConfigRequest {
     /**
-    * Enable OAuth provider.
+    * Specifies the user name
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderCUSTOM;
+    'user'?: string;
     /**
-    * Headers to send with the request
+    * Specifies the password
     */
-    'headers'?: string;
+    'pass'?: string;
     /**
-    * URL to send the request to to verify the payload
+    * Specifies the host
     */
-    'authenticationUrl': string;
+    'host'?: string;
+    /**
+    * Specifies the port
+    */
+    'port'?: number;
+    /**
+    * Specifies the use SSL
+    */
+    'useSSL'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
+            "name": "user",
+            "baseName": "user",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pass",
+            "baseName": "pass",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "host",
+            "baseName": "host",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "port",
+            "baseName": "port",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "useSSL",
+            "baseName": "useSSL",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderCUSTOM",
-            "format": ""
-        },
-        {
-            "name": "headers",
-            "baseName": "headers",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "authenticationUrl",
-            "baseName": "authenticationUrl",
-            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CustomAuthConfig.attributeTypeMap;
+        return UpdateSMTPConfigRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

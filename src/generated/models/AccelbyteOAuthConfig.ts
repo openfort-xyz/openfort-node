@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
+import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
 import { HttpFile } from '../http/http';
 
 /**
@@ -21,7 +21,7 @@ export class AccelbyteOAuthConfig {
     * Enable OAuth provider.
     */
     'enabled': boolean;
-    'provider': OAuthProviderACCELBYTE;
+    'provider': ThirdPartyOAuthProviderACCELBYTE;
     /**
     * Base URI of your accelbyte gaming service environment. E.g. https://mygame.dev.gamingservices.accelbyte.io/
     */
@@ -47,7 +47,7 @@ export class AccelbyteOAuthConfig {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderACCELBYTE",
+            "type": "ThirdPartyOAuthProviderACCELBYTE",
             "format": ""
         },
         {

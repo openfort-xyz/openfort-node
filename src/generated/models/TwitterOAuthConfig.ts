@@ -10,42 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
-import { OAuthProvider } from '../models/OAuthProvider';
+import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
 import { HttpFile } from '../http/http';
 
-export class OAuthInitRequest {
-    'options'?: OAuthInitRequestOptions;
+/**
+* Twitter oauth configuration
+*/
+export class TwitterOAuthConfig {
     /**
-    * Use Pooling for the OAuth flow  This option is for the flow that requires the user can\'t be redirected from the authorization page to the application. The client should poll the server to check if the user has authorized the application.
+    * Enable OAuth provider.
     */
-    'usePooling'?: boolean;
-    'provider': OAuthProvider;
+    'enabled': boolean;
+    'provider': OAuthProviderTWITTER;
+    /**
+    * Twitter API consumer key.
+    */
+    'clientId': string;
+    /**
+    * Twitter API consumer secret.
+    */
+    'clientSecret': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "options",
-            "baseName": "options",
-            "type": "OAuthInitRequestOptions",
-            "format": ""
-        },
-        {
-            "name": "usePooling",
-            "baseName": "usePooling",
+            "name": "enabled",
+            "baseName": "enabled",
             "type": "boolean",
             "format": ""
         },
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProvider",
+            "type": "OAuthProviderTWITTER",
+            "format": ""
+        },
+        {
+            "name": "clientId",
+            "baseName": "clientId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "clientSecret",
+            "baseName": "clientSecret",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthInitRequest.attributeTypeMap;
+        return TwitterOAuthConfig.attributeTypeMap;
     }
 
     public constructor() {

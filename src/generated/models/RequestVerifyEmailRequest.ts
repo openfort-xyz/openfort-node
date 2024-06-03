@@ -10,52 +10,47 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
+import { CodeChallenge } from '../models/CodeChallenge';
 import { HttpFile } from '../http/http';
 
-/**
-* PlayFab oauth configuration
-*/
-export class PlayFabOAuthConfig {
+export class RequestVerifyEmailRequest {
     /**
-    * Enable OAuth provider.
+    * The email address of the user.
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderPLAYFAB;
+    'email': string;
     /**
-    * Title ID of your Play Fab gaming service environment.
+    * The URL sent to the user by email to reset the password. At the end of the URL, we will add the token in the format `?token=token`.
     */
-    'titleId': string;
+    'redirectUrl': string;
+    'challenge'?: CodeChallenge;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderPLAYFAB",
-            "format": ""
-        },
-        {
-            "name": "titleId",
-            "baseName": "titleId",
+            "name": "email",
+            "baseName": "email",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "redirectUrl",
+            "baseName": "redirectUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallenge",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayFabOAuthConfig.attributeTypeMap;
+        return RequestVerifyEmailRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

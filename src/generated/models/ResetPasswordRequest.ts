@@ -10,59 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
+import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { HttpFile } from '../http/http';
 
-export class CustomAuthConfig {
+export class ResetPasswordRequest {
     /**
-    * Enable OAuth provider.
+    * The email address of the user.
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderCUSTOM;
+    'email': string;
     /**
-    * Headers to send with the request
+    * The new password of the user.
     */
-    'headers'?: string;
+    'password': string;
     /**
-    * URL to send the request to to verify the payload
+    * Unique value to identify the request. It\'s used to mitigate CSRF attacks.
     */
-    'authenticationUrl': string;
+    'state'?: string;
+    'challenge'?: CodeChallengeVerify;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderCUSTOM",
-            "format": ""
-        },
-        {
-            "name": "headers",
-            "baseName": "headers",
+            "name": "email",
+            "baseName": "email",
             "type": "string",
             "format": ""
         },
         {
-            "name": "authenticationUrl",
-            "baseName": "authenticationUrl",
+            "name": "password",
+            "baseName": "password",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "state",
+            "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallengeVerify",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CustomAuthConfig.attributeTypeMap;
+        return ResetPasswordRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 
