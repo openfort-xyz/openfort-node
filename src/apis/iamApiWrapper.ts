@@ -51,10 +51,13 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
 
         if (recoveryShare) {
             let authProvider: ShieldJSAuthProvider;
+            let externalUserId: string;
             if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.Openfort) {
                 authProvider = ShieldJSAuthProvider.OPENFORT;
+                externalUserId = resp.id;
             } else if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.Custom) {
                 authProvider = ShieldJSAuthProvider.CUSTOM;
+                externalUserId = req.thirdPartyUserId;
             } else {
                 throw new Error("Invalid Shield auth provider.");
             }
@@ -62,7 +65,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
             const authOptions: ShieldAuthOptions = {
                 authProvider: authProvider,
                 encryptionPart: embeddedReq.encryptionPart,
-                externalUserId: req.thirdPartyUserId,
+                externalUserId: externalUserId,
                 apiKey: embeddedReq.apiKey,
                 apiSecret: embeddedReq.apiSecret,
             };
