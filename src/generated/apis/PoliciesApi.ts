@@ -242,7 +242,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of Policies.
+     * Returns a list of Policies.  Returns the latest 10 transaction intents for each policy.
      * List policies.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
@@ -328,7 +328,7 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the details of a Policy that has previously been created.
+     * Retrieves the details of a Policy that has previously been created.  Returns the latest 10 transaction intents that used this policy.
      * Get a policy object.
      * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.

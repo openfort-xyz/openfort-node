@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProviderSUPABASE = "supabase" ;
+export type EmailTypeResponse = "emailVerification" | "passwordReset" ;

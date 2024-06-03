@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProviderFIREBASE = "firebase" ;
+export type OAuthProviderTWITTER = "twitter" ;

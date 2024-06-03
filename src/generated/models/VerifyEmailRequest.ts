@@ -10,30 +10,27 @@
  * Do not edit the class manually.
  */
 
-import { AuthProvider } from '../models/AuthProvider';
-import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
-import { TokenType } from '../models/TokenType';
+import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { HttpFile } from '../http/http';
 
-export class AuthenticateOAuthRequest {
-    'provider': AuthProvider;
+export class VerifyEmailRequest {
     /**
-    * Token to be verified
+    * The email address of the user.
+    */
+    'email': string;
+    /**
+    * Unique value to identify the request. Obtained from the email.
     */
     'token': string;
-    'tokenType': TokenType;
-    /**
-    * Specifies the fields to expand in the response.
-    */
-    'expand'?: Array<PlayerResponseExpandable>;
+    'challenge'?: CodeChallengeVerify;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "AuthProvider",
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
             "format": ""
         },
         {
@@ -43,25 +40,17 @@ export class AuthenticateOAuthRequest {
             "format": ""
         },
         {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "TokenType",
-            "format": ""
-        },
-        {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<PlayerResponseExpandable>",
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallengeVerify",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthenticateOAuthRequest.attributeTypeMap;
+        return VerifyEmailRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

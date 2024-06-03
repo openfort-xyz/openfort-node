@@ -10,32 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvider } from '../models/OAuthProvider';
 import { HttpFile } from '../http/http';
 
-/**
-* The request to verify access token
-*/
-export class UnlinkRequest {
-    'provider': OAuthProvider;
+export class UnlinkEmailRequest {
+    /**
+    * The email address of the user.
+    */
+    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProvider",
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UnlinkRequest.attributeTypeMap;
+        return UnlinkEmailRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

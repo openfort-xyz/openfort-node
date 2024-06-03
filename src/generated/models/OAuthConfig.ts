@@ -12,13 +12,15 @@
 
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
+import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
-import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
+import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
+import { TwitterOAuthConfig } from '../models/TwitterOAuthConfig';
 import { HttpFile } from '../http/http';
 
 export class OAuthConfig {
@@ -26,7 +28,7 @@ export class OAuthConfig {
     * Enable OAuth provider.
     */
     'enabled': boolean;
-    'provider': OAuthProviderLOOTLOCKER;
+    'provider': ThirdPartyOAuthProviderLOOTLOCKER;
     /**
     * The unique Supabase URL which is supplied when you create a new project in your project dashboard.
     */
@@ -52,11 +54,11 @@ export class OAuthConfig {
     */
     'baseUrl': string;
     /**
-    * Google API client ID.
+    * Facebook API client ID.
     */
     'clientId': string;
     /**
-    * Google API client secret.
+    * Facebook API client secret.
     */
     'clientSecret': string;
     /**
@@ -88,7 +90,7 @@ export class OAuthConfig {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderLOOTLOCKER",
+            "type": "ThirdPartyOAuthProviderLOOTLOCKER",
             "format": ""
         },
         {

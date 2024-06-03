@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProviderLOOTLOCKER = "lootlocker" ;
+export type EntityTypeSMTPCONFIG = "smtpConfig" ;

@@ -10,47 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
+import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
 import { HttpFile } from '../http/http';
 
-/**
-* PlayFab oauth configuration
-*/
-export class PlayFabOAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderPLAYFAB;
-    /**
-    * Title ID of your Play Fab gaming service environment.
-    */
-    'titleId': string;
+export class EmailSampleDeleteResponse {
+    'deleted': boolean;
+    'id': string;
+    'object': EntityTypeEMAILSAMPLE;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
+            "name": "deleted",
+            "baseName": "deleted",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderPLAYFAB",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "titleId",
-            "baseName": "titleId",
-            "type": "string",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeEMAILSAMPLE",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayFabOAuthConfig.attributeTypeMap;
+        return EmailSampleDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {

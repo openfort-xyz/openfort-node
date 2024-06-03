@@ -38,10 +38,6 @@ export class CreateTransactionIntentRequest {
     * Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.
     */
     'optimistic'?: boolean;
-    /**
-    * Specify the number of confirmation blocks after which the confirmation webhook will be sent when the transaction arrives on-chain. Default is 5.
-    */
-    'confirmationBlocks'?: number;
     'interactions': Array<Interaction>;
 
     static readonly discriminator: string | undefined = undefined;
@@ -82,12 +78,6 @@ export class CreateTransactionIntentRequest {
             "baseName": "optimistic",
             "type": "boolean",
             "format": ""
-        },
-        {
-            "name": "confirmationBlocks",
-            "baseName": "confirmationBlocks",
-            "type": "number",
-            "format": "int32"
         },
         {
             "name": "interactions",
