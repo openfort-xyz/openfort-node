@@ -160,6 +160,7 @@ export * from '../models/OAuthConfig';
 export * from '../models/OAuthConfigListResponse';
 export * from '../models/OAuthInitRequest';
 export * from '../models/OAuthInitRequestOptions';
+export * from '../models/OAuthProvders';
 export * from '../models/OAuthProvider';
 export * from '../models/OAuthProviderFACEBOOK';
 export * from '../models/OAuthProviderGOOGLE';
@@ -474,6 +475,7 @@ import { OAuthConfig               } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest    } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
+import { OAuthProvders } from '../models/OAuthProvders';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
@@ -687,6 +689,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeWEB3CONNECTION",
     "ErrorTypeINVALIDREQUESTERROR",
     "NextActionType",
+    "OAuthProvders",
     "OAuthProvider",
     "OAuthProviderFACEBOOK",
     "OAuthProviderGOOGLE",

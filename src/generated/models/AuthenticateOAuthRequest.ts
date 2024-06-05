@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { AuthProvider } from '../models/AuthProvider';
+import { OAuthProvders } from '../models/OAuthProvders';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { TokenType } from '../models/TokenType';
 import { HttpFile } from '../http/http';
 
 export class AuthenticateOAuthRequest {
-    'provider': AuthProvider;
+    'provider': OAuthProvders;
     /**
     * Token to be verified
     */
@@ -33,7 +33,7 @@ export class AuthenticateOAuthRequest {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "AuthProvider",
+            "type": "OAuthProvders",
             "format": ""
         },
         {
