@@ -9,13 +9,13 @@ import { SessionsApiWrapper } from "./apis/sessionsApiWrapper";
 import { TransactionIntentsApiWrapper } from "./apis/transactionIntentsApiWrapper";
 import { InventoriesApiWrapper } from "./apis/inventoriesApiWrapper";
 import { WebHookEvent } from "./models";
-import { createHmac } from "crypto";
 import { IamApiWrapper } from "./apis/iamApiWrapper";
 import { SettingsApiWrapper } from "./apis/settingsApiWrapper";
 import { Web3ConnectionsApiWrapper } from "./apis/web3ConnectionsApiWrapper";
 import { EventsApiWrapper } from "./apis/eventsApiWrapper";
 import { SubscriptionsApiWrapper } from "./apis/subscriptionsApiWrapper";
 import { ExchangeApiWrapper } from "./apis/exchangeApiWrapper";
+import { sign } from "./utilities/signer";
 
 export default class Openfort {
     private readonly apiWrappers: { [name: string]: Observable } = {};
@@ -101,12 +101,15 @@ export default class Openfort {
     }
 
     public async constructWebhookEvent(body: string, signature: string): Promise<WebHookEvent> {
-        const secret = this.apiKey.split("_")[2]?.replace(/-/g, "");
-        const signedPayload = await createHmac("sha256", secret).update(body, "utf8").digest("hex");
+        const signedPayload = await sign(this.apiKey, body);
         if (signedPayload !== signature) {
             throw Error("Invalid signature");
         }
         return JSON.parse(body) as WebHookEvent;
+    }
+
+    public async signNonce(nonce: string): Promise<string> {
+        return await sign(this.apiKey, nonce)
     }
 }
 
