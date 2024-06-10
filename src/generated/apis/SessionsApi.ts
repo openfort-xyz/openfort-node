@@ -72,7 +72,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of Sessions.
+     * Returns a list of Sessions.  Returns the latest 10 transaction intents for each session.
      * List session keys of a player.
      * @param player The player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
@@ -142,7 +142,7 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieves the details of a Session that has previously been created.
+     * Retrieves the details of a Session that has previously been created.  Returns the latest 10 transaction intents that used this session.
      * Returns a player session by session id
      * @param id Specifies the unique session ID (starts with ses_).
      * @param expand Specifies the fields to expand.

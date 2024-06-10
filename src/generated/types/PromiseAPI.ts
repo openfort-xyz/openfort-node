@@ -31,19 +31,24 @@ import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
 import { AuthPlayerResponseWithRecoveryShare } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthProvider } from '../models/AuthProvider';
+import { AuthProviderResponse } from '../models/AuthProviderResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { BalanceEventResponse } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
+import { BaseEntityListResponseEmailSampleResponse } from '../models/BaseEntityListResponseEmailSampleResponse';
 import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
 import { BaseEntityListResponseTriggerResponse } from '../models/BaseEntityListResponseTriggerResponse';
+import { BasicAuthProvider } from '../models/BasicAuthProvider';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
+import { CodeChallenge } from '../models/CodeChallenge';
+import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse } from '../models/ContractDeleteResponse';
 import { ContractEventResponse } from '../models/ContractEventResponse';
@@ -60,6 +65,7 @@ import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorized
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
@@ -67,6 +73,7 @@ import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
+import { CreateSMTPConfigRequest } from '../models/CreateSMTPConfigRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
@@ -74,6 +81,7 @@ import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
+import { DeleteSMTPConfigResponse } from '../models/DeleteSMTPConfigResponse';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
@@ -87,11 +95,16 @@ import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountRe
 import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DomainData } from '../models/DomainData';
+import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
+import { EmailSampleResponse } from '../models/EmailSampleResponse';
+import { EmailTypeRequest } from '../models/EmailTypeRequest';
+import { EmailTypeResponse } from '../models/EmailTypeResponse';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
+import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
 import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeLOG } from '../models/EntityTypeLOG';
@@ -103,6 +116,7 @@ import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
+import { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG';
 import { EntityTypeSUBSCRIPTION } from '../models/EntityTypeSUBSCRIPTION';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
@@ -115,6 +129,7 @@ import { EventDeleteResponse } from '../models/EventDeleteResponse';
 import { EventListQueries } from '../models/EventListQueries';
 import { EventListResponse } from '../models/EventListResponse';
 import { EventResponse } from '../models/EventResponse';
+import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
@@ -148,15 +163,11 @@ import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
+import { OAuthProvders } from '../models/OAuthProvders';
 import { OAuthProvider } from '../models/OAuthProvider';
-import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
-import { OAuthProviderCUSTOM } from '../models/OAuthProviderCUSTOM';
-import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
+import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
-import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
-import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
-import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
-import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
+import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
@@ -215,12 +226,16 @@ import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
+import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
+import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
+import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SIWEAuthenticateRequest } from '../models/SIWEAuthenticateRequest';
 import { SIWEInitResponse } from '../models/SIWEInitResponse';
 import { SIWERequest } from '../models/SIWERequest';
+import { SMTPConfigResponse } from '../models/SMTPConfigResponse';
 import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
@@ -244,6 +259,13 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
+import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
+import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
+import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
+import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
+import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
+import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
+import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
 import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
@@ -262,13 +284,17 @@ import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
 import { TriggerResponse } from '../models/TriggerResponse';
+import { TwitterOAuthConfig } from '../models/TwitterOAuthConfig';
 import { TypedDataField } from '../models/TypedDataField';
-import { UnlinkRequest } from '../models/UnlinkRequest';
+import { UnlinkEmailRequest } from '../models/UnlinkEmailRequest';
+import { UnlinkOAuthRequest } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
+import { UpdateEmailSampleRequest } from '../models/UpdateEmailSampleRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
+import { UpdateSMTPConfigRequest } from '../models/UpdateSMTPConfigRequest';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { UserProjectDeleteResponse } from '../models/UserProjectDeleteResponse';
@@ -278,6 +304,7 @@ import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
+import { VerifyEmailRequest } from '../models/VerifyEmailRequest';
 import { Web3ActionListResponse } from '../models/Web3ActionListResponse';
 import { Web3ActionResponse } from '../models/Web3ActionResponse';
 import { Web3ActionStatusEnum } from '../models/Web3ActionStatusEnum';
@@ -345,7 +372,7 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * Retrieves the details of an existing account.  Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.
+     * Retrieves the details of an existing account.  Supply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.  Returns the latest 10 transaction intents created by this account.
      * Get existing account.
      * @param id Specifies the unique account ID (starts with acc_).
      * @param expand 
@@ -356,7 +383,7 @@ export class PromiseAccountsApi {
     }
 
     /**
-     * Returns a list of accounts for the given player.  This object represents a player\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  By default, a maximum of 10 accounts are shown per page.
+     * Returns a list of accounts for the given player.  This object represents a player\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  Returns the latest 10 transaction intents for each account.  By default, a maximum of 10 accounts are shown per page.
      * List accounts of a player.
      * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
@@ -514,18 +541,18 @@ export class PromiseAdminAuthenticationApi {
     }
 
     /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
      * Retrieve player by token.
      * @param provider OAuth provider
      * @param oAuthRequest 
      */
-    public verifyOAuth(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
+    public verifyOAuth(provider: AuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
         const result = this.api.verifyOAuth(provider, oAuthRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
      * Retrieve player by oauth token.
      * @param authenticateOAuthRequest 
      */
@@ -554,6 +581,7 @@ export class PromiseAuthenticationApi {
     }
 
     /**
+     * Deprecated
      * Authenticate player with oauth token.
      * @param authenticateOAuthRequest 
      */
@@ -577,7 +605,7 @@ export class PromiseAuthenticationApi {
      * @param provider OAuth provider
      * @param oAuthRequest 
      */
-    public authorizeWithOAuthToken(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<DeprecatedAuthenticatedPlayerResponse> {
+    public authorizeWithOAuthToken(provider: AuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<DeprecatedAuthenticatedPlayerResponse> {
         const result = this.api.authorizeWithOAuthToken(provider, oAuthRequest, _options);
         return result.toPromise();
     }
@@ -608,6 +636,23 @@ export class PromiseAuthenticationApi {
      */
     public initSIWE(sIWERequest: SIWERequest, _options?: Configuration): Promise<SIWEInitResponse> {
         const result = this.api.initSIWE(sIWERequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param loginRequest 
+     */
+    public linkEmail(loginRequest: LoginRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.linkEmail(loginRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Initialize Link OAuth.
+     * @param oAuthInitRequest 
+     */
+    public linkOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Promise<OAuthResponse> {
+        const result = this.api.linkOAuth(oAuthInitRequest, _options);
         return result.toPromise();
     }
 
@@ -648,12 +693,51 @@ export class PromiseAuthenticationApi {
     }
 
     /**
+     * Initialize OAuth.
+     * @param key 
+     */
+    public poolOAuth(key: string, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.poolOAuth(key, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Get or create a new session for the player based on the refresh token.
      * Refresh or create auth session.
      * @param refreshTokenRequest 
      */
     public refresh(refreshTokenRequest: RefreshTokenRequest, _options?: Configuration): Promise<AuthResponse> {
         const result = this.api.refresh(refreshTokenRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Start the Email Verification process for a player.
+     * Request an Email Verification.
+     * @param requestVerifyEmailRequest 
+     */
+    public requestEmailVerification(requestVerifyEmailRequest: RequestVerifyEmailRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.requestEmailVerification(requestVerifyEmailRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Start the Reset process for a player\'s password.
+     * Request a Reset password.
+     * @param requestResetPasswordRequest 
+     */
+    public requestResetPassword(requestResetPasswordRequest: RequestResetPasswordRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.requestResetPassword(requestResetPasswordRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Reset a player\'s password.
+     * Reset a password.
+     * @param resetPasswordRequest 
+     */
+    public resetPassword(resetPasswordRequest: ResetPasswordRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.resetPassword(resetPasswordRequest, _options);
         return result.toPromise();
     }
 
@@ -677,11 +761,19 @@ export class PromiseAuthenticationApi {
     }
 
     /**
-     * Unlink OAuth account
-     * @param unlinkRequest 
+     * @param unlinkEmailRequest 
      */
-    public unlinkOAuth(unlinkRequest: UnlinkRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
-        const result = this.api.unlinkOAuth(unlinkRequest, _options);
+    public unlinkEmail(unlinkEmailRequest: UnlinkEmailRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.unlinkEmail(unlinkEmailRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Unlink OAuth account
+     * @param unlinkOAuthRequest 
+     */
+    public unlinkOAuth(unlinkOAuthRequest: UnlinkOAuthRequest, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.unlinkOAuth(unlinkOAuthRequest, _options);
         return result.toPromise();
     }
 
@@ -695,18 +787,28 @@ export class PromiseAuthenticationApi {
     }
 
     /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * Verify a player\'s email address.
+     * Verify an email.
+     * @param verifyEmailRequest 
+     */
+    public verifyEmail(verifyEmailRequest: VerifyEmailRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.verifyEmail(verifyEmailRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
      * Retrieve player by token.
      * @param provider OAuth provider
      * @param oAuthRequest 
      */
-    public verifyOAuth(provider: OAuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
+    public verifyOAuth(provider: AuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Promise<PlayerResponse> {
         const result = this.api.verifyOAuth(provider, oAuthRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.
+     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
      * Retrieve player by oauth token.
      * @param authenticateOAuthRequest 
      */
@@ -1105,7 +1207,7 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Creates a Player.
+     * Creates a player.
      * Create a player object.
      * @param playerCreateRequest 
      */
@@ -1124,6 +1226,7 @@ export class PromisePlayersApi {
     }
 
     /**
+     * Retrieves the details of a player that has previously been created.  Returns the latest 10 transaction intents that were created with this player.
      * Retrieves the details of an existing player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
@@ -1134,7 +1237,7 @@ export class PromisePlayersApi {
     }
 
     /**
-     * By default, a maximum of ten players are shown.
+     * By default, a maximum of 10 players are shown.  Returns the latest 10 transaction intents that were created with each player.
      * List players.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
@@ -1159,7 +1262,7 @@ export class PromisePlayersApi {
     }
 
     /**
-     * Updates the specified Player by setting the values of the parameters passed.
+     * Updates the specified player by setting the values of the parameters passed.
      * Updates a player object.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param playerUpdateRequest 
@@ -1236,7 +1339,7 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * Returns a list of Policies.
+     * Returns a list of Policies.  Returns the latest 10 transaction intents for each policy.
      * List policies.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
@@ -1253,7 +1356,7 @@ export class PromisePoliciesApi {
     }
 
     /**
-     * Retrieves the details of a Policy that has previously been created.
+     * Retrieves the details of a Policy that has previously been created.  Returns the latest 10 transaction intents that used this policy.
      * Get a policy object.
      * @param id Specifies the unique policy ID (starts with pol_).
      * @param expand Specifies the fields to expand.
@@ -1383,7 +1486,7 @@ export class PromiseSessionsApi {
     }
 
     /**
-     * Returns a list of Sessions.
+     * Returns a list of Sessions.  Returns the latest 10 transaction intents for each session.
      * List session keys of a player.
      * @param player The player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
@@ -1397,7 +1500,7 @@ export class PromiseSessionsApi {
     }
 
     /**
-     * Retrieves the details of a Session that has previously been created.
+     * Retrieves the details of a Session that has previously been created.  Returns the latest 10 transaction intents that used this session.
      * Returns a player session by session id
      * @param id Specifies the unique session ID (starts with ses_).
      * @param expand Specifies the fields to expand.
@@ -1466,7 +1569,7 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Retrieve a developer account.
+     * Retrieve a developer account.  Returns the latest 10 transaction intents that were created with each developer account.
      * Get existing developer account.
      * @param id Specifies the unique developer account ID (starts with dac_).
      * @param expand 
@@ -1477,7 +1580,7 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Retrieve the list of the developer accounts for the current project.  By default, a maximum of 10 accounts are shown per page.
+     * Retrieve the list of the developer accounts for the current project.  Returns the latest 10 transaction intents that were created with each developer account.  By default, a maximum of 10 accounts are shown per page.
      * List of developer accounts.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.

@@ -10,47 +10,36 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
 import { HttpFile } from '../http/http';
 
-/**
-* PlayFab oauth configuration
-*/
-export class PlayFabOAuthConfig {
+export class CodeChallenge {
     /**
-    * Enable OAuth provider.
+    * The code challenge.
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderPLAYFAB;
+    'codeChallenge': string;
     /**
-    * Title ID of your Play Fab gaming service environment.
+    * The code verifier.
     */
-    'titleId': string;
+    'method': CodeChallengeMethodEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderPLAYFAB",
-            "format": ""
-        },
-        {
-            "name": "titleId",
-            "baseName": "titleId",
+            "name": "codeChallenge",
+            "baseName": "codeChallenge",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "method",
+            "baseName": "method",
+            "type": "CodeChallengeMethodEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PlayFabOAuthConfig.attributeTypeMap;
+        return CodeChallenge.attributeTypeMap;
     }
 
     public constructor() {
@@ -58,4 +47,5 @@ export class PlayFabOAuthConfig {
 }
 
 
+export type CodeChallengeMethodEnum = "plain" | "S256" ;
 

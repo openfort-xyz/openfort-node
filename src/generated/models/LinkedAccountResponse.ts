@@ -10,15 +10,16 @@
  * Do not edit the class manually.
  */
 
-import { AuthProvider } from '../models/AuthProvider';
+import { AuthProviderResponse } from '../models/AuthProviderResponse';
 import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { HttpFile } from '../http/http';
 
 export class LinkedAccountResponse {
-    'provider': AuthProvider;
+    'provider': AuthProviderResponse;
     'email'?: string;
     'externalUserId'?: string;
     'disabled': boolean;
+    'verified'?: boolean;
     'updatedAt'?: number;
     'address'?: string;
     'metadata'?: PrismaInputJsonValue;
@@ -29,7 +30,7 @@ export class LinkedAccountResponse {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "AuthProvider",
+            "type": "AuthProviderResponse",
             "format": ""
         },
         {
@@ -47,6 +48,12 @@ export class LinkedAccountResponse {
         {
             "name": "disabled",
             "baseName": "disabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "verified",
+            "baseName": "verified",
             "type": "boolean",
             "format": ""
         },

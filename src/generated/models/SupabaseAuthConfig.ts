@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
+import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
 import { HttpFile } from '../http/http';
 
 /**
@@ -21,7 +21,7 @@ export class SupabaseAuthConfig {
     * Enable OAuth provider.
     */
     'enabled': boolean;
-    'provider': OAuthProviderSUPABASE;
+    'provider': ThirdPartyOAuthProviderSUPABASE;
     /**
     * The unique Supabase URL which is supplied when you create a new project in your project dashboard.
     */
@@ -43,7 +43,7 @@ export class SupabaseAuthConfig {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderSUPABASE",
+            "type": "ThirdPartyOAuthProviderSUPABASE",
             "format": ""
         },
         {

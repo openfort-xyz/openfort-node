@@ -10,58 +10,69 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvders } from '../models/OAuthProvders';
-import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
-import { TokenType } from '../models/TokenType';
 import { HttpFile } from '../http/http';
 
-export class AuthenticateOAuthRequest {
-    'provider': OAuthProvders;
+export class UpdateSMTPConfigRequest {
     /**
-    * Token to be verified
+    * Specifies the user name
     */
-    'token': string;
-    'tokenType': TokenType;
+    'user'?: string;
     /**
-    * Specifies the fields to expand in the response.
+    * Specifies the password
     */
-    'expand'?: Array<PlayerResponseExpandable>;
+    'pass'?: string;
+    /**
+    * Specifies the host
+    */
+    'host'?: string;
+    /**
+    * Specifies the port
+    */
+    'port'?: number;
+    /**
+    * Specifies the use SSL
+    */
+    'useSSL'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProvders",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "user",
+            "baseName": "user",
             "type": "string",
             "format": ""
         },
         {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "TokenType",
+            "name": "pass",
+            "baseName": "pass",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<PlayerResponseExpandable>",
+            "name": "host",
+            "baseName": "host",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "port",
+            "baseName": "port",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "useSSL",
+            "baseName": "useSSL",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthenticateOAuthRequest.attributeTypeMap;
+        return UpdateSMTPConfigRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 
