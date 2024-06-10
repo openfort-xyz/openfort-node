@@ -10,53 +10,54 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvders } from '../models/OAuthProvders';
-import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
-import { TokenType } from '../models/TokenType';
+import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { HttpFile } from '../http/http';
 
-export class AuthenticateOAuthRequest {
-    'provider': OAuthProvders;
+export class CreateEmailSampleRequest {
     /**
-    * Token to be verified
+    * Specifies the name
     */
-    'token': string;
-    'tokenType': TokenType;
+    'name': string;
     /**
-    * Specifies the fields to expand in the response.
+    * Specifies the subject
     */
-    'expand'?: Array<PlayerResponseExpandable>;
+    'subject': string;
+    /**
+    * Specifies the body
+    */
+    'body': string;
+    'type': EmailTypeRequest;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProvders",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "TokenType",
+            "name": "subject",
+            "baseName": "subject",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<PlayerResponseExpandable>",
+            "name": "body",
+            "baseName": "body",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "EmailTypeRequest",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthenticateOAuthRequest.attributeTypeMap;
+        return CreateEmailSampleRequest.attributeTypeMap;
     }
 
     public constructor() {

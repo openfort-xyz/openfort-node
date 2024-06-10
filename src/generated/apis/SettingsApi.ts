@@ -110,7 +110,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieve a developer account.
+     * Retrieve a developer account.  Returns the latest 10 transaction intents that were created with each developer account.
      * Get existing developer account.
      * @param id Specifies the unique developer account ID (starts with dac_).
      * @param expand 
@@ -155,7 +155,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieve the list of the developer accounts for the current project.  By default, a maximum of 10 accounts are shown per page.
+     * Retrieve the list of the developer accounts for the current project.  Returns the latest 10 transaction intents that were created with each developer account.  By default, a maximum of 10 accounts are shown per page.
      * List of developer accounts.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.

@@ -10,58 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvders } from '../models/OAuthProvders';
-import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
-import { TokenType } from '../models/TokenType';
+import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { HttpFile } from '../http/http';
 
-export class AuthenticateOAuthRequest {
-    'provider': OAuthProvders;
+export class ResetPasswordRequest {
     /**
-    * Token to be verified
+    * The email address of the user.
     */
-    'token': string;
-    'tokenType': TokenType;
+    'email': string;
     /**
-    * Specifies the fields to expand in the response.
+    * The new password of the user.
     */
-    'expand'?: Array<PlayerResponseExpandable>;
+    'password': string;
+    /**
+    * Unique value to identify the request. It\'s used to mitigate CSRF attacks.
+    */
+    'state'?: string;
+    'challenge'?: CodeChallengeVerify;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProvders",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
+            "name": "email",
+            "baseName": "email",
             "type": "string",
             "format": ""
         },
         {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "TokenType",
+            "name": "password",
+            "baseName": "password",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<PlayerResponseExpandable>",
+            "name": "state",
+            "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallengeVerify",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthenticateOAuthRequest.attributeTypeMap;
+        return ResetPasswordRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

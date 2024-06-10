@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
+import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
 import { HttpFile } from '../http/http';
 
 /**
@@ -21,7 +21,7 @@ export class FirebaseOAuthConfig {
     * Enable OAuth provider.
     */
     'enabled': boolean;
-    'provider': OAuthProviderFIREBASE;
+    'provider': ThirdPartyOAuthProviderFIREBASE;
     /**
     * Project ID of your Firebase service environment.
     */
@@ -39,7 +39,7 @@ export class FirebaseOAuthConfig {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderFIREBASE",
+            "type": "ThirdPartyOAuthProviderFIREBASE",
             "format": ""
         },
         {

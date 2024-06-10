@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProviderCUSTOM = "custom" ;
+export type OAuthProviderFACEBOOK = "facebook" ;

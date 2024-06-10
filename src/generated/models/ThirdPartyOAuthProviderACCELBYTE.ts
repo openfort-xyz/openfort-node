@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProviderPLAYFAB = "playfab" ;
+export type ThirdPartyOAuthProviderACCELBYTE = "accelbyte" ;

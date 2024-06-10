@@ -83,7 +83,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates a Player.
+     * Creates a player.
      * Create a player object.
      * @param playerCreateRequest 
      */
@@ -168,6 +168,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieves the details of a player that has previously been created.  Returns the latest 10 transaction intents that were created with this player.
      * Retrieves the details of an existing player.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param expand Specifies the expandable fields.
@@ -212,7 +213,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * By default, a maximum of ten players are shown.
+     * By default, a maximum of 10 players are shown.  Returns the latest 10 transaction intents that were created with each player.
      * List players.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
@@ -333,7 +334,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates the specified Player by setting the values of the parameters passed.
+     * Updates the specified player by setting the values of the parameters passed.
      * Updates a player object.
      * @param id Specifies the unique player ID (starts with pla_).
      * @param playerUpdateRequest 

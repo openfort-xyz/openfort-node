@@ -12,4 +12,7 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProviderOIDC = "oidc" ;
+/**
+* Enum of the supporting Basic Auth providers.
+*/
+export type BasicAuthProvider = "email" | "wallet" ;

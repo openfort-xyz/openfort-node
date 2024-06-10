@@ -10,59 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
+import { CodeChallenge } from '../models/CodeChallenge';
 import { HttpFile } from '../http/http';
 
-export class CustomAuthConfig {
+export class RequestResetPasswordRequest {
     /**
-    * Enable OAuth provider.
+    * The email address of the user.
     */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderCUSTOM;
+    'email': string;
     /**
-    * Headers to send with the request
+    * The URL sent to the user by email to reset the password. At the end of the URL, we will add the token in the format `?token=token`.
     */
-    'headers'?: string;
+    'redirectUrl': string;
     /**
-    * URL to send the request to to verify the payload
+    * Unique value to identify the request. It\'s used to mitigate CSRF attacks.
     */
-    'authenticationUrl': string;
+    'state'?: string;
+    'challenge'?: CodeChallenge;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderCUSTOM",
-            "format": ""
-        },
-        {
-            "name": "headers",
-            "baseName": "headers",
+            "name": "email",
+            "baseName": "email",
             "type": "string",
             "format": ""
         },
         {
-            "name": "authenticationUrl",
-            "baseName": "authenticationUrl",
+            "name": "redirectUrl",
+            "baseName": "redirectUrl",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "state",
+            "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallenge",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CustomAuthConfig.attributeTypeMap;
+        return RequestResetPasswordRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

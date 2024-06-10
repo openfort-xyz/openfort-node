@@ -10,9 +10,26 @@
  * Do not edit the class manually.
  */
 
+import { BasicAuthProvider } from '../models/BasicAuthProvider';
+import { OAuthProvider } from '../models/OAuthProvider';
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { HttpFile } from '../http/http';
 
 /**
-* Enum of the supporting OAuth providers.
+* Enum of the supporting Auth providers.
 */
-export type AuthProvider = "email" | "accelbyte" | "firebase" | "google" | "lootlocker" | "playfab" | "wallet" ;
+export class AuthProvider {
+
+    static readonly discriminator: string | undefined = undefined;
+
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+    ];
+
+    static getAttributeTypeMap() {
+        return AuthProvider.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
+}
+

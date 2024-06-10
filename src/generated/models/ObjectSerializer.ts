@@ -28,19 +28,24 @@ export * from '../models/AuthPlayerResponse';
 export * from '../models/AuthPlayerResponsePlayer';
 export * from '../models/AuthPlayerResponseWithRecoveryShare';
 export * from '../models/AuthProvider';
+export * from '../models/AuthProviderResponse';
 export * from '../models/AuthResponse';
 export * from '../models/AuthSessionResponse';
 export * from '../models/AuthenticateOAuthRequest';
 export * from '../models/BalanceEventResponse';
 export * from '../models/BalanceResponse';
 export * from '../models/BaseEntityListResponseDeviceResponse';
+export * from '../models/BaseEntityListResponseEmailSampleResponse';
 export * from '../models/BaseEntityListResponseLogResponse';
 export * from '../models/BaseEntityListResponseTriggerResponse';
+export * from '../models/BasicAuthProvider';
 export * from '../models/CancelTransferOwnershipRequest';
 export * from '../models/ChargeCustomTokenPolicyStrategy';
 export * from '../models/CheckoutRequest';
 export * from '../models/CheckoutResponse';
 export * from '../models/CheckoutSubscriptionRequest';
+export * from '../models/CodeChallenge';
+export * from '../models/CodeChallengeVerify';
 export * from '../models/CompleteRecoveryRequest';
 export * from '../models/ContractDeleteResponse';
 export * from '../models/ContractEventResponse';
@@ -57,6 +62,7 @@ export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateAuthPlayerRequest';
 export * from '../models/CreateContractRequest';
 export * from '../models/CreateDeviceRequest';
+export * from '../models/CreateEmailSampleRequest';
 export * from '../models/CreateEventRequest';
 export * from '../models/CreateExchangeRequest';
 export * from '../models/CreatePaymasterRequest';
@@ -64,6 +70,7 @@ export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
 export * from '../models/CreateProjectRequest';
+export * from '../models/CreateSMTPConfigRequest';
 export * from '../models/CreateSessionRequest';
 export * from '../models/CreateSubscriptionRequest';
 export * from '../models/CreateTransactionIntentRequest';
@@ -71,6 +78,7 @@ export * from '../models/CreateTriggerRequest';
 export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
 export * from '../models/CustomAuthConfig';
+export * from '../models/DeleteSMTPConfigResponse';
 export * from '../models/DeployRequest';
 export * from '../models/DeprecatedAuthenticatedPlayerResponse';
 export * from '../models/DeveloperAccount';
@@ -84,11 +92,16 @@ export * from '../models/DeveloperAccountResponseExpandable';
 export * from '../models/DeviceListQueries';
 export * from '../models/DeviceResponse';
 export * from '../models/DomainData';
+export * from '../models/EmailSampleDeleteResponse';
+export * from '../models/EmailSampleResponse';
+export * from '../models/EmailTypeRequest';
+export * from '../models/EmailTypeResponse';
 export * from '../models/EntityIdResponse';
 export * from '../models/EntityTypeACCOUNT';
 export * from '../models/EntityTypeCONTRACT';
 export * from '../models/EntityTypeDEVELOPERACCOUNT';
 export * from '../models/EntityTypeDEVICE';
+export * from '../models/EntityTypeEMAILSAMPLE';
 export * from '../models/EntityTypeEVENT';
 export * from '../models/EntityTypeINVENTORY';
 export * from '../models/EntityTypeLOG';
@@ -100,6 +113,7 @@ export * from '../models/EntityTypePROJECT';
 export * from '../models/EntityTypeREADCONTRACT';
 export * from '../models/EntityTypeSESSION';
 export * from '../models/EntityTypeSIGNATURE';
+export * from '../models/EntityTypeSMTPCONFIG';
 export * from '../models/EntityTypeSUBSCRIPTION';
 export * from '../models/EntityTypeTRANSACTIONINTENT';
 export * from '../models/EntityTypeTRIGGER';
@@ -112,6 +126,7 @@ export * from '../models/EventDeleteResponse';
 export * from '../models/EventListQueries';
 export * from '../models/EventListResponse';
 export * from '../models/EventResponse';
+export * from '../models/FacebookOAuthConfig';
 export * from '../models/Fee';
 export * from '../models/FieldErrorsValue';
 export * from '../models/FirebaseOAuthConfig';
@@ -145,15 +160,11 @@ export * from '../models/OAuthConfig';
 export * from '../models/OAuthConfigListResponse';
 export * from '../models/OAuthInitRequest';
 export * from '../models/OAuthInitRequestOptions';
+export * from '../models/OAuthProvders';
 export * from '../models/OAuthProvider';
-export * from '../models/OAuthProviderACCELBYTE';
-export * from '../models/OAuthProviderCUSTOM';
-export * from '../models/OAuthProviderFIREBASE';
+export * from '../models/OAuthProviderFACEBOOK';
 export * from '../models/OAuthProviderGOOGLE';
-export * from '../models/OAuthProviderLOOTLOCKER';
-export * from '../models/OAuthProviderOIDC';
-export * from '../models/OAuthProviderPLAYFAB';
-export * from '../models/OAuthProviderSUPABASE';
+export * from '../models/OAuthProviderTWITTER';
 export * from '../models/OAuthRequest';
 export * from '../models/OAuthResponse';
 export * from '../models/OIDCAuthConfig';
@@ -212,12 +223,16 @@ export * from '../models/ProjectStatsRequest';
 export * from '../models/ProjectStatsResponse';
 export * from '../models/QuoteExchangeResult';
 export * from '../models/RefreshTokenRequest';
+export * from '../models/RequestResetPasswordRequest';
+export * from '../models/RequestVerifyEmailRequest';
+export * from '../models/ResetPasswordRequest';
 export * from '../models/ResponseResponse';
 export * from '../models/ResponseTypeLIST';
 export * from '../models/RevokeSessionRequest';
 export * from '../models/SIWEAuthenticateRequest';
 export * from '../models/SIWEInitResponse';
 export * from '../models/SIWERequest';
+export * from '../models/SMTPConfigResponse';
 export * from '../models/SessionListQueries';
 export * from '../models/SessionListResponse';
 export * from '../models/SessionResponse';
@@ -241,6 +256,13 @@ export * from '../models/SubscriptionResponse';
 export * from '../models/SubscriptionResponsePlan';
 export * from '../models/SupabaseAuthConfig';
 export * from '../models/ThirdPartyOAuthProvider';
+export * from '../models/ThirdPartyOAuthProviderACCELBYTE';
+export * from '../models/ThirdPartyOAuthProviderCUSTOM';
+export * from '../models/ThirdPartyOAuthProviderFIREBASE';
+export * from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
+export * from '../models/ThirdPartyOAuthProviderOIDC';
+export * from '../models/ThirdPartyOAuthProviderPLAYFAB';
+export * from '../models/ThirdPartyOAuthProviderSUPABASE';
 export * from '../models/ThirdPartyOAuthRequest';
 export * from '../models/TimeIntervalType';
 export * from '../models/Token';
@@ -259,13 +281,17 @@ export * from '../models/TransactionStat';
 export * from '../models/TransferOwnershipRequest';
 export * from '../models/TriggerDeleteResponse';
 export * from '../models/TriggerResponse';
+export * from '../models/TwitterOAuthConfig';
 export * from '../models/TypedDataField';
-export * from '../models/UnlinkRequest';
+export * from '../models/UnlinkEmailRequest';
+export * from '../models/UnlinkOAuthRequest';
 export * from '../models/UpdateContractRequest';
+export * from '../models/UpdateEmailSampleRequest';
 export * from '../models/UpdatePolicyRequest';
 export * from '../models/UpdatePolicyRuleRequest';
 export * from '../models/UpdateProjectApiKeyRequest';
 export * from '../models/UpdateProjectRequest';
+export * from '../models/UpdateSMTPConfigRequest';
 export * from '../models/UserProjectCreateRequest';
 export * from '../models/UserProjectCreateRequestRole';
 export * from '../models/UserProjectDeleteResponse';
@@ -275,6 +301,7 @@ export * from '../models/UserProjectRole';
 export * from '../models/UserProjectRoleADMIN';
 export * from '../models/UserProjectRoleMEMBER';
 export * from '../models/UserProjectUpdateRequest';
+export * from '../models/VerifyEmailRequest';
 export * from '../models/Web3ActionListResponse';
 export * from '../models/Web3ActionResponse';
 export * from '../models/Web3ActionStatusEnum';
@@ -316,19 +343,24 @@ import { AuthPlayerResponse      } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePlayer';
 import { AuthPlayerResponseWithRecoveryShare       } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthProvider } from '../models/AuthProvider';
+import { AuthProviderResponse } from '../models/AuthProviderResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest     } from '../models/AuthenticateOAuthRequest';
 import { BalanceEventResponse      } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse       } from '../models/BaseEntityListResponseDeviceResponse';
+import { BaseEntityListResponseEmailSampleResponse       } from '../models/BaseEntityListResponseEmailSampleResponse';
 import { BaseEntityListResponseLogResponse       } from '../models/BaseEntityListResponseLogResponse';
 import { BaseEntityListResponseTriggerResponse       } from '../models/BaseEntityListResponseTriggerResponse';
+import { BasicAuthProvider } from '../models/BasicAuthProvider';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest     } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
+import { CodeChallenge , CodeChallengeMethodEnum   } from '../models/CodeChallenge';
+import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { ContractDeleteResponse    } from '../models/ContractDeleteResponse';
 import { ContractEventResponse         } from '../models/ContractEventResponse';
@@ -342,9 +374,10 @@ import { ContractResponse          } from '../models/ContractResponse';
 import { CountPerIntervalLimitPolicyRuleResponse         } from '../models/CountPerIntervalLimitPolicyRuleResponse';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
-import { CreateAuthPlayerRequest    } from '../models/CreateAuthPlayerRequest';
+import { CreateAuthPlayerRequest      } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateEmailSampleRequest     } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest          } from '../models/CreateEventRequest';
 import { CreateExchangeRequest            } from '../models/CreateExchangeRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
@@ -352,6 +385,7 @@ import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest   } from '../models/CreateProjectRequest';
+import { CreateSMTPConfigRequest } from '../models/CreateSMTPConfigRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateSubscriptionRequest   } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
@@ -359,6 +393,7 @@ import { CreateTriggerRequest    } from '../models/CreateTriggerRequest';
 import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { CustomAuthConfig     } from '../models/CustomAuthConfig';
+import { DeleteSMTPConfigResponse   } from '../models/DeleteSMTPConfigResponse';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount        } from '../models/DeveloperAccount';
@@ -372,11 +407,16 @@ import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountRe
 import { DeviceListQueries     } from '../models/DeviceListQueries';
 import { DeviceResponse       } from '../models/DeviceResponse';
 import { DomainData } from '../models/DomainData';
+import { EmailSampleDeleteResponse    } from '../models/EmailSampleDeleteResponse';
+import { EmailSampleResponse        } from '../models/EmailSampleResponse';
+import { EmailTypeRequest } from '../models/EmailTypeRequest';
+import { EmailTypeResponse } from '../models/EmailTypeResponse';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
 import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
 import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
+import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
 import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeLOG } from '../models/EntityTypeLOG';
@@ -388,6 +428,7 @@ import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
 import { EntityTypeSESSION } from '../models/EntityTypeSESSION';
 import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
+import { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG';
 import { EntityTypeSUBSCRIPTION } from '../models/EntityTypeSUBSCRIPTION';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
@@ -400,6 +441,7 @@ import { EventDeleteResponse    } from '../models/EventDeleteResponse';
 import { EventListQueries      } from '../models/EventListQueries';
 import { EventListResponse       } from '../models/EventListResponse';
 import { EventResponse            } from '../models/EventResponse';
+import { FacebookOAuthConfig     } from '../models/FacebookOAuthConfig';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig    } from '../models/FirebaseOAuthConfig';
@@ -417,7 +459,7 @@ import { InventoryListResponse       } from '../models/InventoryListResponse';
 import { InventoryResponse    } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
-import { LinkedAccountResponse        } from '../models/LinkedAccountResponse';
+import { LinkedAccountResponse         } from '../models/LinkedAccountResponse';
 import { ListSubscriptionLogsRequest          } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse         } from '../models/LogResponse';
@@ -431,17 +473,13 @@ import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
 import { OAuthConfig               } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
-import { OAuthInitRequest   } from '../models/OAuthInitRequest';
+import { OAuthInitRequest    } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
+import { OAuthProvders } from '../models/OAuthProvders';
 import { OAuthProvider } from '../models/OAuthProvider';
-import { OAuthProviderACCELBYTE } from '../models/OAuthProviderACCELBYTE';
-import { OAuthProviderCUSTOM } from '../models/OAuthProviderCUSTOM';
-import { OAuthProviderFIREBASE } from '../models/OAuthProviderFIREBASE';
+import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
-import { OAuthProviderLOOTLOCKER } from '../models/OAuthProviderLOOTLOCKER';
-import { OAuthProviderOIDC } from '../models/OAuthProviderOIDC';
-import { OAuthProviderPLAYFAB } from '../models/OAuthProviderPLAYFAB';
-import { OAuthProviderSUPABASE } from '../models/OAuthProviderSUPABASE';
+import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig      } from '../models/OIDCAuthConfig';
@@ -500,12 +538,16 @@ import { ProjectStatsRequest, ProjectStatsRequestTimeFrameEnum   } from '../mode
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
+import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
+import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
+import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
 import { ResponseResponse } from '../models/ResponseResponse';
 import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SIWEAuthenticateRequest } from '../models/SIWEAuthenticateRequest';
 import { SIWEInitResponse } from '../models/SIWEInitResponse';
 import { SIWERequest } from '../models/SIWERequest';
+import { SMTPConfigResponse          } from '../models/SMTPConfigResponse';
 import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
@@ -529,6 +571,13 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
+import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
+import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
+import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
+import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
+import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
+import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
+import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
 import { ThirdPartyOAuthRequest    } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
@@ -547,13 +596,17 @@ import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TriggerDeleteResponse    } from '../models/TriggerDeleteResponse';
 import { TriggerResponse        } from '../models/TriggerResponse';
+import { TwitterOAuthConfig     } from '../models/TwitterOAuthConfig';
 import { TypedDataField } from '../models/TypedDataField';
-import { UnlinkRequest  } from '../models/UnlinkRequest';
+import { UnlinkEmailRequest } from '../models/UnlinkEmailRequest';
+import { UnlinkOAuthRequest  } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
+import { UpdateEmailSampleRequest     } from '../models/UpdateEmailSampleRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest    } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
+import { UpdateSMTPConfigRequest } from '../models/UpdateSMTPConfigRequest';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { UserProjectDeleteResponse    } from '../models/UserProjectDeleteResponse';
@@ -563,6 +616,7 @@ import { UserProjectRole } from '../models/UserProjectRole';
 import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
+import { VerifyEmailRequest } from '../models/VerifyEmailRequest';
 import { Web3ActionListResponse       } from '../models/Web3ActionListResponse';
 import { Web3ActionResponse               } from '../models/Web3ActionResponse';
 import { Web3ActionStatusEnum } from '../models/Web3ActionStatusEnum';
@@ -603,13 +657,18 @@ let enumsMap: Set<string> = new Set<string>([
     "AccountResponseExpandable",
     "ApiKeyType",
     "AssetType",
-    "AuthProvider",
+    "AuthProviderResponse",
+    "BasicAuthProvider",
+    "CodeChallengeMethodEnum",
     "Currency",
     "DeveloperAccountResponseExpandable",
+    "EmailTypeRequest",
+    "EmailTypeResponse",
     "EntityTypeACCOUNT",
     "EntityTypeCONTRACT",
     "EntityTypeDEVELOPERACCOUNT",
     "EntityTypeDEVICE",
+    "EntityTypeEMAILSAMPLE",
     "EntityTypeEVENT",
     "EntityTypeINVENTORY",
     "EntityTypeLOG",
@@ -621,6 +680,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeREADCONTRACT",
     "EntityTypeSESSION",
     "EntityTypeSIGNATURE",
+    "EntityTypeSMTPCONFIG",
     "EntityTypeSUBSCRIPTION",
     "EntityTypeTRANSACTIONINTENT",
     "EntityTypeTRIGGER",
@@ -629,15 +689,11 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeWEB3CONNECTION",
     "ErrorTypeINVALIDREQUESTERROR",
     "NextActionType",
+    "OAuthProvders",
     "OAuthProvider",
-    "OAuthProviderACCELBYTE",
-    "OAuthProviderCUSTOM",
-    "OAuthProviderFIREBASE",
+    "OAuthProviderFACEBOOK",
     "OAuthProviderGOOGLE",
-    "OAuthProviderLOOTLOCKER",
-    "OAuthProviderOIDC",
-    "OAuthProviderPLAYFAB",
-    "OAuthProviderSUPABASE",
+    "OAuthProviderTWITTER",
     "PlanChangeTypeEnum",
     "PlayerResponseExpandable",
     "PolicyRateLimit",
@@ -661,6 +717,13 @@ let enumsMap: Set<string> = new Set<string>([
     "SponsorSchemaPAYFORUSER",
     "Status",
     "ThirdPartyOAuthProvider",
+    "ThirdPartyOAuthProviderACCELBYTE",
+    "ThirdPartyOAuthProviderCUSTOM",
+    "ThirdPartyOAuthProviderFIREBASE",
+    "ThirdPartyOAuthProviderLOOTLOCKER",
+    "ThirdPartyOAuthProviderOIDC",
+    "ThirdPartyOAuthProviderPLAYFAB",
+    "ThirdPartyOAuthProviderSUPABASE",
     "TimeIntervalType",
     "TokenType",
     "TradeType",
@@ -693,12 +756,14 @@ let typeMap: {[index: string]: any} = {
     "AuthPlayerResponse": AuthPlayerResponse,
     "AuthPlayerResponsePlayer": AuthPlayerResponsePlayer,
     "AuthPlayerResponseWithRecoveryShare": AuthPlayerResponseWithRecoveryShare,
+    "AuthProvider": AuthProvider,
     "AuthResponse": AuthResponse,
     "AuthSessionResponse": AuthSessionResponse,
     "AuthenticateOAuthRequest": AuthenticateOAuthRequest,
     "BalanceEventResponse": BalanceEventResponse,
     "BalanceResponse": BalanceResponse,
     "BaseEntityListResponseDeviceResponse": BaseEntityListResponseDeviceResponse,
+    "BaseEntityListResponseEmailSampleResponse": BaseEntityListResponseEmailSampleResponse,
     "BaseEntityListResponseLogResponse": BaseEntityListResponseLogResponse,
     "BaseEntityListResponseTriggerResponse": BaseEntityListResponseTriggerResponse,
     "CancelTransferOwnershipRequest": CancelTransferOwnershipRequest,
@@ -706,6 +771,8 @@ let typeMap: {[index: string]: any} = {
     "CheckoutRequest": CheckoutRequest,
     "CheckoutResponse": CheckoutResponse,
     "CheckoutSubscriptionRequest": CheckoutSubscriptionRequest,
+    "CodeChallenge": CodeChallenge,
+    "CodeChallengeVerify": CodeChallengeVerify,
     "CompleteRecoveryRequest": CompleteRecoveryRequest,
     "ContractDeleteResponse": ContractDeleteResponse,
     "ContractEventResponse": ContractEventResponse,
@@ -722,6 +789,7 @@ let typeMap: {[index: string]: any} = {
     "CreateAuthPlayerRequest": CreateAuthPlayerRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreateDeviceRequest": CreateDeviceRequest,
+    "CreateEmailSampleRequest": CreateEmailSampleRequest,
     "CreateEventRequest": CreateEventRequest,
     "CreateExchangeRequest": CreateExchangeRequest,
     "CreatePaymasterRequest": CreatePaymasterRequest,
@@ -729,12 +797,14 @@ let typeMap: {[index: string]: any} = {
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
     "CreateProjectRequest": CreateProjectRequest,
+    "CreateSMTPConfigRequest": CreateSMTPConfigRequest,
     "CreateSessionRequest": CreateSessionRequest,
     "CreateSubscriptionRequest": CreateSubscriptionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "CreateTriggerRequest": CreateTriggerRequest,
     "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
     "CustomAuthConfig": CustomAuthConfig,
+    "DeleteSMTPConfigResponse": DeleteSMTPConfigResponse,
     "DeployRequest": DeployRequest,
     "DeprecatedAuthenticatedPlayerResponse": DeprecatedAuthenticatedPlayerResponse,
     "DeveloperAccount": DeveloperAccount,
@@ -747,12 +817,15 @@ let typeMap: {[index: string]: any} = {
     "DeviceListQueries": DeviceListQueries,
     "DeviceResponse": DeviceResponse,
     "DomainData": DomainData,
+    "EmailSampleDeleteResponse": EmailSampleDeleteResponse,
+    "EmailSampleResponse": EmailSampleResponse,
     "EntityIdResponse": EntityIdResponse,
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
     "EventDeleteResponse": EventDeleteResponse,
     "EventListQueries": EventListQueries,
     "EventListResponse": EventListResponse,
     "EventResponse": EventResponse,
+    "FacebookOAuthConfig": FacebookOAuthConfig,
     "Fee": Fee,
     "FieldErrorsValue": FieldErrorsValue,
     "FirebaseOAuthConfig": FirebaseOAuthConfig,
@@ -832,11 +905,15 @@ let typeMap: {[index: string]: any} = {
     "ProjectStatsResponse": ProjectStatsResponse,
     "QuoteExchangeResult": QuoteExchangeResult,
     "RefreshTokenRequest": RefreshTokenRequest,
+    "RequestResetPasswordRequest": RequestResetPasswordRequest,
+    "RequestVerifyEmailRequest": RequestVerifyEmailRequest,
+    "ResetPasswordRequest": ResetPasswordRequest,
     "ResponseResponse": ResponseResponse,
     "RevokeSessionRequest": RevokeSessionRequest,
     "SIWEAuthenticateRequest": SIWEAuthenticateRequest,
     "SIWEInitResponse": SIWEInitResponse,
     "SIWERequest": SIWERequest,
+    "SMTPConfigResponse": SMTPConfigResponse,
     "SessionListQueries": SessionListQueries,
     "SessionListResponse": SessionListResponse,
     "SessionResponse": SessionResponse,
@@ -866,19 +943,24 @@ let typeMap: {[index: string]: any} = {
     "TransferOwnershipRequest": TransferOwnershipRequest,
     "TriggerDeleteResponse": TriggerDeleteResponse,
     "TriggerResponse": TriggerResponse,
+    "TwitterOAuthConfig": TwitterOAuthConfig,
     "TypedDataField": TypedDataField,
-    "UnlinkRequest": UnlinkRequest,
+    "UnlinkEmailRequest": UnlinkEmailRequest,
+    "UnlinkOAuthRequest": UnlinkOAuthRequest,
     "UpdateContractRequest": UpdateContractRequest,
+    "UpdateEmailSampleRequest": UpdateEmailSampleRequest,
     "UpdatePolicyRequest": UpdatePolicyRequest,
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
     "UpdateProjectApiKeyRequest": UpdateProjectApiKeyRequest,
     "UpdateProjectRequest": UpdateProjectRequest,
+    "UpdateSMTPConfigRequest": UpdateSMTPConfigRequest,
     "UserProjectCreateRequest": UserProjectCreateRequest,
     "UserProjectCreateRequestRole": UserProjectCreateRequestRole,
     "UserProjectDeleteResponse": UserProjectDeleteResponse,
     "UserProjectListResponse": UserProjectListResponse,
     "UserProjectResponse": UserProjectResponse,
     "UserProjectUpdateRequest": UserProjectUpdateRequest,
+    "VerifyEmailRequest": VerifyEmailRequest,
     "Web3ActionListResponse": Web3ActionListResponse,
     "Web3ActionResponse": Web3ActionResponse,
     "Web3ConnectionListQueries": Web3ConnectionListQueries,
