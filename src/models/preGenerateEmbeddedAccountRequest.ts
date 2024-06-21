@@ -6,6 +6,6 @@ export interface PreGenerateEmbeddedAccountsConfiguration {
 }
 
 export enum ShieldAuthProvider {
-    Openfort = "openfort",
-    Custom = "custom",
+    OPENFORT = "openfort",
+    CUSTOM = "custom",
 }

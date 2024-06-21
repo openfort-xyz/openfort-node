@@ -10,52 +10,54 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
 import { HttpFile } from '../http/http';
 
-export class ApiAuthorizedNetworkResponse {
-    'id': string;
-    'object': EntityTypePROJECT;
-    'createdAt': number;
-    'name': string;
-    'network': string;
+export class DiscordOAuthConfig {
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': OAuthProviderDISCORD;
+    /**
+    * Discord API client ID.
+    */
+    'clientId': string;
+    /**
+    * Discord API client secret.
+    */
+    'clientSecret': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderDISCORD",
+            "format": ""
+        },
+        {
+            "name": "clientId",
+            "baseName": "clientId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePROJECT",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "network",
-            "baseName": "network",
+            "name": "clientSecret",
+            "baseName": "clientSecret",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ApiAuthorizedNetworkResponse.attributeTypeMap;
+        return DiscordOAuthConfig.attributeTypeMap;
     }
 
     public constructor() {
