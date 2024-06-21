@@ -13,12 +13,10 @@
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
 import { HttpFile } from '../http/http';
 
-export class ApiAuthorizedNetworkResponse {
+export class ApiAuthorizedNetworkDeleteResponse {
     'id': string;
     'object': EntityTypePROJECT;
-    'createdAt': number;
-    'name': string;
-    'network': string;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -36,26 +34,14 @@ export class ApiAuthorizedNetworkResponse {
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "network",
-            "baseName": "network",
-            "type": "string",
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ApiAuthorizedNetworkResponse.attributeTypeMap;
+        return ApiAuthorizedNetworkDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {

@@ -52,10 +52,10 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
         if (recoveryShare) {
             let authProvider: ShieldJSAuthProvider;
             let externalUserId: string;
-            if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.Openfort) {
+            if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.OPENFORT) {
                 authProvider = ShieldJSAuthProvider.OPENFORT;
                 externalUserId = resp.id;
-            } else if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.Custom) {
+            } else if (embeddedReq?.shieldAuthProvider === ShieldAuthProvider.CUSTOM) {
                 authProvider = ShieldJSAuthProvider.CUSTOM;
                 externalUserId = req.thirdPartyUserId;
             } else {
