@@ -6,6 +6,8 @@ import { GetDeveloperAccountRequest } from "../models/getDeveloperAccountRequest
 
 @httpErrorHandler
 export class SettingsApiWrapper extends BaseApiWrapper<SettingsApi> {
+    static type = 'settings';
+
     constructor(accessToken: string, basePath?: string) {
         super(SettingsApi, accessToken, basePath);
     }

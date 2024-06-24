@@ -5,6 +5,8 @@ import { ConfigurationParameters } from "../generated/configuration";
 import { Middleware } from "../utilities/middleware";
 
 export class BaseApiWrapper<T> implements Observable {
+    static type = 'base';
+
     private readonly _observers: Observer[] = [];
     protected readonly api: T;
 
