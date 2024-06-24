@@ -4,6 +4,8 @@ import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
 export class ExchangeApiWrapper extends BaseApiWrapper<ExchangeApi> {
+    static type = 'exchange';
+
     constructor(accessToken: string, basePath?: string) {
         super(ExchangeApi, accessToken, basePath);
     }

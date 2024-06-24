@@ -86,8 +86,21 @@ export default class Openfort {
         }
     }
 
+    private getWrapperKey(wrapper: any): string {
+        if ('type' in wrapper && typeof wrapper.type === 'string') {
+            return wrapper.type;
+        }
+
+        if ('name' in wrapper && typeof wrapper.name === 'string') {
+            return wrapper.name;
+        }
+
+        throw new Error('getWrapperKey failed');
+    }
+
     private getOrCreateWrapper<T extends Observable>(type: new (_accessToken: string, _basePath?: string) => T): T {
-        const wrapper = this.apiWrappers[type.name];
+        const key = this.getWrapperKey(type);
+        const wrapper = this.apiWrappers[key];
         if (wrapper) {
             return wrapper as T;
         }
@@ -96,7 +109,7 @@ export default class Openfort {
         for (const observer of this.observers) {
             result.subscribe?.(observer);
         }
-        this.apiWrappers[type.name] = result;
+        this.apiWrappers[key] = result;
         return result;
     }
 

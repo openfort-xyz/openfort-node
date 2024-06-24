@@ -27,6 +27,8 @@ import {
 
 @httpErrorHandler
 export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
+    static type = 'iam';
+
     constructor(accessToken: string, basePath?: string) {
         super(AdminAuthenticationApi, accessToken, basePath);
     }
