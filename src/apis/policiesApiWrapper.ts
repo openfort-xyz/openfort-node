@@ -14,7 +14,7 @@ import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
 export class PoliciesApiWrapper extends BaseApiWrapper<PoliciesApi> {
-    static type = 'policies';
+    static type = "policies";
 
     constructor(accessToken: string, basePath?: string) {
         super(PoliciesApi, accessToken, basePath);

@@ -11,7 +11,7 @@ import { GetSubscriptionRequest } from "../models/getSubscriptionRequest";
 
 @httpErrorHandler
 export class SubscriptionsApiWrapper extends BaseApiWrapper<SubscriptionsApi> {
-    static type = 'subscriptions';
+    static type = "subscriptions";
 
     constructor(accessToken: string, basePath?: string) {
         super(SubscriptionsApi, accessToken, basePath);

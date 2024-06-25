@@ -12,7 +12,7 @@ import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
 export class PolicyRulesApiWrapper extends BaseApiWrapper<PolicyRulesApi> {
-    static type = 'policyRules';
+    static type = "policyRules";
 
     constructor(accessToken: string, basePath?: string) {
         super(PolicyRulesApi, accessToken, basePath);

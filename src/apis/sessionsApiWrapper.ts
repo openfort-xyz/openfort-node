@@ -13,7 +13,7 @@ import { GetSessionRequest } from "../models/getSessionRequest";
 
 @httpErrorHandler
 export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
-    static type = 'sessions';
+    static type = "sessions";
 
     constructor(accessToken: string, basePath?: string) {
         super(SessionsApi, accessToken, basePath);

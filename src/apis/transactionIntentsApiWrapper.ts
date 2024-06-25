@@ -13,7 +13,7 @@ import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {
-    static type = 'transactionIntents';
+    static type = "transactionIntents";
 
     constructor(accessToken: string, basePath?: string) {
         super(TransactionIntentsApi, accessToken, basePath);
