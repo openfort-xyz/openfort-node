@@ -13,6 +13,8 @@ import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
 export class PlayersApiWrapper extends BaseApiWrapper<PlayersApi> {
+    static type = 'players';
+
     constructor(accessToken: string, basePath?: string) {
         super(PlayersApi, accessToken, basePath);
     }
