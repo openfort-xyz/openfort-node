@@ -87,15 +87,15 @@ export default class Openfort {
     }
 
     private getWrapperKey(wrapper: any): string {
-        if ('type' in wrapper && typeof wrapper.type === 'string') {
+        if ("type" in wrapper && typeof wrapper.type === "string") {
             return wrapper.type;
         }
 
-        if ('name' in wrapper && typeof wrapper.name === 'string') {
+        if ("name" in wrapper && typeof wrapper.name === "string") {
             return wrapper.name;
         }
 
-        throw new Error('getWrapperKey failed');
+        throw new Error("getWrapperKey failed");
     }
 
     private getOrCreateWrapper<T extends Observable>(type: new (_accessToken: string, _basePath?: string) => T): T {
