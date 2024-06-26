@@ -6,6 +6,8 @@ import { UpdatePaymasterRequest } from "../models/updatePaymasterRequest";
 
 @httpErrorHandler
 export class PaymasterApiWrapper extends BaseApiWrapper<PaymasterApi> {
+    static type = "paymaster";
+
     constructor(accessToken: string, basePath?: string) {
         super(PaymasterApi, accessToken, basePath);
     }

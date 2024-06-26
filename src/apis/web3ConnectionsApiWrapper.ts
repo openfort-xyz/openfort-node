@@ -15,6 +15,8 @@ import { CreateSubmitWeb3ActionRequest } from "../models/submitWeb3ActionRequest
 
 @httpErrorHandler
 export class Web3ConnectionsApiWrapper extends BaseApiWrapper<Web3ConnectionsApi> {
+    static type = "web3Connections";
+
     constructor(accessToken: string, basePath?: string) {
         super(Web3ConnectionsApi, accessToken, basePath);
     }

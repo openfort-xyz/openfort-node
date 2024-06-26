@@ -14,6 +14,8 @@ import { ReadContractRequest } from "../models/readContractRequest";
 
 @httpErrorHandler
 export class ContractsApiWrapper extends BaseApiWrapper<ContractsApi> {
+    static type = "contracts";
+
     constructor(accessToken: string, basePath?: string) {
         super(ContractsApi, accessToken, basePath);
     }
