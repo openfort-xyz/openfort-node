@@ -10,52 +10,54 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { OAuthProviderEPICGAMES } from '../models/OAuthProviderEPICGAMES';
 import { HttpFile } from '../http/http';
 
-export class ApiAuthorizedNetworkResponse {
-    'id': string;
-    'object': EntityTypePROJECT;
-    'createdAt': number;
-    'name': string;
-    'network': string;
+export class EpicGamesOAuthConfig {
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': OAuthProviderEPICGAMES;
+    /**
+    * Epic Games API client ID.
+    */
+    'clientId': string;
+    /**
+    * Epic Games API client secret.
+    */
+    'clientSecret': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderEPICGAMES",
+            "format": ""
+        },
+        {
+            "name": "clientId",
+            "baseName": "clientId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePROJECT",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "network",
-            "baseName": "network",
+            "name": "clientSecret",
+            "baseName": "clientSecret",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ApiAuthorizedNetworkResponse.attributeTypeMap;
+        return EpicGamesOAuthConfig.attributeTypeMap;
     }
 
     public constructor() {

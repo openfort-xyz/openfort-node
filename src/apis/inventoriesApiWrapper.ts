@@ -9,6 +9,8 @@ import { GetAccountInventoryRequest } from "../models/getAccountInventoryRequest
 
 @httpErrorHandler
 export class InventoriesApiWrapper extends BaseApiWrapper<InventoriesApi> {
+    static type = "inventories";
+
     constructor(accessToken: string, basePath?: string) {
         super(InventoriesApi, accessToken, basePath);
     }

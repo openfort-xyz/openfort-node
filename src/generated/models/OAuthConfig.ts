@@ -12,6 +12,8 @@
 
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
+import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
+import { EpicGamesOAuthConfig } from '../models/EpicGamesOAuthConfig';
 import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
@@ -54,11 +56,11 @@ export class OAuthConfig {
     */
     'baseUrl': string;
     /**
-    * Facebook API client ID.
+    * Epic Games API client ID.
     */
     'clientId': string;
     /**
-    * Facebook API client secret.
+    * Epic Games API client secret.
     */
     'clientSecret': string;
     /**

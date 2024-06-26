@@ -14,9 +14,13 @@ import { HttpFile } from '../http/http';
 
 export class RefreshTokenRequest {
     /**
-    * Specifies the session.
+    * Specifies the session refresh token.
     */
     'refreshToken': string;
+    /**
+    * Specifies whether to force refresh the session.
+    */
+    'forceRefresh'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,6 +29,12 @@ export class RefreshTokenRequest {
             "name": "refreshToken",
             "baseName": "refreshToken",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "forceRefresh",
+            "baseName": "forceRefresh",
+            "type": "boolean",
             "format": ""
         }    ];
 

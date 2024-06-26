@@ -19,6 +19,8 @@ import { DeployRequest } from "../models/deployRequest";
 
 @httpErrorHandler
 export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
+    static type = "accounts";
+
     constructor(accessToken: string, basePath?: string) {
         super(AccountsApi, accessToken, basePath);
     }

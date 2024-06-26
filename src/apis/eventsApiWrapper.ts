@@ -12,6 +12,8 @@ import { GetEventRequest } from "../models/getEventRequest";
 
 @httpErrorHandler
 export class EventsApiWrapper extends BaseApiWrapper<EventsApi> {
+    static type = "events";
+
     constructor(accessToken: string, basePath?: string) {
         super(EventsApi, accessToken, basePath);
     }
