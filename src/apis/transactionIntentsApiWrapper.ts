@@ -8,8 +8,9 @@ import {
     EstimateTransactionIntentGasResult,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { TransactionIntentsApi } from "../generated";
+import {createConfiguration, ResponseContext, TransactionIntentsApi} from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
+import {HeadersMiddleware} from "../utilities/middleware";
 
 @httpErrorHandler
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {
@@ -30,8 +31,19 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
     /**
      * Creates a transaction intent object.
      * @param req Parameters to create transaction intent
+     * @param madeFor In case of ecosystems, the publishable key of the game wants to create the transaction intent
      */
-    public async create(req: CreateTransactionIntentRequest): Promise<TransactionIntentResponse> {
+    public async create(req: CreateTransactionIntentRequest, madeFor?: string): Promise<TransactionIntentResponse> {
+        if (madeFor) {
+            const config = createConfiguration({
+                middleware: [
+                    new HeadersMiddleware({
+                        "X-Openfort-Made-For": madeFor,
+                    })
+                ]
+            })
+            return await this.api.createTransactionIntent(req, config);
+        }
         return await this.api.createTransactionIntent(req);
     }
 
