@@ -31,14 +31,14 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
     /**
      * Creates a transaction intent object.
      * @param req Parameters to create transaction intent
-     * @param madeFor In case of ecosystems, the publishable key of the game wants to create the transaction intent
+     * @param behalfOf In case of ecosystems, the publishable key of the game wants to create the transaction intent
      */
-    public async create(req: CreateTransactionIntentRequest, madeFor?: string): Promise<TransactionIntentResponse> {
-        if (madeFor) {
+    public async create(req: CreateTransactionIntentRequest, behalfOf?: string): Promise<TransactionIntentResponse> {
+        if (behalfOf) {
             const config = createConfiguration({
                 middleware: [
                     new HeadersMiddleware({
-                        "X-Openfort-Made-For": madeFor,
+                        "X-Behalf-Of-Project": behalfOf,
                     })
                 ]
             })
