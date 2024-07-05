@@ -8,15 +8,19 @@ import {
     EstimateTransactionIntentGasResult,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { TransactionIntentsApi } from "../generated";
+import { createConfiguration, ResponseContext, ServerConfiguration, TransactionIntentsApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {
     static type = "transactionIntents";
+    private readonly accessToken: string;
+    private readonly basePath?: string;
 
     constructor(accessToken: string, basePath?: string) {
         super(TransactionIntentsApi, accessToken, basePath);
+        this.accessToken = accessToken;
+        this.basePath = basePath;
     }
 
     /**
@@ -30,9 +34,10 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
     /**
      * Creates a transaction intent object.
      * @param req Parameters to create transaction intent
+     * @param behalfOf In case of ecosystems, the publishable key of the game wants to create the transaction intent
      */
-    public async create(req: CreateTransactionIntentRequest): Promise<TransactionIntentResponse> {
-        return await this.api.createTransactionIntent(req);
+    public async create(req: CreateTransactionIntentRequest, behalfOf?: string): Promise<TransactionIntentResponse> {
+        return await this.api.createTransactionIntent(req, behalfOf);
     }
 
     /**

@@ -22,7 +22,7 @@ export class SubmitWeb3ActionRequest {
     */
     'policy'?: string;
     /**
-    * signed data by the owner
+    * signed repositories by the owner
     */
     'signature'?: string;
 

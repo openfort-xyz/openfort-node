@@ -14,17 +14,9 @@ import { HttpFile } from '../http/http';
 
 export class OAuthInitRequestOptions {
     /**
-    * If set to true does not immediately redirect the current browser context to visit the OAuth authorization page for the provider.
-    */
-    'skipBrowserRedirect'?: boolean;
-    /**
     * An object of query params
     */
     'queryParams'?: { [key: string]: string; };
-    /**
-    * A space-separated list of scopes granted to the OAuth application.
-    */
-    'scopes'?: string;
     /**
     * A URL to send the user to after they are confirmed.
     */
@@ -34,21 +26,9 @@ export class OAuthInitRequestOptions {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "skipBrowserRedirect",
-            "baseName": "skipBrowserRedirect",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "queryParams",
             "baseName": "queryParams",
             "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
-            "name": "scopes",
-            "baseName": "scopes",
-            "type": "string",
             "format": ""
         },
         {
