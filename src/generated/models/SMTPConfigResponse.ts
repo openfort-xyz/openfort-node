@@ -14,37 +14,17 @@ import { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG';
 import { HttpFile } from '../http/http';
 
 export class SMTPConfigResponse {
-    'id': string;
-    'object': EntityTypeSMTPCONFIG;
-    'createdAt': number;
     'user': string;
     'pass': string;
     'host': string;
     'port': number;
     '_from': string;
     'useSSL': boolean;
+    'object': EntityTypeSMTPCONFIG;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeSMTPCONFIG",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "user",
             "baseName": "user",
@@ -79,6 +59,12 @@ export class SMTPConfigResponse {
             "name": "useSSL",
             "baseName": "useSSL",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeSMTPCONFIG",
             "format": ""
         }    ];
 

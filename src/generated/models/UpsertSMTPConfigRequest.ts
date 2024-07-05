@@ -12,7 +12,7 @@
 
 import { HttpFile } from '../http/http';
 
-export class UpdateSMTPConfigRequest {
+export class UpsertSMTPConfigRequest {
     /**
     * Specifies the user name
     */
@@ -25,6 +25,10 @@ export class UpdateSMTPConfigRequest {
     * Specifies the host
     */
     'host'?: string;
+    /**
+    * Specifies the from
+    */
+    '_from'?: string;
     /**
     * Specifies the port
     */
@@ -56,6 +60,12 @@ export class UpdateSMTPConfigRequest {
             "format": ""
         },
         {
+            "name": "_from",
+            "baseName": "from",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "port",
             "baseName": "port",
             "type": "number",
@@ -69,7 +79,7 @@ export class UpdateSMTPConfigRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateSMTPConfigRequest.attributeTypeMap;
+        return UpsertSMTPConfigRequest.attributeTypeMap;
     }
 
     public constructor() {

@@ -16,6 +16,22 @@ export class InventoriesApiWrapper extends BaseApiWrapper<InventoriesApi> {
     }
 
     /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
+     * Get NFTs list of player.
+     */
+    public async getPlayerNftInventory(req: PlayerInventoryListQueries): Promise<InventoryListResponse> {
+        return await this.api.getPlayerNftInventory(req.id, req.chainId, req.limit, req.skip, req.order, req.contract);
+    }
+
+    /**
+     * For development purposes only.  Under higher load scenarios, this endpoint may be rate limited.
+     * Retrieves the NFT assets of an existing account.
+     */
+    public async getAccountNftInventory(req: AccountInventoryListQueries): Promise<InventoryListResponse> {
+        return await this.api.getAccountNftInventory(req.id, req.limit, req.skip, req.order, req.contractId);
+    }
+
+    /**
      * Retrieves the native assets list of an existing player. Supply the unique player ID from either a player creation request or the player list, and Openfort will return the corresponding player information.
      */
     public async getPlayerCryptoCurrencyInventory(req: PlayerInventoryListQueries): Promise<InventoryListResponse> {

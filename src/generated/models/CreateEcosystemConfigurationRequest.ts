@@ -12,54 +12,64 @@
 
 import { HttpFile } from '../http/http';
 
-export class CreatePaymasterRequest {
+export class CreateEcosystemConfigurationRequest {
     /**
-    * Specifies the address of the paymaster
+    * Custom domain of the ecosystem.
     */
-    'address': string;
+    'customDomain': string;
     /**
-    * Specifies the paymaster URL
+    * Primary color of the ecosystem.
     */
-    'url': string;
+    'primaryColor': string;
     /**
-    * Specifies the context, that is, the arbitrary repositories that the specific paymaster may require
+    * Primary color foreground of the ecosystem.
     */
-    'context'?: any;
+    'primaryColorForeground': string;
     /**
-    * Specifies the name of the paymaster
+    * Radius of the ecosystem.
     */
-    'name'?: string;
+    'radius': string;
+    /**
+    * Logo URL of the ecosystem.
+    */
+    'logoUrl': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "address",
-            "baseName": "address",
+            "name": "customDomain",
+            "baseName": "customDomain",
             "type": "string",
             "format": ""
         },
         {
-            "name": "url",
-            "baseName": "url",
+            "name": "primaryColor",
+            "baseName": "primaryColor",
             "type": "string",
             "format": ""
         },
         {
-            "name": "context",
-            "baseName": "context",
-            "type": "any",
+            "name": "primaryColorForeground",
+            "baseName": "primaryColorForeground",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "radius",
+            "baseName": "radius",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "logoUrl",
+            "baseName": "logoUrl",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreatePaymasterRequest.attributeTypeMap;
+        return CreateEcosystemConfigurationRequest.attributeTypeMap;
     }
 
     public constructor() {

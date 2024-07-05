@@ -33,6 +33,8 @@ export * from '../models/AuthProviderResponse';
 export * from '../models/AuthResponse';
 export * from '../models/AuthSessionResponse';
 export * from '../models/AuthenticateOAuthRequest';
+export * from '../models/Authorize200Response';
+export * from '../models/AuthorizePlayerRequest';
 export * from '../models/BalanceEventResponse';
 export * from '../models/BalanceResponse';
 export * from '../models/BaseEntityListResponseDeviceResponse';
@@ -45,6 +47,8 @@ export * from '../models/ChargeCustomTokenPolicyStrategy';
 export * from '../models/CheckoutRequest';
 export * from '../models/CheckoutResponse';
 export * from '../models/CheckoutSubscriptionRequest';
+export * from '../models/ChildProjectListResponse';
+export * from '../models/ChildProjectResponse';
 export * from '../models/CodeChallenge';
 export * from '../models/CodeChallengeVerify';
 export * from '../models/CompleteRecoveryRequest';
@@ -63,6 +67,7 @@ export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateAuthPlayerRequest';
 export * from '../models/CreateContractRequest';
 export * from '../models/CreateDeviceRequest';
+export * from '../models/CreateEcosystemConfigurationRequest';
 export * from '../models/CreateEmailSampleRequest';
 export * from '../models/CreateEventRequest';
 export * from '../models/CreateExchangeRequest';
@@ -71,7 +76,6 @@ export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
 export * from '../models/CreateProjectRequest';
-export * from '../models/CreateSMTPConfigRequest';
 export * from '../models/CreateSessionRequest';
 export * from '../models/CreateSubscriptionRequest';
 export * from '../models/CreateTransactionIntentRequest';
@@ -94,6 +98,7 @@ export * from '../models/DeviceListQueries';
 export * from '../models/DeviceResponse';
 export * from '../models/DiscordOAuthConfig';
 export * from '../models/DomainData';
+export * from '../models/EcosystemConfigurationResponse';
 export * from '../models/EmailSampleDeleteResponse';
 export * from '../models/EmailSampleResponse';
 export * from '../models/EmailTypeRequest';
@@ -296,7 +301,7 @@ export * from '../models/UpdatePolicyRequest';
 export * from '../models/UpdatePolicyRuleRequest';
 export * from '../models/UpdateProjectApiKeyRequest';
 export * from '../models/UpdateProjectRequest';
-export * from '../models/UpdateSMTPConfigRequest';
+export * from '../models/UpsertSMTPConfigRequest';
 export * from '../models/UserProjectCreateRequest';
 export * from '../models/UserProjectCreateRequestRole';
 export * from '../models/UserProjectDeleteResponse';
@@ -353,6 +358,8 @@ import { AuthProviderResponse } from '../models/AuthProviderResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest     } from '../models/AuthenticateOAuthRequest';
+import { Authorize200Response        } from '../models/Authorize200Response';
+import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse      } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse       } from '../models/BaseEntityListResponseDeviceResponse';
@@ -365,6 +372,8 @@ import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomToken
 import { CheckoutRequest     } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
+import { ChildProjectListResponse       } from '../models/ChildProjectListResponse';
+import { ChildProjectResponse     } from '../models/ChildProjectResponse';
 import { CodeChallenge , CodeChallengeMethodEnum   } from '../models/CodeChallenge';
 import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
@@ -383,6 +392,7 @@ import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorized
 import { CreateAuthPlayerRequest      } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest     } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest          } from '../models/CreateEventRequest';
 import { CreateExchangeRequest            } from '../models/CreateExchangeRequest';
@@ -391,7 +401,6 @@ import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest   } from '../models/CreateProjectRequest';
-import { CreateSMTPConfigRequest } from '../models/CreateSMTPConfigRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateSubscriptionRequest   } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
@@ -414,6 +423,7 @@ import { DeviceListQueries     } from '../models/DeviceListQueries';
 import { DeviceResponse       } from '../models/DeviceResponse';
 import { DiscordOAuthConfig     } from '../models/DiscordOAuthConfig';
 import { DomainData } from '../models/DomainData';
+import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
 import { EmailSampleDeleteResponse    } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse        } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
@@ -543,7 +553,7 @@ import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
 import { ProjectLogs       } from '../models/ProjectLogs';
-import { ProjectResponse        } from '../models/ProjectResponse';
+import { ProjectResponse          } from '../models/ProjectResponse';
 import { ProjectStatsRequest, ProjectStatsRequestTimeFrameEnum   } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
@@ -557,7 +567,7 @@ import { RevokeSessionRequest } from '../models/RevokeSessionRequest';
 import { SIWEAuthenticateRequest } from '../models/SIWEAuthenticateRequest';
 import { SIWEInitResponse } from '../models/SIWEInitResponse';
 import { SIWERequest } from '../models/SIWERequest';
-import { SMTPConfigResponse          } from '../models/SMTPConfigResponse';
+import { SMTPConfigResponse        } from '../models/SMTPConfigResponse';
 import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
@@ -616,7 +626,7 @@ import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest    } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
-import { UpdateSMTPConfigRequest } from '../models/UpdateSMTPConfigRequest';
+import { UpsertSMTPConfigRequest } from '../models/UpsertSMTPConfigRequest';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { UserProjectDeleteResponse    } from '../models/UserProjectDeleteResponse';
@@ -773,6 +783,8 @@ let typeMap: {[index: string]: any} = {
     "AuthResponse": AuthResponse,
     "AuthSessionResponse": AuthSessionResponse,
     "AuthenticateOAuthRequest": AuthenticateOAuthRequest,
+    "Authorize200Response": Authorize200Response,
+    "AuthorizePlayerRequest": AuthorizePlayerRequest,
     "BalanceEventResponse": BalanceEventResponse,
     "BalanceResponse": BalanceResponse,
     "BaseEntityListResponseDeviceResponse": BaseEntityListResponseDeviceResponse,
@@ -784,6 +796,8 @@ let typeMap: {[index: string]: any} = {
     "CheckoutRequest": CheckoutRequest,
     "CheckoutResponse": CheckoutResponse,
     "CheckoutSubscriptionRequest": CheckoutSubscriptionRequest,
+    "ChildProjectListResponse": ChildProjectListResponse,
+    "ChildProjectResponse": ChildProjectResponse,
     "CodeChallenge": CodeChallenge,
     "CodeChallengeVerify": CodeChallengeVerify,
     "CompleteRecoveryRequest": CompleteRecoveryRequest,
@@ -802,6 +816,7 @@ let typeMap: {[index: string]: any} = {
     "CreateAuthPlayerRequest": CreateAuthPlayerRequest,
     "CreateContractRequest": CreateContractRequest,
     "CreateDeviceRequest": CreateDeviceRequest,
+    "CreateEcosystemConfigurationRequest": CreateEcosystemConfigurationRequest,
     "CreateEmailSampleRequest": CreateEmailSampleRequest,
     "CreateEventRequest": CreateEventRequest,
     "CreateExchangeRequest": CreateExchangeRequest,
@@ -810,7 +825,6 @@ let typeMap: {[index: string]: any} = {
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
     "CreateProjectRequest": CreateProjectRequest,
-    "CreateSMTPConfigRequest": CreateSMTPConfigRequest,
     "CreateSessionRequest": CreateSessionRequest,
     "CreateSubscriptionRequest": CreateSubscriptionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
@@ -831,6 +845,7 @@ let typeMap: {[index: string]: any} = {
     "DeviceResponse": DeviceResponse,
     "DiscordOAuthConfig": DiscordOAuthConfig,
     "DomainData": DomainData,
+    "EcosystemConfigurationResponse": EcosystemConfigurationResponse,
     "EmailSampleDeleteResponse": EmailSampleDeleteResponse,
     "EmailSampleResponse": EmailSampleResponse,
     "EntityIdResponse": EntityIdResponse,
@@ -968,7 +983,7 @@ let typeMap: {[index: string]: any} = {
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
     "UpdateProjectApiKeyRequest": UpdateProjectApiKeyRequest,
     "UpdateProjectRequest": UpdateProjectRequest,
-    "UpdateSMTPConfigRequest": UpdateSMTPConfigRequest,
+    "UpsertSMTPConfigRequest": UpsertSMTPConfigRequest,
     "UserProjectCreateRequest": UserProjectCreateRequest,
     "UserProjectCreateRequestRole": UserProjectCreateRequestRole,
     "UserProjectDeleteResponse": UserProjectDeleteResponse,

@@ -37,6 +37,8 @@ import { AuthProviderResponse } from '../models/AuthProviderResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
+import { Authorize200Response } from '../models/Authorize200Response';
+import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
@@ -49,6 +51,8 @@ import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPoli
 import { CheckoutRequest } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
+import { ChildProjectListResponse } from '../models/ChildProjectListResponse';
+import { ChildProjectResponse } from '../models/ChildProjectResponse';
 import { CodeChallenge } from '../models/CodeChallenge';
 import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
@@ -67,6 +71,7 @@ import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorized
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
@@ -75,7 +80,6 @@ import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
-import { CreateSMTPConfigRequest } from '../models/CreateSMTPConfigRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
@@ -98,6 +102,7 @@ import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
 import { DomainData } from '../models/DomainData';
+import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
 import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
@@ -300,7 +305,7 @@ import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
-import { UpdateSMTPConfigRequest } from '../models/UpdateSMTPConfigRequest';
+import { UpsertSMTPConfigRequest } from '../models/UpsertSMTPConfigRequest';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { UserProjectDeleteResponse } from '../models/UserProjectDeleteResponse';
@@ -515,7 +520,7 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * **Custodial Accounts only** - Signs the typed data value with types data structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
+     * **Custodial Accounts only** - Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param id Specifies the unique account ID (starts with acc_).
      * @param signPayloadRequest 
@@ -915,6 +920,28 @@ export class ObservableAuthenticationApi {
     }
 
     /**
+     * @param authorizePlayerRequest 
+     */
+    public authorize(authorizePlayerRequest: AuthorizePlayerRequest, _options?: Configuration): Observable<Authorize200Response> {
+        const requestContextPromise = this.requestFactory.authorize(authorizePlayerRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authorize(rsp)));
+            }));
+    }
+
+    /**
      * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
      * Authorize player with token.
      * @param provider OAuth provider
@@ -966,9 +993,10 @@ export class ObservableAuthenticationApi {
     /**
      * Initialize OAuth.
      * @param oAuthInitRequest 
+     * @param xGame 
      */
-    public initOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Observable<OAuthResponse> {
-        const requestContextPromise = this.requestFactory.initOAuth(oAuthInitRequest, _options);
+    public initOAuth(oAuthInitRequest: OAuthInitRequest, xGame?: string, _options?: Configuration): Observable<OAuthResponse> {
+        const requestContextPromise = this.requestFactory.initOAuth(oAuthInitRequest, xGame, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -990,9 +1018,10 @@ export class ObservableAuthenticationApi {
      * Create a challenge to link external wallet to the player.
      * Initialize SIWE.
      * @param sIWERequest 
+     * @param xGame 
      */
-    public initSIWE(sIWERequest: SIWERequest, _options?: Configuration): Observable<SIWEInitResponse> {
-        const requestContextPromise = this.requestFactory.initSIWE(sIWERequest, _options);
+    public initSIWE(sIWERequest: SIWERequest, xGame?: string, _options?: Configuration): Observable<SIWEInitResponse> {
+        const requestContextPromise = this.requestFactory.initSIWE(sIWERequest, xGame, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1012,9 +1041,10 @@ export class ObservableAuthenticationApi {
 
     /**
      * @param loginRequest 
+     * @param xGame 
      */
-    public linkEmail(loginRequest: LoginRequest, _options?: Configuration): Observable<AuthPlayerResponse> {
-        const requestContextPromise = this.requestFactory.linkEmail(loginRequest, _options);
+    public linkEmail(loginRequest: LoginRequest, xGame?: string, _options?: Configuration): Observable<AuthPlayerResponse> {
+        const requestContextPromise = this.requestFactory.linkEmail(loginRequest, xGame, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1035,9 +1065,10 @@ export class ObservableAuthenticationApi {
     /**
      * Initialize Link OAuth.
      * @param oAuthInitRequest 
+     * @param xGame 
      */
-    public linkOAuth(oAuthInitRequest: OAuthInitRequest, _options?: Configuration): Observable<OAuthResponse> {
-        const requestContextPromise = this.requestFactory.linkOAuth(oAuthInitRequest, _options);
+    public linkOAuth(oAuthInitRequest: OAuthInitRequest, xGame?: string, _options?: Configuration): Observable<OAuthResponse> {
+        const requestContextPromise = this.requestFactory.linkOAuth(oAuthInitRequest, xGame, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1082,9 +1113,10 @@ export class ObservableAuthenticationApi {
      * Authenticate a player based on email and password.
      * Email and password login.
      * @param loginRequest 
+     * @param xGame 
      */
-    public loginEmailPassword(loginRequest: LoginRequest, _options?: Configuration): Observable<AuthResponse> {
-        const requestContextPromise = this.requestFactory.loginEmailPassword(loginRequest, _options);
+    public loginEmailPassword(loginRequest: LoginRequest, xGame?: string, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.loginEmailPassword(loginRequest, xGame, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1270,9 +1302,10 @@ export class ObservableAuthenticationApi {
      * Create and authenticate a player based on email and password.
      * Email and password signup.
      * @param signupRequest 
+     * @param xGame 
      */
-    public signupEmailPassword(signupRequest: SignupRequest, _options?: Configuration): Observable<AuthResponse> {
-        const requestContextPromise = this.requestFactory.signupEmailPassword(signupRequest, _options);
+    public signupEmailPassword(signupRequest: SignupRequest, xGame?: string, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.signupEmailPassword(signupRequest, xGame, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1293,9 +1326,10 @@ export class ObservableAuthenticationApi {
     /**
      * Verify oauth token of a third party auth provider.
      * @param thirdPartyOAuthRequest 
+     * @param xGame 
      */
-    public thirdParty(thirdPartyOAuthRequest: ThirdPartyOAuthRequest, _options?: Configuration): Observable<AuthPlayerResponse> {
-        const requestContextPromise = this.requestFactory.thirdParty(thirdPartyOAuthRequest, _options);
+    public thirdParty(thirdPartyOAuthRequest: ThirdPartyOAuthRequest, xGame?: string, _options?: Configuration): Observable<AuthPlayerResponse> {
+        const requestContextPromise = this.requestFactory.thirdParty(thirdPartyOAuthRequest, xGame, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1575,8 +1609,8 @@ export class ObservableContractsApi {
     }
 
     /**
-     * Using this endpoint, you can get the data returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
-     * Read on chain contract data.
+     * Using this endpoint, you can get the repositories returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
+     * Read on chain contract repositories.
      * @param id Specifies the unique contract ID (starts with con_).
      * @param functionName The function name of the contract.
      * @param functionArgs The function arguments of the contract, in string format. Accepts pla_, con_ and acc_ IDs.
@@ -3275,9 +3309,10 @@ export class ObservableTransactionIntentsApi {
      * Creates a TransactionIntent.  A pending TransactionIntent has the `response` attribute as undefined.  After the TransactionIntent is created and broadcasted to the blockchain, `response` will be populated with the transaction hash and a status (1 success, 0 fail).  When using a non-custodial account, a `nextAction` attribute is returned with the `userOperationHash` that must be signed by the owner of the account.
      * Create a transaction intent object.
      * @param createTransactionIntentRequest 
+     * @param xBehalfOfProject 
      */
-    public createTransactionIntent(createTransactionIntentRequest: CreateTransactionIntentRequest, _options?: Configuration): Observable<TransactionIntentResponse> {
-        const requestContextPromise = this.requestFactory.createTransactionIntent(createTransactionIntentRequest, _options);
+    public createTransactionIntent(createTransactionIntentRequest: CreateTransactionIntentRequest, xBehalfOfProject?: string, _options?: Configuration): Observable<TransactionIntentResponse> {
+        const requestContextPromise = this.requestFactory.createTransactionIntent(createTransactionIntentRequest, xBehalfOfProject, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

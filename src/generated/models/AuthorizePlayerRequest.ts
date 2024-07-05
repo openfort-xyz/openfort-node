@@ -12,34 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-export class CreateDeviceRequest {
+export class AuthorizePlayerRequest {
     /**
-    * Specifies the unique account ID (starts with acc_)
+    * The authorization code received from the api to authorize the project to use the Ecosystem player.
     */
-    'account': string;
-    /**
-    * Specifies the share repositories
-    */
-    'share': string;
+    'authorizationCode': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "share",
-            "baseName": "share",
+            "name": "authorizationCode",
+            "baseName": "authorizationCode",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateDeviceRequest.attributeTypeMap;
+        return AuthorizePlayerRequest.attributeTypeMap;
     }
 
     public constructor() {

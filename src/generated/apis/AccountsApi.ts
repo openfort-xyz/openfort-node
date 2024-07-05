@@ -416,7 +416,7 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * **Custodial Accounts only** - Signs the typed data value with types data structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
+     * **Custodial Accounts only** - Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param id Specifies the unique account ID (starts with acc_).
      * @param signPayloadRequest 
