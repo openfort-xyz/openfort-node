@@ -122,7 +122,7 @@ export default class Openfort {
     }
 
     public async signNonce(nonce: string): Promise<string> {
-        return await sign(this.apiKey, nonce)
+        return await sign(this.apiKey, nonce);
     }
 }
 
