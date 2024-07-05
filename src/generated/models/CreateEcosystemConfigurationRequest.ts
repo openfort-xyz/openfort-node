@@ -14,9 +14,9 @@ import { HttpFile } from '../http/http';
 
 export class CreateEcosystemConfigurationRequest {
     /**
-    * Subdomain of the ecosystem.
+    * Custom domain of the ecosystem.
     */
-    'subdomain': string;
+    'customDomain': string;
     /**
     * Primary color of the ecosystem.
     */
@@ -38,8 +38,8 @@ export class CreateEcosystemConfigurationRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subdomain",
-            "baseName": "subdomain",
+            "name": "customDomain",
+            "baseName": "customDomain",
             "type": "string",
             "format": ""
         },

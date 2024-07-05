@@ -25,6 +25,10 @@ export class CreatePaymasterRequest {
     * Specifies the context, that is, the arbitrary repositories that the specific paymaster may require
     */
     'context'?: any;
+    /**
+    * Specifies the name of the paymaster
+    */
+    'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -45,6 +49,12 @@ export class CreatePaymasterRequest {
             "name": "context",
             "baseName": "context",
             "type": "any",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         }    ];
 

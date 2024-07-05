@@ -16,7 +16,7 @@ export class EcosystemConfigurationResponse {
     /**
     * Subdomain of the ecosystem.
     */
-    'subdomain': string;
+    'customDomain': string;
     /**
     * Primary color of the ecosystem.
     */
@@ -38,8 +38,8 @@ export class EcosystemConfigurationResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subdomain",
-            "baseName": "subdomain",
+            "name": "customDomain",
+            "baseName": "customDomain",
             "type": "string",
             "format": ""
         },

@@ -264,7 +264,7 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (functionArgs !== undefined) {
-            requestContext.setQueryParam("functionArgs", JSON.stringify(functionArgs));
+            requestContext.setQueryParam("functionArgs", ObjectSerializer.serialize(functionArgs, "Array<any>", ""));
         }
 
 

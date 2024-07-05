@@ -51,6 +51,8 @@ import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPoli
 import { CheckoutRequest } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
+import { ChildProjectListResponse } from '../models/ChildProjectListResponse';
+import { ChildProjectResponse } from '../models/ChildProjectResponse';
 import { CodeChallenge } from '../models/CodeChallenge';
 import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
