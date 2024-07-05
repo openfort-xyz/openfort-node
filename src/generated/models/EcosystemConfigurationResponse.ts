@@ -12,64 +12,64 @@
 
 import { HttpFile } from '../http/http';
 
-export class UpdateSMTPConfigRequest {
+export class EcosystemConfigurationResponse {
     /**
-    * Specifies the user name
+    * Subdomain of the ecosystem.
     */
-    'user'?: string;
+    'subdomain': string;
     /**
-    * Specifies the password
+    * Primary color of the ecosystem.
     */
-    'pass'?: string;
+    'primaryColor': string;
     /**
-    * Specifies the host
+    * Primary color foreground of the ecosystem.
     */
-    'host'?: string;
+    'primaryColorForeground': string;
     /**
-    * Specifies the port
+    * Radius of the ecosystem.
     */
-    'port'?: number;
+    'radius': string;
     /**
-    * Specifies the use SSL
+    * Logo URL of the ecosystem.
     */
-    'useSSL'?: boolean;
+    'logoUrl': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "user",
-            "baseName": "user",
+            "name": "subdomain",
+            "baseName": "subdomain",
             "type": "string",
             "format": ""
         },
         {
-            "name": "pass",
-            "baseName": "pass",
+            "name": "primaryColor",
+            "baseName": "primaryColor",
             "type": "string",
             "format": ""
         },
         {
-            "name": "host",
-            "baseName": "host",
+            "name": "primaryColorForeground",
+            "baseName": "primaryColorForeground",
             "type": "string",
             "format": ""
         },
         {
-            "name": "port",
-            "baseName": "port",
-            "type": "number",
-            "format": "double"
+            "name": "radius",
+            "baseName": "radius",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "useSSL",
-            "baseName": "useSSL",
-            "type": "boolean",
+            "name": "logoUrl",
+            "baseName": "logoUrl",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateSMTPConfigRequest.attributeTypeMap;
+        return EcosystemConfigurationResponse.attributeTypeMap;
     }
 
     public constructor() {

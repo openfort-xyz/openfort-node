@@ -12,6 +12,7 @@
 
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { ProjectListResponse } from '../models/ProjectListResponse';
 import { WebhookResponse } from '../models/WebhookResponse';
 import { HttpFile } from '../http/http';
 
@@ -23,6 +24,8 @@ export class ProjectResponse {
     'name': string;
     'apikeys'?: Array<ApiKeyResponse>;
     'webhook'?: Array<WebhookResponse>;
+    'parentProject'?: string;
+    'childProjects'?: ProjectListResponse;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -67,6 +70,18 @@ export class ProjectResponse {
             "name": "webhook",
             "baseName": "webhook",
             "type": "Array<WebhookResponse>",
+            "format": ""
+        },
+        {
+            "name": "parentProject",
+            "baseName": "parentProject",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "childProjects",
+            "baseName": "childProjects",
+            "type": "ProjectListResponse",
             "format": ""
         }    ];
 

@@ -8,16 +8,19 @@ import {
     EstimateTransactionIntentGasResult,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import {createConfiguration, ResponseContext, TransactionIntentsApi} from "../generated";
+import {createConfiguration, ResponseContext, ServerConfiguration, TransactionIntentsApi} from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
-import {HeadersMiddleware} from "../utilities/middleware";
 
 @httpErrorHandler
 export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionIntentsApi> {
     static type = "transactionIntents";
+    private readonly accessToken: string;
+    private readonly basePath?: string;
 
     constructor(accessToken: string, basePath?: string) {
         super(TransactionIntentsApi, accessToken, basePath);
+        this.accessToken = accessToken;
+        this.basePath = basePath;
     }
 
     /**
@@ -34,17 +37,7 @@ export class TransactionIntentsApiWrapper extends BaseApiWrapper<TransactionInte
      * @param behalfOf In case of ecosystems, the publishable key of the game wants to create the transaction intent
      */
     public async create(req: CreateTransactionIntentRequest, behalfOf?: string): Promise<TransactionIntentResponse> {
-        if (behalfOf) {
-            const config = createConfiguration({
-                middleware: [
-                    new HeadersMiddleware({
-                        "X-Behalf-Of-Project": behalfOf,
-                    })
-                ]
-            })
-            return await this.api.createTransactionIntent(req, config);
-        }
-        return await this.api.createTransactionIntent(req);
+        return await this.api.createTransactionIntent(req, behalfOf);
     }
 
     /**

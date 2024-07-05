@@ -10,17 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG';
 import { HttpFile } from '../http/http';
 
-export class SMTPConfigResponse {
-    'user': string;
-    'pass': string;
-    'host': string;
-    'port': number;
-    '_from': string;
-    'useSSL': boolean;
-    'object': EntityTypeSMTPCONFIG;
+export class UpsertSMTPConfigRequest {
+    /**
+    * Specifies the user name
+    */
+    'user'?: string;
+    /**
+    * Specifies the password
+    */
+    'pass'?: string;
+    /**
+    * Specifies the host
+    */
+    'host'?: string;
+    /**
+    * Specifies the from
+    */
+    '_from'?: string;
+    /**
+    * Specifies the port
+    */
+    'port'?: number;
+    /**
+    * Specifies the use SSL
+    */
+    'useSSL'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,37 +60,29 @@ export class SMTPConfigResponse {
             "format": ""
         },
         {
-            "name": "port",
-            "baseName": "port",
-            "type": "number",
-            "format": "double"
-        },
-        {
             "name": "_from",
             "baseName": "from",
             "type": "string",
             "format": ""
         },
         {
+            "name": "port",
+            "baseName": "port",
+            "type": "number",
+            "format": "double"
+        },
+        {
             "name": "useSSL",
             "baseName": "useSSL",
             "type": "boolean",
             "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeSMTPCONFIG",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SMTPConfigResponse.attributeTypeMap;
+        return UpsertSMTPConfigRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

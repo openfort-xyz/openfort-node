@@ -28,8 +28,9 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
      * Creates a TransactionIntent.  A pending TransactionIntent has the `response` attribute as undefined.  After the TransactionIntent is created and broadcasted to the blockchain, `response` will be populated with the transaction hash and a status (1 success, 0 fail).  When using a non-custodial account, a `nextAction` attribute is returned with the `userOperationHash` that must be signed by the owner of the account.
      * Create a transaction intent object.
      * @param createTransactionIntentRequest 
+     * @param xBehalfOfProject 
      */
-    public async createTransactionIntent(createTransactionIntentRequest: CreateTransactionIntentRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createTransactionIntent(createTransactionIntentRequest: CreateTransactionIntentRequest, xBehalfOfProject?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'createTransactionIntentRequest' is not null or undefined
@@ -38,12 +39,16 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/v1/transaction_intents';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Header Params
+        requestContext.setHeaderParam("X-Behalf-Of-Project", ObjectSerializer.serialize(xBehalfOfProject, "string", ""));
 
 
         // Body Params
