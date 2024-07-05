@@ -47,6 +47,8 @@ export * from '../models/ChargeCustomTokenPolicyStrategy';
 export * from '../models/CheckoutRequest';
 export * from '../models/CheckoutResponse';
 export * from '../models/CheckoutSubscriptionRequest';
+export * from '../models/ChildProjectListResponse';
+export * from '../models/ChildProjectResponse';
 export * from '../models/CodeChallenge';
 export * from '../models/CodeChallengeVerify';
 export * from '../models/CompleteRecoveryRequest';
@@ -370,6 +372,8 @@ import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomToken
 import { CheckoutRequest     } from '../models/CheckoutRequest';
 import { CheckoutResponse } from '../models/CheckoutResponse';
 import { CheckoutSubscriptionRequest } from '../models/CheckoutSubscriptionRequest';
+import { ChildProjectListResponse       } from '../models/ChildProjectListResponse';
+import { ChildProjectResponse     } from '../models/ChildProjectResponse';
 import { CodeChallenge , CodeChallengeMethodEnum   } from '../models/CodeChallenge';
 import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
@@ -792,6 +796,8 @@ let typeMap: {[index: string]: any} = {
     "CheckoutRequest": CheckoutRequest,
     "CheckoutResponse": CheckoutResponse,
     "CheckoutSubscriptionRequest": CheckoutSubscriptionRequest,
+    "ChildProjectListResponse": ChildProjectListResponse,
+    "ChildProjectResponse": ChildProjectResponse,
     "CodeChallenge": CodeChallenge,
     "CodeChallengeVerify": CodeChallengeVerify,
     "CompleteRecoveryRequest": CompleteRecoveryRequest,

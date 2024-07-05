@@ -10,22 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyResponse } from '../models/ApiKeyResponse';
-import { ChildProjectListResponse } from '../models/ChildProjectListResponse';
 import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
-import { WebhookResponse } from '../models/WebhookResponse';
 import { HttpFile } from '../http/http';
 
-export class ProjectResponse {
+export class ChildProjectResponse {
     'id': string;
     'object': EntityTypePROJECT;
     'createdAt': number;
-    'updatedAt': number;
     'name': string;
-    'apikeys'?: Array<ApiKeyResponse>;
-    'webhook'?: Array<WebhookResponse>;
-    'parentProject'?: string;
-    'childProjects'?: ChildProjectListResponse;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -49,44 +41,14 @@ export class ProjectResponse {
             "format": "int32"
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "name",
             "baseName": "name",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "apikeys",
-            "baseName": "apikeys",
-            "type": "Array<ApiKeyResponse>",
-            "format": ""
-        },
-        {
-            "name": "webhook",
-            "baseName": "webhook",
-            "type": "Array<WebhookResponse>",
-            "format": ""
-        },
-        {
-            "name": "parentProject",
-            "baseName": "parentProject",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "childProjects",
-            "baseName": "childProjects",
-            "type": "ChildProjectListResponse",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ProjectResponse.attributeTypeMap;
+        return ChildProjectResponse.attributeTypeMap;
     }
 
     public constructor() {
