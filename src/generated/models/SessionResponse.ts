@@ -20,12 +20,12 @@ export class SessionResponse {
     'object': EntityTypeSESSION;
     'createdAt': number;
     'updatedAt': number;
-    'isActive'?: boolean;
+    'isActive': boolean;
     'address': string;
-    'validAfter'?: string;
-    'validUntil'?: string;
-    'whitelist'?: Array<string>;
-    'limit'?: number;
+    'validAfter': string;
+    'validUntil': string;
+    'whitelist': Array<string>;
+    'limit': number;
     'nextAction'?: NextActionResponse;
     'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
 

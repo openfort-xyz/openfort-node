@@ -227,8 +227,8 @@ export class ContractsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Using this endpoint, you can get the data returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
-     * Read on chain contract data.
+     * Using this endpoint, you can get the repositories returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
+     * Read on chain contract repositories.
      * @param id Specifies the unique contract ID (starts with con_).
      * @param functionName The function name of the contract.
      * @param functionArgs The function arguments of the contract, in string format. Accepts pla_, con_ and acc_ IDs.

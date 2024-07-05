@@ -36,6 +36,8 @@ import { AuthProviderResponse } from '../models/AuthProviderResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
+import { Authorize200Response } from '../models/Authorize200Response';
+import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
@@ -66,6 +68,7 @@ import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorized
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
+import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
@@ -74,7 +77,6 @@ import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
-import { CreateSMTPConfigRequest } from '../models/CreateSMTPConfigRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
@@ -97,6 +99,7 @@ import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
 import { DomainData } from '../models/DomainData';
+import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
 import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
@@ -299,7 +302,7 @@ import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
-import { UpdateSMTPConfigRequest } from '../models/UpdateSMTPConfigRequest';
+import { UpsertSMTPConfigRequest } from '../models/UpsertSMTPConfigRequest';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { UserProjectDeleteResponse } from '../models/UserProjectDeleteResponse';
@@ -550,7 +553,7 @@ export class ObjectAccountsApi {
     }
 
     /**
-     * **Custodial Accounts only** - Signs the typed data value with types data structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
+     * **Custodial Accounts only** - Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
      * Sign a given payload
      * @param param the request object
      */
@@ -814,6 +817,15 @@ export interface AuthenticationApiAuthenticateSIWERequest {
     sIWEAuthenticateRequest: SIWEAuthenticateRequest
 }
 
+export interface AuthenticationApiAuthorizeRequest {
+    /**
+     * 
+     * @type AuthorizePlayerRequest
+     * @memberof AuthenticationApiauthorize
+     */
+    authorizePlayerRequest: AuthorizePlayerRequest
+}
+
 export interface AuthenticationApiAuthorizeWithOAuthTokenRequest {
     /**
      * OAuth provider
@@ -845,6 +857,12 @@ export interface AuthenticationApiInitOAuthRequest {
      * @memberof AuthenticationApiinitOAuth
      */
     oAuthInitRequest: OAuthInitRequest
+    /**
+     * 
+     * @type string
+     * @memberof AuthenticationApiinitOAuth
+     */
+    xGame?: string
 }
 
 export interface AuthenticationApiInitSIWERequest {
@@ -854,6 +872,12 @@ export interface AuthenticationApiInitSIWERequest {
      * @memberof AuthenticationApiinitSIWE
      */
     sIWERequest: SIWERequest
+    /**
+     * 
+     * @type string
+     * @memberof AuthenticationApiinitSIWE
+     */
+    xGame?: string
 }
 
 export interface AuthenticationApiLinkEmailRequest {
@@ -863,6 +887,12 @@ export interface AuthenticationApiLinkEmailRequest {
      * @memberof AuthenticationApilinkEmail
      */
     loginRequest: LoginRequest
+    /**
+     * 
+     * @type string
+     * @memberof AuthenticationApilinkEmail
+     */
+    xGame?: string
 }
 
 export interface AuthenticationApiLinkOAuthRequest {
@@ -872,6 +902,12 @@ export interface AuthenticationApiLinkOAuthRequest {
      * @memberof AuthenticationApilinkOAuth
      */
     oAuthInitRequest: OAuthInitRequest
+    /**
+     * 
+     * @type string
+     * @memberof AuthenticationApilinkOAuth
+     */
+    xGame?: string
 }
 
 export interface AuthenticationApiLinkSIWERequest {
@@ -890,6 +926,12 @@ export interface AuthenticationApiLoginEmailPasswordRequest {
      * @memberof AuthenticationApiloginEmailPassword
      */
     loginRequest: LoginRequest
+    /**
+     * 
+     * @type string
+     * @memberof AuthenticationApiloginEmailPassword
+     */
+    xGame?: string
 }
 
 export interface AuthenticationApiLogoutRequest {
@@ -956,6 +998,12 @@ export interface AuthenticationApiSignupEmailPasswordRequest {
      * @memberof AuthenticationApisignupEmailPassword
      */
     signupRequest: SignupRequest
+    /**
+     * 
+     * @type string
+     * @memberof AuthenticationApisignupEmailPassword
+     */
+    xGame?: string
 }
 
 export interface AuthenticationApiThirdPartyRequest {
@@ -965,6 +1013,12 @@ export interface AuthenticationApiThirdPartyRequest {
      * @memberof AuthenticationApithirdParty
      */
     thirdPartyOAuthRequest: ThirdPartyOAuthRequest
+    /**
+     * 
+     * @type string
+     * @memberof AuthenticationApithirdParty
+     */
+    xGame?: string
 }
 
 export interface AuthenticationApiUnlinkEmailRequest {
@@ -1052,6 +1106,13 @@ export class ObjectAuthenticationApi {
     }
 
     /**
+     * @param param the request object
+     */
+    public authorize(param: AuthenticationApiAuthorizeRequest, options?: Configuration): Promise<Authorize200Response> {
+        return this.api.authorize(param.authorizePlayerRequest,  options).toPromise();
+    }
+
+    /**
      * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
      * Authorize player with token.
      * @param param the request object
@@ -1074,7 +1135,7 @@ export class ObjectAuthenticationApi {
      * @param param the request object
      */
     public initOAuth(param: AuthenticationApiInitOAuthRequest, options?: Configuration): Promise<OAuthResponse> {
-        return this.api.initOAuth(param.oAuthInitRequest,  options).toPromise();
+        return this.api.initOAuth(param.oAuthInitRequest, param.xGame,  options).toPromise();
     }
 
     /**
@@ -1083,14 +1144,14 @@ export class ObjectAuthenticationApi {
      * @param param the request object
      */
     public initSIWE(param: AuthenticationApiInitSIWERequest, options?: Configuration): Promise<SIWEInitResponse> {
-        return this.api.initSIWE(param.sIWERequest,  options).toPromise();
+        return this.api.initSIWE(param.sIWERequest, param.xGame,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public linkEmail(param: AuthenticationApiLinkEmailRequest, options?: Configuration): Promise<AuthPlayerResponse> {
-        return this.api.linkEmail(param.loginRequest,  options).toPromise();
+        return this.api.linkEmail(param.loginRequest, param.xGame,  options).toPromise();
     }
 
     /**
@@ -1098,7 +1159,7 @@ export class ObjectAuthenticationApi {
      * @param param the request object
      */
     public linkOAuth(param: AuthenticationApiLinkOAuthRequest, options?: Configuration): Promise<OAuthResponse> {
-        return this.api.linkOAuth(param.oAuthInitRequest,  options).toPromise();
+        return this.api.linkOAuth(param.oAuthInitRequest, param.xGame,  options).toPromise();
     }
 
     /**
@@ -1115,7 +1176,7 @@ export class ObjectAuthenticationApi {
      * @param param the request object
      */
     public loginEmailPassword(param: AuthenticationApiLoginEmailPasswordRequest, options?: Configuration): Promise<AuthResponse> {
-        return this.api.loginEmailPassword(param.loginRequest,  options).toPromise();
+        return this.api.loginEmailPassword(param.loginRequest, param.xGame,  options).toPromise();
     }
 
     /**
@@ -1184,7 +1245,7 @@ export class ObjectAuthenticationApi {
      * @param param the request object
      */
     public signupEmailPassword(param: AuthenticationApiSignupEmailPasswordRequest, options?: Configuration): Promise<AuthResponse> {
-        return this.api.signupEmailPassword(param.signupRequest,  options).toPromise();
+        return this.api.signupEmailPassword(param.signupRequest, param.xGame,  options).toPromise();
     }
 
     /**
@@ -1192,7 +1253,7 @@ export class ObjectAuthenticationApi {
      * @param param the request object
      */
     public thirdParty(param: AuthenticationApiThirdPartyRequest, options?: Configuration): Promise<AuthPlayerResponse> {
-        return this.api.thirdParty(param.thirdPartyOAuthRequest,  options).toPromise();
+        return this.api.thirdParty(param.thirdPartyOAuthRequest, param.xGame,  options).toPromise();
     }
 
     /**
@@ -1402,8 +1463,8 @@ export class ObjectContractsApi {
     }
 
     /**
-     * Using this endpoint, you can get the data returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
-     * Read on chain contract data.
+     * Using this endpoint, you can get the repositories returned by any readable function listed in a contracts ABI. This could be things like querying the totalSupply of a currency contract, the number of owners of an items contract, and more.
+     * Read on chain contract repositories.
      * @param param the request object
      */
     public readContract(param: ContractsApiReadContractRequest, options?: Configuration): Promise<ContractReadResponse> {
@@ -2996,6 +3057,12 @@ export interface TransactionIntentsApiCreateTransactionIntentRequest {
      * @memberof TransactionIntentsApicreateTransactionIntent
      */
     createTransactionIntentRequest: CreateTransactionIntentRequest
+    /**
+     * 
+     * @type string
+     * @memberof TransactionIntentsApicreateTransactionIntent
+     */
+    xBehalfOfProject?: string
 }
 
 export interface TransactionIntentsApiEstimateTransactionIntentCostRequest {
@@ -3107,7 +3174,7 @@ export class ObjectTransactionIntentsApi {
      * @param param the request object
      */
     public createTransactionIntent(param: TransactionIntentsApiCreateTransactionIntentRequest, options?: Configuration): Promise<TransactionIntentResponse> {
-        return this.api.createTransactionIntent(param.createTransactionIntentRequest,  options).toPromise();
+        return this.api.createTransactionIntent(param.createTransactionIntentRequest, param.xBehalfOfProject,  options).toPromise();
     }
 
     /**

@@ -22,7 +22,7 @@ export class CreatePaymasterRequest {
     */
     'url': string;
     /**
-    * Specifies the context, that is, the arbitrary data that the specific paymaster may require
+    * Specifies the context, that is, the arbitrary repositories that the specific paymaster may require
     */
     'context'?: any;
 
