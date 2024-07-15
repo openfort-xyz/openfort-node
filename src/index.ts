@@ -16,6 +16,7 @@ import { EventsApiWrapper } from "./apis/eventsApiWrapper";
 import { SubscriptionsApiWrapper } from "./apis/subscriptionsApiWrapper";
 import { ExchangeApiWrapper } from "./apis/exchangeApiWrapper";
 import { sign } from "./utilities/signer";
+import fetch from "node-fetch";
 
 export default class Openfort {
     private readonly apiWrappers: { [name: string]: Observable } = {};
@@ -123,6 +124,27 @@ export default class Openfort {
 
     public async signNonce(nonce: string): Promise<string> {
         return await sign(this.apiKey, nonce);
+    }
+
+    public async registerRecoverySession(apiKey: string, secretKey: string, encryptionPart: string): Promise<string> {
+        const response = await fetch('https://shield.openfort.xyz/project/encryption-session', {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': apiKey,
+                'x-api-secret': secretKey
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                encryption_part: encryptionPart
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to authorize user")
+        }
+
+        const jsonResponse = await response.json();
+        return jsonResponse.session_id;
     }
 }
 
