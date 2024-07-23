@@ -549,7 +549,10 @@ export class AdminAuthenticationApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+            throw new ApiException<undefined>(response.httpStatusCode, "Unauthorized.", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Player not found.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
