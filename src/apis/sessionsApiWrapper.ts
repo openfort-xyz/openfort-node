@@ -23,8 +23,8 @@ export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
      * Creates the session for the account.
      * @param req Parameters to create session
      */
-    public async create(req: CreateSessionRequest): Promise<SessionResponse> {
-        return await this.api.createSession(req);
+    public async create(req: CreateSessionRequest, behalfOf?: string): Promise<SessionResponse> {
+        return await this.api.createSession(req, behalfOf);
     }
 
     /**
@@ -46,8 +46,8 @@ export class SessionsApiWrapper extends BaseApiWrapper<SessionsApi> {
      * Revokes the session for the account.
      * @param req Parameters to revoke the session
      */
-    public async revoke(req: RevokeSessionRequest): Promise<SessionResponse> {
-        return await this.api.revokeSession(req);
+    public async revoke(req: RevokeSessionRequest, behalfOf?: string): Promise<SessionResponse> {
+        return await this.api.revokeSession(req, behalfOf);
     }
 
     /**

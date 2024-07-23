@@ -106,6 +106,7 @@ import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { EmailTypeResponse } from '../models/EmailTypeResponse';
+import { EmbeddedResponse } from '../models/EmbeddedResponse';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -137,6 +138,7 @@ import { EventDeleteResponse } from '../models/EventDeleteResponse';
 import { EventListQueries } from '../models/EventListQueries';
 import { EventListResponse } from '../models/EventListResponse';
 import { EventResponse } from '../models/EventResponse';
+import { ExportedEmbeddedRequest } from '../models/ExportedEmbeddedRequest';
 import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
@@ -148,6 +150,7 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
+import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -236,6 +239,7 @@ import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
+import { RegisterEmbeddedRequest } from '../models/RegisterEmbeddedRequest';
 import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
 import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
 import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
@@ -585,6 +589,15 @@ export class ObjectAccountsApi {
 import { ObservableAdminAuthenticationApi } from "./ObservableAPI";
 import { AdminAuthenticationApiRequestFactory, AdminAuthenticationApiResponseProcessor} from "../apis/AdminAuthenticationApi";
 
+export interface AdminAuthenticationApiAuthorizeRequest {
+    /**
+     * 
+     * @type AuthorizePlayerRequest
+     * @memberof AdminAuthenticationApiauthorize
+     */
+    authorizePlayerRequest: AuthorizePlayerRequest
+}
+
 export interface AdminAuthenticationApiCreateAuthPlayerRequest {
     /**
      * 
@@ -707,6 +720,13 @@ export class ObjectAdminAuthenticationApi {
     }
 
     /**
+     * @param param the request object
+     */
+    public authorize(param: AdminAuthenticationApiAuthorizeRequest, options?: Configuration): Promise<Authorize200Response> {
+        return this.api.authorize(param.authorizePlayerRequest,  options).toPromise();
+    }
+
+    /**
      * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
      * Create an authenticated player.
      * @param param the request object
@@ -817,15 +837,6 @@ export interface AuthenticationApiAuthenticateSIWERequest {
      * @memberof AuthenticationApiauthenticateSIWE
      */
     sIWEAuthenticateRequest: SIWEAuthenticateRequest
-}
-
-export interface AuthenticationApiAuthorizeRequest {
-    /**
-     * 
-     * @type AuthorizePlayerRequest
-     * @memberof AuthenticationApiauthorize
-     */
-    authorizePlayerRequest: AuthorizePlayerRequest
 }
 
 export interface AuthenticationApiAuthorizeWithOAuthTokenRequest {
@@ -1105,13 +1116,6 @@ export class ObjectAuthenticationApi {
      */
     public authenticateSIWE(param: AuthenticationApiAuthenticateSIWERequest, options?: Configuration): Promise<void | AuthResponse> {
         return this.api.authenticateSIWE(param.sIWEAuthenticateRequest,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public authorize(param: AuthenticationApiAuthorizeRequest, options?: Configuration): Promise<Authorize200Response> {
-        return this.api.authorize(param.authorizePlayerRequest,  options).toPromise();
     }
 
     /**
@@ -2545,6 +2549,12 @@ export interface SessionsApiCreateSessionRequest {
      * @memberof SessionsApicreateSession
      */
     createSessionRequest: CreateSessionRequest
+    /**
+     * 
+     * @type string
+     * @memberof SessionsApicreateSession
+     */
+    xBehalfOfProject?: string
 }
 
 export interface SessionsApiGetPlayerSessionsRequest {
@@ -2602,6 +2612,12 @@ export interface SessionsApiRevokeSessionRequest {
      * @memberof SessionsApirevokeSession
      */
     revokeSessionRequest: RevokeSessionRequest
+    /**
+     * 
+     * @type string
+     * @memberof SessionsApirevokeSession
+     */
+    xBehalfOfProject?: string
 }
 
 export interface SessionsApiSignatureSessionRequest {
@@ -2632,7 +2648,7 @@ export class ObjectSessionsApi {
      * @param param the request object
      */
     public createSession(param: SessionsApiCreateSessionRequest, options?: Configuration): Promise<SessionResponse> {
-        return this.api.createSession(param.createSessionRequest,  options).toPromise();
+        return this.api.createSession(param.createSessionRequest, param.xBehalfOfProject,  options).toPromise();
     }
 
     /**
@@ -2658,7 +2674,7 @@ export class ObjectSessionsApi {
      * @param param the request object
      */
     public revokeSession(param: SessionsApiRevokeSessionRequest, options?: Configuration): Promise<SessionResponse> {
-        return this.api.revokeSession(param.revokeSessionRequest,  options).toPromise();
+        return this.api.revokeSession(param.revokeSessionRequest, param.xBehalfOfProject,  options).toPromise();
     }
 
     /**

@@ -103,6 +103,7 @@ export * from '../models/EmailSampleDeleteResponse';
 export * from '../models/EmailSampleResponse';
 export * from '../models/EmailTypeRequest';
 export * from '../models/EmailTypeResponse';
+export * from '../models/EmbeddedResponse';
 export * from '../models/EntityIdResponse';
 export * from '../models/EntityTypeACCOUNT';
 export * from '../models/EntityTypeCONTRACT';
@@ -134,6 +135,7 @@ export * from '../models/EventDeleteResponse';
 export * from '../models/EventListQueries';
 export * from '../models/EventListResponse';
 export * from '../models/EventResponse';
+export * from '../models/ExportedEmbeddedRequest';
 export * from '../models/FacebookOAuthConfig';
 export * from '../models/Fee';
 export * from '../models/FieldErrorsValue';
@@ -145,6 +147,7 @@ export * from '../models/GasReport';
 export * from '../models/GasReportListResponse';
 export * from '../models/GasReportTransactionIntentsInner';
 export * from '../models/GoogleOAuthConfig';
+export * from '../models/InitEmbeddedRequest';
 export * from '../models/Interaction';
 export * from '../models/InvalidRequestError';
 export * from '../models/InvalidRequestErrorResponse';
@@ -233,6 +236,7 @@ export * from '../models/ProjectStatsRequest';
 export * from '../models/ProjectStatsResponse';
 export * from '../models/QuoteExchangeResult';
 export * from '../models/RefreshTokenRequest';
+export * from '../models/RegisterEmbeddedRequest';
 export * from '../models/RequestResetPasswordRequest';
 export * from '../models/RequestVerifyEmailRequest';
 export * from '../models/ResetPasswordRequest';
@@ -428,6 +432,7 @@ import { EmailSampleDeleteResponse    } from '../models/EmailSampleDeleteRespons
 import { EmailSampleResponse        } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { EmailTypeResponse } from '../models/EmailTypeResponse';
+import { EmbeddedResponse } from '../models/EmbeddedResponse';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -459,6 +464,7 @@ import { EventDeleteResponse    } from '../models/EventDeleteResponse';
 import { EventListQueries      } from '../models/EventListQueries';
 import { EventListResponse       } from '../models/EventListResponse';
 import { EventResponse            } from '../models/EventResponse';
+import { ExportedEmbeddedRequest } from '../models/ExportedEmbeddedRequest';
 import { FacebookOAuthConfig     } from '../models/FacebookOAuthConfig';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
@@ -470,6 +476,7 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse       } from '../models/GasReportListResponse';
 import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GoogleOAuthConfig     } from '../models/GoogleOAuthConfig';
+import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError    } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -558,6 +565,7 @@ import { ProjectStatsRequest, ProjectStatsRequestTimeFrameEnum   } from '../mode
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
+import { RegisterEmbeddedRequest } from '../models/RegisterEmbeddedRequest';
 import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
 import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
 import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
@@ -848,6 +856,7 @@ let typeMap: {[index: string]: any} = {
     "EcosystemConfigurationResponse": EcosystemConfigurationResponse,
     "EmailSampleDeleteResponse": EmailSampleDeleteResponse,
     "EmailSampleResponse": EmailSampleResponse,
+    "EmbeddedResponse": EmbeddedResponse,
     "EntityIdResponse": EntityIdResponse,
     "EpicGamesOAuthConfig": EpicGamesOAuthConfig,
     "EstimateTransactionIntentGasResult": EstimateTransactionIntentGasResult,
@@ -855,6 +864,7 @@ let typeMap: {[index: string]: any} = {
     "EventListQueries": EventListQueries,
     "EventListResponse": EventListResponse,
     "EventResponse": EventResponse,
+    "ExportedEmbeddedRequest": ExportedEmbeddedRequest,
     "FacebookOAuthConfig": FacebookOAuthConfig,
     "Fee": Fee,
     "FieldErrorsValue": FieldErrorsValue,
@@ -866,6 +876,7 @@ let typeMap: {[index: string]: any} = {
     "GasReportListResponse": GasReportListResponse,
     "GasReportTransactionIntentsInner": GasReportTransactionIntentsInner,
     "GoogleOAuthConfig": GoogleOAuthConfig,
+    "InitEmbeddedRequest": InitEmbeddedRequest,
     "Interaction": Interaction,
     "InvalidRequestError": InvalidRequestError,
     "InvalidRequestErrorResponse": InvalidRequestErrorResponse,
@@ -935,6 +946,7 @@ let typeMap: {[index: string]: any} = {
     "ProjectStatsResponse": ProjectStatsResponse,
     "QuoteExchangeResult": QuoteExchangeResult,
     "RefreshTokenRequest": RefreshTokenRequest,
+    "RegisterEmbeddedRequest": RegisterEmbeddedRequest,
     "RequestResetPasswordRequest": RequestResetPasswordRequest,
     "RequestVerifyEmailRequest": RequestVerifyEmailRequest,
     "ResetPasswordRequest": ResetPasswordRequest,

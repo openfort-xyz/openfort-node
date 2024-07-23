@@ -106,6 +106,7 @@ import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { EmailTypeResponse } from '../models/EmailTypeResponse';
+import { EmbeddedResponse } from '../models/EmbeddedResponse';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -137,6 +138,7 @@ import { EventDeleteResponse } from '../models/EventDeleteResponse';
 import { EventListQueries } from '../models/EventListQueries';
 import { EventListResponse } from '../models/EventListResponse';
 import { EventResponse } from '../models/EventResponse';
+import { ExportedEmbeddedRequest } from '../models/ExportedEmbeddedRequest';
 import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
@@ -148,6 +150,7 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
+import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -236,6 +239,7 @@ import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
+import { RegisterEmbeddedRequest } from '../models/RegisterEmbeddedRequest';
 import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
 import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
 import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
@@ -468,6 +472,14 @@ export class PromiseAdminAuthenticationApi {
     }
 
     /**
+     * @param authorizePlayerRequest 
+     */
+    public authorize(authorizePlayerRequest: AuthorizePlayerRequest, _options?: Configuration): Promise<Authorize200Response> {
+        const result = this.api.authorize(authorizePlayerRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
      * Create an authenticated player.
      * @param createAuthPlayerRequest 
@@ -606,14 +618,6 @@ export class PromiseAuthenticationApi {
      */
     public authenticateSIWE(sIWEAuthenticateRequest: SIWEAuthenticateRequest, _options?: Configuration): Promise<void | AuthResponse> {
         const result = this.api.authenticateSIWE(sIWEAuthenticateRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * @param authorizePlayerRequest 
-     */
-    public authorize(authorizePlayerRequest: AuthorizePlayerRequest, _options?: Configuration): Promise<Authorize200Response> {
-        const result = this.api.authorize(authorizePlayerRequest, _options);
         return result.toPromise();
     }
 
@@ -1504,9 +1508,10 @@ export class PromiseSessionsApi {
      * Creates a Session.
      * Create a session key.
      * @param createSessionRequest 
+     * @param xBehalfOfProject 
      */
-    public createSession(createSessionRequest: CreateSessionRequest, _options?: Configuration): Promise<SessionResponse> {
-        const result = this.api.createSession(createSessionRequest, _options);
+    public createSession(createSessionRequest: CreateSessionRequest, xBehalfOfProject?: string, _options?: Configuration): Promise<SessionResponse> {
+        const result = this.api.createSession(createSessionRequest, xBehalfOfProject, _options);
         return result.toPromise();
     }
 
@@ -1538,9 +1543,10 @@ export class PromiseSessionsApi {
     /**
      * Revoke the session session key.
      * @param revokeSessionRequest 
+     * @param xBehalfOfProject 
      */
-    public revokeSession(revokeSessionRequest: RevokeSessionRequest, _options?: Configuration): Promise<SessionResponse> {
-        const result = this.api.revokeSession(revokeSessionRequest, _options);
+    public revokeSession(revokeSessionRequest: RevokeSessionRequest, xBehalfOfProject?: string, _options?: Configuration): Promise<SessionResponse> {
+        const result = this.api.revokeSession(revokeSessionRequest, xBehalfOfProject, _options);
         return result.toPromise();
     }
 

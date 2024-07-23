@@ -16,6 +16,8 @@ import { AuthPlayerResponseWithRecoveryShare } from '../models/AuthPlayerRespons
 import { AuthProvider } from '../models/AuthProvider';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
+import { Authorize200Response } from '../models/Authorize200Response';
+import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
 import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
@@ -28,6 +30,52 @@ import { SortOrder } from '../models/SortOrder';
  * no description
  */
 export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory {
+
+    /**
+     * @param authorizePlayerRequest 
+     */
+    public async authorize(authorizePlayerRequest: AuthorizePlayerRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'authorizePlayerRequest' is not null or undefined
+        if (authorizePlayerRequest === null || authorizePlayerRequest === undefined) {
+            throw new RequiredError("AdminAuthenticationApi", "authorize", "authorizePlayerRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/iam/v1/authorize';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(authorizePlayerRequest, "AuthorizePlayerRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
 
     /**
      * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
@@ -483,6 +531,38 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
 }
 
 export class AdminAuthenticationApiResponseProcessor {
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to authorize
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async authorize(response: ResponseContext): Promise<Authorize200Response > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: Authorize200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Authorize200Response", ""
+            ) as Authorize200Response;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: Authorize200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Authorize200Response", ""
+            ) as Authorize200Response;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

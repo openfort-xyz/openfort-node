@@ -107,6 +107,7 @@ import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { EmailTypeResponse } from '../models/EmailTypeResponse';
+import { EmbeddedResponse } from '../models/EmbeddedResponse';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -138,6 +139,7 @@ import { EventDeleteResponse } from '../models/EventDeleteResponse';
 import { EventListQueries } from '../models/EventListQueries';
 import { EventListResponse } from '../models/EventListResponse';
 import { EventResponse } from '../models/EventResponse';
+import { ExportedEmbeddedRequest } from '../models/ExportedEmbeddedRequest';
 import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
@@ -149,6 +151,7 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
+import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
 import { InvalidRequestErrorResponse } from '../models/InvalidRequestErrorResponse';
@@ -237,6 +240,7 @@ import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
+import { RegisterEmbeddedRequest } from '../models/RegisterEmbeddedRequest';
 import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
 import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
 import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
@@ -611,6 +615,28 @@ export class ObservableAdminAuthenticationApi {
     }
 
     /**
+     * @param authorizePlayerRequest 
+     */
+    public authorize(authorizePlayerRequest: AuthorizePlayerRequest, _options?: Configuration): Observable<Authorize200Response> {
+        const requestContextPromise = this.requestFactory.authorize(authorizePlayerRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authorize(rsp)));
+            }));
+    }
+
+    /**
      * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
      * Create an authenticated player.
      * @param createAuthPlayerRequest 
@@ -916,28 +942,6 @@ export class ObservableAuthenticationApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authenticateSIWE(rsp)));
-            }));
-    }
-
-    /**
-     * @param authorizePlayerRequest 
-     */
-    public authorize(authorizePlayerRequest: AuthorizePlayerRequest, _options?: Configuration): Observable<Authorize200Response> {
-        const requestContextPromise = this.requestFactory.authorize(authorizePlayerRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authorize(rsp)));
             }));
     }
 
@@ -2757,9 +2761,10 @@ export class ObservableSessionsApi {
      * Creates a Session.
      * Create a session key.
      * @param createSessionRequest 
+     * @param xBehalfOfProject 
      */
-    public createSession(createSessionRequest: CreateSessionRequest, _options?: Configuration): Observable<SessionResponse> {
-        const requestContextPromise = this.requestFactory.createSession(createSessionRequest, _options);
+    public createSession(createSessionRequest: CreateSessionRequest, xBehalfOfProject?: string, _options?: Configuration): Observable<SessionResponse> {
+        const requestContextPromise = this.requestFactory.createSession(createSessionRequest, xBehalfOfProject, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -2833,9 +2838,10 @@ export class ObservableSessionsApi {
     /**
      * Revoke the session session key.
      * @param revokeSessionRequest 
+     * @param xBehalfOfProject 
      */
-    public revokeSession(revokeSessionRequest: RevokeSessionRequest, _options?: Configuration): Observable<SessionResponse> {
-        const requestContextPromise = this.requestFactory.revokeSession(revokeSessionRequest, _options);
+    public revokeSession(revokeSessionRequest: RevokeSessionRequest, xBehalfOfProject?: string, _options?: Configuration): Observable<SessionResponse> {
+        const requestContextPromise = this.requestFactory.revokeSession(revokeSessionRequest, xBehalfOfProject, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
