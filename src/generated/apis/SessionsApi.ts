@@ -27,8 +27,9 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
      * Creates a Session.
      * Create a session key.
      * @param createSessionRequest 
+     * @param xBehalfOfProject 
      */
-    public async createSession(createSessionRequest: CreateSessionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createSession(createSessionRequest: CreateSessionRequest, xBehalfOfProject?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'createSessionRequest' is not null or undefined
@@ -37,12 +38,16 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/v1/sessions';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Header Params
+        requestContext.setHeaderParam("X-Behalf-Of-Project", ObjectSerializer.serialize(xBehalfOfProject, "string", ""));
 
 
         // Body Params
@@ -189,8 +194,9 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Revoke the session session key.
      * @param revokeSessionRequest 
+     * @param xBehalfOfProject 
      */
-    public async revokeSession(revokeSessionRequest: RevokeSessionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async revokeSession(revokeSessionRequest: RevokeSessionRequest, xBehalfOfProject?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'revokeSessionRequest' is not null or undefined
@@ -199,12 +205,16 @@ export class SessionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/v1/sessions/revoke';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Header Params
+        requestContext.setHeaderParam("X-Behalf-Of-Project", ObjectSerializer.serialize(xBehalfOfProject, "string", ""));
 
 
         // Body Params

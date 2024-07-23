@@ -8,7 +8,7 @@ import {
     EstimateTransactionIntentGasResult,
 } from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
-import { createConfiguration, ResponseContext, ServerConfiguration, TransactionIntentsApi } from "../generated";
+import { TransactionIntentsApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
 
 @httpErrorHandler

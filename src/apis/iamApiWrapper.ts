@@ -1,6 +1,8 @@
 import {
     AdminAuthenticationApi,
     AuthenticateOAuthRequest,
+    Authorize200Response,
+    AuthorizePlayerRequest,
     AuthPlayerListQueries,
     AuthPlayerListResponse,
     AuthPlayerResponse,
@@ -154,5 +156,9 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      */
     public async listOAuthConfig(): Promise<OAuthConfigListResponse> {
         return await this.api.listOAuthConfig();
+    }
+
+    public async authorize(req: AuthorizePlayerRequest): Promise<Authorize200Response> {
+        return await this.api.authorize(req);
     }
 }

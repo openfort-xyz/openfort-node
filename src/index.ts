@@ -127,20 +127,20 @@ export default class Openfort {
     }
 
     public async registerRecoverySession(apiKey: string, secretKey: string, encryptionPart: string): Promise<string> {
-        const response = await fetch('https://shield.openfort.xyz/project/encryption-session', {
+        const response = await fetch("https://shield.openfort.xyz/project/encryption-session", {
             headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': apiKey,
-                'x-api-secret': secretKey
+                "Content-Type": "application/json",
+                "x-api-key": apiKey,
+                "x-api-secret": secretKey,
             },
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify({
-                encryption_part: encryptionPart
+                encryption_part: encryptionPart,
             }),
         });
 
         if (!response.ok) {
-            throw new Error("Failed to authorize user")
+            throw new Error("Failed to authorize user");
         }
 
         const jsonResponse = await response.json();
