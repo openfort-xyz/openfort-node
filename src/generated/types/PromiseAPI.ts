@@ -11,6 +11,7 @@ import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { Account } from '../models/Account';
+import { AccountAbstractionV6Details } from '../models/AccountAbstractionV6Details';
 import { AccountEventResponse } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
@@ -83,7 +84,6 @@ import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
-import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DeleteSMTPConfigResponse } from '../models/DeleteSMTPConfigResponse';
@@ -100,7 +100,6 @@ import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountRe
 import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
-import { DomainData } from '../models/DomainData';
 import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
 import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
@@ -129,8 +128,6 @@ import { EntityTypeSUBSCRIPTION } from '../models/EntityTypeSUBSCRIPTION';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
-import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
-import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { EpicGamesOAuthConfig } from '../models/EpicGamesOAuthConfig';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
@@ -263,10 +260,10 @@ import { SponsorSchema } from '../models/SponsorSchema';
 import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
 import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
+import { StandardDetails } from '../models/StandardDetails';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
 import { Status } from '../models/Status';
-import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionDeleteResponse } from '../models/SubscriptionDeleteResponse';
 import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
@@ -285,8 +282,10 @@ import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
 import { TokenType } from '../models/TokenType';
 import { TradeType } from '../models/TradeType';
+import { TransactionAbstractionType } from '../models/TransactionAbstractionType';
 import { TransactionConfirmedEventResponse } from '../models/TransactionConfirmedEventResponse';
 import { TransactionIntent } from '../models/TransactionIntent';
+import { TransactionIntentDetails } from '../models/TransactionIntentDetails';
 import { TransactionIntentListQueries } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse } from '../models/TransactionIntentListResponse';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
@@ -300,6 +299,7 @@ import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
 import { TriggerResponse } from '../models/TriggerResponse';
 import { TwitterOAuthConfig } from '../models/TwitterOAuthConfig';
 import { TypedDataField } from '../models/TypedDataField';
+import { TypedDomainData } from '../models/TypedDomainData';
 import { UnlinkEmailRequest } from '../models/UnlinkEmailRequest';
 import { UnlinkOAuthRequest } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
@@ -309,6 +309,7 @@ import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
 import { UpsertSMTPConfigRequest } from '../models/UpsertSMTPConfigRequest';
+import { UserOperationV6 } from '../models/UserOperationV6';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { UserProjectDeleteResponse } from '../models/UserProjectDeleteResponse';
@@ -319,16 +320,9 @@ import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
 import { VerifyEmailRequest } from '../models/VerifyEmailRequest';
-import { Web3ActionListResponse } from '../models/Web3ActionListResponse';
-import { Web3ActionResponse } from '../models/Web3ActionResponse';
-import { Web3ActionStatusEnum } from '../models/Web3ActionStatusEnum';
-import { Web3ConnectionListQueries } from '../models/Web3ConnectionListQueries';
-import { Web3ConnectionListResponse } from '../models/Web3ConnectionListResponse';
-import { Web3ConnectionResponse } from '../models/Web3ConnectionResponse';
-import { Web3ConnectionResponseExpandable } from '../models/Web3ConnectionResponseExpandable';
-import { Web3ConnectionResponsePlayer } from '../models/Web3ConnectionResponsePlayer';
 import { WebhookResponse } from '../models/WebhookResponse';
 import { WithdrawalPolicyRequest } from '../models/WithdrawalPolicyRequest';
+import { ZKSyncDetails } from '../models/ZKSyncDetails';
 import { ObservableAccountsApi } from './ObservableAPI';
 
 import { AccountsApiRequestFactory, AccountsApiResponseProcessor} from "../apis/AccountsApi";
@@ -1839,82 +1833,6 @@ export class PromiseTransactionIntentsApi {
      */
     public signature(id: string, signatureRequest: SignatureRequest, _options?: Configuration): Promise<TransactionIntentResponse> {
         const result = this.api.signature(id, signatureRequest, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableWeb3ConnectionsApi } from './ObservableAPI';
-
-import { Web3ConnectionsApiRequestFactory, Web3ConnectionsApiResponseProcessor} from "../apis/Web3ConnectionsApi";
-export class PromiseWeb3ConnectionsApi {
-    private api: ObservableWeb3ConnectionsApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: Web3ConnectionsApiRequestFactory,
-        responseProcessor?: Web3ConnectionsApiResponseProcessor
-    ) {
-        this.api = new ObservableWeb3ConnectionsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * This endpoint allows you to create a new web3 connection to your Openfort player. Together with the player ID (pla_), you need to provide a chain ID. The chain to use is required because Openfort needs to make sure the account is deployed, as counterfactual addresses cannot use web3 connections. The `uri` body parameter must contain a [WalletConnect pairing URI](https://specs.walletconnect.com/2.0/specs/clients/core/pairing/pairing-uri).
-     * Create a Web3 Connection object.
-     * @param createWeb3ConnectionRequest 
-     */
-    public createWeb3Connection(createWeb3ConnectionRequest: CreateWeb3ConnectionRequest, _options?: Configuration): Promise<Web3ConnectionResponse> {
-        const result = this.api.createWeb3Connection(createWeb3ConnectionRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns a list of web3 actions for the given web3 connection. The actions are returned sorted by creation date, with the most recently received action appearing first. By default, a maximum of ten actions are shown per page.
-     * List Web3 actions from a web3 connection.
-     * @param id Specifies the web3Connection ID (starts with web3_).
-     */
-    public getWeb3Actions(id: string, _options?: Configuration): Promise<Web3ActionListResponse> {
-        const result = this.api.getWeb3Actions(id, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieves the details of an existing web3 connection. Supply the unique web3 connection ID from either a web3 connection creation request or the web3 connection list. Openfort will return the corresponding web3 connection information.
-     * Get a web3Connection object.
-     * @param id Specifies the unique web3Connection ID (starts with web3_).
-     * @param expand Specifies the fields to expand.
-     */
-    public getWeb3Connection(id: string, expand?: Array<Web3ConnectionResponseExpandable>, _options?: Configuration): Promise<Web3ConnectionResponse> {
-        const result = this.api.getWeb3Connection(id, expand, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns a list of web3 connections for the given player. The connections are returned sorted by creation date, with the most recently created connections appearing first. By default, a maximum of ten connections are shown per page.
-     * List Web3 connections.
-     * @param limit Specifies the maximum number of records to return.
-     * @param skip Specifies the offset for the first records to return.
-     * @param order Specifies the order in which to sort the results.
-     * @param player Specifies the unique player ID (starts with pla_)
-     * @param disconnected Specifies connection status
-     */
-    public getWeb3Connections(limit?: number, skip?: number, order?: SortOrder, player?: string, disconnected?: boolean, _options?: Configuration): Promise<Web3ConnectionListResponse> {
-        const result = this.api.getWeb3Connections(limit, skip, order, player, disconnected, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Approve or Reject a web3 action for the given web3 connection.
-     * Approve or Reject a web3 action
-     * @param id Specifies the web3Connection ID (starts with web3_).
-     * @param web3Action Specifies web3_action (starts with act_).
-     * @param submitWeb3ActionRequest 
-     */
-    public submitWeb3Action(id: string, web3Action: string, submitWeb3ActionRequest: SubmitWeb3ActionRequest, _options?: Configuration): Promise<Web3ActionResponse> {
-        const result = this.api.submitWeb3Action(id, web3Action, submitWeb3ActionRequest, _options);
         return result.toPromise();
     }
 

@@ -11,7 +11,6 @@ import { InventoriesApiWrapper } from "./apis/inventoriesApiWrapper";
 import { WebHookEvent } from "./models";
 import { IamApiWrapper } from "./apis/iamApiWrapper";
 import { SettingsApiWrapper } from "./apis/settingsApiWrapper";
-import { Web3ConnectionsApiWrapper } from "./apis/web3ConnectionsApiWrapper";
 import { EventsApiWrapper } from "./apis/eventsApiWrapper";
 import { SubscriptionsApiWrapper } from "./apis/subscriptionsApiWrapper";
 import { ExchangeApiWrapper } from "./apis/exchangeApiWrapper";
@@ -54,10 +53,6 @@ export default class Openfort {
 
     public get inventories(): InventoriesApiWrapper {
         return this.getOrCreateWrapper(InventoriesApiWrapper);
-    }
-
-    public get web3Connections(): Web3ConnectionsApiWrapper {
-        return this.getOrCreateWrapper(Web3ConnectionsApiWrapper);
     }
 
     public get settings(): SettingsApiWrapper {

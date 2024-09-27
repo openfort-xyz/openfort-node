@@ -15,6 +15,8 @@ import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTE
 import { Interaction } from '../models/Interaction';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { ResponseResponse } from '../models/ResponseResponse';
+import { TransactionAbstractionType } from '../models/TransactionAbstractionType';
+import { TransactionIntentDetails } from '../models/TransactionIntentDetails';
 import { HttpFile } from '../http/http';
 
 export class TransactionIntent {
@@ -29,9 +31,8 @@ export class TransactionIntent {
     * The chain ID.
     */
     'chainId': number;
-    /**
-    * The hashed userOperation.
-    */
+    'abstractionType': TransactionAbstractionType;
+    'details'?: TransactionIntentDetails;
     'userOperationHash'?: string;
     'userOperation'?: any | null;
     'response'?: ResponseResponse;
@@ -73,6 +74,18 @@ export class TransactionIntent {
             "baseName": "chainId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "abstractionType",
+            "baseName": "abstractionType",
+            "type": "TransactionAbstractionType",
+            "format": ""
+        },
+        {
+            "name": "details",
+            "baseName": "details",
+            "type": "TransactionIntentDetails",
+            "format": ""
         },
         {
             "name": "userOperationHash",

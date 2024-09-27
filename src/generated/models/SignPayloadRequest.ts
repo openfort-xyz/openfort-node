@@ -10,19 +10,19 @@
  * Do not edit the class manually.
  */
 
-import { DomainData } from '../models/DomainData';
 import { TypedDataField } from '../models/TypedDataField';
+import { TypedDomainData } from '../models/TypedDomainData';
 import { HttpFile } from '../http/http';
 
 export class SignPayloadRequest {
-    'domain': DomainData;
+    'domain': TypedDomainData;
     'types': { [key: string]: Array<TypedDataField>; };
     'primaryType': string;
     'value': { [key: string]: any; };
     /**
     * Hash to verify and that will be signed
     */
-    'hash': string;
+    'hash'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,7 +30,7 @@ export class SignPayloadRequest {
         {
             "name": "domain",
             "baseName": "domain",
-            "type": "DomainData",
+            "type": "TypedDomainData",
             "format": ""
         },
         {

@@ -18,7 +18,7 @@ export class PaymasterResponse {
     'object': EntityTypePAYMASTER;
     'createdAt': number;
     'address': string;
-    'url': string;
+    'url'?: string;
     'context'?: any;
 
     static readonly discriminator: string | undefined = undefined;
