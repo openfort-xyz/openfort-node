@@ -8,6 +8,7 @@ export * from '../models/Abi';
 export * from '../models/AbiType';
 export * from '../models/AccelbyteOAuthConfig';
 export * from '../models/Account';
+export * from '../models/AccountAbstractionV6Details';
 export * from '../models/AccountEventResponse';
 export * from '../models/AccountInventoryListQueries';
 export * from '../models/AccountListQueries';
@@ -80,7 +81,6 @@ export * from '../models/CreateSessionRequest';
 export * from '../models/CreateSubscriptionRequest';
 export * from '../models/CreateTransactionIntentRequest';
 export * from '../models/CreateTriggerRequest';
-export * from '../models/CreateWeb3ConnectionRequest';
 export * from '../models/Currency';
 export * from '../models/CustomAuthConfig';
 export * from '../models/DeleteSMTPConfigResponse';
@@ -97,7 +97,6 @@ export * from '../models/DeveloperAccountResponseExpandable';
 export * from '../models/DeviceListQueries';
 export * from '../models/DeviceResponse';
 export * from '../models/DiscordOAuthConfig';
-export * from '../models/DomainData';
 export * from '../models/EcosystemConfigurationResponse';
 export * from '../models/EmailSampleDeleteResponse';
 export * from '../models/EmailSampleResponse';
@@ -126,8 +125,6 @@ export * from '../models/EntityTypeSUBSCRIPTION';
 export * from '../models/EntityTypeTRANSACTIONINTENT';
 export * from '../models/EntityTypeTRIGGER';
 export * from '../models/EntityTypeUSER';
-export * from '../models/EntityTypeWEB3ACTION';
-export * from '../models/EntityTypeWEB3CONNECTION';
 export * from '../models/EpicGamesOAuthConfig';
 export * from '../models/ErrorTypeINVALIDREQUESTERROR';
 export * from '../models/EstimateTransactionIntentGasResult';
@@ -260,10 +257,10 @@ export * from '../models/SponsorSchema';
 export * from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
 export * from '../models/SponsorSchemaFIXEDRATE';
 export * from '../models/SponsorSchemaPAYFORUSER';
+export * from '../models/StandardDetails';
 export * from '../models/StartRecoveryRequest';
 export * from '../models/Stat';
 export * from '../models/Status';
-export * from '../models/SubmitWeb3ActionRequest';
 export * from '../models/SubscriptionDeleteResponse';
 export * from '../models/SubscriptionListResponse';
 export * from '../models/SubscriptionResponse';
@@ -282,8 +279,10 @@ export * from '../models/TimeIntervalType';
 export * from '../models/Token';
 export * from '../models/TokenType';
 export * from '../models/TradeType';
+export * from '../models/TransactionAbstractionType';
 export * from '../models/TransactionConfirmedEventResponse';
 export * from '../models/TransactionIntent';
+export * from '../models/TransactionIntentDetails';
 export * from '../models/TransactionIntentListQueries';
 export * from '../models/TransactionIntentListResponse';
 export * from '../models/TransactionIntentResponse';
@@ -297,6 +296,7 @@ export * from '../models/TriggerDeleteResponse';
 export * from '../models/TriggerResponse';
 export * from '../models/TwitterOAuthConfig';
 export * from '../models/TypedDataField';
+export * from '../models/TypedDomainData';
 export * from '../models/UnlinkEmailRequest';
 export * from '../models/UnlinkOAuthRequest';
 export * from '../models/UpdateContractRequest';
@@ -306,6 +306,7 @@ export * from '../models/UpdatePolicyRuleRequest';
 export * from '../models/UpdateProjectApiKeyRequest';
 export * from '../models/UpdateProjectRequest';
 export * from '../models/UpsertSMTPConfigRequest';
+export * from '../models/UserOperationV6';
 export * from '../models/UserProjectCreateRequest';
 export * from '../models/UserProjectCreateRequestRole';
 export * from '../models/UserProjectDeleteResponse';
@@ -316,16 +317,9 @@ export * from '../models/UserProjectRoleADMIN';
 export * from '../models/UserProjectRoleMEMBER';
 export * from '../models/UserProjectUpdateRequest';
 export * from '../models/VerifyEmailRequest';
-export * from '../models/Web3ActionListResponse';
-export * from '../models/Web3ActionResponse';
-export * from '../models/Web3ActionStatusEnum';
-export * from '../models/Web3ConnectionListQueries';
-export * from '../models/Web3ConnectionListResponse';
-export * from '../models/Web3ConnectionResponse';
-export * from '../models/Web3ConnectionResponseExpandable';
-export * from '../models/Web3ConnectionResponsePlayer';
 export * from '../models/WebhookResponse';
 export * from '../models/WithdrawalPolicyRequest';
+export * from '../models/ZKSyncDetails';
 
 import { APITopic } from '../models/APITopic';
 import { APITopicBALANCECONTRACT } from '../models/APITopicBALANCECONTRACT';
@@ -337,6 +331,7 @@ import { Abi } from '../models/Abi';
 import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig      } from '../models/AccelbyteOAuthConfig';
 import { Account              } from '../models/Account';
+import { AccountAbstractionV6Details } from '../models/AccountAbstractionV6Details';
 import { AccountEventResponse        } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries     } from '../models/AccountInventoryListQueries';
 import { AccountListQueries      } from '../models/AccountListQueries';
@@ -409,7 +404,6 @@ import { CreateSessionRequest } from '../models/CreateSessionRequest';
 import { CreateSubscriptionRequest   } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateTriggerRequest    } from '../models/CreateTriggerRequest';
-import { CreateWeb3ConnectionRequest } from '../models/CreateWeb3ConnectionRequest';
 import { Currency } from '../models/Currency';
 import { CustomAuthConfig     } from '../models/CustomAuthConfig';
 import { DeleteSMTPConfigResponse   } from '../models/DeleteSMTPConfigResponse';
@@ -426,7 +420,6 @@ import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountRe
 import { DeviceListQueries     } from '../models/DeviceListQueries';
 import { DeviceResponse       } from '../models/DeviceResponse';
 import { DiscordOAuthConfig     } from '../models/DiscordOAuthConfig';
-import { DomainData } from '../models/DomainData';
 import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
 import { EmailSampleDeleteResponse    } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse        } from '../models/EmailSampleResponse';
@@ -455,8 +448,6 @@ import { EntityTypeSUBSCRIPTION } from '../models/EntityTypeSUBSCRIPTION';
 import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
 import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
 import { EntityTypeUSER } from '../models/EntityTypeUSER';
-import { EntityTypeWEB3ACTION } from '../models/EntityTypeWEB3ACTION';
-import { EntityTypeWEB3CONNECTION } from '../models/EntityTypeWEB3CONNECTION';
 import { EpicGamesOAuthConfig     } from '../models/EpicGamesOAuthConfig';
 import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
 import { EstimateTransactionIntentGasResult } from '../models/EstimateTransactionIntentGasResult';
@@ -531,7 +522,7 @@ import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { PlayerResponse         } from '../models/PlayerResponse';
 import { PlayerResponseAccountsInner              } from '../models/PlayerResponseAccountsInner';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
-import { PlayerResponseTransactionIntentsInner              } from '../models/PlayerResponseTransactionIntentsInner';
+import { PlayerResponseTransactionIntentsInner                } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
 import { Policy            } from '../models/Policy';
@@ -589,10 +580,10 @@ import { SponsorSchema } from '../models/SponsorSchema';
 import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
 import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
 import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
+import { StandardDetails } from '../models/StandardDetails';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
 import { Stat } from '../models/Stat';
 import { Status } from '../models/Status';
-import { SubmitWeb3ActionRequest } from '../models/SubmitWeb3ActionRequest';
 import { SubscriptionDeleteResponse    } from '../models/SubscriptionDeleteResponse';
 import { SubscriptionListResponse       } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
@@ -611,11 +602,13 @@ import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
 import { TokenType } from '../models/TokenType';
 import { TradeType } from '../models/TradeType';
+import { TransactionAbstractionType } from '../models/TransactionAbstractionType';
 import { TransactionConfirmedEventResponse      } from '../models/TransactionConfirmedEventResponse';
-import { TransactionIntent              } from '../models/TransactionIntent';
+import { TransactionIntent                } from '../models/TransactionIntent';
+import { TransactionIntentDetails } from '../models/TransactionIntentDetails';
 import { TransactionIntentListQueries          } from '../models/TransactionIntentListQueries';
 import { TransactionIntentListResponse       } from '../models/TransactionIntentListResponse';
-import { TransactionIntentResponse              } from '../models/TransactionIntentResponse';
+import { TransactionIntentResponse                } from '../models/TransactionIntentResponse';
 import { TransactionIntentResponseAccount               } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
@@ -626,6 +619,7 @@ import { TriggerDeleteResponse    } from '../models/TriggerDeleteResponse';
 import { TriggerResponse        } from '../models/TriggerResponse';
 import { TwitterOAuthConfig     } from '../models/TwitterOAuthConfig';
 import { TypedDataField } from '../models/TypedDataField';
+import { TypedDomainData } from '../models/TypedDomainData';
 import { UnlinkEmailRequest } from '../models/UnlinkEmailRequest';
 import { UnlinkOAuthRequest  } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
@@ -635,6 +629,7 @@ import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleReques
 import { UpdateProjectApiKeyRequest    } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
 import { UpsertSMTPConfigRequest } from '../models/UpsertSMTPConfigRequest';
+import { UserOperationV6 } from '../models/UserOperationV6';
 import { UserProjectCreateRequest } from '../models/UserProjectCreateRequest';
 import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
 import { UserProjectDeleteResponse    } from '../models/UserProjectDeleteResponse';
@@ -645,16 +640,9 @@ import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
 import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
 import { UserProjectUpdateRequest } from '../models/UserProjectUpdateRequest';
 import { VerifyEmailRequest } from '../models/VerifyEmailRequest';
-import { Web3ActionListResponse       } from '../models/Web3ActionListResponse';
-import { Web3ActionResponse               } from '../models/Web3ActionResponse';
-import { Web3ActionStatusEnum } from '../models/Web3ActionStatusEnum';
-import { Web3ConnectionListQueries      } from '../models/Web3ConnectionListQueries';
-import { Web3ConnectionListResponse       } from '../models/Web3ConnectionListResponse';
-import { Web3ConnectionResponse      } from '../models/Web3ConnectionResponse';
-import { Web3ConnectionResponseExpandable } from '../models/Web3ConnectionResponseExpandable';
-import { Web3ConnectionResponsePlayer         } from '../models/Web3ConnectionResponsePlayer';
 import { WebhookResponse } from '../models/WebhookResponse';
 import { WithdrawalPolicyRequest } from '../models/WithdrawalPolicyRequest';
+import { ZKSyncDetails } from '../models/ZKSyncDetails';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -713,8 +701,6 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeTRANSACTIONINTENT",
     "EntityTypeTRIGGER",
     "EntityTypeUSER",
-    "EntityTypeWEB3ACTION",
-    "EntityTypeWEB3CONNECTION",
     "ErrorTypeINVALIDREQUESTERROR",
     "NextActionType",
     "OAuthProvders",
@@ -757,12 +743,11 @@ let enumsMap: Set<string> = new Set<string>([
     "TimeIntervalType",
     "TokenType",
     "TradeType",
+    "TransactionAbstractionType",
     "TransactionIntentResponseExpandable",
     "UserProjectRole",
     "UserProjectRoleADMIN",
     "UserProjectRoleMEMBER",
-    "Web3ActionStatusEnum",
-    "Web3ConnectionResponseExpandable",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -770,6 +755,7 @@ let typeMap: {[index: string]: any} = {
     "AbiType": AbiType,
     "AccelbyteOAuthConfig": AccelbyteOAuthConfig,
     "Account": Account,
+    "AccountAbstractionV6Details": AccountAbstractionV6Details,
     "AccountEventResponse": AccountEventResponse,
     "AccountInventoryListQueries": AccountInventoryListQueries,
     "AccountListQueries": AccountListQueries,
@@ -837,7 +823,6 @@ let typeMap: {[index: string]: any} = {
     "CreateSubscriptionRequest": CreateSubscriptionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "CreateTriggerRequest": CreateTriggerRequest,
-    "CreateWeb3ConnectionRequest": CreateWeb3ConnectionRequest,
     "CustomAuthConfig": CustomAuthConfig,
     "DeleteSMTPConfigResponse": DeleteSMTPConfigResponse,
     "DeployRequest": DeployRequest,
@@ -852,7 +837,6 @@ let typeMap: {[index: string]: any} = {
     "DeviceListQueries": DeviceListQueries,
     "DeviceResponse": DeviceResponse,
     "DiscordOAuthConfig": DiscordOAuthConfig,
-    "DomainData": DomainData,
     "EcosystemConfigurationResponse": EcosystemConfigurationResponse,
     "EmailSampleDeleteResponse": EmailSampleDeleteResponse,
     "EmailSampleResponse": EmailSampleResponse,
@@ -963,9 +947,9 @@ let typeMap: {[index: string]: any} = {
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
     "SignupRequest": SignupRequest,
+    "StandardDetails": StandardDetails,
     "StartRecoveryRequest": StartRecoveryRequest,
     "Stat": Stat,
-    "SubmitWeb3ActionRequest": SubmitWeb3ActionRequest,
     "SubscriptionDeleteResponse": SubscriptionDeleteResponse,
     "SubscriptionListResponse": SubscriptionListResponse,
     "SubscriptionResponse": SubscriptionResponse,
@@ -975,6 +959,7 @@ let typeMap: {[index: string]: any} = {
     "Token": Token,
     "TransactionConfirmedEventResponse": TransactionConfirmedEventResponse,
     "TransactionIntent": TransactionIntent,
+    "TransactionIntentDetails": TransactionIntentDetails,
     "TransactionIntentListQueries": TransactionIntentListQueries,
     "TransactionIntentListResponse": TransactionIntentListResponse,
     "TransactionIntentResponse": TransactionIntentResponse,
@@ -987,6 +972,7 @@ let typeMap: {[index: string]: any} = {
     "TriggerResponse": TriggerResponse,
     "TwitterOAuthConfig": TwitterOAuthConfig,
     "TypedDataField": TypedDataField,
+    "TypedDomainData": TypedDomainData,
     "UnlinkEmailRequest": UnlinkEmailRequest,
     "UnlinkOAuthRequest": UnlinkOAuthRequest,
     "UpdateContractRequest": UpdateContractRequest,
@@ -996,6 +982,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateProjectApiKeyRequest": UpdateProjectApiKeyRequest,
     "UpdateProjectRequest": UpdateProjectRequest,
     "UpsertSMTPConfigRequest": UpsertSMTPConfigRequest,
+    "UserOperationV6": UserOperationV6,
     "UserProjectCreateRequest": UserProjectCreateRequest,
     "UserProjectCreateRequestRole": UserProjectCreateRequestRole,
     "UserProjectDeleteResponse": UserProjectDeleteResponse,
@@ -1003,14 +990,9 @@ let typeMap: {[index: string]: any} = {
     "UserProjectResponse": UserProjectResponse,
     "UserProjectUpdateRequest": UserProjectUpdateRequest,
     "VerifyEmailRequest": VerifyEmailRequest,
-    "Web3ActionListResponse": Web3ActionListResponse,
-    "Web3ActionResponse": Web3ActionResponse,
-    "Web3ConnectionListQueries": Web3ConnectionListQueries,
-    "Web3ConnectionListResponse": Web3ConnectionListResponse,
-    "Web3ConnectionResponse": Web3ConnectionResponse,
-    "Web3ConnectionResponsePlayer": Web3ConnectionResponsePlayer,
     "WebhookResponse": WebhookResponse,
     "WithdrawalPolicyRequest": WithdrawalPolicyRequest,
+    "ZKSyncDetails": ZKSyncDetails,
 }
 
 export class ObjectSerializer {

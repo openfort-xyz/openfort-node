@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type EntityTypeWEB3CONNECTION = "web3Connection" ;
+export type TransactionAbstractionType = "accountAbstractionV6" | "zkSync" | "standard" ;

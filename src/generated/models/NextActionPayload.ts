@@ -23,6 +23,10 @@ export class NextActionPayload {
     * The hashed userOperation.
     */
     'userOperationHash'?: string;
+    /**
+    * chain-agnostic hash to sign.
+    */
+    'signableHash'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,6 +52,12 @@ export class NextActionPayload {
         {
             "name": "userOperationHash",
             "baseName": "userOperationHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "signableHash",
+            "baseName": "signableHash",
             "type": "string",
             "format": ""
         }    ];

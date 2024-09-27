@@ -12,14 +12,27 @@
 
 import { HttpFile } from '../http/http';
 
-export class DomainData {
+export class TypedDomainData {
     /**
     * The chain ID.
     */
     'chainId': number;
+    /**
+    * The user readable name of signing domain, i.e. the name of the DApp or the protocol..
+    */
     'name'?: string;
+    /**
+    * The current major version of the signing domain. Signatures from different versions are not compatible.
+    */
     'version'?: string;
+    /**
+    * The address of the contract that will verify the signature. The user-agent may do contract specific phishing prevention.
+    */
     'verifyingContract'?: string;
+    /**
+    * An disambiguating salt for the protocol. This can be used as a domain separator of last resort.
+    */
+    'salt'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -47,10 +60,16 @@ export class DomainData {
             "baseName": "verifyingContract",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "salt",
+            "baseName": "salt",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return DomainData.attributeTypeMap;
+        return TypedDomainData.attributeTypeMap;
     }
 
     public constructor() {

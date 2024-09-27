@@ -16,29 +16,11 @@ import { HttpFile } from '../http/http';
 * return value from estimateTransactionIntentCost
 */
 export class EstimateTransactionIntentGasResult {
-    /**
-    * the preVerification gas used by this UserOperation.
-    */
-    'preVerificationGas': string;
-    /**
-    * gas used for validation of this UserOperation, including account creation
-    */
-    'verificationGas': string;
-    /**
-    * the deadline after which this UserOperation is invalid (not a gas estimation parameter, but returned by validation
-    */
+    'preVerificationGas'?: string;
+    'verificationGas'?: string;
     'validUntil'?: string;
-    /**
-    * the deadline after which this UserOperation is valid (not a gas estimation parameter, but returned by validation
-    */
     'validAfter'?: string;
-    /**
-    * estimated cost of calling the account with the given callData
-    */
-    'callGasLimit': string;
-    /**
-    * returned by some bundlers (e.g. Biconomy\'s)
-    */
+    'callGasLimit'?: string;
     'verificationGasLimit'?: string;
     /**
     * estimated TX gas cost
