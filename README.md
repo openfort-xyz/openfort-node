@@ -20,7 +20,8 @@
   </h4>
 </div>
 
-[banner-image]: https://blog-cms.openfort.xyz/uploads/nodejs_d651988940.png
+![Illustration_04 1](https://github.com/user-attachments/assets/08ee1833-3929-4d6e-ac9f-5d2ca49430c8)
+
 
 # Openfort Node.js Library
 
