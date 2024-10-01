@@ -1,4 +1,4 @@
-![Openfort Protocol][banner-image]
+![Illustration_04 1](https://github.com/user-attachments/assets/08ee1833-3929-4d6e-ac9f-5d2ca49430c8)
 
 <div align="center">
   <h4>
@@ -19,8 +19,6 @@
     </a>
   </h4>
 </div>
-
-![Illustration_04 1](https://github.com/user-attachments/assets/08ee1833-3929-4d6e-ac9f-5d2ca49430c8)
 
 
 # Openfort Node.js Library
