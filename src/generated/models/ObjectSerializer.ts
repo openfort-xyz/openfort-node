@@ -30,10 +30,13 @@ export * from '../models/AuthPlayerResponse';
 export * from '../models/AuthPlayerResponsePlayer';
 export * from '../models/AuthPlayerResponseWithRecoveryShare';
 export * from '../models/AuthProvider';
+export * from '../models/AuthProviderListResponse';
 export * from '../models/AuthProviderResponse';
+export * from '../models/AuthProviderWithTypeResponse';
 export * from '../models/AuthResponse';
 export * from '../models/AuthSessionResponse';
 export * from '../models/AuthenticateOAuthRequest';
+export * from '../models/AuthenticationType';
 export * from '../models/Authorize200Response';
 export * from '../models/AuthorizePlayerRequest';
 export * from '../models/BalanceEventResponse';
@@ -142,7 +145,8 @@ export * from '../models/GasPerIntervalLimitPolicyRuleResponse';
 export * from '../models/GasPerTransactionLimitPolicyRuleResponse';
 export * from '../models/GasReport';
 export * from '../models/GasReportListResponse';
-export * from '../models/GasReportTransactionIntentsInner';
+export * from '../models/GasReportTransactionIntents';
+export * from '../models/GasReportTransactionIntentsListResponse';
 export * from '../models/GoogleOAuthConfig';
 export * from '../models/InitEmbeddedRequest';
 export * from '../models/Interaction';
@@ -152,15 +156,18 @@ export * from '../models/InventoryListResponse';
 export * from '../models/InventoryResponse';
 export * from '../models/JwtKey';
 export * from '../models/JwtKeyResponse';
+export * from '../models/LineOAuthConfig';
 export * from '../models/LinkedAccountResponse';
 export * from '../models/ListSubscriptionLogsRequest';
 export * from '../models/Log';
 export * from '../models/LogResponse';
+export * from '../models/LoginOIDCRequest';
 export * from '../models/LoginRequest';
 export * from '../models/LogoutRequest';
 export * from '../models/LootLockerOAuthConfig';
 export * from '../models/Money';
 export * from '../models/MonthRange';
+export * from '../models/MyEcosystemResponse';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
@@ -174,6 +181,8 @@ export * from '../models/OAuthProviderDISCORD';
 export * from '../models/OAuthProviderEPICGAMES';
 export * from '../models/OAuthProviderFACEBOOK';
 export * from '../models/OAuthProviderGOOGLE';
+export * from '../models/OAuthProviderLINE';
+export * from '../models/OAuthProviderTELEGRAM';
 export * from '../models/OAuthProviderTWITTER';
 export * from '../models/OAuthRequest';
 export * from '../models/OAuthResponse';
@@ -211,6 +220,8 @@ export * from '../models/PolicyRateLimit';
 export * from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 export * from '../models/PolicyRateLimitGASPERINTERVAL';
 export * from '../models/PolicyRateLimitGASPERTRANSACTION';
+export * from '../models/PolicyReportQueries';
+export * from '../models/PolicyReportTransactionIntentsQueries';
 export * from '../models/PolicyResponse';
 export * from '../models/PolicyResponseExpandable';
 export * from '../models/PolicyResponsePolicyRulesInner';
@@ -266,6 +277,7 @@ export * from '../models/SubscriptionListResponse';
 export * from '../models/SubscriptionResponse';
 export * from '../models/SubscriptionResponsePlan';
 export * from '../models/SupabaseAuthConfig';
+export * from '../models/TelegramOAuthConfig';
 export * from '../models/ThirdPartyOAuthProvider';
 export * from '../models/ThirdPartyOAuthProviderACCELBYTE';
 export * from '../models/ThirdPartyOAuthProviderCUSTOM';
@@ -353,10 +365,13 @@ import { AuthPlayerResponse      } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer         } from '../models/AuthPlayerResponsePlayer';
 import { AuthPlayerResponseWithRecoveryShare       } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthProvider } from '../models/AuthProvider';
+import { AuthProviderListResponse } from '../models/AuthProviderListResponse';
 import { AuthProviderResponse } from '../models/AuthProviderResponse';
+import { AuthProviderWithTypeResponse   } from '../models/AuthProviderWithTypeResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest     } from '../models/AuthenticateOAuthRequest';
+import { AuthenticationType } from '../models/AuthenticationType';
 import { Authorize200Response        } from '../models/Authorize200Response';
 import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse      } from '../models/BalanceEventResponse';
@@ -380,7 +395,7 @@ import { ContractDeleteResponse    } from '../models/ContractDeleteResponse';
 import { ContractEventResponse         } from '../models/ContractEventResponse';
 import { ContractListQueries        } from '../models/ContractListQueries';
 import { ContractListResponse       } from '../models/ContractListResponse';
-import { ContractPolicyRuleResponse       } from '../models/ContractPolicyRuleResponse';
+import { ContractPolicyRuleResponse        } from '../models/ContractPolicyRuleResponse';
 import { ContractPolicyRuleResponseContract          } from '../models/ContractPolicyRuleResponseContract';
 import { ContractReadQueries } from '../models/ContractReadQueries';
 import { ContractReadResponse      } from '../models/ContractReadResponse';
@@ -397,7 +412,7 @@ import { CreateEventRequest          } from '../models/CreateEventRequest';
 import { CreateExchangeRequest            } from '../models/CreateExchangeRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
-import { CreatePolicyRuleRequest         } from '../models/CreatePolicyRuleRequest';
+import { CreatePolicyRuleRequest          } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest   } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
@@ -465,7 +480,8 @@ import { GasPerIntervalLimitPolicyRuleResponse         } from '../models/GasPerI
 import { GasPerTransactionLimitPolicyRuleResponse       } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
 import { GasReportListResponse       } from '../models/GasReportListResponse';
-import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
+import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
+import { GasReportTransactionIntentsListResponse       } from '../models/GasReportTransactionIntentsListResponse';
 import { GoogleOAuthConfig     } from '../models/GoogleOAuthConfig';
 import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
@@ -475,19 +491,22 @@ import { InventoryListResponse       } from '../models/InventoryListResponse';
 import { InventoryResponse    } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
+import { LineOAuthConfig     } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse         } from '../models/LinkedAccountResponse';
 import { ListSubscriptionLogsRequest          } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse         } from '../models/LogResponse';
+import { LoginOIDCRequest } from '../models/LoginOIDCRequest';
 import { LoginRequest } from '../models/LoginRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig   } from '../models/LootLockerOAuthConfig';
 import { Money   } from '../models/Money';
 import { MonthRange } from '../models/MonthRange';
+import { MyEcosystemResponse } from '../models/MyEcosystemResponse';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { OAuthConfig               } from '../models/OAuthConfig';
+import { OAuthConfig                   } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest    } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
@@ -497,6 +516,8 @@ import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
 import { OAuthProviderEPICGAMES } from '../models/OAuthProviderEPICGAMES';
 import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
+import { OAuthProviderLINE } from '../models/OAuthProviderLINE';
+import { OAuthProviderTELEGRAM } from '../models/OAuthProviderTELEGRAM';
 import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
@@ -534,13 +555,15 @@ import { PolicyRateLimit } from '../models/PolicyRateLimit';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
+import { PolicyReportQueries } from '../models/PolicyReportQueries';
+import { PolicyReportTransactionIntentsQueries } from '../models/PolicyReportTransactionIntentsQueries';
 import { PolicyResponse            } from '../models/PolicyResponse';
 import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
-import { PolicyResponsePolicyRulesInner           } from '../models/PolicyResponsePolicyRulesInner';
+import { PolicyResponsePolicyRulesInner            } from '../models/PolicyResponsePolicyRulesInner';
 import { PolicyRuleDeleteResponse    } from '../models/PolicyRuleDeleteResponse';
 import { PolicyRuleListQueries   , PolicyRuleListQueriesExpandEnum    } from '../models/PolicyRuleListQueries';
 import { PolicyRuleListResponse       } from '../models/PolicyRuleListResponse';
-import { PolicyRuleResponse           } from '../models/PolicyRuleResponse';
+import { PolicyRuleResponse            } from '../models/PolicyRuleResponse';
 import { PolicyRuleType } from '../models/PolicyRuleType';
 import { PolicyRuleTypeACCOUNT } from '../models/PolicyRuleTypeACCOUNT';
 import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
@@ -589,6 +612,7 @@ import { SubscriptionListResponse       } from '../models/SubscriptionListRespon
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
+import { TelegramOAuthConfig     } from '../models/TelegramOAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
@@ -625,7 +649,7 @@ import { UnlinkOAuthRequest  } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdateEmailSampleRequest     } from '../models/UpdateEmailSampleRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
-import { UpdatePolicyRuleRequest        } from '../models/UpdatePolicyRuleRequest';
+import { UpdatePolicyRuleRequest         } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest    } from '../models/UpdateProjectApiKeyRequest';
 import { UpdateProjectRequest } from '../models/UpdateProjectRequest';
 import { UpsertSMTPConfigRequest } from '../models/UpsertSMTPConfigRequest';
@@ -674,6 +698,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ApiKeyType",
     "AssetType",
     "AuthProviderResponse",
+    "AuthenticationType",
     "BasicAuthProvider",
     "CodeChallengeMethodEnum",
     "Currency",
@@ -709,6 +734,8 @@ let enumsMap: Set<string> = new Set<string>([
     "OAuthProviderEPICGAMES",
     "OAuthProviderFACEBOOK",
     "OAuthProviderGOOGLE",
+    "OAuthProviderLINE",
+    "OAuthProviderTELEGRAM",
     "OAuthProviderTWITTER",
     "PlanChangeTypeEnum",
     "PlayerResponseExpandable",
@@ -774,6 +801,8 @@ let typeMap: {[index: string]: any} = {
     "AuthPlayerResponsePlayer": AuthPlayerResponsePlayer,
     "AuthPlayerResponseWithRecoveryShare": AuthPlayerResponseWithRecoveryShare,
     "AuthProvider": AuthProvider,
+    "AuthProviderListResponse": AuthProviderListResponse,
+    "AuthProviderWithTypeResponse": AuthProviderWithTypeResponse,
     "AuthResponse": AuthResponse,
     "AuthSessionResponse": AuthSessionResponse,
     "AuthenticateOAuthRequest": AuthenticateOAuthRequest,
@@ -858,7 +887,8 @@ let typeMap: {[index: string]: any} = {
     "GasPerTransactionLimitPolicyRuleResponse": GasPerTransactionLimitPolicyRuleResponse,
     "GasReport": GasReport,
     "GasReportListResponse": GasReportListResponse,
-    "GasReportTransactionIntentsInner": GasReportTransactionIntentsInner,
+    "GasReportTransactionIntents": GasReportTransactionIntents,
+    "GasReportTransactionIntentsListResponse": GasReportTransactionIntentsListResponse,
     "GoogleOAuthConfig": GoogleOAuthConfig,
     "InitEmbeddedRequest": InitEmbeddedRequest,
     "Interaction": Interaction,
@@ -868,15 +898,18 @@ let typeMap: {[index: string]: any} = {
     "InventoryResponse": InventoryResponse,
     "JwtKey": JwtKey,
     "JwtKeyResponse": JwtKeyResponse,
+    "LineOAuthConfig": LineOAuthConfig,
     "LinkedAccountResponse": LinkedAccountResponse,
     "ListSubscriptionLogsRequest": ListSubscriptionLogsRequest,
     "Log": Log,
     "LogResponse": LogResponse,
+    "LoginOIDCRequest": LoginOIDCRequest,
     "LoginRequest": LoginRequest,
     "LogoutRequest": LogoutRequest,
     "LootLockerOAuthConfig": LootLockerOAuthConfig,
     "Money": Money,
     "MonthRange": MonthRange,
+    "MyEcosystemResponse": MyEcosystemResponse,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
     "OAuthConfig": OAuthConfig,
@@ -914,6 +947,8 @@ let typeMap: {[index: string]: any} = {
     "PolicyDeleteResponse": PolicyDeleteResponse,
     "PolicyListQueries": PolicyListQueries,
     "PolicyListResponse": PolicyListResponse,
+    "PolicyReportQueries": PolicyReportQueries,
+    "PolicyReportTransactionIntentsQueries": PolicyReportTransactionIntentsQueries,
     "PolicyResponse": PolicyResponse,
     "PolicyResponsePolicyRulesInner": PolicyResponsePolicyRulesInner,
     "PolicyRuleDeleteResponse": PolicyRuleDeleteResponse,
@@ -955,6 +990,7 @@ let typeMap: {[index: string]: any} = {
     "SubscriptionResponse": SubscriptionResponse,
     "SubscriptionResponsePlan": SubscriptionResponsePlan,
     "SupabaseAuthConfig": SupabaseAuthConfig,
+    "TelegramOAuthConfig": TelegramOAuthConfig,
     "ThirdPartyOAuthRequest": ThirdPartyOAuthRequest,
     "Token": Token,
     "TransactionConfirmedEventResponse": TransactionConfirmedEventResponse,
