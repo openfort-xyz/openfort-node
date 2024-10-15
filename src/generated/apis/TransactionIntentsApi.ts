@@ -264,8 +264,8 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Broadcasts a signed TransactionIntent to the blockchain.  Use this endpoint to send the signed `userOperationHash`. Openfort will then put it on-chain.
-     * Send a signed transaction userOperationHash.
+     * Broadcasts a signed TransactionIntent to the blockchain.  Use this endpoint to send the signed `signableHash`. Openfort will then put it on-chain.
+     * Send a signed transaction signableHash.
      * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 
      */

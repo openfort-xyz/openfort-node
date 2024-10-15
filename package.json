@@ -1,6 +1,6 @@
 {
   "name": "@openfort/openfort-node",
-  "version": "0.6.65",
+  "version": "0.6.66",
   "description": "OpenAPI client for Openfort API",
   "author": "Openfort",
   "repository": {

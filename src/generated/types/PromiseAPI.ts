@@ -33,10 +33,13 @@ import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
 import { AuthPlayerResponseWithRecoveryShare } from '../models/AuthPlayerResponseWithRecoveryShare';
 import { AuthProvider } from '../models/AuthProvider';
+import { AuthProviderListResponse } from '../models/AuthProviderListResponse';
 import { AuthProviderResponse } from '../models/AuthProviderResponse';
+import { AuthProviderWithTypeResponse } from '../models/AuthProviderWithTypeResponse';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
+import { AuthenticationType } from '../models/AuthenticationType';
 import { Authorize200Response } from '../models/Authorize200Response';
 import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse } from '../models/BalanceEventResponse';
@@ -145,7 +148,8 @@ import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalL
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
-import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
+import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
+import { GasReportTransactionIntentsListResponse } from '../models/GasReportTransactionIntentsListResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
@@ -155,15 +159,18 @@ import { InventoryListResponse } from '../models/InventoryListResponse';
 import { InventoryResponse } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
+import { LineOAuthConfig } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { ListSubscriptionLogsRequest } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse } from '../models/LogResponse';
+import { LoginOIDCRequest } from '../models/LoginOIDCRequest';
 import { LoginRequest } from '../models/LoginRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { Money } from '../models/Money';
 import { MonthRange } from '../models/MonthRange';
+import { MyEcosystemResponse } from '../models/MyEcosystemResponse';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
@@ -177,6 +184,8 @@ import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
 import { OAuthProviderEPICGAMES } from '../models/OAuthProviderEPICGAMES';
 import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
+import { OAuthProviderLINE } from '../models/OAuthProviderLINE';
+import { OAuthProviderTELEGRAM } from '../models/OAuthProviderTELEGRAM';
 import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
@@ -214,6 +223,8 @@ import { PolicyRateLimit } from '../models/PolicyRateLimit';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
+import { PolicyReportQueries } from '../models/PolicyReportQueries';
+import { PolicyReportTransactionIntentsQueries } from '../models/PolicyReportTransactionIntentsQueries';
 import { PolicyResponse } from '../models/PolicyResponse';
 import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyResponsePolicyRulesInner } from '../models/PolicyResponsePolicyRulesInner';
@@ -269,6 +280,7 @@ import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
+import { TelegramOAuthConfig } from '../models/TelegramOAuthConfig';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
@@ -697,6 +709,17 @@ export class PromiseAuthenticationApi {
     }
 
     /**
+     * Authenticate a player from an identity token.
+     * OIDC Identity token.
+     * @param loginOIDCRequest 
+     * @param xGame 
+     */
+    public loginOIDC(loginOIDCRequest: LoginOIDCRequest, xGame?: string, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.loginOIDC(loginOIDCRequest, xGame, _options);
+        return result.toPromise();
+    }
+
+    /**
      * When using Openfort Auth, the endpoint logs out the player.
      * Log out a player.
      * @param logoutRequest 
@@ -924,6 +947,34 @@ export class PromiseContractsApi {
      */
     public updateContract(id: string, updateContractRequest: UpdateContractRequest, _options?: Configuration): Promise<ContractResponse> {
         const result = this.api.updateContract(id, updateContractRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableDefaultApi } from './ObservableAPI';
+
+import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+export class PromiseDefaultApi {
+    private api: ObservableDefaultApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DefaultApiRequestFactory,
+        responseProcessor?: DefaultApiResponseProcessor
+    ) {
+        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * List available authentication methods for the current project environment.
+     * List of available authentication methods.
+     */
+    public listAvailableAuthProviders(_options?: Configuration): Promise<AuthProviderListResponse> {
+        const result = this.api.listAvailableAuthProviders(_options);
         return result.toPromise();
     }
 
@@ -1400,11 +1451,24 @@ export class PromisePoliciesApi {
     }
 
     /**
+     * List transaction intents of a policy report.
+     * @param id Specifies the unique policy ID (starts with pol_).
+     * @param to The start date of the period in unix timestamp.
+     * @param _from The end date of the period in unix timestamp.
+     */
+    public getPolicyReportTransactionIntents(id: string, to: number, _from: number, _options?: Configuration): Promise<GasReportTransactionIntentsListResponse> {
+        const result = this.api.getPolicyReportTransactionIntents(id, to, _from, _options);
+        return result.toPromise();
+    }
+
+    /**
      * List all gas reports of a policy.
      * @param id Specifies the unique policy ID (starts with pol_).
+     * @param to The start date of the period in unix timestamp.
+     * @param _from The end date of the period in unix timestamp.
      */
-    public getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<GasReportListResponse> {
-        const result = this.api.getPolicyTotalGasUsage(id, _options);
+    public getPolicyTotalGasUsage(id: string, to?: number, _from?: number, _options?: Configuration): Promise<GasReportListResponse> {
+        const result = this.api.getPolicyTotalGasUsage(id, to, _from, _options);
         return result.toPromise();
     }
 
@@ -1826,8 +1890,8 @@ export class PromiseTransactionIntentsApi {
     }
 
     /**
-     * Broadcasts a signed TransactionIntent to the blockchain.  Use this endpoint to send the signed `userOperationHash`. Openfort will then put it on-chain.
-     * Send a signed transaction userOperationHash.
+     * Broadcasts a signed TransactionIntent to the blockchain.  Use this endpoint to send the signed `signableHash`. Openfort will then put it on-chain.
+     * Send a signed transaction signableHash.
      * @param id Specifies the unique transaction intent ID (starts with tin_).
      * @param signatureRequest 
      */
