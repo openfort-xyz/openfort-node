@@ -10,51 +10,38 @@
  * Do not edit the class manually.
  */
 
+import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
 import { HttpFile } from '../http/http';
 
-export class GasReportTransactionIntentsInner {
-    'gasFeeInUSD': string;
-    'gasUsed': string;
-    'gasPrice': string;
-    'gasFee': string;
-    'id': string;
+export class MyEcosystemResponse {
+    'publishableKey': string;
+    'name': string;
+    'configuration'?: EcosystemConfigurationResponse;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "gasFeeInUSD",
-            "baseName": "gasFeeInUSD",
+            "name": "publishableKey",
+            "baseName": "publishableKey",
             "type": "string",
             "format": ""
         },
         {
-            "name": "gasUsed",
-            "baseName": "gasUsed",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "gasPrice",
-            "baseName": "gasPrice",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasFee",
-            "baseName": "gasFee",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "configuration",
+            "baseName": "configuration",
+            "type": "EcosystemConfigurationResponse",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return GasReportTransactionIntentsInner.attributeTypeMap;
+        return MyEcosystemResponse.attributeTypeMap;
     }
 
     public constructor() {

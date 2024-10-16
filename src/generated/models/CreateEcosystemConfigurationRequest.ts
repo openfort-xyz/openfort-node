@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { HttpFile } from '../http/http';
 
 export class CreateEcosystemConfigurationRequest {
@@ -33,6 +34,30 @@ export class CreateEcosystemConfigurationRequest {
     * Logo URL of the ecosystem.
     */
     'logoUrl': string;
+    /**
+    * URLs where the ecosystem wallet is hosted.
+    */
+    'ecosystemWalletDomains'?: Array<string>;
+    /**
+    * Terms of service URL
+    */
+    'termsOfServiceUrl'?: string;
+    /**
+    * Privacy policy URL
+    */
+    'privacyPolicyUrl'?: string;
+    /**
+    * Favicon URL
+    */
+    'faviconUrl'?: string;
+    /**
+    * Examples of the ecosystem.
+    */
+    'dashboardExamples'?: Array<{ [key: string]: PlayerMetadataValue; }>;
+    /**
+    * SDKs of the ecosystem.
+    */
+    'dashboardSDKs'?: Array<{ [key: string]: PlayerMetadataValue; }>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -65,6 +90,42 @@ export class CreateEcosystemConfigurationRequest {
             "name": "logoUrl",
             "baseName": "logoUrl",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "ecosystemWalletDomains",
+            "baseName": "ecosystemWalletDomains",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "termsOfServiceUrl",
+            "baseName": "termsOfServiceUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "privacyPolicyUrl",
+            "baseName": "privacyPolicyUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "faviconUrl",
+            "baseName": "faviconUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "dashboardExamples",
+            "baseName": "dashboardExamples",
+            "type": "Array<{ [key: string]: PlayerMetadataValue; }>",
+            "format": ""
+        },
+        {
+            "name": "dashboardSDKs",
+            "baseName": "dashboardSDKs",
+            "type": "Array<{ [key: string]: PlayerMetadataValue; }>",
             "format": ""
         }    ];
 

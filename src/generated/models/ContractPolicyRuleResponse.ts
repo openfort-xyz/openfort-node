@@ -20,8 +20,9 @@ export class ContractPolicyRuleResponse {
     'object': EntityTypePOLICYRULE;
     'createdAt': number;
     'type': PolicyRuleTypeCONTRACT;
-    'contract': ContractPolicyRuleResponseContract;
-    'functionName': string;
+    'contract'?: ContractPolicyRuleResponseContract;
+    'functionName'?: string;
+    'wildcard': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -60,6 +61,12 @@ export class ContractPolicyRuleResponse {
             "name": "functionName",
             "baseName": "functionName",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "wildcard",
+            "baseName": "wildcard",
+            "type": "boolean",
             "format": ""
         }    ];
 
