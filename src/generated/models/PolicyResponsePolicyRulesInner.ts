@@ -24,8 +24,9 @@ export class PolicyResponsePolicyRulesInner {
     'object': EntityTypePOLICYRULE;
     'createdAt': number;
     'type': PolicyRuleTypeRATELIMIT;
-    'contract': ContractPolicyRuleResponseContract;
+    'contract'?: ContractPolicyRuleResponseContract;
     'functionName': PolicyRateLimitCOUNTPERINTERVAL;
+    'wildcard': boolean;
     'gasLimit': string;
     'timeIntervalType': TimeIntervalType;
     'timeIntervalValue': number;
@@ -68,6 +69,12 @@ export class PolicyResponsePolicyRulesInner {
             "name": "functionName",
             "baseName": "functionName",
             "type": "PolicyRateLimitCOUNTPERINTERVAL",
+            "format": ""
+        },
+        {
+            "name": "wildcard",
+            "baseName": "wildcard",
+            "type": "boolean",
             "format": ""
         },
         {

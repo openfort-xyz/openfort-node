@@ -25,6 +25,10 @@ export class UpdatePolicyRuleRequest {
     */
     'contract'?: string;
     /**
+    * When using `contract_functions` type, set this to `true` to allow all contracts.
+    */
+    'wildcard'?: boolean;
+    /**
     * Gas limit in WEI (i.e. factor 10^18).
     */
     'gasLimit'?: string;
@@ -57,6 +61,12 @@ export class UpdatePolicyRuleRequest {
             "name": "contract",
             "baseName": "contract",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "wildcard",
+            "baseName": "wildcard",
+            "type": "boolean",
             "format": ""
         },
         {

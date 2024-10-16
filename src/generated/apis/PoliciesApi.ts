@@ -12,6 +12,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { GasReportListResponse } from '../models/GasReportListResponse';
+import { GasReportTransactionIntentsListResponse } from '../models/GasReportTransactionIntentsListResponse';
 import { PolicyBalanceWithdrawResponse } from '../models/PolicyBalanceWithdrawResponse';
 import { PolicyDeleteResponse } from '../models/PolicyDeleteResponse';
 import { PolicyListResponse } from '../models/PolicyListResponse';
@@ -411,16 +412,81 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * List transaction intents of a policy report.
+     * @param id Specifies the unique policy ID (starts with pol_).
+     * @param to The start date of the period in unix timestamp.
+     * @param _from The end date of the period in unix timestamp.
+     */
+    public async getPolicyReportTransactionIntents(id: string, to: number, _from: number, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("PoliciesApi", "getPolicyReportTransactionIntents", "id");
+        }
+
+
+        // verify required parameter 'to' is not null or undefined
+        if (to === null || to === undefined) {
+            throw new RequiredError("PoliciesApi", "getPolicyReportTransactionIntents", "to");
+        }
+
+
+        // verify required parameter '_from' is not null or undefined
+        if (_from === null || _from === undefined) {
+            throw new RequiredError("PoliciesApi", "getPolicyReportTransactionIntents", "_from");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/policies/{id}/reports/transaction_intents'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (to !== undefined) {
+            requestContext.setQueryParam("to", ObjectSerializer.serialize(to, "number", "double"));
+        }
+
+        // Query Params
+        if (_from !== undefined) {
+            requestContext.setQueryParam("from", ObjectSerializer.serialize(_from, "number", "double"));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * List all gas reports of a policy.
      * @param id Specifies the unique policy ID (starts with pol_).
+     * @param to The start date of the period in unix timestamp.
+     * @param _from The end date of the period in unix timestamp.
      */
-    public async getPolicyTotalGasUsage(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async getPolicyTotalGasUsage(id: string, to?: number, _from?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new RequiredError("PoliciesApi", "getPolicyTotalGasUsage", "id");
         }
+
+
 
 
         // Path Params
@@ -430,6 +496,16 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (to !== undefined) {
+            requestContext.setQueryParam("to", ObjectSerializer.serialize(to, "number", "double"));
+        }
+
+        // Query Params
+        if (_from !== undefined) {
+            requestContext.setQueryParam("from", ObjectSerializer.serialize(_from, "number", "double"));
+        }
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -774,6 +850,41 @@ export class PoliciesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PolicyBalanceWithdrawResponse", ""
             ) as PolicyBalanceWithdrawResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getPolicyReportTransactionIntents
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getPolicyReportTransactionIntents(response: ResponseContext): Promise<GasReportTransactionIntentsListResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: GasReportTransactionIntentsListResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GasReportTransactionIntentsListResponse", ""
+            ) as GasReportTransactionIntentsListResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: GasReportTransactionIntentsListResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GasReportTransactionIntentsListResponse", ""
+            ) as GasReportTransactionIntentsListResponse;
             return body;
         }
 

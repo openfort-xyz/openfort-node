@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { GasReportTransactionIntentsInner } from '../models/GasReportTransactionIntentsInner';
+import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { MonthRange } from '../models/MonthRange';
 import { HttpFile } from '../http/http';
 
@@ -20,7 +20,7 @@ export class GasReport {
     'totalTransactionFeeInCustomTokens': string;
     'totalTransactionFee': string;
     'totalTransactionFeeInUSD': string;
-    'transactionIntents': Array<GasReportTransactionIntentsInner>;
+    'transactionIntents': Array<GasReportTransactionIntents>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -58,7 +58,7 @@ export class GasReport {
         {
             "name": "transactionIntents",
             "baseName": "transactionIntents",
-            "type": "Array<GasReportTransactionIntentsInner>",
+            "type": "Array<GasReportTransactionIntents>",
             "format": ""
         }    ];
 
