@@ -27,6 +27,7 @@ import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
+import { AuthConfig } from '../models/AuthConfig';
 import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
@@ -49,6 +50,7 @@ import { BaseEntityListResponseEmailSampleResponse } from '../models/BaseEntityL
 import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
 import { BaseEntityListResponseTriggerResponse } from '../models/BaseEntityListResponseTriggerResponse';
 import { BasicAuthProvider } from '../models/BasicAuthProvider';
+import { BasicAuthProviderEMAIL } from '../models/BasicAuthProviderEMAIL';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
@@ -73,11 +75,13 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
+import { CreateDeveloperAccountCreateRequest } from '../models/CreateDeveloperAccountCreateRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
+import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
@@ -93,7 +97,6 @@ import { DeleteSMTPConfigResponse } from '../models/DeleteSMTPConfigResponse';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
-import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
 import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueries';
@@ -104,6 +107,7 @@ import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
 import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
+import { EmailAuthConfig } from '../models/EmailAuthConfig';
 import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
@@ -116,6 +120,7 @@ import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT
 import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
 import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
 import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
+import { EntityTypeFORWARDERCONTRACT } from '../models/EntityTypeFORWARDERCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeLOG } from '../models/EntityTypeLOG';
 import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
@@ -144,6 +149,8 @@ import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
+import { ForwarderContractDeleteResponse } from '../models/ForwarderContractDeleteResponse';
+import { ForwarderContractResponse } from '../models/ForwarderContractResponse';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
@@ -151,6 +158,8 @@ import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { GasReportTransactionIntentsListResponse } from '../models/GasReportTransactionIntentsListResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
+import { GrantCallbackRequest } from '../models/GrantCallbackRequest';
+import { GrantOAuthResponse } from '../models/GrantOAuthResponse';
 import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
@@ -161,6 +170,7 @@ import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
+import { ListConfigRequest } from '../models/ListConfigRequest';
 import { ListSubscriptionLogsRequest } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse } from '../models/LogResponse';
@@ -174,7 +184,6 @@ import { MyEcosystemResponse } from '../models/MyEcosystemResponse';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
@@ -281,6 +290,8 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
 import { TelegramOAuthConfig } from '../models/TelegramOAuthConfig';
+import { TelegramThirdPartyConfig } from '../models/TelegramThirdPartyConfig';
+import { TestTrigger200Response } from '../models/TestTrigger200Response';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
@@ -289,6 +300,7 @@ import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProv
 import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
 import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
+import { ThirdPartyOAuthProviderTELEGRAMMINIAPP } from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
@@ -315,6 +327,7 @@ import { TypedDomainData } from '../models/TypedDomainData';
 import { UnlinkEmailRequest } from '../models/UnlinkEmailRequest';
 import { UnlinkOAuthRequest } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
+import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAccountCreateRequest';
 import { UpdateEmailSampleRequest } from '../models/UpdateEmailSampleRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
@@ -604,6 +617,15 @@ export interface AdminAuthenticationApiAuthorizeRequest {
     authorizePlayerRequest: AuthorizePlayerRequest
 }
 
+export interface AdminAuthenticationApiCreateRequest {
+    /**
+     * Specifies the oauth provider specific configuration.
+     * @type AuthConfig
+     * @memberof AdminAuthenticationApicreate
+     */
+    body: AuthConfig
+}
+
 export interface AdminAuthenticationApiCreateAuthPlayerRequest {
     /**
      * 
@@ -616,10 +638,10 @@ export interface AdminAuthenticationApiCreateAuthPlayerRequest {
 export interface AdminAuthenticationApiCreateOAuthConfigRequest {
     /**
      * Specifies the oauth provider specific configuration.
-     * @type OAuthConfig
+     * @type AuthConfig
      * @memberof AdminAuthenticationApicreateOAuthConfig
      */
-    body: OAuthConfig
+    body: AuthConfig
 }
 
 export interface AdminAuthenticationApiDeleteAuthPlayerRequest {
@@ -733,6 +755,15 @@ export class ObjectAdminAuthenticationApi {
     }
 
     /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param param the request object
+     */
+    public create(param: AdminAuthenticationApiCreateRequest, options?: Configuration): Promise<AuthConfig> {
+        return this.api.create(param.body,  options).toPromise();
+    }
+
+    /**
      * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
      * Create an authenticated player.
      * @param param the request object
@@ -746,7 +777,7 @@ export class ObjectAdminAuthenticationApi {
      * Create oauth configuration.
      * @param param the request object
      */
-    public createOAuthConfig(param: AdminAuthenticationApiCreateOAuthConfigRequest, options?: Configuration): Promise<OAuthConfig> {
+    public createOAuthConfig(param: AdminAuthenticationApiCreateOAuthConfigRequest, options?: Configuration): Promise<AuthConfig> {
         return this.api.createOAuthConfig(param.body,  options).toPromise();
     }
 
@@ -782,7 +813,7 @@ export class ObjectAdminAuthenticationApi {
      * Get oauth configuration.
      * @param param the request object
      */
-    public getOAuthConfig(param: AdminAuthenticationApiGetOAuthConfigRequest, options?: Configuration): Promise<OAuthConfig> {
+    public getOAuthConfig(param: AdminAuthenticationApiGetOAuthConfigRequest, options?: Configuration): Promise<AuthConfig> {
         return this.api.getOAuthConfig(param.provider,  options).toPromise();
     }
 
@@ -1520,7 +1551,13 @@ export class ObjectContractsApi {
 import { ObservableDefaultApi } from "./ObservableAPI";
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
 
-export interface DefaultApiListAvailableAuthProvidersRequest {
+export interface DefaultApiListRequest {
+    /**
+     * 
+     * @type boolean
+     * @memberof DefaultApilist
+     */
+    enabled?: boolean
 }
 
 export class ObjectDefaultApi {
@@ -1531,12 +1568,12 @@ export class ObjectDefaultApi {
     }
 
     /**
-     * List available authentication methods for the current project environment.
-     * List of available authentication methods.
+     * List configured auth methods for the current project environment.
+     * List of auth configurations.
      * @param param the request object
      */
-    public listAvailableAuthProviders(param: DefaultApiListAvailableAuthProvidersRequest = {}, options?: Configuration): Promise<AuthProviderListResponse> {
-        return this.api.listAvailableAuthProviders( options).toPromise();
+    public list(param: DefaultApiListRequest = {}, options?: Configuration): Promise<AuthProviderListResponse> {
+        return this.api.list(param.enabled,  options).toPromise();
     }
 
 }
@@ -1693,6 +1730,126 @@ export class ObjectExchangeApi {
      */
     public quoteSwap(param: ExchangeApiQuoteSwapRequest, options?: Configuration): Promise<QuoteExchangeResult> {
         return this.api.quoteSwap(param.createExchangeRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableForwarderContractApi } from "./ObservableAPI";
+import { ForwarderContractApiRequestFactory, ForwarderContractApiResponseProcessor} from "../apis/ForwarderContractApi";
+
+export interface ForwarderContractApiCreateForwarderContractRequest {
+    /**
+     * 
+     * @type CreateForwarderContractRequest
+     * @memberof ForwarderContractApicreateForwarderContract
+     */
+    createForwarderContractRequest: CreateForwarderContractRequest
+}
+
+export interface ForwarderContractApiDeleteForwarderContractRequest {
+    /**
+     * 
+     * @type string
+     * @memberof ForwarderContractApideleteForwarderContract
+     */
+    id: string
+}
+
+export interface ForwarderContractApiGetForwarderContractRequest {
+    /**
+     * 
+     * @type string
+     * @memberof ForwarderContractApigetForwarderContract
+     */
+    id: string
+}
+
+export interface ForwarderContractApiListForwarderContractsRequest {
+    /**
+     * Specifies the maximum number of records to return.
+     * @type number
+     * @memberof ForwarderContractApilistForwarderContracts
+     */
+    limit?: number
+    /**
+     * Specifies the offset for the first records to return.
+     * @type number
+     * @memberof ForwarderContractApilistForwarderContracts
+     */
+    skip?: number
+    /**
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof ForwarderContractApilistForwarderContracts
+     */
+    order?: SortOrder
+}
+
+export interface ForwarderContractApiUpdateForwarderContractRequest {
+    /**
+     * 
+     * @type string
+     * @memberof ForwarderContractApiupdateForwarderContract
+     */
+    id: string
+    /**
+     * 
+     * @type CreateForwarderContractRequest
+     * @memberof ForwarderContractApiupdateForwarderContract
+     */
+    createForwarderContractRequest: CreateForwarderContractRequest
+}
+
+export class ObjectForwarderContractApi {
+    private api: ObservableForwarderContractApi
+
+    public constructor(configuration: Configuration, requestFactory?: ForwarderContractApiRequestFactory, responseProcessor?: ForwarderContractApiResponseProcessor) {
+        this.api = new ObservableForwarderContractApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create a new forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees of the transactions.
+     * Create a new forwarder contract.
+     * @param param the request object
+     */
+    public createForwarderContract(param: ForwarderContractApiCreateForwarderContractRequest, options?: Configuration): Promise<ForwarderContractResponse> {
+        return this.api.createForwarderContract(param.createForwarderContractRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete the forwarder contract with the given id.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.
+     * Delete forwarder contract by id.
+     * @param param the request object
+     */
+    public deleteForwarderContract(param: ForwarderContractApiDeleteForwarderContractRequest, options?: Configuration): Promise<ForwarderContractDeleteResponse> {
+        return this.api.deleteForwarderContract(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns the forwarder contract with the given id.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.
+     * Get forwarder contract by id.
+     * @param param the request object
+     */
+    public getForwarderContract(param: ForwarderContractApiGetForwarderContractRequest, options?: Configuration): Promise<ForwarderContractResponse> {
+        return this.api.getForwarderContract(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.  By default, a maximum of 10 forwarder contract are shown per page.
+     * List forwarder contract.
+     * @param param the request object
+     */
+    public listForwarderContracts(param: ForwarderContractApiListForwarderContractsRequest = {}, options?: Configuration): Promise<Array<ForwarderContractResponse>> {
+        return this.api.listForwarderContracts(param.limit, param.skip, param.order,  options).toPromise();
+    }
+
+    /**
+     * Update a forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees of the transactions.
+     * Update a forwarder contract.
+     * @param param the request object
+     */
+    public updateForwarderContract(param: ForwarderContractApiUpdateForwarderContractRequest, options?: Configuration): Promise<ForwarderContractResponse> {
+        return this.api.updateForwarderContract(param.id, param.createForwarderContractRequest,  options).toPromise();
     }
 
 }
@@ -2788,10 +2945,10 @@ import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/
 export interface SettingsApiCreateDeveloperAccountRequest {
     /**
      * 
-     * @type DeveloperAccountCreateRequest
+     * @type CreateDeveloperAccountCreateRequest
      * @memberof SettingsApicreateDeveloperAccount
      */
-    developerAccountCreateRequest: DeveloperAccountCreateRequest
+    createDeveloperAccountCreateRequest: CreateDeveloperAccountCreateRequest
 }
 
 export interface SettingsApiDeleteDeveloperAccountRequest {
@@ -2860,6 +3017,21 @@ export interface SettingsApiGetVerificationPayloadRequest {
     address: string
 }
 
+export interface SettingsApiUpdateDeveloperAccountRequest {
+    /**
+     * 
+     * @type string
+     * @memberof SettingsApiupdateDeveloperAccount
+     */
+    id: string
+    /**
+     * 
+     * @type UpdateDeveloperAccountCreateRequest
+     * @memberof SettingsApiupdateDeveloperAccount
+     */
+    updateDeveloperAccountCreateRequest: UpdateDeveloperAccountCreateRequest
+}
+
 export class ObjectSettingsApi {
     private api: ObservableSettingsApi
 
@@ -2873,7 +3045,7 @@ export class ObjectSettingsApi {
      * @param param the request object
      */
     public createDeveloperAccount(param: SettingsApiCreateDeveloperAccountRequest, options?: Configuration): Promise<DeveloperAccountResponse> {
-        return this.api.createDeveloperAccount(param.developerAccountCreateRequest,  options).toPromise();
+        return this.api.createDeveloperAccount(param.createDeveloperAccountCreateRequest,  options).toPromise();
     }
 
     /**
@@ -2910,6 +3082,15 @@ export class ObjectSettingsApi {
      */
     public getVerificationPayload(param: SettingsApiGetVerificationPayloadRequest, options?: Configuration): Promise<DeveloperAccountGetMessageResponse> {
         return this.api.getVerificationPayload(param.address,  options).toPromise();
+    }
+
+    /**
+     * Update a developer account.
+     * Update a developer account.
+     * @param param the request object
+     */
+    public updateDeveloperAccount(param: SettingsApiUpdateDeveloperAccountRequest, options?: Configuration): Promise<DeveloperAccountResponse> {
+        return this.api.updateDeveloperAccount(param.id, param.updateDeveloperAccountCreateRequest,  options).toPromise();
     }
 
 }
@@ -3154,7 +3335,7 @@ export class ObjectSubscriptionsApi {
      * Test trigger by id.
      * @param param the request object
      */
-    public testTrigger(param: SubscriptionsApiTestTriggerRequest = {}, options?: Configuration): Promise<void> {
+    public testTrigger(param: SubscriptionsApiTestTriggerRequest = {}, options?: Configuration): Promise<TestTrigger200Response> {
         return this.api.testTrigger( options).toPromise();
     }
 

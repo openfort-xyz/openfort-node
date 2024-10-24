@@ -10,6 +10,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { AuthConfig } from '../models/AuthConfig';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { AuthPlayerResponseWithRecoveryShare } from '../models/AuthPlayerResponseWithRecoveryShare';
@@ -19,7 +20,6 @@ import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
 import { Authorize200Response } from '../models/Authorize200Response';
 import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
-import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthRequest } from '../models/OAuthRequest';
@@ -58,6 +58,54 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(authorizePlayerRequest, "AuthorizePlayerRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param body Specifies the oauth provider specific configuration.
+     */
+    public async create(body: AuthConfig, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'body' is not null or undefined
+        if (body === null || body === undefined) {
+            throw new RequiredError("AdminAuthenticationApi", "create", "body");
+        }
+
+
+        // Path Params
+        const localVarPath = '/iam/v1/config';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(body, "AuthConfig", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -130,7 +178,7 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
      * Create oauth configuration.
      * @param body Specifies the oauth provider specific configuration.
      */
-    public async createOAuthConfig(body: OAuthConfig, _options?: Configuration): Promise<RequestContext> {
+    public async createOAuthConfig(body: AuthConfig, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'body' is not null or undefined
@@ -153,7 +201,7 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(body, "OAuthConfig", ""),
+            ObjectSerializer.serialize(body, "AuthConfig", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -571,6 +619,38 @@ export class AdminAuthenticationApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to create
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async create(response: ResponseContext): Promise<AuthConfig > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AuthConfig = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AuthConfig", ""
+            ) as AuthConfig;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AuthConfig = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AuthConfig", ""
+            ) as AuthConfig;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to createAuthPlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -609,13 +689,13 @@ export class AdminAuthenticationApiResponseProcessor {
      * @params response Response returned by the server for a request to createOAuthConfig
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOAuthConfig(response: ResponseContext): Promise<OAuthConfig > {
+     public async createOAuthConfig(response: ResponseContext): Promise<AuthConfig > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
+            const body: AuthConfig = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
+                "AuthConfig", ""
+            ) as AuthConfig;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -624,10 +704,10 @@ export class AdminAuthenticationApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
+            const body: AuthConfig = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
+                "AuthConfig", ""
+            ) as AuthConfig;
             return body;
         }
 
@@ -736,13 +816,13 @@ export class AdminAuthenticationApiResponseProcessor {
      * @params response Response returned by the server for a request to getOAuthConfig
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getOAuthConfig(response: ResponseContext): Promise<OAuthConfig > {
+     public async getOAuthConfig(response: ResponseContext): Promise<AuthConfig > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
+            const body: AuthConfig = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
+                "AuthConfig", ""
+            ) as AuthConfig;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -751,10 +831,10 @@ export class AdminAuthenticationApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: OAuthConfig = ObjectSerializer.deserialize(
+            const body: AuthConfig = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "OAuthConfig", ""
-            ) as OAuthConfig;
+                "AuthConfig", ""
+            ) as AuthConfig;
             return body;
         }
 

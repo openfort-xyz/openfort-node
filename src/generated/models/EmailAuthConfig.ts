@@ -10,49 +10,42 @@
  * Do not edit the class manually.
  */
 
+import { BasicAuthProviderEMAIL } from '../models/BasicAuthProviderEMAIL';
 import { HttpFile } from '../http/http';
 
-export class OAuthInitRequestOptions {
+/**
+* Email auth configuration
+*/
+export class EmailAuthConfig {
     /**
-    * A URL to custom handle the provider callback
+    * Enable OAuth provider.
     */
-    'callbackTo'?: string;
-    /**
-    * An object of query params
-    */
-    'queryParams'?: { [key: string]: string; };
-    /**
-    * A URL to send the user to after they are confirmed.
-    */
-    'redirectTo'?: string;
+    'enabled': boolean;
+    'provider': BasicAuthProviderEMAIL;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "callbackTo",
-            "baseName": "callbackTo",
-            "type": "string",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "queryParams",
-            "baseName": "queryParams",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
-            "name": "redirectTo",
-            "baseName": "redirectTo",
-            "type": "string",
+            "name": "provider",
+            "baseName": "provider",
+            "type": "BasicAuthProviderEMAIL",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthInitRequestOptions.attributeTypeMap;
+        return EmailAuthConfig.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

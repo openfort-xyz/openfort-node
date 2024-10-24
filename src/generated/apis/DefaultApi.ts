@@ -18,18 +18,25 @@ import { AuthProviderListResponse } from '../models/AuthProviderListResponse';
 export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * List available authentication methods for the current project environment.
-     * List of available authentication methods.
+     * List configured auth methods for the current project environment.
+     * List of auth configurations.
+     * @param enabled 
      */
-    public async listAvailableAuthProviders(_options?: Configuration): Promise<RequestContext> {
+    public async list(enabled?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
+
         // Path Params
-        const localVarPath = '/iam/v1/providers';
+        const localVarPath = '/iam/v1/config';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (enabled !== undefined) {
+            requestContext.setQueryParam("enabled", ObjectSerializer.serialize(enabled, "boolean", ""));
+        }
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -55,10 +62,10 @@ export class DefaultApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to listAvailableAuthProviders
+     * @params response Response returned by the server for a request to list
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listAvailableAuthProviders(response: ResponseContext): Promise<AuthProviderListResponse > {
+     public async list(response: ResponseContext): Promise<AuthProviderListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: AuthProviderListResponse = ObjectSerializer.deserialize(
