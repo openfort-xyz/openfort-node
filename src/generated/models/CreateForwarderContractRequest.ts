@@ -12,17 +12,17 @@
 
 import { HttpFile } from '../http/http';
 
-export class DeveloperAccountCreateRequest {
+export class CreateForwarderContractRequest {
     /**
-    * The address of the wallet that has deposited funds in the paymaster.
+    * Specifies the address of the paymaster
     */
-    'address'?: string;
+    'address': string;
     /**
-    * Signature to verify the account ownership.
+    * The chain ID. Must be a [supported chain](/chains).
     */
-    'signature'?: string;
+    'chainId': number;
     /**
-    * The name of the account.
+    * Specifies the name of the paymaster
     */
     'name'?: string;
 
@@ -36,10 +36,10 @@ export class DeveloperAccountCreateRequest {
             "format": ""
         },
         {
-            "name": "signature",
-            "baseName": "signature",
-            "type": "string",
-            "format": ""
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "name",
@@ -49,7 +49,7 @@ export class DeveloperAccountCreateRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return DeveloperAccountCreateRequest.attributeTypeMap;
+        return CreateForwarderContractRequest.attributeTypeMap;
     }
 
     public constructor() {

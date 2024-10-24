@@ -10,30 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { AuthConfig } from '../models/AuthConfig';
 import { HttpFile } from '../http/http';
 
-/**
-* Response for the OAuth config list method.
-*/
-export class OAuthConfigListResponse {
-    /**
-    * List of the OAuth providers configurations
-    */
-    'data': Array<AuthConfig>;
+export class ListConfigRequest {
+    'enabled'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<AuthConfig>",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthConfigListResponse.attributeTypeMap;
+        return ListConfigRequest.attributeTypeMap;
     }
 
     public constructor() {

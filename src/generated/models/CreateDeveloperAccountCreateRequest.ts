@@ -12,44 +12,44 @@
 
 import { HttpFile } from '../http/http';
 
-export class OAuthInitRequestOptions {
+export class CreateDeveloperAccountCreateRequest {
     /**
-    * A URL to custom handle the provider callback
+    * The address of the wallet that has deposited funds in the paymaster.
     */
-    'callbackTo'?: string;
+    'address'?: string;
     /**
-    * An object of query params
+    * Signature to verify the account ownership.
     */
-    'queryParams'?: { [key: string]: string; };
+    'signature'?: string;
     /**
-    * A URL to send the user to after they are confirmed.
+    * The name of the account.
     */
-    'redirectTo'?: string;
+    'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "callbackTo",
-            "baseName": "callbackTo",
+            "name": "address",
+            "baseName": "address",
             "type": "string",
             "format": ""
         },
         {
-            "name": "queryParams",
-            "baseName": "queryParams",
-            "type": "{ [key: string]: string; }",
+            "name": "signature",
+            "baseName": "signature",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "redirectTo",
-            "baseName": "redirectTo",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthInitRequestOptions.attributeTypeMap;
+        return CreateDeveloperAccountCreateRequest.attributeTypeMap;
     }
 
     public constructor() {
