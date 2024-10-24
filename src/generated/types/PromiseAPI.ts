@@ -27,6 +27,7 @@ import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
+import { AuthConfig } from '../models/AuthConfig';
 import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
@@ -49,6 +50,7 @@ import { BaseEntityListResponseEmailSampleResponse } from '../models/BaseEntityL
 import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
 import { BaseEntityListResponseTriggerResponse } from '../models/BaseEntityListResponseTriggerResponse';
 import { BasicAuthProvider } from '../models/BasicAuthProvider';
+import { BasicAuthProviderEMAIL } from '../models/BasicAuthProviderEMAIL';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest } from '../models/CheckoutRequest';
@@ -73,11 +75,13 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateAuthPlayerRequest } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
+import { CreateDeveloperAccountCreateRequest } from '../models/CreateDeveloperAccountCreateRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
+import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
@@ -93,7 +97,6 @@ import { DeleteSMTPConfigResponse } from '../models/DeleteSMTPConfigResponse';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
-import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
 import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueries';
@@ -104,6 +107,7 @@ import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
 import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
+import { EmailAuthConfig } from '../models/EmailAuthConfig';
 import { EmailSampleDeleteResponse } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
@@ -116,6 +120,7 @@ import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT
 import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
 import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
 import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
+import { EntityTypeFORWARDERCONTRACT } from '../models/EntityTypeFORWARDERCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeLOG } from '../models/EntityTypeLOG';
 import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
@@ -144,6 +149,8 @@ import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
+import { ForwarderContractDeleteResponse } from '../models/ForwarderContractDeleteResponse';
+import { ForwarderContractResponse } from '../models/ForwarderContractResponse';
 import { GasPerIntervalLimitPolicyRuleResponse } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
@@ -151,6 +158,8 @@ import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { GasReportTransactionIntentsListResponse } from '../models/GasReportTransactionIntentsListResponse';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
+import { GrantCallbackRequest } from '../models/GrantCallbackRequest';
+import { GrantOAuthResponse } from '../models/GrantOAuthResponse';
 import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError } from '../models/InvalidRequestError';
@@ -161,6 +170,7 @@ import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
+import { ListConfigRequest } from '../models/ListConfigRequest';
 import { ListSubscriptionLogsRequest } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse } from '../models/LogResponse';
@@ -174,7 +184,6 @@ import { MyEcosystemResponse } from '../models/MyEcosystemResponse';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { OAuthConfig } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
@@ -281,6 +290,8 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
 import { TelegramOAuthConfig } from '../models/TelegramOAuthConfig';
+import { TelegramThirdPartyConfig } from '../models/TelegramThirdPartyConfig';
+import { TestTrigger200Response } from '../models/TestTrigger200Response';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
@@ -289,6 +300,7 @@ import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProv
 import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
 import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
+import { ThirdPartyOAuthProviderTELEGRAMMINIAPP } from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
@@ -315,6 +327,7 @@ import { TypedDomainData } from '../models/TypedDomainData';
 import { UnlinkEmailRequest } from '../models/UnlinkEmailRequest';
 import { UnlinkOAuthRequest } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
+import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAccountCreateRequest';
 import { UpdateEmailSampleRequest } from '../models/UpdateEmailSampleRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
@@ -486,6 +499,16 @@ export class PromiseAdminAuthenticationApi {
     }
 
     /**
+     * The endpoint creates oauth configuration for the current project environment.
+     * Create oauth configuration.
+     * @param body Specifies the oauth provider specific configuration.
+     */
+    public create(body: AuthConfig, _options?: Configuration): Promise<AuthConfig> {
+        const result = this.api.create(body, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Creates an authenticated player.  The player will be authenticated with the provider and an embedded account can be pre generated.
      * Create an authenticated player.
      * @param createAuthPlayerRequest 
@@ -500,7 +523,7 @@ export class PromiseAdminAuthenticationApi {
      * Create oauth configuration.
      * @param body Specifies the oauth provider specific configuration.
      */
-    public createOAuthConfig(body: OAuthConfig, _options?: Configuration): Promise<OAuthConfig> {
+    public createOAuthConfig(body: AuthConfig, _options?: Configuration): Promise<AuthConfig> {
         const result = this.api.createOAuthConfig(body, _options);
         return result.toPromise();
     }
@@ -544,7 +567,7 @@ export class PromiseAdminAuthenticationApi {
      * Get oauth configuration.
      * @param provider Specifies the oauth provider type.
      */
-    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<OAuthConfig> {
+    public getOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<AuthConfig> {
         const result = this.api.getOAuthConfig(provider, _options);
         return result.toPromise();
     }
@@ -970,11 +993,12 @@ export class PromiseDefaultApi {
     }
 
     /**
-     * List available authentication methods for the current project environment.
-     * List of available authentication methods.
+     * List configured auth methods for the current project environment.
+     * List of auth configurations.
+     * @param enabled 
      */
-    public listAvailableAuthProviders(_options?: Configuration): Promise<AuthProviderListResponse> {
-        const result = this.api.listAvailableAuthProviders(_options);
+    public list(enabled?: boolean, _options?: Configuration): Promise<AuthProviderListResponse> {
+        const result = this.api.list(enabled, _options);
         return result.toPromise();
     }
 
@@ -1077,6 +1101,78 @@ export class PromiseExchangeApi {
      */
     public quoteSwap(createExchangeRequest: CreateExchangeRequest, _options?: Configuration): Promise<QuoteExchangeResult> {
         const result = this.api.quoteSwap(createExchangeRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableForwarderContractApi } from './ObservableAPI';
+
+import { ForwarderContractApiRequestFactory, ForwarderContractApiResponseProcessor} from "../apis/ForwarderContractApi";
+export class PromiseForwarderContractApi {
+    private api: ObservableForwarderContractApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: ForwarderContractApiRequestFactory,
+        responseProcessor?: ForwarderContractApiResponseProcessor
+    ) {
+        this.api = new ObservableForwarderContractApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create a new forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees of the transactions.
+     * Create a new forwarder contract.
+     * @param createForwarderContractRequest 
+     */
+    public createForwarderContract(createForwarderContractRequest: CreateForwarderContractRequest, _options?: Configuration): Promise<ForwarderContractResponse> {
+        const result = this.api.createForwarderContract(createForwarderContractRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete the forwarder contract with the given id.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.
+     * Delete forwarder contract by id.
+     * @param id 
+     */
+    public deleteForwarderContract(id: string, _options?: Configuration): Promise<ForwarderContractDeleteResponse> {
+        const result = this.api.deleteForwarderContract(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns the forwarder contract with the given id.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.
+     * Get forwarder contract by id.
+     * @param id 
+     */
+    public getForwarderContract(id: string, _options?: Configuration): Promise<ForwarderContractResponse> {
+        const result = this.api.getForwarderContract(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns a list of forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.  By default, a maximum of 10 forwarder contract are shown per page.
+     * List forwarder contract.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     */
+    public listForwarderContracts(limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Promise<Array<ForwarderContractResponse>> {
+        const result = this.api.listForwarderContracts(limit, skip, order, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update a forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees of the transactions.
+     * Update a forwarder contract.
+     * @param id 
+     * @param createForwarderContractRequest 
+     */
+    public updateForwarderContract(id: string, createForwarderContractRequest: CreateForwarderContractRequest, _options?: Configuration): Promise<ForwarderContractResponse> {
+        const result = this.api.updateForwarderContract(id, createForwarderContractRequest, _options);
         return result.toPromise();
     }
 
@@ -1640,10 +1736,10 @@ export class PromiseSettingsApi {
     /**
      * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
      * Create a developer account.
-     * @param developerAccountCreateRequest 
+     * @param createDeveloperAccountCreateRequest 
      */
-    public createDeveloperAccount(developerAccountCreateRequest: DeveloperAccountCreateRequest, _options?: Configuration): Promise<DeveloperAccountResponse> {
-        const result = this.api.createDeveloperAccount(developerAccountCreateRequest, _options);
+    public createDeveloperAccount(createDeveloperAccountCreateRequest: CreateDeveloperAccountCreateRequest, _options?: Configuration): Promise<DeveloperAccountResponse> {
+        const result = this.api.createDeveloperAccount(createDeveloperAccountCreateRequest, _options);
         return result.toPromise();
     }
 
@@ -1689,6 +1785,17 @@ export class PromiseSettingsApi {
      */
     public getVerificationPayload(address: string, _options?: Configuration): Promise<DeveloperAccountGetMessageResponse> {
         const result = this.api.getVerificationPayload(address, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update a developer account.
+     * Update a developer account.
+     * @param id 
+     * @param updateDeveloperAccountCreateRequest 
+     */
+    public updateDeveloperAccount(id: string, updateDeveloperAccountCreateRequest: UpdateDeveloperAccountCreateRequest, _options?: Configuration): Promise<DeveloperAccountResponse> {
+        const result = this.api.updateDeveloperAccount(id, updateDeveloperAccountCreateRequest, _options);
         return result.toPromise();
     }
 
@@ -1815,7 +1922,7 @@ export class PromiseSubscriptionsApi {
      * Test a trigger  Returns a trigger for the given id.
      * Test trigger by id.
      */
-    public testTrigger(_options?: Configuration): Promise<void> {
+    public testTrigger(_options?: Configuration): Promise<TestTrigger200Response> {
         const result = this.api.testTrigger(_options);
         return result.toPromise();
     }

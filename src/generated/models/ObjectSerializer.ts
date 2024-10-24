@@ -24,6 +24,7 @@ export * from '../models/ApiKeyResponse';
 export * from '../models/ApiKeyType';
 export * from '../models/AssetInventory';
 export * from '../models/AssetType';
+export * from '../models/AuthConfig';
 export * from '../models/AuthPlayerListQueries';
 export * from '../models/AuthPlayerListResponse';
 export * from '../models/AuthPlayerResponse';
@@ -46,6 +47,7 @@ export * from '../models/BaseEntityListResponseEmailSampleResponse';
 export * from '../models/BaseEntityListResponseLogResponse';
 export * from '../models/BaseEntityListResponseTriggerResponse';
 export * from '../models/BasicAuthProvider';
+export * from '../models/BasicAuthProviderEMAIL';
 export * from '../models/CancelTransferOwnershipRequest';
 export * from '../models/ChargeCustomTokenPolicyStrategy';
 export * from '../models/CheckoutRequest';
@@ -70,11 +72,13 @@ export * from '../models/CreateAccountRequest';
 export * from '../models/CreateApiAuthorizedNetworkRequest';
 export * from '../models/CreateAuthPlayerRequest';
 export * from '../models/CreateContractRequest';
+export * from '../models/CreateDeveloperAccountCreateRequest';
 export * from '../models/CreateDeviceRequest';
 export * from '../models/CreateEcosystemConfigurationRequest';
 export * from '../models/CreateEmailSampleRequest';
 export * from '../models/CreateEventRequest';
 export * from '../models/CreateExchangeRequest';
+export * from '../models/CreateForwarderContractRequest';
 export * from '../models/CreatePaymasterRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
@@ -90,7 +94,6 @@ export * from '../models/DeleteSMTPConfigResponse';
 export * from '../models/DeployRequest';
 export * from '../models/DeprecatedAuthenticatedPlayerResponse';
 export * from '../models/DeveloperAccount';
-export * from '../models/DeveloperAccountCreateRequest';
 export * from '../models/DeveloperAccountDeleteResponse';
 export * from '../models/DeveloperAccountGetMessageResponse';
 export * from '../models/DeveloperAccountListQueries';
@@ -101,6 +104,7 @@ export * from '../models/DeviceListQueries';
 export * from '../models/DeviceResponse';
 export * from '../models/DiscordOAuthConfig';
 export * from '../models/EcosystemConfigurationResponse';
+export * from '../models/EmailAuthConfig';
 export * from '../models/EmailSampleDeleteResponse';
 export * from '../models/EmailSampleResponse';
 export * from '../models/EmailTypeRequest';
@@ -113,6 +117,7 @@ export * from '../models/EntityTypeDEVELOPERACCOUNT';
 export * from '../models/EntityTypeDEVICE';
 export * from '../models/EntityTypeEMAILSAMPLE';
 export * from '../models/EntityTypeEVENT';
+export * from '../models/EntityTypeFORWARDERCONTRACT';
 export * from '../models/EntityTypeINVENTORY';
 export * from '../models/EntityTypeLOG';
 export * from '../models/EntityTypePAYMASTER';
@@ -141,6 +146,8 @@ export * from '../models/Fee';
 export * from '../models/FieldErrorsValue';
 export * from '../models/FirebaseOAuthConfig';
 export * from '../models/FixedRateTokenPolicyStrategy';
+export * from '../models/ForwarderContractDeleteResponse';
+export * from '../models/ForwarderContractResponse';
 export * from '../models/GasPerIntervalLimitPolicyRuleResponse';
 export * from '../models/GasPerTransactionLimitPolicyRuleResponse';
 export * from '../models/GasReport';
@@ -148,6 +155,8 @@ export * from '../models/GasReportListResponse';
 export * from '../models/GasReportTransactionIntents';
 export * from '../models/GasReportTransactionIntentsListResponse';
 export * from '../models/GoogleOAuthConfig';
+export * from '../models/GrantCallbackRequest';
+export * from '../models/GrantOAuthResponse';
 export * from '../models/InitEmbeddedRequest';
 export * from '../models/Interaction';
 export * from '../models/InvalidRequestError';
@@ -158,6 +167,7 @@ export * from '../models/JwtKey';
 export * from '../models/JwtKeyResponse';
 export * from '../models/LineOAuthConfig';
 export * from '../models/LinkedAccountResponse';
+export * from '../models/ListConfigRequest';
 export * from '../models/ListSubscriptionLogsRequest';
 export * from '../models/Log';
 export * from '../models/LogResponse';
@@ -171,7 +181,6 @@ export * from '../models/MyEcosystemResponse';
 export * from '../models/NextActionPayload';
 export * from '../models/NextActionResponse';
 export * from '../models/NextActionType';
-export * from '../models/OAuthConfig';
 export * from '../models/OAuthConfigListResponse';
 export * from '../models/OAuthInitRequest';
 export * from '../models/OAuthInitRequestOptions';
@@ -278,6 +287,8 @@ export * from '../models/SubscriptionResponse';
 export * from '../models/SubscriptionResponsePlan';
 export * from '../models/SupabaseAuthConfig';
 export * from '../models/TelegramOAuthConfig';
+export * from '../models/TelegramThirdPartyConfig';
+export * from '../models/TestTrigger200Response';
 export * from '../models/ThirdPartyOAuthProvider';
 export * from '../models/ThirdPartyOAuthProviderACCELBYTE';
 export * from '../models/ThirdPartyOAuthProviderCUSTOM';
@@ -286,6 +297,7 @@ export * from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 export * from '../models/ThirdPartyOAuthProviderOIDC';
 export * from '../models/ThirdPartyOAuthProviderPLAYFAB';
 export * from '../models/ThirdPartyOAuthProviderSUPABASE';
+export * from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 export * from '../models/ThirdPartyOAuthRequest';
 export * from '../models/TimeIntervalType';
 export * from '../models/Token';
@@ -312,6 +324,7 @@ export * from '../models/TypedDomainData';
 export * from '../models/UnlinkEmailRequest';
 export * from '../models/UnlinkOAuthRequest';
 export * from '../models/UpdateContractRequest';
+export * from '../models/UpdateDeveloperAccountCreateRequest';
 export * from '../models/UpdateEmailSampleRequest';
 export * from '../models/UpdatePolicyRequest';
 export * from '../models/UpdatePolicyRuleRequest';
@@ -359,6 +372,7 @@ import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
 import { AssetInventory      } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
+import { AuthConfig                   } from '../models/AuthConfig';
 import { AuthPlayerListQueries      } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse      } from '../models/AuthPlayerResponse';
@@ -381,6 +395,7 @@ import { BaseEntityListResponseEmailSampleResponse       } from '../models/BaseE
 import { BaseEntityListResponseLogResponse       } from '../models/BaseEntityListResponseLogResponse';
 import { BaseEntityListResponseTriggerResponse       } from '../models/BaseEntityListResponseTriggerResponse';
 import { BasicAuthProvider } from '../models/BasicAuthProvider';
+import { BasicAuthProviderEMAIL } from '../models/BasicAuthProviderEMAIL';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { ChargeCustomTokenPolicyStrategy     } from '../models/ChargeCustomTokenPolicyStrategy';
 import { CheckoutRequest     } from '../models/CheckoutRequest';
@@ -405,11 +420,13 @@ import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { CreateApiAuthorizedNetworkRequest } from '../models/CreateApiAuthorizedNetworkRequest';
 import { CreateAuthPlayerRequest      } from '../models/CreateAuthPlayerRequest';
 import { CreateContractRequest } from '../models/CreateContractRequest';
+import { CreateDeveloperAccountCreateRequest } from '../models/CreateDeveloperAccountCreateRequest';
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest     } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest          } from '../models/CreateEventRequest';
 import { CreateExchangeRequest            } from '../models/CreateExchangeRequest';
+import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest          } from '../models/CreatePolicyRuleRequest';
@@ -425,7 +442,6 @@ import { DeleteSMTPConfigResponse   } from '../models/DeleteSMTPConfigResponse';
 import { DeployRequest } from '../models/DeployRequest';
 import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount        } from '../models/DeveloperAccount';
-import { DeveloperAccountCreateRequest } from '../models/DeveloperAccountCreateRequest';
 import { DeveloperAccountDeleteResponse    } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
 import { DeveloperAccountListQueries      } from '../models/DeveloperAccountListQueries';
@@ -436,6 +452,7 @@ import { DeviceListQueries     } from '../models/DeviceListQueries';
 import { DeviceResponse       } from '../models/DeviceResponse';
 import { DiscordOAuthConfig     } from '../models/DiscordOAuthConfig';
 import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
+import { EmailAuthConfig   } from '../models/EmailAuthConfig';
 import { EmailSampleDeleteResponse    } from '../models/EmailSampleDeleteResponse';
 import { EmailSampleResponse        } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
@@ -448,6 +465,7 @@ import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT
 import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
 import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
 import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
+import { EntityTypeFORWARDERCONTRACT } from '../models/EntityTypeFORWARDERCONTRACT';
 import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
 import { EntityTypeLOG } from '../models/EntityTypeLOG';
 import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
@@ -476,6 +494,8 @@ import { Fee } from '../models/Fee';
 import { FieldErrorsValue } from '../models/FieldErrorsValue';
 import { FirebaseOAuthConfig    } from '../models/FirebaseOAuthConfig';
 import { FixedRateTokenPolicyStrategy     } from '../models/FixedRateTokenPolicyStrategy';
+import { ForwarderContractDeleteResponse    } from '../models/ForwarderContractDeleteResponse';
+import { ForwarderContractResponse       } from '../models/ForwarderContractResponse';
 import { GasPerIntervalLimitPolicyRuleResponse         } from '../models/GasPerIntervalLimitPolicyRuleResponse';
 import { GasPerTransactionLimitPolicyRuleResponse       } from '../models/GasPerTransactionLimitPolicyRuleResponse';
 import { GasReport } from '../models/GasReport';
@@ -483,6 +503,8 @@ import { GasReportListResponse       } from '../models/GasReportListResponse';
 import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { GasReportTransactionIntentsListResponse       } from '../models/GasReportTransactionIntentsListResponse';
 import { GoogleOAuthConfig     } from '../models/GoogleOAuthConfig';
+import { GrantCallbackRequest } from '../models/GrantCallbackRequest';
+import { GrantOAuthResponse } from '../models/GrantOAuthResponse';
 import { InitEmbeddedRequest } from '../models/InitEmbeddedRequest';
 import { Interaction } from '../models/Interaction';
 import { InvalidRequestError    } from '../models/InvalidRequestError';
@@ -493,6 +515,7 @@ import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig     } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse         } from '../models/LinkedAccountResponse';
+import { ListConfigRequest } from '../models/ListConfigRequest';
 import { ListSubscriptionLogsRequest          } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse         } from '../models/LogResponse';
@@ -506,7 +529,6 @@ import { MyEcosystemResponse } from '../models/MyEcosystemResponse';
 import { NextActionPayload } from '../models/NextActionPayload';
 import { NextActionResponse   } from '../models/NextActionResponse';
 import { NextActionType } from '../models/NextActionType';
-import { OAuthConfig                   } from '../models/OAuthConfig';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest    } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
@@ -613,6 +635,8 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
 import { TelegramOAuthConfig     } from '../models/TelegramOAuthConfig';
+import { TelegramThirdPartyConfig    } from '../models/TelegramThirdPartyConfig';
+import { TestTrigger200Response } from '../models/TestTrigger200Response';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
@@ -621,6 +645,7 @@ import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProv
 import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
 import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
+import { ThirdPartyOAuthProviderTELEGRAMMINIAPP } from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 import { ThirdPartyOAuthRequest    } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
@@ -647,6 +672,7 @@ import { TypedDomainData } from '../models/TypedDomainData';
 import { UnlinkEmailRequest } from '../models/UnlinkEmailRequest';
 import { UnlinkOAuthRequest  } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
+import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAccountCreateRequest';
 import { UpdateEmailSampleRequest     } from '../models/UpdateEmailSampleRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest         } from '../models/UpdatePolicyRuleRequest';
@@ -700,6 +726,7 @@ let enumsMap: Set<string> = new Set<string>([
     "AuthProviderResponse",
     "AuthenticationType",
     "BasicAuthProvider",
+    "BasicAuthProviderEMAIL",
     "CodeChallengeMethodEnum",
     "Currency",
     "DeveloperAccountResponseExpandable",
@@ -711,6 +738,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeDEVICE",
     "EntityTypeEMAILSAMPLE",
     "EntityTypeEVENT",
+    "EntityTypeFORWARDERCONTRACT",
     "EntityTypeINVENTORY",
     "EntityTypeLOG",
     "EntityTypePAYMASTER",
@@ -767,6 +795,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ThirdPartyOAuthProviderOIDC",
     "ThirdPartyOAuthProviderPLAYFAB",
     "ThirdPartyOAuthProviderSUPABASE",
+    "ThirdPartyOAuthProviderTELEGRAMMINIAPP",
     "TimeIntervalType",
     "TokenType",
     "TradeType",
@@ -795,6 +824,7 @@ let typeMap: {[index: string]: any} = {
     "ApiAuthorizedNetworkResponse": ApiAuthorizedNetworkResponse,
     "ApiKeyResponse": ApiKeyResponse,
     "AssetInventory": AssetInventory,
+    "AuthConfig": AuthConfig,
     "AuthPlayerListQueries": AuthPlayerListQueries,
     "AuthPlayerListResponse": AuthPlayerListResponse,
     "AuthPlayerResponse": AuthPlayerResponse,
@@ -838,11 +868,13 @@ let typeMap: {[index: string]: any} = {
     "CreateApiAuthorizedNetworkRequest": CreateApiAuthorizedNetworkRequest,
     "CreateAuthPlayerRequest": CreateAuthPlayerRequest,
     "CreateContractRequest": CreateContractRequest,
+    "CreateDeveloperAccountCreateRequest": CreateDeveloperAccountCreateRequest,
     "CreateDeviceRequest": CreateDeviceRequest,
     "CreateEcosystemConfigurationRequest": CreateEcosystemConfigurationRequest,
     "CreateEmailSampleRequest": CreateEmailSampleRequest,
     "CreateEventRequest": CreateEventRequest,
     "CreateExchangeRequest": CreateExchangeRequest,
+    "CreateForwarderContractRequest": CreateForwarderContractRequest,
     "CreatePaymasterRequest": CreatePaymasterRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
@@ -857,7 +889,6 @@ let typeMap: {[index: string]: any} = {
     "DeployRequest": DeployRequest,
     "DeprecatedAuthenticatedPlayerResponse": DeprecatedAuthenticatedPlayerResponse,
     "DeveloperAccount": DeveloperAccount,
-    "DeveloperAccountCreateRequest": DeveloperAccountCreateRequest,
     "DeveloperAccountDeleteResponse": DeveloperAccountDeleteResponse,
     "DeveloperAccountGetMessageResponse": DeveloperAccountGetMessageResponse,
     "DeveloperAccountListQueries": DeveloperAccountListQueries,
@@ -867,6 +898,7 @@ let typeMap: {[index: string]: any} = {
     "DeviceResponse": DeviceResponse,
     "DiscordOAuthConfig": DiscordOAuthConfig,
     "EcosystemConfigurationResponse": EcosystemConfigurationResponse,
+    "EmailAuthConfig": EmailAuthConfig,
     "EmailSampleDeleteResponse": EmailSampleDeleteResponse,
     "EmailSampleResponse": EmailSampleResponse,
     "EmbeddedResponse": EmbeddedResponse,
@@ -883,6 +915,8 @@ let typeMap: {[index: string]: any} = {
     "FieldErrorsValue": FieldErrorsValue,
     "FirebaseOAuthConfig": FirebaseOAuthConfig,
     "FixedRateTokenPolicyStrategy": FixedRateTokenPolicyStrategy,
+    "ForwarderContractDeleteResponse": ForwarderContractDeleteResponse,
+    "ForwarderContractResponse": ForwarderContractResponse,
     "GasPerIntervalLimitPolicyRuleResponse": GasPerIntervalLimitPolicyRuleResponse,
     "GasPerTransactionLimitPolicyRuleResponse": GasPerTransactionLimitPolicyRuleResponse,
     "GasReport": GasReport,
@@ -890,6 +924,8 @@ let typeMap: {[index: string]: any} = {
     "GasReportTransactionIntents": GasReportTransactionIntents,
     "GasReportTransactionIntentsListResponse": GasReportTransactionIntentsListResponse,
     "GoogleOAuthConfig": GoogleOAuthConfig,
+    "GrantCallbackRequest": GrantCallbackRequest,
+    "GrantOAuthResponse": GrantOAuthResponse,
     "InitEmbeddedRequest": InitEmbeddedRequest,
     "Interaction": Interaction,
     "InvalidRequestError": InvalidRequestError,
@@ -900,6 +936,7 @@ let typeMap: {[index: string]: any} = {
     "JwtKeyResponse": JwtKeyResponse,
     "LineOAuthConfig": LineOAuthConfig,
     "LinkedAccountResponse": LinkedAccountResponse,
+    "ListConfigRequest": ListConfigRequest,
     "ListSubscriptionLogsRequest": ListSubscriptionLogsRequest,
     "Log": Log,
     "LogResponse": LogResponse,
@@ -912,7 +949,6 @@ let typeMap: {[index: string]: any} = {
     "MyEcosystemResponse": MyEcosystemResponse,
     "NextActionPayload": NextActionPayload,
     "NextActionResponse": NextActionResponse,
-    "OAuthConfig": OAuthConfig,
     "OAuthConfigListResponse": OAuthConfigListResponse,
     "OAuthInitRequest": OAuthInitRequest,
     "OAuthInitRequestOptions": OAuthInitRequestOptions,
@@ -991,6 +1027,8 @@ let typeMap: {[index: string]: any} = {
     "SubscriptionResponsePlan": SubscriptionResponsePlan,
     "SupabaseAuthConfig": SupabaseAuthConfig,
     "TelegramOAuthConfig": TelegramOAuthConfig,
+    "TelegramThirdPartyConfig": TelegramThirdPartyConfig,
+    "TestTrigger200Response": TestTrigger200Response,
     "ThirdPartyOAuthRequest": ThirdPartyOAuthRequest,
     "Token": Token,
     "TransactionConfirmedEventResponse": TransactionConfirmedEventResponse,
@@ -1012,6 +1050,7 @@ let typeMap: {[index: string]: any} = {
     "UnlinkEmailRequest": UnlinkEmailRequest,
     "UnlinkOAuthRequest": UnlinkOAuthRequest,
     "UpdateContractRequest": UpdateContractRequest,
+    "UpdateDeveloperAccountCreateRequest": UpdateDeveloperAccountCreateRequest,
     "UpdateEmailSampleRequest": UpdateEmailSampleRequest,
     "UpdatePolicyRequest": UpdatePolicyRequest,
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,

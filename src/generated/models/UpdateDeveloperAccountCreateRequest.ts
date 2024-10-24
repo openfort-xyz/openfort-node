@@ -10,30 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { AuthConfig } from '../models/AuthConfig';
 import { HttpFile } from '../http/http';
 
-/**
-* Response for the OAuth config list method.
-*/
-export class OAuthConfigListResponse {
+export class UpdateDeveloperAccountCreateRequest {
     /**
-    * List of the OAuth providers configurations
+    * The name of the account.
     */
-    'data': Array<AuthConfig>;
+    'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<AuthConfig>",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthConfigListResponse.attributeTypeMap;
+        return UpdateDeveloperAccountCreateRequest.attributeTypeMap;
     }
 
     public constructor() {

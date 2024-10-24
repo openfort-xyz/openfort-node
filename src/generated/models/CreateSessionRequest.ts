@@ -52,7 +52,7 @@ export class CreateSessionRequest {
     /**
     * The player ID (starts with pla_).
     */
-    'player': string;
+    'player'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
