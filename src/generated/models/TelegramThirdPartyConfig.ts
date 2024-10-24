@@ -10,49 +10,49 @@
  * Do not edit the class manually.
  */
 
+import { ThirdPartyOAuthProviderTELEGRAMMINIAPP } from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 import { HttpFile } from '../http/http';
 
-export class OAuthInitRequestOptions {
+export class TelegramThirdPartyConfig {
     /**
-    * A URL to custom handle the provider callback
+    * Enable OAuth provider.
     */
-    'callbackTo'?: string;
+    'enabled': boolean;
+    'provider': ThirdPartyOAuthProviderTELEGRAMMINIAPP;
     /**
-    * An object of query params
+    * Telegram bot token.
     */
-    'queryParams'?: { [key: string]: string; };
-    /**
-    * A URL to send the user to after they are confirmed.
-    */
-    'redirectTo'?: string;
+    'botToken': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "callbackTo",
-            "baseName": "callbackTo",
-            "type": "string",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "queryParams",
-            "baseName": "queryParams",
-            "type": "{ [key: string]: string; }",
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProviderTELEGRAMMINIAPP",
             "format": ""
         },
         {
-            "name": "redirectTo",
-            "baseName": "redirectTo",
+            "name": "botToken",
+            "baseName": "botToken",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthInitRequestOptions.attributeTypeMap;
+        return TelegramThirdPartyConfig.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

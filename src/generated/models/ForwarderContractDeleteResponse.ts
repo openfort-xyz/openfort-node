@@ -10,49 +10,43 @@
  * Do not edit the class manually.
  */
 
+import { EntityTypeFORWARDERCONTRACT } from '../models/EntityTypeFORWARDERCONTRACT';
 import { HttpFile } from '../http/http';
 
-export class OAuthInitRequestOptions {
-    /**
-    * A URL to custom handle the provider callback
-    */
-    'callbackTo'?: string;
-    /**
-    * An object of query params
-    */
-    'queryParams'?: { [key: string]: string; };
-    /**
-    * A URL to send the user to after they are confirmed.
-    */
-    'redirectTo'?: string;
+export class ForwarderContractDeleteResponse {
+    'id': string;
+    'object': EntityTypeFORWARDERCONTRACT;
+    'deleted': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "callbackTo",
-            "baseName": "callbackTo",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "queryParams",
-            "baseName": "queryParams",
-            "type": "{ [key: string]: string; }",
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeFORWARDERCONTRACT",
             "format": ""
         },
         {
-            "name": "redirectTo",
-            "baseName": "redirectTo",
-            "type": "string",
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthInitRequestOptions.attributeTypeMap;
+        return ForwarderContractDeleteResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

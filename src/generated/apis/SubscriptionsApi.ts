@@ -20,6 +20,7 @@ import { Status } from '../models/Status';
 import { SubscriptionDeleteResponse } from '../models/SubscriptionDeleteResponse';
 import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
+import { TestTrigger200Response } from '../models/TestTrigger200Response';
 import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
 import { TriggerResponse } from '../models/TriggerResponse';
 
@@ -808,10 +809,14 @@ export class SubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to testTrigger
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async testTrigger(response: ResponseContext): Promise<void > {
+     public async testTrigger(response: ResponseContext): Promise<TestTrigger200Response > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            const body: TestTrigger200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TestTrigger200Response", ""
+            ) as TestTrigger200Response;
+            return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
@@ -822,10 +827,10 @@ export class SubscriptionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
+            const body: TestTrigger200Response = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
+                "TestTrigger200Response", ""
+            ) as TestTrigger200Response;
             return body;
         }
 

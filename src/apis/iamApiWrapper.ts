@@ -8,7 +8,7 @@ import {
     AuthPlayerResponse,
     AuthSessionResponse,
     CreateAuthPlayerRequest,
-    OAuthConfig,
+    AuthConfig,
     OAuthConfigListResponse,
     OAuthProvider,
     PlayerResponse,
@@ -107,7 +107,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      * Create oauth configuration.
      * @param body Specifies the oauth provider specific configuration.
      */
-    public async createOAuthConfig(req: OAuthConfig): Promise<OAuthConfig> {
+    public async createOAuthConfig(req: AuthConfig): Promise<AuthConfig> {
         return await this.api.createOAuthConfig(req);
     }
 
@@ -146,7 +146,7 @@ export class IamApiWrapper extends BaseApiWrapper<AdminAuthenticationApi> {
      * Get oauth configuration.
      * @param provider Specifies the oauth provider type.
      */
-    public async getOAuthConfig(provider: OAuthProvider): Promise<OAuthConfig> {
+    public async getOAuthConfig(provider: OAuthProvider): Promise<AuthConfig> {
         return await this.api.getOAuthConfig(provider);
     }
 

@@ -12,44 +12,42 @@
 
 import { HttpFile } from '../http/http';
 
-export class OAuthInitRequestOptions {
-    /**
-    * A URL to custom handle the provider callback
-    */
-    'callbackTo'?: string;
-    /**
-    * An object of query params
-    */
-    'queryParams'?: { [key: string]: string; };
-    /**
-    * A URL to send the user to after they are confirmed.
-    */
-    'redirectTo'?: string;
+export class GrantOAuthResponse {
+    'authorizationCode'?: string;
+    'accessToken'?: string;
+    'refreshToken'?: string;
+    'playerId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "callbackTo",
-            "baseName": "callbackTo",
+            "name": "authorizationCode",
+            "baseName": "authorizationCode",
             "type": "string",
             "format": ""
         },
         {
-            "name": "queryParams",
-            "baseName": "queryParams",
-            "type": "{ [key: string]: string; }",
+            "name": "accessToken",
+            "baseName": "accessToken",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "redirectTo",
-            "baseName": "redirectTo",
+            "name": "refreshToken",
+            "baseName": "refreshToken",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "playerId",
+            "baseName": "playerId",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthInitRequestOptions.attributeTypeMap;
+        return GrantOAuthResponse.attributeTypeMap;
     }
 
     public constructor() {

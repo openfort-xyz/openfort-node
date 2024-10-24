@@ -10,36 +10,32 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CreateDeveloperAccountCreateRequest } from '../models/CreateDeveloperAccountCreateRequest';
-import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
-import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
-import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
-import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
-import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
+import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
+import { ForwarderContractDeleteResponse } from '../models/ForwarderContractDeleteResponse';
+import { ForwarderContractResponse } from '../models/ForwarderContractResponse';
 import { SortOrder } from '../models/SortOrder';
-import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAccountCreateRequest';
 
 /**
  * no description
  */
-export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
+export class ForwarderContractApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
-     * Create a developer account.
-     * @param createDeveloperAccountCreateRequest 
+     * Create a new forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees of the transactions.
+     * Create a new forwarder contract.
+     * @param createForwarderContractRequest 
      */
-    public async createDeveloperAccount(createDeveloperAccountCreateRequest: CreateDeveloperAccountCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createForwarderContract(createForwarderContractRequest: CreateForwarderContractRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'createDeveloperAccountCreateRequest' is not null or undefined
-        if (createDeveloperAccountCreateRequest === null || createDeveloperAccountCreateRequest === undefined) {
-            throw new RequiredError("SettingsApi", "createDeveloperAccount", "createDeveloperAccountCreateRequest");
+        // verify required parameter 'createForwarderContractRequest' is not null or undefined
+        if (createForwarderContractRequest === null || createForwarderContractRequest === undefined) {
+            throw new RequiredError("ForwarderContractApi", "createForwarderContract", "createForwarderContractRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/v1/settings/developer_accounts';
+        const localVarPath = '/v1/forwarder_contracts';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -52,7 +48,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(createDeveloperAccountCreateRequest, "CreateDeveloperAccountCreateRequest", ""),
+            ObjectSerializer.serialize(createForwarderContractRequest, "CreateForwarderContractRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -73,21 +69,21 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Delete a developer account from the current project.
-     * Delete a developer account.
-     * @param id Specifies a unique developer account (starts with dac_).
+     * Delete the forwarder contract with the given id.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.
+     * Delete forwarder contract by id.
+     * @param id 
      */
-    public async deleteDeveloperAccount(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async deleteForwarderContract(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("SettingsApi", "deleteDeveloperAccount", "id");
+            throw new RequiredError("ForwarderContractApi", "deleteForwarderContract", "id");
         }
 
 
         // Path Params
-        const localVarPath = '/v1/settings/developer_accounts/{id}'
+        const localVarPath = '/v1/forwarder_contracts/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
@@ -111,33 +107,26 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieve a developer account.  Returns the latest 10 transaction intents that were created with each developer account.
-     * Get existing developer account.
-     * @param id Specifies the unique developer account ID (starts with dac_).
-     * @param expand 
+     * Returns the forwarder contract with the given id.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.
+     * Get forwarder contract by id.
+     * @param id 
      */
-    public async getDeveloperAccount(id: string, expand?: Array<DeveloperAccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
+    public async getForwarderContract(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("SettingsApi", "getDeveloperAccount", "id");
+            throw new RequiredError("ForwarderContractApi", "getForwarderContract", "id");
         }
 
 
-
         // Path Params
-        const localVarPath = '/v1/settings/developer_accounts/{id}'
+        const localVarPath = '/v1/forwarder_contracts/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<DeveloperAccountResponseExpandable>", ""));
-        }
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -156,24 +145,20 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieve the list of the developer accounts for the current project.  Returns the latest 10 transaction intents that were created with each developer account.  By default, a maximum of 10 accounts are shown per page.
-     * List of developer accounts.
+     * Returns a list of forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees for the transactions.  By default, a maximum of 10 forwarder contract are shown per page.
+     * List forwarder contract.
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
-     * @param expand Specifies the fields to expand in the response.
-     * @param deleted Specifies whether to include deleted dev accounts.
      */
-    public async getDeveloperAccounts(limit?: number, skip?: number, order?: SortOrder, expand?: Array<DeveloperAccountResponseExpandable>, deleted?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async listForwarderContracts(limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
 
 
-
-
         // Path Params
-        const localVarPath = '/v1/settings/developer_accounts';
+        const localVarPath = '/v1/forwarder_contracts';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -194,16 +179,6 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("order", ObjectSerializer.serialize(order, "SortOrder", ""));
         }
 
-        // Query Params
-        if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<DeveloperAccountResponseExpandable>", ""));
-        }
-
-        // Query Params
-        if (deleted !== undefined) {
-            requestContext.setQueryParam("deleted", ObjectSerializer.serialize(deleted, "boolean", ""));
-        }
-
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -221,70 +196,28 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Generate message, which should be signed by the account your want to add as a developer account.
-     * Generate message to sign
-     * @param address Specifies the address
-     */
-    public async getVerificationPayload(address: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'address' is not null or undefined
-        if (address === null || address === undefined) {
-            throw new RequiredError("SettingsApi", "getVerificationPayload", "address");
-        }
-
-
-        // Path Params
-        const localVarPath = '/v1/settings/developer_accounts/message_to_sign';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (address !== undefined) {
-            requestContext.setQueryParam("address", ObjectSerializer.serialize(address, "string", ""));
-        }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["sk"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Update a developer account.
-     * Update a developer account.
+     * Update a forwarder contract.  This object represents the forwarder contract that will be used to pay the gas fees of the transactions.
+     * Update a forwarder contract.
      * @param id 
-     * @param updateDeveloperAccountCreateRequest 
+     * @param createForwarderContractRequest 
      */
-    public async updateDeveloperAccount(id: string, updateDeveloperAccountCreateRequest: UpdateDeveloperAccountCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateForwarderContract(id: string, createForwarderContractRequest: CreateForwarderContractRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("SettingsApi", "updateDeveloperAccount", "id");
+            throw new RequiredError("ForwarderContractApi", "updateForwarderContract", "id");
         }
 
 
-        // verify required parameter 'updateDeveloperAccountCreateRequest' is not null or undefined
-        if (updateDeveloperAccountCreateRequest === null || updateDeveloperAccountCreateRequest === undefined) {
-            throw new RequiredError("SettingsApi", "updateDeveloperAccount", "updateDeveloperAccountCreateRequest");
+        // verify required parameter 'createForwarderContractRequest' is not null or undefined
+        if (createForwarderContractRequest === null || createForwarderContractRequest === undefined) {
+            throw new RequiredError("ForwarderContractApi", "updateForwarderContract", "createForwarderContractRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/v1/settings/developer_accounts/{id}'
+        const localVarPath = '/v1/forwarder_contracts/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
@@ -298,7 +231,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(updateDeveloperAccountCreateRequest, "UpdateDeveloperAccountCreateRequest", ""),
+            ObjectSerializer.serialize(createForwarderContractRequest, "CreateForwarderContractRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -320,22 +253,22 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class SettingsApiResponseProcessor {
+export class ForwarderContractApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createDeveloperAccount
+     * @params response Response returned by the server for a request to createForwarderContract
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createDeveloperAccount(response: ResponseContext): Promise<DeveloperAccountResponse > {
+     public async createForwarderContract(response: ResponseContext): Promise<ForwarderContractResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: ForwarderContractResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountResponse", ""
-            ) as DeveloperAccountResponse;
+                "ForwarderContractResponse", ""
+            ) as ForwarderContractResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -347,10 +280,10 @@ export class SettingsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
+            const body: ForwarderContractResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountResponse", ""
-            ) as DeveloperAccountResponse;
+                "ForwarderContractResponse", ""
+            ) as ForwarderContractResponse;
             return body;
         }
 
@@ -361,31 +294,31 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to deleteDeveloperAccount
+     * @params response Response returned by the server for a request to deleteForwarderContract
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteDeveloperAccount(response: ResponseContext): Promise<DeveloperAccountDeleteResponse > {
+     public async deleteForwarderContract(response: ResponseContext): Promise<ForwarderContractDeleteResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: DeveloperAccountDeleteResponse = ObjectSerializer.deserialize(
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            const body: ForwarderContractDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountDeleteResponse", ""
-            ) as DeveloperAccountDeleteResponse;
+                "ForwarderContractDeleteResponse", ""
+            ) as ForwarderContractDeleteResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
-        if (isCodeInRange("409", response.httpStatusCode)) {
+        if (isCodeInRange("404", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: DeveloperAccountDeleteResponse = ObjectSerializer.deserialize(
+            const body: ForwarderContractDeleteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountDeleteResponse", ""
-            ) as DeveloperAccountDeleteResponse;
+                "ForwarderContractDeleteResponse", ""
+            ) as ForwarderContractDeleteResponse;
             return body;
         }
 
@@ -396,31 +329,31 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getDeveloperAccount
+     * @params response Response returned by the server for a request to getForwarderContract
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getDeveloperAccount(response: ResponseContext): Promise<DeveloperAccountResponse > {
+     public async getForwarderContract(response: ResponseContext): Promise<ForwarderContractResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
+            const body: ForwarderContractResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountResponse", ""
-            ) as DeveloperAccountResponse;
+                "ForwarderContractResponse", ""
+            ) as ForwarderContractResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
-        if (isCodeInRange("409", response.httpStatusCode)) {
+        if (isCodeInRange("404", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
+            const body: ForwarderContractResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountResponse", ""
-            ) as DeveloperAccountResponse;
+                "ForwarderContractResponse", ""
+            ) as ForwarderContractResponse;
             return body;
         }
 
@@ -431,31 +364,28 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getDeveloperAccounts
+     * @params response Response returned by the server for a request to listForwarderContracts
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getDeveloperAccounts(response: ResponseContext): Promise<DeveloperAccountListResponse > {
+     public async listForwarderContracts(response: ResponseContext): Promise<Array<ForwarderContractResponse> > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: DeveloperAccountListResponse = ObjectSerializer.deserialize(
+            const body: Array<ForwarderContractResponse> = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountListResponse", ""
-            ) as DeveloperAccountListResponse;
+                "Array<ForwarderContractResponse>", ""
+            ) as Array<ForwarderContractResponse>;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
-        if (isCodeInRange("409", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: DeveloperAccountListResponse = ObjectSerializer.deserialize(
+            const body: Array<ForwarderContractResponse> = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountListResponse", ""
-            ) as DeveloperAccountListResponse;
+                "Array<ForwarderContractResponse>", ""
+            ) as Array<ForwarderContractResponse>;
             return body;
         }
 
@@ -466,16 +396,16 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getVerificationPayload
+     * @params response Response returned by the server for a request to updateForwarderContract
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getVerificationPayload(response: ResponseContext): Promise<DeveloperAccountGetMessageResponse > {
+     public async updateForwarderContract(response: ResponseContext): Promise<ForwarderContractResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: DeveloperAccountGetMessageResponse = ObjectSerializer.deserialize(
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: ForwarderContractResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountGetMessageResponse", ""
-            ) as DeveloperAccountGetMessageResponse;
+                "ForwarderContractResponse", ""
+            ) as ForwarderContractResponse;
             return body;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
@@ -487,45 +417,10 @@ export class SettingsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: DeveloperAccountGetMessageResponse = ObjectSerializer.deserialize(
+            const body: ForwarderContractResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountGetMessageResponse", ""
-            ) as DeveloperAccountGetMessageResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to updateDeveloperAccount
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async updateDeveloperAccount(response: ResponseContext): Promise<DeveloperAccountResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountResponse", ""
-            ) as DeveloperAccountResponse;
-            return body;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-        if (isCodeInRange("409", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: DeveloperAccountResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeveloperAccountResponse", ""
-            ) as DeveloperAccountResponse;
+                "ForwarderContractResponse", ""
+            ) as ForwarderContractResponse;
             return body;
         }
 

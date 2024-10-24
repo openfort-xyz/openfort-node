@@ -13,6 +13,7 @@
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
+import { EmailAuthConfig } from '../models/EmailAuthConfig';
 import { EpicGamesOAuthConfig } from '../models/EpicGamesOAuthConfig';
 import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
@@ -23,11 +24,12 @@ import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
 import { TelegramOAuthConfig } from '../models/TelegramOAuthConfig';
+import { TelegramThirdPartyConfig } from '../models/TelegramThirdPartyConfig';
 import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 import { TwitterOAuthConfig } from '../models/TwitterOAuthConfig';
 import { HttpFile } from '../http/http';
 
-export class OAuthConfig {
+export class AuthConfig {
     /**
     * Enable OAuth provider.
     */
@@ -211,7 +213,7 @@ export class OAuthConfig {
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthConfig.attributeTypeMap;
+        return AuthConfig.attributeTypeMap;
     }
 
     public constructor() {
