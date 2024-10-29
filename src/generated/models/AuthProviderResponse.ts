@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type AuthProviderResponse = "email" | "wallet" | "google" | "twitter" | "discord" | "epic_games" | "facebook" | "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;
+export type AuthProviderResponse = "email" | "wallet" | "google" | "twitter" | "discord" | "epic_games" | "facebook" | "telegram" | "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" | "telegramMiniApp" ;
