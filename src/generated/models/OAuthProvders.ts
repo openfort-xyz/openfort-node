@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProvders = "google" | "twitter" | "facebook" | "discord" | "epic_games" | "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;
+export type OAuthProvders = "google" | "twitter" | "facebook" | "discord" | "epic_games" | "telegram" | "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" | "telegramMiniApp" ;
