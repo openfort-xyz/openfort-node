@@ -2,6 +2,7 @@ import { AccountsApiWrapper } from "./apis/accountsApiWrapper";
 import { ContractsApiWrapper } from "./apis/contractsApiWrapper";
 import { Observable } from "./utilities/observable";
 import { Observer } from "./utilities/observer";
+import { PaymasterApiWrapper } from "./apis/paymasterApiWrapper";
 import { PlayersApiWrapper } from "./apis/playersApiWrapper";
 import { PoliciesApiWrapper } from "./apis/policiesApiWrapper";
 import { PolicyRulesApiWrapper } from "./apis/policyRulesApiWrapper";
@@ -31,10 +32,14 @@ export default class Openfort {
         return this.getOrCreateWrapper(ContractsApiWrapper);
     }
 
+    public get paymasters(): PaymasterApiWrapper {
+        return this.getOrCreateWrapper(PaymasterApiWrapper);
+    }
+
     public get players(): PlayersApiWrapper {
         return this.getOrCreateWrapper(PlayersApiWrapper);
     }
-
+    
     public get policies(): PoliciesApiWrapper {
         return this.getOrCreateWrapper(PoliciesApiWrapper);
     }
