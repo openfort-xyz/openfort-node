@@ -1,4 +1,8 @@
-import { CreateDeveloperAccountCreateRequest, DeveloperAccountListResponse, DeveloperAccountDeleteResponse } from "../models";
+import {
+    CreateDeveloperAccountCreateRequest,
+    DeveloperAccountListResponse,
+    DeveloperAccountDeleteResponse,
+} from "../models";
 import { BaseApiWrapper } from "./baseApiWrapper";
 import { DeveloperAccountResponse, SettingsApi } from "../generated";
 import { httpErrorHandler } from "../utilities/httpErrorHandler";
