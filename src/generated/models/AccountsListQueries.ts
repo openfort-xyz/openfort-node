@@ -10,19 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
-export class PolicyReportQueries {
-    /**
-    * Specifies the maximum number of records to return.
-    */
+export class AccountsListQueries {
     'limit'?: number;
-    /**
-    * Specifies the offset for the first records to return.
-    */
     'skip'?: number;
-    'order'?: SortOrder;
+    'order'?: AccountsListQueriesOrderEnum;
+    'accountType'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,23 +25,29 @@ export class PolicyReportQueries {
             "name": "limit",
             "baseName": "limit",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
             "name": "skip",
             "baseName": "skip",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
             "name": "order",
             "baseName": "order",
-            "type": "SortOrder",
+            "type": "AccountsListQueriesOrderEnum",
+            "format": ""
+        },
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyReportQueries.attributeTypeMap;
+        return AccountsListQueries.attributeTypeMap;
     }
 
     public constructor() {
@@ -55,4 +55,5 @@ export class PolicyReportQueries {
 }
 
 
+export type AccountsListQueriesOrderEnum = "asc" | "desc" ;
 

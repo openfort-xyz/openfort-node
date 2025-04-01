@@ -10,44 +10,47 @@
  * Do not edit the class manually.
  */
 
-import { SortOrder } from '../models/SortOrder';
+import { ThirdPartyOAuthProviderGOOGLENATIVE } from '../models/ThirdPartyOAuthProviderGOOGLENATIVE';
 import { HttpFile } from '../http/http';
 
-export class PolicyReportQueries {
+/**
+* Google oauth configuration
+*/
+export class GoogleNativeOAuthConfig {
     /**
-    * Specifies the maximum number of records to return.
+    * Enable OAuth provider.
     */
-    'limit'?: number;
+    'enabled': boolean;
+    'provider': ThirdPartyOAuthProviderGOOGLENATIVE;
     /**
-    * Specifies the offset for the first records to return.
+    * Google API client ID.
     */
-    'skip'?: number;
-    'order'?: SortOrder;
+    'clientId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number",
-            "format": "int32"
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
         },
         {
-            "name": "skip",
-            "baseName": "skip",
-            "type": "number",
-            "format": "int32"
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProviderGOOGLENATIVE",
+            "format": ""
         },
         {
-            "name": "order",
-            "baseName": "order",
-            "type": "SortOrder",
+            "name": "clientId",
+            "baseName": "clientId",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyReportQueries.attributeTypeMap;
+        return GoogleNativeOAuthConfig.attributeTypeMap;
     }
 
     public constructor() {

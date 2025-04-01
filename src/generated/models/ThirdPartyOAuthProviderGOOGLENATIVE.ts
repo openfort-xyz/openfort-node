@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type AuthProviderResponse = "email" | "wallet" | "google" | "apple" | "twitter" | "discord" | "epic_games" | "facebook" | "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" | "google_native" | "apple_native" ;
+export type ThirdPartyOAuthProviderGOOGLENATIVE = "google_native" ;

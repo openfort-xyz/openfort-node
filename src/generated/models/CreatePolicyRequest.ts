@@ -27,6 +27,10 @@ export class CreatePolicyRequest {
     * The ID of the paymaster.
     */
     'paymaster'?: string;
+    /**
+    * The ID of the forwarder contract.
+    */
+    'forwarderContract'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -52,6 +56,12 @@ export class CreatePolicyRequest {
         {
             "name": "paymaster",
             "baseName": "paymaster",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "forwarderContract",
+            "baseName": "forwarderContract",
             "type": "string",
             "format": ""
         }    ];

@@ -222,7 +222,7 @@ export class AdminAuthenticationApiRequestFactory extends BaseAPIRequestFactory 
     }
 
     /**
-     * Deletes a player auth object.  It will delete all linked accounts the player is authenticated with.
+     * Deletes a player auth object.  It will delete all linked accounts the player is authenticated with. If the player has a linked embedded signer, it will be deleted as well.
      * Deletes a player auth object.
      * @param id Specifies the unique player ID (starts with pla_).
      */

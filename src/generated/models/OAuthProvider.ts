@@ -15,4 +15,4 @@ import { HttpFile } from '../http/http';
 /**
 * Enum of the supporting OAuth providers.
 */
-export type OAuthProvider = "google" | "twitter" | "facebook" | "discord" | "epic_games" | "telegram" | "line" ;
+export type OAuthProvider = "google" | "twitter" | "facebook" | "discord" | "epic_games" | "line" | "apple" ;

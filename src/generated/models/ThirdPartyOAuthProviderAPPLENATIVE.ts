@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type OAuthProviderTELEGRAM = "telegram" ;
+export type ThirdPartyOAuthProviderAPPLENATIVE = "apple_native" ;

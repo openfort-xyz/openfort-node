@@ -58,6 +58,14 @@ export class EcosystemConfigurationResponse {
     * SDKs of the ecosystem.
     */
     'dashboardSDKs'?: Array<{ [key: string]: PlayerMetadataValue; }>;
+    /**
+    * Support email of the ecosystem.
+    */
+    'supportEmail'?: string;
+    /**
+    * Documentation URL of the ecosystem.
+    */
+    'documentationUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -126,6 +134,18 @@ export class EcosystemConfigurationResponse {
             "name": "dashboardSDKs",
             "baseName": "dashboardSDKs",
             "type": "Array<{ [key: string]: PlayerMetadataValue; }>",
+            "format": ""
+        },
+        {
+            "name": "supportEmail",
+            "baseName": "supportEmail",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "documentationUrl",
+            "baseName": "documentationUrl",
+            "type": "string",
             "format": ""
         }    ];
 

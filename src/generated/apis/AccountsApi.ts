@@ -10,6 +10,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { AccountCreateRequest } from '../models/AccountCreateRequest';
 import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
@@ -17,6 +18,7 @@ import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershi
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { DeployRequest } from '../models/DeployRequest';
+import { ListResponseAccount } from '../models/ListResponseAccount';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SortOrder } from '../models/SortOrder';
@@ -189,6 +191,46 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * @param accountCreateRequest 
+     */
+    public async createAccountV2(accountCreateRequest: AccountCreateRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'accountCreateRequest' is not null or undefined
+        if (accountCreateRequest === null || accountCreateRequest === undefined) {
+            throw new RequiredError("AccountsApi", "createAccountV2", "accountCreateRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v2/accounts';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(accountCreateRequest, "AccountCreateRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param id Specifies the unique account ID (starts with acc_).
@@ -228,6 +270,42 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
             contentType
         );
         requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * @param id 
+     */
+    public async disableAccount(id: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("AccountsApi", "disableAccount", "id");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/accounts/{id}/disable'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -290,21 +368,48 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * @param accountId 
+     */
+    public async getAccountV2(accountId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'accountId' is not null or undefined
+        if (accountId === null || accountId === undefined) {
+            throw new RequiredError("AccountsApi", "getAccountV2", "accountId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v2/accounts/{accountId}'
+            .replace('{' + 'accountId' + '}', encodeURIComponent(String(accountId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Returns a list of accounts for the given player.  This object represents a player\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  Returns the latest 10 transaction intents for each account.  By default, a maximum of 10 accounts are shown per page.
      * List accounts of a player.
-     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
+     * @param player Specifies the unique player ID (starts with pla_)
+     * @param address Specifies the address of the account
      * @param expand Specifies the fields to expand in the response.
      */
-    public async getAccounts(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
+    public async getAccounts(limit?: number, skip?: number, order?: SortOrder, player?: string, address?: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'player' is not null or undefined
-        if (player === null || player === undefined) {
-            throw new RequiredError("AccountsApi", "getAccounts", "player");
-        }
 
 
 
@@ -334,13 +439,18 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (expand !== undefined) {
-            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<AccountResponseExpandable>", ""));
+        if (player !== undefined) {
+            requestContext.setQueryParam("player", ObjectSerializer.serialize(player, "string", ""));
         }
 
         // Query Params
-        if (player !== undefined) {
-            requestContext.setQueryParam("player", ObjectSerializer.serialize(player, "string", ""));
+        if (address !== undefined) {
+            requestContext.setQueryParam("address", ObjectSerializer.serialize(address, "string", ""));
+        }
+
+        // Query Params
+        if (expand !== undefined) {
+            requestContext.setQueryParam("expand", ObjectSerializer.serialize(expand, "Array<AccountResponseExpandable>", ""));
         }
 
 
@@ -350,6 +460,56 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * @param limit 
+     * @param skip 
+     * @param order 
+     * @param accountType 
+     */
+    public async listAccountsV2(limit?: number, skip?: number, order?: 'asc' | 'desc', accountType?: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+
+
+
+
+        // Path Params
+        const localVarPath = '/v2/accounts';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "double"));
+        }
+
+        // Query Params
+        if (skip !== undefined) {
+            requestContext.setQueryParam("skip", ObjectSerializer.serialize(skip, "number", "double"));
+        }
+
+        // Query Params
+        if (order !== undefined) {
+            requestContext.setQueryParam("order", ObjectSerializer.serialize(order, "'asc' | 'desc'", ""));
+        }
+
+        // Query Params
+        if (accountType !== undefined) {
+            requestContext.setQueryParam("accountType", ObjectSerializer.serialize(accountType, "string", ""));
+        }
+
+
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -677,6 +837,35 @@ export class AccountsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to createAccountV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async createAccountV2(response: ResponseContext): Promise<AccountResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: AccountResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountResponse", ""
+            ) as AccountResponse;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AccountResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountResponse", ""
+            ) as AccountResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to deployAccount
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -705,6 +894,37 @@ export class AccountsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "AccountResponse", ""
             ) as AccountResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to disableAccount
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async disableAccount(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
             return body;
         }
 
@@ -747,6 +967,35 @@ export class AccountsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to getAccountV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getAccountV2(response: ResponseContext): Promise<AccountResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AccountResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountResponse", ""
+            ) as AccountResponse;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AccountResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountResponse", ""
+            ) as AccountResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to getAccounts
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -769,6 +1018,35 @@ export class AccountsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "AccountListResponse", ""
             ) as AccountListResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to listAccountsV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async listAccountsV2(response: ResponseContext): Promise<ListResponseAccount > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: ListResponseAccount = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ListResponseAccount", ""
+            ) as ListResponseAccount;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: ListResponseAccount = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ListResponseAccount", ""
+            ) as ListResponseAccount;
             return body;
         }
 

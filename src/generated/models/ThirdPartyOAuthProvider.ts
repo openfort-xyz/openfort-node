@@ -15,4 +15,4 @@ import { HttpFile } from '../http/http';
 /**
 * Enum of the supporting third party auth providers.
 */
-export type ThirdPartyOAuthProvider = "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" | "telegramMiniApp" ;
+export type ThirdPartyOAuthProvider = "accelbyte" | "firebase" | "apple_native" | "google_native" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;

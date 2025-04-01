@@ -475,16 +475,18 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * List all gas reports of a policy.
      * @param id Specifies the unique policy ID (starts with pol_).
-     * @param to The start date of the period in unix timestamp.
-     * @param _from The end date of the period in unix timestamp.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      */
-    public async getPolicyTotalGasUsage(id: string, to?: number, _from?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getPolicyTotalGasUsage(id: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new RequiredError("PoliciesApi", "getPolicyTotalGasUsage", "id");
         }
+
 
 
 
@@ -498,13 +500,18 @@ export class PoliciesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (to !== undefined) {
-            requestContext.setQueryParam("to", ObjectSerializer.serialize(to, "number", "double"));
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
         // Query Params
-        if (_from !== undefined) {
-            requestContext.setQueryParam("from", ObjectSerializer.serialize(_from, "number", "double"));
+        if (skip !== undefined) {
+            requestContext.setQueryParam("skip", ObjectSerializer.serialize(skip, "number", "int32"));
+        }
+
+        // Query Params
+        if (order !== undefined) {
+            requestContext.setQueryParam("order", ObjectSerializer.serialize(order, "SortOrder", ""));
         }
 
 

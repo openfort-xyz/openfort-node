@@ -10,54 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderTELEGRAM } from '../models/OAuthProviderTELEGRAM';
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { HttpFile } from '../http/http';
 
-export class TelegramOAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': OAuthProviderTELEGRAM;
-    /**
-    * Telegram bot username.
-    */
-    'botUsername': string;
-    /**
-    * Telegram bot token.
-    */
-    'botToken': string;
+export class ThirdPartyLinkRequest {
+    'provider': ThirdPartyOAuthProvider;
+    'token': string;
+    'tokenType': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProviderTELEGRAM",
+            "type": "ThirdPartyOAuthProvider",
             "format": ""
         },
         {
-            "name": "botUsername",
-            "baseName": "botUsername",
+            "name": "token",
+            "baseName": "token",
             "type": "string",
             "format": ""
         },
         {
-            "name": "botToken",
-            "baseName": "botToken",
+            "name": "tokenType",
+            "baseName": "tokenType",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TelegramOAuthConfig.attributeTypeMap;
+        return ThirdPartyLinkRequest.attributeTypeMap;
     }
 
     public constructor() {

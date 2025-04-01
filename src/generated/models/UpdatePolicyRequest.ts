@@ -28,6 +28,10 @@ export class UpdatePolicyRequest {
     */
     'paymaster'?: string;
     /**
+    * The ID of the forwarder contract.
+    */
+    'forwarderContract'?: string;
+    /**
     * Specifies whether to delete the policy.
     */
     'deleted'?: boolean;
@@ -56,6 +60,12 @@ export class UpdatePolicyRequest {
         {
             "name": "paymaster",
             "baseName": "paymaster",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "forwarderContract",
+            "baseName": "forwarderContract",
             "type": "string",
             "format": ""
         },
