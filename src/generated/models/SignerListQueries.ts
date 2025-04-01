@@ -10,32 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
-import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
-export class AccountListQueries {
-    /**
-    * Specifies the maximum number of records to return.
-    */
+export class SignerListQueries {
     'limit'?: number;
-    /**
-    * Specifies the offset for the first records to return.
-    */
     'skip'?: number;
-    'order'?: SortOrder;
-    /**
-    * Specifies the unique player ID (starts with pla_)
-    */
-    'player'?: string;
-    /**
-    * Specifies the address of the account
-    */
-    'address'?: string;
-    /**
-    * Specifies the fields to expand in the response.
-    */
-    'expand'?: Array<AccountResponseExpandable>;
+    'order'?: SignerListQueriesOrderEnum;
+    'signerType'?: string;
+    'account'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,41 +26,35 @@ export class AccountListQueries {
             "name": "limit",
             "baseName": "limit",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
             "name": "skip",
             "baseName": "skip",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
             "name": "order",
             "baseName": "order",
-            "type": "SortOrder",
+            "type": "SignerListQueriesOrderEnum",
             "format": ""
         },
         {
-            "name": "player",
-            "baseName": "player",
+            "name": "signerType",
+            "baseName": "signerType",
             "type": "string",
             "format": ""
         },
         {
-            "name": "address",
-            "baseName": "address",
+            "name": "account",
+            "baseName": "account",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<AccountResponseExpandable>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AccountListQueries.attributeTypeMap;
+        return SignerListQueries.attributeTypeMap;
     }
 
     public constructor() {
@@ -86,4 +62,5 @@ export class AccountListQueries {
 }
 
 
+export type SignerListQueriesOrderEnum = "asc" | "desc" ;
 

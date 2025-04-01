@@ -11,18 +11,20 @@
  */
 
 import { AuthProviderResponse } from '../models/AuthProviderResponse';
-import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
 import { HttpFile } from '../http/http';
 
 export class LinkedAccountResponse {
     'provider': AuthProviderResponse;
     'email'?: string;
     'externalUserId'?: string;
+    'connectorType'?: string;
+    'walletClientType'?: string;
     'disabled': boolean;
     'verified'?: boolean;
     'updatedAt'?: number;
     'address'?: string;
-    'metadata'?: PrismaInputJsonValue;
+    'metadata'?: { [key: string]: PlayerMetadataValue; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -42,6 +44,18 @@ export class LinkedAccountResponse {
         {
             "name": "externalUserId",
             "baseName": "externalUserId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "connectorType",
+            "baseName": "connectorType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "walletClientType",
+            "baseName": "walletClientType",
             "type": "string",
             "format": ""
         },
@@ -72,7 +86,7 @@ export class LinkedAccountResponse {
         {
             "name": "metadata",
             "baseName": "metadata",
-            "type": "PrismaInputJsonValue",
+            "type": "{ [key: string]: PlayerMetadataValue; }",
             "format": ""
         }    ];
 

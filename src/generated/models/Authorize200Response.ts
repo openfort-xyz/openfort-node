@@ -11,7 +11,7 @@
  */
 
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
-import { AuthResponse } from '../models/AuthResponse';
+import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { HttpFile } from '../http/http';
@@ -22,14 +22,6 @@ export class Authorize200Response {
     'object': EntityTypePLAYER;
     'createdAt': number;
     'linkedAccounts': Array<LinkedAccountResponse>;
-    /**
-    * JWT access token.
-    */
-    'token': string;
-    /**
-    * Refresh token.
-    */
-    'refreshToken': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -62,18 +54,6 @@ export class Authorize200Response {
             "name": "linkedAccounts",
             "baseName": "linkedAccounts",
             "type": "Array<LinkedAccountResponse>",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
-            "type": "string",
             "format": ""
         }    ];
 

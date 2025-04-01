@@ -10,20 +10,24 @@
  * Do not edit the class manually.
  */
 
+import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
 import { HttpFile } from '../http/http';
 
-/**
-* Matches any valid value that can be used as an input for operations like create and update as the value of a JSON field. Unlike `JsonValue`, this type allows read-only arrays and read-only object properties and disallows `null` at the top level.  `null` cannot be used as the value of a JSON field because its meaning would be ambiguous. Use `Prisma.JsonNull` to store the JSON null value or `Prisma.DbNull` to clear the JSON value and set the field to the database NULL value instead.
-*/
-export class PrismaInputJsonValue {
+export class AuthenticatedPlayerResponse {
+    'player': AuthPlayerResponse;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-    ];
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "AuthPlayerResponse",
+            "format": ""
+        }    ];
 
     static getAttributeTypeMap() {
-        return PrismaInputJsonValue.attributeTypeMap;
+        return AuthenticatedPlayerResponse.attributeTypeMap;
     }
 
     public constructor() {

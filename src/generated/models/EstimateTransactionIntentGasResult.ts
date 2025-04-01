@@ -16,12 +16,6 @@ import { HttpFile } from '../http/http';
 * return value from estimateTransactionIntentCost
 */
 export class EstimateTransactionIntentGasResult {
-    'preVerificationGas'?: string;
-    'verificationGas'?: string;
-    'validUntil'?: string;
-    'validAfter'?: string;
-    'callGasLimit'?: string;
-    'verificationGasLimit'?: string;
     /**
     * estimated TX gas cost
     */
@@ -46,42 +40,6 @@ export class EstimateTransactionIntentGasResult {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "preVerificationGas",
-            "baseName": "preVerificationGas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "verificationGas",
-            "baseName": "verificationGas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "validUntil",
-            "baseName": "validUntil",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "validAfter",
-            "baseName": "validAfter",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "callGasLimit",
-            "baseName": "callGasLimit",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "verificationGasLimit",
-            "baseName": "verificationGasLimit",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "estimatedTXGas",
             "baseName": "estimatedTXGas",

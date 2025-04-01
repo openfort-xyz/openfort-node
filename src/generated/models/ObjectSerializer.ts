@@ -9,6 +9,7 @@ export * from '../models/AbiType';
 export * from '../models/AccelbyteOAuthConfig';
 export * from '../models/Account';
 export * from '../models/AccountAbstractionV6Details';
+export * from '../models/AccountCreateRequest';
 export * from '../models/AccountEventResponse';
 export * from '../models/AccountInventoryListQueries';
 export * from '../models/AccountListQueries';
@@ -16,12 +17,15 @@ export * from '../models/AccountListResponse';
 export * from '../models/AccountPolicyRuleResponse';
 export * from '../models/AccountResponse';
 export * from '../models/AccountResponseExpandable';
+export * from '../models/AccountsListQueries';
 export * from '../models/Amount';
 export * from '../models/ApiAuthorizedNetworkDeleteResponse';
 export * from '../models/ApiAuthorizedNetworkListResponse';
 export * from '../models/ApiAuthorizedNetworkResponse';
 export * from '../models/ApiKeyResponse';
 export * from '../models/ApiKeyType';
+export * from '../models/AppleNativeOAuthConfig';
+export * from '../models/AppleOAuthConfig';
 export * from '../models/AssetInventory';
 export * from '../models/AssetType';
 export * from '../models/AuthConfig';
@@ -37,6 +41,7 @@ export * from '../models/AuthProviderWithTypeResponse';
 export * from '../models/AuthResponse';
 export * from '../models/AuthSessionResponse';
 export * from '../models/AuthenticateOAuthRequest';
+export * from '../models/AuthenticatedPlayerResponse';
 export * from '../models/AuthenticationType';
 export * from '../models/Authorize200Response';
 export * from '../models/AuthorizePlayerRequest';
@@ -85,6 +90,7 @@ export * from '../models/CreatePolicyRuleRequest';
 export * from '../models/CreateProjectApiKeyRequest';
 export * from '../models/CreateProjectRequest';
 export * from '../models/CreateSessionRequest';
+export * from '../models/CreateSignerRequest';
 export * from '../models/CreateSubscriptionRequest';
 export * from '../models/CreateTransactionIntentRequest';
 export * from '../models/CreateTriggerRequest';
@@ -100,6 +106,7 @@ export * from '../models/DeveloperAccountListQueries';
 export * from '../models/DeveloperAccountListResponse';
 export * from '../models/DeveloperAccountResponse';
 export * from '../models/DeveloperAccountResponseExpandable';
+export * from '../models/DeviceCreateRequest';
 export * from '../models/DeviceListQueries';
 export * from '../models/DeviceResponse';
 export * from '../models/DiscordOAuthConfig';
@@ -154,6 +161,7 @@ export * from '../models/GasReport';
 export * from '../models/GasReportListResponse';
 export * from '../models/GasReportTransactionIntents';
 export * from '../models/GasReportTransactionIntentsListResponse';
+export * from '../models/GoogleNativeOAuthConfig';
 export * from '../models/GoogleOAuthConfig';
 export * from '../models/GrantCallbackRequest';
 export * from '../models/GrantOAuthResponse';
@@ -168,6 +176,9 @@ export * from '../models/JwtKeyResponse';
 export * from '../models/LineOAuthConfig';
 export * from '../models/LinkedAccountResponse';
 export * from '../models/ListConfigRequest';
+export * from '../models/ListQueries';
+export * from '../models/ListResponseAccount';
+export * from '../models/ListResponseSigner';
 export * from '../models/ListSubscriptionLogsRequest';
 export * from '../models/Log';
 export * from '../models/LogResponse';
@@ -186,12 +197,12 @@ export * from '../models/OAuthInitRequest';
 export * from '../models/OAuthInitRequestOptions';
 export * from '../models/OAuthProvders';
 export * from '../models/OAuthProvider';
+export * from '../models/OAuthProviderAPPLE';
 export * from '../models/OAuthProviderDISCORD';
 export * from '../models/OAuthProviderEPICGAMES';
 export * from '../models/OAuthProviderFACEBOOK';
 export * from '../models/OAuthProviderGOOGLE';
 export * from '../models/OAuthProviderLINE';
-export * from '../models/OAuthProviderTELEGRAM';
 export * from '../models/OAuthProviderTWITTER';
 export * from '../models/OAuthRequest';
 export * from '../models/OAuthResponse';
@@ -244,7 +255,6 @@ export * from '../models/PolicyRuleTypeCONTRACT';
 export * from '../models/PolicyRuleTypeRATELIMIT';
 export * from '../models/PolicyStrategy';
 export * from '../models/PolicyStrategyRequest';
-export * from '../models/PrismaInputJsonValue';
 export * from '../models/PrivateKeyPolicy';
 export * from '../models/ProjectListResponse';
 export * from '../models/ProjectLogs';
@@ -268,9 +278,15 @@ export * from '../models/SessionListQueries';
 export * from '../models/SessionListResponse';
 export * from '../models/SessionResponse';
 export * from '../models/SessionResponseExpandable';
+export * from '../models/ShamirParams';
+export * from '../models/ShamirSigner';
 export * from '../models/SignPayloadRequest';
 export * from '../models/SignPayloadResponse';
 export * from '../models/SignatureRequest';
+export * from '../models/Signer';
+export * from '../models/SignerListQueries';
+export * from '../models/SignerOwner';
+export * from '../models/SignerResponse';
 export * from '../models/SignupRequest';
 export * from '../models/SortOrder';
 export * from '../models/SponsorSchema';
@@ -286,18 +302,19 @@ export * from '../models/SubscriptionListResponse';
 export * from '../models/SubscriptionResponse';
 export * from '../models/SubscriptionResponsePlan';
 export * from '../models/SupabaseAuthConfig';
-export * from '../models/TelegramOAuthConfig';
-export * from '../models/TelegramThirdPartyConfig';
+export * from '../models/SwitchChainRequest';
 export * from '../models/TestTrigger200Response';
+export * from '../models/ThirdPartyLinkRequest';
 export * from '../models/ThirdPartyOAuthProvider';
 export * from '../models/ThirdPartyOAuthProviderACCELBYTE';
+export * from '../models/ThirdPartyOAuthProviderAPPLENATIVE';
 export * from '../models/ThirdPartyOAuthProviderCUSTOM';
 export * from '../models/ThirdPartyOAuthProviderFIREBASE';
+export * from '../models/ThirdPartyOAuthProviderGOOGLENATIVE';
 export * from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 export * from '../models/ThirdPartyOAuthProviderOIDC';
 export * from '../models/ThirdPartyOAuthProviderPLAYFAB';
 export * from '../models/ThirdPartyOAuthProviderSUPABASE';
-export * from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 export * from '../models/ThirdPartyOAuthRequest';
 export * from '../models/TimeIntervalType';
 export * from '../models/Token';
@@ -357,22 +374,26 @@ import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig      } from '../models/AccelbyteOAuthConfig';
 import { Account              } from '../models/Account';
 import { AccountAbstractionV6Details } from '../models/AccountAbstractionV6Details';
+import { AccountCreateRequest, AccountCreateRequestAccountTypeEnum    } from '../models/AccountCreateRequest';
 import { AccountEventResponse        } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries     } from '../models/AccountInventoryListQueries';
-import { AccountListQueries      } from '../models/AccountListQueries';
+import { AccountListQueries       } from '../models/AccountListQueries';
 import { AccountListResponse       } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse     } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse              } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { AccountsListQueries  , AccountsListQueriesOrderEnum    } from '../models/AccountsListQueries';
 import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkDeleteResponse    } from '../models/ApiAuthorizedNetworkDeleteResponse';
 import { ApiAuthorizedNetworkListResponse       } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse      } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
+import { AppleNativeOAuthConfig    } from '../models/AppleNativeOAuthConfig';
+import { AppleOAuthConfig     } from '../models/AppleOAuthConfig';
 import { AssetInventory      } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
-import { AuthConfig                   } from '../models/AuthConfig';
+import { AuthConfig                 } from '../models/AuthConfig';
 import { AuthPlayerListQueries      } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse      } from '../models/AuthPlayerResponse';
@@ -385,8 +406,9 @@ import { AuthProviderWithTypeResponse   } from '../models/AuthProviderWithTypeRe
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest     } from '../models/AuthenticateOAuthRequest';
+import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { AuthenticationType } from '../models/AuthenticationType';
-import { Authorize200Response        } from '../models/Authorize200Response';
+import { Authorize200Response      } from '../models/Authorize200Response';
 import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse      } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
@@ -433,6 +455,7 @@ import { CreatePolicyRuleRequest          } from '../models/CreatePolicyRuleRequ
 import { CreateProjectApiKeyRequest  } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest   } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateSignerRequest } from '../models/CreateSignerRequest';
 import { CreateSubscriptionRequest   } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateTriggerRequest    } from '../models/CreateTriggerRequest';
@@ -448,6 +471,7 @@ import { DeveloperAccountListQueries      } from '../models/DeveloperAccountList
 import { DeveloperAccountListResponse       } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse        } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
+import { DeviceCreateRequest } from '../models/DeviceCreateRequest';
 import { DeviceListQueries     } from '../models/DeviceListQueries';
 import { DeviceResponse       } from '../models/DeviceResponse';
 import { DiscordOAuthConfig     } from '../models/DiscordOAuthConfig';
@@ -502,6 +526,7 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse       } from '../models/GasReportListResponse';
 import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { GasReportTransactionIntentsListResponse       } from '../models/GasReportTransactionIntentsListResponse';
+import { GoogleNativeOAuthConfig    } from '../models/GoogleNativeOAuthConfig';
 import { GoogleOAuthConfig     } from '../models/GoogleOAuthConfig';
 import { GrantCallbackRequest } from '../models/GrantCallbackRequest';
 import { GrantOAuthResponse } from '../models/GrantOAuthResponse';
@@ -514,8 +539,11 @@ import { InventoryResponse    } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig     } from '../models/LineOAuthConfig';
-import { LinkedAccountResponse         } from '../models/LinkedAccountResponse';
+import { LinkedAccountResponse           } from '../models/LinkedAccountResponse';
 import { ListConfigRequest } from '../models/ListConfigRequest';
+import { ListQueries  , ListQueriesOrderEnum   } from '../models/ListQueries';
+import { ListResponseAccount } from '../models/ListResponseAccount';
+import { ListResponseSigner } from '../models/ListResponseSigner';
 import { ListSubscriptionLogsRequest          } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse         } from '../models/LogResponse';
@@ -534,12 +562,12 @@ import { OAuthInitRequest    } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
 import { OAuthProvders } from '../models/OAuthProvders';
 import { OAuthProvider } from '../models/OAuthProvider';
+import { OAuthProviderAPPLE } from '../models/OAuthProviderAPPLE';
 import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
 import { OAuthProviderEPICGAMES } from '../models/OAuthProviderEPICGAMES';
 import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLINE } from '../models/OAuthProviderLINE';
-import { OAuthProviderTELEGRAM } from '../models/OAuthProviderTELEGRAM';
 import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
@@ -568,7 +596,7 @@ import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { PlayerResponseTransactionIntentsInner                } from '../models/PlayerResponseTransactionIntentsInner';
 import { PlayerTransferOwnershipRequest } from '../models/PlayerTransferOwnershipRequest';
 import { PlayerUpdateRequest } from '../models/PlayerUpdateRequest';
-import { Policy            } from '../models/Policy';
+import { Policy             } from '../models/Policy';
 import { PolicyBalanceWithdrawResponse } from '../models/PolicyBalanceWithdrawResponse';
 import { PolicyDeleteResponse    } from '../models/PolicyDeleteResponse';
 import { PolicyListQueries         } from '../models/PolicyListQueries';
@@ -577,9 +605,9 @@ import { PolicyRateLimit } from '../models/PolicyRateLimit';
 import { PolicyRateLimitCOUNTPERINTERVAL } from '../models/PolicyRateLimitCOUNTPERINTERVAL';
 import { PolicyRateLimitGASPERINTERVAL } from '../models/PolicyRateLimitGASPERINTERVAL';
 import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
-import { PolicyReportQueries } from '../models/PolicyReportQueries';
+import { PolicyReportQueries    } from '../models/PolicyReportQueries';
 import { PolicyReportTransactionIntentsQueries } from '../models/PolicyReportTransactionIntentsQueries';
-import { PolicyResponse            } from '../models/PolicyResponse';
+import { PolicyResponse             } from '../models/PolicyResponse';
 import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
 import { PolicyResponsePolicyRulesInner            } from '../models/PolicyResponsePolicyRulesInner';
 import { PolicyRuleDeleteResponse    } from '../models/PolicyRuleDeleteResponse';
@@ -592,7 +620,6 @@ import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
 import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy     } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest     } from '../models/PolicyStrategyRequest';
-import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse       } from '../models/ProjectListResponse';
 import { ProjectLogs       } from '../models/ProjectLogs';
@@ -616,9 +643,15 @@ import { SessionListQueries      } from '../models/SessionListQueries';
 import { SessionListResponse       } from '../models/SessionListResponse';
 import { SessionResponse             } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
+import { ShamirParams } from '../models/ShamirParams';
+import { ShamirSigner } from '../models/ShamirSigner';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse      } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
+import { Signer } from '../models/Signer';
+import { SignerListQueries  , SignerListQueriesOrderEnum     } from '../models/SignerListQueries';
+import { SignerOwner } from '../models/SignerOwner';
+import { SignerResponse } from '../models/SignerResponse';
 import { SignupRequest } from '../models/SignupRequest';
 import { SortOrder } from '../models/SortOrder';
 import { SponsorSchema } from '../models/SponsorSchema';
@@ -634,18 +667,19 @@ import { SubscriptionListResponse       } from '../models/SubscriptionListRespon
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig     } from '../models/SupabaseAuthConfig';
-import { TelegramOAuthConfig     } from '../models/TelegramOAuthConfig';
-import { TelegramThirdPartyConfig    } from '../models/TelegramThirdPartyConfig';
+import { SwitchChainRequest } from '../models/SwitchChainRequest';
 import { TestTrigger200Response } from '../models/TestTrigger200Response';
+import { ThirdPartyLinkRequest    } from '../models/ThirdPartyLinkRequest';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
+import { ThirdPartyOAuthProviderAPPLENATIVE } from '../models/ThirdPartyOAuthProviderAPPLENATIVE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
 import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
+import { ThirdPartyOAuthProviderGOOGLENATIVE } from '../models/ThirdPartyOAuthProviderGOOGLENATIVE';
 import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
 import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
-import { ThirdPartyOAuthProviderTELEGRAMMINIAPP } from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 import { ThirdPartyOAuthRequest    } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
@@ -661,7 +695,7 @@ import { TransactionIntentResponse                } from '../models/TransactionI
 import { TransactionIntentResponseAccount               } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
 import { TransactionIntentResponsePlayer         } from '../models/TransactionIntentResponsePlayer';
-import { TransactionIntentResponsePolicy            } from '../models/TransactionIntentResponsePolicy';
+import { TransactionIntentResponsePolicy             } from '../models/TransactionIntentResponsePolicy';
 import { TransactionStat } from '../models/TransactionStat';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 import { TriggerDeleteResponse    } from '../models/TriggerDeleteResponse';
@@ -720,7 +754,9 @@ let enumsMap: Set<string> = new Set<string>([
     "APITopicBALANCEPROJECT",
     "APITopicTRANSACTIONSUCCESSFUL",
     "APITriggerType",
+    "AccountCreateRequestAccountTypeEnum",
     "AccountResponseExpandable",
+    "AccountsListQueriesOrderEnum",
     "ApiKeyType",
     "AssetType",
     "AuthProviderResponse",
@@ -755,15 +791,16 @@ let enumsMap: Set<string> = new Set<string>([
     "EntityTypeTRIGGER",
     "EntityTypeUSER",
     "ErrorTypeINVALIDREQUESTERROR",
+    "ListQueriesOrderEnum",
     "NextActionType",
     "OAuthProvders",
     "OAuthProvider",
+    "OAuthProviderAPPLE",
     "OAuthProviderDISCORD",
     "OAuthProviderEPICGAMES",
     "OAuthProviderFACEBOOK",
     "OAuthProviderGOOGLE",
     "OAuthProviderLINE",
-    "OAuthProviderTELEGRAM",
     "OAuthProviderTWITTER",
     "PlanChangeTypeEnum",
     "PlayerResponseExpandable",
@@ -781,6 +818,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ProjectStatsRequestTimeFrameEnum",
     "ResponseTypeLIST",
     "SessionResponseExpandable",
+    "SignerListQueriesOrderEnum",
     "SortOrder",
     "SponsorSchema",
     "SponsorSchemaCHARGECUSTOMTOKENS",
@@ -789,13 +827,14 @@ let enumsMap: Set<string> = new Set<string>([
     "Status",
     "ThirdPartyOAuthProvider",
     "ThirdPartyOAuthProviderACCELBYTE",
+    "ThirdPartyOAuthProviderAPPLENATIVE",
     "ThirdPartyOAuthProviderCUSTOM",
     "ThirdPartyOAuthProviderFIREBASE",
+    "ThirdPartyOAuthProviderGOOGLENATIVE",
     "ThirdPartyOAuthProviderLOOTLOCKER",
     "ThirdPartyOAuthProviderOIDC",
     "ThirdPartyOAuthProviderPLAYFAB",
     "ThirdPartyOAuthProviderSUPABASE",
-    "ThirdPartyOAuthProviderTELEGRAMMINIAPP",
     "TimeIntervalType",
     "TokenType",
     "TradeType",
@@ -812,17 +851,21 @@ let typeMap: {[index: string]: any} = {
     "AccelbyteOAuthConfig": AccelbyteOAuthConfig,
     "Account": Account,
     "AccountAbstractionV6Details": AccountAbstractionV6Details,
+    "AccountCreateRequest": AccountCreateRequest,
     "AccountEventResponse": AccountEventResponse,
     "AccountInventoryListQueries": AccountInventoryListQueries,
     "AccountListQueries": AccountListQueries,
     "AccountListResponse": AccountListResponse,
     "AccountPolicyRuleResponse": AccountPolicyRuleResponse,
     "AccountResponse": AccountResponse,
+    "AccountsListQueries": AccountsListQueries,
     "Amount": Amount,
     "ApiAuthorizedNetworkDeleteResponse": ApiAuthorizedNetworkDeleteResponse,
     "ApiAuthorizedNetworkListResponse": ApiAuthorizedNetworkListResponse,
     "ApiAuthorizedNetworkResponse": ApiAuthorizedNetworkResponse,
     "ApiKeyResponse": ApiKeyResponse,
+    "AppleNativeOAuthConfig": AppleNativeOAuthConfig,
+    "AppleOAuthConfig": AppleOAuthConfig,
     "AssetInventory": AssetInventory,
     "AuthConfig": AuthConfig,
     "AuthPlayerListQueries": AuthPlayerListQueries,
@@ -836,6 +879,7 @@ let typeMap: {[index: string]: any} = {
     "AuthResponse": AuthResponse,
     "AuthSessionResponse": AuthSessionResponse,
     "AuthenticateOAuthRequest": AuthenticateOAuthRequest,
+    "AuthenticatedPlayerResponse": AuthenticatedPlayerResponse,
     "Authorize200Response": Authorize200Response,
     "AuthorizePlayerRequest": AuthorizePlayerRequest,
     "BalanceEventResponse": BalanceEventResponse,
@@ -881,6 +925,7 @@ let typeMap: {[index: string]: any} = {
     "CreateProjectApiKeyRequest": CreateProjectApiKeyRequest,
     "CreateProjectRequest": CreateProjectRequest,
     "CreateSessionRequest": CreateSessionRequest,
+    "CreateSignerRequest": CreateSignerRequest,
     "CreateSubscriptionRequest": CreateSubscriptionRequest,
     "CreateTransactionIntentRequest": CreateTransactionIntentRequest,
     "CreateTriggerRequest": CreateTriggerRequest,
@@ -894,6 +939,7 @@ let typeMap: {[index: string]: any} = {
     "DeveloperAccountListQueries": DeveloperAccountListQueries,
     "DeveloperAccountListResponse": DeveloperAccountListResponse,
     "DeveloperAccountResponse": DeveloperAccountResponse,
+    "DeviceCreateRequest": DeviceCreateRequest,
     "DeviceListQueries": DeviceListQueries,
     "DeviceResponse": DeviceResponse,
     "DiscordOAuthConfig": DiscordOAuthConfig,
@@ -923,6 +969,7 @@ let typeMap: {[index: string]: any} = {
     "GasReportListResponse": GasReportListResponse,
     "GasReportTransactionIntents": GasReportTransactionIntents,
     "GasReportTransactionIntentsListResponse": GasReportTransactionIntentsListResponse,
+    "GoogleNativeOAuthConfig": GoogleNativeOAuthConfig,
     "GoogleOAuthConfig": GoogleOAuthConfig,
     "GrantCallbackRequest": GrantCallbackRequest,
     "GrantOAuthResponse": GrantOAuthResponse,
@@ -937,6 +984,9 @@ let typeMap: {[index: string]: any} = {
     "LineOAuthConfig": LineOAuthConfig,
     "LinkedAccountResponse": LinkedAccountResponse,
     "ListConfigRequest": ListConfigRequest,
+    "ListQueries": ListQueries,
+    "ListResponseAccount": ListResponseAccount,
+    "ListResponseSigner": ListResponseSigner,
     "ListSubscriptionLogsRequest": ListSubscriptionLogsRequest,
     "Log": Log,
     "LogResponse": LogResponse,
@@ -993,7 +1043,6 @@ let typeMap: {[index: string]: any} = {
     "PolicyRuleResponse": PolicyRuleResponse,
     "PolicyStrategy": PolicyStrategy,
     "PolicyStrategyRequest": PolicyStrategyRequest,
-    "PrismaInputJsonValue": PrismaInputJsonValue,
     "ProjectListResponse": ProjectListResponse,
     "ProjectLogs": ProjectLogs,
     "ProjectResponse": ProjectResponse,
@@ -1014,9 +1063,15 @@ let typeMap: {[index: string]: any} = {
     "SessionListQueries": SessionListQueries,
     "SessionListResponse": SessionListResponse,
     "SessionResponse": SessionResponse,
+    "ShamirParams": ShamirParams,
+    "ShamirSigner": ShamirSigner,
     "SignPayloadRequest": SignPayloadRequest,
     "SignPayloadResponse": SignPayloadResponse,
     "SignatureRequest": SignatureRequest,
+    "Signer": Signer,
+    "SignerListQueries": SignerListQueries,
+    "SignerOwner": SignerOwner,
+    "SignerResponse": SignerResponse,
     "SignupRequest": SignupRequest,
     "StandardDetails": StandardDetails,
     "StartRecoveryRequest": StartRecoveryRequest,
@@ -1026,9 +1081,9 @@ let typeMap: {[index: string]: any} = {
     "SubscriptionResponse": SubscriptionResponse,
     "SubscriptionResponsePlan": SubscriptionResponsePlan,
     "SupabaseAuthConfig": SupabaseAuthConfig,
-    "TelegramOAuthConfig": TelegramOAuthConfig,
-    "TelegramThirdPartyConfig": TelegramThirdPartyConfig,
+    "SwitchChainRequest": SwitchChainRequest,
     "TestTrigger200Response": TestTrigger200Response,
+    "ThirdPartyLinkRequest": ThirdPartyLinkRequest,
     "ThirdPartyOAuthRequest": ThirdPartyOAuthRequest,
     "Token": Token,
     "TransactionConfirmedEventResponse": TransactionConfirmedEventResponse,

@@ -131,6 +131,7 @@ export class PlayersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * It will delete all linked accounts the player is authenticated with. If the player has a linked embedded signer, it will be deleted as well.
      * Deletes a player object.
      * @param id Specifies the unique player ID (starts with pla_).
      */

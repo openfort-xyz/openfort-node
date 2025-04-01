@@ -11,20 +11,21 @@
  */
 
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
+import { AppleNativeOAuthConfig } from '../models/AppleNativeOAuthConfig';
+import { AppleOAuthConfig } from '../models/AppleOAuthConfig';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
 import { EmailAuthConfig } from '../models/EmailAuthConfig';
 import { EpicGamesOAuthConfig } from '../models/EpicGamesOAuthConfig';
 import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
+import { GoogleNativeOAuthConfig } from '../models/GoogleNativeOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PlayFabOAuthConfig } from '../models/PlayFabOAuthConfig';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
-import { TelegramOAuthConfig } from '../models/TelegramOAuthConfig';
-import { TelegramThirdPartyConfig } from '../models/TelegramThirdPartyConfig';
 import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 import { TwitterOAuthConfig } from '../models/TwitterOAuthConfig';
 import { HttpFile } from '../http/http';
@@ -67,14 +68,6 @@ export class AuthConfig {
     * Epic Games API client secret.
     */
     'clientSecret': string;
-    /**
-    * Telegram bot username.
-    */
-    'botUsername': string;
-    /**
-    * Telegram bot token.
-    */
-    'botToken': string;
     /**
     * Line Channel ID.
     */
@@ -160,18 +153,6 @@ export class AuthConfig {
         {
             "name": "clientSecret",
             "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "botUsername",
-            "baseName": "botUsername",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "botToken",
-            "baseName": "botToken",
             "type": "string",
             "format": ""
         },

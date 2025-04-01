@@ -12,6 +12,7 @@ import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { Account } from '../models/Account';
 import { AccountAbstractionV6Details } from '../models/AccountAbstractionV6Details';
+import { AccountCreateRequest } from '../models/AccountCreateRequest';
 import { AccountEventResponse } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
@@ -19,12 +20,15 @@ import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { AccountsListQueries } from '../models/AccountsListQueries';
 import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkDeleteResponse } from '../models/ApiAuthorizedNetworkDeleteResponse';
 import { ApiAuthorizedNetworkListResponse } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
+import { AppleNativeOAuthConfig } from '../models/AppleNativeOAuthConfig';
+import { AppleOAuthConfig } from '../models/AppleOAuthConfig';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthConfig } from '../models/AuthConfig';
@@ -40,6 +44,7 @@ import { AuthProviderWithTypeResponse } from '../models/AuthProviderWithTypeResp
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
+import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { AuthenticationType } from '../models/AuthenticationType';
 import { Authorize200Response } from '../models/Authorize200Response';
 import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
@@ -88,6 +93,7 @@ import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
+import { CreateSignerRequest } from '../models/CreateSignerRequest';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
@@ -103,6 +109,7 @@ import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueri
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
+import { DeviceCreateRequest } from '../models/DeviceCreateRequest';
 import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
@@ -157,6 +164,7 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { GasReportTransactionIntentsListResponse } from '../models/GasReportTransactionIntentsListResponse';
+import { GoogleNativeOAuthConfig } from '../models/GoogleNativeOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { GrantCallbackRequest } from '../models/GrantCallbackRequest';
 import { GrantOAuthResponse } from '../models/GrantOAuthResponse';
@@ -171,6 +179,9 @@ import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { ListConfigRequest } from '../models/ListConfigRequest';
+import { ListQueries } from '../models/ListQueries';
+import { ListResponseAccount } from '../models/ListResponseAccount';
+import { ListResponseSigner } from '../models/ListResponseSigner';
 import { ListSubscriptionLogsRequest } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse } from '../models/LogResponse';
@@ -189,12 +200,12 @@ import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
 import { OAuthProvders } from '../models/OAuthProvders';
 import { OAuthProvider } from '../models/OAuthProvider';
+import { OAuthProviderAPPLE } from '../models/OAuthProviderAPPLE';
 import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
 import { OAuthProviderEPICGAMES } from '../models/OAuthProviderEPICGAMES';
 import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLINE } from '../models/OAuthProviderLINE';
-import { OAuthProviderTELEGRAM } from '../models/OAuthProviderTELEGRAM';
 import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
 import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
@@ -247,7 +258,6 @@ import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
 import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
 import { PolicyStrategy } from '../models/PolicyStrategy';
 import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
-import { PrismaInputJsonValue } from '../models/PrismaInputJsonValue';
 import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
 import { ProjectListResponse } from '../models/ProjectListResponse';
 import { ProjectLogs } from '../models/ProjectLogs';
@@ -271,9 +281,15 @@ import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
+import { ShamirParams } from '../models/ShamirParams';
+import { ShamirSigner } from '../models/ShamirSigner';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
+import { Signer } from '../models/Signer';
+import { SignerListQueries } from '../models/SignerListQueries';
+import { SignerOwner } from '../models/SignerOwner';
+import { SignerResponse } from '../models/SignerResponse';
 import { SignupRequest } from '../models/SignupRequest';
 import { SortOrder } from '../models/SortOrder';
 import { SponsorSchema } from '../models/SponsorSchema';
@@ -289,18 +305,19 @@ import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
-import { TelegramOAuthConfig } from '../models/TelegramOAuthConfig';
-import { TelegramThirdPartyConfig } from '../models/TelegramThirdPartyConfig';
+import { SwitchChainRequest } from '../models/SwitchChainRequest';
 import { TestTrigger200Response } from '../models/TestTrigger200Response';
+import { ThirdPartyLinkRequest } from '../models/ThirdPartyLinkRequest';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
+import { ThirdPartyOAuthProviderAPPLENATIVE } from '../models/ThirdPartyOAuthProviderAPPLENATIVE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
 import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
+import { ThirdPartyOAuthProviderGOOGLENATIVE } from '../models/ThirdPartyOAuthProviderGOOGLENATIVE';
 import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
 import { ThirdPartyOAuthProviderSUPABASE } from '../models/ThirdPartyOAuthProviderSUPABASE';
-import { ThirdPartyOAuthProviderTELEGRAMMINIAPP } from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 import { ThirdPartyOAuthRequest } from '../models/ThirdPartyOAuthRequest';
 import { TimeIntervalType } from '../models/TimeIntervalType';
 import { Token } from '../models/Token';
@@ -394,6 +411,14 @@ export class PromiseAccountsApi {
     }
 
     /**
+     * @param accountCreateRequest 
+     */
+    public createAccountV2(accountCreateRequest: AccountCreateRequest, _options?: Configuration): Promise<AccountResponse> {
+        const result = this.api.createAccountV2(accountCreateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
      * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param id Specifies the unique account ID (starts with acc_).
@@ -401,6 +426,14 @@ export class PromiseAccountsApi {
      */
     public deployAccount(id: string, deployRequest: DeployRequest, _options?: Configuration): Promise<AccountResponse> {
         const result = this.api.deployAccount(id, deployRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param id 
+     */
+    public disableAccount(id: string, _options?: Configuration): Promise<void> {
+        const result = this.api.disableAccount(id, _options);
         return result.toPromise();
     }
 
@@ -416,16 +449,36 @@ export class PromiseAccountsApi {
     }
 
     /**
+     * @param accountId 
+     */
+    public getAccountV2(accountId: string, _options?: Configuration): Promise<AccountResponse> {
+        const result = this.api.getAccountV2(accountId, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Returns a list of accounts for the given player.  This object represents a player\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  Returns the latest 10 transaction intents for each account.  By default, a maximum of 10 accounts are shown per page.
      * List accounts of a player.
-     * @param player Specifies the unique player ID (starts with pla_)
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
+     * @param player Specifies the unique player ID (starts with pla_)
+     * @param address Specifies the address of the account
      * @param expand Specifies the fields to expand in the response.
      */
-    public getAccounts(player: string, limit?: number, skip?: number, order?: SortOrder, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountListResponse> {
-        const result = this.api.getAccounts(player, limit, skip, order, expand, _options);
+    public getAccounts(limit?: number, skip?: number, order?: SortOrder, player?: string, address?: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<AccountListResponse> {
+        const result = this.api.getAccounts(limit, skip, order, player, address, expand, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param limit 
+     * @param skip 
+     * @param order 
+     * @param accountType 
+     */
+    public listAccountsV2(limit?: number, skip?: number, order?: 'asc' | 'desc', accountType?: string, _options?: Configuration): Promise<ListResponseAccount> {
+        const result = this.api.listAccountsV2(limit, skip, order, accountType, _options);
         return result.toPromise();
     }
 
@@ -529,7 +582,7 @@ export class PromiseAdminAuthenticationApi {
     }
 
     /**
-     * Deletes a player auth object.  It will delete all linked accounts the player is authenticated with.
+     * Deletes a player auth object.  It will delete all linked accounts the player is authenticated with. If the player has a linked embedded signer, it will be deleted as well.
      * Deletes a player auth object.
      * @param id Specifies the unique player ID (starts with pla_).
      */
@@ -721,6 +774,16 @@ export class PromiseAuthenticationApi {
     }
 
     /**
+     * Initialize Link OAuth.
+     * @param thirdPartyLinkRequest 
+     * @param xGame 
+     */
+    public linkThirdParty(thirdPartyLinkRequest: ThirdPartyLinkRequest, xGame?: string, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.linkThirdParty(thirdPartyLinkRequest, xGame, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Authenticate a player based on email and password.
      * Email and password login.
      * @param loginRequest 
@@ -775,6 +838,16 @@ export class PromiseAuthenticationApi {
      */
     public refresh(refreshTokenRequest: RefreshTokenRequest, _options?: Configuration): Promise<AuthResponse> {
         const result = this.api.refresh(refreshTokenRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a guest player.
+     * Create a guest player.
+     * @param xGame 
+     */
+    public registerGuest(xGame?: string, _options?: Configuration): Promise<AuthResponse> {
+        const result = this.api.registerGuest(xGame, _options);
         return result.toPromise();
     }
 
@@ -999,6 +1072,54 @@ export class PromiseDefaultApi {
      */
     public list(enabled?: boolean, _options?: Configuration): Promise<AuthProviderListResponse> {
         const result = this.api.list(enabled, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableDevicesApi } from './ObservableAPI';
+
+import { DevicesApiRequestFactory, DevicesApiResponseProcessor} from "../apis/DevicesApi";
+export class PromiseDevicesApi {
+    private api: ObservableDevicesApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DevicesApiRequestFactory,
+        responseProcessor?: DevicesApiResponseProcessor
+    ) {
+        this.api = new ObservableDevicesApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param signerId 
+     * @param deviceCreateRequest 
+     */
+    public createDevice(signerId: string, deviceCreateRequest: DeviceCreateRequest, _options?: Configuration): Promise<DeviceResponse> {
+        const result = this.api.createDevice(signerId, deviceCreateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param signerId 
+     * @param deviceId 
+     */
+    public getDevice(signerId: string, deviceId: string, _options?: Configuration): Promise<DeviceResponse> {
+        const result = this.api.getDevice(signerId, deviceId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param signerId 
+     * @param limit 
+     * @param skip 
+     * @param order 
+     */
+    public listDevices(signerId: string, limit?: number, skip?: number, order?: 'asc' | 'desc', _options?: Configuration): Promise<BaseEntityListResponseDeviceResponse> {
+        const result = this.api.listDevices(signerId, limit, skip, order, _options);
         return result.toPromise();
     }
 
@@ -1387,6 +1508,7 @@ export class PromisePlayersApi {
     }
 
     /**
+     * It will delete all linked accounts the player is authenticated with. If the player has a linked embedded signer, it will be deleted as well.
      * Deletes a player object.
      * @param id Specifies the unique player ID (starts with pla_).
      */
@@ -1560,11 +1682,12 @@ export class PromisePoliciesApi {
     /**
      * List all gas reports of a policy.
      * @param id Specifies the unique policy ID (starts with pol_).
-     * @param to The start date of the period in unix timestamp.
-     * @param _from The end date of the period in unix timestamp.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
      */
-    public getPolicyTotalGasUsage(id: string, to?: number, _from?: number, _options?: Configuration): Promise<GasReportListResponse> {
-        const result = this.api.getPolicyTotalGasUsage(id, to, _from, _options);
+    public getPolicyTotalGasUsage(id: string, limit?: number, skip?: number, order?: SortOrder, _options?: Configuration): Promise<GasReportListResponse> {
+        const result = this.api.getPolicyTotalGasUsage(id, limit, skip, order, _options);
         return result.toPromise();
     }
 
@@ -1796,6 +1919,61 @@ export class PromiseSettingsApi {
      */
     public updateDeveloperAccount(id: string, updateDeveloperAccountCreateRequest: UpdateDeveloperAccountCreateRequest, _options?: Configuration): Promise<DeveloperAccountResponse> {
         const result = this.api.updateDeveloperAccount(id, updateDeveloperAccountCreateRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableSignersApi } from './ObservableAPI';
+
+import { SignersApiRequestFactory, SignersApiResponseProcessor} from "../apis/SignersApi";
+export class PromiseSignersApi {
+    private api: ObservableSignersApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SignersApiRequestFactory,
+        responseProcessor?: SignersApiResponseProcessor
+    ) {
+        this.api = new ObservableSignersApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param createSignerRequest 
+     */
+    public createSigner(createSignerRequest: CreateSignerRequest, _options?: Configuration): Promise<SignerResponse> {
+        const result = this.api.createSigner(createSignerRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param signerId 
+     */
+    public exportSigner(signerId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.exportSigner(signerId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param signerId 
+     */
+    public getSigner(signerId: string, _options?: Configuration): Promise<SignerResponse> {
+        const result = this.api.getSigner(signerId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param limit 
+     * @param skip 
+     * @param order 
+     * @param signerType 
+     * @param account 
+     */
+    public listSigners(limit?: number, skip?: number, order?: 'asc' | 'desc', signerType?: string, account?: string, _options?: Configuration): Promise<ListResponseSigner> {
+        const result = this.api.listSigners(limit, skip, order, signerType, account, _options);
         return result.toPromise();
     }
 

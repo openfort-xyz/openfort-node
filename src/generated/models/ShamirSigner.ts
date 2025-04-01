@@ -10,49 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderTELEGRAMMINIAPP } from '../models/ThirdPartyOAuthProviderTELEGRAMMINIAPP';
 import { HttpFile } from '../http/http';
 
-export class TelegramThirdPartyConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderTELEGRAMMINIAPP;
-    /**
-    * Telegram bot token.
-    */
-    'botToken': string;
+export class ShamirSigner {
+    'share': string;
+    'publicKey': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
+            "name": "share",
+            "baseName": "share",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderTELEGRAMMINIAPP",
-            "format": ""
-        },
-        {
-            "name": "botToken",
-            "baseName": "botToken",
+            "name": "publicKey",
+            "baseName": "publicKey",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TelegramThirdPartyConfig.attributeTypeMap;
+        return ShamirSigner.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

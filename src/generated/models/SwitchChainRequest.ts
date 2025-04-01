@@ -10,49 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { SortOrder } from '../models/SortOrder';
 import { HttpFile } from '../http/http';
 
-export class PolicyReportQueries {
-    /**
-    * Specifies the maximum number of records to return.
-    */
-    'limit'?: number;
-    /**
-    * Specifies the offset for the first records to return.
-    */
-    'skip'?: number;
-    'order'?: SortOrder;
+export class SwitchChainRequest {
+    'chainId': number;
+    'deviceId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "limit",
-            "baseName": "limit",
+            "name": "chainId",
+            "baseName": "chainId",
             "type": "number",
-            "format": "int32"
+            "format": "double"
         },
         {
-            "name": "skip",
-            "baseName": "skip",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "order",
-            "baseName": "order",
-            "type": "SortOrder",
+            "name": "deviceId",
+            "baseName": "deviceId",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyReportQueries.attributeTypeMap;
+        return SwitchChainRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 

@@ -10,44 +10,44 @@
  * Do not edit the class manually.
  */
 
-import { SortOrder } from '../models/SortOrder';
+import { ThirdPartyOAuthProviderAPPLENATIVE } from '../models/ThirdPartyOAuthProviderAPPLENATIVE';
 import { HttpFile } from '../http/http';
 
-export class PolicyReportQueries {
+export class AppleNativeOAuthConfig {
     /**
-    * Specifies the maximum number of records to return.
+    * Enable OAuth provider.
     */
-    'limit'?: number;
+    'enabled': boolean;
+    'provider': ThirdPartyOAuthProviderAPPLENATIVE;
     /**
-    * Specifies the offset for the first records to return.
+    * Apple API client ID (Service ID).
     */
-    'skip'?: number;
-    'order'?: SortOrder;
+    'clientId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number",
-            "format": "int32"
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
         },
         {
-            "name": "skip",
-            "baseName": "skip",
-            "type": "number",
-            "format": "int32"
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProviderAPPLENATIVE",
+            "format": ""
         },
         {
-            "name": "order",
-            "baseName": "order",
-            "type": "SortOrder",
+            "name": "clientId",
+            "baseName": "clientId",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyReportQueries.attributeTypeMap;
+        return AppleNativeOAuthConfig.attributeTypeMap;
     }
 
     public constructor() {

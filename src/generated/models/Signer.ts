@@ -10,49 +10,49 @@
  * Do not edit the class manually.
  */
 
-import { SortOrder } from '../models/SortOrder';
+import { ShamirSigner } from '../models/ShamirSigner';
+import { SignerOwner } from '../models/SignerOwner';
 import { HttpFile } from '../http/http';
 
-export class PolicyReportQueries {
-    /**
-    * Specifies the maximum number of records to return.
-    */
-    'limit'?: number;
-    /**
-    * Specifies the offset for the first records to return.
-    */
-    'skip'?: number;
-    'order'?: SortOrder;
+export class Signer {
+    'id': string;
+    'type': string;
+    'owner': SignerOwner;
+    'shamir'?: ShamirSigner;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number",
-            "format": "int32"
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "skip",
-            "baseName": "skip",
-            "type": "number",
-            "format": "int32"
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "order",
-            "baseName": "order",
-            "type": "SortOrder",
+            "name": "owner",
+            "baseName": "owner",
+            "type": "SignerOwner",
+            "format": ""
+        },
+        {
+            "name": "shamir",
+            "baseName": "shamir",
+            "type": "ShamirSigner",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PolicyReportQueries.attributeTypeMap;
+        return Signer.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
 
