@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { EntityIdResponse } from '../models/EntityIdResponse';
+import { AccountResponsePlayer } from '../models/AccountResponsePlayer';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
 import { HttpFile } from '../http/http';
@@ -31,7 +31,7 @@ export class AccountResponse {
     'accountType': string;
     'pendingOwnerAddress'?: string;
     'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
-    'player': EntityIdResponse;
+    'player': AccountResponsePlayer;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -111,7 +111,7 @@ export class AccountResponse {
         {
             "name": "player",
             "baseName": "player",
-            "type": "EntityIdResponse",
+            "type": "AccountResponsePlayer",
             "format": ""
         }    ];
 

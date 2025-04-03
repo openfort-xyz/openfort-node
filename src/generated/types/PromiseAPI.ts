@@ -20,6 +20,7 @@ import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { AccountResponsePlayer } from '../models/AccountResponsePlayer';
 import { AccountsListQueries } from '../models/AccountsListQueries';
 import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkDeleteResponse } from '../models/ApiAuthorizedNetworkDeleteResponse';
@@ -32,6 +33,9 @@ import { AppleOAuthConfig } from '../models/AppleOAuthConfig';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthConfig } from '../models/AuthConfig';
+import { AuthMigrationListResponse } from '../models/AuthMigrationListResponse';
+import { AuthMigrationResponse } from '../models/AuthMigrationResponse';
+import { AuthMigrationStatus } from '../models/AuthMigrationStatus';
 import { AuthPlayerListQueries } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
@@ -87,6 +91,7 @@ import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
 import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
+import { CreateMigrationRequest } from '../models/CreateMigrationRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
@@ -179,6 +184,7 @@ import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { ListConfigRequest } from '../models/ListConfigRequest';
+import { ListMigrationsRequest } from '../models/ListMigrationsRequest';
 import { ListQueries } from '../models/ListQueries';
 import { ListResponseAccount } from '../models/ListResponseAccount';
 import { ListResponseSigner } from '../models/ListResponseSigner';
@@ -189,6 +195,7 @@ import { LoginOIDCRequest } from '../models/LoginOIDCRequest';
 import { LoginRequest } from '../models/LoginRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
+import { MappingStrategy } from '../models/MappingStrategy';
 import { Money } from '../models/Money';
 import { MonthRange } from '../models/MonthRange';
 import { MyEcosystemResponse } from '../models/MyEcosystemResponse';
@@ -346,6 +353,7 @@ import { UnlinkOAuthRequest } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAccountCreateRequest';
 import { UpdateEmailSampleRequest } from '../models/UpdateEmailSampleRequest';
+import { UpdateMigrationRequest } from '../models/UpdateMigrationRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest } from '../models/UpdateProjectApiKeyRequest';
@@ -598,6 +606,16 @@ export class PromiseAdminAuthenticationApi {
      */
     public deleteOAuthConfig(provider: OAuthProvider, _options?: Configuration): Promise<void> {
         const result = this.api.deleteOAuthConfig(provider, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieves an authenticated player.  Players have linked accounts and are authenticated with a provider.
+     * Authenticated player.
+     * @param id 
+     */
+    public getAuthPlayer(id: string, _options?: Configuration): Promise<AuthPlayerResponse> {
+        const result = this.api.getAuthPlayer(id, _options);
         return result.toPromise();
     }
 

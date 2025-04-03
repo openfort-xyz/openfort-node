@@ -17,6 +17,7 @@ export * from '../models/AccountListResponse';
 export * from '../models/AccountPolicyRuleResponse';
 export * from '../models/AccountResponse';
 export * from '../models/AccountResponseExpandable';
+export * from '../models/AccountResponsePlayer';
 export * from '../models/AccountsListQueries';
 export * from '../models/Amount';
 export * from '../models/ApiAuthorizedNetworkDeleteResponse';
@@ -29,6 +30,9 @@ export * from '../models/AppleOAuthConfig';
 export * from '../models/AssetInventory';
 export * from '../models/AssetType';
 export * from '../models/AuthConfig';
+export * from '../models/AuthMigrationListResponse';
+export * from '../models/AuthMigrationResponse';
+export * from '../models/AuthMigrationStatus';
 export * from '../models/AuthPlayerListQueries';
 export * from '../models/AuthPlayerListResponse';
 export * from '../models/AuthPlayerResponse';
@@ -84,6 +88,7 @@ export * from '../models/CreateEmailSampleRequest';
 export * from '../models/CreateEventRequest';
 export * from '../models/CreateExchangeRequest';
 export * from '../models/CreateForwarderContractRequest';
+export * from '../models/CreateMigrationRequest';
 export * from '../models/CreatePaymasterRequest';
 export * from '../models/CreatePolicyRequest';
 export * from '../models/CreatePolicyRuleRequest';
@@ -176,6 +181,7 @@ export * from '../models/JwtKeyResponse';
 export * from '../models/LineOAuthConfig';
 export * from '../models/LinkedAccountResponse';
 export * from '../models/ListConfigRequest';
+export * from '../models/ListMigrationsRequest';
 export * from '../models/ListQueries';
 export * from '../models/ListResponseAccount';
 export * from '../models/ListResponseSigner';
@@ -186,6 +192,7 @@ export * from '../models/LoginOIDCRequest';
 export * from '../models/LoginRequest';
 export * from '../models/LogoutRequest';
 export * from '../models/LootLockerOAuthConfig';
+export * from '../models/MappingStrategy';
 export * from '../models/Money';
 export * from '../models/MonthRange';
 export * from '../models/MyEcosystemResponse';
@@ -343,6 +350,7 @@ export * from '../models/UnlinkOAuthRequest';
 export * from '../models/UpdateContractRequest';
 export * from '../models/UpdateDeveloperAccountCreateRequest';
 export * from '../models/UpdateEmailSampleRequest';
+export * from '../models/UpdateMigrationRequest';
 export * from '../models/UpdatePolicyRequest';
 export * from '../models/UpdatePolicyRuleRequest';
 export * from '../models/UpdateProjectApiKeyRequest';
@@ -382,6 +390,7 @@ import { AccountListResponse       } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse     } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse              } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { AccountResponsePlayer         } from '../models/AccountResponsePlayer';
 import { AccountsListQueries  , AccountsListQueriesOrderEnum    } from '../models/AccountsListQueries';
 import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkDeleteResponse    } from '../models/ApiAuthorizedNetworkDeleteResponse';
@@ -394,6 +403,9 @@ import { AppleOAuthConfig     } from '../models/AppleOAuthConfig';
 import { AssetInventory      } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
 import { AuthConfig                 } from '../models/AuthConfig';
+import { AuthMigrationListResponse       } from '../models/AuthMigrationListResponse';
+import { AuthMigrationResponse        } from '../models/AuthMigrationResponse';
+import { AuthMigrationStatus } from '../models/AuthMigrationStatus';
 import { AuthPlayerListQueries      } from '../models/AuthPlayerListQueries';
 import { AuthPlayerListResponse       } from '../models/AuthPlayerListResponse';
 import { AuthPlayerResponse      } from '../models/AuthPlayerResponse';
@@ -449,6 +461,7 @@ import { CreateEmailSampleRequest     } from '../models/CreateEmailSampleRequest
 import { CreateEventRequest          } from '../models/CreateEventRequest';
 import { CreateExchangeRequest            } from '../models/CreateExchangeRequest';
 import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
+import { CreateMigrationRequest } from '../models/CreateMigrationRequest';
 import { CreatePaymasterRequest } from '../models/CreatePaymasterRequest';
 import { CreatePolicyRequest } from '../models/CreatePolicyRequest';
 import { CreatePolicyRuleRequest          } from '../models/CreatePolicyRuleRequest';
@@ -541,6 +554,7 @@ import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig     } from '../models/LineOAuthConfig';
 import { LinkedAccountResponse           } from '../models/LinkedAccountResponse';
 import { ListConfigRequest } from '../models/ListConfigRequest';
+import { ListMigrationsRequest       } from '../models/ListMigrationsRequest';
 import { ListQueries  , ListQueriesOrderEnum   } from '../models/ListQueries';
 import { ListResponseAccount } from '../models/ListResponseAccount';
 import { ListResponseSigner } from '../models/ListResponseSigner';
@@ -551,6 +565,7 @@ import { LoginOIDCRequest } from '../models/LoginOIDCRequest';
 import { LoginRequest } from '../models/LoginRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig   } from '../models/LootLockerOAuthConfig';
+import { MappingStrategy } from '../models/MappingStrategy';
 import { Money   } from '../models/Money';
 import { MonthRange } from '../models/MonthRange';
 import { MyEcosystemResponse } from '../models/MyEcosystemResponse';
@@ -708,6 +723,7 @@ import { UnlinkOAuthRequest  } from '../models/UnlinkOAuthRequest';
 import { UpdateContractRequest } from '../models/UpdateContractRequest';
 import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAccountCreateRequest';
 import { UpdateEmailSampleRequest     } from '../models/UpdateEmailSampleRequest';
+import { UpdateMigrationRequest   } from '../models/UpdateMigrationRequest';
 import { UpdatePolicyRequest } from '../models/UpdatePolicyRequest';
 import { UpdatePolicyRuleRequest         } from '../models/UpdatePolicyRuleRequest';
 import { UpdateProjectApiKeyRequest    } from '../models/UpdateProjectApiKeyRequest';
@@ -759,6 +775,7 @@ let enumsMap: Set<string> = new Set<string>([
     "AccountsListQueriesOrderEnum",
     "ApiKeyType",
     "AssetType",
+    "AuthMigrationStatus",
     "AuthProviderResponse",
     "AuthenticationType",
     "BasicAuthProvider",
@@ -858,6 +875,7 @@ let typeMap: {[index: string]: any} = {
     "AccountListResponse": AccountListResponse,
     "AccountPolicyRuleResponse": AccountPolicyRuleResponse,
     "AccountResponse": AccountResponse,
+    "AccountResponsePlayer": AccountResponsePlayer,
     "AccountsListQueries": AccountsListQueries,
     "Amount": Amount,
     "ApiAuthorizedNetworkDeleteResponse": ApiAuthorizedNetworkDeleteResponse,
@@ -868,6 +886,8 @@ let typeMap: {[index: string]: any} = {
     "AppleOAuthConfig": AppleOAuthConfig,
     "AssetInventory": AssetInventory,
     "AuthConfig": AuthConfig,
+    "AuthMigrationListResponse": AuthMigrationListResponse,
+    "AuthMigrationResponse": AuthMigrationResponse,
     "AuthPlayerListQueries": AuthPlayerListQueries,
     "AuthPlayerListResponse": AuthPlayerListResponse,
     "AuthPlayerResponse": AuthPlayerResponse,
@@ -919,6 +939,7 @@ let typeMap: {[index: string]: any} = {
     "CreateEventRequest": CreateEventRequest,
     "CreateExchangeRequest": CreateExchangeRequest,
     "CreateForwarderContractRequest": CreateForwarderContractRequest,
+    "CreateMigrationRequest": CreateMigrationRequest,
     "CreatePaymasterRequest": CreatePaymasterRequest,
     "CreatePolicyRequest": CreatePolicyRequest,
     "CreatePolicyRuleRequest": CreatePolicyRuleRequest,
@@ -984,6 +1005,7 @@ let typeMap: {[index: string]: any} = {
     "LineOAuthConfig": LineOAuthConfig,
     "LinkedAccountResponse": LinkedAccountResponse,
     "ListConfigRequest": ListConfigRequest,
+    "ListMigrationsRequest": ListMigrationsRequest,
     "ListQueries": ListQueries,
     "ListResponseAccount": ListResponseAccount,
     "ListResponseSigner": ListResponseSigner,
@@ -994,6 +1016,7 @@ let typeMap: {[index: string]: any} = {
     "LoginRequest": LoginRequest,
     "LogoutRequest": LogoutRequest,
     "LootLockerOAuthConfig": LootLockerOAuthConfig,
+    "MappingStrategy": MappingStrategy,
     "Money": Money,
     "MonthRange": MonthRange,
     "MyEcosystemResponse": MyEcosystemResponse,
@@ -1107,6 +1130,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateContractRequest": UpdateContractRequest,
     "UpdateDeveloperAccountCreateRequest": UpdateDeveloperAccountCreateRequest,
     "UpdateEmailSampleRequest": UpdateEmailSampleRequest,
+    "UpdateMigrationRequest": UpdateMigrationRequest,
     "UpdatePolicyRequest": UpdatePolicyRequest,
     "UpdatePolicyRuleRequest": UpdatePolicyRuleRequest,
     "UpdateProjectApiKeyRequest": UpdateProjectApiKeyRequest,

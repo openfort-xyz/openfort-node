@@ -38,7 +38,7 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Criteria to get account.
      */
     public async get(req: GetAccountRequest): Promise<AccountResponse> {
-        return await this.api.getAccount(req.id, req.expandTransactionIntent ? ["transactionIntents"] : undefined);
+        return await this.api.getAccount(req.id, req.expand);
     }
 
     /**
