@@ -1,4 +1,6 @@
+import { AccountResponseExpandable } from "../generated";
+
 export interface GetAccountRequest {
     id: string;
-    expandTransactionIntent?: boolean;
+    expand?: AccountResponseExpandable[];
 }
