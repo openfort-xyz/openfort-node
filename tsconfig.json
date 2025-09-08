@@ -11,7 +11,8 @@
     "composite": true,
     "target": "es2021",
     "lib": [
-      "es2021"
+      "es2021",
+      "esnext.disposable"
     ],
     "typeRoots": [
       "node_modules/@types",
