@@ -11,7 +11,6 @@ export * from "./signatureSessionRequest";
 export * from "./signatureTransactionIntentRequest";
 export * from "./updatePlayerRequest";
 export * from "./updatePolicyAllowFunctionRequest";
-export * from "./verifyOAuthTokenRequest";
 export * from "./webHookEvent";
 export { CancelTransferOwnershipRequest } from "./cancelTransferOwnershipRequest";
 export { CompleteRecoveryRequest } from "./completeRecoveryRequest";

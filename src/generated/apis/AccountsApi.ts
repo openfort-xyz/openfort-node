@@ -10,19 +10,21 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { AccountCreateRequest } from '../models/AccountCreateRequest';
 import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { AccountV2Response } from '../models/AccountV2Response';
+import { BaseEntityListResponseAccountV2Response } from '../models/BaseEntityListResponseAccountV2Response';
 import { CancelTransferOwnershipRequest } from '../models/CancelTransferOwnershipRequest';
 import { CompleteRecoveryRequest } from '../models/CompleteRecoveryRequest';
 import { CreateAccountRequest } from '../models/CreateAccountRequest';
 import { DeployRequest } from '../models/DeployRequest';
-import { ListResponseAccount } from '../models/ListResponseAccount';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
+import { SignerIdResponse } from '../models/SignerIdResponse';
 import { SortOrder } from '../models/SortOrder';
 import { StartRecoveryRequest } from '../models/StartRecoveryRequest';
+import { SwitchChainQueriesV2 } from '../models/SwitchChainQueriesV2';
 import { TransactionIntentResponse } from '../models/TransactionIntentResponse';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
 
@@ -191,46 +193,6 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param accountCreateRequest 
-     */
-    public async createAccountV2(accountCreateRequest: AccountCreateRequest, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'accountCreateRequest' is not null or undefined
-        if (accountCreateRequest === null || accountCreateRequest === undefined) {
-            throw new RequiredError("AccountsApi", "createAccountV2", "accountCreateRequest");
-        }
-
-
-        // Path Params
-        const localVarPath = '/v2/accounts';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(accountCreateRequest, "AccountCreateRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
      * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param id Specifies the unique account ID (starts with acc_).
@@ -368,26 +330,32 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param accountId 
+     * @param id 
      */
-    public async getAccountV2(accountId: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAccountV2(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'accountId' is not null or undefined
-        if (accountId === null || accountId === undefined) {
-            throw new RequiredError("AccountsApi", "getAccountV2", "accountId");
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("AccountsApi", "getAccountV2", "id");
         }
 
 
         // Path Params
-        const localVarPath = '/v2/accounts/{accountId}'
-            .replace('{' + 'accountId' + '}', encodeURIComponent(String(accountId)));
+        const localVarPath = '/v2/accounts/{id}'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -403,12 +371,14 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
+     * @param chainId The chain ID. Must be a [supported chain](/development/chains).
      * @param player Specifies the unique player ID (starts with pla_)
      * @param address Specifies the address of the account
      * @param expand Specifies the fields to expand in the response.
      */
-    public async getAccounts(limit?: number, skip?: number, order?: SortOrder, player?: string, address?: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
+    public async getAccounts(limit?: number, skip?: number, order?: SortOrder, chainId?: number, player?: string, address?: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -436,6 +406,11 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (order !== undefined) {
             requestContext.setQueryParam("order", ObjectSerializer.serialize(order, "SortOrder", ""));
+        }
+
+        // Query Params
+        if (chainId !== undefined) {
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
         }
 
         // Query Params
@@ -470,13 +445,23 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param accountType 
+     * Returns a list of accounts for the given user.  This object represents a user\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  Returns the latest 10 transaction intents for each account.  By default, a maximum of 10 accounts are shown per page.
+     * List accounts of a user.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param chainId The chain ID. Must be a [supported chain](/development/chains).
+     * @param user Specifies the unique user ID (starts with pla_)
+     * @param chainType The chain type. Must be either \&quot;EVM\&quot; or \&quot;SVM\&quot;.
+     * @param accountType Specifies the type of account. Must be either \&quot;Smart Account\&quot; or \&quot;Externally Owned Account\&quot;.
+     * @param address Specifies the account address
      */
-    public async listAccountsV2(limit?: number, skip?: number, order?: 'asc' | 'desc', accountType?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAccountsV2(limit?: number, skip?: number, order?: SortOrder, chainId?: number, user?: string, chainType?: string, accountType?: string, address?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+
+
+
 
 
 
@@ -491,17 +476,32 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "double"));
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
         // Query Params
         if (skip !== undefined) {
-            requestContext.setQueryParam("skip", ObjectSerializer.serialize(skip, "number", "double"));
+            requestContext.setQueryParam("skip", ObjectSerializer.serialize(skip, "number", "int32"));
         }
 
         // Query Params
         if (order !== undefined) {
-            requestContext.setQueryParam("order", ObjectSerializer.serialize(order, "'asc' | 'desc'", ""));
+            requestContext.setQueryParam("order", ObjectSerializer.serialize(order, "SortOrder", ""));
+        }
+
+        // Query Params
+        if (chainId !== undefined) {
+            requestContext.setQueryParam("chainId", ObjectSerializer.serialize(chainId, "number", "int32"));
+        }
+
+        // Query Params
+        if (user !== undefined) {
+            requestContext.setQueryParam("user", ObjectSerializer.serialize(user, "string", ""));
+        }
+
+        // Query Params
+        if (chainType !== undefined) {
+            requestContext.setQueryParam("chainType", ObjectSerializer.serialize(chainType, "string", ""));
         }
 
         // Query Params
@@ -509,7 +509,58 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("accountType", ObjectSerializer.serialize(accountType, "string", ""));
         }
 
+        // Query Params
+        if (address !== undefined) {
+            requestContext.setQueryParam("address", ObjectSerializer.serialize(address, "string", ""));
+        }
 
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * @param address 
+     */
+    public async getSignerIdByAddress(address: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'address' is not null or undefined
+        if (address === null || address === undefined) {
+            throw new RequiredError("AccountsApi", "getSignerIdByAddress", "address");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v2/accounts/signer';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (address !== undefined) {
+            requestContext.setQueryParam("address", ObjectSerializer.serialize(address, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -687,6 +738,46 @@ export class AccountsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * @param switchChainQueriesV2 
+     */
+    public async switchChainV2(switchChainQueriesV2: SwitchChainQueriesV2, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'switchChainQueriesV2' is not null or undefined
+        if (switchChainQueriesV2 === null || switchChainQueriesV2 === undefined) {
+            throw new RequiredError("AccountsApi", "switchChainV2", "switchChainQueriesV2");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v2/accounts/switch-chain';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(switchChainQueriesV2, "SwitchChainQueriesV2", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Synchronize the account state with the blockchain. Specifically, it updates the account owner and whether its deployed or not.
      * Sync account state with the blockchain
      * @param id Specifies the unique account ID (starts with acc_).
@@ -837,35 +928,6 @@ export class AccountsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createAccountV2
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async createAccountV2(response: ResponseContext): Promise<AccountResponse > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: AccountResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountResponse", ""
-            ) as AccountResponse;
-            return body;
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AccountResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountResponse", ""
-            ) as AccountResponse;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
      * @params response Response returned by the server for a request to deployAccount
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -970,22 +1032,25 @@ export class AccountsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAccountV2
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAccountV2(response: ResponseContext): Promise<AccountResponse > {
+     public async getAccountV2(response: ResponseContext): Promise<AccountV2Response > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AccountResponse = ObjectSerializer.deserialize(
+            const body: AccountV2Response = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountResponse", ""
-            ) as AccountResponse;
+                "AccountV2Response", ""
+            ) as AccountV2Response;
             return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AccountResponse = ObjectSerializer.deserialize(
+            const body: AccountV2Response = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AccountResponse", ""
-            ) as AccountResponse;
+                "AccountV2Response", ""
+            ) as AccountV2Response;
             return body;
         }
 
@@ -1028,25 +1093,60 @@ export class AccountsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to listAccountsV2
+     * @params response Response returned by the server for a request to getAccountsV2
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listAccountsV2(response: ResponseContext): Promise<ListResponseAccount > {
+     public async getAccountsV2(response: ResponseContext): Promise<BaseEntityListResponseAccountV2Response > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ListResponseAccount = ObjectSerializer.deserialize(
+            const body: BaseEntityListResponseAccountV2Response = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ListResponseAccount", ""
-            ) as ListResponseAccount;
+                "BaseEntityListResponseAccountV2Response", ""
+            ) as BaseEntityListResponseAccountV2Response;
             return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ListResponseAccount = ObjectSerializer.deserialize(
+            const body: BaseEntityListResponseAccountV2Response = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ListResponseAccount", ""
-            ) as ListResponseAccount;
+                "BaseEntityListResponseAccountV2Response", ""
+            ) as BaseEntityListResponseAccountV2Response;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getSignerIdByAddress
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getSignerIdByAddress(response: ResponseContext): Promise<SignerIdResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: SignerIdResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SignerIdResponse", ""
+            ) as SignerIdResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SignerIdResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SignerIdResponse", ""
+            ) as SignerIdResponse;
             return body;
         }
 
@@ -1152,6 +1252,38 @@ export class AccountsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TransactionIntentResponse", ""
             ) as TransactionIntentResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to switchChainV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async switchChainV2(response: ResponseContext): Promise<AccountV2Response > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AccountV2Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountV2Response", ""
+            ) as AccountV2Response;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AccountV2Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AccountV2Response", ""
+            ) as AccountV2Response;
             return body;
         }
 

@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -10,41 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { ShamirParams } from '../models/ShamirParams';
+import { OAuthProvider } from '../models/OAuthProvider';
 import { HttpFile } from '../http/http';
 
-export class CreateSignerRequest {
-    'signerType': string;
-    'account'?: string;
-    'params'?: ShamirParams;
+export class LoginWithIdTokenRequest {
+    'provider': OAuthProvider;
+    /**
+    * Token to be verified
+    */
+    'token': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "signerType",
-            "baseName": "signerType",
-            "type": "string",
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProvider",
             "format": ""
         },
         {
-            "name": "account",
-            "baseName": "account",
+            "name": "token",
+            "baseName": "token",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "params",
-            "baseName": "params",
-            "type": "ShamirParams",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateSignerRequest.attributeTypeMap;
+        return LoginWithIdTokenRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

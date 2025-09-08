@@ -16,6 +16,8 @@ import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGe
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
+import { SignPayloadRequest } from '../models/SignPayloadRequest';
+import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SortOrder } from '../models/SortOrder';
 import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAccountCreateRequest';
 
@@ -25,7 +27,7 @@ import { UpdateDeveloperAccountCreateRequest } from '../models/UpdateDeveloperAc
 export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
+     * Create or add a developer account. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
      * Create a developer account.
      * @param createDeveloperAccountCreateRequest 
      */
@@ -246,6 +248,62 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("address", ObjectSerializer.serialize(address, "string", ""));
         }
 
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["sk"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
+     * Sign a given payload
+     * @param id Specifies the unique developer account ID (starts with dac_).
+     * @param signPayloadRequest 
+     */
+    public async signPayloadDeveloperAccount(id: string, signPayloadRequest: SignPayloadRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("SettingsApi", "signPayloadDeveloperAccount", "id");
+        }
+
+
+        // verify required parameter 'signPayloadRequest' is not null or undefined
+        if (signPayloadRequest === null || signPayloadRequest === undefined) {
+            throw new RequiredError("SettingsApi", "signPayloadDeveloperAccount", "signPayloadRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/v1/settings/developer_accounts/{id}/sign_payload'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(signPayloadRequest, "SignPayloadRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -491,6 +549,41 @@ export class SettingsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "DeveloperAccountGetMessageResponse", ""
             ) as DeveloperAccountGetMessageResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to signPayloadDeveloperAccount
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async signPayloadDeveloperAccount(response: ResponseContext): Promise<SignPayloadResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: SignPayloadResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SignPayloadResponse", ""
+            ) as SignPayloadResponse;
+            return body;
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Error response.", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SignPayloadResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SignPayloadResponse", ""
+            ) as SignPayloadResponse;
             return body;
         }
 

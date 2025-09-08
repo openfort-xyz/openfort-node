@@ -46,7 +46,15 @@ export class AccountsApiWrapper extends BaseApiWrapper<AccountsApi> {
      * @param req Criteria to get the list of accounts.
      */
     public async list(req: AccountListQueries): Promise<AccountListResponse> {
-        return await this.api.getAccounts(req.limit, req.skip, req.order, req.player, req.address, req.expand);
+        return await this.api.getAccounts(
+            req.limit,
+            req.skip,
+            req.order,
+            req.chainId,
+            req.player,
+            req.address,
+            req.expand,
+        );
     }
 
     /**

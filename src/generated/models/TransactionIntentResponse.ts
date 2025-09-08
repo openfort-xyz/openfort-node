@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -19,6 +19,7 @@ import { TransactionIntentDetails } from '../models/TransactionIntentDetails';
 import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
+import { Transition } from '../models/Transition';
 import { HttpFile } from '../http/http';
 
 export class TransactionIntentResponse {
@@ -34,6 +35,10 @@ export class TransactionIntentResponse {
     */
     'chainId': number;
     'abstractionType': TransactionAbstractionType;
+    /**
+    * Transition of statuses the transaction has gone through.
+    */
+    'transitions'?: Array<Transition>;
     'details'?: TransactionIntentDetails;
     'userOperationHash'?: string;
     'userOperation'?: any | null;
@@ -81,6 +86,12 @@ export class TransactionIntentResponse {
             "name": "abstractionType",
             "baseName": "abstractionType",
             "type": "TransactionAbstractionType",
+            "format": ""
+        },
+        {
+            "name": "transitions",
+            "baseName": "transitions",
+            "type": "Array<Transition>",
             "format": ""
         },
         {

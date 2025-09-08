@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -15,4 +15,4 @@ import { HttpFile } from '../http/http';
 /**
 * Enum of the supporting third party auth providers.
 */
-export type ThirdPartyOAuthProvider = "accelbyte" | "firebase" | "apple_native" | "google_native" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;
+export type ThirdPartyOAuthProvider = "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;

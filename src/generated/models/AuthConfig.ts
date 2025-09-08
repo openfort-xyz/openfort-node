@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -11,7 +11,6 @@
  */
 
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
-import { AppleNativeOAuthConfig } from '../models/AppleNativeOAuthConfig';
 import { AppleOAuthConfig } from '../models/AppleOAuthConfig';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
@@ -19,7 +18,6 @@ import { EmailAuthConfig } from '../models/EmailAuthConfig';
 import { EpicGamesOAuthConfig } from '../models/EpicGamesOAuthConfig';
 import { FacebookOAuthConfig } from '../models/FacebookOAuthConfig';
 import { FirebaseOAuthConfig } from '../models/FirebaseOAuthConfig';
-import { GoogleNativeOAuthConfig } from '../models/GoogleNativeOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
@@ -36,6 +34,10 @@ export class AuthConfig {
     */
     'enabled': boolean;
     'provider': ThirdPartyOAuthProviderLOOTLOCKER;
+    /**
+    * Allow unverified emails: Users will be able to sign in with unverified emails
+    */
+    'allowUnverified': boolean;
     /**
     * The unique Supabase URL which is supplied when you create a new project in your project dashboard.
     */
@@ -106,6 +108,12 @@ export class AuthConfig {
             "name": "provider",
             "baseName": "provider",
             "type": "ThirdPartyOAuthProviderLOOTLOCKER",
+            "format": ""
+        },
+        {
+            "name": "allowUnverified",
+            "baseName": "allowUnverified",
+            "type": "boolean",
             "format": ""
         },
         {

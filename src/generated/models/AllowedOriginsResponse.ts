@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -12,28 +12,21 @@
 
 import { HttpFile } from '../http/http';
 
-export class ShamirSigner {
-    'share': string;
-    'publicKey': string;
+export class AllowedOriginsResponse {
+    'allowedOrigins': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "share",
-            "baseName": "share",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "publicKey",
-            "baseName": "publicKey",
-            "type": "string",
+            "name": "allowedOrigins",
+            "baseName": "allowedOrigins",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ShamirSigner.attributeTypeMap;
+        return AllowedOriginsResponse.attributeTypeMap;
     }
 
     public constructor() {

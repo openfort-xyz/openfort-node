@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -29,7 +29,7 @@ export class GoogleOAuthConfig {
     /**
     * Google API client secret.
     */
-    'clientSecret': string;
+    'clientSecret'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 

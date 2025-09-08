@@ -13,23 +13,26 @@ import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { Account } from '../models/Account';
 import { AccountAbstractionV6Details } from '../models/AccountAbstractionV6Details';
-import { AccountCreateRequest } from '../models/AccountCreateRequest';
 import { AccountEventResponse } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
+import { AccountListQueriesV2 } from '../models/AccountListQueriesV2';
 import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { AccountResponsePlayer } from '../models/AccountResponsePlayer';
-import { AccountsListQueries } from '../models/AccountsListQueries';
+import { AccountV2Response } from '../models/AccountV2Response';
+import { ActionRequiredResponse } from '../models/ActionRequiredResponse';
+import { Actions } from '../models/Actions';
+import { AllowedOriginsRequest } from '../models/AllowedOriginsRequest';
+import { AllowedOriginsResponse } from '../models/AllowedOriginsResponse';
 import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkDeleteResponse } from '../models/ApiAuthorizedNetworkDeleteResponse';
 import { ApiAuthorizedNetworkListResponse } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
-import { AppleNativeOAuthConfig } from '../models/AppleNativeOAuthConfig';
 import { AppleOAuthConfig } from '../models/AppleOAuthConfig';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
@@ -49,12 +52,14 @@ import { AuthProviderWithTypeResponse } from '../models/AuthProviderWithTypeResp
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
+import { AuthenticateOAuthRequestProvider } from '../models/AuthenticateOAuthRequestProvider';
 import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { AuthenticationType } from '../models/AuthenticationType';
 import { Authorize200Response } from '../models/Authorize200Response';
 import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
+import { BaseEntityListResponseAccountV2Response } from '../models/BaseEntityListResponseAccountV2Response';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
 import { BaseEntityListResponseEmailSampleResponse } from '../models/BaseEntityListResponseEmailSampleResponse';
 import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
@@ -89,6 +94,7 @@ import { CreateDeveloperAccountCreateRequest } from '../models/CreateDeveloperAc
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
+import { CreateEmbeddedRequest } from '../models/CreateEmbeddedRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
 import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
@@ -99,7 +105,6 @@ import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateSignerRequest } from '../models/CreateSignerRequest';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
@@ -107,7 +112,6 @@ import { Currency } from '../models/Currency';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DeleteSMTPConfigResponse } from '../models/DeleteSMTPConfigResponse';
 import { DeployRequest } from '../models/DeployRequest';
-import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
@@ -115,7 +119,6 @@ import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueri
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
-import { DeviceCreateRequest } from '../models/DeviceCreateRequest';
 import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
@@ -126,6 +129,7 @@ import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { EmailTypeResponse } from '../models/EmailTypeResponse';
 import { EmbeddedResponse } from '../models/EmbeddedResponse';
+import { EmbeddedV2Response } from '../models/EmbeddedV2Response';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -170,7 +174,6 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { GasReportTransactionIntentsListResponse } from '../models/GasReportTransactionIntentsListResponse';
-import { GoogleNativeOAuthConfig } from '../models/GoogleNativeOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { GrantCallbackRequest } from '../models/GrantCallbackRequest';
 import { GrantOAuthResponse } from '../models/GrantOAuthResponse';
@@ -183,17 +186,16 @@ import { InventoryResponse } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
+import { LinkEmail200Response } from '../models/LinkEmail200Response';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { ListConfigRequest } from '../models/ListConfigRequest';
 import { ListMigrationsRequest } from '../models/ListMigrationsRequest';
-import { ListQueries } from '../models/ListQueries';
-import { ListResponseAccount } from '../models/ListResponseAccount';
-import { ListResponseSigner } from '../models/ListResponseSigner';
 import { ListSubscriptionLogsRequest } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse } from '../models/LogResponse';
 import { LoginOIDCRequest } from '../models/LoginOIDCRequest';
 import { LoginRequest } from '../models/LoginRequest';
+import { LoginWithIdTokenRequest } from '../models/LoginWithIdTokenRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { MappingStrategy } from '../models/MappingStrategy';
@@ -206,7 +208,6 @@ import { NextActionType } from '../models/NextActionType';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
-import { OAuthProvders } from '../models/OAuthProvders';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderAPPLE } from '../models/OAuthProviderAPPLE';
 import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
@@ -215,7 +216,6 @@ import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLINE } from '../models/OAuthProviderLINE';
 import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
-import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PagingQueries } from '../models/PagingQueries';
@@ -273,8 +273,11 @@ import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
+import { RecoverV2EmbeddedRequest } from '../models/RecoverV2EmbeddedRequest';
+import { RecoverV2Response } from '../models/RecoverV2Response';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { RegisterEmbeddedRequest } from '../models/RegisterEmbeddedRequest';
+import { RegisterEmbeddedV2Request } from '../models/RegisterEmbeddedV2Request';
 import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
 import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
 import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
@@ -289,16 +292,13 @@ import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
-import { ShamirParams } from '../models/ShamirParams';
-import { ShamirSigner } from '../models/ShamirSigner';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
-import { Signer } from '../models/Signer';
-import { SignerListQueries } from '../models/SignerListQueries';
-import { SignerOwner } from '../models/SignerOwner';
-import { SignerResponse } from '../models/SignerResponse';
+import { SignerIdResponse } from '../models/SignerIdResponse';
+import { SignupEmailPassword201Response } from '../models/SignupEmailPassword201Response';
 import { SignupRequest } from '../models/SignupRequest';
+import { SmartAccountData } from '../models/SmartAccountData';
 import { SortOrder } from '../models/SortOrder';
 import { SponsorSchema } from '../models/SponsorSchema';
 import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
@@ -313,15 +313,14 @@ import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
+import { SwitchChainQueriesV2 } from '../models/SwitchChainQueriesV2';
 import { SwitchChainRequest } from '../models/SwitchChainRequest';
 import { TestTrigger200Response } from '../models/TestTrigger200Response';
 import { ThirdPartyLinkRequest } from '../models/ThirdPartyLinkRequest';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
-import { ThirdPartyOAuthProviderAPPLENATIVE } from '../models/ThirdPartyOAuthProviderAPPLENATIVE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
 import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
-import { ThirdPartyOAuthProviderGOOGLENATIVE } from '../models/ThirdPartyOAuthProviderGOOGLENATIVE';
 import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
@@ -343,7 +342,9 @@ import { TransactionIntentResponseExpandable } from '../models/TransactionIntent
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { TransactionStat } from '../models/TransactionStat';
+import { TransactionStatus } from '../models/TransactionStatus';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
+import { Transition } from '../models/Transition';
 import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
 import { TriggerResponse } from '../models/TriggerResponse';
 import { TwitterOAuthConfig } from '../models/TwitterOAuthConfig';
@@ -465,28 +466,6 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * @param accountCreateRequest 
-     */
-    public createAccountV2(accountCreateRequest: AccountCreateRequest, _options?: Configuration): Observable<AccountResponse> {
-        const requestContextPromise = this.requestFactory.createAccountV2(accountCreateRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createAccountV2(rsp)));
-            }));
-    }
-
-    /**
      * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param id Specifies the unique account ID (starts with acc_).
@@ -559,10 +538,10 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * @param accountId 
+     * @param id 
      */
-    public getAccountV2(accountId: string, _options?: Configuration): Observable<AccountResponse> {
-        const requestContextPromise = this.requestFactory.getAccountV2(accountId, _options);
+    public getAccountV2(id: string, _options?: Configuration): Observable<AccountV2Response> {
+        const requestContextPromise = this.requestFactory.getAccountV2(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -586,12 +565,13 @@ export class ObservableAccountsApi {
      * @param limit Specifies the maximum number of records to return.
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
+     * @param chainId The chain ID. Must be a [supported chain](/development/chains).
      * @param player Specifies the unique player ID (starts with pla_)
      * @param address Specifies the address of the account
      * @param expand Specifies the fields to expand in the response.
      */
-    public getAccounts(limit?: number, skip?: number, order?: SortOrder, player?: string, address?: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Observable<AccountListResponse> {
-        const requestContextPromise = this.requestFactory.getAccounts(limit, skip, order, player, address, expand, _options);
+    public getAccounts(limit?: number, skip?: number, order?: SortOrder, chainId?: number, player?: string, address?: string, expand?: Array<AccountResponseExpandable>, _options?: Configuration): Observable<AccountListResponse> {
+        const requestContextPromise = this.requestFactory.getAccounts(limit, skip, order, chainId, player, address, expand, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -610,13 +590,19 @@ export class ObservableAccountsApi {
     }
 
     /**
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param accountType 
+     * Returns a list of accounts for the given user.  This object represents a user\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  Returns the latest 10 transaction intents for each account.  By default, a maximum of 10 accounts are shown per page.
+     * List accounts of a user.
+     * @param limit Specifies the maximum number of records to return.
+     * @param skip Specifies the offset for the first records to return.
+     * @param order Specifies the order in which to sort the results.
+     * @param chainId The chain ID. Must be a [supported chain](/development/chains).
+     * @param user Specifies the unique user ID (starts with pla_)
+     * @param chainType The chain type. Must be either \&quot;EVM\&quot; or \&quot;SVM\&quot;.
+     * @param accountType Specifies the type of account. Must be either \&quot;Smart Account\&quot; or \&quot;Externally Owned Account\&quot;.
+     * @param address Specifies the account address
      */
-    public listAccountsV2(limit?: number, skip?: number, order?: 'asc' | 'desc', accountType?: string, _options?: Configuration): Observable<ListResponseAccount> {
-        const requestContextPromise = this.requestFactory.listAccountsV2(limit, skip, order, accountType, _options);
+    public getAccountsV2(limit?: number, skip?: number, order?: SortOrder, chainId?: number, user?: string, chainType?: string, accountType?: string, address?: string, _options?: Configuration): Observable<BaseEntityListResponseAccountV2Response> {
+        const requestContextPromise = this.requestFactory.getAccountsV2(limit, skip, order, chainId, user, chainType, accountType, address, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -630,7 +616,29 @@ export class ObservableAccountsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listAccountsV2(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAccountsV2(rsp)));
+            }));
+    }
+
+    /**
+     * @param address 
+     */
+    public getSignerIdByAddress(address: string, _options?: Configuration): Observable<SignerIdResponse> {
+        const requestContextPromise = this.requestFactory.getSignerIdByAddress(address, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSignerIdByAddress(rsp)));
             }));
     }
 
@@ -705,6 +713,28 @@ export class ObservableAccountsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.startRecovery(rsp)));
+            }));
+    }
+
+    /**
+     * @param switchChainQueriesV2 
+     */
+    public switchChainV2(switchChainQueriesV2: SwitchChainQueriesV2, _options?: Configuration): Observable<AccountV2Response> {
+        const requestContextPromise = this.requestFactory.switchChainV2(switchChainQueriesV2, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.switchChainV2(rsp)));
             }));
     }
 
@@ -1017,31 +1047,6 @@ export class ObservableAdminAuthenticationApi {
 
     /**
      * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
-     * Retrieve player by token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
-     */
-    public verifyOAuth(provider: AuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<PlayerResponse> {
-        const requestContextPromise = this.requestFactory.verifyOAuth(provider, oAuthRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyOAuth(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
      * Retrieve player by oauth token.
      * @param authenticateOAuthRequest 
      */
@@ -1083,30 +1088,6 @@ export class ObservableAuthenticationApi {
     }
 
     /**
-     * Deprecated
-     * Authenticate player with oauth token.
-     * @param authenticateOAuthRequest 
-     */
-    public authenticateOAuth(authenticateOAuthRequest: AuthenticateOAuthRequest, _options?: Configuration): Observable<AuthResponse> {
-        const requestContextPromise = this.requestFactory.authenticateOAuth(authenticateOAuthRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authenticateOAuth(rsp)));
-            }));
-    }
-
-    /**
      * Authenticate player with SIWE
      * @param sIWEAuthenticateRequest 
      */
@@ -1126,31 +1107,6 @@ export class ObservableAuthenticationApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authenticateSIWE(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
-     * Authorize player with token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
-     */
-    public authorizeWithOAuthToken(provider: AuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<DeprecatedAuthenticatedPlayerResponse> {
-        const requestContextPromise = this.requestFactory.authorizeWithOAuthToken(provider, oAuthRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authorizeWithOAuthToken(rsp)));
             }));
     }
 
@@ -1231,7 +1187,7 @@ export class ObservableAuthenticationApi {
      * @param loginRequest 
      * @param xGame 
      */
-    public linkEmail(loginRequest: LoginRequest, xGame?: string, _options?: Configuration): Observable<AuthPlayerResponse> {
+    public linkEmail(loginRequest: LoginRequest, xGame?: string, _options?: Configuration): Observable<LinkEmail200Response> {
         const requestContextPromise = this.requestFactory.linkEmail(loginRequest, xGame, _options);
 
         // build promise chain
@@ -1327,7 +1283,7 @@ export class ObservableAuthenticationApi {
      * @param loginRequest 
      * @param xGame 
      */
-    public loginEmailPassword(loginRequest: LoginRequest, xGame?: string, _options?: Configuration): Observable<AuthResponse> {
+    public loginEmailPassword(loginRequest: LoginRequest, xGame?: string, _options?: Configuration): Observable<SignupEmailPassword201Response> {
         const requestContextPromise = this.requestFactory.loginEmailPassword(loginRequest, xGame, _options);
 
         // build promise chain
@@ -1368,6 +1324,29 @@ export class ObservableAuthenticationApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.loginOIDC(rsp)));
+            }));
+    }
+
+    /**
+     * Authenticate player with oauth token.
+     * @param loginWithIdTokenRequest 
+     */
+    public loginWithIdToken(loginWithIdTokenRequest: LoginWithIdTokenRequest, _options?: Configuration): Observable<AuthResponse> {
+        const requestContextPromise = this.requestFactory.loginWithIdToken(loginWithIdTokenRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.loginWithIdToken(rsp)));
             }));
     }
 
@@ -1565,7 +1544,7 @@ export class ObservableAuthenticationApi {
      * @param signupRequest 
      * @param xGame 
      */
-    public signupEmailPassword(signupRequest: SignupRequest, xGame?: string, _options?: Configuration): Observable<AuthResponse> {
+    public signupEmailPassword(signupRequest: SignupRequest, xGame?: string, _options?: Configuration): Observable<SignupEmailPassword201Response> {
         const requestContextPromise = this.requestFactory.signupEmailPassword(signupRequest, xGame, _options);
 
         // build promise chain
@@ -1697,31 +1676,6 @@ export class ObservableAuthenticationApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyEmail(rsp)));
-            }));
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
-     * Retrieve player by token.
-     * @param provider OAuth provider
-     * @param oAuthRequest 
-     */
-    public verifyOAuth(provider: AuthProvider, oAuthRequest: OAuthRequest, _options?: Configuration): Observable<PlayerResponse> {
-        const requestContextPromise = this.requestFactory.verifyOAuth(provider, oAuthRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.verifyOAuth(rsp)));
             }));
     }
 
@@ -1958,95 +1912,6 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.list(rsp)));
-            }));
-    }
-
-}
-
-import { DevicesApiRequestFactory, DevicesApiResponseProcessor} from "../apis/DevicesApi";
-export class ObservableDevicesApi {
-    private requestFactory: DevicesApiRequestFactory;
-    private responseProcessor: DevicesApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DevicesApiRequestFactory,
-        responseProcessor?: DevicesApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new DevicesApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DevicesApiResponseProcessor();
-    }
-
-    /**
-     * @param signerId 
-     * @param deviceCreateRequest 
-     */
-    public createDevice(signerId: string, deviceCreateRequest: DeviceCreateRequest, _options?: Configuration): Observable<DeviceResponse> {
-        const requestContextPromise = this.requestFactory.createDevice(signerId, deviceCreateRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDevice(rsp)));
-            }));
-    }
-
-    /**
-     * @param signerId 
-     * @param deviceId 
-     */
-    public getDevice(signerId: string, deviceId: string, _options?: Configuration): Observable<DeviceResponse> {
-        const requestContextPromise = this.requestFactory.getDevice(signerId, deviceId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDevice(rsp)));
-            }));
-    }
-
-    /**
-     * @param signerId 
-     * @param limit 
-     * @param skip 
-     * @param order 
-     */
-    public listDevices(signerId: string, limit?: number, skip?: number, order?: 'asc' | 'desc', _options?: Configuration): Observable<BaseEntityListResponseDeviceResponse> {
-        const requestContextPromise = this.requestFactory.listDevices(signerId, limit, skip, order, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listDevices(rsp)));
             }));
     }
 
@@ -3460,7 +3325,7 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
+     * Create or add a developer account. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
      * Create a developer account.
      * @param createDeveloperAccountCreateRequest 
      */
@@ -3585,6 +3450,31 @@ export class ObservableSettingsApi {
     }
 
     /**
+     * Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
+     * Sign a given payload
+     * @param id Specifies the unique developer account ID (starts with dac_).
+     * @param signPayloadRequest 
+     */
+    public signPayloadDeveloperAccount(id: string, signPayloadRequest: SignPayloadRequest, _options?: Configuration): Observable<SignPayloadResponse> {
+        const requestContextPromise = this.requestFactory.signPayloadDeveloperAccount(id, signPayloadRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.signPayloadDeveloperAccount(rsp)));
+            }));
+    }
+
+    /**
      * Update a developer account.
      * Update a developer account.
      * @param id 
@@ -3606,116 +3496,6 @@ export class ObservableSettingsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateDeveloperAccount(rsp)));
-            }));
-    }
-
-}
-
-import { SignersApiRequestFactory, SignersApiResponseProcessor} from "../apis/SignersApi";
-export class ObservableSignersApi {
-    private requestFactory: SignersApiRequestFactory;
-    private responseProcessor: SignersApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: SignersApiRequestFactory,
-        responseProcessor?: SignersApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new SignersApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new SignersApiResponseProcessor();
-    }
-
-    /**
-     * @param createSignerRequest 
-     */
-    public createSigner(createSignerRequest: CreateSignerRequest, _options?: Configuration): Observable<SignerResponse> {
-        const requestContextPromise = this.requestFactory.createSigner(createSignerRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createSigner(rsp)));
-            }));
-    }
-
-    /**
-     * @param signerId 
-     */
-    public exportSigner(signerId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.exportSigner(signerId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.exportSigner(rsp)));
-            }));
-    }
-
-    /**
-     * @param signerId 
-     */
-    public getSigner(signerId: string, _options?: Configuration): Observable<SignerResponse> {
-        const requestContextPromise = this.requestFactory.getSigner(signerId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSigner(rsp)));
-            }));
-    }
-
-    /**
-     * @param limit 
-     * @param skip 
-     * @param order 
-     * @param signerType 
-     * @param account 
-     */
-    public listSigners(limit?: number, skip?: number, order?: 'asc' | 'desc', signerType?: string, account?: string, _options?: Configuration): Observable<ListResponseSigner> {
-        const requestContextPromise = this.requestFactory.listSigners(limit, skip, order, signerType, account, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listSigners(rsp)));
             }));
     }
 
@@ -4085,7 +3865,7 @@ export class ObservableTransactionIntentsApi {
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
-     * @param chainId The chain ID. Must be a [supported chain](/chains).
+     * @param chainId The chain ID. Must be a [supported chain](/development/chains).
      * @param account Filter by account ID or developer account (starts with acc_ or dac_ respectively).
      * @param player Filter by player ID (starts with pla_).
      * @param status Filter by successful (1) or failed (0) transaction intents.

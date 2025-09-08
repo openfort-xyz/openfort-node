@@ -177,7 +177,7 @@ export class TransactionIntentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param skip Specifies the offset for the first records to return.
      * @param order Specifies the order in which to sort the results.
      * @param expand Specifies the fields to expand in the response.
-     * @param chainId The chain ID. Must be a [supported chain](/chains).
+     * @param chainId The chain ID. Must be a [supported chain](/development/chains).
      * @param account Filter by account ID or developer account (starts with acc_ or dac_ respectively).
      * @param player Filter by player ID (starts with pla_).
      * @param status Filter by successful (1) or failed (0) transaction intents.

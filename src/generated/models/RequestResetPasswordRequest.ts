@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -22,10 +22,6 @@ export class RequestResetPasswordRequest {
     * The URL sent to the user by email to reset the password. At the end of the URL, we will add the token in the format `?token=token`.
     */
     'redirectUrl': string;
-    /**
-    * Unique value to identify the request. It\'s used to mitigate CSRF attacks.
-    */
-    'state'?: string;
     'challenge'?: CodeChallenge;
 
     static readonly discriminator: string | undefined = undefined;
@@ -40,12 +36,6 @@ export class RequestResetPasswordRequest {
         {
             "name": "redirectUrl",
             "baseName": "redirectUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "state",
-            "baseName": "state",
             "type": "string",
             "format": ""
         },

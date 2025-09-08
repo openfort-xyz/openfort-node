@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -12,34 +12,21 @@
 
 import { HttpFile } from '../http/http';
 
-export class DeprecatedAuthenticatedPlayerResponse {
-    /**
-    * Player\'s identifier.
-    */
-    'playerId': string;
-    /**
-    * JWT access token.
-    */
-    'token': string;
+export class AllowedOriginsRequest {
+    'allowedOrigins': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "playerId",
-            "baseName": "playerId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
+            "name": "allowedOrigins",
+            "baseName": "allowedOrigins",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return DeprecatedAuthenticatedPlayerResponse.attributeTypeMap;
+        return AllowedOriginsRequest.attributeTypeMap;
     }
 
     public constructor() {

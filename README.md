@@ -2,19 +2,16 @@
 
 <div align="center">
   <h4>
-    <a href="https://www.openfort.xyz/">
+    <a href="https://www.openfort.io/">
       Website
     </a>
     <span> | </span>
-    <a href="https://www.openfort.xyz/docs">
+    <a href="https://www.openfort.io/docs">
       Documentation
     </a>
     <span> | </span>
-    <a href="https://www.openfort.xyz/docs/reference/api/authentication">
-      API Docs
-    </a>
     <span> | </span>
-    <a href="https://twitter.com/openfortxyz">
+    <a href="https://x.com/openfort_hq">
       Twitter
     </a>
   </h4>
@@ -26,11 +23,7 @@
 [![Version](https://img.shields.io/npm/v/@openfort/openfort-node.svg)](https://www.npmjs.org/package/@openfort/openfort-node)
 
 The Openfort Node library provides convenient access to the Openfort API from applications written in server-side JavaScript.
-
-## Documentation
-
-See the [`openfort-node` API docs]([https://openfort.xyz/docs/api?lang=node](https://www.openfort.xyz/docs/reference/api/introduction)) for Node.js.
-
+\
 ## Requirements
 
 Node 14 or higher.
@@ -105,7 +98,7 @@ example().catch((e) => console.error(e));
 
 New features and bug fixes are released on the latest major version of the `openfort` package. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
 
-[api-keys]: https://dashboard.openfort.xyz/api-keys
+[api-keys]: https://dashboard.openfort.io/api-keys
 
 <!--
 # vim: set tw=79:
