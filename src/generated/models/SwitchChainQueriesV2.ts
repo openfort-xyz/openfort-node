@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -12,27 +12,34 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* The request to verify access token
-*/
-export class OAuthRequest {
+export class SwitchChainQueriesV2 {
     /**
-    * Access token to be verified
+    * The account ID (starts with acc_)
     */
-    'token': string;
+    'account': string;
+    /**
+    * The target chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "token",
-            "baseName": "token",
+            "name": "account",
+            "baseName": "account",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return OAuthRequest.attributeTypeMap;
+        return SwitchChainQueriesV2.attributeTypeMap;
     }
 
     public constructor() {

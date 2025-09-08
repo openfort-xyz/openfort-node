@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -10,27 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { Signer } from '../models/Signer';
+import { Actions } from '../models/Actions';
 import { HttpFile } from '../http/http';
 
-export class SignerResponse {
-    'signer': Signer;
+export class ActionRequiredResponse {
+    'action': Actions;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "signer",
-            "baseName": "signer",
-            "type": "Signer",
+            "name": "action",
+            "baseName": "action",
+            "type": "Actions",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SignerResponse.attributeTypeMap;
+        return ActionRequiredResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -22,6 +22,10 @@ export class EmailAuthConfig {
     */
     'enabled': boolean;
     'provider': BasicAuthProviderEMAIL;
+    /**
+    * Allow unverified emails: Users will be able to sign in with unverified emails
+    */
+    'allowUnverified': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -36,6 +40,12 @@ export class EmailAuthConfig {
             "name": "provider",
             "baseName": "provider",
             "type": "BasicAuthProviderEMAIL",
+            "format": ""
+        },
+        {
+            "name": "allowUnverified",
+            "baseName": "allowUnverified",
+            "type": "boolean",
             "format": ""
         }    ];
 

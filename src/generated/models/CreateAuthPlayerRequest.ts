@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -25,7 +25,7 @@ export class CreateAuthPlayerRequest {
     */
     'preGenerateEmbeddedAccount': boolean;
     /**
-    * The chain ID. Must be a [supported chain](/chains).
+    * The chain ID. Must be a [supported chain](/development/chains).
     */
     'chainId'?: number;
     'metadata'?: { [key: string]: PlayerMetadataValue; };

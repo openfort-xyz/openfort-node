@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -14,9 +14,9 @@ import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { HttpFile } from '../http/http';
 
 export class SubscriptionResponse {
-    'currentPeriodEnd': Date;
-    'currentPeriodStart': Date;
-    'canceledAt': Date;
+    'currentPeriodEnd'?: Date;
+    'currentPeriodStart'?: Date;
+    'canceledAt'?: Date;
     'plan': SubscriptionResponsePlan;
 
     static readonly discriminator: string | undefined = undefined;

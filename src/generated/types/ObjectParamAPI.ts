@@ -12,23 +12,26 @@ import { AbiType } from '../models/AbiType';
 import { AccelbyteOAuthConfig } from '../models/AccelbyteOAuthConfig';
 import { Account } from '../models/Account';
 import { AccountAbstractionV6Details } from '../models/AccountAbstractionV6Details';
-import { AccountCreateRequest } from '../models/AccountCreateRequest';
 import { AccountEventResponse } from '../models/AccountEventResponse';
 import { AccountInventoryListQueries } from '../models/AccountInventoryListQueries';
 import { AccountListQueries } from '../models/AccountListQueries';
+import { AccountListQueriesV2 } from '../models/AccountListQueriesV2';
 import { AccountListResponse } from '../models/AccountListResponse';
 import { AccountPolicyRuleResponse } from '../models/AccountPolicyRuleResponse';
 import { AccountResponse } from '../models/AccountResponse';
 import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
 import { AccountResponsePlayer } from '../models/AccountResponsePlayer';
-import { AccountsListQueries } from '../models/AccountsListQueries';
+import { AccountV2Response } from '../models/AccountV2Response';
+import { ActionRequiredResponse } from '../models/ActionRequiredResponse';
+import { Actions } from '../models/Actions';
+import { AllowedOriginsRequest } from '../models/AllowedOriginsRequest';
+import { AllowedOriginsResponse } from '../models/AllowedOriginsResponse';
 import { Amount } from '../models/Amount';
 import { ApiAuthorizedNetworkDeleteResponse } from '../models/ApiAuthorizedNetworkDeleteResponse';
 import { ApiAuthorizedNetworkListResponse } from '../models/ApiAuthorizedNetworkListResponse';
 import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
 import { ApiKeyResponse } from '../models/ApiKeyResponse';
 import { ApiKeyType } from '../models/ApiKeyType';
-import { AppleNativeOAuthConfig } from '../models/AppleNativeOAuthConfig';
 import { AppleOAuthConfig } from '../models/AppleOAuthConfig';
 import { AssetInventory } from '../models/AssetInventory';
 import { AssetType } from '../models/AssetType';
@@ -48,12 +51,14 @@ import { AuthProviderWithTypeResponse } from '../models/AuthProviderWithTypeResp
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthSessionResponse } from '../models/AuthSessionResponse';
 import { AuthenticateOAuthRequest } from '../models/AuthenticateOAuthRequest';
+import { AuthenticateOAuthRequestProvider } from '../models/AuthenticateOAuthRequestProvider';
 import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
 import { AuthenticationType } from '../models/AuthenticationType';
 import { Authorize200Response } from '../models/Authorize200Response';
 import { AuthorizePlayerRequest } from '../models/AuthorizePlayerRequest';
 import { BalanceEventResponse } from '../models/BalanceEventResponse';
 import { BalanceResponse } from '../models/BalanceResponse';
+import { BaseEntityListResponseAccountV2Response } from '../models/BaseEntityListResponseAccountV2Response';
 import { BaseEntityListResponseDeviceResponse } from '../models/BaseEntityListResponseDeviceResponse';
 import { BaseEntityListResponseEmailSampleResponse } from '../models/BaseEntityListResponseEmailSampleResponse';
 import { BaseEntityListResponseLogResponse } from '../models/BaseEntityListResponseLogResponse';
@@ -88,6 +93,7 @@ import { CreateDeveloperAccountCreateRequest } from '../models/CreateDeveloperAc
 import { CreateDeviceRequest } from '../models/CreateDeviceRequest';
 import { CreateEcosystemConfigurationRequest } from '../models/CreateEcosystemConfigurationRequest';
 import { CreateEmailSampleRequest } from '../models/CreateEmailSampleRequest';
+import { CreateEmbeddedRequest } from '../models/CreateEmbeddedRequest';
 import { CreateEventRequest } from '../models/CreateEventRequest';
 import { CreateExchangeRequest } from '../models/CreateExchangeRequest';
 import { CreateForwarderContractRequest } from '../models/CreateForwarderContractRequest';
@@ -98,7 +104,6 @@ import { CreatePolicyRuleRequest } from '../models/CreatePolicyRuleRequest';
 import { CreateProjectApiKeyRequest } from '../models/CreateProjectApiKeyRequest';
 import { CreateProjectRequest } from '../models/CreateProjectRequest';
 import { CreateSessionRequest } from '../models/CreateSessionRequest';
-import { CreateSignerRequest } from '../models/CreateSignerRequest';
 import { CreateSubscriptionRequest } from '../models/CreateSubscriptionRequest';
 import { CreateTransactionIntentRequest } from '../models/CreateTransactionIntentRequest';
 import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
@@ -106,7 +111,6 @@ import { Currency } from '../models/Currency';
 import { CustomAuthConfig } from '../models/CustomAuthConfig';
 import { DeleteSMTPConfigResponse } from '../models/DeleteSMTPConfigResponse';
 import { DeployRequest } from '../models/DeployRequest';
-import { DeprecatedAuthenticatedPlayerResponse } from '../models/DeprecatedAuthenticatedPlayerResponse';
 import { DeveloperAccount } from '../models/DeveloperAccount';
 import { DeveloperAccountDeleteResponse } from '../models/DeveloperAccountDeleteResponse';
 import { DeveloperAccountGetMessageResponse } from '../models/DeveloperAccountGetMessageResponse';
@@ -114,7 +118,6 @@ import { DeveloperAccountListQueries } from '../models/DeveloperAccountListQueri
 import { DeveloperAccountListResponse } from '../models/DeveloperAccountListResponse';
 import { DeveloperAccountResponse } from '../models/DeveloperAccountResponse';
 import { DeveloperAccountResponseExpandable } from '../models/DeveloperAccountResponseExpandable';
-import { DeviceCreateRequest } from '../models/DeviceCreateRequest';
 import { DeviceListQueries } from '../models/DeviceListQueries';
 import { DeviceResponse } from '../models/DeviceResponse';
 import { DiscordOAuthConfig } from '../models/DiscordOAuthConfig';
@@ -125,6 +128,7 @@ import { EmailSampleResponse } from '../models/EmailSampleResponse';
 import { EmailTypeRequest } from '../models/EmailTypeRequest';
 import { EmailTypeResponse } from '../models/EmailTypeResponse';
 import { EmbeddedResponse } from '../models/EmbeddedResponse';
+import { EmbeddedV2Response } from '../models/EmbeddedV2Response';
 import { EntityIdResponse } from '../models/EntityIdResponse';
 import { EntityTypeACCOUNT } from '../models/EntityTypeACCOUNT';
 import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
@@ -169,7 +173,6 @@ import { GasReport } from '../models/GasReport';
 import { GasReportListResponse } from '../models/GasReportListResponse';
 import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
 import { GasReportTransactionIntentsListResponse } from '../models/GasReportTransactionIntentsListResponse';
-import { GoogleNativeOAuthConfig } from '../models/GoogleNativeOAuthConfig';
 import { GoogleOAuthConfig } from '../models/GoogleOAuthConfig';
 import { GrantCallbackRequest } from '../models/GrantCallbackRequest';
 import { GrantOAuthResponse } from '../models/GrantOAuthResponse';
@@ -182,17 +185,16 @@ import { InventoryResponse } from '../models/InventoryResponse';
 import { JwtKey } from '../models/JwtKey';
 import { JwtKeyResponse } from '../models/JwtKeyResponse';
 import { LineOAuthConfig } from '../models/LineOAuthConfig';
+import { LinkEmail200Response } from '../models/LinkEmail200Response';
 import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
 import { ListConfigRequest } from '../models/ListConfigRequest';
 import { ListMigrationsRequest } from '../models/ListMigrationsRequest';
-import { ListQueries } from '../models/ListQueries';
-import { ListResponseAccount } from '../models/ListResponseAccount';
-import { ListResponseSigner } from '../models/ListResponseSigner';
 import { ListSubscriptionLogsRequest } from '../models/ListSubscriptionLogsRequest';
 import { Log } from '../models/Log';
 import { LogResponse } from '../models/LogResponse';
 import { LoginOIDCRequest } from '../models/LoginOIDCRequest';
 import { LoginRequest } from '../models/LoginRequest';
+import { LoginWithIdTokenRequest } from '../models/LoginWithIdTokenRequest';
 import { LogoutRequest } from '../models/LogoutRequest';
 import { LootLockerOAuthConfig } from '../models/LootLockerOAuthConfig';
 import { MappingStrategy } from '../models/MappingStrategy';
@@ -205,7 +207,6 @@ import { NextActionType } from '../models/NextActionType';
 import { OAuthConfigListResponse } from '../models/OAuthConfigListResponse';
 import { OAuthInitRequest } from '../models/OAuthInitRequest';
 import { OAuthInitRequestOptions } from '../models/OAuthInitRequestOptions';
-import { OAuthProvders } from '../models/OAuthProvders';
 import { OAuthProvider } from '../models/OAuthProvider';
 import { OAuthProviderAPPLE } from '../models/OAuthProviderAPPLE';
 import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
@@ -214,7 +215,6 @@ import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
 import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
 import { OAuthProviderLINE } from '../models/OAuthProviderLINE';
 import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
-import { OAuthRequest } from '../models/OAuthRequest';
 import { OAuthResponse } from '../models/OAuthResponse';
 import { OIDCAuthConfig } from '../models/OIDCAuthConfig';
 import { PagingQueries } from '../models/PagingQueries';
@@ -272,8 +272,11 @@ import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectStatsRequest } from '../models/ProjectStatsRequest';
 import { ProjectStatsResponse } from '../models/ProjectStatsResponse';
 import { QuoteExchangeResult } from '../models/QuoteExchangeResult';
+import { RecoverV2EmbeddedRequest } from '../models/RecoverV2EmbeddedRequest';
+import { RecoverV2Response } from '../models/RecoverV2Response';
 import { RefreshTokenRequest } from '../models/RefreshTokenRequest';
 import { RegisterEmbeddedRequest } from '../models/RegisterEmbeddedRequest';
+import { RegisterEmbeddedV2Request } from '../models/RegisterEmbeddedV2Request';
 import { RequestResetPasswordRequest } from '../models/RequestResetPasswordRequest';
 import { RequestVerifyEmailRequest } from '../models/RequestVerifyEmailRequest';
 import { ResetPasswordRequest } from '../models/ResetPasswordRequest';
@@ -288,16 +291,13 @@ import { SessionListQueries } from '../models/SessionListQueries';
 import { SessionListResponse } from '../models/SessionListResponse';
 import { SessionResponse } from '../models/SessionResponse';
 import { SessionResponseExpandable } from '../models/SessionResponseExpandable';
-import { ShamirParams } from '../models/ShamirParams';
-import { ShamirSigner } from '../models/ShamirSigner';
 import { SignPayloadRequest } from '../models/SignPayloadRequest';
 import { SignPayloadResponse } from '../models/SignPayloadResponse';
 import { SignatureRequest } from '../models/SignatureRequest';
-import { Signer } from '../models/Signer';
-import { SignerListQueries } from '../models/SignerListQueries';
-import { SignerOwner } from '../models/SignerOwner';
-import { SignerResponse } from '../models/SignerResponse';
+import { SignerIdResponse } from '../models/SignerIdResponse';
+import { SignupEmailPassword201Response } from '../models/SignupEmailPassword201Response';
 import { SignupRequest } from '../models/SignupRequest';
+import { SmartAccountData } from '../models/SmartAccountData';
 import { SortOrder } from '../models/SortOrder';
 import { SponsorSchema } from '../models/SponsorSchema';
 import { SponsorSchemaCHARGECUSTOMTOKENS } from '../models/SponsorSchemaCHARGECUSTOMTOKENS';
@@ -312,15 +312,14 @@ import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { SubscriptionResponsePlan } from '../models/SubscriptionResponsePlan';
 import { SupabaseAuthConfig } from '../models/SupabaseAuthConfig';
+import { SwitchChainQueriesV2 } from '../models/SwitchChainQueriesV2';
 import { SwitchChainRequest } from '../models/SwitchChainRequest';
 import { TestTrigger200Response } from '../models/TestTrigger200Response';
 import { ThirdPartyLinkRequest } from '../models/ThirdPartyLinkRequest';
 import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
 import { ThirdPartyOAuthProviderACCELBYTE } from '../models/ThirdPartyOAuthProviderACCELBYTE';
-import { ThirdPartyOAuthProviderAPPLENATIVE } from '../models/ThirdPartyOAuthProviderAPPLENATIVE';
 import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
 import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
-import { ThirdPartyOAuthProviderGOOGLENATIVE } from '../models/ThirdPartyOAuthProviderGOOGLENATIVE';
 import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
 import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
 import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
@@ -342,7 +341,9 @@ import { TransactionIntentResponseExpandable } from '../models/TransactionIntent
 import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
 import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
 import { TransactionStat } from '../models/TransactionStat';
+import { TransactionStatus } from '../models/TransactionStatus';
 import { TransferOwnershipRequest } from '../models/TransferOwnershipRequest';
+import { Transition } from '../models/Transition';
 import { TriggerDeleteResponse } from '../models/TriggerDeleteResponse';
 import { TriggerResponse } from '../models/TriggerResponse';
 import { TwitterOAuthConfig } from '../models/TwitterOAuthConfig';
@@ -416,15 +417,6 @@ export interface AccountsApiCreateAccountRequest {
     createAccountRequest: CreateAccountRequest
 }
 
-export interface AccountsApiCreateAccountV2Request {
-    /**
-     * 
-     * @type AccountCreateRequest
-     * @memberof AccountsApicreateAccountV2
-     */
-    accountCreateRequest: AccountCreateRequest
-}
-
 export interface AccountsApiDeployAccountRequest {
     /**
      * Specifies the unique account ID (starts with acc_).
@@ -470,7 +462,7 @@ export interface AccountsApiGetAccountV2Request {
      * @type string
      * @memberof AccountsApigetAccountV2
      */
-    accountId: string
+    id: string
 }
 
 export interface AccountsApiGetAccountsRequest {
@@ -493,6 +485,12 @@ export interface AccountsApiGetAccountsRequest {
      */
     order?: SortOrder
     /**
+     * The chain ID. Must be a [supported chain](/development/chains).
+     * @type number
+     * @memberof AccountsApigetAccounts
+     */
+    chainId?: number
+    /**
      * Specifies the unique player ID (starts with pla_)
      * @type string
      * @memberof AccountsApigetAccounts
@@ -512,31 +510,64 @@ export interface AccountsApiGetAccountsRequest {
     expand?: Array<AccountResponseExpandable>
 }
 
-export interface AccountsApiListAccountsV2Request {
+export interface AccountsApiGetAccountsV2Request {
     /**
-     * 
+     * Specifies the maximum number of records to return.
      * @type number
-     * @memberof AccountsApilistAccountsV2
+     * @memberof AccountsApigetAccountsV2
      */
     limit?: number
     /**
-     * 
+     * Specifies the offset for the first records to return.
      * @type number
-     * @memberof AccountsApilistAccountsV2
+     * @memberof AccountsApigetAccountsV2
      */
     skip?: number
     /**
-     * 
-     * @type &#39;asc&#39; | &#39;desc&#39;
-     * @memberof AccountsApilistAccountsV2
+     * Specifies the order in which to sort the results.
+     * @type SortOrder
+     * @memberof AccountsApigetAccountsV2
      */
-    order?: 'asc' | 'desc'
+    order?: SortOrder
+    /**
+     * The chain ID. Must be a [supported chain](/development/chains).
+     * @type number
+     * @memberof AccountsApigetAccountsV2
+     */
+    chainId?: number
+    /**
+     * Specifies the unique user ID (starts with pla_)
+     * @type string
+     * @memberof AccountsApigetAccountsV2
+     */
+    user?: string
+    /**
+     * The chain type. Must be either \&quot;EVM\&quot; or \&quot;SVM\&quot;.
+     * @type string
+     * @memberof AccountsApigetAccountsV2
+     */
+    chainType?: string
+    /**
+     * Specifies the type of account. Must be either \&quot;Smart Account\&quot; or \&quot;Externally Owned Account\&quot;.
+     * @type string
+     * @memberof AccountsApigetAccountsV2
+     */
+    accountType?: string
+    /**
+     * Specifies the account address
+     * @type string
+     * @memberof AccountsApigetAccountsV2
+     */
+    address?: string
+}
+
+export interface AccountsApiGetSignerIdByAddressRequest {
     /**
      * 
      * @type string
-     * @memberof AccountsApilistAccountsV2
+     * @memberof AccountsApigetSignerIdByAddress
      */
-    accountType?: string
+    address: string
 }
 
 export interface AccountsApiRequestTransferOwnershipRequest {
@@ -584,6 +615,15 @@ export interface AccountsApiStartRecoveryRequest {
     startRecoveryRequest: StartRecoveryRequest
 }
 
+export interface AccountsApiSwitchChainV2Request {
+    /**
+     * 
+     * @type SwitchChainQueriesV2
+     * @memberof AccountsApiswitchChainV2
+     */
+    switchChainQueriesV2: SwitchChainQueriesV2
+}
+
 export interface AccountsApiSyncAccountRequest {
     /**
      * Specifies the unique account ID (starts with acc_).
@@ -627,13 +667,6 @@ export class ObjectAccountsApi {
     }
 
     /**
-     * @param param the request object
-     */
-    public createAccountV2(param: AccountsApiCreateAccountV2Request, options?: Configuration): Promise<AccountResponse> {
-        return this.api.createAccountV2(param.accountCreateRequest,  options).toPromise();
-    }
-
-    /**
      * This endpoint can be used to deploy a smart contract account that was counterfactually generated.
      * Deploy an account.
      * @param param the request object
@@ -661,8 +694,8 @@ export class ObjectAccountsApi {
     /**
      * @param param the request object
      */
-    public getAccountV2(param: AccountsApiGetAccountV2Request, options?: Configuration): Promise<AccountResponse> {
-        return this.api.getAccountV2(param.accountId,  options).toPromise();
+    public getAccountV2(param: AccountsApiGetAccountV2Request, options?: Configuration): Promise<AccountV2Response> {
+        return this.api.getAccountV2(param.id,  options).toPromise();
     }
 
     /**
@@ -671,14 +704,23 @@ export class ObjectAccountsApi {
      * @param param the request object
      */
     public getAccounts(param: AccountsApiGetAccountsRequest = {}, options?: Configuration): Promise<AccountListResponse> {
-        return this.api.getAccounts(param.limit, param.skip, param.order, param.player, param.address, param.expand,  options).toPromise();
+        return this.api.getAccounts(param.limit, param.skip, param.order, param.chainId, param.player, param.address, param.expand,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of accounts for the given user.  This object represents a user\'s account, which is a blockchain smart account that can be used to interact with the blockchain.  The accounts are returned sorted by creation date, with the most recently created accounts appearing first.  Returns the latest 10 transaction intents for each account.  By default, a maximum of 10 accounts are shown per page.
+     * List accounts of a user.
+     * @param param the request object
+     */
+    public getAccountsV2(param: AccountsApiGetAccountsV2Request = {}, options?: Configuration): Promise<BaseEntityListResponseAccountV2Response> {
+        return this.api.getAccountsV2(param.limit, param.skip, param.order, param.chainId, param.user, param.chainType, param.accountType, param.address,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
-    public listAccountsV2(param: AccountsApiListAccountsV2Request = {}, options?: Configuration): Promise<ListResponseAccount> {
-        return this.api.listAccountsV2(param.limit, param.skip, param.order, param.accountType,  options).toPromise();
+    public getSignerIdByAddress(param: AccountsApiGetSignerIdByAddressRequest, options?: Configuration): Promise<SignerIdResponse> {
+        return this.api.getSignerIdByAddress(param.address,  options).toPromise();
     }
 
     /**
@@ -705,6 +747,13 @@ export class ObjectAccountsApi {
      */
     public startRecovery(param: AccountsApiStartRecoveryRequest, options?: Configuration): Promise<TransactionIntentResponse> {
         return this.api.startRecovery(param.id, param.startRecoveryRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public switchChainV2(param: AccountsApiSwitchChainV2Request, options?: Configuration): Promise<AccountV2Response> {
+        return this.api.switchChainV2(param.switchChainQueriesV2,  options).toPromise();
     }
 
     /**
@@ -838,21 +887,6 @@ export interface AdminAuthenticationApiVerifyAuthTokenRequest {
     token: string
 }
 
-export interface AdminAuthenticationApiVerifyOAuthRequest {
-    /**
-     * OAuth provider
-     * @type AuthProvider
-     * @memberof AdminAuthenticationApiverifyOAuth
-     */
-    provider: AuthProvider
-    /**
-     * 
-     * @type OAuthRequest
-     * @memberof AdminAuthenticationApiverifyOAuth
-     */
-    oAuthRequest: OAuthRequest
-}
-
 export interface AdminAuthenticationApiVerifyOAuthTokenRequest {
     /**
      * 
@@ -968,15 +1002,6 @@ export class ObjectAdminAuthenticationApi {
 
     /**
      * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
-     * Retrieve player by token.
-     * @param param the request object
-     */
-    public verifyOAuth(param: AdminAuthenticationApiVerifyOAuthRequest, options?: Configuration): Promise<PlayerResponse> {
-        return this.api.verifyOAuth(param.provider, param.oAuthRequest,  options).toPromise();
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
      * Retrieve player by oauth token.
      * @param param the request object
      */
@@ -989,15 +1014,6 @@ export class ObjectAdminAuthenticationApi {
 import { ObservableAuthenticationApi } from "./ObservableAPI";
 import { AuthenticationApiRequestFactory, AuthenticationApiResponseProcessor} from "../apis/AuthenticationApi";
 
-export interface AuthenticationApiAuthenticateOAuthRequest {
-    /**
-     * 
-     * @type AuthenticateOAuthRequest
-     * @memberof AuthenticationApiauthenticateOAuth
-     */
-    authenticateOAuthRequest: AuthenticateOAuthRequest
-}
-
 export interface AuthenticationApiAuthenticateSIWERequest {
     /**
      * 
@@ -1005,21 +1021,6 @@ export interface AuthenticationApiAuthenticateSIWERequest {
      * @memberof AuthenticationApiauthenticateSIWE
      */
     sIWEAuthenticateRequest: SIWEAuthenticateRequest
-}
-
-export interface AuthenticationApiAuthorizeWithOAuthTokenRequest {
-    /**
-     * OAuth provider
-     * @type AuthProvider
-     * @memberof AuthenticationApiauthorizeWithOAuthToken
-     */
-    provider: AuthProvider
-    /**
-     * 
-     * @type OAuthRequest
-     * @memberof AuthenticationApiauthorizeWithOAuthToken
-     */
-    oAuthRequest: OAuthRequest
 }
 
 export interface AuthenticationApiGetJwksRequest {
@@ -1143,6 +1144,15 @@ export interface AuthenticationApiLoginOIDCRequest {
      * @memberof AuthenticationApiloginOIDC
      */
     xGame?: string
+}
+
+export interface AuthenticationApiLoginWithIdTokenRequest {
+    /**
+     * 
+     * @type LoginWithIdTokenRequest
+     * @memberof AuthenticationApiloginWithIdToken
+     */
+    loginWithIdTokenRequest: LoginWithIdTokenRequest
 }
 
 export interface AuthenticationApiLogoutRequest {
@@ -1277,21 +1287,6 @@ export interface AuthenticationApiVerifyEmailRequest {
     verifyEmailRequest: VerifyEmailRequest
 }
 
-export interface AuthenticationApiVerifyOAuthRequest {
-    /**
-     * OAuth provider
-     * @type AuthProvider
-     * @memberof AuthenticationApiverifyOAuth
-     */
-    provider: AuthProvider
-    /**
-     * 
-     * @type OAuthRequest
-     * @memberof AuthenticationApiverifyOAuth
-     */
-    oAuthRequest: OAuthRequest
-}
-
 export interface AuthenticationApiVerifyOAuthTokenRequest {
     /**
      * 
@@ -1309,29 +1304,11 @@ export class ObjectAuthenticationApi {
     }
 
     /**
-     * Deprecated
-     * Authenticate player with oauth token.
-     * @param param the request object
-     */
-    public authenticateOAuth(param: AuthenticationApiAuthenticateOAuthRequest, options?: Configuration): Promise<AuthResponse> {
-        return this.api.authenticateOAuth(param.authenticateOAuthRequest,  options).toPromise();
-    }
-
-    /**
      * Authenticate player with SIWE
      * @param param the request object
      */
     public authenticateSIWE(param: AuthenticationApiAuthenticateSIWERequest, options?: Configuration): Promise<void | AuthResponse> {
         return this.api.authenticateSIWE(param.sIWEAuthenticateRequest,  options).toPromise();
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider, creates or retrieves a player based on his email, and returns the jwt token for the player together with the player id.
-     * Authorize player with token.
-     * @param param the request object
-     */
-    public authorizeWithOAuthToken(param: AuthenticationApiAuthorizeWithOAuthTokenRequest, options?: Configuration): Promise<DeprecatedAuthenticatedPlayerResponse> {
-        return this.api.authorizeWithOAuthToken(param.provider, param.oAuthRequest,  options).toPromise();
     }
 
     /**
@@ -1363,7 +1340,7 @@ export class ObjectAuthenticationApi {
     /**
      * @param param the request object
      */
-    public linkEmail(param: AuthenticationApiLinkEmailRequest, options?: Configuration): Promise<AuthPlayerResponse> {
+    public linkEmail(param: AuthenticationApiLinkEmailRequest, options?: Configuration): Promise<LinkEmail200Response> {
         return this.api.linkEmail(param.loginRequest, param.xGame,  options).toPromise();
     }
 
@@ -1396,7 +1373,7 @@ export class ObjectAuthenticationApi {
      * Email and password login.
      * @param param the request object
      */
-    public loginEmailPassword(param: AuthenticationApiLoginEmailPasswordRequest, options?: Configuration): Promise<AuthResponse> {
+    public loginEmailPassword(param: AuthenticationApiLoginEmailPasswordRequest, options?: Configuration): Promise<SignupEmailPassword201Response> {
         return this.api.loginEmailPassword(param.loginRequest, param.xGame,  options).toPromise();
     }
 
@@ -1407,6 +1384,14 @@ export class ObjectAuthenticationApi {
      */
     public loginOIDC(param: AuthenticationApiLoginOIDCRequest, options?: Configuration): Promise<AuthResponse> {
         return this.api.loginOIDC(param.loginOIDCRequest, param.xGame,  options).toPromise();
+    }
+
+    /**
+     * Authenticate player with oauth token.
+     * @param param the request object
+     */
+    public loginWithIdToken(param: AuthenticationApiLoginWithIdTokenRequest, options?: Configuration): Promise<AuthResponse> {
+        return this.api.loginWithIdToken(param.loginWithIdTokenRequest,  options).toPromise();
     }
 
     /**
@@ -1483,7 +1468,7 @@ export class ObjectAuthenticationApi {
      * Email and password signup.
      * @param param the request object
      */
-    public signupEmailPassword(param: AuthenticationApiSignupEmailPasswordRequest, options?: Configuration): Promise<AuthResponse> {
+    public signupEmailPassword(param: AuthenticationApiSignupEmailPasswordRequest, options?: Configuration): Promise<SignupEmailPassword201Response> {
         return this.api.signupEmailPassword(param.signupRequest, param.xGame,  options).toPromise();
     }
 
@@ -1525,15 +1510,6 @@ export class ObjectAuthenticationApi {
      */
     public verifyEmail(param: AuthenticationApiVerifyEmailRequest, options?: Configuration): Promise<void> {
         return this.api.verifyEmail(param.verifyEmailRequest,  options).toPromise();
-    }
-
-    /**
-     * The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.  Returns the latest 10 transaction intents for the player.
-     * Retrieve player by token.
-     * @param param the request object
-     */
-    public verifyOAuth(param: AuthenticationApiVerifyOAuthRequest, options?: Configuration): Promise<PlayerResponse> {
-        return this.api.verifyOAuth(param.provider, param.oAuthRequest,  options).toPromise();
     }
 
     /**
@@ -1746,96 +1722,6 @@ export class ObjectDefaultApi {
      */
     public list(param: DefaultApiListRequest = {}, options?: Configuration): Promise<AuthProviderListResponse> {
         return this.api.list(param.enabled,  options).toPromise();
-    }
-
-}
-
-import { ObservableDevicesApi } from "./ObservableAPI";
-import { DevicesApiRequestFactory, DevicesApiResponseProcessor} from "../apis/DevicesApi";
-
-export interface DevicesApiCreateDeviceRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DevicesApicreateDevice
-     */
-    signerId: string
-    /**
-     * 
-     * @type DeviceCreateRequest
-     * @memberof DevicesApicreateDevice
-     */
-    deviceCreateRequest: DeviceCreateRequest
-}
-
-export interface DevicesApiGetDeviceRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DevicesApigetDevice
-     */
-    signerId: string
-    /**
-     * 
-     * @type string
-     * @memberof DevicesApigetDevice
-     */
-    deviceId: string
-}
-
-export interface DevicesApiListDevicesRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DevicesApilistDevices
-     */
-    signerId: string
-    /**
-     * 
-     * @type number
-     * @memberof DevicesApilistDevices
-     */
-    limit?: number
-    /**
-     * 
-     * @type number
-     * @memberof DevicesApilistDevices
-     */
-    skip?: number
-    /**
-     * 
-     * @type &#39;asc&#39; | &#39;desc&#39;
-     * @memberof DevicesApilistDevices
-     */
-    order?: 'asc' | 'desc'
-}
-
-export class ObjectDevicesApi {
-    private api: ObservableDevicesApi
-
-    public constructor(configuration: Configuration, requestFactory?: DevicesApiRequestFactory, responseProcessor?: DevicesApiResponseProcessor) {
-        this.api = new ObservableDevicesApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * @param param the request object
-     */
-    public createDevice(param: DevicesApiCreateDeviceRequest, options?: Configuration): Promise<DeviceResponse> {
-        return this.api.createDevice(param.signerId, param.deviceCreateRequest,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public getDevice(param: DevicesApiGetDeviceRequest, options?: Configuration): Promise<DeviceResponse> {
-        return this.api.getDevice(param.signerId, param.deviceId,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public listDevices(param: DevicesApiListDevicesRequest, options?: Configuration): Promise<BaseEntityListResponseDeviceResponse> {
-        return this.api.listDevices(param.signerId, param.limit, param.skip, param.order,  options).toPromise();
     }
 
 }
@@ -3286,6 +3172,21 @@ export interface SettingsApiGetVerificationPayloadRequest {
     address: string
 }
 
+export interface SettingsApiSignPayloadDeveloperAccountRequest {
+    /**
+     * Specifies the unique developer account ID (starts with dac_).
+     * @type string
+     * @memberof SettingsApisignPayloadDeveloperAccount
+     */
+    id: string
+    /**
+     * 
+     * @type SignPayloadRequest
+     * @memberof SettingsApisignPayloadDeveloperAccount
+     */
+    signPayloadRequest: SignPayloadRequest
+}
+
 export interface SettingsApiUpdateDeveloperAccountRequest {
     /**
      * 
@@ -3309,7 +3210,7 @@ export class ObjectSettingsApi {
     }
 
     /**
-     * Create or add a developer account. Developer accounts can be used as for escrow, minting and transferring assets. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
+     * Create or add a developer account. To add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor
      * Create a developer account.
      * @param param the request object
      */
@@ -3354,112 +3255,21 @@ export class ObjectSettingsApi {
     }
 
     /**
+     * Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.
+     * Sign a given payload
+     * @param param the request object
+     */
+    public signPayloadDeveloperAccount(param: SettingsApiSignPayloadDeveloperAccountRequest, options?: Configuration): Promise<SignPayloadResponse> {
+        return this.api.signPayloadDeveloperAccount(param.id, param.signPayloadRequest,  options).toPromise();
+    }
+
+    /**
      * Update a developer account.
      * Update a developer account.
      * @param param the request object
      */
     public updateDeveloperAccount(param: SettingsApiUpdateDeveloperAccountRequest, options?: Configuration): Promise<DeveloperAccountResponse> {
         return this.api.updateDeveloperAccount(param.id, param.updateDeveloperAccountCreateRequest,  options).toPromise();
-    }
-
-}
-
-import { ObservableSignersApi } from "./ObservableAPI";
-import { SignersApiRequestFactory, SignersApiResponseProcessor} from "../apis/SignersApi";
-
-export interface SignersApiCreateSignerRequest {
-    /**
-     * 
-     * @type CreateSignerRequest
-     * @memberof SignersApicreateSigner
-     */
-    createSignerRequest: CreateSignerRequest
-}
-
-export interface SignersApiExportSignerRequest {
-    /**
-     * 
-     * @type string
-     * @memberof SignersApiexportSigner
-     */
-    signerId: string
-}
-
-export interface SignersApiGetSignerRequest {
-    /**
-     * 
-     * @type string
-     * @memberof SignersApigetSigner
-     */
-    signerId: string
-}
-
-export interface SignersApiListSignersRequest {
-    /**
-     * 
-     * @type number
-     * @memberof SignersApilistSigners
-     */
-    limit?: number
-    /**
-     * 
-     * @type number
-     * @memberof SignersApilistSigners
-     */
-    skip?: number
-    /**
-     * 
-     * @type &#39;asc&#39; | &#39;desc&#39;
-     * @memberof SignersApilistSigners
-     */
-    order?: 'asc' | 'desc'
-    /**
-     * 
-     * @type string
-     * @memberof SignersApilistSigners
-     */
-    signerType?: string
-    /**
-     * 
-     * @type string
-     * @memberof SignersApilistSigners
-     */
-    account?: string
-}
-
-export class ObjectSignersApi {
-    private api: ObservableSignersApi
-
-    public constructor(configuration: Configuration, requestFactory?: SignersApiRequestFactory, responseProcessor?: SignersApiResponseProcessor) {
-        this.api = new ObservableSignersApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * @param param the request object
-     */
-    public createSigner(param: SignersApiCreateSignerRequest, options?: Configuration): Promise<SignerResponse> {
-        return this.api.createSigner(param.createSignerRequest,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public exportSigner(param: SignersApiExportSignerRequest, options?: Configuration): Promise<void> {
-        return this.api.exportSigner(param.signerId,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public getSigner(param: SignersApiGetSignerRequest, options?: Configuration): Promise<SignerResponse> {
-        return this.api.getSigner(param.signerId,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public listSigners(param: SignersApiListSignersRequest = {}, options?: Configuration): Promise<ListResponseSigner> {
-        return this.api.listSigners(param.limit, param.skip, param.order, param.signerType, param.account,  options).toPromise();
     }
 
 }
@@ -3778,7 +3588,7 @@ export interface TransactionIntentsApiGetTransactionIntentsRequest {
      */
     expand?: Array<TransactionIntentResponseExpandable>
     /**
-     * The chain ID. Must be a [supported chain](/chains).
+     * The chain ID. Must be a [supported chain](/development/chains).
      * @type number
      * @memberof TransactionIntentsApigetTransactionIntents
      */

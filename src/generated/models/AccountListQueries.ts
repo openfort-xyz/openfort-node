@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -24,6 +24,10 @@ export class AccountListQueries {
     */
     'skip'?: number;
     'order'?: SortOrder;
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId'?: number;
     /**
     * Specifies the unique player ID (starts with pla_)
     */
@@ -57,6 +61,12 @@ export class AccountListQueries {
             "baseName": "order",
             "type": "SortOrder",
             "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "player",

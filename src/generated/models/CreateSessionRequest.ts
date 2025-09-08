@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -18,7 +18,7 @@ export class CreateSessionRequest {
     */
     'address': string;
     /**
-    * The chain ID. Must be a [supported chain](/chains).
+    * The chain ID. Must be a [supported chain](/development/chains).
     */
     'chainId': number;
     /**
@@ -53,6 +53,10 @@ export class CreateSessionRequest {
     * The player ID (starts with pla_).
     */
     'player'?: string;
+    /**
+    * ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).  When providing a Player and ChainID, you can omit this parameter.
+    */
+    'account'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -114,6 +118,12 @@ export class CreateSessionRequest {
         {
             "name": "player",
             "baseName": "player",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
             "type": "string",
             "format": ""
         }    ];

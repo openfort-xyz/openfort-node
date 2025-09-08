@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -10,12 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { Signer } from '../models/Signer';
+import { AccountV2Response } from '../models/AccountV2Response';
+import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
 import { HttpFile } from '../http/http';
 
-export class ListResponseSigner {
+export class BaseEntityListResponseAccountV2Response {
+    'object': ResponseTypeLIST;
     'url': string;
-    'data': Array<Signer>;
+    'data': Array<AccountV2Response>;
     'start': number;
     'end': number;
     'total': number;
@@ -23,6 +25,12 @@ export class ListResponseSigner {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "ResponseTypeLIST",
+            "format": ""
+        },
         {
             "name": "url",
             "baseName": "url",
@@ -32,33 +40,35 @@ export class ListResponseSigner {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<Signer>",
+            "type": "Array<AccountV2Response>",
             "format": ""
         },
         {
             "name": "start",
             "baseName": "start",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "end",
             "baseName": "end",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         },
         {
             "name": "total",
             "baseName": "total",
             "type": "number",
-            "format": "double"
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return ListResponseSigner.attributeTypeMap;
+        return BaseEntityListResponseAccountV2Response.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
 

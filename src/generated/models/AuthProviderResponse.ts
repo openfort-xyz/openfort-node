@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -12,4 +12,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type AuthProviderResponse = "email" | "wallet" | "google" | "apple" | "twitter" | "discord" | "epic_games" | "facebook" | "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" | "google_native" | "apple_native" ;
+export type AuthProviderResponse = "email" | "wallet" | "google" | "apple" | "twitter" | "discord" | "epic_games" | "facebook" | "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;

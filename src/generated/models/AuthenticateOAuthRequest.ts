@@ -1,6 +1,6 @@
 /**
  * Openfort API
- * Complete Openfort API references and guides can be found at: https://openfort.xyz/docs
+ * Complete Openfort API references and guides can be found at: https://www.openfort.io/docs
  *
  * OpenAPI spec version: 1.0.0
  * Contact: founders@openfort.xyz
@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvders } from '../models/OAuthProvders';
+import { AuthenticateOAuthRequestProvider } from '../models/AuthenticateOAuthRequestProvider';
 import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
 import { TokenType } from '../models/TokenType';
 import { HttpFile } from '../http/http';
 
 export class AuthenticateOAuthRequest {
-    'provider': OAuthProvders;
+    'provider': AuthenticateOAuthRequestProvider;
     /**
     * Token to be verified
     */
@@ -33,7 +33,7 @@ export class AuthenticateOAuthRequest {
         {
             "name": "provider",
             "baseName": "provider",
-            "type": "OAuthProvders",
+            "type": "AuthenticateOAuthRequestProvider",
             "format": ""
         },
         {
