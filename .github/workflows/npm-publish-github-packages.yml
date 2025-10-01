@@ -27,7 +27,7 @@ jobs:
       contents: read
     steps:
       - name: Clone repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           submodules: "recursive"
 
@@ -49,13 +49,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
-      contents: write        # To push commits and tags
-      pull-requests: write   # To create and update PRs
-      issues: write          # To comment on issues/PRs
-      id-token: write        # For NPM provenance
+      contents: write # To push commits and tags
+      pull-requests: write # To create and update PRs
+      issues: write # To comment on issues/PRs
+      id-token: write # For NPM provenance
     steps:
       - name: Clone repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           submodules: "recursive"
 
