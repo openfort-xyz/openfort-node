@@ -10,66 +10,65 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION';
-import { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT';
-import { HttpFile } from '../http/http';
+import type { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE'
+import type { PolicyRateLimitGASPERTRANSACTION } from '../models/PolicyRateLimitGASPERTRANSACTION'
+import type { PolicyRuleTypeRATELIMIT } from '../models/PolicyRuleTypeRATELIMIT'
 
 export class GasPerTransactionLimitPolicyRuleResponse {
-    'id': string;
-    'object': EntityTypePOLICYRULE;
-    'createdAt': number;
-    'type': PolicyRuleTypeRATELIMIT;
-    'functionName': PolicyRateLimitGASPERTRANSACTION;
-    'gasLimit': string;
+  id: string
+  object: EntityTypePOLICYRULE
+  createdAt: number
+  type: PolicyRuleTypeRATELIMIT
+  functionName: PolicyRateLimitGASPERTRANSACTION
+  gasLimit: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "PolicyRuleTypeRATELIMIT",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
-            "type": "PolicyRateLimitGASPERTRANSACTION",
-            "format": ""
-        },
-        {
-            "name": "gasLimit",
-            "baseName": "gasLimit",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypePOLICYRULE',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'PolicyRuleTypeRATELIMIT',
+      format: '',
+    },
+    {
+      name: 'functionName',
+      baseName: 'functionName',
+      type: 'PolicyRateLimitGASPERTRANSACTION',
+      format: '',
+    },
+    {
+      name: 'gasLimit',
+      baseName: 'gasLimit',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return GasPerTransactionLimitPolicyRuleResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return GasPerTransactionLimitPolicyRuleResponse.attributeTypeMap
+  }
 }
-
-
-

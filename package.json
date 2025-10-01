@@ -33,9 +33,15 @@
   "scripts": {
     "prebuild": "node -p \"'export const VERSION = ' + JSON.stringify(require('./package.json').version) + ';\\nexport const PACKAGE = ' + JSON.stringify(require('./package.json').name) + ';'\" > src/version.ts",
     "build": "tsc",
-    "format": "rome format . --write",
-    "lint": "rome check .",
-    "prepublishOnly": "yarn install && yarn build",
+    "prepublishOnly": "pnpm install && pnpm build",
+    "changeset": "changeset",
+    "changeset:version": "pnpm install --lockfile-only && changeset version",
+    "changeset:publish": "pnpm build && changeset publish",
+    "changeset:prepublish": "pnpm build",
+    "check": "biome check --write --unsafe",
+    "check:types": "tsc --noEmit",
+    "format": "biome format --write",
+    "lint": "biome lint",
     "docs": "typedoc --entryPoints src/index.ts --out docs/ --includes src/**/*.ts",
     "docs:json": "typedoc --entryPoints src/index.ts --includes src/**/*.ts --json docs/spec.json --excludeExternals"
   },
@@ -52,7 +58,10 @@
     "typedoc": "^0.25.0"
   },
   "devDependencies": {
-    "rome": "^12.1.3",
-    "typescript": "^5.2.0"
-  }
+    "@biomejs/biome": "^2.2.4",
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.29.7",
+    "typescript": "^5.4.3"
+  },
+  "packageManager": "pnpm@10.16.1"
 }

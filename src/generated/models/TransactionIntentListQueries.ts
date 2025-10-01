@@ -10,110 +10,109 @@
  * Do not edit the class manually.
  */
 
-import { SortOrder } from '../models/SortOrder';
-import { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable';
-import { HttpFile } from '../http/http';
+import type { SortOrder } from '../models/SortOrder'
+import type { TransactionIntentResponseExpandable } from '../models/TransactionIntentResponseExpandable'
 
 export class TransactionIntentListQueries {
-    /**
-    * Specifies the maximum number of records to return.
-    */
-    'limit'?: number;
-    /**
-    * Specifies the offset for the first records to return.
-    */
-    'skip'?: number;
-    'order'?: SortOrder;
-    /**
-    * Specifies the fields to expand in the response.
-    */
-    'expand'?: Array<TransactionIntentResponseExpandable>;
-    /**
-    * The chain ID. Must be a [supported chain](/development/chains).
-    */
-    'chainId'?: number;
-    /**
-    * Filter by account ID or developer account (starts with acc_ or dac_ respectively).
-    */
-    'account'?: Array<string>;
-    /**
-    * Filter by player ID (starts with pla_).
-    */
-    'player'?: Array<string>;
-    /**
-    * Filter by successful (1) or failed (0) transaction intents.
-    */
-    'status'?: number;
-    /**
-    * Filter by policy ID (starts with pol_).
-    */
-    'policy'?: Array<string>;
+  /**
+   * Specifies the maximum number of records to return.
+   */
+  limit?: number
+  /**
+   * Specifies the offset for the first records to return.
+   */
+  skip?: number
+  order?: SortOrder
+  /**
+   * Specifies the fields to expand in the response.
+   */
+  expand?: TransactionIntentResponseExpandable[]
+  /**
+   * The chain ID. Must be a [supported chain](/development/chains).
+   */
+  chainId?: number
+  /**
+   * Filter by account ID or developer account (starts with acc_ or dac_ respectively).
+   */
+  account?: string[]
+  /**
+   * Filter by player ID (starts with pla_).
+   */
+  player?: string[]
+  /**
+   * Filter by successful (1) or failed (0) transaction intents.
+   */
+  status?: number
+  /**
+   * Filter by policy ID (starts with pol_).
+   */
+  policy?: string[]
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "skip",
-            "baseName": "skip",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "order",
-            "baseName": "order",
-            "type": "SortOrder",
-            "format": ""
-        },
-        {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<TransactionIntentResponseExpandable>",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "Array<string>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'limit',
+      baseName: 'limit',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'skip',
+      baseName: 'skip',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'order',
+      baseName: 'order',
+      type: 'SortOrder',
+      format: '',
+    },
+    {
+      name: 'expand',
+      baseName: 'expand',
+      type: 'Array<TransactionIntentResponseExpandable>',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'Array<string>',
+      format: '',
+    },
+    {
+      name: 'player',
+      baseName: 'player',
+      type: 'Array<string>',
+      format: '',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'policy',
+      baseName: 'policy',
+      type: 'Array<string>',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return TransactionIntentListQueries.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return TransactionIntentListQueries.attributeTypeMap
+  }
 }
-
-
-

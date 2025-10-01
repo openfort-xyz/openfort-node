@@ -10,64 +10,63 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeDEVICE } from '../models/EntityTypeDEVICE';
-import { HttpFile } from '../http/http';
+import type { EntityTypeDEVICE } from '../models/EntityTypeDEVICE'
 
 export class DeviceResponse {
-    'id': string;
-    'object': EntityTypeDEVICE;
-    'createdAt': number;
-    'account': string;
-    'share': string;
-    'isPrimary': boolean;
+  id: string
+  object: EntityTypeDEVICE
+  createdAt: number
+  account: string
+  share: string
+  isPrimary: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeDEVICE",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "share",
-            "baseName": "share",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "isPrimary",
-            "baseName": "isPrimary",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeDEVICE',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'share',
+      baseName: 'share',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'isPrimary',
+      baseName: 'isPrimary',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return DeviceResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return DeviceResponse.attributeTypeMap
+  }
 }
-
-
-

@@ -10,43 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeUSER } from '../models/EntityTypeUSER';
-import { HttpFile } from '../http/http';
+import type { EntityTypeUSER } from '../models/EntityTypeUSER'
 
 export class UserProjectDeleteResponse {
-    'id': string;
-    'object': EntityTypeUSER;
-    'deleted': boolean;
+  id: string
+  object: EntityTypeUSER
+  deleted: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeUSER",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeUSER',
+      format: '',
+    },
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UserProjectDeleteResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return UserProjectDeleteResponse.attributeTypeMap
+  }
 }
-
-
-

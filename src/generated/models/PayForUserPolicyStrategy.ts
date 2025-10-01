@@ -10,36 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER';
-import { HttpFile } from '../http/http';
+import type { SponsorSchemaPAYFORUSER } from '../models/SponsorSchemaPAYFORUSER'
 
 export class PayForUserPolicyStrategy {
-    'sponsorSchema': SponsorSchemaPAYFORUSER;
-    'depositor'?: string | null;
+  sponsorSchema: SponsorSchemaPAYFORUSER
+  depositor?: string | null
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "sponsorSchema",
-            "baseName": "sponsorSchema",
-            "type": "SponsorSchemaPAYFORUSER",
-            "format": ""
-        },
-        {
-            "name": "depositor",
-            "baseName": "depositor",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'sponsorSchema',
+      baseName: 'sponsorSchema',
+      type: 'SponsorSchemaPAYFORUSER',
+      format: '',
+    },
+    {
+      name: 'depositor',
+      baseName: 'depositor',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PayForUserPolicyStrategy.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PayForUserPolicyStrategy.attributeTypeMap
+  }
 }
-
-
-

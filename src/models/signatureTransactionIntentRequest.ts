@@ -1,4 +1,4 @@
 export interface SignatureTransactionIntentRequest {
-    id: string;
-    signature: string;
+  id: string
+  signature: string
 }

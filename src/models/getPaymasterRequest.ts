@@ -1,3 +1,3 @@
 export interface GetPaymasterRequest {
-    id: string;
+  id: string
 }

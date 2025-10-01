@@ -10,37 +10,36 @@
  * Do not edit the class manually.
  */
 
-import { NextActionPayload } from '../models/NextActionPayload';
-import { NextActionType } from '../models/NextActionType';
-import { HttpFile } from '../http/http';
+import type { NextActionPayload } from '../models/NextActionPayload'
+import type { NextActionType } from '../models/NextActionType'
 
 export class NextActionResponse {
-    'type': NextActionType;
-    'payload': NextActionPayload;
+  type: NextActionType
+  payload: NextActionPayload
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "NextActionType",
-            "format": ""
-        },
-        {
-            "name": "payload",
-            "baseName": "payload",
-            "type": "NextActionPayload",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'NextActionType',
+      format: '',
+    },
+    {
+      name: 'payload',
+      baseName: 'payload',
+      type: 'NextActionPayload',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return NextActionResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return NextActionResponse.attributeTypeMap
+  }
 }
-
-
-

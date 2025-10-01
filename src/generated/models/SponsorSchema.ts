@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type SponsorSchema = "pay_for_user" | "charge_custom_tokens" | "fixed_rate" ;
+export type SponsorSchema =
+  | 'pay_for_user'
+  | 'charge_custom_tokens'
+  | 'fixed_rate'

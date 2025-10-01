@@ -10,40 +10,40 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class CheckoutSubscriptionRequest {
-    'plan': string;
-    'cancelUrl'?: string;
-    'successUrl'?: string;
+  plan: string
+  cancelUrl?: string
+  successUrl?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "plan",
-            "baseName": "plan",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "cancelUrl",
-            "baseName": "cancelUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "successUrl",
-            "baseName": "successUrl",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'plan',
+      baseName: 'plan',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'cancelUrl',
+      baseName: 'cancelUrl',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'successUrl',
+      baseName: 'successUrl',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CheckoutSubscriptionRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CheckoutSubscriptionRequest.attributeTypeMap
+  }
 }
-

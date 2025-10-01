@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class RegisterEmbeddedV2Request {
-    'account': string;
-    'share': string;
+  account: string
+  share: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "share",
-            "baseName": "share",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'share',
+      baseName: 'share',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return RegisterEmbeddedV2Request.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return RegisterEmbeddedV2Request.attributeTypeMap
+  }
 }
-

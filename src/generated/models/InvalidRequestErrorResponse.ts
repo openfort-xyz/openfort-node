@@ -10,27 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { InvalidRequestError } from '../models/InvalidRequestError';
-import { HttpFile } from '../http/http';
+import type { InvalidRequestError } from '../models/InvalidRequestError'
 
 export class InvalidRequestErrorResponse {
-    'error': InvalidRequestError;
+  error: InvalidRequestError
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "error",
-            "baseName": "error",
-            "type": "InvalidRequestError",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'error',
+      baseName: 'error',
+      type: 'InvalidRequestError',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return InvalidRequestErrorResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return InvalidRequestErrorResponse.attributeTypeMap
+  }
 }
-

@@ -10,58 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { APITopicBALANCEPROJECT } from '../models/APITopicBALANCEPROJECT';
-import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
-import { HttpFile } from '../http/http';
+import type { APITopicBALANCEPROJECT } from '../models/APITopicBALANCEPROJECT'
+import type { EntityTypeEVENT } from '../models/EntityTypeEVENT'
 
 export class BalanceEventResponse {
-    'id': string;
-    'object': EntityTypeEVENT;
-    'createdAt': number;
-    'topic': APITopicBALANCEPROJECT;
-    'threshold': string;
+  id: string
+  object: EntityTypeEVENT
+  createdAt: number
+  topic: APITopicBALANCEPROJECT
+  threshold: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeEVENT",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "topic",
-            "baseName": "topic",
-            "type": "APITopicBALANCEPROJECT",
-            "format": ""
-        },
-        {
-            "name": "threshold",
-            "baseName": "threshold",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeEVENT',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'topic',
+      baseName: 'topic',
+      type: 'APITopicBALANCEPROJECT',
+      format: '',
+    },
+    {
+      name: 'threshold',
+      baseName: 'threshold',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return BalanceEventResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return BalanceEventResponse.attributeTypeMap
+  }
 }
-
-
-

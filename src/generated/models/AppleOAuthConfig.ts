@@ -10,59 +10,58 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderAPPLE } from '../models/OAuthProviderAPPLE';
-import { HttpFile } from '../http/http';
+import type { OAuthProviderAPPLE } from '../models/OAuthProviderAPPLE'
 
 export class AppleOAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': OAuthProviderAPPLE;
-    /**
-    * Apple API client ID (Service ID).
-    */
-    'clientId': string;
-    /**
-    * Pre-generated client secret JWT
-    */
-    'clientSecret'?: string;
+  /**
+   * Enable OAuth provider.
+   */
+  enabled: boolean
+  provider: OAuthProviderAPPLE
+  /**
+   * Apple API client ID (Service ID).
+   */
+  clientId: string
+  /**
+   * Pre-generated client secret JWT
+   */
+  clientSecret?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProviderAPPLE",
-            "format": ""
-        },
-        {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientSecret",
-            "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'enabled',
+      baseName: 'enabled',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'OAuthProviderAPPLE',
+      format: '',
+    },
+    {
+      name: 'clientId',
+      baseName: 'clientId',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'clientSecret',
+      baseName: 'clientSecret',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return AppleOAuthConfig.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return AppleOAuthConfig.attributeTypeMap
+  }
 }
-
-
-

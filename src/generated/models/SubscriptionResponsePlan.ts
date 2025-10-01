@@ -10,40 +10,40 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class SubscriptionResponsePlan {
-    'price': number;
-    'name': string;
-    'id': string;
+  price: number
+  name: string
+  id: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "price",
-            "baseName": "price",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'price',
+      baseName: 'price',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return SubscriptionResponsePlan.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return SubscriptionResponsePlan.attributeTypeMap
+  }
 }
-

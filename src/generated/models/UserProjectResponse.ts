@@ -10,79 +10,78 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeUSER } from '../models/EntityTypeUSER';
-import { UserProjectRole } from '../models/UserProjectRole';
-import { HttpFile } from '../http/http';
+import type { EntityTypeUSER } from '../models/EntityTypeUSER'
+import type { UserProjectRole } from '../models/UserProjectRole'
 
 export class UserProjectResponse {
-    'id': string;
-    'object': EntityTypeUSER;
-    'createdAt': number;
-    'updatedAt': number;
-    'firstName': string;
-    'lastName': string;
-    'role': UserProjectRole;
-    'email': string;
+  id: string
+  object: EntityTypeUSER
+  createdAt: number
+  updatedAt: number
+  firstName: string
+  lastName: string
+  role: UserProjectRole
+  email: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeUSER",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "firstName",
-            "baseName": "firstName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "lastName",
-            "baseName": "lastName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "role",
-            "baseName": "role",
-            "type": "UserProjectRole",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeUSER',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'updatedAt',
+      baseName: 'updatedAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'firstName',
+      baseName: 'firstName',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'lastName',
+      baseName: 'lastName',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'role',
+      baseName: 'role',
+      type: 'UserProjectRole',
+      format: '',
+    },
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UserProjectResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return UserProjectResponse.attributeTypeMap
+  }
 }
-
-
-

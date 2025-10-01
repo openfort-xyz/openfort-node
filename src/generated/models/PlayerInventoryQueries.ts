@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class PlayerInventoryQueries {
-    /**
-    * Filter by chain id.
-    */
-    'chainId': number;
+  /**
+   * Filter by chain id.
+   */
+  chainId: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PlayerInventoryQueries.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PlayerInventoryQueries.attributeTypeMap
+  }
 }
-

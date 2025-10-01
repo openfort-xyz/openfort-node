@@ -10,72 +10,71 @@
  * Do not edit the class manually.
  */
 
-import { APITriggerType } from '../models/APITriggerType';
-import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
-import { HttpFile } from '../http/http';
+import type { APITriggerType } from '../models/APITriggerType'
+import type { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER'
 
 export class TriggerResponse {
-    'id': string;
-    'object': EntityTypeTRIGGER;
-    'createdAt': number;
-    'target': string;
-    'type': APITriggerType;
-    'subscription': string;
-    'updatedAt'?: number;
+  id: string
+  object: EntityTypeTRIGGER
+  createdAt: number
+  target: string
+  type: APITriggerType
+  subscription: string
+  updatedAt?: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeTRIGGER",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "target",
-            "baseName": "target",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "APITriggerType",
-            "format": ""
-        },
-        {
-            "name": "subscription",
-            "baseName": "subscription",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeTRIGGER',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'target',
+      baseName: 'target',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'APITriggerType',
+      format: '',
+    },
+    {
+      name: 'subscription',
+      baseName: 'subscription',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'updatedAt',
+      baseName: 'updatedAt',
+      type: 'number',
+      format: 'double',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return TriggerResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return TriggerResponse.attributeTypeMap
+  }
 }
-
-
-

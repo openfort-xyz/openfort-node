@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type PolicyRateLimitGASPERTRANSACTION = "gas_per_transaction" ;
+export type PolicyRateLimitGASPERTRANSACTION = 'gas_per_transaction'

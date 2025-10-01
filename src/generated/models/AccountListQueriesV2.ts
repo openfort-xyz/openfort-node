@@ -10,99 +10,98 @@
  * Do not edit the class manually.
  */
 
-import { SortOrder } from '../models/SortOrder';
-import { HttpFile } from '../http/http';
+import type { SortOrder } from '../models/SortOrder'
 
 export class AccountListQueriesV2 {
-    /**
-    * Specifies the maximum number of records to return.
-    */
-    'limit'?: number;
-    /**
-    * Specifies the offset for the first records to return.
-    */
-    'skip'?: number;
-    'order'?: SortOrder;
-    /**
-    * The chain ID. Must be a [supported chain](/development/chains).
-    */
-    'chainId'?: number;
-    /**
-    * Specifies the unique user ID (starts with pla_)
-    */
-    'user'?: string;
-    /**
-    * The chain type. Must be either \"EVM\" or \"SVM\".
-    */
-    'chainType'?: string;
-    /**
-    * Specifies the type of account. Must be either \"Smart Account\" or \"Externally Owned Account\".
-    */
-    'accountType'?: string;
-    /**
-    * Specifies the account address
-    */
-    'address'?: string;
+  /**
+   * Specifies the maximum number of records to return.
+   */
+  limit?: number
+  /**
+   * Specifies the offset for the first records to return.
+   */
+  skip?: number
+  order?: SortOrder
+  /**
+   * The chain ID. Must be a [supported chain](/development/chains).
+   */
+  chainId?: number
+  /**
+   * Specifies the unique user ID (starts with pla_)
+   */
+  user?: string
+  /**
+   * The chain type. Must be either \"EVM\" or \"SVM\".
+   */
+  chainType?: string
+  /**
+   * Specifies the type of account. Must be either \"Smart Account\" or \"Externally Owned Account\".
+   */
+  accountType?: string
+  /**
+   * Specifies the account address
+   */
+  address?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "skip",
-            "baseName": "skip",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "order",
-            "baseName": "order",
-            "type": "SortOrder",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "user",
-            "baseName": "user",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "chainType",
-            "baseName": "chainType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "accountType",
-            "baseName": "accountType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'limit',
+      baseName: 'limit',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'skip',
+      baseName: 'skip',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'order',
+      baseName: 'order',
+      type: 'SortOrder',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'user',
+      baseName: 'user',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'chainType',
+      baseName: 'chainType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'accountType',
+      baseName: 'accountType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return AccountListQueriesV2.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return AccountListQueriesV2.attributeTypeMap
+  }
 }
-
-
-

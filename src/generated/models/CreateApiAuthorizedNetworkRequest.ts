@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class CreateApiAuthorizedNetworkRequest {
-    /**
-    * The name of the authorized network.
-    */
-    'name': string;
-    /**
-    * The network address.
-    */
-    'network': string;
+  /**
+   * The name of the authorized network.
+   */
+  name: string
+  /**
+   * The network address.
+   */
+  network: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "network",
-            "baseName": "network",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'network',
+      baseName: 'network',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CreateApiAuthorizedNetworkRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CreateApiAuthorizedNetworkRequest.attributeTypeMap
+  }
 }
-

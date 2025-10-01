@@ -10,49 +10,48 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyType } from '../models/ApiKeyType';
-import { HttpFile } from '../http/http';
+import type { ApiKeyType } from '../models/ApiKeyType'
 
 export class UpdateProjectApiKeyRequest {
-    'type': ApiKeyType;
-    /**
-    * The API key to update.
-    */
-    'uuid': string;
-    /**
-    * Whether key to use to sign webhooks.
-    */
-    'use_for_webhooks'?: boolean;
+  type: ApiKeyType
+  /**
+   * The API key to update.
+   */
+  uuid: string
+  /**
+   * Whether key to use to sign webhooks.
+   */
+  use_for_webhooks?: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "ApiKeyType",
-            "format": ""
-        },
-        {
-            "name": "uuid",
-            "baseName": "uuid",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "use_for_webhooks",
-            "baseName": "use_for_webhooks",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'ApiKeyType',
+      format: '',
+    },
+    {
+      name: 'uuid',
+      baseName: 'uuid',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'use_for_webhooks',
+      baseName: 'use_for_webhooks',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UpdateProjectApiKeyRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return UpdateProjectApiKeyRequest.attributeTypeMap
+  }
 }
-
-
-

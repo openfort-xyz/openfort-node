@@ -10,59 +10,58 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM';
-import { HttpFile } from '../http/http';
+import type { ThirdPartyOAuthProviderCUSTOM } from '../models/ThirdPartyOAuthProviderCUSTOM'
 
 export class CustomAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderCUSTOM;
-    /**
-    * Headers to send with the request
-    */
-    'headers'?: string;
-    /**
-    * URL to send the request to to verify the payload
-    */
-    'authenticationUrl': string;
+  /**
+   * Enable OAuth provider.
+   */
+  enabled: boolean
+  provider: ThirdPartyOAuthProviderCUSTOM
+  /**
+   * Headers to send with the request
+   */
+  headers?: string
+  /**
+   * URL to send the request to to verify the payload
+   */
+  authenticationUrl: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderCUSTOM",
-            "format": ""
-        },
-        {
-            "name": "headers",
-            "baseName": "headers",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "authenticationUrl",
-            "baseName": "authenticationUrl",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'enabled',
+      baseName: 'enabled',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'ThirdPartyOAuthProviderCUSTOM',
+      format: '',
+    },
+    {
+      name: 'headers',
+      baseName: 'headers',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'authenticationUrl',
+      baseName: 'authenticationUrl',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CustomAuthConfig.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CustomAuthConfig.attributeTypeMap
+  }
 }
-
-
-

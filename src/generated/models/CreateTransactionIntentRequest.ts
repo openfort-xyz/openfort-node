@@ -10,87 +10,88 @@
  * Do not edit the class manually.
  */
 
-import { Interaction } from '../models/Interaction';
-import { HttpFile } from '../http/http';
+import type { Interaction } from '../models/Interaction'
 
 export class CreateTransactionIntentRequest {
-    /**
-    * The chain ID. Must be a [supported chain](/development/chains).
-    */
-    'chainId': number;
-    /**
-    * ID of the Player this TransactionIntent belongs to, if one exists (starts with `pla_`).  If you omit this parameter a new Player will be created.
-    */
-    'player'?: string;
-    /**
-    * ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).  When providing a Player and ChainID, you can omit this parameter.
-    */
-    'account'?: string;
-    /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
-    */
-    'policy'?: string;
-    /**
-    * Use this parameter to create a new Account for Player with the provided owner address.  If you omit this parameter and no Account exists for the Player, a custodial Account will be created.
-    */
-    'externalOwnerAddress'?: string;
-    /**
-    * Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.
-    */
-    'optimistic'?: boolean;
-    'interactions': Array<Interaction>;
+  /**
+   * The chain ID. Must be a [supported chain](/development/chains).
+   */
+  chainId: number
+  /**
+   * ID of the Player this TransactionIntent belongs to, if one exists (starts with `pla_`).  If you omit this parameter a new Player will be created.
+   */
+  player?: string
+  /**
+   * ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).  When providing a Player and ChainID, you can omit this parameter.
+   */
+  account?: string
+  /**
+   * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
+   */
+  policy?: string
+  /**
+   * Use this parameter to create a new Account for Player with the provided owner address.  If you omit this parameter and no Account exists for the Player, a custodial Account will be created.
+   */
+  externalOwnerAddress?: string
+  /**
+   * Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.
+   */
+  optimistic?: boolean
+  interactions: Interaction[]
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "externalOwnerAddress",
-            "baseName": "externalOwnerAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "optimistic",
-            "baseName": "optimistic",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "interactions",
-            "baseName": "interactions",
-            "type": "Array<Interaction>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'player',
+      baseName: 'player',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'policy',
+      baseName: 'policy',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'externalOwnerAddress',
+      baseName: 'externalOwnerAddress',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'optimistic',
+      baseName: 'optimistic',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'interactions',
+      baseName: 'interactions',
+      type: 'Array<Interaction>',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CreateTransactionIntentRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CreateTransactionIntentRequest.attributeTypeMap
+  }
 }
-

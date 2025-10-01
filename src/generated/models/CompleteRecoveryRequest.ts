@@ -10,49 +10,49 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class CompleteRecoveryRequest {
-    /**
-    * Address of the new owner
-    */
-    'newOwnerAddress': string;
-    /**
-    * Signatures by the guardians
-    */
-    'signatures'?: Array<string>;
-    /**
-    * The policy ID (starts with pol_)
-    */
-    'policy': string;
+  /**
+   * Address of the new owner
+   */
+  newOwnerAddress: string
+  /**
+   * Signatures by the guardians
+   */
+  signatures?: string[]
+  /**
+   * The policy ID (starts with pol_)
+   */
+  policy: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "newOwnerAddress",
-            "baseName": "newOwnerAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "signatures",
-            "baseName": "signatures",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'newOwnerAddress',
+      baseName: 'newOwnerAddress',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'signatures',
+      baseName: 'signatures',
+      type: 'Array<string>',
+      format: '',
+    },
+    {
+      name: 'policy',
+      baseName: 'policy',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CompleteRecoveryRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CompleteRecoveryRequest.attributeTypeMap
+  }
 }
-
