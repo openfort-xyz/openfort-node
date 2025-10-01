@@ -10,70 +10,71 @@
  * Do not edit the class manually.
  */
 
-import { Abi } from '../models/Abi';
-import { HttpFile } from '../http/http';
+import type { Abi } from '../models/Abi'
 
 export class CreateContractRequest {
-    /**
-    * Specifies the name of the contract (Only for display purposes).
-    */
-    'name': string;
-    /**
-    * Specifies the chain ID of the contract. Must be a [supported chain](/development/chains).
-    */
-    'chainId': number;
-    /**
-    * Specifies the address of the contract.
-    */
-    'address': string;
-    /**
-    * Specifies the ABI of the contract.
-    */
-    'abi'?: Array<Abi>;
-    /**
-    * Specifies whether to verify the contract publicly.
-    */
-    'publicVerification'?: boolean;
+  /**
+   * Specifies the name of the contract (Only for display purposes).
+   */
+  name: string
+  /**
+   * Specifies the chain ID of the contract. Must be a [supported chain](/development/chains).
+   */
+  chainId: number
+  /**
+   * Specifies the address of the contract.
+   */
+  address: string
+  /**
+   * Specifies the ABI of the contract.
+   */
+  abi?: Abi[]
+  /**
+   * Specifies whether to verify the contract publicly.
+   */
+  publicVerification?: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "abi",
-            "baseName": "abi",
-            "type": "Array<Abi>",
-            "format": ""
-        },
-        {
-            "name": "publicVerification",
-            "baseName": "publicVerification",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'abi',
+      baseName: 'abi',
+      type: 'Array<Abi>',
+      format: '',
+    },
+    {
+      name: 'publicVerification',
+      baseName: 'publicVerification',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CreateContractRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CreateContractRequest.attributeTypeMap
+  }
 }
-

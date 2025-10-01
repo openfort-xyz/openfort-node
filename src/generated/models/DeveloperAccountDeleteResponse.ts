@@ -10,43 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
-import { HttpFile } from '../http/http';
+import type { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT'
 
 export class DeveloperAccountDeleteResponse {
-    'id': string;
-    'object': EntityTypeDEVELOPERACCOUNT;
-    'deleted': boolean;
+  id: string
+  object: EntityTypeDEVELOPERACCOUNT
+  deleted: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeDEVELOPERACCOUNT",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeDEVELOPERACCOUNT',
+      format: '',
+    },
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return DeveloperAccountDeleteResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return DeveloperAccountDeleteResponse.attributeTypeMap
+  }
 }
-
-
-

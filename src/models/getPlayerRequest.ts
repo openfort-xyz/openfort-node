@@ -1,4 +1,4 @@
 export interface GetPlayerRequest {
-    id: string;
-    expand?: Array<"transactionIntents" | "accounts">;
+  id: string
+  expand?: Array<'transactionIntents' | 'accounts'>
 }

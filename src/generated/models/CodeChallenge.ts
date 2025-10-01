@@ -10,42 +10,41 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class CodeChallenge {
-    /**
-    * The code challenge.
-    */
-    'codeChallenge': string;
-    /**
-    * The code verifier.
-    */
-    'method': CodeChallengeMethodEnum;
+  /**
+   * The code challenge.
+   */
+  codeChallenge: string
+  /**
+   * The code verifier.
+   */
+  method: CodeChallengeMethodEnum
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "codeChallenge",
-            "baseName": "codeChallenge",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "method",
-            "baseName": "method",
-            "type": "CodeChallengeMethodEnum",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'codeChallenge',
+      baseName: 'codeChallenge',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'method',
+      baseName: 'method',
+      type: 'CodeChallengeMethodEnum',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CodeChallenge.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CodeChallenge.attributeTypeMap
+  }
 }
 
-
-export type CodeChallengeMethodEnum = "plain" | "S256" ;
-
+export type CodeChallengeMethodEnum = 'plain' | 'S256'

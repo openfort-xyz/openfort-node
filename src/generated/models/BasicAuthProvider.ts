@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 /**
-* Enum of the supporting Basic Auth providers.
-*/
-export type BasicAuthProvider = "email" | "wallet" ;
+ * Enum of the supporting Basic Auth providers.
+ */
+export type BasicAuthProvider = 'email' | 'wallet'

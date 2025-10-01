@@ -1,4 +1,4 @@
 export interface SignatureSessionRequest {
-    id: string;
-    signature: string;
+  id: string
+  signature: string
 }

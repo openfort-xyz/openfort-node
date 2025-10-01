@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type NextActionType = "sign_with_wallet" ;
+export type NextActionType = 'sign_with_wallet'

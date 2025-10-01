@@ -10,65 +10,64 @@
  * Do not edit the class manually.
  */
 
-import { EventResponse } from '../models/EventResponse';
-import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
-import { HttpFile } from '../http/http';
+import type { EventResponse } from '../models/EventResponse'
+import type { ResponseTypeLIST } from '../models/ResponseTypeLIST'
 
 export class EventListResponse {
-    'object': ResponseTypeLIST;
-    'url': string;
-    'data': Array<EventResponse>;
-    'start': number;
-    'end': number;
-    'total': number;
+  object: ResponseTypeLIST
+  url: string
+  data: EventResponse[]
+  start: number
+  end: number
+  total: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "ResponseTypeLIST",
-            "format": ""
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<EventResponse>",
-            "format": ""
-        },
-        {
-            "name": "start",
-            "baseName": "start",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "end",
-            "baseName": "end",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'ResponseTypeLIST',
+      format: '',
+    },
+    {
+      name: 'url',
+      baseName: 'url',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'data',
+      baseName: 'data',
+      type: 'Array<EventResponse>',
+      format: '',
+    },
+    {
+      name: 'start',
+      baseName: 'start',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'end',
+      baseName: 'end',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'total',
+      baseName: 'total',
+      type: 'number',
+      format: 'int32',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return EventListResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return EventListResponse.attributeTypeMap
+  }
 }
-
-
-

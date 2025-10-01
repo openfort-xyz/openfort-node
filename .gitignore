@@ -7,3 +7,5 @@ yarn-error.log
 updateGeneratedCode.sh
 docs
 .DS_Store
+pnpm-debug.log
+.pnpm-debug.log*

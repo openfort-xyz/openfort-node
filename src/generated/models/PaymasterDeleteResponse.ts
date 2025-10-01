@@ -10,43 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
-import { HttpFile } from '../http/http';
+import type { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER'
 
 export class PaymasterDeleteResponse {
-    'id': string;
-    'object': EntityTypePAYMASTER;
-    'deleted': boolean;
+  id: string
+  object: EntityTypePAYMASTER
+  deleted: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePAYMASTER",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypePAYMASTER',
+      format: '',
+    },
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PaymasterDeleteResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PaymasterDeleteResponse.attributeTypeMap
+  }
 }
-
-
-

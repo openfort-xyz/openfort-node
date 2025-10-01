@@ -10,53 +10,52 @@
  * Do not edit the class manually.
  */
 
-import { Currency } from '../models/Currency';
-import { HttpFile } from '../http/http';
+import type { Currency } from '../models/Currency'
 
 export class CheckoutRequest {
-    /**
-    * Amount in cents
-    */
-    'amount': number;
-    'currency': Currency;
-    'cancelUrl'?: string;
-    'successUrl'?: string;
+  /**
+   * Amount in cents
+   */
+  amount: number
+  currency: Currency
+  cancelUrl?: string
+  successUrl?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "amount",
-            "baseName": "amount",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "currency",
-            "baseName": "currency",
-            "type": "Currency",
-            "format": ""
-        },
-        {
-            "name": "cancelUrl",
-            "baseName": "cancelUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "successUrl",
-            "baseName": "successUrl",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'amount',
+      baseName: 'amount',
+      type: 'number',
+      format: 'int64',
+    },
+    {
+      name: 'currency',
+      baseName: 'currency',
+      type: 'Currency',
+      format: '',
+    },
+    {
+      name: 'cancelUrl',
+      baseName: 'cancelUrl',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'successUrl',
+      baseName: 'successUrl',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CheckoutRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CheckoutRequest.attributeTypeMap
+  }
 }
-
-
-

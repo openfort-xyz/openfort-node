@@ -10,44 +10,45 @@
  * Do not edit the class manually.
  */
 
-import { Amount } from '../models/Amount';
-import { HttpFile } from '../http/http';
+import type { Amount } from '../models/Amount'
 
 /**
-* Type representing the fees returned in the quote
-*/
+ * Type representing the fees returned in the quote
+ */
 export class Fee {
-    'amount': Amount;
-    'basisPoints': number;
-    'recipient': string;
+  amount: Amount
+  basisPoints: number
+  recipient: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "amount",
-            "baseName": "amount",
-            "type": "Amount",
-            "format": ""
-        },
-        {
-            "name": "basisPoints",
-            "baseName": "basisPoints",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "recipient",
-            "baseName": "recipient",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'amount',
+      baseName: 'amount',
+      type: 'Amount',
+      format: '',
+    },
+    {
+      name: 'basisPoints',
+      baseName: 'basisPoints',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'recipient',
+      baseName: 'recipient',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Fee.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return Fee.attributeTypeMap
+  }
 }
-

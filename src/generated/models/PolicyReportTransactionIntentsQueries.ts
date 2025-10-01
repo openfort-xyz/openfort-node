@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class PolicyReportTransactionIntentsQueries {
-    /**
-    * The start date of the period in unix timestamp.
-    */
-    'to': number;
-    /**
-    * The end date of the period in unix timestamp.
-    */
-    '_from': number;
+  /**
+   * The start date of the period in unix timestamp.
+   */
+  to: number
+  /**
+   * The end date of the period in unix timestamp.
+   */
+  _from: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "to",
-            "baseName": "to",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "_from",
-            "baseName": "from",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'to',
+      baseName: 'to',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: '_from',
+      baseName: 'from',
+      type: 'number',
+      format: 'double',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PolicyReportTransactionIntentsQueries.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PolicyReportTransactionIntentsQueries.attributeTypeMap
+  }
 }
-

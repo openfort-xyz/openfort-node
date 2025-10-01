@@ -10,41 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse';
-import { HttpFile } from '../http/http';
+import type { EcosystemConfigurationResponse } from '../models/EcosystemConfigurationResponse'
 
 export class MyEcosystemResponse {
-    'publishableKey': string;
-    'name': string;
-    'configuration'?: EcosystemConfigurationResponse;
+  publishableKey: string
+  name: string
+  configuration?: EcosystemConfigurationResponse
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "publishableKey",
-            "baseName": "publishableKey",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "configuration",
-            "baseName": "configuration",
-            "type": "EcosystemConfigurationResponse",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'publishableKey',
+      baseName: 'publishableKey',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'configuration',
+      baseName: 'configuration',
+      type: 'EcosystemConfigurationResponse',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return MyEcosystemResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return MyEcosystemResponse.attributeTypeMap
+  }
 }
-

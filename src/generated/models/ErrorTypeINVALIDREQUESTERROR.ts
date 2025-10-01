@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type ErrorTypeINVALIDREQUESTERROR = "invalid_request_error" ;
+export type ErrorTypeINVALIDREQUESTERROR = 'invalid_request_error'

@@ -1,6 +1,6 @@
-import { AccountResponseExpandable } from "../generated";
+import type { AccountResponseExpandable } from '../generated'
 
 export interface GetAccountRequest {
-    id: string;
-    expand?: AccountResponseExpandable[];
+  id: string
+  expand?: AccountResponseExpandable[]
 }

@@ -10,37 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
-import { HttpFile } from '../http/http';
+import type { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole'
 
 export class UserProjectCreateRequest {
-    'role'?: UserProjectCreateRequestRole;
-    /**
-    * The email of the user to add.
-    */
-    'email': string;
+  role?: UserProjectCreateRequestRole
+  /**
+   * The email of the user to add.
+   */
+  email: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "role",
-            "baseName": "role",
-            "type": "UserProjectCreateRequestRole",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'role',
+      baseName: 'role',
+      type: 'UserProjectCreateRequestRole',
+      format: '',
+    },
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UserProjectCreateRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return UserProjectCreateRequest.attributeTypeMap
+  }
 }
-

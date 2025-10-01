@@ -10,43 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER';
-import { HttpFile } from '../http/http';
+import type { EntityTypeTRIGGER } from '../models/EntityTypeTRIGGER'
 
 export class TriggerDeleteResponse {
-    'id': string;
-    'object': EntityTypeTRIGGER;
-    'deleted': boolean;
+  id: string
+  object: EntityTypeTRIGGER
+  deleted: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeTRIGGER",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeTRIGGER',
+      format: '',
+    },
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return TriggerDeleteResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return TriggerDeleteResponse.attributeTypeMap
+  }
 }
-
-
-

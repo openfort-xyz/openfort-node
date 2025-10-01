@@ -1,4 +1,4 @@
 export interface GetAllowFunctionsRequest {
-    id: string;
-    expand?: "contract"[];
+  id: string
+  expand?: 'contract'[]
 }

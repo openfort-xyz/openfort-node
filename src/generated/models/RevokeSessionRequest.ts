@@ -10,79 +10,79 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class RevokeSessionRequest {
-    /**
-    * The address of the session key to revoke.
-    */
-    'address': string;
-    /**
-    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
-    */
-    'policy'?: string;
-    /**
-    * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
-    */
-    'optimistic'?: boolean;
-    /**
-    * The chain ID. Must be a [supported chain](/development/chains).
-    */
-    'chainId': number;
-    /**
-    * The player ID (starts with pla_).
-    */
-    'player': string;
-    /**
-    * ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).  When providing a Player and ChainID, you can omit this parameter.
-    */
-    'account'?: string;
+  /**
+   * The address of the session key to revoke.
+   */
+  address: string
+  /**
+   * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.
+   */
+  policy?: string
+  /**
+   * Whether the transactionIntent is optimistic (resolve before it arrives on chain) or not.
+   */
+  optimistic?: boolean
+  /**
+   * The chain ID. Must be a [supported chain](/development/chains).
+   */
+  chainId: number
+  /**
+   * The player ID (starts with pla_).
+   */
+  player: string
+  /**
+   * ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).  When providing a Player and ChainID, you can omit this parameter.
+   */
+  account?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "optimistic",
-            "baseName": "optimistic",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'policy',
+      baseName: 'policy',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'optimistic',
+      baseName: 'optimistic',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'player',
+      baseName: 'player',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return RevokeSessionRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return RevokeSessionRequest.attributeTypeMap
+  }
 }
-

@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class CreateDeviceRequest {
-    /**
-    * Specifies the unique account ID (starts with acc_)
-    */
-    'account': string;
-    /**
-    * Specifies the share repositories
-    */
-    'share': string;
+  /**
+   * Specifies the unique account ID (starts with acc_)
+   */
+  account: string
+  /**
+   * Specifies the share repositories
+   */
+  share: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "share",
-            "baseName": "share",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'share',
+      baseName: 'share',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CreateDeviceRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CreateDeviceRequest.attributeTypeMap
+  }
 }
-

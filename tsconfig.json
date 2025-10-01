@@ -5,19 +5,11 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "composite": true,
     "target": "es2021",
-    "lib": [
-      "es2021",
-      "esnext.disposable"
-    ],
-    "typeRoots": [
-      "node_modules/@types",
-      "./typings"
-    ],
+    "lib": ["es2021", "esnext.disposable"],
+    "typeRoots": ["node_modules/@types", "./typings"],
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "declaration": true,
@@ -33,8 +25,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "exclude": [
-    "dist",
-    "example"
-  ]
+  "exclude": ["dist", "example"]
 }

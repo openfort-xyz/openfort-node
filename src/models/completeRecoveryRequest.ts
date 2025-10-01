@@ -1,5 +1,5 @@
-import { CompleteRecoveryRequest as ApiCompleteRecoveryRequest } from "../generated";
+import type { CompleteRecoveryRequest as ApiCompleteRecoveryRequest } from '../generated'
 
 export interface CompleteRecoveryRequest extends ApiCompleteRecoveryRequest {
-    id: string;
+  id: string
 }

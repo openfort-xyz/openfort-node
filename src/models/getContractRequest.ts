@@ -1,3 +1,3 @@
 export interface GetContractRequest {
-    id: string;
+  id: string
 }

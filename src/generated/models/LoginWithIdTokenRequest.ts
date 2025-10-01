@@ -10,39 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvider } from '../models/OAuthProvider';
-import { HttpFile } from '../http/http';
+import type { OAuthProvider } from '../models/OAuthProvider'
 
 export class LoginWithIdTokenRequest {
-    'provider': OAuthProvider;
-    /**
-    * Token to be verified
-    */
-    'token': string;
+  provider: OAuthProvider
+  /**
+   * Token to be verified
+   */
+  token: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProvider",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'OAuthProvider',
+      format: '',
+    },
+    {
+      name: 'token',
+      baseName: 'token',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return LoginWithIdTokenRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return LoginWithIdTokenRequest.attributeTypeMap
+  }
 }
-
-
-

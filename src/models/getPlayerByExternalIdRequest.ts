@@ -1,6 +1,6 @@
-import { OAuthProvider } from "../generated";
+import type { OAuthProvider } from '../generated'
 
 export interface GetPlayerByExternalIdRequest {
-    provider: OAuthProvider;
-    externalId: string;
+  provider: OAuthProvider
+  externalId: string
 }

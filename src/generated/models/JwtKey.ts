@@ -10,68 +10,68 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class JwtKey {
-    'kty': string;
-    'x': string;
-    'y': string;
-    'crv': string;
-    'kid': string;
-    'use': string;
-    'alg': string;
+  kty: string
+  x: string
+  y: string
+  crv: string
+  kid: string
+  use: string
+  alg: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "kty",
-            "baseName": "kty",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "x",
-            "baseName": "x",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "y",
-            "baseName": "y",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "crv",
-            "baseName": "crv",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "kid",
-            "baseName": "kid",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "use",
-            "baseName": "use",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "alg",
-            "baseName": "alg",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'kty',
+      baseName: 'kty',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'x',
+      baseName: 'x',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'y',
+      baseName: 'y',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'crv',
+      baseName: 'crv',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'kid',
+      baseName: 'kid',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'use',
+      baseName: 'use',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'alg',
+      baseName: 'alg',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return JwtKey.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return JwtKey.attributeTypeMap
+  }
 }
-

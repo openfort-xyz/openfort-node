@@ -10,9 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 /**
-* Enum of the supporting third party auth providers.
-*/
-export type ThirdPartyOAuthProvider = "accelbyte" | "firebase" | "lootlocker" | "playfab" | "supabase" | "custom" | "oidc" ;
+ * Enum of the supporting third party auth providers.
+ */
+export type ThirdPartyOAuthProvider =
+  | 'accelbyte'
+  | 'firebase'
+  | 'lootlocker'
+  | 'playfab'
+  | 'supabase'
+  | 'custom'
+  | 'oidc'

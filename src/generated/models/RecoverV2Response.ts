@@ -10,75 +10,75 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class RecoverV2Response {
-    'id': string;
-    'account': string;
-    'signerAddress': string;
-    'signer': string;
-    'share': string;
-    'isPrimary': boolean;
-    'createdAt': Date;
-    'user': string;
+  id: string
+  account: string
+  signerAddress: string
+  signer: string
+  share: string
+  isPrimary: boolean
+  createdAt: Date
+  user: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "signerAddress",
-            "baseName": "signerAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "signer",
-            "baseName": "signer",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "share",
-            "baseName": "share",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "isPrimary",
-            "baseName": "isPrimary",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "user",
-            "baseName": "user",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'signerAddress',
+      baseName: 'signerAddress',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'signer',
+      baseName: 'signer',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'share',
+      baseName: 'share',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'isPrimary',
+      baseName: 'isPrimary',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'Date',
+      format: 'date-time',
+    },
+    {
+      name: 'user',
+      baseName: 'user',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return RecoverV2Response.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return RecoverV2Response.attributeTypeMap
+  }
 }
-

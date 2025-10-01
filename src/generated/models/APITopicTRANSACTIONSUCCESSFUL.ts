@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type APITopicTRANSACTIONSUCCESSFUL = "transaction_intent.successful" ;
+export type APITopicTRANSACTIONSUCCESSFUL = 'transaction_intent.successful'

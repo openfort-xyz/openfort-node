@@ -10,152 +10,151 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT';
-import { Interaction } from '../models/Interaction';
-import { NextActionResponse } from '../models/NextActionResponse';
-import { ResponseResponse } from '../models/ResponseResponse';
-import { TransactionAbstractionType } from '../models/TransactionAbstractionType';
-import { TransactionIntentDetails } from '../models/TransactionIntentDetails';
-import { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount';
-import { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer';
-import { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy';
-import { Transition } from '../models/Transition';
-import { HttpFile } from '../http/http';
+import type { EntityTypeTRANSACTIONINTENT } from '../models/EntityTypeTRANSACTIONINTENT'
+import type { Interaction } from '../models/Interaction'
+import type { NextActionResponse } from '../models/NextActionResponse'
+import type { ResponseResponse } from '../models/ResponseResponse'
+import type { TransactionAbstractionType } from '../models/TransactionAbstractionType'
+import type { TransactionIntentDetails } from '../models/TransactionIntentDetails'
+import type { TransactionIntentResponseAccount } from '../models/TransactionIntentResponseAccount'
+import type { TransactionIntentResponsePlayer } from '../models/TransactionIntentResponsePlayer'
+import type { TransactionIntentResponsePolicy } from '../models/TransactionIntentResponsePolicy'
+import type { Transition } from '../models/Transition'
 
 export class TransactionIntentResponse {
-    'id': string;
-    'object': EntityTypeTRANSACTIONINTENT;
-    'createdAt': number;
-    /**
-    * The unix timestamp in seconds when the transactionIntent was created.
-    */
-    'updatedAt': number;
-    /**
-    * The chain ID.
-    */
-    'chainId': number;
-    'abstractionType': TransactionAbstractionType;
-    /**
-    * Transition of statuses the transaction has gone through.
-    */
-    'transitions'?: Array<Transition>;
-    'details'?: TransactionIntentDetails;
-    'userOperationHash'?: string;
-    'userOperation'?: any | null;
-    'response'?: ResponseResponse;
-    'interactions'?: Array<Interaction>;
-    'nextAction'?: NextActionResponse;
-    'policy'?: TransactionIntentResponsePolicy;
-    'player'?: TransactionIntentResponsePlayer;
-    'account': TransactionIntentResponseAccount;
+  id: string
+  object: EntityTypeTRANSACTIONINTENT
+  createdAt: number
+  /**
+   * The unix timestamp in seconds when the transactionIntent was created.
+   */
+  updatedAt: number
+  /**
+   * The chain ID.
+   */
+  chainId: number
+  abstractionType: TransactionAbstractionType
+  /**
+   * Transition of statuses the transaction has gone through.
+   */
+  transitions?: Transition[]
+  details?: TransactionIntentDetails
+  userOperationHash?: string
+  userOperation?: any | null
+  response?: ResponseResponse
+  interactions?: Interaction[]
+  nextAction?: NextActionResponse
+  policy?: TransactionIntentResponsePolicy
+  player?: TransactionIntentResponsePlayer
+  account: TransactionIntentResponseAccount
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeTRANSACTIONINTENT",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "abstractionType",
-            "baseName": "abstractionType",
-            "type": "TransactionAbstractionType",
-            "format": ""
-        },
-        {
-            "name": "transitions",
-            "baseName": "transitions",
-            "type": "Array<Transition>",
-            "format": ""
-        },
-        {
-            "name": "details",
-            "baseName": "details",
-            "type": "TransactionIntentDetails",
-            "format": ""
-        },
-        {
-            "name": "userOperationHash",
-            "baseName": "userOperationHash",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "userOperation",
-            "baseName": "userOperation",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "response",
-            "baseName": "response",
-            "type": "ResponseResponse",
-            "format": ""
-        },
-        {
-            "name": "interactions",
-            "baseName": "interactions",
-            "type": "Array<Interaction>",
-            "format": ""
-        },
-        {
-            "name": "nextAction",
-            "baseName": "nextAction",
-            "type": "NextActionResponse",
-            "format": ""
-        },
-        {
-            "name": "policy",
-            "baseName": "policy",
-            "type": "TransactionIntentResponsePolicy",
-            "format": ""
-        },
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "TransactionIntentResponsePlayer",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "TransactionIntentResponseAccount",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeTRANSACTIONINTENT',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'updatedAt',
+      baseName: 'updatedAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'abstractionType',
+      baseName: 'abstractionType',
+      type: 'TransactionAbstractionType',
+      format: '',
+    },
+    {
+      name: 'transitions',
+      baseName: 'transitions',
+      type: 'Array<Transition>',
+      format: '',
+    },
+    {
+      name: 'details',
+      baseName: 'details',
+      type: 'TransactionIntentDetails',
+      format: '',
+    },
+    {
+      name: 'userOperationHash',
+      baseName: 'userOperationHash',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'userOperation',
+      baseName: 'userOperation',
+      type: 'any',
+      format: '',
+    },
+    {
+      name: 'response',
+      baseName: 'response',
+      type: 'ResponseResponse',
+      format: '',
+    },
+    {
+      name: 'interactions',
+      baseName: 'interactions',
+      type: 'Array<Interaction>',
+      format: '',
+    },
+    {
+      name: 'nextAction',
+      baseName: 'nextAction',
+      type: 'NextActionResponse',
+      format: '',
+    },
+    {
+      name: 'policy',
+      baseName: 'policy',
+      type: 'TransactionIntentResponsePolicy',
+      format: '',
+    },
+    {
+      name: 'player',
+      baseName: 'player',
+      type: 'TransactionIntentResponsePlayer',
+      format: '',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'TransactionIntentResponseAccount',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return TransactionIntentResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return TransactionIntentResponse.attributeTypeMap
+  }
 }
-
-
-

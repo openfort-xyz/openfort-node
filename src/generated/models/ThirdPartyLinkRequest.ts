@@ -10,43 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
-import { HttpFile } from '../http/http';
+import type { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider'
 
 export class ThirdPartyLinkRequest {
-    'provider': ThirdPartyOAuthProvider;
-    'token': string;
-    'tokenType': string;
+  provider: ThirdPartyOAuthProvider
+  token: string
+  tokenType: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProvider",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'ThirdPartyOAuthProvider',
+      format: '',
+    },
+    {
+      name: 'token',
+      baseName: 'token',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'tokenType',
+      baseName: 'tokenType',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ThirdPartyLinkRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return ThirdPartyLinkRequest.attributeTypeMap
+  }
 }
-
-
-
