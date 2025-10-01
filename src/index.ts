@@ -25,7 +25,7 @@ export default class Openfort {
   constructor(
     private readonly apiKey: string,
     private readonly basePath?: string,
-  ) {}
+  ) { }
 
   public get accounts(): AccountsApiWrapper {
     return this.getOrCreateWrapper(AccountsApiWrapper)
@@ -138,9 +138,10 @@ export default class Openfort {
     apiKey: string,
     secretKey: string,
     encryptionPart: string,
+    shieldAPIBaseURL = 'https://shield.openfort.io',
   ): Promise<string> {
     const response = await fetch(
-      'https://shield.openfort.xyz/project/encryption-session',
+      `${shieldAPIBaseURL}/project/encryption-session`,
       {
         headers: {
           'Content-Type': 'application/json',
