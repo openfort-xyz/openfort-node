@@ -10,130 +10,131 @@
  * Do not edit the class manually.
  */
 
-import { Log } from '../models/Log';
-import { HttpFile } from '../http/http';
+import type { Log } from '../models/Log'
 
 export class ResponseResponse {
-    /**
-    * The unix timestamp in seconds when the transactionIntent was created.
-    */
-    'createdAt': number;
-    /**
-    * The block height (number) of the block including the transaction of this log.
-    */
-    'blockNumber'?: number;
-    /**
-    * The transaction hash of the transaction of this log.
-    */
-    'transactionHash'?: string;
-    /**
-    * The l1 gas used by the transaction of this log.
-    */
-    'l1GasUsed'?: string;
-    /**
-    * The gas used by the transaction of this log.
-    */
-    'gasUsed'?: string;
-    /**
-    * The gas fee by the transaction of this log.
-    */
-    'gasFee'?: string;
-    /**
-    * The l1 gas fee by the transaction of this log.
-    */
-    'l1GasFee'?: string;
-    /**
-    * The status of the transaction of this log.
-    */
-    'status'?: number;
-    /**
-    * The logs of the transaction of this log.
-    */
-    'logs'?: Array<Log>;
-    /**
-    * The address of the contract of this log.
-    */
-    'to'?: string;
-    /**
-    * The error of the transaction of this log.
-    */
-    'error'?: any | null;
+  /**
+   * The unix timestamp in seconds when the transactionIntent was created.
+   */
+  createdAt: number
+  /**
+   * The block height (number) of the block including the transaction of this log.
+   */
+  blockNumber?: number
+  /**
+   * The transaction hash of the transaction of this log.
+   */
+  transactionHash?: string
+  /**
+   * The l1 gas used by the transaction of this log.
+   */
+  l1GasUsed?: string
+  /**
+   * The gas used by the transaction of this log.
+   */
+  gasUsed?: string
+  /**
+   * The gas fee by the transaction of this log.
+   */
+  gasFee?: string
+  /**
+   * The l1 gas fee by the transaction of this log.
+   */
+  l1GasFee?: string
+  /**
+   * The status of the transaction of this log.
+   */
+  status?: number
+  /**
+   * The logs of the transaction of this log.
+   */
+  logs?: Log[]
+  /**
+   * The address of the contract of this log.
+   */
+  to?: string
+  /**
+   * The error of the transaction of this log.
+   */
+  error?: any | null
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "blockNumber",
-            "baseName": "blockNumber",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "transactionHash",
-            "baseName": "transactionHash",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "l1GasUsed",
-            "baseName": "l1GasUsed",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasUsed",
-            "baseName": "gasUsed",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasFee",
-            "baseName": "gasFee",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "l1GasFee",
-            "baseName": "l1GasFee",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "logs",
-            "baseName": "logs",
-            "type": "Array<Log>",
-            "format": ""
-        },
-        {
-            "name": "to",
-            "baseName": "to",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "error",
-            "baseName": "error",
-            "type": "any",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'blockNumber',
+      baseName: 'blockNumber',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'transactionHash',
+      baseName: 'transactionHash',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'l1GasUsed',
+      baseName: 'l1GasUsed',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'gasUsed',
+      baseName: 'gasUsed',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'gasFee',
+      baseName: 'gasFee',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'l1GasFee',
+      baseName: 'l1GasFee',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'logs',
+      baseName: 'logs',
+      type: 'Array<Log>',
+      format: '',
+    },
+    {
+      name: 'to',
+      baseName: 'to',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'error',
+      baseName: 'error',
+      type: 'any',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ResponseResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return ResponseResponse.attributeTypeMap
+  }
 }
-

@@ -10,36 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG';
-import { HttpFile } from '../http/http';
+import type { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG'
 
 export class DeleteSMTPConfigResponse {
-    'deleted': boolean;
-    'object': EntityTypeSMTPCONFIG;
+  deleted: boolean
+  object: EntityTypeSMTPCONFIG
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeSMTPCONFIG",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeSMTPCONFIG',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return DeleteSMTPConfigResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return DeleteSMTPConfigResponse.attributeTypeMap
+  }
 }
-
-
-

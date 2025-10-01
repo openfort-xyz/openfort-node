@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type BasicAuthProviderEMAIL = "email" ;
+export type BasicAuthProviderEMAIL = 'email'

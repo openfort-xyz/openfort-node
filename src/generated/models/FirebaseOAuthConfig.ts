@@ -10,52 +10,51 @@
  * Do not edit the class manually.
  */
 
-import { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE';
-import { HttpFile } from '../http/http';
+import type { ThirdPartyOAuthProviderFIREBASE } from '../models/ThirdPartyOAuthProviderFIREBASE'
 
 /**
-* Firebase configuration
-*/
+ * Firebase configuration
+ */
 export class FirebaseOAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': ThirdPartyOAuthProviderFIREBASE;
-    /**
-    * Project ID of your Firebase service environment.
-    */
-    'projectId': string;
+  /**
+   * Enable OAuth provider.
+   */
+  enabled: boolean
+  provider: ThirdPartyOAuthProviderFIREBASE
+  /**
+   * Project ID of your Firebase service environment.
+   */
+  projectId: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "ThirdPartyOAuthProviderFIREBASE",
-            "format": ""
-        },
-        {
-            "name": "projectId",
-            "baseName": "projectId",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'enabled',
+      baseName: 'enabled',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'ThirdPartyOAuthProviderFIREBASE',
+      format: '',
+    },
+    {
+      name: 'projectId',
+      baseName: 'projectId',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return FirebaseOAuthConfig.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return FirebaseOAuthConfig.attributeTypeMap
+  }
 }
-
-
-

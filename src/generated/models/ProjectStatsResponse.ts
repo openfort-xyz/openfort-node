@@ -10,35 +10,36 @@
  * Do not edit the class manually.
  */
 
-import { Stat } from '../models/Stat';
-import { TransactionStat } from '../models/TransactionStat';
-import { HttpFile } from '../http/http';
+import type { Stat } from '../models/Stat'
+import type { TransactionStat } from '../models/TransactionStat'
 
 export class ProjectStatsResponse {
-    'transactionIntents': Array<TransactionStat>;
-    'devices': Array<Stat>;
+  transactionIntents: TransactionStat[]
+  devices: Stat[]
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "transactionIntents",
-            "baseName": "transactionIntents",
-            "type": "Array<TransactionStat>",
-            "format": ""
-        },
-        {
-            "name": "devices",
-            "baseName": "devices",
-            "type": "Array<Stat>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'transactionIntents',
+      baseName: 'transactionIntents',
+      type: 'Array<TransactionStat>',
+      format: '',
+    },
+    {
+      name: 'devices',
+      baseName: 'devices',
+      type: 'Array<Stat>',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ProjectStatsResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return ProjectStatsResponse.attributeTypeMap
+  }
 }
-

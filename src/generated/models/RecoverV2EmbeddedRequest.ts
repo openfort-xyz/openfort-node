@@ -10,26 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class RecoverV2EmbeddedRequest {
-    'account': string;
+  account: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return RecoverV2EmbeddedRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return RecoverV2EmbeddedRequest.attributeTypeMap
+  }
 }
-

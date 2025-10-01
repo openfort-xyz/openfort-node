@@ -10,59 +10,58 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK';
-import { HttpFile } from '../http/http';
+import type { OAuthProviderFACEBOOK } from '../models/OAuthProviderFACEBOOK'
 
 export class FacebookOAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': OAuthProviderFACEBOOK;
-    /**
-    * Facebook API client ID.
-    */
-    'clientId': string;
-    /**
-    * Facebook API client secret.
-    */
-    'clientSecret': string;
+  /**
+   * Enable OAuth provider.
+   */
+  enabled: boolean
+  provider: OAuthProviderFACEBOOK
+  /**
+   * Facebook API client ID.
+   */
+  clientId: string
+  /**
+   * Facebook API client secret.
+   */
+  clientSecret: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProviderFACEBOOK",
-            "format": ""
-        },
-        {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientSecret",
-            "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'enabled',
+      baseName: 'enabled',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'OAuthProviderFACEBOOK',
+      format: '',
+    },
+    {
+      name: 'clientId',
+      baseName: 'clientId',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'clientSecret',
+      baseName: 'clientSecret',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return FacebookOAuthConfig.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return FacebookOAuthConfig.attributeTypeMap
+  }
 }
-
-
-

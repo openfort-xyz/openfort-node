@@ -1,5 +1,5 @@
-import { PlayerUpdateRequest } from "../generated";
+import type { PlayerUpdateRequest } from '../generated'
 
 export interface UpdatePlayerRequest extends PlayerUpdateRequest {
-    id: string;
+  id: string
 }

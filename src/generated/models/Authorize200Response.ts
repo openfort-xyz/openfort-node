@@ -10,60 +10,58 @@
  * Do not edit the class manually.
  */
 
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
-import { AuthenticatedPlayerResponse } from '../models/AuthenticatedPlayerResponse';
-import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
-import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
-import { HttpFile } from '../http/http';
+import type { AuthPlayerResponse } from '../models/AuthPlayerResponse'
+import type { EntityTypePLAYER } from '../models/EntityTypePLAYER'
+import type { LinkedAccountResponse } from '../models/LinkedAccountResponse'
 
 export class Authorize200Response {
-    'player': AuthPlayerResponse;
-    'id': string;
-    'object': EntityTypePLAYER;
-    'createdAt': number;
-    'linkedAccounts': Array<LinkedAccountResponse>;
+  player: AuthPlayerResponse
+  id: string
+  object: EntityTypePLAYER
+  createdAt: number
+  linkedAccounts: LinkedAccountResponse[]
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePLAYER",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "linkedAccounts",
-            "baseName": "linkedAccounts",
-            "type": "Array<LinkedAccountResponse>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'player',
+      baseName: 'player',
+      type: 'AuthPlayerResponse',
+      format: '',
+    },
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypePLAYER',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'linkedAccounts',
+      baseName: 'linkedAccounts',
+      type: 'Array<LinkedAccountResponse>',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Authorize200Response.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return Authorize200Response.attributeTypeMap
+  }
 }
-
-
-

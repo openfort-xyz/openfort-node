@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type PrivateKeyPolicy = "INDIVIDUAL" | "PROJECT" ;
+export type PrivateKeyPolicy = 'INDIVIDUAL' | 'PROJECT'

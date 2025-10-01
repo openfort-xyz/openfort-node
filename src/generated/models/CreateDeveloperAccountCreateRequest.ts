@@ -10,49 +10,49 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class CreateDeveloperAccountCreateRequest {
-    /**
-    * The address of the wallet that has deposited funds in the paymaster.
-    */
-    'address'?: string;
-    /**
-    * Signature to verify the account ownership.
-    */
-    'signature'?: string;
-    /**
-    * The name of the account.
-    */
-    'name'?: string;
+  /**
+   * The address of the wallet that has deposited funds in the paymaster.
+   */
+  address?: string
+  /**
+   * Signature to verify the account ownership.
+   */
+  signature?: string
+  /**
+   * The name of the account.
+   */
+  name?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "signature",
-            "baseName": "signature",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'signature',
+      baseName: 'signature',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CreateDeveloperAccountCreateRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CreateDeveloperAccountCreateRequest.attributeTypeMap
+  }
 }
-

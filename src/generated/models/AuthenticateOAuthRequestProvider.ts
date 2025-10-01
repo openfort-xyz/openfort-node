@@ -10,25 +10,20 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProvider } from '../models/OAuthProvider';
-import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
-import { HttpFile } from '../http/http';
-
 /**
-* OAuth provider
-*/
+ * OAuth provider
+ */
 export class AuthenticateOAuthRequestProvider {
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = []
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-    ];
-
-    static getAttributeTypeMap() {
-        return AuthenticateOAuthRequestProvider.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return AuthenticateOAuthRequestProvider.attributeTypeMap
+  }
 }
-

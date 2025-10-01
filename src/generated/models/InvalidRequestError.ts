@@ -10,44 +10,43 @@
  * Do not edit the class manually.
  */
 
-import { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR';
-import { FieldErrorsValue } from '../models/FieldErrorsValue';
-import { HttpFile } from '../http/http';
+import type { ErrorTypeINVALIDREQUESTERROR } from '../models/ErrorTypeINVALIDREQUESTERROR'
+import type { FieldErrorsValue } from '../models/FieldErrorsValue'
 
 export class InvalidRequestError {
-    'type': ErrorTypeINVALIDREQUESTERROR;
-    'message': string;
-    'details'?: { [key: string]: FieldErrorsValue; };
+  type: ErrorTypeINVALIDREQUESTERROR
+  message: string
+  details?: { [key: string]: FieldErrorsValue }
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "ErrorTypeINVALIDREQUESTERROR",
-            "format": ""
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "details",
-            "baseName": "details",
-            "type": "{ [key: string]: FieldErrorsValue; }",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'ErrorTypeINVALIDREQUESTERROR',
+      format: '',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'details',
+      baseName: 'details',
+      type: '{ [key: string]: FieldErrorsValue; }',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return InvalidRequestError.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return InvalidRequestError.attributeTypeMap
+  }
 }
-
-
-

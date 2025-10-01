@@ -10,26 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class AllowedOriginsResponse {
-    'allowedOrigins': Array<string>;
+  allowedOrigins: string[]
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "allowedOrigins",
-            "baseName": "allowedOrigins",
-            "type": "Array<string>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'allowedOrigins',
+      baseName: 'allowedOrigins',
+      type: 'Array<string>',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return AllowedOriginsResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return AllowedOriginsResponse.attributeTypeMap
+  }
 }
-

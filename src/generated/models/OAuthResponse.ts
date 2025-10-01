@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class OAuthResponse {
-    'url': string;
-    'key': string;
+  url: string
+  key: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "key",
-            "baseName": "key",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'url',
+      baseName: 'url',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'key',
+      baseName: 'key',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return OAuthResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return OAuthResponse.attributeTypeMap
+  }
 }
-

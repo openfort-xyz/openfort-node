@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 /**
-* Contains list of the expandable fields for the session response
-*/
-export type SessionResponseExpandable = "transactionIntents" ;
+ * Contains list of the expandable fields for the session response
+ */
+export type SessionResponseExpandable = 'transactionIntents'

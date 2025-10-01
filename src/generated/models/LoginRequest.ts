@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class LoginRequest {
-    /**
-    * The email address of the user.
-    */
-    'email': string;
-    /**
-    * The password of the user.
-    */
-    'password': string;
+  /**
+   * The email address of the user.
+   */
+  email: string
+  /**
+   * The password of the user.
+   */
+  password: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'password',
+      baseName: 'password',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return LoginRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return LoginRequest.attributeTypeMap
+  }
 }
-

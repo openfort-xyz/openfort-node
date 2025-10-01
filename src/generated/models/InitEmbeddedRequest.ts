@@ -10,26 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class InitEmbeddedRequest {
-    'chainId': number;
+  chainId: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'double',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return InitEmbeddedRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return InitEmbeddedRequest.attributeTypeMap
+  }
 }
-

@@ -10,129 +10,129 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class UserOperationV6 {
-    /**
-    * The data to pass to the `sender` during the main execution call.
-    */
-    'callData': string;
-    /**
-    * The amount of gas to allocate the main execution call
-    */
-    'callGasLimit': string;
-    /**
-    * Account init code. Only for new accounts.
-    */
-    'initCode'?: string;
-    /**
-    * Maximum fee per gas.
-    */
-    'maxFeePerGas': string;
-    /**
-    * Maximum priority fee per gas.
-    */
-    'maxPriorityFeePerGas': string;
-    /**
-    * Anti-replay parameter.
-    */
-    'nonce': string;
-    /**
-    * Paymaster address with calldata.
-    */
-    'paymasterAndData'?: string;
-    /**
-    * Extra gas to pay the bundler.
-    */
-    'preVerificationGas': string;
-    /**
-    * The account making the operation.
-    */
-    'sender': string;
-    /**
-    * Data passed into the account to verify authorization.
-    */
-    'signature': string;
-    /**
-    * The amount of gas to allocate for the verification step.
-    */
-    'verificationGasLimit': string;
+  /**
+   * The data to pass to the `sender` during the main execution call.
+   */
+  callData: string
+  /**
+   * The amount of gas to allocate the main execution call
+   */
+  callGasLimit: string
+  /**
+   * Account init code. Only for new accounts.
+   */
+  initCode?: string
+  /**
+   * Maximum fee per gas.
+   */
+  maxFeePerGas: string
+  /**
+   * Maximum priority fee per gas.
+   */
+  maxPriorityFeePerGas: string
+  /**
+   * Anti-replay parameter.
+   */
+  nonce: string
+  /**
+   * Paymaster address with calldata.
+   */
+  paymasterAndData?: string
+  /**
+   * Extra gas to pay the bundler.
+   */
+  preVerificationGas: string
+  /**
+   * The account making the operation.
+   */
+  sender: string
+  /**
+   * Data passed into the account to verify authorization.
+   */
+  signature: string
+  /**
+   * The amount of gas to allocate for the verification step.
+   */
+  verificationGasLimit: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "callData",
-            "baseName": "callData",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "callGasLimit",
-            "baseName": "callGasLimit",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "initCode",
-            "baseName": "initCode",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "maxFeePerGas",
-            "baseName": "maxFeePerGas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "maxPriorityFeePerGas",
-            "baseName": "maxPriorityFeePerGas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "nonce",
-            "baseName": "nonce",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "paymasterAndData",
-            "baseName": "paymasterAndData",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "preVerificationGas",
-            "baseName": "preVerificationGas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "sender",
-            "baseName": "sender",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "signature",
-            "baseName": "signature",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "verificationGasLimit",
-            "baseName": "verificationGasLimit",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'callData',
+      baseName: 'callData',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'callGasLimit',
+      baseName: 'callGasLimit',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'initCode',
+      baseName: 'initCode',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'maxFeePerGas',
+      baseName: 'maxFeePerGas',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'maxPriorityFeePerGas',
+      baseName: 'maxPriorityFeePerGas',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'nonce',
+      baseName: 'nonce',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'paymasterAndData',
+      baseName: 'paymasterAndData',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'preVerificationGas',
+      baseName: 'preVerificationGas',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'sender',
+      baseName: 'sender',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'signature',
+      baseName: 'signature',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'verificationGasLimit',
+      baseName: 'verificationGasLimit',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UserOperationV6.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return UserOperationV6.attributeTypeMap
+  }
 }
-

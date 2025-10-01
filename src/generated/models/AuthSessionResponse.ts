@@ -10,68 +10,68 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class AuthSessionResponse {
-    'livemode': boolean;
-    'projectId': string;
-    'playerId': string;
-    'issuer': string;
-    'issuedAt': number;
-    'expiration': number;
-    'sessionId': string;
+  livemode: boolean
+  projectId: string
+  playerId: string
+  issuer: string
+  issuedAt: number
+  expiration: number
+  sessionId: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "projectId",
-            "baseName": "projectId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "playerId",
-            "baseName": "playerId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "issuer",
-            "baseName": "issuer",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "issuedAt",
-            "baseName": "issuedAt",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "expiration",
-            "baseName": "expiration",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "sessionId",
-            "baseName": "sessionId",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'livemode',
+      baseName: 'livemode',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'projectId',
+      baseName: 'projectId',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'playerId',
+      baseName: 'playerId',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'issuer',
+      baseName: 'issuer',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'issuedAt',
+      baseName: 'issuedAt',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'expiration',
+      baseName: 'expiration',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'sessionId',
+      baseName: 'sessionId',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return AuthSessionResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return AuthSessionResponse.attributeTypeMap
+  }
 }
-

@@ -10,37 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { Token } from '../models/Token';
-import { HttpFile } from '../http/http';
+import type { Token } from '../models/Token'
 
 /**
-* Interface representing a token amount
-*/
+ * Interface representing a token amount
+ */
 export class Amount {
-    'value': string;
-    'token': Token;
+  value: string
+  token: Token
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "Token",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'value',
+      baseName: 'value',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'token',
+      baseName: 'token',
+      type: 'Token',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Amount.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return Amount.attributeTypeMap
+  }
 }
-

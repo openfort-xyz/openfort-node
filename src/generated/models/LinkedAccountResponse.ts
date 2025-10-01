@@ -10,93 +10,92 @@
  * Do not edit the class manually.
  */
 
-import { AuthProviderResponse } from '../models/AuthProviderResponse';
-import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
-import { HttpFile } from '../http/http';
+import type { AuthProviderResponse } from '../models/AuthProviderResponse'
+import type { PlayerMetadataValue } from '../models/PlayerMetadataValue'
 
 export class LinkedAccountResponse {
-    'provider': AuthProviderResponse;
-    'email'?: string;
-    'externalUserId'?: string;
-    'connectorType'?: string;
-    'walletClientType'?: string;
-    'disabled': boolean;
-    'verified'?: boolean;
-    'updatedAt'?: number;
-    'address'?: string;
-    'metadata'?: { [key: string]: PlayerMetadataValue; };
+  provider: AuthProviderResponse
+  email?: string
+  externalUserId?: string
+  connectorType?: string
+  walletClientType?: string
+  disabled: boolean
+  verified?: boolean
+  updatedAt?: number
+  address?: string
+  metadata?: { [key: string]: PlayerMetadataValue }
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "AuthProviderResponse",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "externalUserId",
-            "baseName": "externalUserId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "connectorType",
-            "baseName": "connectorType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "walletClientType",
-            "baseName": "walletClientType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "disabled",
-            "baseName": "disabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "verified",
-            "baseName": "verified",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "metadata",
-            "baseName": "metadata",
-            "type": "{ [key: string]: PlayerMetadataValue; }",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'AuthProviderResponse',
+      format: '',
+    },
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'externalUserId',
+      baseName: 'externalUserId',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'connectorType',
+      baseName: 'connectorType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'walletClientType',
+      baseName: 'walletClientType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'disabled',
+      baseName: 'disabled',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'verified',
+      baseName: 'verified',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'updatedAt',
+      baseName: 'updatedAt',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'metadata',
+      baseName: 'metadata',
+      type: '{ [key: string]: PlayerMetadataValue; }',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return LinkedAccountResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return LinkedAccountResponse.attributeTypeMap
+  }
 }
-
-
-

@@ -10,105 +10,100 @@
  * Do not edit the class manually.
  */
 
-import { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL';
-import { AccountEventResponse } from '../models/AccountEventResponse';
-import { BalanceEventResponse } from '../models/BalanceEventResponse';
-import { ContractEventResponse } from '../models/ContractEventResponse';
-import { EntityIdResponse } from '../models/EntityIdResponse';
-import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
-import { TransactionConfirmedEventResponse } from '../models/TransactionConfirmedEventResponse';
-import { HttpFile } from '../http/http';
+import type { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL'
+import type { EntityIdResponse } from '../models/EntityIdResponse'
+import type { EntityTypeEVENT } from '../models/EntityTypeEVENT'
 
 export class EventResponse {
-    'id': string;
-    'object': EntityTypeEVENT;
-    'createdAt': number;
-    'topic': APITopicTRANSACTIONSUCCESSFUL;
-    'threshold': string;
-    'contract': EntityIdResponse;
-    'functionName': string;
-    'functionArgs': Array<string>;
-    'developerAccount': EntityIdResponse;
-    'chainId': number;
-    'numberOfBlocks': number;
+  id: string
+  object: EntityTypeEVENT
+  createdAt: number
+  topic: APITopicTRANSACTIONSUCCESSFUL
+  threshold: string
+  contract: EntityIdResponse
+  functionName: string
+  functionArgs: string[]
+  developerAccount: EntityIdResponse
+  chainId: number
+  numberOfBlocks: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeEVENT",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "topic",
-            "baseName": "topic",
-            "type": "APITopicTRANSACTIONSUCCESSFUL",
-            "format": ""
-        },
-        {
-            "name": "threshold",
-            "baseName": "threshold",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "contract",
-            "baseName": "contract",
-            "type": "EntityIdResponse",
-            "format": ""
-        },
-        {
-            "name": "functionName",
-            "baseName": "functionName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "functionArgs",
-            "baseName": "functionArgs",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "developerAccount",
-            "baseName": "developerAccount",
-            "type": "EntityIdResponse",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "numberOfBlocks",
-            "baseName": "numberOfBlocks",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeEVENT',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'topic',
+      baseName: 'topic',
+      type: 'APITopicTRANSACTIONSUCCESSFUL',
+      format: '',
+    },
+    {
+      name: 'threshold',
+      baseName: 'threshold',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'contract',
+      baseName: 'contract',
+      type: 'EntityIdResponse',
+      format: '',
+    },
+    {
+      name: 'functionName',
+      baseName: 'functionName',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'functionArgs',
+      baseName: 'functionArgs',
+      type: 'Array<string>',
+      format: '',
+    },
+    {
+      name: 'developerAccount',
+      baseName: 'developerAccount',
+      type: 'EntityIdResponse',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'numberOfBlocks',
+      baseName: 'numberOfBlocks',
+      type: 'number',
+      format: 'double',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return EventResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return EventResponse.attributeTypeMap
+  }
 }
-
-
-

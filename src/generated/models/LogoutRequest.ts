@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class LogoutRequest {
-    /**
-    * Specifies the refresh token.
-    */
-    'refreshToken': string;
+  /**
+   * Specifies the refresh token.
+   */
+  refreshToken: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'refreshToken',
+      baseName: 'refreshToken',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return LogoutRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return LogoutRequest.attributeTypeMap
+  }
 }
-

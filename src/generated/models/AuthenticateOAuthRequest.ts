@@ -10,58 +10,57 @@
  * Do not edit the class manually.
  */
 
-import { AuthenticateOAuthRequestProvider } from '../models/AuthenticateOAuthRequestProvider';
-import { PlayerResponseExpandable } from '../models/PlayerResponseExpandable';
-import { TokenType } from '../models/TokenType';
-import { HttpFile } from '../http/http';
+import type { AuthenticateOAuthRequestProvider } from '../models/AuthenticateOAuthRequestProvider'
+import type { PlayerResponseExpandable } from '../models/PlayerResponseExpandable'
+import type { TokenType } from '../models/TokenType'
 
 export class AuthenticateOAuthRequest {
-    'provider': AuthenticateOAuthRequestProvider;
-    /**
-    * Token to be verified
-    */
-    'token': string;
-    'tokenType': TokenType;
-    /**
-    * Specifies the fields to expand in the response.
-    */
-    'expand'?: Array<PlayerResponseExpandable>;
+  provider: AuthenticateOAuthRequestProvider
+  /**
+   * Token to be verified
+   */
+  token: string
+  tokenType: TokenType
+  /**
+   * Specifies the fields to expand in the response.
+   */
+  expand?: PlayerResponseExpandable[]
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "AuthenticateOAuthRequestProvider",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "TokenType",
-            "format": ""
-        },
-        {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<PlayerResponseExpandable>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'AuthenticateOAuthRequestProvider',
+      format: '',
+    },
+    {
+      name: 'token',
+      baseName: 'token',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'tokenType',
+      baseName: 'tokenType',
+      type: 'TokenType',
+      format: '',
+    },
+    {
+      name: 'expand',
+      baseName: 'expand',
+      type: 'Array<PlayerResponseExpandable>',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return AuthenticateOAuthRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return AuthenticateOAuthRequest.attributeTypeMap
+  }
 }
-
-
-

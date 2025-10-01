@@ -10,110 +10,110 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class EmbeddedV2Response {
-    'share'?: string;
-    'accountType': string;
-    'implementationType'?: string;
-    'implementationAddress'?: string;
-    'factoryAddress'?: string;
-    'salt'?: string;
-    'address': string;
-    'ownerAddress': string;
-    'chainType': string;
-    'chainId'?: number;
-    'device'?: string;
-    'account': string;
-    'signer': string;
+  share?: string
+  accountType: string
+  implementationType?: string
+  implementationAddress?: string
+  factoryAddress?: string
+  salt?: string
+  address: string
+  ownerAddress: string
+  chainType: string
+  chainId?: number
+  device?: string
+  account: string
+  signer: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "share",
-            "baseName": "share",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "accountType",
-            "baseName": "accountType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "implementationType",
-            "baseName": "implementationType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "implementationAddress",
-            "baseName": "implementationAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "factoryAddress",
-            "baseName": "factoryAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "salt",
-            "baseName": "salt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "ownerAddress",
-            "baseName": "ownerAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "chainType",
-            "baseName": "chainType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "device",
-            "baseName": "device",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "signer",
-            "baseName": "signer",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'share',
+      baseName: 'share',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'accountType',
+      baseName: 'accountType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'implementationType',
+      baseName: 'implementationType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'implementationAddress',
+      baseName: 'implementationAddress',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'factoryAddress',
+      baseName: 'factoryAddress',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'salt',
+      baseName: 'salt',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'ownerAddress',
+      baseName: 'ownerAddress',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'chainType',
+      baseName: 'chainType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'double',
+    },
+    {
+      name: 'device',
+      baseName: 'device',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'signer',
+      baseName: 'signer',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return EmbeddedV2Response.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return EmbeddedV2Response.attributeTypeMap
+  }
 }
-

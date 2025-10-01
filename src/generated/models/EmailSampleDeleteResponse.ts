@@ -10,43 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
-import { HttpFile } from '../http/http';
+import type { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE'
 
 export class EmailSampleDeleteResponse {
-    'deleted': boolean;
-    'id': string;
-    'object': EntityTypeEMAILSAMPLE;
+  deleted: boolean
+  id: string
+  object: EntityTypeEMAILSAMPLE
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeEMAILSAMPLE",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeEMAILSAMPLE',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return EmailSampleDeleteResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return EmailSampleDeleteResponse.attributeTypeMap
+  }
 }
-
-
-

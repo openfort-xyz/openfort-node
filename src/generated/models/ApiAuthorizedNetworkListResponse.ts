@@ -10,65 +10,64 @@
  * Do not edit the class manually.
  */
 
-import { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse';
-import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
-import { HttpFile } from '../http/http';
+import type { ApiAuthorizedNetworkResponse } from '../models/ApiAuthorizedNetworkResponse'
+import type { ResponseTypeLIST } from '../models/ResponseTypeLIST'
 
 export class ApiAuthorizedNetworkListResponse {
-    'object': ResponseTypeLIST;
-    'url': string;
-    'data': Array<ApiAuthorizedNetworkResponse>;
-    'start': number;
-    'end': number;
-    'total': number;
+  object: ResponseTypeLIST
+  url: string
+  data: ApiAuthorizedNetworkResponse[]
+  start: number
+  end: number
+  total: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "ResponseTypeLIST",
-            "format": ""
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<ApiAuthorizedNetworkResponse>",
-            "format": ""
-        },
-        {
-            "name": "start",
-            "baseName": "start",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "end",
-            "baseName": "end",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'ResponseTypeLIST',
+      format: '',
+    },
+    {
+      name: 'url',
+      baseName: 'url',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'data',
+      baseName: 'data',
+      type: 'Array<ApiAuthorizedNetworkResponse>',
+      format: '',
+    },
+    {
+      name: 'start',
+      baseName: 'start',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'end',
+      baseName: 'end',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'total',
+      baseName: 'total',
+      type: 'number',
+      format: 'int32',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ApiAuthorizedNetworkListResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return ApiAuthorizedNetworkListResponse.attributeTypeMap
+  }
 }
-
-
-

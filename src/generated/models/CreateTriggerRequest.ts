@@ -10,49 +10,48 @@
  * Do not edit the class manually.
  */
 
-import { APITriggerType } from '../models/APITriggerType';
-import { HttpFile } from '../http/http';
+import type { APITriggerType } from '../models/APITriggerType'
 
 export class CreateTriggerRequest {
-    /**
-    * Specifies the target of the trigger
-    */
-    'target': string;
-    'type': APITriggerType;
-    /**
-    * Specifies the subscription ID
-    */
-    'subscription'?: string;
+  /**
+   * Specifies the target of the trigger
+   */
+  target: string
+  type: APITriggerType
+  /**
+   * Specifies the subscription ID
+   */
+  subscription?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "target",
-            "baseName": "target",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "APITriggerType",
-            "format": ""
-        },
-        {
-            "name": "subscription",
-            "baseName": "subscription",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'target',
+      baseName: 'target',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'APITriggerType',
+      format: '',
+    },
+    {
+      name: 'subscription',
+      baseName: 'subscription',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CreateTriggerRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CreateTriggerRequest.attributeTypeMap
+  }
 }
-
-
-

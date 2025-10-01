@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type AssetType = "ETH" | "ERC20" | "ERC721" | "ERC1155" ;
+export type AssetType = 'ETH' | 'ERC20' | 'ERC721' | 'ERC1155'

@@ -10,6 +10,4 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type TradeType = "EXACT_INPUT" | "EXACT_OUTPUT" ;
+export type TradeType = 'EXACT_INPUT' | 'EXACT_OUTPUT'
