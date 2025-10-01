@@ -70,8 +70,8 @@ async function example() {
     const playerDeleteResponse = await openfort.players.delete(newPlayer.id);
     console.info(playerDeleteResponse);
 
-    await openfort.settings.updateWebhook("https://openfort.xyz");
-    await openfort.settings.removeWebhook("https://openfort.xyz");
+    await openfort.settings.updateWebhook("https://openfort.io");
+    await openfort.settings.removeWebhook("https://openfort.io");
 }
 
 dotenv.config();
