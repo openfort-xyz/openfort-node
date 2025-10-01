@@ -10,59 +10,56 @@
  * Do not edit the class manually.
  */
 
-import { ActionRequiredResponse } from '../models/ActionRequiredResponse';
-import { Actions } from '../models/Actions';
-import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
-import { AuthResponse } from '../models/AuthResponse';
-import { HttpFile } from '../http/http';
+import type { Actions } from '../models/Actions'
+import type { AuthPlayerResponse } from '../models/AuthPlayerResponse'
 
 export class SignupEmailPassword201Response {
-    'player': AuthPlayerResponse;
-    /**
-    * JWT access token.
-    */
-    'token': string;
-    /**
-    * Refresh token.
-    */
-    'refreshToken': string;
-    'action': Actions;
+  player: AuthPlayerResponse
+  /**
+   * JWT access token.
+   */
+  token: string
+  /**
+   * Refresh token.
+   */
+  refreshToken: string
+  action: Actions
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "player",
-            "baseName": "player",
-            "type": "AuthPlayerResponse",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "refreshToken",
-            "baseName": "refreshToken",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "action",
-            "baseName": "action",
-            "type": "Actions",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'player',
+      baseName: 'player',
+      type: 'AuthPlayerResponse',
+      format: '',
+    },
+    {
+      name: 'token',
+      baseName: 'token',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'refreshToken',
+      baseName: 'refreshToken',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'action',
+      baseName: 'action',
+      type: 'Actions',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return SignupEmailPassword201Response.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return SignupEmailPassword201Response.attributeTypeMap
+  }
 }
-
-
-

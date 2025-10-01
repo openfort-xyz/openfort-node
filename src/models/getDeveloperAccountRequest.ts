@@ -1,4 +1,4 @@
 export interface GetDeveloperAccountRequest {
-    id: string;
-    expand?: "transactionIntents"[];
+  id: string
+  expand?: 'transactionIntents'[]
 }

@@ -10,59 +10,60 @@
  * Do not edit the class manually.
  */
 
-import { TypedDataField } from '../models/TypedDataField';
-import { TypedDomainData } from '../models/TypedDomainData';
-import { HttpFile } from '../http/http';
+import type { TypedDataField } from '../models/TypedDataField'
+import type { TypedDomainData } from '../models/TypedDomainData'
 
 export class SignPayloadRequest {
-    'domain': TypedDomainData;
-    'types': { [key: string]: Array<TypedDataField>; };
-    'primaryType': string;
-    'value': { [key: string]: any; };
-    /**
-    * Hash to verify and that will be signed
-    */
-    'hash'?: string;
+  domain: TypedDomainData
+  types: { [key: string]: TypedDataField[] }
+  primaryType: string
+  value: { [key: string]: any }
+  /**
+   * Hash to verify and that will be signed
+   */
+  hash?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "domain",
-            "baseName": "domain",
-            "type": "TypedDomainData",
-            "format": ""
-        },
-        {
-            "name": "types",
-            "baseName": "types",
-            "type": "{ [key: string]: Array<TypedDataField>; }",
-            "format": ""
-        },
-        {
-            "name": "primaryType",
-            "baseName": "primaryType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "hash",
-            "baseName": "hash",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'domain',
+      baseName: 'domain',
+      type: 'TypedDomainData',
+      format: '',
+    },
+    {
+      name: 'types',
+      baseName: 'types',
+      type: '{ [key: string]: Array<TypedDataField>; }',
+      format: '',
+    },
+    {
+      name: 'primaryType',
+      baseName: 'primaryType',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'value',
+      baseName: 'value',
+      type: '{ [key: string]: any; }',
+      format: '',
+    },
+    {
+      name: 'hash',
+      baseName: 'hash',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return SignPayloadRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return SignPayloadRequest.attributeTypeMap
+  }
 }
-

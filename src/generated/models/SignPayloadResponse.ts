@@ -10,57 +10,56 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE';
-import { HttpFile } from '../http/http';
+import type { EntityTypeSIGNATURE } from '../models/EntityTypeSIGNATURE'
 
 export class SignPayloadResponse {
-    'object': EntityTypeSIGNATURE;
-    'account': string;
-    'address': string;
-    'hash': string;
-    'signature': string;
+  object: EntityTypeSIGNATURE
+  account: string
+  address: string
+  hash: string
+  signature: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeSIGNATURE",
-            "format": ""
-        },
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "hash",
-            "baseName": "hash",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "signature",
-            "baseName": "signature",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeSIGNATURE',
+      format: '',
+    },
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'hash',
+      baseName: 'hash',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'signature',
+      baseName: 'signature',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return SignPayloadResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return SignPayloadResponse.attributeTypeMap
+  }
 }
-
-
-

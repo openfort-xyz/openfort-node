@@ -10,62 +10,61 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE';
-import { HttpFile } from '../http/http';
+import type { OAuthProviderGOOGLE } from '../models/OAuthProviderGOOGLE'
 
 /**
-* Google oauth configuration
-*/
+ * Google oauth configuration
+ */
 export class GoogleOAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': OAuthProviderGOOGLE;
-    /**
-    * Google API client ID.
-    */
-    'clientId': string;
-    /**
-    * Google API client secret.
-    */
-    'clientSecret'?: string;
+  /**
+   * Enable OAuth provider.
+   */
+  enabled: boolean
+  provider: OAuthProviderGOOGLE
+  /**
+   * Google API client ID.
+   */
+  clientId: string
+  /**
+   * Google API client secret.
+   */
+  clientSecret?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProviderGOOGLE",
-            "format": ""
-        },
-        {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientSecret",
-            "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'enabled',
+      baseName: 'enabled',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'OAuthProviderGOOGLE',
+      format: '',
+    },
+    {
+      name: 'clientId',
+      baseName: 'clientId',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'clientSecret',
+      baseName: 'clientSecret',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return GoogleOAuthConfig.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return GoogleOAuthConfig.attributeTypeMap
+  }
 }
-
-
-

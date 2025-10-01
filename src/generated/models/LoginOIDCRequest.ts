@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class LoginOIDCRequest {
-    /**
-    * The identity token of the user.
-    */
-    'identityToken': string;
+  /**
+   * The identity token of the user.
+   */
+  identityToken: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "identityToken",
-            "baseName": "identityToken",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'identityToken',
+      baseName: 'identityToken',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return LoginOIDCRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return LoginOIDCRequest.attributeTypeMap
+  }
 }
-

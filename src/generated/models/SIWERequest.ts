@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class SIWERequest {
-    /**
-    * The address of the user.
-    */
-    'address': string;
+  /**
+   * The address of the user.
+   */
+  address: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "address",
-            "baseName": "address",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'address',
+      baseName: 'address',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return SIWERequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return SIWERequest.attributeTypeMap
+  }
 }
-

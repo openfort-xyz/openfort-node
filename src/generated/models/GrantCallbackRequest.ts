@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class GrantCallbackRequest {
-    'code': string;
-    'state': string;
+  code: string
+  state: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "state",
-            "baseName": "state",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'state',
+      baseName: 'state',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return GrantCallbackRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return GrantCallbackRequest.attributeTypeMap
+  }
 }
-

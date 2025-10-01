@@ -10,53 +10,49 @@
  * Do not edit the class manually.
  */
 
-import { ChargeCustomTokenPolicyStrategy } from '../models/ChargeCustomTokenPolicyStrategy';
-import { FixedRateTokenPolicyStrategy } from '../models/FixedRateTokenPolicyStrategy';
-import { PayForUserPolicyStrategy } from '../models/PayForUserPolicyStrategy';
-import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
-import { HttpFile } from '../http/http';
+import type { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE'
 
 export class PolicyStrategy {
-    'sponsorSchema': SponsorSchemaFIXEDRATE;
-    'depositor'?: string | null;
-    'tokenContract': string;
-    'tokenContractAmount': string;
+  sponsorSchema: SponsorSchemaFIXEDRATE
+  depositor?: string | null
+  tokenContract: string
+  tokenContractAmount: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "sponsorSchema",
-            "baseName": "sponsorSchema",
-            "type": "SponsorSchemaFIXEDRATE",
-            "format": ""
-        },
-        {
-            "name": "depositor",
-            "baseName": "depositor",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokenContract",
-            "baseName": "tokenContract",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokenContractAmount",
-            "baseName": "tokenContractAmount",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'sponsorSchema',
+      baseName: 'sponsorSchema',
+      type: 'SponsorSchemaFIXEDRATE',
+      format: '',
+    },
+    {
+      name: 'depositor',
+      baseName: 'depositor',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'tokenContract',
+      baseName: 'tokenContract',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'tokenContractAmount',
+      baseName: 'tokenContractAmount',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PolicyStrategy.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PolicyStrategy.attributeTypeMap
+  }
 }
-
-
-

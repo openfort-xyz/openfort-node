@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
-export type PolicyRuleType = "contract_functions" | "account_functions" | "rate_limit" ;
+export type PolicyRuleType =
+  | 'contract_functions'
+  | 'account_functions'
+  | 'rate_limit'

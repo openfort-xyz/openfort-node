@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class WithdrawalPolicyRequest {
-    /**
-    * ID of the Dev Account this TransactionIntent will send the specified amount of tokens to (starts with `dac_`).
-    */
-    'account': string;
-    /**
-    * Amount in WEI to withdraw (i.e. factor 10^18)..
-    */
-    'amount': string;
+  /**
+   * ID of the Dev Account this TransactionIntent will send the specified amount of tokens to (starts with `dac_`).
+   */
+  account: string
+  /**
+   * Amount in WEI to withdraw (i.e. factor 10^18)..
+   */
+  amount: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "amount",
-            "baseName": "amount",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'amount',
+      baseName: 'amount',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return WithdrawalPolicyRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return WithdrawalPolicyRequest.attributeTypeMap
+  }
 }
-

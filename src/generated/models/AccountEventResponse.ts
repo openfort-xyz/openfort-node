@@ -10,73 +10,72 @@
  * Do not edit the class manually.
  */
 
-import { APITopicBALANCEDEVACCOUNT } from '../models/APITopicBALANCEDEVACCOUNT';
-import { EntityIdResponse } from '../models/EntityIdResponse';
-import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
-import { HttpFile } from '../http/http';
+import type { APITopicBALANCEDEVACCOUNT } from '../models/APITopicBALANCEDEVACCOUNT'
+import type { EntityIdResponse } from '../models/EntityIdResponse'
+import type { EntityTypeEVENT } from '../models/EntityTypeEVENT'
 
 export class AccountEventResponse {
-    'id': string;
-    'object': EntityTypeEVENT;
-    'createdAt': number;
-    'topic': APITopicBALANCEDEVACCOUNT;
-    'threshold': string;
-    'developerAccount': EntityIdResponse;
-    'chainId': number;
+  id: string
+  object: EntityTypeEVENT
+  createdAt: number
+  topic: APITopicBALANCEDEVACCOUNT
+  threshold: string
+  developerAccount: EntityIdResponse
+  chainId: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypeEVENT",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "topic",
-            "baseName": "topic",
-            "type": "APITopicBALANCEDEVACCOUNT",
-            "format": ""
-        },
-        {
-            "name": "threshold",
-            "baseName": "threshold",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "developerAccount",
-            "baseName": "developerAccount",
-            "type": "EntityIdResponse",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypeEVENT',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'topic',
+      baseName: 'topic',
+      type: 'APITopicBALANCEDEVACCOUNT',
+      format: '',
+    },
+    {
+      name: 'threshold',
+      baseName: 'threshold',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'developerAccount',
+      baseName: 'developerAccount',
+      type: 'EntityIdResponse',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'double',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return AccountEventResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return AccountEventResponse.attributeTypeMap
+  }
 }
-
-
-

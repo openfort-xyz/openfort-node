@@ -10,7 +10,6 @@
       Documentation
     </a>
     <span> | </span>
-    <span> | </span>
     <a href="https://x.com/openfort_hq">
       Twitter
     </a>

@@ -10,59 +10,58 @@
  * Do not edit the class manually.
  */
 
-import { EmailTypeRequest } from '../models/EmailTypeRequest';
-import { HttpFile } from '../http/http';
+import type { EmailTypeRequest } from '../models/EmailTypeRequest'
 
 export class UpdateEmailSampleRequest {
-    /**
-    * Specifies the name
-    */
-    'name'?: string;
-    /**
-    * Specifies the subject
-    */
-    'subject'?: string;
-    /**
-    * Specifies the body
-    */
-    'body'?: string;
-    'type'?: EmailTypeRequest;
+  /**
+   * Specifies the name
+   */
+  name?: string
+  /**
+   * Specifies the subject
+   */
+  subject?: string
+  /**
+   * Specifies the body
+   */
+  body?: string
+  type?: EmailTypeRequest
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "subject",
-            "baseName": "subject",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "body",
-            "baseName": "body",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "EmailTypeRequest",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'subject',
+      baseName: 'subject',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'body',
+      baseName: 'body',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'EmailTypeRequest',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UpdateEmailSampleRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return UpdateEmailSampleRequest.attributeTypeMap
+  }
 }
-
-
-

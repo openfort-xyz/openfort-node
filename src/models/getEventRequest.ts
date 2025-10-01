@@ -1,3 +1,3 @@
 export interface GetEventRequest {
-    id: string;
+  id: string
 }

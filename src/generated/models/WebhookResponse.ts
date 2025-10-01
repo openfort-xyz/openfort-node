@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class WebhookResponse {
-    'webhook': string | null;
-    'livemode': boolean;
+  webhook: string | null
+  livemode: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "webhook",
-            "baseName": "webhook",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "livemode",
-            "baseName": "livemode",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'webhook',
+      baseName: 'webhook',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'livemode',
+      baseName: 'livemode',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return WebhookResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return WebhookResponse.attributeTypeMap
+  }
 }
-

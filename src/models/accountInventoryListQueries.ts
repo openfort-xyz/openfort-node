@@ -1,5 +1,6 @@
-import { AccountInventoryListQueries as ApiAccountInventoryListQueries } from "../generated";
+import type { AccountInventoryListQueries as ApiAccountInventoryListQueries } from '../generated'
 
-export interface AccountInventoryListQueries extends ApiAccountInventoryListQueries {
-    id: string;
+export interface AccountInventoryListQueries
+  extends ApiAccountInventoryListQueries {
+  id: string
 }

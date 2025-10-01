@@ -1,3 +1,3 @@
 export interface GetSubscriptionRequest {
-    id: string;
+  id: string
 }

@@ -10,27 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { Plan } from '../models/Plan';
-import { HttpFile } from '../http/http';
+import type { Plan } from '../models/Plan'
 
 export class PlansResponse {
-    'plans': Array<Plan>;
+  plans: Plan[]
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "plans",
-            "baseName": "plans",
-            "type": "Array<Plan>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'plans',
+      baseName: 'plans',
+      type: 'Array<Plan>',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PlansResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PlansResponse.attributeTypeMap
+  }
 }
-

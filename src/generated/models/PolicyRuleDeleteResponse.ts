@@ -10,43 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
-import { HttpFile } from '../http/http';
+import type { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE'
 
 export class PolicyRuleDeleteResponse {
-    'id': string;
-    'object': EntityTypePOLICYRULE;
-    'deleted': boolean;
+  id: string
+  object: EntityTypePOLICYRULE
+  deleted: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePOLICYRULE",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypePOLICYRULE',
+      format: '',
+    },
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PolicyRuleDeleteResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PolicyRuleDeleteResponse.attributeTypeMap
+  }
 }
-
-
-

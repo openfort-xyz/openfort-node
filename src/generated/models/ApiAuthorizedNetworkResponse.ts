@@ -10,57 +10,56 @@
  * Do not edit the class manually.
  */
 
-import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
-import { HttpFile } from '../http/http';
+import type { EntityTypePROJECT } from '../models/EntityTypePROJECT'
 
 export class ApiAuthorizedNetworkResponse {
-    'id': string;
-    'object': EntityTypePROJECT;
-    'createdAt': number;
-    'name': string;
-    'network': string;
+  id: string
+  object: EntityTypePROJECT
+  createdAt: number
+  name: string
+  network: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "object",
-            "baseName": "object",
-            "type": "EntityTypePROJECT",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "network",
-            "baseName": "network",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'object',
+      baseName: 'object',
+      type: 'EntityTypePROJECT',
+      format: '',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'network',
+      baseName: 'network',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ApiAuthorizedNetworkResponse.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return ApiAuthorizedNetworkResponse.attributeTypeMap
+  }
 }
-
-
-

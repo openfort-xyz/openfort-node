@@ -10,100 +10,99 @@
  * Do not edit the class manually.
  */
 
-import { PolicyResponseExpandable } from '../models/PolicyResponseExpandable';
-import { SortOrder } from '../models/SortOrder';
-import { HttpFile } from '../http/http';
+import type { PolicyResponseExpandable } from '../models/PolicyResponseExpandable'
+import type { SortOrder } from '../models/SortOrder'
 
 export class PolicyListQueries {
-    /**
-    * Specifies the maximum number of records to return.
-    */
-    'limit'?: number;
-    /**
-    * Specifies the offset for the first records to return.
-    */
-    'skip'?: number;
-    'order'?: SortOrder;
-    /**
-    * Specifies the fields to expand in the response.
-    */
-    'expand'?: Array<PolicyResponseExpandable>;
-    /**
-    * Specifies the name of the policy.
-    */
-    'name'?: string;
-    /**
-    * Specifies whether to include deleted policies.
-    */
-    'deleted'?: boolean;
-    /**
-    * The chain ID of the policy.
-    */
-    'chainId'?: number;
-    /**
-    * Specifies whether to include enabled policies.
-    */
-    'enabled'?: boolean;
+  /**
+   * Specifies the maximum number of records to return.
+   */
+  limit?: number
+  /**
+   * Specifies the offset for the first records to return.
+   */
+  skip?: number
+  order?: SortOrder
+  /**
+   * Specifies the fields to expand in the response.
+   */
+  expand?: PolicyResponseExpandable[]
+  /**
+   * Specifies the name of the policy.
+   */
+  name?: string
+  /**
+   * Specifies whether to include deleted policies.
+   */
+  deleted?: boolean
+  /**
+   * The chain ID of the policy.
+   */
+  chainId?: number
+  /**
+   * Specifies whether to include enabled policies.
+   */
+  enabled?: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "skip",
-            "baseName": "skip",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "order",
-            "baseName": "order",
-            "type": "SortOrder",
-            "format": ""
-        },
-        {
-            "name": "expand",
-            "baseName": "expand",
-            "type": "Array<PolicyResponseExpandable>",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "chainId",
-            "baseName": "chainId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'limit',
+      baseName: 'limit',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'skip',
+      baseName: 'skip',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'order',
+      baseName: 'order',
+      type: 'SortOrder',
+      format: '',
+    },
+    {
+      name: 'expand',
+      baseName: 'expand',
+      type: 'Array<PolicyResponseExpandable>',
+      format: '',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'deleted',
+      baseName: 'deleted',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'chainId',
+      baseName: 'chainId',
+      type: 'number',
+      format: 'int32',
+    },
+    {
+      name: 'enabled',
+      baseName: 'enabled',
+      type: 'boolean',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return PolicyListQueries.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return PolicyListQueries.attributeTypeMap
+  }
 }
-
-
-

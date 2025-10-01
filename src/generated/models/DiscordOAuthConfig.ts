@@ -10,59 +10,58 @@
  * Do not edit the class manually.
  */
 
-import { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD';
-import { HttpFile } from '../http/http';
+import type { OAuthProviderDISCORD } from '../models/OAuthProviderDISCORD'
 
 export class DiscordOAuthConfig {
-    /**
-    * Enable OAuth provider.
-    */
-    'enabled': boolean;
-    'provider': OAuthProviderDISCORD;
-    /**
-    * Discord API client ID.
-    */
-    'clientId': string;
-    /**
-    * Discord API client secret.
-    */
-    'clientSecret': string;
+  /**
+   * Enable OAuth provider.
+   */
+  enabled: boolean
+  provider: OAuthProviderDISCORD
+  /**
+   * Discord API client ID.
+   */
+  clientId: string
+  /**
+   * Discord API client secret.
+   */
+  clientSecret: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "provider",
-            "baseName": "provider",
-            "type": "OAuthProviderDISCORD",
-            "format": ""
-        },
-        {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientSecret",
-            "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'enabled',
+      baseName: 'enabled',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'provider',
+      baseName: 'provider',
+      type: 'OAuthProviderDISCORD',
+      format: '',
+    },
+    {
+      name: 'clientId',
+      baseName: 'clientId',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'clientSecret',
+      baseName: 'clientSecret',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return DiscordOAuthConfig.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return DiscordOAuthConfig.attributeTypeMap
+  }
 }
-
-
-

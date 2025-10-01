@@ -10,29 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { ApiKeyType } from '../models/ApiKeyType';
-import { HttpFile } from '../http/http';
+import type { ApiKeyType } from '../models/ApiKeyType'
 
 export class CreateProjectApiKeyRequest {
-    'type': ApiKeyType;
+  type: ApiKeyType
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "ApiKeyType",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'ApiKeyType',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return CreateProjectApiKeyRequest.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return CreateProjectApiKeyRequest.attributeTypeMap
+  }
 }
-
-
-

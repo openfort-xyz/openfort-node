@@ -10,39 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { Currency } from '../models/Currency';
-import { HttpFile } from '../http/http';
+import type { Currency } from '../models/Currency'
 
 export class Money {
-    /**
-    * Amount in cents
-    */
-    'amount': number;
-    'currency': Currency;
+  /**
+   * Amount in cents
+   */
+  amount: number
+  currency: Currency
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "amount",
-            "baseName": "amount",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "currency",
-            "baseName": "currency",
-            "type": "Currency",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'amount',
+      baseName: 'amount',
+      type: 'number',
+      format: 'int64',
+    },
+    {
+      name: 'currency',
+      baseName: 'currency',
+      type: 'Currency',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Money.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return Money.attributeTypeMap
+  }
 }
-
-
-

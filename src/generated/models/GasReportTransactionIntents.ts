@@ -10,54 +10,54 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class GasReportTransactionIntents {
-    'id': string;
-    'gasFee': string;
-    'gasPrice': string;
-    'gasUsed': string;
-    'gasFeeInUSD': string;
+  id: string
+  gasFee: string
+  gasPrice: string
+  gasUsed: string
+  gasFeeInUSD: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasFee",
-            "baseName": "gasFee",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasPrice",
-            "baseName": "gasPrice",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasUsed",
-            "baseName": "gasUsed",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gasFeeInUSD",
-            "baseName": "gasFeeInUSD",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'gasFee',
+      baseName: 'gasFee',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'gasPrice',
+      baseName: 'gasPrice',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'gasUsed',
+      baseName: 'gasUsed',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'gasFeeInUSD',
+      baseName: 'gasFeeInUSD',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return GasReportTransactionIntents.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return GasReportTransactionIntents.attributeTypeMap
+  }
 }
-

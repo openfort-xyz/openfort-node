@@ -10,119 +10,119 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
-
 export class ZKSyncDetails {
-    /**
-    * The transaction sender.
-    */
-    '_from': string;
-    /**
-    * The transaction recipient or contract address.
-    */
-    'to': string;
-    /**
-    * A contract hashed method call with encoded args.
-    */
-    'data'?: string;
-    /**
-    * Unique number identifying this transaction.
-    */
-    'nonce': string;
-    /**
-    * The gas limit for the transaction.
-    */
-    'gas': string;
-    /**
-    * Total fee per gas (in wei), inclusive of `maxPriorityFeePerGas`. Only applies to EIP-1559 Transactions.
-    */
-    'maxFeePerGas': string;
-    /**
-    * Max priority fee per gas (in wei). Only applies to EIP-1559 Transactions.
-    */
-    'maxPriorityFeePerGas': string;
-    /**
-    * Address of the paymaster account that will pay the fees.
-    */
-    'paymaster'?: string;
-    /**
-    * Input data to the paymaster
-    */
-    'paymasterInput'?: string;
-    /**
-    * Value in wei sent with this transaction.
-    */
-    'value'?: string;
+  /**
+   * The transaction sender.
+   */
+  _from: string
+  /**
+   * The transaction recipient or contract address.
+   */
+  to: string
+  /**
+   * A contract hashed method call with encoded args.
+   */
+  data?: string
+  /**
+   * Unique number identifying this transaction.
+   */
+  nonce: string
+  /**
+   * The gas limit for the transaction.
+   */
+  gas: string
+  /**
+   * Total fee per gas (in wei), inclusive of `maxPriorityFeePerGas`. Only applies to EIP-1559 Transactions.
+   */
+  maxFeePerGas: string
+  /**
+   * Max priority fee per gas (in wei). Only applies to EIP-1559 Transactions.
+   */
+  maxPriorityFeePerGas: string
+  /**
+   * Address of the paymaster account that will pay the fees.
+   */
+  paymaster?: string
+  /**
+   * Input data to the paymaster
+   */
+  paymasterInput?: string
+  /**
+   * Value in wei sent with this transaction.
+   */
+  value?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "_from",
-            "baseName": "from",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "to",
-            "baseName": "to",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "nonce",
-            "baseName": "nonce",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "gas",
-            "baseName": "gas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "maxFeePerGas",
-            "baseName": "maxFeePerGas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "maxPriorityFeePerGas",
-            "baseName": "maxPriorityFeePerGas",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "paymaster",
-            "baseName": "paymaster",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "paymasterInput",
-            "baseName": "paymasterInput",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: '_from',
+      baseName: 'from',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'to',
+      baseName: 'to',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'data',
+      baseName: 'data',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'nonce',
+      baseName: 'nonce',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'gas',
+      baseName: 'gas',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'maxFeePerGas',
+      baseName: 'maxFeePerGas',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'maxPriorityFeePerGas',
+      baseName: 'maxPriorityFeePerGas',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'paymaster',
+      baseName: 'paymaster',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'paymasterInput',
+      baseName: 'paymasterInput',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'value',
+      baseName: 'value',
+      type: 'string',
+      format: '',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ZKSyncDetails.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return ZKSyncDetails.attributeTypeMap
+  }
 }
-

@@ -10,46 +10,45 @@
  * Do not edit the class manually.
  */
 
-import { TransactionStatus } from '../models/TransactionStatus';
-import { HttpFile } from '../http/http';
+import type { TransactionStatus } from '../models/TransactionStatus'
 
 /**
-* A transition represents a change in the status of a transaction intent.
-*/
+ * A transition represents a change in the status of a transaction intent.
+ */
 export class Transition {
-    'fromStatus': TransactionStatus;
-    'toStatus': TransactionStatus;
-    'at': number;
+  fromStatus: TransactionStatus
+  toStatus: TransactionStatus
+  at: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "fromStatus",
-            "baseName": "fromStatus",
-            "type": "TransactionStatus",
-            "format": ""
-        },
-        {
-            "name": "toStatus",
-            "baseName": "toStatus",
-            "type": "TransactionStatus",
-            "format": ""
-        },
-        {
-            "name": "at",
-            "baseName": "at",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: 'fromStatus',
+      baseName: 'fromStatus',
+      type: 'TransactionStatus',
+      format: '',
+    },
+    {
+      name: 'toStatus',
+      baseName: 'toStatus',
+      type: 'TransactionStatus',
+      format: '',
+    },
+    {
+      name: 'at',
+      baseName: 'at',
+      type: 'number',
+      format: 'double',
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Transition.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+  static getAttributeTypeMap() {
+    return Transition.attributeTypeMap
+  }
 }
-
-
-
