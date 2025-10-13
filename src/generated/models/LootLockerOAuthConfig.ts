@@ -10,41 +10,42 @@
  * Do not edit the class manually.
  */
 
-import type { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER'
+import { ThirdPartyOAuthProviderLOOTLOCKER } from '../models/ThirdPartyOAuthProviderLOOTLOCKER';
+import { HttpFile } from '../http/http';
 
 /**
- * LootLocker oauth configuration
- */
+* LootLocker oauth configuration
+*/
 export class LootLockerOAuthConfig {
-  /**
-   * Enable OAuth provider.
-   */
-  enabled: boolean
-  provider: ThirdPartyOAuthProviderLOOTLOCKER
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': ThirdPartyOAuthProviderLOOTLOCKER;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'enabled',
-      baseName: 'enabled',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'ThirdPartyOAuthProviderLOOTLOCKER',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProviderLOOTLOCKER",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return LootLockerOAuthConfig.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return LootLockerOAuthConfig.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

@@ -10,80 +10,81 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypePLAYER } from '../models/EntityTypePLAYER'
-import type { PlayerMetadataValue } from '../models/PlayerMetadataValue'
-import type { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner'
-import type { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner'
+import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
+import { PlayerResponseAccountsInner } from '../models/PlayerResponseAccountsInner';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
+import { HttpFile } from '../http/http';
 
 export class PlayerResponse {
-  id: string
-  object: EntityTypePLAYER
-  createdAt: number
-  name: string
-  description?: string
-  metadata?: { [key: string]: PlayerMetadataValue }
-  transactionIntents?: PlayerResponseTransactionIntentsInner[]
-  accounts?: PlayerResponseAccountsInner[]
+    'id': string;
+    'object': EntityTypePLAYER;
+    'createdAt': number;
+    'name': string;
+    'description'?: string;
+    'metadata'?: { [key: string]: PlayerMetadataValue; };
+    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
+    'accounts'?: Array<PlayerResponseAccountsInner>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePLAYER',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'description',
-      baseName: 'description',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'metadata',
-      baseName: 'metadata',
-      type: '{ [key: string]: PlayerMetadataValue; }',
-      format: '',
-    },
-    {
-      name: 'transactionIntents',
-      baseName: 'transactionIntents',
-      type: 'Array<PlayerResponseTransactionIntentsInner>',
-      format: '',
-    },
-    {
-      name: 'accounts',
-      baseName: 'accounts',
-      type: 'Array<PlayerResponseAccountsInner>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePLAYER",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "{ [key: string]: PlayerMetadataValue; }",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PlayerResponseTransactionIntentsInner>",
+            "format": ""
+        },
+        {
+            "name": "accounts",
+            "baseName": "accounts",
+            "type": "Array<PlayerResponseAccountsInner>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PlayerResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PlayerResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

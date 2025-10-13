@@ -10,58 +10,57 @@
  * Do not edit the class manually.
  */
 
-import type { CodeChallengeVerify } from '../models/CodeChallengeVerify'
+import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
+import { HttpFile } from '../http/http';
 
 export class ResetPasswordRequest {
-  /**
-   * The email address of the user.
-   */
-  email: string
-  /**
-   * The new password of the user.
-   */
-  password: string
-  /**
-   * Unique value to identify the request. It\'s used to mitigate CSRF attacks.
-   */
-  state?: string
-  challenge?: CodeChallengeVerify
+    /**
+    * The email address of the user.
+    */
+    'email': string;
+    /**
+    * The new password of the user.
+    */
+    'password': string;
+    /**
+    * Unique value to identify the request. It\'s used to mitigate CSRF attacks.
+    */
+    'state'?: string;
+    'challenge'?: CodeChallengeVerify;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'email',
-      baseName: 'email',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'password',
-      baseName: 'password',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'state',
-      baseName: 'state',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'challenge',
-      baseName: 'challenge',
-      type: 'CodeChallengeVerify',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "password",
+            "baseName": "password",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "state",
+            "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallengeVerify",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ResetPasswordRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ResetPasswordRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

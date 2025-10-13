@@ -10,84 +10,85 @@
  * Do not edit the class manually.
  */
 
-import type { AuthMigrationStatus } from '../models/AuthMigrationStatus'
-import type { AuthProvider } from '../models/AuthProvider'
-import type { MappingStrategy } from '../models/MappingStrategy'
+import { AuthMigrationStatus } from '../models/AuthMigrationStatus';
+import { AuthProvider } from '../models/AuthProvider';
+import { MappingStrategy } from '../models/MappingStrategy';
+import { HttpFile } from '../http/http';
 
 /**
- * Auth Migration Response.
- */
+* Auth Migration Response.
+*/
 export class AuthMigrationResponse {
-  /**
-   * Unique identifier for the migration.
-   */
-  id: string
-  sourceProvider: AuthProvider
-  destinationProvider: AuthProvider
-  status: AuthMigrationStatus
-  /**
-   * The created date of the migration.
-   */
-  createdAt: Date
-  /**
-   * If the migration is finished, this will be the date it was finished.
-   */
-  finishedAt?: Date
-  mappingStrategy?: MappingStrategy
+    /**
+    * Unique identifier for the migration.
+    */
+    'id': string;
+    'sourceProvider': AuthProvider;
+    'destinationProvider': AuthProvider;
+    'status': AuthMigrationStatus;
+    /**
+    * The created date of the migration.
+    */
+    'createdAt': Date;
+    /**
+    * If the migration is finished, this will be the date it was finished.
+    */
+    'finishedAt'?: Date;
+    'mappingStrategy'?: MappingStrategy;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'sourceProvider',
-      baseName: 'sourceProvider',
-      type: 'AuthProvider',
-      format: '',
-    },
-    {
-      name: 'destinationProvider',
-      baseName: 'destinationProvider',
-      type: 'AuthProvider',
-      format: '',
-    },
-    {
-      name: 'status',
-      baseName: 'status',
-      type: 'AuthMigrationStatus',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'Date',
-      format: 'date-time',
-    },
-    {
-      name: 'finishedAt',
-      baseName: 'finishedAt',
-      type: 'Date',
-      format: 'date-time',
-    },
-    {
-      name: 'mappingStrategy',
-      baseName: 'mappingStrategy',
-      type: 'MappingStrategy',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "sourceProvider",
+            "baseName": "sourceProvider",
+            "type": "AuthProvider",
+            "format": ""
+        },
+        {
+            "name": "destinationProvider",
+            "baseName": "destinationProvider",
+            "type": "AuthProvider",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "AuthMigrationStatus",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "finishedAt",
+            "baseName": "finishedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "mappingStrategy",
+            "baseName": "mappingStrategy",
+            "type": "MappingStrategy",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AuthMigrationResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AuthMigrationResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

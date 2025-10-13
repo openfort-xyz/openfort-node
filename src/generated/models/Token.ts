@@ -10,57 +10,57 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 /**
- * Type representing a token
- */
+* Type representing a token
+*/
 export class Token {
-  name?: string
-  symbol?: string
-  decimals: number
-  address: string
-  chainId: number
+    'name'?: string;
+    'symbol'?: string;
+    'decimals': number;
+    'address': string;
+    'chainId': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'symbol',
-      baseName: 'symbol',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'decimals',
-      baseName: 'decimals',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'double',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "symbol",
+            "baseName": "symbol",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "decimals",
+            "baseName": "decimals",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return Token.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return Token.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

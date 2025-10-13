@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type OAuthProviderFACEBOOK = 'facebook'
+import { HttpFile } from '../http/http';
+
+export type OAuthProviderFACEBOOK = "facebook" ;

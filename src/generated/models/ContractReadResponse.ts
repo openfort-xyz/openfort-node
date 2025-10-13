@@ -10,56 +10,57 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT'
+import { EntityTypeREADCONTRACT } from '../models/EntityTypeREADCONTRACT';
+import { HttpFile } from '../http/http';
 
 export class ContractReadResponse {
-  id: string
-  object: EntityTypeREADCONTRACT
-  createdAt: number
-  functionName: string
-  result: any | null
+    'id': string;
+    'object': EntityTypeREADCONTRACT;
+    'createdAt': number;
+    'functionName': string;
+    'result': any | null;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeREADCONTRACT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'functionName',
-      baseName: 'functionName',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'result',
-      baseName: 'result',
-      type: 'any',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeREADCONTRACT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "functionName",
+            "baseName": "functionName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "result",
+            "baseName": "result",
+            "type": "any",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ContractReadResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ContractReadResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

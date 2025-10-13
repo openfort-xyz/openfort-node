@@ -10,28 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class ProjectStatsRequest {
-  timeFrame: ProjectStatsRequestTimeFrameEnum
+    'timeFrame': ProjectStatsRequestTimeFrameEnum;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'timeFrame',
-      baseName: 'timeFrame',
-      type: 'ProjectStatsRequestTimeFrameEnum',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "timeFrame",
+            "baseName": "timeFrame",
+            "type": "ProjectStatsRequestTimeFrameEnum",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ProjectStatsRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ProjectStatsRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
 
-export type ProjectStatsRequestTimeFrameEnum = 'day' | 'week' | 'month' | 'all'
+
+export type ProjectStatsRequestTimeFrameEnum = "day" | "week" | "month" | "all" ;
+

@@ -10,71 +10,70 @@
  * Do not edit the class manually.
  */
 
-import type { Amount } from '../models/Amount'
-import type { Fee } from '../models/Fee'
+import { Amount } from '../models/Amount';
+import { Fee } from '../models/Fee';
+import { HttpFile } from '../http/http';
 
 export class QuoteExchangeResult {
-  amount: Amount
-  amountWithMaxSlippage: Amount
-  slippage: number
-  fees: Fee[]
-  estimatedTXGasFee: string
-  estimatedTXGasFeeUSD: string
-  estimatedTXGasFeeToken?: string
+    'amount': Amount;
+    'amountWithMaxSlippage': Amount;
+    'slippage': number;
+    'fees': Array<Fee>;
+    'estimatedTXGasFee': string;
+    'estimatedTXGasFeeUSD': string;
+    'estimatedTXGasFeeToken'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'amount',
-      baseName: 'amount',
-      type: 'Amount',
-      format: '',
-    },
-    {
-      name: 'amountWithMaxSlippage',
-      baseName: 'amountWithMaxSlippage',
-      type: 'Amount',
-      format: '',
-    },
-    {
-      name: 'slippage',
-      baseName: 'slippage',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'fees',
-      baseName: 'fees',
-      type: 'Array<Fee>',
-      format: '',
-    },
-    {
-      name: 'estimatedTXGasFee',
-      baseName: 'estimatedTXGasFee',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'estimatedTXGasFeeUSD',
-      baseName: 'estimatedTXGasFeeUSD',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'estimatedTXGasFeeToken',
-      baseName: 'estimatedTXGasFeeToken',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "amount",
+            "baseName": "amount",
+            "type": "Amount",
+            "format": ""
+        },
+        {
+            "name": "amountWithMaxSlippage",
+            "baseName": "amountWithMaxSlippage",
+            "type": "Amount",
+            "format": ""
+        },
+        {
+            "name": "slippage",
+            "baseName": "slippage",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "fees",
+            "baseName": "fees",
+            "type": "Array<Fee>",
+            "format": ""
+        },
+        {
+            "name": "estimatedTXGasFee",
+            "baseName": "estimatedTXGasFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "estimatedTXGasFeeUSD",
+            "baseName": "estimatedTXGasFeeUSD",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "estimatedTXGasFeeToken",
+            "baseName": "estimatedTXGasFeeToken",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return QuoteExchangeResult.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return QuoteExchangeResult.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

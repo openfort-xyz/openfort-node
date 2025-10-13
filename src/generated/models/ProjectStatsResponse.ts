@@ -10,36 +10,35 @@
  * Do not edit the class manually.
  */
 
-import type { Stat } from '../models/Stat'
-import type { TransactionStat } from '../models/TransactionStat'
+import { Stat } from '../models/Stat';
+import { TransactionStat } from '../models/TransactionStat';
+import { HttpFile } from '../http/http';
 
 export class ProjectStatsResponse {
-  transactionIntents: TransactionStat[]
-  devices: Stat[]
+    'transactionIntents': Array<TransactionStat>;
+    'devices': Array<Stat>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'transactionIntents',
-      baseName: 'transactionIntents',
-      type: 'Array<TransactionStat>',
-      format: '',
-    },
-    {
-      name: 'devices',
-      baseName: 'devices',
-      type: 'Array<Stat>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<TransactionStat>",
+            "format": ""
+        },
+        {
+            "name": "devices",
+            "baseName": "devices",
+            "type": "Array<Stat>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ProjectStatsResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ProjectStatsResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

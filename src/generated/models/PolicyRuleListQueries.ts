@@ -10,70 +10,70 @@
  * Do not edit the class manually.
  */
 
-import type { SortOrder } from '../models/SortOrder'
+import { SortOrder } from '../models/SortOrder';
+import { HttpFile } from '../http/http';
 
 export class PolicyRuleListQueries {
-  /**
-   * Specifies the maximum number of records to return.
-   */
-  limit?: number
-  /**
-   * Specifies the offset for the first records to return.
-   */
-  skip?: number
-  order?: SortOrder
-  /**
-   * Specifies the fields to expand in the response.
-   */
-  expand?: PolicyRuleListQueriesExpandEnum[]
-  /**
-   * Specifies the unique policy ID (starts with pol_).
-   */
-  policy: string
+    /**
+    * Specifies the maximum number of records to return.
+    */
+    'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
+    'skip'?: number;
+    'order'?: SortOrder;
+    /**
+    * Specifies the fields to expand in the response.
+    */
+    'expand'?: Array<PolicyRuleListQueriesExpandEnum>;
+    /**
+    * Specifies the unique policy ID (starts with pol_).
+    */
+    'policy': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'limit',
-      baseName: 'limit',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'skip',
-      baseName: 'skip',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'order',
-      baseName: 'order',
-      type: 'SortOrder',
-      format: '',
-    },
-    {
-      name: 'expand',
-      baseName: 'expand',
-      type: 'Array<PolicyRuleListQueriesExpandEnum>',
-      format: '',
-    },
-    {
-      name: 'policy',
-      baseName: 'policy',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "limit",
+            "baseName": "limit",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "skip",
+            "baseName": "skip",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "order",
+            "baseName": "order",
+            "type": "SortOrder",
+            "format": ""
+        },
+        {
+            "name": "expand",
+            "baseName": "expand",
+            "type": "Array<PolicyRuleListQueriesExpandEnum>",
+            "format": ""
+        },
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PolicyRuleListQueries.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PolicyRuleListQueries.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
 
-export type PolicyRuleListQueriesExpandEnum = 'contract'
+
+export type PolicyRuleListQueriesExpandEnum = "contract" ;
+

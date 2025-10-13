@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type OAuthProviderLINE = 'line'
+import { HttpFile } from '../http/http';
+
+export type OAuthProviderLINE = "line" ;

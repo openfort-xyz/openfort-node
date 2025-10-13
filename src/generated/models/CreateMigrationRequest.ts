@@ -10,46 +10,45 @@
  * Do not edit the class manually.
  */
 
-import type { AuthProvider } from '../models/AuthProvider'
-import type { MappingStrategy } from '../models/MappingStrategy'
+import { AuthProvider } from '../models/AuthProvider';
+import { MappingStrategy } from '../models/MappingStrategy';
+import { HttpFile } from '../http/http';
 
 /**
- * Request for migrating authentication from one provider to another
- */
+* Request for migrating authentication from one provider to another
+*/
 export class CreateMigrationRequest {
-  mappingStrategy?: MappingStrategy
-  destinationProvider: AuthProvider
-  sourceProvider: AuthProvider
+    'mappingStrategy'?: MappingStrategy;
+    'destinationProvider': AuthProvider;
+    'sourceProvider': AuthProvider;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'mappingStrategy',
-      baseName: 'mappingStrategy',
-      type: 'MappingStrategy',
-      format: '',
-    },
-    {
-      name: 'destinationProvider',
-      baseName: 'destinationProvider',
-      type: 'AuthProvider',
-      format: '',
-    },
-    {
-      name: 'sourceProvider',
-      baseName: 'sourceProvider',
-      type: 'AuthProvider',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "mappingStrategy",
+            "baseName": "mappingStrategy",
+            "type": "MappingStrategy",
+            "format": ""
+        },
+        {
+            "name": "destinationProvider",
+            "baseName": "destinationProvider",
+            "type": "AuthProvider",
+            "format": ""
+        },
+        {
+            "name": "sourceProvider",
+            "baseName": "sourceProvider",
+            "type": "AuthProvider",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreateMigrationRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreateMigrationRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

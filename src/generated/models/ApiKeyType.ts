@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type ApiKeyType = 'pk' | 'sk' | 'pk_shield' | 'sk_shield'
+import { HttpFile } from '../http/http';
+
+export type ApiKeyType = "pk" | "sk" | "pk_shield" | "sk_shield" ;

@@ -10,46 +10,47 @@
  * Do not edit the class manually.
  */
 
-import type { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider'
-import type { TokenType } from '../models/TokenType'
+import { ThirdPartyOAuthProvider } from '../models/ThirdPartyOAuthProvider';
+import { TokenType } from '../models/TokenType';
+import { HttpFile } from '../http/http';
 
 export class ThirdPartyOAuthRequest {
-  provider: ThirdPartyOAuthProvider
-  /**
-   * Token to be verified
-   */
-  token: string
-  tokenType: TokenType
+    'provider': ThirdPartyOAuthProvider;
+    /**
+    * Token to be verified
+    */
+    'token': string;
+    'tokenType': TokenType;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'ThirdPartyOAuthProvider',
-      format: '',
-    },
-    {
-      name: 'token',
-      baseName: 'token',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'tokenType',
-      baseName: 'tokenType',
-      type: 'TokenType',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProvider",
+            "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenType",
+            "baseName": "tokenType",
+            "type": "TokenType",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ThirdPartyOAuthRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ThirdPartyOAuthRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

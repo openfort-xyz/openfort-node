@@ -10,72 +10,73 @@
  * Do not edit the class manually.
  */
 
-import type { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract'
-import type { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE'
-import type { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT'
+import { ContractPolicyRuleResponseContract } from '../models/ContractPolicyRuleResponseContract';
+import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
+import { PolicyRuleTypeCONTRACT } from '../models/PolicyRuleTypeCONTRACT';
+import { HttpFile } from '../http/http';
 
 export class ContractPolicyRuleResponse {
-  id: string
-  object: EntityTypePOLICYRULE
-  createdAt: number
-  type: PolicyRuleTypeCONTRACT
-  contract?: ContractPolicyRuleResponseContract
-  functionName?: string
-  wildcard: boolean
+    'id': string;
+    'object': EntityTypePOLICYRULE;
+    'createdAt': number;
+    'type': PolicyRuleTypeCONTRACT;
+    'contract'?: ContractPolicyRuleResponseContract;
+    'functionName'?: string;
+    'wildcard': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePOLICYRULE',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'PolicyRuleTypeCONTRACT',
-      format: '',
-    },
-    {
-      name: 'contract',
-      baseName: 'contract',
-      type: 'ContractPolicyRuleResponseContract',
-      format: '',
-    },
-    {
-      name: 'functionName',
-      baseName: 'functionName',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'wildcard',
-      baseName: 'wildcard',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePOLICYRULE",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PolicyRuleTypeCONTRACT",
+            "format": ""
+        },
+        {
+            "name": "contract",
+            "baseName": "contract",
+            "type": "ContractPolicyRuleResponseContract",
+            "format": ""
+        },
+        {
+            "name": "functionName",
+            "baseName": "functionName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "wildcard",
+            "baseName": "wildcard",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ContractPolicyRuleResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ContractPolicyRuleResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

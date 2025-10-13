@@ -10,49 +10,50 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypePROJECT } from '../models/EntityTypePROJECT'
+import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { HttpFile } from '../http/http';
 
 export class ChildProjectResponse {
-  id: string
-  object: EntityTypePROJECT
-  createdAt: number
-  name: string
+    'id': string;
+    'object': EntityTypePROJECT;
+    'createdAt': number;
+    'name': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePROJECT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePROJECT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ChildProjectResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ChildProjectResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

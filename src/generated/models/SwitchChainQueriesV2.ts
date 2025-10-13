@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class SwitchChainQueriesV2 {
-  /**
-   * The account ID (starts with acc_)
-   */
-  account: string
-  /**
-   * The target chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId: number
+    /**
+    * The account ID (starts with acc_)
+    */
+    'account': string;
+    /**
+    * The target chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'account',
-      baseName: 'account',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SwitchChainQueriesV2.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SwitchChainQueriesV2.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

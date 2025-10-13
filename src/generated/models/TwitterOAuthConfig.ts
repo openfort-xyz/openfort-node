@@ -10,61 +10,62 @@
  * Do not edit the class manually.
  */
 
-import type { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER'
+import { OAuthProviderTWITTER } from '../models/OAuthProviderTWITTER';
+import { HttpFile } from '../http/http';
 
 /**
- * Twitter oauth configuration
- */
+* Twitter oauth configuration
+*/
 export class TwitterOAuthConfig {
-  /**
-   * Enable OAuth provider.
-   */
-  enabled: boolean
-  provider: OAuthProviderTWITTER
-  /**
-   * Twitter API consumer key.
-   */
-  clientId: string
-  /**
-   * Twitter API consumer secret.
-   */
-  clientSecret: string
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': OAuthProviderTWITTER;
+    /**
+    * Twitter API consumer key.
+    */
+    'clientId': string;
+    /**
+    * Twitter API consumer secret.
+    */
+    'clientSecret': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'enabled',
-      baseName: 'enabled',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'OAuthProviderTWITTER',
-      format: '',
-    },
-    {
-      name: 'clientId',
-      baseName: 'clientId',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'clientSecret',
-      baseName: 'clientSecret',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderTWITTER",
+            "format": ""
+        },
+        {
+            "name": "clientId",
+            "baseName": "clientId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "clientSecret",
+            "baseName": "clientSecret",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return TwitterOAuthConfig.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return TwitterOAuthConfig.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

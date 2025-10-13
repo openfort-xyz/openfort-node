@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EmailTypeRequest = 'emailVerification' | 'passwordReset'
+import { HttpFile } from '../http/http';
+
+export type EmailTypeRequest = "emailVerification" | "passwordReset" ;

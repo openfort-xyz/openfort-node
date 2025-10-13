@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class FieldErrorsValue {
-  value?: any | null
-  message: string
+    'value'?: any | null;
+    'message': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'value',
-      baseName: 'value',
-      type: 'any',
-      format: '',
-    },
-    {
-      name: 'message',
-      baseName: 'message',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "value",
+            "baseName": "value",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return FieldErrorsValue.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return FieldErrorsValue.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

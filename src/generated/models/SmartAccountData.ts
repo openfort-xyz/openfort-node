@@ -10,68 +10,68 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class SmartAccountData {
-  implementationType: string
-  factoryAddress: string
-  implementationAddress: string
-  salt: string
-  deployedTx?: string
-  deployedAt?: number
-  active: boolean
+    'implementationType': string;
+    'factoryAddress': string;
+    'implementationAddress': string;
+    'salt': string;
+    'deployedTx'?: string;
+    'deployedAt'?: number;
+    'active': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'implementationType',
-      baseName: 'implementationType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'factoryAddress',
-      baseName: 'factoryAddress',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'implementationAddress',
-      baseName: 'implementationAddress',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'salt',
-      baseName: 'salt',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'deployedTx',
-      baseName: 'deployedTx',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'deployedAt',
-      baseName: 'deployedAt',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'active',
-      baseName: 'active',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "implementationType",
+            "baseName": "implementationType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "factoryAddress",
+            "baseName": "factoryAddress",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "implementationAddress",
+            "baseName": "implementationAddress",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "salt",
+            "baseName": "salt",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deployedTx",
+            "baseName": "deployedTx",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deployedAt",
+            "baseName": "deployedAt",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "active",
+            "baseName": "active",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SmartAccountData.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SmartAccountData.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

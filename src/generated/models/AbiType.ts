@@ -10,54 +10,54 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class AbiType {
-  name?: string
-  type?: string
-  indexed?: boolean
-  internalType?: any | null
-  components?: AbiType[]
+    'name'?: string;
+    'type'?: string;
+    'indexed'?: boolean;
+    'internalType'?: any | null;
+    'components'?: Array<AbiType>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'indexed',
-      baseName: 'indexed',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'internalType',
-      baseName: 'internalType',
-      type: 'any',
-      format: '',
-    },
-    {
-      name: 'components',
-      baseName: 'components',
-      type: 'Array<AbiType>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "indexed",
+            "baseName": "indexed",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "internalType",
+            "baseName": "internalType",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "components",
+            "baseName": "components",
+            "type": "Array<AbiType>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AbiType.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AbiType.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,64 +10,65 @@
  * Do not edit the class manually.
  */
 
-import type { GasReport } from '../models/GasReport'
-import type { ResponseTypeLIST } from '../models/ResponseTypeLIST'
+import { GasReport } from '../models/GasReport';
+import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { HttpFile } from '../http/http';
 
 export class GasReportListResponse {
-  object: ResponseTypeLIST
-  url: string
-  data: GasReport[]
-  start: number
-  end: number
-  total: number
+    'object': ResponseTypeLIST;
+    'url': string;
+    'data': Array<GasReport>;
+    'start': number;
+    'end': number;
+    'total': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'ResponseTypeLIST',
-      format: '',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'Array<GasReport>',
-      format: '',
-    },
-    {
-      name: 'start',
-      baseName: 'start',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'end',
-      baseName: 'end',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'total',
-      baseName: 'total',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "ResponseTypeLIST",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<GasReport>",
+            "format": ""
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return GasReportListResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return GasReportListResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

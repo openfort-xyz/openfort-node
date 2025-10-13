@@ -10,64 +10,65 @@
  * Do not edit the class manually.
  */
 
-import type { AuthMigrationResponse } from '../models/AuthMigrationResponse'
-import type { ResponseTypeLIST } from '../models/ResponseTypeLIST'
+import { AuthMigrationResponse } from '../models/AuthMigrationResponse';
+import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { HttpFile } from '../http/http';
 
 export class AuthMigrationListResponse {
-  object: ResponseTypeLIST
-  url: string
-  data: AuthMigrationResponse[]
-  start: number
-  end: number
-  total: number
+    'object': ResponseTypeLIST;
+    'url': string;
+    'data': Array<AuthMigrationResponse>;
+    'start': number;
+    'end': number;
+    'total': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'ResponseTypeLIST',
-      format: '',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'Array<AuthMigrationResponse>',
-      format: '',
-    },
-    {
-      name: 'start',
-      baseName: 'start',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'end',
-      baseName: 'end',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'total',
-      baseName: 'total',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "ResponseTypeLIST",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<AuthMigrationResponse>",
+            "format": ""
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AuthMigrationListResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AuthMigrationListResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type PolicyRuleTypeRATELIMIT = 'rate_limit'
+import { HttpFile } from '../http/http';
+
+export type PolicyRuleTypeRATELIMIT = "rate_limit" ;

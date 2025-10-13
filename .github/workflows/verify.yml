@@ -1,25 +1,50 @@
 name: Verify
-
 on:
   workflow_call:
-  push:
-    branches: [main]
+  workflow_dispatch:
   pull_request:
-    branches: [main]
 
 jobs:
-  audit:
-    name: Audit Dependencies
+  check:
+    name: Check
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: read
 
     steps:
-      - name: Checkout code
+      - name: Clone repository
         uses: actions/checkout@v4
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
-      - name: Run security audit
+      - name: Audit dependencies
         run: pnpm audit
+
+      - name: Check code
+        run: pnpm biome check
+
+  build:
+    name: Build
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+
+      - name: Check types
+        run: pnpm check:types
+
+      - name: Build
+        run: pnpm build
+
+      - name: Check for unused files, dependencies, and exports
+        run: pnpm knip --production

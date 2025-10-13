@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class RefreshTokenRequest {
-  /**
-   * Specifies the session refresh token.
-   */
-  refreshToken: string
-  /**
-   * Specifies whether to force refresh the session.
-   */
-  forceRefresh?: boolean
+    /**
+    * Specifies the session refresh token.
+    */
+    'refreshToken': string;
+    /**
+    * Specifies whether to force refresh the session.
+    */
+    'forceRefresh'?: boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'refreshToken',
-      baseName: 'refreshToken',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'forceRefresh',
-      baseName: 'forceRefresh',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "refreshToken",
+            "baseName": "refreshToken",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "forceRefresh",
+            "baseName": "forceRefresh",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return RefreshTokenRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return RefreshTokenRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
