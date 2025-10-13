@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.74
+
+### Patch Changes
+
+- [#22](https://github.com/openfort-xyz/openfort-node/pull/22) [`e93f739bedf661232e5bc8e78cc362fef4a5567d`](https://github.com/openfort-xyz/openfort-node/commit/e93f739bedf661232e5bc8e78cc362fef4a5567d) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update reference and include account v2'
+
 ## 0.6.73
 
 ### Patch Changes
