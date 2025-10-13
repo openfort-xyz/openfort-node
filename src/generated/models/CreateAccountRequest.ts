@@ -18,10 +18,6 @@ export class CreateAccountRequest {
     */
     'chainId': number;
     /**
-    * Use this parameter to create a new Account with the provided UUID.
-    */
-    'account'?: string;
-    /**
     * Use this parameter to create a new Account for Player with the provided owner address.
     */
     'externalOwnerAddress'?: string;
@@ -48,7 +44,7 @@ export class CreateAccountRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+    static readonly attributeTypeMap: Array<{ name: string, baseName: string, type: string, format: string }> = [
         {
             "name": "chainId",
             "baseName": "chainId",
@@ -96,7 +92,7 @@ export class CreateAccountRequest {
             "baseName": "player",
             "type": "string",
             "format": ""
-        }    ];
+        }];
 
     static getAttributeTypeMap() {
         return CreateAccountRequest.attributeTypeMap;
