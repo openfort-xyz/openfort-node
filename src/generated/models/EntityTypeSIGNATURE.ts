@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeSIGNATURE = 'signature'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeSIGNATURE = "signature" ;

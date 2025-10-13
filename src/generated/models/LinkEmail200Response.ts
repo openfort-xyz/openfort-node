@@ -10,66 +10,69 @@
  * Do not edit the class manually.
  */
 
-import type { Actions } from '../models/Actions'
-import type { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer'
-import type { EntityTypePLAYER } from '../models/EntityTypePLAYER'
-import type { LinkedAccountResponse } from '../models/LinkedAccountResponse'
+import { ActionRequiredResponse } from '../models/ActionRequiredResponse';
+import { Actions } from '../models/Actions';
+import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { AuthPlayerResponsePlayer } from '../models/AuthPlayerResponsePlayer';
+import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
+import { LinkedAccountResponse } from '../models/LinkedAccountResponse';
+import { HttpFile } from '../http/http';
 
 export class LinkEmail200Response {
-  player?: AuthPlayerResponsePlayer
-  id: string
-  object: EntityTypePLAYER
-  createdAt: number
-  linkedAccounts: LinkedAccountResponse[]
-  action: Actions
+    'player'?: AuthPlayerResponsePlayer;
+    'id': string;
+    'object': EntityTypePLAYER;
+    'createdAt': number;
+    'linkedAccounts': Array<LinkedAccountResponse>;
+    'action': Actions;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'player',
-      baseName: 'player',
-      type: 'AuthPlayerResponsePlayer',
-      format: '',
-    },
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePLAYER',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'linkedAccounts',
-      baseName: 'linkedAccounts',
-      type: 'Array<LinkedAccountResponse>',
-      format: '',
-    },
-    {
-      name: 'action',
-      baseName: 'action',
-      type: 'Actions',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "AuthPlayerResponsePlayer",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePLAYER",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "linkedAccounts",
+            "baseName": "linkedAccounts",
+            "type": "Array<LinkedAccountResponse>",
+            "format": ""
+        },
+        {
+            "name": "action",
+            "baseName": "action",
+            "type": "Actions",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return LinkEmail200Response.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return LinkEmail200Response.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

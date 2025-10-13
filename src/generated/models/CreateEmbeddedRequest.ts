@@ -10,68 +10,75 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class CreateEmbeddedRequest {
-  accountType: string
-  chainType: string
-  address: string
-  chainId?: number
-  privateKey?: string
-  kmsKey?: string
-  share?: string
+    'accountType': string;
+    'chainType': string;
+    'address': string;
+    'chainId'?: number;
+    'privateKey'?: string;
+    'kmsKey'?: string;
+    'share'?: string;
+    'signerUuid'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'accountType',
-      baseName: 'accountType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainType',
-      baseName: 'chainType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'privateKey',
-      baseName: 'privateKey',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'kmsKey',
-      baseName: 'kmsKey',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'share',
-      baseName: 'share',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainType",
+            "baseName": "chainType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "privateKey",
+            "baseName": "privateKey",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "kmsKey",
+            "baseName": "kmsKey",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "share",
+            "baseName": "share",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "signerUuid",
+            "baseName": "signerUuid",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreateEmbeddedRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreateEmbeddedRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

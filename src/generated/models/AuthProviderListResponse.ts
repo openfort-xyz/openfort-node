@@ -10,28 +10,27 @@
  * Do not edit the class manually.
  */
 
-import type { AuthProviderWithTypeResponse } from '../models/AuthProviderWithTypeResponse'
+import { AuthProviderWithTypeResponse } from '../models/AuthProviderWithTypeResponse';
+import { HttpFile } from '../http/http';
 
 export class AuthProviderListResponse {
-  data: AuthProviderWithTypeResponse[]
+    'data': Array<AuthProviderWithTypeResponse>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'Array<AuthProviderWithTypeResponse>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<AuthProviderWithTypeResponse>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AuthProviderListResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AuthProviderListResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

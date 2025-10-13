@@ -10,42 +10,43 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypePLAYER } from '../models/EntityTypePLAYER'
+import { EntityTypePLAYER } from '../models/EntityTypePLAYER';
+import { HttpFile } from '../http/http';
 
 export class PlayerDeleteResponse {
-  id: string
-  object: EntityTypePLAYER
-  deleted: boolean
+    'id': string;
+    'object': EntityTypePLAYER;
+    'deleted': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePLAYER',
-      format: '',
-    },
-    {
-      name: 'deleted',
-      baseName: 'deleted',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePLAYER",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PlayerDeleteResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PlayerDeleteResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

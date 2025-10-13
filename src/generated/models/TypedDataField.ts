@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class TypedDataField {
-  name: string
-  type: string
+    'name': string;
+    'type': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return TypedDataField.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return TypedDataField.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

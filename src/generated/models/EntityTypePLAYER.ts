@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypePLAYER = 'player'
+import { HttpFile } from '../http/http';
+
+export type EntityTypePLAYER = "player" ;

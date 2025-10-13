@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeINVENTORY = 'inventory'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeINVENTORY = "inventory" ;

@@ -10,48 +10,47 @@
  * Do not edit the class manually.
  */
 
-import type { CodeChallengeVerify } from '../models/CodeChallengeVerify'
+import { CodeChallengeVerify } from '../models/CodeChallengeVerify';
+import { HttpFile } from '../http/http';
 
 export class VerifyEmailRequest {
-  /**
-   * The email address of the user.
-   */
-  email: string
-  /**
-   * Unique value to identify the request. Obtained from the email.
-   */
-  token: string
-  challenge?: CodeChallengeVerify
+    /**
+    * The email address of the user.
+    */
+    'email': string;
+    /**
+    * Unique value to identify the request. Obtained from the email.
+    */
+    'token': string;
+    'challenge'?: CodeChallengeVerify;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'email',
-      baseName: 'email',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'token',
-      baseName: 'token',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'challenge',
-      baseName: 'challenge',
-      type: 'CodeChallengeVerify',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallengeVerify",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return VerifyEmailRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return VerifyEmailRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

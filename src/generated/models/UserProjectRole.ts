@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type UserProjectRole = 'OWNER' | 'ADMIN' | 'MEMBER'
+import { HttpFile } from '../http/http';
+
+export type UserProjectRole = "OWNER" | "ADMIN" | "MEMBER" ;

@@ -10,54 +10,54 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class ApiKeyResponse {
-  id: number
-  createdAt: number
-  token: string
-  name: string
-  livemode: boolean
+    'id': number;
+    'createdAt': number;
+    'token': string;
+    'name': string;
+    'livemode': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'token',
-      baseName: 'token',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'livemode',
-      baseName: 'livemode',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "livemode",
+            "baseName": "livemode",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ApiKeyResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ApiKeyResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,58 +10,59 @@
  * Do not edit the class manually.
  */
 
-import type { SortOrder } from '../models/SortOrder'
+import { SortOrder } from '../models/SortOrder';
+import { HttpFile } from '../http/http';
 
 export class DeviceListQueries {
-  /**
-   * Specifies the maximum number of records to return.
-   */
-  limit?: number
-  /**
-   * Specifies the offset for the first records to return.
-   */
-  skip?: number
-  order?: SortOrder
-  /**
-   * Specifies the unique account ID (starts with acc_)
-   */
-  account: string
+    /**
+    * Specifies the maximum number of records to return.
+    */
+    'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
+    'skip'?: number;
+    'order'?: SortOrder;
+    /**
+    * Specifies the unique account ID (starts with acc_)
+    */
+    'account': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'limit',
-      baseName: 'limit',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'skip',
-      baseName: 'skip',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'order',
-      baseName: 'order',
-      type: 'SortOrder',
-      format: '',
-    },
-    {
-      name: 'account',
-      baseName: 'account',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "limit",
+            "baseName": "limit",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "skip",
+            "baseName": "skip",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "order",
+            "baseName": "order",
+            "type": "SortOrder",
+            "format": ""
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return DeviceListQueries.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return DeviceListQueries.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

@@ -10,28 +10,27 @@
  * Do not edit the class manually.
  */
 
-import type { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole'
+import { UserProjectCreateRequestRole } from '../models/UserProjectCreateRequestRole';
+import { HttpFile } from '../http/http';
 
 export class UserProjectUpdateRequest {
-  role: UserProjectCreateRequestRole
+    'role': UserProjectCreateRequestRole;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'role',
-      baseName: 'role',
-      type: 'UserProjectCreateRequestRole',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "role",
+            "baseName": "role",
+            "type": "UserProjectCreateRequestRole",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UserProjectUpdateRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UserProjectUpdateRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

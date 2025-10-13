@@ -10,51 +10,52 @@
  * Do not edit the class manually.
  */
 
-import type { BasicAuthProviderEMAIL } from '../models/BasicAuthProviderEMAIL'
+import { BasicAuthProviderEMAIL } from '../models/BasicAuthProviderEMAIL';
+import { HttpFile } from '../http/http';
 
 /**
- * Email auth configuration
- */
+* Email auth configuration
+*/
 export class EmailAuthConfig {
-  /**
-   * Enable OAuth provider.
-   */
-  enabled: boolean
-  provider: BasicAuthProviderEMAIL
-  /**
-   * Allow unverified emails: Users will be able to sign in with unverified emails
-   */
-  allowUnverified: boolean
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': BasicAuthProviderEMAIL;
+    /**
+    * Allow unverified emails: Users will be able to sign in with unverified emails
+    */
+    'allowUnverified': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'enabled',
-      baseName: 'enabled',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'BasicAuthProviderEMAIL',
-      format: '',
-    },
-    {
-      name: 'allowUnverified',
-      baseName: 'allowUnverified',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "BasicAuthProviderEMAIL",
+            "format": ""
+        },
+        {
+            "name": "allowUnverified",
+            "baseName": "allowUnverified",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return EmailAuthConfig.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return EmailAuthConfig.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

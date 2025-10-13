@@ -10,63 +10,64 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER'
+import { EntityTypePAYMASTER } from '../models/EntityTypePAYMASTER';
+import { HttpFile } from '../http/http';
 
 export class PaymasterResponse {
-  id: string
-  object: EntityTypePAYMASTER
-  createdAt: number
-  address: string
-  url?: string
-  context?: any
+    'id': string;
+    'object': EntityTypePAYMASTER;
+    'createdAt': number;
+    'address': string;
+    'url'?: string;
+    'context'?: any;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePAYMASTER',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'context',
-      baseName: 'context',
-      type: 'any',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePAYMASTER",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "context",
+            "baseName": "context",
+            "type": "any",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PaymasterResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PaymasterResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

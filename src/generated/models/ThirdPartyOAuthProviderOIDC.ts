@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type ThirdPartyOAuthProviderOIDC = 'oidc'
+import { HttpFile } from '../http/http';
+
+export type ThirdPartyOAuthProviderOIDC = "oidc" ;

@@ -10,47 +10,47 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class TransactionStat {
-  timestamp: string
-  total: number
-  successful: number
-  gasUsed: string
+    'timestamp': string;
+    'total': number;
+    'successful': number;
+    'gasUsed': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'timestamp',
-      baseName: 'timestamp',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'total',
-      baseName: 'total',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'successful',
-      baseName: 'successful',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'gasUsed',
-      baseName: 'gasUsed',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "timestamp",
+            "baseName": "timestamp",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "successful",
+            "baseName": "successful",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "gasUsed",
+            "baseName": "gasUsed",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return TransactionStat.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return TransactionStat.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,26 +10,26 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class ListConfigRequest {
-  enabled?: boolean
+    'enabled'?: boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'enabled',
-      baseName: 'enabled',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ListConfigRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ListConfigRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

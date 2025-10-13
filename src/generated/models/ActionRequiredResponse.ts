@@ -10,28 +10,29 @@
  * Do not edit the class manually.
  */
 
-import type { Actions } from '../models/Actions'
+import { Actions } from '../models/Actions';
+import { HttpFile } from '../http/http';
 
 export class ActionRequiredResponse {
-  action: Actions
+    'action': Actions;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'action',
-      baseName: 'action',
-      type: 'Actions',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "action",
+            "baseName": "action",
+            "type": "Actions",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ActionRequiredResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ActionRequiredResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

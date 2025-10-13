@@ -10,48 +10,47 @@
  * Do not edit the class manually.
  */
 
-import type { AuthPlayerResponse } from '../models/AuthPlayerResponse'
+import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { HttpFile } from '../http/http';
 
 export class AuthResponse {
-  player: AuthPlayerResponse
-  /**
-   * JWT access token.
-   */
-  token: string
-  /**
-   * Refresh token.
-   */
-  refreshToken: string
+    'player': AuthPlayerResponse;
+    /**
+    * JWT access token.
+    */
+    'token': string;
+    /**
+    * Refresh token.
+    */
+    'refreshToken': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'player',
-      baseName: 'player',
-      type: 'AuthPlayerResponse',
-      format: '',
-    },
-    {
-      name: 'token',
-      baseName: 'token',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'refreshToken',
-      baseName: 'refreshToken',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "AuthPlayerResponse",
+            "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "refreshToken",
+            "baseName": "refreshToken",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AuthResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AuthResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

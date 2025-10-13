@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeUSER = 'user'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeUSER = "user" ;

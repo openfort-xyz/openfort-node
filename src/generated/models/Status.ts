@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type Status = 'success' | 'failed'
+import { HttpFile } from '../http/http';
+
+export type Status = "success" | "failed" ;

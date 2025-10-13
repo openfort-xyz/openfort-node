@@ -10,39 +10,40 @@
  * Do not edit the class manually.
  */
 
-import type { APITopic } from '../models/APITopic'
-import type { CreateTriggerRequest } from '../models/CreateTriggerRequest'
+import { APITopic } from '../models/APITopic';
+import { CreateTriggerRequest } from '../models/CreateTriggerRequest';
+import { HttpFile } from '../http/http';
 
 export class CreateSubscriptionRequest {
-  topic: APITopic
-  /**
-   * Specifies the triggers of the subscription
-   */
-  triggers: CreateTriggerRequest[]
+    'topic': APITopic;
+    /**
+    * Specifies the triggers of the subscription
+    */
+    'triggers': Array<CreateTriggerRequest>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'topic',
-      baseName: 'topic',
-      type: 'APITopic',
-      format: '',
-    },
-    {
-      name: 'triggers',
-      baseName: 'triggers',
-      type: 'Array<CreateTriggerRequest>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopic",
+            "format": ""
+        },
+        {
+            "name": "triggers",
+            "baseName": "triggers",
+            "type": "Array<CreateTriggerRequest>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreateSubscriptionRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreateSubscriptionRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

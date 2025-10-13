@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type DeveloperAccountResponseExpandable = 'transactionIntents'
+import { HttpFile } from '../http/http';
+
+export type DeveloperAccountResponseExpandable = "transactionIntents" ;

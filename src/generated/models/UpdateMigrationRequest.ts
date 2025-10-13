@@ -10,39 +10,40 @@
  * Do not edit the class manually.
  */
 
-import type { AuthMigrationStatus } from '../models/AuthMigrationStatus'
-import type { MappingStrategy } from '../models/MappingStrategy'
+import { AuthMigrationStatus } from '../models/AuthMigrationStatus';
+import { MappingStrategy } from '../models/MappingStrategy';
+import { HttpFile } from '../http/http';
 
 /**
- * Request for update the status of a migration
- */
+* Request for update the status of a migration
+*/
 export class UpdateMigrationRequest {
-  mappingStrategy?: MappingStrategy
-  status: AuthMigrationStatus
+    'mappingStrategy'?: MappingStrategy;
+    'status': AuthMigrationStatus;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'mappingStrategy',
-      baseName: 'mappingStrategy',
-      type: 'MappingStrategy',
-      format: '',
-    },
-    {
-      name: 'status',
-      baseName: 'status',
-      type: 'AuthMigrationStatus',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "mappingStrategy",
+            "baseName": "mappingStrategy",
+            "type": "MappingStrategy",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "AuthMigrationStatus",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UpdateMigrationRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UpdateMigrationRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

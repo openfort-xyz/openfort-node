@@ -10,49 +10,50 @@
  * Do not edit the class manually.
  */
 
-import type { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE'
+import { SponsorSchemaFIXEDRATE } from '../models/SponsorSchemaFIXEDRATE';
+import { HttpFile } from '../http/http';
 
 export class FixedRateTokenPolicyStrategy {
-  sponsorSchema: SponsorSchemaFIXEDRATE
-  depositor?: string | null
-  tokenContract: string
-  tokenContractAmount: string
+    'sponsorSchema': SponsorSchemaFIXEDRATE;
+    'depositor'?: string | null;
+    'tokenContract': string;
+    'tokenContractAmount': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'sponsorSchema',
-      baseName: 'sponsorSchema',
-      type: 'SponsorSchemaFIXEDRATE',
-      format: '',
-    },
-    {
-      name: 'depositor',
-      baseName: 'depositor',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'tokenContract',
-      baseName: 'tokenContract',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'tokenContractAmount',
-      baseName: 'tokenContractAmount',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "sponsorSchema",
+            "baseName": "sponsorSchema",
+            "type": "SponsorSchemaFIXEDRATE",
+            "format": ""
+        },
+        {
+            "name": "depositor",
+            "baseName": "depositor",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenContract",
+            "baseName": "tokenContract",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenContractAmount",
+            "baseName": "tokenContractAmount",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return FixedRateTokenPolicyStrategy.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return FixedRateTokenPolicyStrategy.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

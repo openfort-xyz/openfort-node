@@ -10,70 +10,71 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG'
+import { EntityTypeSMTPCONFIG } from '../models/EntityTypeSMTPCONFIG';
+import { HttpFile } from '../http/http';
 
 export class SMTPConfigResponse {
-  user: string
-  pass: string
-  host: string
-  port: number
-  _from: string
-  useSSL: boolean
-  object: EntityTypeSMTPCONFIG
+    'user': string;
+    'pass': string;
+    'host': string;
+    'port': number;
+    '_from': string;
+    'useSSL': boolean;
+    'object': EntityTypeSMTPCONFIG;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'user',
-      baseName: 'user',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'pass',
-      baseName: 'pass',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'host',
-      baseName: 'host',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'port',
-      baseName: 'port',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: '_from',
-      baseName: 'from',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'useSSL',
-      baseName: 'useSSL',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeSMTPCONFIG',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "user",
+            "baseName": "user",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pass",
+            "baseName": "pass",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "host",
+            "baseName": "host",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "port",
+            "baseName": "port",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "_from",
+            "baseName": "from",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "useSSL",
+            "baseName": "useSSL",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeSMTPCONFIG",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SMTPConfigResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SMTPConfigResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

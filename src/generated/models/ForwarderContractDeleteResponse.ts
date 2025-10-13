@@ -10,42 +10,43 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypeFORWARDERCONTRACT } from '../models/EntityTypeFORWARDERCONTRACT'
+import { EntityTypeFORWARDERCONTRACT } from '../models/EntityTypeFORWARDERCONTRACT';
+import { HttpFile } from '../http/http';
 
 export class ForwarderContractDeleteResponse {
-  id: string
-  object: EntityTypeFORWARDERCONTRACT
-  deleted: boolean
+    'id': string;
+    'object': EntityTypeFORWARDERCONTRACT;
+    'deleted': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeFORWARDERCONTRACT',
-      format: '',
-    },
-    {
-      name: 'deleted',
-      baseName: 'deleted',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeFORWARDERCONTRACT",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ForwarderContractDeleteResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ForwarderContractDeleteResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

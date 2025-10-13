@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class DeployRequest {
-  /**
-   * The policy ID (starts with pol_)
-   */
-  policy: string
+    /**
+    * The policy ID (starts with pol_)
+    */
+    'policy': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'policy',
-      baseName: 'policy',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return DeployRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return DeployRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,69 +10,69 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class TypedDomainData {
-  /**
-   * The chain ID.
-   */
-  chainId: number
-  /**
-   * The user readable name of signing domain, i.e. the name of the DApp or the protocol..
-   */
-  name?: string
-  /**
-   * The current major version of the signing domain. Signatures from different versions are not compatible.
-   */
-  version?: string
-  /**
-   * The address of the contract that will verify the signature. The user-agent may do contract specific phishing prevention.
-   */
-  verifyingContract?: string
-  /**
-   * An disambiguating salt for the protocol. This can be used as a domain separator of last resort.
-   */
-  salt?: string
+    /**
+    * The chain ID.
+    */
+    'chainId': number;
+    /**
+    * The user readable name of signing domain, i.e. the name of the DApp or the protocol..
+    */
+    'name'?: string;
+    /**
+    * The current major version of the signing domain. Signatures from different versions are not compatible.
+    */
+    'version'?: string;
+    /**
+    * The address of the contract that will verify the signature. The user-agent may do contract specific phishing prevention.
+    */
+    'verifyingContract'?: string;
+    /**
+    * An disambiguating salt for the protocol. This can be used as a domain separator of last resort.
+    */
+    'salt'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'version',
-      baseName: 'version',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'verifyingContract',
-      baseName: 'verifyingContract',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'salt',
-      baseName: 'salt',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "version",
+            "baseName": "version",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "verifyingContract",
+            "baseName": "verifyingContract",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "salt",
+            "baseName": "salt",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return TypedDomainData.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return TypedDomainData.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

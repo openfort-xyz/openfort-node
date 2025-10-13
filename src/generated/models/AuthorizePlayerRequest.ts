@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class AuthorizePlayerRequest {
-  /**
-   * The authorization code received from the api to authorize the project to use the Ecosystem player.
-   */
-  authorizationCode: string
+    /**
+    * The authorization code received from the api to authorize the project to use the Ecosystem player.
+    */
+    'authorizationCode': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'authorizationCode',
-      baseName: 'authorizationCode',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "authorizationCode",
+            "baseName": "authorizationCode",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AuthorizePlayerRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AuthorizePlayerRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

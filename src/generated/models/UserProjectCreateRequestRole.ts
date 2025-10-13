@@ -10,20 +10,25 @@
  * Do not edit the class manually.
  */
 
+import { UserProjectRoleADMIN } from '../models/UserProjectRoleADMIN';
+import { UserProjectRoleMEMBER } from '../models/UserProjectRoleMEMBER';
+import { HttpFile } from '../http/http';
+
 /**
- * The role of the user.
- */
+* The role of the user.
+*/
 export class UserProjectCreateRequestRole {
-  static readonly discriminator: string | undefined = undefined
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = []
+    static readonly discriminator: string | undefined = undefined;
 
-  static getAttributeTypeMap() {
-    return UserProjectCreateRequestRole.attributeTypeMap
-  }
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+    ];
+
+    static getAttributeTypeMap() {
+        return UserProjectCreateRequestRole.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

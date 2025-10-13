@@ -10,56 +10,57 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class Plan {
-  id: string
-  name: string
-  price: number
-  is_current: boolean
-  change_type: PlanChangeTypeEnum
+    'id': string;
+    'name': string;
+    'price': number;
+    'is_current': boolean;
+    'change_type': PlanChangeTypeEnum;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'price',
-      baseName: 'price',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'is_current',
-      baseName: 'is_current',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'change_type',
-      baseName: 'change_type',
-      type: 'PlanChangeTypeEnum',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "price",
+            "baseName": "price",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "is_current",
+            "baseName": "is_current",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "change_type",
+            "baseName": "change_type",
+            "type": "PlanChangeTypeEnum",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return Plan.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return Plan.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
 
-export type PlanChangeTypeEnum = 'upgrade' | 'downgrade' | 'none'
+
+export type PlanChangeTypeEnum = "upgrade" | "downgrade" | "none" ;
+

@@ -10,57 +10,58 @@
  * Do not edit the class manually.
  */
 
-import type { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL'
-import type { EntityTypeEVENT } from '../models/EntityTypeEVENT'
+import { APITopicTRANSACTIONSUCCESSFUL } from '../models/APITopicTRANSACTIONSUCCESSFUL';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
+import { HttpFile } from '../http/http';
 
 export class TransactionConfirmedEventResponse {
-  id: string
-  object: EntityTypeEVENT
-  createdAt: number
-  topic: APITopicTRANSACTIONSUCCESSFUL
-  numberOfBlocks: number
+    'id': string;
+    'object': EntityTypeEVENT;
+    'createdAt': number;
+    'topic': APITopicTRANSACTIONSUCCESSFUL;
+    'numberOfBlocks': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeEVENT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'topic',
-      baseName: 'topic',
-      type: 'APITopicTRANSACTIONSUCCESSFUL',
-      format: '',
-    },
-    {
-      name: 'numberOfBlocks',
-      baseName: 'numberOfBlocks',
-      type: 'number',
-      format: 'double',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeEVENT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopicTRANSACTIONSUCCESSFUL",
+            "format": ""
+        },
+        {
+            "name": "numberOfBlocks",
+            "baseName": "numberOfBlocks",
+            "type": "number",
+            "format": "double"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return TransactionConfirmedEventResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return TransactionConfirmedEventResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

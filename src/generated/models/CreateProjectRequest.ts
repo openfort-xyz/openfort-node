@@ -10,38 +10,39 @@
  * Do not edit the class manually.
  */
 
-import type { PrivateKeyPolicy } from '../models/PrivateKeyPolicy'
+import { PrivateKeyPolicy } from '../models/PrivateKeyPolicy';
+import { HttpFile } from '../http/http';
 
 export class CreateProjectRequest {
-  /**
-   * Name of the project.
-   */
-  name: string
-  pkPolicy?: PrivateKeyPolicy
+    /**
+    * Name of the project.
+    */
+    'name': string;
+    'pkPolicy'?: PrivateKeyPolicy;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'pkPolicy',
-      baseName: 'pkPolicy',
-      type: 'PrivateKeyPolicy',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pkPolicy",
+            "baseName": "pkPolicy",
+            "type": "PrivateKeyPolicy",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreateProjectRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreateProjectRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

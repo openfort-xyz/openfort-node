@@ -10,89 +10,99 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class CreateAccountRequest {
-  /**
-   * The chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId: number
-  /**
-   * Use this parameter to create a new Account for Player with the provided owner address.
-   */
-  externalOwnerAddress?: string
-  /**
-   * The type of smart account that will be created (e.g. ERC6551V1, UpgradeableV6, UpgradeableV5, ZKSyncUpgradeableV2). Defaults to UpgradeableV6.
-   */
-  accountType?: string
-  /**
-   * For account types that support social recovery, wether to enable Openfort as guardian or not. Defaults to false.
-   */
-  defaultGuardian?: boolean
-  /**
-   * If ERC6551, the address of the NFT contract to use
-   */
-  tokenContract?: string
-  /**
-   * If ERC6551, the tokenId from the NFT contract that will serve as owner
-   */
-  tokenId?: number
-  /**
-   * ID of the player this account belongs to (starts with `pla_`). If none is provided, a new player will be created.
-   */
-  player?: string
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId': number;
+    /**
+    * Use this parameter to create a new Account with the provided UUID.
+    */
+    'account'?: string;
+    /**
+    * Use this parameter to create a new Account for Player with the provided owner address.
+    */
+    'externalOwnerAddress'?: string;
+    /**
+    * The type of smart account that will be created (e.g. ERC6551V1, UpgradeableV6, UpgradeableV5, ZKSyncUpgradeableV2). Defaults to UpgradeableV6.
+    */
+    'accountType'?: string;
+    /**
+    * For account types that support social recovery, wether to enable Openfort as guardian or not. Defaults to false.
+    */
+    'defaultGuardian'?: boolean;
+    /**
+    * If ERC6551, the address of the NFT contract to use
+    */
+    'tokenContract'?: string;
+    /**
+    * If ERC6551, the tokenId from the NFT contract that will serve as owner
+    */
+    'tokenId'?: number;
+    /**
+    * ID of the player this account belongs to (starts with `pla_`). If none is provided, a new player will be created.
+    */
+    'player'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'externalOwnerAddress',
-      baseName: 'externalOwnerAddress',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'accountType',
-      baseName: 'accountType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'defaultGuardian',
-      baseName: 'defaultGuardian',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'tokenContract',
-      baseName: 'tokenContract',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'tokenId',
-      baseName: 'tokenId',
-      type: 'number',
-      format: 'int64',
-    },
-    {
-      name: 'player',
-      baseName: 'player',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "externalOwnerAddress",
+            "baseName": "externalOwnerAddress",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "defaultGuardian",
+            "baseName": "defaultGuardian",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "tokenContract",
+            "baseName": "tokenContract",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenId",
+            "baseName": "tokenId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreateAccountRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreateAccountRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

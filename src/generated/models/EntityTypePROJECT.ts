@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypePROJECT = 'project'
+import { HttpFile } from '../http/http';
+
+export type EntityTypePROJECT = "project" ;

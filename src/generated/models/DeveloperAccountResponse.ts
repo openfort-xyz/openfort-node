@@ -10,71 +10,72 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT'
-import type { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner'
+import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
+import { PlayerResponseTransactionIntentsInner } from '../models/PlayerResponseTransactionIntentsInner';
+import { HttpFile } from '../http/http';
 
 export class DeveloperAccountResponse {
-  id: string
-  object: EntityTypeDEVELOPERACCOUNT
-  createdAt: number
-  address: string
-  custodial: boolean
-  name?: string
-  transactionIntents?: PlayerResponseTransactionIntentsInner[]
+    'id': string;
+    'object': EntityTypeDEVELOPERACCOUNT;
+    'createdAt': number;
+    'address': string;
+    'custodial': boolean;
+    'name'?: string;
+    'transactionIntents'?: Array<PlayerResponseTransactionIntentsInner>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeDEVELOPERACCOUNT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'custodial',
-      baseName: 'custodial',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'transactionIntents',
-      baseName: 'transactionIntents',
-      type: 'Array<PlayerResponseTransactionIntentsInner>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeDEVELOPERACCOUNT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "custodial",
+            "baseName": "custodial",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<PlayerResponseTransactionIntentsInner>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return DeveloperAccountResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return DeveloperAccountResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

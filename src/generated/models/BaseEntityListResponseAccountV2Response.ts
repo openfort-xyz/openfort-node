@@ -10,64 +10,65 @@
  * Do not edit the class manually.
  */
 
-import type { AccountV2Response } from '../models/AccountV2Response'
-import type { ResponseTypeLIST } from '../models/ResponseTypeLIST'
+import { AccountV2Response } from '../models/AccountV2Response';
+import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { HttpFile } from '../http/http';
 
 export class BaseEntityListResponseAccountV2Response {
-  object: ResponseTypeLIST
-  url: string
-  data: AccountV2Response[]
-  start: number
-  end: number
-  total: number
+    'object': ResponseTypeLIST;
+    'url': string;
+    'data': Array<AccountV2Response>;
+    'start': number;
+    'end': number;
+    'total': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'ResponseTypeLIST',
-      format: '',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'Array<AccountV2Response>',
-      format: '',
-    },
-    {
-      name: 'start',
-      baseName: 'start',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'end',
-      baseName: 'end',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'total',
-      baseName: 'total',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "ResponseTypeLIST",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<AccountV2Response>",
+            "format": ""
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return BaseEntityListResponseAccountV2Response.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return BaseEntityListResponseAccountV2Response.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

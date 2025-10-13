@@ -10,28 +10,27 @@
  * Do not edit the class manually.
  */
 
-import type { JwtKey } from '../models/JwtKey'
+import { JwtKey } from '../models/JwtKey';
+import { HttpFile } from '../http/http';
 
 export class JwtKeyResponse {
-  keys: JwtKey[]
+    'keys': Array<JwtKey>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'keys',
-      baseName: 'keys',
-      type: 'Array<JwtKey>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "keys",
+            "baseName": "keys",
+            "type": "Array<JwtKey>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return JwtKeyResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return JwtKeyResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
