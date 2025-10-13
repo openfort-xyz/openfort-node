@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class CancelTransferOwnershipRequest {
-  /**
-   * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
-   */
-  policy: string
+    /**
+    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
+    */
+    'policy': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'policy',
-      baseName: 'policy',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CancelTransferOwnershipRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CancelTransferOwnershipRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

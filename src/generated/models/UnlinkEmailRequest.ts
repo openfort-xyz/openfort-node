@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class UnlinkEmailRequest {
-  /**
-   * The email address of the user.
-   */
-  email: string
+    /**
+    * The email address of the user.
+    */
+    'email': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'email',
-      baseName: 'email',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UnlinkEmailRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UnlinkEmailRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

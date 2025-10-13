@@ -10,43 +10,43 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class SIWEInitResponse {
-  /**
-   * The address of the player.
-   */
-  address: string
-  nonce: string
-  expiresAt: number
+    /**
+    * The address of the player.
+    */
+    'address': string;
+    'nonce': string;
+    'expiresAt': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'nonce',
-      baseName: 'nonce',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'expiresAt',
-      baseName: 'expiresAt',
-      type: 'number',
-      format: 'double',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "nonce",
+            "baseName": "nonce",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "number",
+            "format": "double"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SIWEInitResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SIWEInitResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type APITopicBALANCEPROJECT = 'balance.project'
+import { HttpFile } from '../http/http';
+
+export type APITopicBALANCEPROJECT = "balance.project" ;

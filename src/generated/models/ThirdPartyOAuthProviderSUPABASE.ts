@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type ThirdPartyOAuthProviderSUPABASE = 'supabase'
+import { HttpFile } from '../http/http';
+
+export type ThirdPartyOAuthProviderSUPABASE = "supabase" ;

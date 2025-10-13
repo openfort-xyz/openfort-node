@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeTRANSACTIONINTENT = 'transactionIntent'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeTRANSACTIONINTENT = "transactionIntent" ;

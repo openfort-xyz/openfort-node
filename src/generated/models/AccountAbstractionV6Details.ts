@@ -10,38 +10,37 @@
  * Do not edit the class manually.
  */
 
-import type { UserOperationV6 } from '../models/UserOperationV6'
+import { UserOperationV6 } from '../models/UserOperationV6';
+import { HttpFile } from '../http/http';
 
 export class AccountAbstractionV6Details {
-  userOperation: UserOperationV6
-  /**
-   * A User Operation hash.
-   */
-  userOperationHash: string
+    'userOperation': UserOperationV6;
+    /**
+    * A User Operation hash.
+    */
+    'userOperationHash': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'userOperation',
-      baseName: 'userOperation',
-      type: 'UserOperationV6',
-      format: '',
-    },
-    {
-      name: 'userOperationHash',
-      baseName: 'userOperationHash',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "userOperation",
+            "baseName": "userOperation",
+            "type": "UserOperationV6",
+            "format": ""
+        },
+        {
+            "name": "userOperationHash",
+            "baseName": "userOperationHash",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AccountAbstractionV6Details.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AccountAbstractionV6Details.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type TransactionIntentResponseExpandable =
-  | 'player'
-  | 'policy'
-  | 'account'
+import { HttpFile } from '../http/http';
+
+export type TransactionIntentResponseExpandable = "player" | "policy" | "account" ;

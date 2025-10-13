@@ -10,42 +10,43 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypePROJECT } from '../models/EntityTypePROJECT'
+import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { HttpFile } from '../http/http';
 
 export class ApiAuthorizedNetworkDeleteResponse {
-  id: string
-  object: EntityTypePROJECT
-  deleted: boolean
+    'id': string;
+    'object': EntityTypePROJECT;
+    'deleted': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePROJECT',
-      format: '',
-    },
-    {
-      name: 'deleted',
-      baseName: 'deleted',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePROJECT",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ApiAuthorizedNetworkDeleteResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ApiAuthorizedNetworkDeleteResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

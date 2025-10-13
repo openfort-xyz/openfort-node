@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeFORWARDERCONTRACT = 'forwarderContract'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeFORWARDERCONTRACT = "forwarderContract" ;

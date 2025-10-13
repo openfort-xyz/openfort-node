@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type OAuthProviderGOOGLE = 'google'
+import { HttpFile } from '../http/http';
+
+export type OAuthProviderGOOGLE = "google" ;

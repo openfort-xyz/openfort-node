@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeSMTPCONFIG = 'smtpConfig'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeSMTPCONFIG = "smtpConfig" ;

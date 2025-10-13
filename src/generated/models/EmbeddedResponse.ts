@@ -10,54 +10,54 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class EmbeddedResponse {
-  share: string
-  accountType: string
-  address: string
-  chainId: number
-  deviceId?: string
+    'share': string;
+    'accountType': string;
+    'address': string;
+    'chainId': number;
+    'deviceId'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'share',
-      baseName: 'share',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'accountType',
-      baseName: 'accountType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'deviceId',
-      baseName: 'deviceId',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "share",
+            "baseName": "share",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "deviceId",
+            "baseName": "deviceId",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return EmbeddedResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return EmbeddedResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

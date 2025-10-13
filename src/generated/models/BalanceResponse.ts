@@ -10,42 +10,41 @@
  * Do not edit the class manually.
  */
 
-import type { Money } from '../models/Money'
+import { Money } from '../models/Money';
+import { HttpFile } from '../http/http';
 
 export class BalanceResponse {
-  balance: Money
-  expenses: Money
-  payments: Money
+    'balance': Money;
+    'expenses': Money;
+    'payments': Money;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'balance',
-      baseName: 'balance',
-      type: 'Money',
-      format: '',
-    },
-    {
-      name: 'expenses',
-      baseName: 'expenses',
-      type: 'Money',
-      format: '',
-    },
-    {
-      name: 'payments',
-      baseName: 'payments',
-      type: 'Money',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "balance",
+            "baseName": "balance",
+            "type": "Money",
+            "format": ""
+        },
+        {
+            "name": "expenses",
+            "baseName": "expenses",
+            "type": "Money",
+            "format": ""
+        },
+        {
+            "name": "payments",
+            "baseName": "payments",
+            "type": "Money",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return BalanceResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return BalanceResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

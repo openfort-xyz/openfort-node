@@ -10,48 +10,47 @@
  * Do not edit the class manually.
  */
 
-import type { PlayerMetadataValue } from '../models/PlayerMetadataValue'
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
+import { HttpFile } from '../http/http';
 
 export class PlayerCreateRequest {
-  /**
-   * Specifies the player name.
-   */
-  name?: string
-  /**
-   * Specifies the player description.
-   */
-  description?: string
-  metadata?: { [key: string]: PlayerMetadataValue }
+    /**
+    * Specifies the player name.
+    */
+    'name'?: string;
+    /**
+    * Specifies the player description.
+    */
+    'description'?: string;
+    'metadata'?: { [key: string]: PlayerMetadataValue; };
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'description',
-      baseName: 'description',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'metadata',
-      baseName: 'metadata',
-      type: '{ [key: string]: PlayerMetadataValue; }',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "{ [key: string]: PlayerMetadataValue; }",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PlayerCreateRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PlayerCreateRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

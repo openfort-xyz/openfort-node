@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type PolicyRuleTypeACCOUNT = 'account_functions'
+import { HttpFile } from '../http/http';
+
+export type PolicyRuleTypeACCOUNT = "account_functions" ;

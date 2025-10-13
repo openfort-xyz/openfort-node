@@ -10,89 +10,89 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class Log {
-  blockNumber: number
-  blockHash: string
-  transactionIndex: number
-  removed: boolean
-  address: string
-  data: string
-  topics: string[]
-  transactionHash: string
-  logIndex: number
-  orphaned?: boolean
+    'blockNumber': number;
+    'blockHash': string;
+    'transactionIndex': number;
+    'removed': boolean;
+    'address': string;
+    'data': string;
+    'topics': Array<string>;
+    'transactionHash': string;
+    'logIndex': number;
+    'orphaned'?: boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'blockNumber',
-      baseName: 'blockNumber',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'blockHash',
-      baseName: 'blockHash',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'transactionIndex',
-      baseName: 'transactionIndex',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'removed',
-      baseName: 'removed',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'topics',
-      baseName: 'topics',
-      type: 'Array<string>',
-      format: '',
-    },
-    {
-      name: 'transactionHash',
-      baseName: 'transactionHash',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'logIndex',
-      baseName: 'logIndex',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'orphaned',
-      baseName: 'orphaned',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "blockNumber",
+            "baseName": "blockNumber",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "blockHash",
+            "baseName": "blockHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIndex",
+            "baseName": "transactionIndex",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "removed",
+            "baseName": "removed",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "topics",
+            "baseName": "topics",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "transactionHash",
+            "baseName": "transactionHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "logIndex",
+            "baseName": "logIndex",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "orphaned",
+            "baseName": "orphaned",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return Log.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return Log.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

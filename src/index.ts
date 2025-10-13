@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 import { AccountsApiWrapper } from './apis/accountsApiWrapper'
+import { AccountsV2ApiWrapper } from './apis/accountsV2ApiWrapper'
 import { ContractsApiWrapper } from './apis/contractsApiWrapper'
 import { EventsApiWrapper } from './apis/eventsApiWrapper'
 import { ExchangeApiWrapper } from './apis/exchangeApiWrapper'
@@ -25,10 +26,14 @@ export default class Openfort {
   constructor(
     private readonly apiKey: string,
     private readonly basePath?: string,
-  ) { }
+  ) {}
 
   public get accounts(): AccountsApiWrapper {
     return this.getOrCreateWrapper(AccountsApiWrapper)
+  }
+
+  public get accountsV2(): AccountsV2ApiWrapper {
+    return this.getOrCreateWrapper(AccountsV2ApiWrapper)
   }
 
   public get contracts(): ContractsApiWrapper {
@@ -163,5 +168,6 @@ export default class Openfort {
     return jsonResponse.session_id
   }
 }
-
+// biome-ignore lint/performance/noReExportAll: Re-exporting generated models for convenience
+// biome-ignore lint/performance/noBarrelFile: This is an intentional barrel file for public API
 export * from './models'

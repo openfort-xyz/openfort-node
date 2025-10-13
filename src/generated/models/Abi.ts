@@ -10,84 +10,83 @@
  * Do not edit the class manually.
  */
 
-import type { AbiType } from '../models/AbiType'
+import { AbiType } from '../models/AbiType';
+import { HttpFile } from '../http/http';
 
 export class Abi {
-  name?: string
-  type?: string
-  anonymous?: boolean
-  payable?: boolean
-  constant?: boolean
-  stateMutability?: string
-  gas?: string
-  inputs?: AbiType[]
-  outputs?: AbiType[]
+    'name'?: string;
+    'type'?: string;
+    'anonymous'?: boolean;
+    'payable'?: boolean;
+    'constant'?: boolean;
+    'stateMutability'?: string;
+    'gas'?: string;
+    'inputs'?: Array<AbiType>;
+    'outputs'?: Array<AbiType>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'anonymous',
-      baseName: 'anonymous',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'payable',
-      baseName: 'payable',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'constant',
-      baseName: 'constant',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'stateMutability',
-      baseName: 'stateMutability',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'gas',
-      baseName: 'gas',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'inputs',
-      baseName: 'inputs',
-      type: 'Array<AbiType>',
-      format: '',
-    },
-    {
-      name: 'outputs',
-      baseName: 'outputs',
-      type: 'Array<AbiType>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "anonymous",
+            "baseName": "anonymous",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "payable",
+            "baseName": "payable",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "constant",
+            "baseName": "constant",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "stateMutability",
+            "baseName": "stateMutability",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "gas",
+            "baseName": "gas",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "inputs",
+            "baseName": "inputs",
+            "type": "Array<AbiType>",
+            "format": ""
+        },
+        {
+            "name": "outputs",
+            "baseName": "outputs",
+            "type": "Array<AbiType>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return Abi.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return Abi.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class SwitchChainRequest {
-  chainId: number
-  deviceId: string
+    'chainId': number;
+    'deviceId': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'deviceId',
-      baseName: 'deviceId',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "deviceId",
+            "baseName": "deviceId",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SwitchChainRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SwitchChainRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

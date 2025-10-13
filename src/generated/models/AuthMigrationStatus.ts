@@ -10,10 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type AuthMigrationStatus =
-  | 'created'
-  | 'running'
-  | 'paused'
-  | 'completed'
-  | 'failed'
-  | 'canceled'
+import { HttpFile } from '../http/http';
+
+export type AuthMigrationStatus = "created" | "running" | "paused" | "completed" | "failed" | "canceled" ;

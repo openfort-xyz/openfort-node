@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type Actions = 'verify_email'
+import { HttpFile } from '../http/http';
+
+export type Actions = "verify_email" ;

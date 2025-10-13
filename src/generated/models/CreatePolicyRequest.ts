@@ -10,68 +10,67 @@
  * Do not edit the class manually.
  */
 
-import type { PolicyStrategyRequest } from '../models/PolicyStrategyRequest'
+import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
+import { HttpFile } from '../http/http';
 
 export class CreatePolicyRequest {
-  /**
-   * Specifies the name of the policy.
-   */
-  name: string
-  /**
-   * The chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId: number
-  strategy: PolicyStrategyRequest
-  /**
-   * The ID of the paymaster.
-   */
-  paymaster?: string
-  /**
-   * The ID of the forwarder contract.
-   */
-  forwarderContract?: string
+    /**
+    * Specifies the name of the policy.
+    */
+    'name': string;
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId': number;
+    'strategy': PolicyStrategyRequest;
+    /**
+    * The ID of the paymaster.
+    */
+    'paymaster'?: string;
+    /**
+    * The ID of the forwarder contract.
+    */
+    'forwarderContract'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'strategy',
-      baseName: 'strategy',
-      type: 'PolicyStrategyRequest',
-      format: '',
-    },
-    {
-      name: 'paymaster',
-      baseName: 'paymaster',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'forwarderContract',
-      baseName: 'forwarderContract',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "strategy",
+            "baseName": "strategy",
+            "type": "PolicyStrategyRequest",
+            "format": ""
+        },
+        {
+            "name": "paymaster",
+            "baseName": "paymaster",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "forwarderContract",
+            "baseName": "forwarderContract",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreatePolicyRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreatePolicyRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

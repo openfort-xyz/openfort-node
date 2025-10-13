@@ -10,71 +10,72 @@
  * Do not edit the class manually.
  */
 
-import type { EmailTypeResponse } from '../models/EmailTypeResponse'
-import type { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE'
+import { EmailTypeResponse } from '../models/EmailTypeResponse';
+import { EntityTypeEMAILSAMPLE } from '../models/EntityTypeEMAILSAMPLE';
+import { HttpFile } from '../http/http';
 
 export class EmailSampleResponse {
-  id: string
-  object: EntityTypeEMAILSAMPLE
-  createdAt: number
-  name: string
-  subject: string
-  body: string
-  type: EmailTypeResponse
+    'id': string;
+    'object': EntityTypeEMAILSAMPLE;
+    'createdAt': number;
+    'name': string;
+    'subject': string;
+    'body': string;
+    'type': EmailTypeResponse;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeEMAILSAMPLE',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'subject',
-      baseName: 'subject',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'body',
-      baseName: 'body',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'EmailTypeResponse',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeEMAILSAMPLE",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "subject",
+            "baseName": "subject",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "body",
+            "baseName": "body",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "EmailTypeResponse",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return EmailSampleResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return EmailSampleResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

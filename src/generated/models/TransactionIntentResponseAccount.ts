@@ -10,126 +10,129 @@
  * Do not edit the class manually.
  */
 
-import type { EntityIdResponse } from '../models/EntityIdResponse'
-import type { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT'
+import { Account } from '../models/Account';
+import { DeveloperAccount } from '../models/DeveloperAccount';
+import { EntityIdResponse } from '../models/EntityIdResponse';
+import { EntityTypeDEVELOPERACCOUNT } from '../models/EntityTypeDEVELOPERACCOUNT';
+import { HttpFile } from '../http/http';
 
 /**
- * The account ID (starts with acc_).
- */
+* The account ID (starts with acc_).
+*/
 export class TransactionIntentResponseAccount {
-  id: string
-  object: EntityTypeDEVELOPERACCOUNT
-  createdAt: number
-  address: string
-  ownerAddress: string
-  deployed: boolean
-  custodial: boolean
-  embeddedSigner: boolean
-  /**
-   * The chain ID.
-   */
-  chainId: number
-  accountType: string
-  pendingOwnerAddress?: string
-  transactionIntents?: EntityIdResponse[]
-  player: EntityIdResponse
-  name?: string
+    'id': string;
+    'object': EntityTypeDEVELOPERACCOUNT;
+    'createdAt': number;
+    'address': string;
+    'ownerAddress': string;
+    'deployed': boolean;
+    'custodial': boolean;
+    'embeddedSigner': boolean;
+    /**
+    * The chain ID.
+    */
+    'chainId': number;
+    'accountType': string;
+    'pendingOwnerAddress'?: string;
+    'transactionIntents'?: Array<EntityIdResponse>;
+    'player': EntityIdResponse;
+    'name'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeDEVELOPERACCOUNT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'ownerAddress',
-      baseName: 'ownerAddress',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'deployed',
-      baseName: 'deployed',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'custodial',
-      baseName: 'custodial',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'embeddedSigner',
-      baseName: 'embeddedSigner',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'accountType',
-      baseName: 'accountType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'pendingOwnerAddress',
-      baseName: 'pendingOwnerAddress',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'transactionIntents',
-      baseName: 'transactionIntents',
-      type: 'Array<EntityIdResponse>',
-      format: '',
-    },
-    {
-      name: 'player',
-      baseName: 'player',
-      type: 'EntityIdResponse',
-      format: '',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeDEVELOPERACCOUNT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "ownerAddress",
+            "baseName": "ownerAddress",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deployed",
+            "baseName": "deployed",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "custodial",
+            "baseName": "custodial",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "embeddedSigner",
+            "baseName": "embeddedSigner",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pendingOwnerAddress",
+            "baseName": "pendingOwnerAddress",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<EntityIdResponse>",
+            "format": ""
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "EntityIdResponse",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return TransactionIntentResponseAccount.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return TransactionIntentResponseAccount.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

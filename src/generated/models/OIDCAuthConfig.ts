@@ -10,68 +10,69 @@
  * Do not edit the class manually.
  */
 
-import type { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC'
+import { ThirdPartyOAuthProviderOIDC } from '../models/ThirdPartyOAuthProviderOIDC';
+import { HttpFile } from '../http/http';
 
 export class OIDCAuthConfig {
-  /**
-   * Enable OAuth provider.
-   */
-  enabled: boolean
-  provider: ThirdPartyOAuthProviderOIDC
-  /**
-   * PEM encoded public key to verify the JWT token
-   */
-  publicVerificationKey?: string
-  /**
-   * Audience of the JWT token
-   */
-  aud: string
-  /**
-   * JWKS URL to fetch the public key
-   */
-  jwksUrl?: string
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': ThirdPartyOAuthProviderOIDC;
+    /**
+    * PEM encoded public key to verify the JWT token
+    */
+    'publicVerificationKey'?: string;
+    /**
+    * Audience of the JWT token
+    */
+    'aud': string;
+    /**
+    * JWKS URL to fetch the public key
+    */
+    'jwksUrl'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'enabled',
-      baseName: 'enabled',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'ThirdPartyOAuthProviderOIDC',
-      format: '',
-    },
-    {
-      name: 'publicVerificationKey',
-      baseName: 'publicVerificationKey',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'aud',
-      baseName: 'aud',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'jwksUrl',
-      baseName: 'jwksUrl',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProviderOIDC",
+            "format": ""
+        },
+        {
+            "name": "publicVerificationKey",
+            "baseName": "publicVerificationKey",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "aud",
+            "baseName": "aud",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "jwksUrl",
+            "baseName": "jwksUrl",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return OIDCAuthConfig.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return OIDCAuthConfig.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

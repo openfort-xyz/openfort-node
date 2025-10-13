@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type SponsorSchemaCHARGECUSTOMTOKENS = 'charge_custom_tokens'
+import { HttpFile } from '../http/http';
+
+export type SponsorSchemaCHARGECUSTOMTOKENS = "charge_custom_tokens" ;

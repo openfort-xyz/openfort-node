@@ -10,96 +10,97 @@
  * Do not edit the class manually.
  */
 
-import type { PolicyRuleType } from '../models/PolicyRuleType'
-import type { TimeIntervalType } from '../models/TimeIntervalType'
+import { PolicyRuleType } from '../models/PolicyRuleType';
+import { TimeIntervalType } from '../models/TimeIntervalType';
+import { HttpFile } from '../http/http';
 
 export class UpdatePolicyRuleRequest {
-  type: PolicyRuleType
-  /**
-   * Name of the function in the contract to allow. If you want to allow all functions, use the wildcard \'All functions\'.
-   */
-  functionName?: string
-  /**
-   * The contract ID you want to interact with. Must have been added to Openfort first, starts with `con_`.
-   */
-  contract?: string
-  /**
-   * When using `contract_functions` type, set this to `true` to allow all contracts.
-   */
-  wildcard?: boolean
-  /**
-   * Gas limit in WEI (i.e. factor 10^18).
-   */
-  gasLimit?: string
-  /**
-   * Number of times the function will be sponsored.
-   */
-  countLimit?: number
-  timeIntervalType?: TimeIntervalType
-  /**
-   * Time interval value.
-   */
-  timeIntervalValue?: number
+    'type': PolicyRuleType;
+    /**
+    * Name of the function in the contract to allow. If you want to allow all functions, use the wildcard \'All functions\'.
+    */
+    'functionName'?: string;
+    /**
+    * The contract ID you want to interact with. Must have been added to Openfort first, starts with `con_`.
+    */
+    'contract'?: string;
+    /**
+    * When using `contract_functions` type, set this to `true` to allow all contracts.
+    */
+    'wildcard'?: boolean;
+    /**
+    * Gas limit in WEI (i.e. factor 10^18).
+    */
+    'gasLimit'?: string;
+    /**
+    * Number of times the function will be sponsored.
+    */
+    'countLimit'?: number;
+    'timeIntervalType'?: TimeIntervalType;
+    /**
+    * Time interval value.
+    */
+    'timeIntervalValue'?: number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'PolicyRuleType',
-      format: '',
-    },
-    {
-      name: 'functionName',
-      baseName: 'functionName',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'contract',
-      baseName: 'contract',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'wildcard',
-      baseName: 'wildcard',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'gasLimit',
-      baseName: 'gasLimit',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'countLimit',
-      baseName: 'countLimit',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'timeIntervalType',
-      baseName: 'timeIntervalType',
-      type: 'TimeIntervalType',
-      format: '',
-    },
-    {
-      name: 'timeIntervalValue',
-      baseName: 'timeIntervalValue',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PolicyRuleType",
+            "format": ""
+        },
+        {
+            "name": "functionName",
+            "baseName": "functionName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contract",
+            "baseName": "contract",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "wildcard",
+            "baseName": "wildcard",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "gasLimit",
+            "baseName": "gasLimit",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "countLimit",
+            "baseName": "countLimit",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "timeIntervalType",
+            "baseName": "timeIntervalType",
+            "type": "TimeIntervalType",
+            "format": ""
+        },
+        {
+            "name": "timeIntervalValue",
+            "baseName": "timeIntervalValue",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UpdatePolicyRuleRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UpdatePolicyRuleRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

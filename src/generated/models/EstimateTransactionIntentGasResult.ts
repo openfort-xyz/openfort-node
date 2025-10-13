@@ -10,72 +10,72 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 /**
- * return value from estimateTransactionIntentCost
- */
+* return value from estimateTransactionIntentCost
+*/
 export class EstimateTransactionIntentGasResult {
-  /**
-   * estimated TX gas cost
-   */
-  estimatedTXGas: string
-  /**
-   * estimated TX gas cost in the chain native token (WEI)
-   */
-  estimatedTXGasFee: string
-  /**
-   * estimated TX gas cost in USD
-   */
-  estimatedTXGasFeeUSD: string
-  /**
-   * when using a policy, the estimated TX gas cost in the ERC-20 token defined in the strategy (WEI)
-   */
-  estimatedTXGasFeeToken?: string
-  /**
-   * gas price used for the estimation
-   */
-  gasPrice: string
+    /**
+    * estimated TX gas cost
+    */
+    'estimatedTXGas': string;
+    /**
+    * estimated TX gas cost in the chain native token (WEI)
+    */
+    'estimatedTXGasFee': string;
+    /**
+    * estimated TX gas cost in USD
+    */
+    'estimatedTXGasFeeUSD': string;
+    /**
+    * when using a policy, the estimated TX gas cost in the ERC-20 token defined in the strategy (WEI)
+    */
+    'estimatedTXGasFeeToken'?: string;
+    /**
+    * gas price used for the estimation
+    */
+    'gasPrice': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'estimatedTXGas',
-      baseName: 'estimatedTXGas',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'estimatedTXGasFee',
-      baseName: 'estimatedTXGasFee',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'estimatedTXGasFeeUSD',
-      baseName: 'estimatedTXGasFeeUSD',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'estimatedTXGasFeeToken',
-      baseName: 'estimatedTXGasFeeToken',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'gasPrice',
-      baseName: 'gasPrice',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "estimatedTXGas",
+            "baseName": "estimatedTXGas",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "estimatedTXGasFee",
+            "baseName": "estimatedTXGasFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "estimatedTXGasFeeUSD",
+            "baseName": "estimatedTXGasFeeUSD",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "estimatedTXGasFeeToken",
+            "baseName": "estimatedTXGasFeeToken",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "gasPrice",
+            "baseName": "gasPrice",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return EstimateTransactionIntentGasResult.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return EstimateTransactionIntentGasResult.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,14 +10,9 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 /**
- * Enum of the supporting OAuth providers.
- */
-export type OAuthProvider =
-  | 'google'
-  | 'twitter'
-  | 'facebook'
-  | 'discord'
-  | 'epic_games'
-  | 'line'
-  | 'apple'
+* Enum of the supporting OAuth providers.
+*/
+export type OAuthProvider = "google" | "twitter" | "facebook" | "discord" | "epic_games" | "line" | "apple" ;

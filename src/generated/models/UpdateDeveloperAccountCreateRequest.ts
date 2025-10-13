@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class UpdateDeveloperAccountCreateRequest {
-  /**
-   * The name of the account.
-   */
-  name?: string
+    /**
+    * The name of the account.
+    */
+    'name'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UpdateDeveloperAccountCreateRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UpdateDeveloperAccountCreateRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

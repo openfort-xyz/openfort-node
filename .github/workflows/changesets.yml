@@ -19,51 +19,48 @@ jobs:
     permissions:
       contents: read
 
-  build-and-test:
-    name: Build and Test
+  changesets:
+    name: Create version pull request
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
-      contents: read
+      contents: write
+      pull-requests: write
+
     steps:
       - name: Clone repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          submodules: "recursive"
+        uses: actions/checkout@v4
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
-      - name: Check code
-        run: pnpm check
-
-      - name: Check types
-        run: pnpm check:types
-
-      - name: Build
-        run: pnpm build
+      - name: Create Version Pull Request
+        uses: changesets/action@v1
+        with:
+          commit: "chore: version package"
+          title: "chore: version package"
+          version: pnpm changeset:version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     name: Release
-    needs: [verify, build-and-test]
+    needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: write # To push commits and tags
       pull-requests: write # To create and update PRs
-      issues: write # To comment on issues/PRs
       id-token: write # For NPM provenance
     steps:
       - name: Clone repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          submodules: "recursive"
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
       - name: Publish to NPM
-        uses: changesets/action@v1
+        uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc
         with:
           createGithubReleases: ${{ github.ref == 'refs/heads/main' }}
           publish: pnpm changeset:publish

@@ -10,79 +10,79 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class UpsertSMTPConfigRequest {
-  /**
-   * Specifies the user name
-   */
-  user?: string
-  /**
-   * Specifies the password
-   */
-  pass?: string
-  /**
-   * Specifies the host
-   */
-  host?: string
-  /**
-   * Specifies the from
-   */
-  _from?: string
-  /**
-   * Specifies the port
-   */
-  port?: number
-  /**
-   * Specifies the use SSL
-   */
-  useSSL?: boolean
+    /**
+    * Specifies the user name
+    */
+    'user'?: string;
+    /**
+    * Specifies the password
+    */
+    'pass'?: string;
+    /**
+    * Specifies the host
+    */
+    'host'?: string;
+    /**
+    * Specifies the from
+    */
+    '_from'?: string;
+    /**
+    * Specifies the port
+    */
+    'port'?: number;
+    /**
+    * Specifies the use SSL
+    */
+    'useSSL'?: boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'user',
-      baseName: 'user',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'pass',
-      baseName: 'pass',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'host',
-      baseName: 'host',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: '_from',
-      baseName: 'from',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'port',
-      baseName: 'port',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'useSSL',
-      baseName: 'useSSL',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "user",
+            "baseName": "user",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pass",
+            "baseName": "pass",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "host",
+            "baseName": "host",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "_from",
+            "baseName": "from",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "port",
+            "baseName": "port",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "useSSL",
+            "baseName": "useSSL",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UpsertSMTPConfigRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UpsertSMTPConfigRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

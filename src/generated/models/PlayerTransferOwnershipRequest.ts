@@ -10,59 +10,59 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class PlayerTransferOwnershipRequest {
-  /**
-   * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
-   */
-  policy: string
-  /**
-   * The chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId: number
-  /**
-   * The address of the new owner
-   */
-  newOwnerAddress: string
-  /**
-   * ID of the Player that has the Account you want to transfer ownership from (starts with `pla_`).
-   */
-  player?: string
+    /**
+    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
+    */
+    'policy': string;
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId': number;
+    /**
+    * The address of the new owner
+    */
+    'newOwnerAddress': string;
+    /**
+    * ID of the Player that has the Account you want to transfer ownership from (starts with `pla_`).
+    */
+    'player'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'policy',
-      baseName: 'policy',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'newOwnerAddress',
-      baseName: 'newOwnerAddress',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'player',
-      baseName: 'player',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "newOwnerAddress",
+            "baseName": "newOwnerAddress",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PlayerTransferOwnershipRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PlayerTransferOwnershipRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

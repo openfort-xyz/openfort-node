@@ -10,49 +10,49 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class CreateForwarderContractRequest {
-  /**
-   * Specifies the address of the paymaster
-   */
-  address: string
-  /**
-   * The chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId: number
-  /**
-   * Specifies the name of the paymaster
-   */
-  name?: string
+    /**
+    * Specifies the address of the paymaster
+    */
+    'address': string;
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId': number;
+    /**
+    * Specifies the name of the paymaster
+    */
+    'name'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreateForwarderContractRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreateForwarderContractRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

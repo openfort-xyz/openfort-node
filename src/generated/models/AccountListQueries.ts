@@ -10,89 +10,90 @@
  * Do not edit the class manually.
  */
 
-import type { AccountResponseExpandable } from '../models/AccountResponseExpandable'
-import type { SortOrder } from '../models/SortOrder'
+import { AccountResponseExpandable } from '../models/AccountResponseExpandable';
+import { SortOrder } from '../models/SortOrder';
+import { HttpFile } from '../http/http';
 
 export class AccountListQueries {
-  /**
-   * Specifies the maximum number of records to return.
-   */
-  limit?: number
-  /**
-   * Specifies the offset for the first records to return.
-   */
-  skip?: number
-  order?: SortOrder
-  /**
-   * The chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId?: number
-  /**
-   * Specifies the unique player ID (starts with pla_)
-   */
-  player?: string
-  /**
-   * Specifies the address of the account
-   */
-  address?: string
-  /**
-   * Specifies the fields to expand in the response.
-   */
-  expand?: AccountResponseExpandable[]
+    /**
+    * Specifies the maximum number of records to return.
+    */
+    'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
+    'skip'?: number;
+    'order'?: SortOrder;
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId'?: number;
+    /**
+    * Specifies the unique player ID (starts with pla_)
+    */
+    'player'?: string;
+    /**
+    * Specifies the address of the account
+    */
+    'address'?: string;
+    /**
+    * Specifies the fields to expand in the response.
+    */
+    'expand'?: Array<AccountResponseExpandable>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'limit',
-      baseName: 'limit',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'skip',
-      baseName: 'skip',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'order',
-      baseName: 'order',
-      type: 'SortOrder',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'player',
-      baseName: 'player',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'expand',
-      baseName: 'expand',
-      type: 'Array<AccountResponseExpandable>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "limit",
+            "baseName": "limit",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "skip",
+            "baseName": "skip",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "order",
+            "baseName": "order",
+            "type": "SortOrder",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "expand",
+            "baseName": "expand",
+            "type": "Array<AccountResponseExpandable>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AccountListQueries.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AccountListQueries.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

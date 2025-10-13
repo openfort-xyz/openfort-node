@@ -10,63 +10,69 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class NextActionPayload {
-  userOp?: any | null
-  userOpHash?: string
-  /**
-   * The userOperation.
-   */
-  userOperation?: any | null
-  /**
-   * The hashed userOperation.
-   */
-  userOperationHash?: string
-  /**
-   * chain-agnostic hash to sign.
-   */
-  signableHash?: string
+    /**
+    * The userOperation.
+    */
+    'userOp'?: any | null;
+    /**
+    * The hashed userOperation.
+    */
+    'userOpHash'?: string;
+    /**
+    * The userOperation.
+    */
+    'userOperation'?: any | null;
+    /**
+    * The hashed userOperation.
+    */
+    'userOperationHash'?: string;
+    /**
+    * chain-agnostic hash to sign.
+    */
+    'signableHash'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'userOp',
-      baseName: 'userOp',
-      type: 'any',
-      format: '',
-    },
-    {
-      name: 'userOpHash',
-      baseName: 'userOpHash',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'userOperation',
-      baseName: 'userOperation',
-      type: 'any',
-      format: '',
-    },
-    {
-      name: 'userOperationHash',
-      baseName: 'userOperationHash',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'signableHash',
-      baseName: 'signableHash',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "userOp",
+            "baseName": "userOp",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "userOpHash",
+            "baseName": "userOpHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "userOperation",
+            "baseName": "userOperation",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "userOperationHash",
+            "baseName": "userOperationHash",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "signableHash",
+            "baseName": "signableHash",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return NextActionPayload.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return NextActionPayload.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
