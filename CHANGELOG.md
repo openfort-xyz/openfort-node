@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- [#24](https://github.com/openfort-xyz/openfort-node/pull/24) [`29725e3b35ff3e503fcae7d58da2ccc4a693171d`](https://github.com/openfort-xyz/openfort-node/commit/29725e3b35ff3e503fcae7d58da2ccc4a693171d) Thanks [@jamalavedra](https://github.com/jamalavedra)! - switch chain account v2
+
+## 0.6.74
+
+### Patch Changes
+
 - [#22](https://github.com/openfort-xyz/openfort-node/pull/22) [`e93f739bedf661232e5bc8e78cc362fef4a5567d`](https://github.com/openfort-xyz/openfort-node/commit/e93f739bedf661232e5bc8e78cc362fef4a5567d) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update reference and include account v2'
 
 ## 0.6.73
