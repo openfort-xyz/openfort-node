@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type TransactionAbstractionType =
-  | 'accountAbstractionV6'
-  | 'zkSync'
-  | 'standard'
+import { HttpFile } from '../http/http';
+
+export type TransactionAbstractionType = "accountAbstractionV6" | "zkSync" | "standard" ;

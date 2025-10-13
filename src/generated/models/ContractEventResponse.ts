@@ -10,79 +10,80 @@
  * Do not edit the class manually.
  */
 
-import type { APITopicBALANCECONTRACT } from '../models/APITopicBALANCECONTRACT'
-import type { EntityIdResponse } from '../models/EntityIdResponse'
-import type { EntityTypeEVENT } from '../models/EntityTypeEVENT'
+import { APITopicBALANCECONTRACT } from '../models/APITopicBALANCECONTRACT';
+import { EntityIdResponse } from '../models/EntityIdResponse';
+import { EntityTypeEVENT } from '../models/EntityTypeEVENT';
+import { HttpFile } from '../http/http';
 
 export class ContractEventResponse {
-  id: string
-  object: EntityTypeEVENT
-  createdAt: number
-  topic: APITopicBALANCECONTRACT
-  threshold: string
-  contract: EntityIdResponse
-  functionName: string
-  functionArgs: string[]
+    'id': string;
+    'object': EntityTypeEVENT;
+    'createdAt': number;
+    'topic': APITopicBALANCECONTRACT;
+    'threshold': string;
+    'contract': EntityIdResponse;
+    'functionName': string;
+    'functionArgs': Array<string>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeEVENT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'topic',
-      baseName: 'topic',
-      type: 'APITopicBALANCECONTRACT',
-      format: '',
-    },
-    {
-      name: 'threshold',
-      baseName: 'threshold',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'contract',
-      baseName: 'contract',
-      type: 'EntityIdResponse',
-      format: '',
-    },
-    {
-      name: 'functionName',
-      baseName: 'functionName',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'functionArgs',
-      baseName: 'functionArgs',
-      type: 'Array<string>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeEVENT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopicBALANCECONTRACT",
+            "format": ""
+        },
+        {
+            "name": "threshold",
+            "baseName": "threshold",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contract",
+            "baseName": "contract",
+            "type": "EntityIdResponse",
+            "format": ""
+        },
+        {
+            "name": "functionName",
+            "baseName": "functionName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "functionArgs",
+            "baseName": "functionArgs",
+            "type": "Array<string>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ContractEventResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ContractEventResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

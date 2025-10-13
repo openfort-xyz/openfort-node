@@ -10,7 +10,9 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 /**
- * Enum of the supporting OAuth providers.
- */
-export type TokenType = 'idToken' | 'customToken'
+* Enum of the supporting OAuth providers.
+*/
+export type TokenType = "idToken" | "customToken" ;

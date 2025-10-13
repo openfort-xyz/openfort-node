@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type OAuthProviderEPICGAMES = 'epic_games'
+import { HttpFile } from '../http/http';
+
+export type OAuthProviderEPICGAMES = "epic_games" ;

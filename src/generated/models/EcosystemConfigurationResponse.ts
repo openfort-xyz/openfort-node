@@ -10,151 +10,150 @@
  * Do not edit the class manually.
  */
 
-import type { PlayerMetadataValue } from '../models/PlayerMetadataValue'
+import { PlayerMetadataValue } from '../models/PlayerMetadataValue';
+import { HttpFile } from '../http/http';
 
 export class EcosystemConfigurationResponse {
-  /**
-   * Subdomain of the ecosystem.
-   */
-  customDomain: string
-  /**
-   * Primary color of the ecosystem.
-   */
-  primaryColor: string
-  /**
-   * Primary color foreground of the ecosystem.
-   */
-  primaryColorForeground: string
-  /**
-   * Radius of the ecosystem.
-   */
-  radius: string
-  /**
-   * Logo URL of the ecosystem.
-   */
-  logoUrl: string
-  /**
-   * Whitelisted frontend domains of the ecosystem.
-   */
-  ecosystemWalletDomains: string[]
-  /**
-   * Terms of service URL
-   */
-  termsOfServiceUrl?: string
-  /**
-   * Privacy policy URL
-   */
-  privacyPolicyUrl?: string
-  /**
-   * Favicon URL
-   */
-  faviconUrl?: string
-  /**
-   * Examples of the ecosystem.
-   */
-  dashboardExamples?: Array<{ [key: string]: PlayerMetadataValue }>
-  /**
-   * SDKs of the ecosystem.
-   */
-  dashboardSDKs?: Array<{ [key: string]: PlayerMetadataValue }>
-  /**
-   * Support email of the ecosystem.
-   */
-  supportEmail?: string
-  /**
-   * Documentation URL of the ecosystem.
-   */
-  documentationUrl?: string
+    /**
+    * Subdomain of the ecosystem.
+    */
+    'customDomain': string;
+    /**
+    * Primary color of the ecosystem.
+    */
+    'primaryColor': string;
+    /**
+    * Primary color foreground of the ecosystem.
+    */
+    'primaryColorForeground': string;
+    /**
+    * Radius of the ecosystem.
+    */
+    'radius': string;
+    /**
+    * Logo URL of the ecosystem.
+    */
+    'logoUrl': string;
+    /**
+    * Whitelisted frontend domains of the ecosystem.
+    */
+    'ecosystemWalletDomains': Array<string>;
+    /**
+    * Terms of service URL
+    */
+    'termsOfServiceUrl'?: string;
+    /**
+    * Privacy policy URL
+    */
+    'privacyPolicyUrl'?: string;
+    /**
+    * Favicon URL
+    */
+    'faviconUrl'?: string;
+    /**
+    * Examples of the ecosystem.
+    */
+    'dashboardExamples'?: Array<{ [key: string]: PlayerMetadataValue; }>;
+    /**
+    * SDKs of the ecosystem.
+    */
+    'dashboardSDKs'?: Array<{ [key: string]: PlayerMetadataValue; }>;
+    /**
+    * Support email of the ecosystem.
+    */
+    'supportEmail'?: string;
+    /**
+    * Documentation URL of the ecosystem.
+    */
+    'documentationUrl'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'customDomain',
-      baseName: 'customDomain',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'primaryColor',
-      baseName: 'primaryColor',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'primaryColorForeground',
-      baseName: 'primaryColorForeground',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'radius',
-      baseName: 'radius',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'logoUrl',
-      baseName: 'logoUrl',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'ecosystemWalletDomains',
-      baseName: 'ecosystemWalletDomains',
-      type: 'Array<string>',
-      format: '',
-    },
-    {
-      name: 'termsOfServiceUrl',
-      baseName: 'termsOfServiceUrl',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'privacyPolicyUrl',
-      baseName: 'privacyPolicyUrl',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'faviconUrl',
-      baseName: 'faviconUrl',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'dashboardExamples',
-      baseName: 'dashboardExamples',
-      type: 'Array<{ [key: string]: PlayerMetadataValue; }>',
-      format: '',
-    },
-    {
-      name: 'dashboardSDKs',
-      baseName: 'dashboardSDKs',
-      type: 'Array<{ [key: string]: PlayerMetadataValue; }>',
-      format: '',
-    },
-    {
-      name: 'supportEmail',
-      baseName: 'supportEmail',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'documentationUrl',
-      baseName: 'documentationUrl',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "customDomain",
+            "baseName": "customDomain",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryColor",
+            "baseName": "primaryColor",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryColorForeground",
+            "baseName": "primaryColorForeground",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "radius",
+            "baseName": "radius",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "logoUrl",
+            "baseName": "logoUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "ecosystemWalletDomains",
+            "baseName": "ecosystemWalletDomains",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "termsOfServiceUrl",
+            "baseName": "termsOfServiceUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "privacyPolicyUrl",
+            "baseName": "privacyPolicyUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "faviconUrl",
+            "baseName": "faviconUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "dashboardExamples",
+            "baseName": "dashboardExamples",
+            "type": "Array<{ [key: string]: PlayerMetadataValue; }>",
+            "format": ""
+        },
+        {
+            "name": "dashboardSDKs",
+            "baseName": "dashboardSDKs",
+            "type": "Array<{ [key: string]: PlayerMetadataValue; }>",
+            "format": ""
+        },
+        {
+            "name": "supportEmail",
+            "baseName": "supportEmail",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "documentationUrl",
+            "baseName": "documentationUrl",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return EcosystemConfigurationResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return EcosystemConfigurationResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -1,19 +1,8 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["src/**/*", "*.ts", "*.js", "*.json"]
+    "includes": ["src/**/*", "*.ts", "*.js", "!src/generated", "*.json"]
   },
-  "overrides": [
-    {
-      "includes": ["src/generated/**/*"],
-      "linter": {
-        "enabled": false
-      },
-      "formatter": {
-        "enabled": false
-      }
-    }
-  ],
   "formatter": {
     "enabled": true,
     "formatWithErrors": true,
@@ -35,8 +24,8 @@
         "noUnusedVariables": "error"
       },
       "performance": {
-        "noBarrelFile": "warn",
-        "noReExportAll": "warn",
+        "noBarrelFile": "error",
+        "noReExportAll": "error",
         "noDelete": "off"
       },
       "style": {

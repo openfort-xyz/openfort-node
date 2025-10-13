@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class UpdateProjectRequest {
-  /**
-   * Name of the project.
-   */
-  name: string
+    /**
+    * Name of the project.
+    */
+    'name': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UpdateProjectRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UpdateProjectRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

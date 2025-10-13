@@ -10,48 +10,49 @@
  * Do not edit the class manually.
  */
 
-import type { SortOrder } from '../models/SortOrder'
+import { SortOrder } from '../models/SortOrder';
+import { HttpFile } from '../http/http';
 
 export class PagingQueries {
-  /**
-   * Specifies the maximum number of records to return.
-   */
-  limit?: number
-  /**
-   * Specifies the offset for the first records to return.
-   */
-  skip?: number
-  order?: SortOrder
+    /**
+    * Specifies the maximum number of records to return.
+    */
+    'limit'?: number;
+    /**
+    * Specifies the offset for the first records to return.
+    */
+    'skip'?: number;
+    'order'?: SortOrder;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'limit',
-      baseName: 'limit',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'skip',
-      baseName: 'skip',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'order',
-      baseName: 'order',
-      type: 'SortOrder',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "limit",
+            "baseName": "limit",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "skip",
+            "baseName": "skip",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "order",
+            "baseName": "order",
+            "type": "SortOrder",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PagingQueries.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PagingQueries.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

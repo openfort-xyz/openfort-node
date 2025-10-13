@@ -10,58 +10,59 @@
  * Do not edit the class manually.
  */
 
-import type { SponsorSchema } from '../models/SponsorSchema'
+import { SponsorSchema } from '../models/SponsorSchema';
+import { HttpFile } from '../http/http';
 
 export class PolicyStrategyRequest {
-  sponsorSchema: SponsorSchema
-  /**
-   * If the user pays in custom tokens, the contract ID (starts with con_) of the token contract.
-   */
-  tokenContract?: string
-  /**
-   * If the user pays in ERC20 tokens, this reflects either the exchange rate or the amount in WEI.
-   */
-  tokenContractAmount?: string
-  /**
-   * If the you want to use your own native tokens to pay for gas, specify the developer account ID (starts with dac_)
-   */
-  depositor?: string
+    'sponsorSchema': SponsorSchema;
+    /**
+    * If the user pays in custom tokens, the contract ID (starts with con_) of the token contract.
+    */
+    'tokenContract'?: string;
+    /**
+    * If the user pays in ERC20 tokens, this reflects either the exchange rate or the amount in WEI.
+    */
+    'tokenContractAmount'?: string;
+    /**
+    * If the you want to use your own native tokens to pay for gas, specify the developer account ID (starts with dac_)
+    */
+    'depositor'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'sponsorSchema',
-      baseName: 'sponsorSchema',
-      type: 'SponsorSchema',
-      format: '',
-    },
-    {
-      name: 'tokenContract',
-      baseName: 'tokenContract',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'tokenContractAmount',
-      baseName: 'tokenContractAmount',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'depositor',
-      baseName: 'depositor',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "sponsorSchema",
+            "baseName": "sponsorSchema",
+            "type": "SponsorSchema",
+            "format": ""
+        },
+        {
+            "name": "tokenContract",
+            "baseName": "tokenContract",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenContractAmount",
+            "baseName": "tokenContractAmount",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "depositor",
+            "baseName": "depositor",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PolicyStrategyRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PolicyStrategyRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

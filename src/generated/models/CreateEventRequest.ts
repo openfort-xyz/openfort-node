@@ -10,108 +10,109 @@
  * Do not edit the class manually.
  */
 
-import type { APITopic } from '../models/APITopic'
+import { APITopic } from '../models/APITopic';
+import { HttpFile } from '../http/http';
 
 export class CreateEventRequest {
-  /**
-   * Specifies the name of the event
-   */
-  name: string
-  topic: APITopic
-  /**
-   * Specifies the contract id (if the event is a contract event)
-   */
-  contract?: string
-  /**
-   * Specifies the function arguments (if the event is a contract event)
-   */
-  functionArgs?: string[]
-  /**
-   * Specifies the function name (if the event is a contract event)
-   */
-  functionName?: string
-  /**
-   * Specifies the developer account id (if the event is a developer account event)
-   */
-  developerAccount?: string
-  /**
-   * Specifies the chain id (if the event is a developer account event)
-   */
-  chainId?: number
-  /**
-   * Threshold for the event (if the event is a contract, dev account or project event)
-   */
-  threshold?: string
-  /**
-   * Specifies the number of confirmations required for the event to trigger
-   */
-  numberOfBlocks?: number
+    /**
+    * Specifies the name of the event
+    */
+    'name': string;
+    'topic': APITopic;
+    /**
+    * Specifies the contract id (if the event is a contract event)
+    */
+    'contract'?: string;
+    /**
+    * Specifies the function arguments (if the event is a contract event)
+    */
+    'functionArgs'?: Array<string>;
+    /**
+    * Specifies the function name (if the event is a contract event)
+    */
+    'functionName'?: string;
+    /**
+    * Specifies the developer account id (if the event is a developer account event)
+    */
+    'developerAccount'?: string;
+    /**
+    * Specifies the chain id (if the event is a developer account event)
+    */
+    'chainId'?: number;
+    /**
+    * Threshold for the event (if the event is a contract, dev account or project event)
+    */
+    'threshold'?: string;
+    /**
+    * Specifies the number of confirmations required for the event to trigger
+    */
+    'numberOfBlocks'?: number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'topic',
-      baseName: 'topic',
-      type: 'APITopic',
-      format: '',
-    },
-    {
-      name: 'contract',
-      baseName: 'contract',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'functionArgs',
-      baseName: 'functionArgs',
-      type: 'Array<string>',
-      format: '',
-    },
-    {
-      name: 'functionName',
-      baseName: 'functionName',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'developerAccount',
-      baseName: 'developerAccount',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'threshold',
-      baseName: 'threshold',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'numberOfBlocks',
-      baseName: 'numberOfBlocks',
-      type: 'number',
-      format: 'double',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopic",
+            "format": ""
+        },
+        {
+            "name": "contract",
+            "baseName": "contract",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "functionArgs",
+            "baseName": "functionArgs",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "functionName",
+            "baseName": "functionName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "developerAccount",
+            "baseName": "developerAccount",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "threshold",
+            "baseName": "threshold",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "numberOfBlocks",
+            "baseName": "numberOfBlocks",
+            "type": "number",
+            "format": "double"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CreateEventRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CreateEventRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

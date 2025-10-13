@@ -10,43 +10,44 @@
  * Do not edit the class manually.
  */
 
-import type { AssetInventory } from '../models/AssetInventory'
-import type { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY'
+import { AssetInventory } from '../models/AssetInventory';
+import { EntityTypeINVENTORY } from '../models/EntityTypeINVENTORY';
+import { HttpFile } from '../http/http';
 
 export class InventoryResponse {
-  object: EntityTypeINVENTORY
-  url: string
-  data: AssetInventory
+    'object': EntityTypeINVENTORY;
+    'url': string;
+    'data': AssetInventory;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeINVENTORY',
-      format: '',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'AssetInventory',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeINVENTORY",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "AssetInventory",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return InventoryResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return InventoryResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

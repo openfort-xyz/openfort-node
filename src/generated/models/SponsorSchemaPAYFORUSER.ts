@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type SponsorSchemaPAYFORUSER = 'pay_for_user'
+import { HttpFile } from '../http/http';
+
+export type SponsorSchemaPAYFORUSER = "pay_for_user" ;

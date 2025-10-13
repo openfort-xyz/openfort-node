@@ -10,64 +10,65 @@
  * Do not edit the class manually.
  */
 
-import type { ProjectResponse } from '../models/ProjectResponse'
-import type { ResponseTypeLIST } from '../models/ResponseTypeLIST'
+import { ProjectResponse } from '../models/ProjectResponse';
+import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { HttpFile } from '../http/http';
 
 export class ProjectListResponse {
-  object: ResponseTypeLIST
-  url: string
-  data: ProjectResponse[]
-  start: number
-  end: number
-  total: number
+    'object': ResponseTypeLIST;
+    'url': string;
+    'data': Array<ProjectResponse>;
+    'start': number;
+    'end': number;
+    'total': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'ResponseTypeLIST',
-      format: '',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'Array<ProjectResponse>',
-      format: '',
-    },
-    {
-      name: 'start',
-      baseName: 'start',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'end',
-      baseName: 'end',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'total',
-      baseName: 'total',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "ResponseTypeLIST",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<ProjectResponse>",
+            "format": ""
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ProjectListResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ProjectListResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

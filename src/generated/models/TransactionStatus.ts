@@ -10,14 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type TransactionStatus =
-  | 'none'
-  | 'new'
-  | 'sent'
-  | 'dropped'
-  | 'indexed'
-  | 'confirmed'
-  | 'reverted'
-  | 'notfound'
-  | 'replaced'
-  | 'expired'
+import { HttpFile } from '../http/http';
+
+export type TransactionStatus = "none" | "new" | "sent" | "dropped" | "indexed" | "confirmed" | "reverted" | "notfound" | "replaced" | "expired" ;

@@ -10,78 +10,77 @@
  * Do not edit the class manually.
  */
 
-import type { PolicyStrategyRequest } from '../models/PolicyStrategyRequest'
+import { PolicyStrategyRequest } from '../models/PolicyStrategyRequest';
+import { HttpFile } from '../http/http';
 
 export class UpdatePolicyRequest {
-  /**
-   * Specifies the name of the policy.
-   */
-  name?: string
-  /**
-   * The chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId?: number
-  strategy?: PolicyStrategyRequest
-  /**
-   * The ID of the paymaster.
-   */
-  paymaster?: string
-  /**
-   * The ID of the forwarder contract.
-   */
-  forwarderContract?: string
-  /**
-   * Specifies whether to delete the policy.
-   */
-  deleted?: boolean
+    /**
+    * Specifies the name of the policy.
+    */
+    'name'?: string;
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId'?: number;
+    'strategy'?: PolicyStrategyRequest;
+    /**
+    * The ID of the paymaster.
+    */
+    'paymaster'?: string;
+    /**
+    * The ID of the forwarder contract.
+    */
+    'forwarderContract'?: string;
+    /**
+    * Specifies whether to delete the policy.
+    */
+    'deleted'?: boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'strategy',
-      baseName: 'strategy',
-      type: 'PolicyStrategyRequest',
-      format: '',
-    },
-    {
-      name: 'paymaster',
-      baseName: 'paymaster',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'forwarderContract',
-      baseName: 'forwarderContract',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'deleted',
-      baseName: 'deleted',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "strategy",
+            "baseName": "strategy",
+            "type": "PolicyStrategyRequest",
+            "format": ""
+        },
+        {
+            "name": "paymaster",
+            "baseName": "paymaster",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "forwarderContract",
+            "baseName": "forwarderContract",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UpdatePolicyRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UpdatePolicyRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

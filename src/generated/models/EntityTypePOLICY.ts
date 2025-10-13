@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypePOLICY = 'policy'
+import { HttpFile } from '../http/http';
+
+export type EntityTypePOLICY = "policy" ;

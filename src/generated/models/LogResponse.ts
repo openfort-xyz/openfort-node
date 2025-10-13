@@ -10,79 +10,80 @@
  * Do not edit the class manually.
  */
 
-import type { APITopic } from '../models/APITopic'
-import type { EntityTypeLOG } from '../models/EntityTypeLOG'
-import type { Status } from '../models/Status'
+import { APITopic } from '../models/APITopic';
+import { EntityTypeLOG } from '../models/EntityTypeLOG';
+import { Status } from '../models/Status';
+import { HttpFile } from '../http/http';
 
 export class LogResponse {
-  id: string
-  object: EntityTypeLOG
-  createdAt: number
-  topic: APITopic
-  status: Status
-  subscription: string
-  trigger: string
-  requestID: string
+    'id': string;
+    'object': EntityTypeLOG;
+    'createdAt': number;
+    'topic': APITopic;
+    'status': Status;
+    'subscription': string;
+    'trigger': string;
+    'requestID': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeLOG',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'topic',
-      baseName: 'topic',
-      type: 'APITopic',
-      format: '',
-    },
-    {
-      name: 'status',
-      baseName: 'status',
-      type: 'Status',
-      format: '',
-    },
-    {
-      name: 'subscription',
-      baseName: 'subscription',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'trigger',
-      baseName: 'trigger',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'requestID',
-      baseName: 'requestID',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeLOG",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "topic",
+            "baseName": "topic",
+            "type": "APITopic",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "Status",
+            "format": ""
+        },
+        {
+            "name": "subscription",
+            "baseName": "subscription",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "trigger",
+            "baseName": "trigger",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "requestID",
+            "baseName": "requestID",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return LogResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return LogResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

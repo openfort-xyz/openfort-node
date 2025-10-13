@@ -10,58 +10,59 @@
  * Do not edit the class manually.
  */
 
-import type { OAuthProviderLINE } from '../models/OAuthProviderLINE'
+import { OAuthProviderLINE } from '../models/OAuthProviderLINE';
+import { HttpFile } from '../http/http';
 
 export class LineOAuthConfig {
-  /**
-   * Enable OAuth provider.
-   */
-  enabled: boolean
-  provider: OAuthProviderLINE
-  /**
-   * Line Channel ID.
-   */
-  channelId: string
-  /**
-   * Line Channel secret.
-   */
-  channelSecret: string
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': OAuthProviderLINE;
+    /**
+    * Line Channel ID.
+    */
+    'channelId': string;
+    /**
+    * Line Channel secret.
+    */
+    'channelSecret': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'enabled',
-      baseName: 'enabled',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'OAuthProviderLINE',
-      format: '',
-    },
-    {
-      name: 'channelId',
-      baseName: 'channelId',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'channelSecret',
-      baseName: 'channelSecret',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProviderLINE",
+            "format": ""
+        },
+        {
+            "name": "channelId",
+            "baseName": "channelId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "channelSecret",
+            "baseName": "channelSecret",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return LineOAuthConfig.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return LineOAuthConfig.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

@@ -10,88 +10,89 @@
  * Do not edit the class manually.
  */
 
-import type { Abi } from '../models/Abi'
-import type { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT'
+import { Abi } from '../models/Abi';
+import { EntityTypeCONTRACT } from '../models/EntityTypeCONTRACT';
+import { HttpFile } from '../http/http';
 
 export class ContractResponse {
-  id: string
-  object: EntityTypeCONTRACT
-  createdAt: number
-  name: string | null
-  /**
-   * The chain ID.
-   */
-  chainId: number
-  address: string
-  deleted: boolean
-  abi: Abi[]
-  publicVerification: boolean
+    'id': string;
+    'object': EntityTypeCONTRACT;
+    'createdAt': number;
+    'name': string | null;
+    /**
+    * The chain ID.
+    */
+    'chainId': number;
+    'address': string;
+    'deleted': boolean;
+    'abi': Array<Abi>;
+    'publicVerification': boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypeCONTRACT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'deleted',
-      baseName: 'deleted',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'abi',
-      baseName: 'abi',
-      type: 'Array<Abi>',
-      format: '',
-    },
-    {
-      name: 'publicVerification',
-      baseName: 'publicVerification',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypeCONTRACT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "abi",
+            "baseName": "abi",
+            "type": "Array<Abi>",
+            "format": ""
+        },
+        {
+            "name": "publicVerification",
+            "baseName": "publicVerification",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ContractResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ContractResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

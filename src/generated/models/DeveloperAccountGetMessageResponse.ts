@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class DeveloperAccountGetMessageResponse {
-  message: string
-  address: string
+    'message': string;
+    'address': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'message',
-      baseName: 'message',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return DeveloperAccountGetMessageResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return DeveloperAccountGetMessageResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

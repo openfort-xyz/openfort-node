@@ -10,87 +10,88 @@
  * Do not edit the class manually.
  */
 
-import type { ApiKeyResponse } from '../models/ApiKeyResponse'
-import type { ChildProjectListResponse } from '../models/ChildProjectListResponse'
-import type { EntityTypePROJECT } from '../models/EntityTypePROJECT'
-import type { WebhookResponse } from '../models/WebhookResponse'
+import { ApiKeyResponse } from '../models/ApiKeyResponse';
+import { ChildProjectListResponse } from '../models/ChildProjectListResponse';
+import { EntityTypePROJECT } from '../models/EntityTypePROJECT';
+import { WebhookResponse } from '../models/WebhookResponse';
+import { HttpFile } from '../http/http';
 
 export class ProjectResponse {
-  id: string
-  object: EntityTypePROJECT
-  createdAt: number
-  updatedAt: number
-  name: string
-  apikeys?: ApiKeyResponse[]
-  webhook?: WebhookResponse[]
-  parentProject?: string
-  childProjects?: ChildProjectListResponse
+    'id': string;
+    'object': EntityTypePROJECT;
+    'createdAt': number;
+    'updatedAt': number;
+    'name': string;
+    'apikeys'?: Array<ApiKeyResponse>;
+    'webhook'?: Array<WebhookResponse>;
+    'parentProject'?: string;
+    'childProjects'?: ChildProjectListResponse;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePROJECT',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'updatedAt',
-      baseName: 'updatedAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'apikeys',
-      baseName: 'apikeys',
-      type: 'Array<ApiKeyResponse>',
-      format: '',
-    },
-    {
-      name: 'webhook',
-      baseName: 'webhook',
-      type: 'Array<WebhookResponse>',
-      format: '',
-    },
-    {
-      name: 'parentProject',
-      baseName: 'parentProject',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'childProjects',
-      baseName: 'childProjects',
-      type: 'ChildProjectListResponse',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePROJECT",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "apikeys",
+            "baseName": "apikeys",
+            "type": "Array<ApiKeyResponse>",
+            "format": ""
+        },
+        {
+            "name": "webhook",
+            "baseName": "webhook",
+            "type": "Array<WebhookResponse>",
+            "format": ""
+        },
+        {
+            "name": "parentProject",
+            "baseName": "parentProject",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "childProjects",
+            "baseName": "childProjects",
+            "type": "ChildProjectListResponse",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return ProjectResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return ProjectResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

@@ -10,26 +10,26 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class CheckoutResponse {
-  url: string
+    'url': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return CheckoutResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return CheckoutResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

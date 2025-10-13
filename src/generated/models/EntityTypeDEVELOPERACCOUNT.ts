@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeDEVELOPERACCOUNT = 'developerAccount'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeDEVELOPERACCOUNT = "developerAccount" ;

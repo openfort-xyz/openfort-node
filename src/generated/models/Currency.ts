@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type Currency = 'usd'
+import { HttpFile } from '../http/http';
+
+export type Currency = "usd" ;

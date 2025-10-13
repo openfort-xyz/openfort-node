@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type PolicyRateLimitCOUNTPERINTERVAL = 'count_per_interval'
+import { HttpFile } from '../http/http';
+
+export type PolicyRateLimitCOUNTPERINTERVAL = "count_per_interval" ;

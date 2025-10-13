@@ -10,64 +10,63 @@
  * Do not edit the class manually.
  */
 
-import type { GasReportTransactionIntents } from '../models/GasReportTransactionIntents'
-import type { MonthRange } from '../models/MonthRange'
+import { GasReportTransactionIntents } from '../models/GasReportTransactionIntents';
+import { MonthRange } from '../models/MonthRange';
+import { HttpFile } from '../http/http';
 
 export class GasReport {
-  period: MonthRange
-  averageTransactionFee: string
-  totalTransactionFeeInCustomTokens: string
-  totalTransactionFee: string
-  totalTransactionFeeInUSD: string
-  transactionIntents: GasReportTransactionIntents[]
+    'period': MonthRange;
+    'averageTransactionFee': string;
+    'totalTransactionFeeInCustomTokens': string;
+    'totalTransactionFee': string;
+    'totalTransactionFeeInUSD': string;
+    'transactionIntents': Array<GasReportTransactionIntents>;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'period',
-      baseName: 'period',
-      type: 'MonthRange',
-      format: '',
-    },
-    {
-      name: 'averageTransactionFee',
-      baseName: 'averageTransactionFee',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'totalTransactionFeeInCustomTokens',
-      baseName: 'totalTransactionFeeInCustomTokens',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'totalTransactionFee',
-      baseName: 'totalTransactionFee',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'totalTransactionFeeInUSD',
-      baseName: 'totalTransactionFeeInUSD',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'transactionIntents',
-      baseName: 'transactionIntents',
-      type: 'Array<GasReportTransactionIntents>',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "period",
+            "baseName": "period",
+            "type": "MonthRange",
+            "format": ""
+        },
+        {
+            "name": "averageTransactionFee",
+            "baseName": "averageTransactionFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "totalTransactionFeeInCustomTokens",
+            "baseName": "totalTransactionFeeInCustomTokens",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "totalTransactionFee",
+            "baseName": "totalTransactionFee",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "totalTransactionFeeInUSD",
+            "baseName": "totalTransactionFeeInUSD",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "transactionIntents",
+            "baseName": "transactionIntents",
+            "type": "Array<GasReportTransactionIntents>",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return GasReport.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return GasReport.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

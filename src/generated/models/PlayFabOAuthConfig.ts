@@ -10,51 +10,52 @@
  * Do not edit the class manually.
  */
 
-import type { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB'
+import { ThirdPartyOAuthProviderPLAYFAB } from '../models/ThirdPartyOAuthProviderPLAYFAB';
+import { HttpFile } from '../http/http';
 
 /**
- * PlayFab oauth configuration
- */
+* PlayFab oauth configuration
+*/
 export class PlayFabOAuthConfig {
-  /**
-   * Enable OAuth provider.
-   */
-  enabled: boolean
-  provider: ThirdPartyOAuthProviderPLAYFAB
-  /**
-   * Title ID of your Play Fab gaming service environment.
-   */
-  titleId: string
+    /**
+    * Enable OAuth provider.
+    */
+    'enabled': boolean;
+    'provider': ThirdPartyOAuthProviderPLAYFAB;
+    /**
+    * Title ID of your Play Fab gaming service environment.
+    */
+    'titleId': string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'enabled',
-      baseName: 'enabled',
-      type: 'boolean',
-      format: '',
-    },
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'ThirdPartyOAuthProviderPLAYFAB',
-      format: '',
-    },
-    {
-      name: 'titleId',
-      baseName: 'titleId',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "ThirdPartyOAuthProviderPLAYFAB",
+            "format": ""
+        },
+        {
+            "name": "titleId",
+            "baseName": "titleId",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PlayFabOAuthConfig.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PlayFabOAuthConfig.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

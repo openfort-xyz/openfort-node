@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type ThirdPartyOAuthProviderFIREBASE = 'firebase'
+import { HttpFile } from '../http/http';
+
+export type ThirdPartyOAuthProviderFIREBASE = "firebase" ;

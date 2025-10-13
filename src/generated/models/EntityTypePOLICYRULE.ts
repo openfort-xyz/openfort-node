@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypePOLICYRULE = 'policyRule'
+import { HttpFile } from '../http/http';
+
+export type EntityTypePOLICYRULE = "policyRule" ;

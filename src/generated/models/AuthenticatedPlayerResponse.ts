@@ -10,28 +10,27 @@
  * Do not edit the class manually.
  */
 
-import type { AuthPlayerResponse } from '../models/AuthPlayerResponse'
+import { AuthPlayerResponse } from '../models/AuthPlayerResponse';
+import { HttpFile } from '../http/http';
 
 export class AuthenticatedPlayerResponse {
-  player: AuthPlayerResponse
+    'player': AuthPlayerResponse;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'player',
-      baseName: 'player',
-      type: 'AuthPlayerResponse',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "player",
+            "baseName": "player",
+            "type": "AuthPlayerResponse",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AuthenticatedPlayerResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AuthenticatedPlayerResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

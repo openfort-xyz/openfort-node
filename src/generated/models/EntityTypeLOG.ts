@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeLOG = 'log'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeLOG = "log" ;

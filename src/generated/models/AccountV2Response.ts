@@ -10,98 +10,105 @@
  * Do not edit the class manually.
  */
 
-import type { SmartAccountData } from '../models/SmartAccountData'
+import { RecoveryMethodDetails } from '../models/RecoveryMethodDetails';
+import { SmartAccountData } from '../models/SmartAccountData';
+import { HttpFile } from '../http/http';
 
 export class AccountV2Response {
-  id: string
-  user: string
-  accountType: string
-  address: string
-  ownerAddress?: string
-  chainType: string
-  chainId?: number
-  createdAt: number
-  updatedAt: number
-  smartAccount?: SmartAccountData
-  recoveryMethod?: string
+    'id': string;
+    'user': string;
+    'accountType': string;
+    'address': string;
+    'ownerAddress'?: string;
+    'chainType': string;
+    'chainId'?: number;
+    'createdAt': number;
+    'updatedAt': number;
+    'smartAccount'?: SmartAccountData;
+    'recoveryMethod'?: string;
+    'recoveryMethodDetails'?: RecoveryMethodDetails;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'user',
-      baseName: 'user',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'accountType',
-      baseName: 'accountType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'ownerAddress',
-      baseName: 'ownerAddress',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainType',
-      baseName: 'chainType',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'updatedAt',
-      baseName: 'updatedAt',
-      type: 'number',
-      format: 'double',
-    },
-    {
-      name: 'smartAccount',
-      baseName: 'smartAccount',
-      type: 'SmartAccountData',
-      format: '',
-    },
-    {
-      name: 'recoveryMethod',
-      baseName: 'recoveryMethod',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "user",
+            "baseName": "user",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "accountType",
+            "baseName": "accountType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "ownerAddress",
+            "baseName": "ownerAddress",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainType",
+            "baseName": "chainType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "number",
+            "format": "double"
+        },
+        {
+            "name": "smartAccount",
+            "baseName": "smartAccount",
+            "type": "SmartAccountData",
+            "format": ""
+        },
+        {
+            "name": "recoveryMethod",
+            "baseName": "recoveryMethod",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "recoveryMethodDetails",
+            "baseName": "recoveryMethodDetails",
+            "type": "RecoveryMethodDetails",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AccountV2Response.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AccountV2Response.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

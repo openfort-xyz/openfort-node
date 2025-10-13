@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type EntityTypeCONTRACT = 'contract'
+import { HttpFile } from '../http/http';
+
+export type EntityTypeCONTRACT = "contract" ;

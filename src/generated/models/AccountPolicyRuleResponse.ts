@@ -10,50 +10,51 @@
  * Do not edit the class manually.
  */
 
-import type { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE'
-import type { PolicyRuleTypeACCOUNT } from '../models/PolicyRuleTypeACCOUNT'
+import { EntityTypePOLICYRULE } from '../models/EntityTypePOLICYRULE';
+import { PolicyRuleTypeACCOUNT } from '../models/PolicyRuleTypeACCOUNT';
+import { HttpFile } from '../http/http';
 
 export class AccountPolicyRuleResponse {
-  id: string
-  object: EntityTypePOLICYRULE
-  createdAt: number
-  type: PolicyRuleTypeACCOUNT
+    'id': string;
+    'object': EntityTypePOLICYRULE;
+    'createdAt': number;
+    'type': PolicyRuleTypeACCOUNT;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'EntityTypePOLICYRULE',
-      format: '',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'PolicyRuleTypeACCOUNT',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "EntityTypePOLICYRULE",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PolicyRuleTypeACCOUNT",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AccountPolicyRuleResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AccountPolicyRuleResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

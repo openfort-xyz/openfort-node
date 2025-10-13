@@ -10,48 +10,47 @@
  * Do not edit the class manually.
  */
 
-import type { CodeChallenge } from '../models/CodeChallenge'
+import { CodeChallenge } from '../models/CodeChallenge';
+import { HttpFile } from '../http/http';
 
 export class RequestResetPasswordRequest {
-  /**
-   * The email address of the user.
-   */
-  email: string
-  /**
-   * The URL sent to the user by email to reset the password. At the end of the URL, we will add the token in the format `?token=token`.
-   */
-  redirectUrl: string
-  challenge?: CodeChallenge
+    /**
+    * The email address of the user.
+    */
+    'email': string;
+    /**
+    * The URL sent to the user by email to reset the password. At the end of the URL, we will add the token in the format `?token=token`.
+    */
+    'redirectUrl': string;
+    'challenge'?: CodeChallenge;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'email',
-      baseName: 'email',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'redirectUrl',
-      baseName: 'redirectUrl',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'challenge',
-      baseName: 'challenge',
-      type: 'CodeChallenge',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "redirectUrl",
+            "baseName": "redirectUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "challenge",
+            "baseName": "challenge",
+            "type": "CodeChallenge",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return RequestResetPasswordRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return RequestResetPasswordRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

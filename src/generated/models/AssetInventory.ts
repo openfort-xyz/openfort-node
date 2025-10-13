@@ -10,59 +10,60 @@
  * Do not edit the class manually.
  */
 
-import type { AssetType } from '../models/AssetType'
+import { AssetType } from '../models/AssetType';
+import { HttpFile } from '../http/http';
 
 export class AssetInventory {
-  assetType: AssetType
-  address?: string
-  tokenId?: number
-  /**
-   * amount in Wei
-   */
-  amount?: string
-  lastTransferredAt?: number
+    'assetType': AssetType;
+    'address'?: string;
+    'tokenId'?: number;
+    /**
+    * amount in Wei
+    */
+    'amount'?: string;
+    'lastTransferredAt'?: number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'assetType',
-      baseName: 'assetType',
-      type: 'AssetType',
-      format: '',
-    },
-    {
-      name: 'address',
-      baseName: 'address',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'tokenId',
-      baseName: 'tokenId',
-      type: 'number',
-      format: 'int64',
-    },
-    {
-      name: 'amount',
-      baseName: 'amount',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'lastTransferredAt',
-      baseName: 'lastTransferredAt',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "assetType",
+            "baseName": "assetType",
+            "type": "AssetType",
+            "format": ""
+        },
+        {
+            "name": "address",
+            "baseName": "address",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenId",
+            "baseName": "tokenId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "amount",
+            "baseName": "amount",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "lastTransferredAt",
+            "baseName": "lastTransferredAt",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return AssetInventory.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return AssetInventory.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

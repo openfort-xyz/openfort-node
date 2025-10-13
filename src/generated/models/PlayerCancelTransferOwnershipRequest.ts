@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class PlayerCancelTransferOwnershipRequest {
-  /**
-   * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
-   */
-  policy: string
-  /**
-   * The chain ID. Must be a [supported chain](/development/chains).
-   */
-  chainId: number
+    /**
+    * ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.
+    */
+    'policy': string;
+    /**
+    * The chain ID. Must be a [supported chain](/development/chains).
+    */
+    'chainId': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'policy',
-      baseName: 'policy',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'chainId',
-      baseName: 'chainId',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "policy",
+            "baseName": "policy",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "chainId",
+            "baseName": "chainId",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return PlayerCancelTransferOwnershipRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return PlayerCancelTransferOwnershipRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

@@ -10,31 +10,32 @@
  * Do not edit the class manually.
  */
 
-import type { OAuthProvider } from '../models/OAuthProvider'
+import { OAuthProvider } from '../models/OAuthProvider';
+import { HttpFile } from '../http/http';
 
 /**
- * The request to verify access token
- */
+* The request to verify access token
+*/
 export class UnlinkOAuthRequest {
-  provider: OAuthProvider
+    'provider': OAuthProvider;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'provider',
-      baseName: 'provider',
-      type: 'OAuthProvider',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "provider",
+            "baseName": "provider",
+            "type": "OAuthProvider",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return UnlinkOAuthRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return UnlinkOAuthRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

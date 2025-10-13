@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type TimeIntervalType = 'minute' | 'hour' | 'day' | 'week' | 'month'
+import { HttpFile } from '../http/http';
+
+export type TimeIntervalType = "minute" | "hour" | "day" | "week" | "month" ;

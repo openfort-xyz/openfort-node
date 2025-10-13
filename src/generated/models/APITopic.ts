@@ -10,12 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type APITopic =
-  | 'transaction_intent.broadcast'
-  | 'transaction_intent.successful'
-  | 'transaction_intent.cancelled'
-  | 'transaction_intent.failed'
-  | 'balance.project'
-  | 'balance.contract'
-  | 'balance.dev_account'
-  | 'test'
+import { HttpFile } from '../http/http';
+
+export type APITopic = "transaction_intent.broadcast" | "transaction_intent.successful" | "transaction_intent.cancelled" | "transaction_intent.failed" | "balance.project" | "balance.contract" | "balance.dev_account" | "test" ;

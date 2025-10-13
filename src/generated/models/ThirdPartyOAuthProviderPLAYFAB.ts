@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type ThirdPartyOAuthProviderPLAYFAB = 'playfab'
+import { HttpFile } from '../http/http';
+
+export type ThirdPartyOAuthProviderPLAYFAB = "playfab" ;

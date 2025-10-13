@@ -10,59 +10,59 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class SignupRequest {
-  /**
-   * The email address of the player.
-   */
-  email: string
-  /**
-   * The password of the player.
-   */
-  password: string
-  /**
-   * The name of the player.
-   */
-  name?: string
-  /**
-   * The description of the player.
-   */
-  description?: string
+    /**
+    * The email address of the player.
+    */
+    'email': string;
+    /**
+    * The password of the player.
+    */
+    'password': string;
+    /**
+    * The name of the player.
+    */
+    'name'?: string;
+    /**
+    * The description of the player.
+    */
+    'description'?: string;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'email',
-      baseName: 'email',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'password',
-      baseName: 'password',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'description',
-      baseName: 'description',
-      type: 'string',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "password",
+            "baseName": "password",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SignupRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SignupRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

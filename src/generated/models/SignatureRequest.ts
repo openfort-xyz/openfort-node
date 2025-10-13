@@ -10,39 +10,39 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class SignatureRequest {
-  /**
-   * signed userOperationHash by the owner or valid session key
-   */
-  signature: string
-  /**
-   * Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.
-   */
-  optimistic?: boolean
+    /**
+    * signed userOperationHash by the owner or valid session key
+    */
+    'signature': string;
+    /**
+    * Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.
+    */
+    'optimistic'?: boolean;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'signature',
-      baseName: 'signature',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'optimistic',
-      baseName: 'optimistic',
-      type: 'boolean',
-      format: '',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "signature",
+            "baseName": "signature",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "optimistic",
+            "baseName": "optimistic",
+            "type": "boolean",
+            "format": ""
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SignatureRequest.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SignatureRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+

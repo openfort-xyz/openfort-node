@@ -10,64 +10,65 @@
  * Do not edit the class manually.
  */
 
-import type { ResponseTypeLIST } from '../models/ResponseTypeLIST'
-import type { SubscriptionResponse } from '../models/SubscriptionResponse'
+import { ResponseTypeLIST } from '../models/ResponseTypeLIST';
+import { SubscriptionResponse } from '../models/SubscriptionResponse';
+import { HttpFile } from '../http/http';
 
 export class SubscriptionListResponse {
-  object: ResponseTypeLIST
-  url: string
-  data: SubscriptionResponse[]
-  start: number
-  end: number
-  total: number
+    'object': ResponseTypeLIST;
+    'url': string;
+    'data': Array<SubscriptionResponse>;
+    'start': number;
+    'end': number;
+    'total': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'object',
-      baseName: 'object',
-      type: 'ResponseTypeLIST',
-      format: '',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'data',
-      baseName: 'data',
-      type: 'Array<SubscriptionResponse>',
-      format: '',
-    },
-    {
-      name: 'start',
-      baseName: 'start',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'end',
-      baseName: 'end',
-      type: 'number',
-      format: 'int32',
-    },
-    {
-      name: 'total',
-      baseName: 'total',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "object",
+            "baseName": "object",
+            "type": "ResponseTypeLIST",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<SubscriptionResponse>",
+            "format": ""
+        },
+        {
+            "name": "start",
+            "baseName": "start",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "end",
+            "baseName": "end",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return SubscriptionListResponse.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return SubscriptionListResponse.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
+
+

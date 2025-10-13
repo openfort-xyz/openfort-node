@@ -10,4 +10,6 @@
  * Do not edit the class manually.
  */
 
-export type PolicyRuleTypeCONTRACT = 'contract_functions'
+import { HttpFile } from '../http/http';
+
+export type PolicyRuleTypeCONTRACT = "contract_functions" ;

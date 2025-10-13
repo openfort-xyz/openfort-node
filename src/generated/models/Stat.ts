@@ -10,33 +10,33 @@
  * Do not edit the class manually.
  */
 
+import { HttpFile } from '../http/http';
+
 export class Stat {
-  timestamp: string
-  total: number
+    'timestamp': string;
+    'total': number;
 
-  static readonly discriminator: string | undefined = undefined
+    static readonly discriminator: string | undefined = undefined;
 
-  static readonly attributeTypeMap: Array<{
-    name: string
-    baseName: string
-    type: string
-    format: string
-  }> = [
-    {
-      name: 'timestamp',
-      baseName: 'timestamp',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'total',
-      baseName: 'total',
-      type: 'number',
-      format: 'int32',
-    },
-  ]
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "timestamp",
+            "baseName": "timestamp",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
-  static getAttributeTypeMap() {
-    return Stat.attributeTypeMap
-  }
+    static getAttributeTypeMap() {
+        return Stat.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
 }
+
