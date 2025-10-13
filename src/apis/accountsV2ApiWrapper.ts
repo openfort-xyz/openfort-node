@@ -29,7 +29,9 @@ export class AccountsV2ApiWrapper extends BaseApiWrapper<AccountsApi> {
    * Create an account in destination chain given an account.
    * @param req Request to switch account given account id and chain target.
    */
-  public async switchChain(req: SwitchChainQueriesV2): Promise<AccountV2Response> {
+  public async switchChain(
+    req: SwitchChainQueriesV2,
+  ): Promise<AccountV2Response> {
     return await this.api.switchChainV2(req)
   }
 
