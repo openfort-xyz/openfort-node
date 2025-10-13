@@ -3,6 +3,7 @@ import type {
   AccountListQueriesV2,
   AccountV2Response,
   BaseEntityListResponseAccountV2Response,
+  SwitchChainQueriesV2,
 } from '../models'
 import type { GetAccountV2Request } from '../models/getAccountV2Request'
 import { httpErrorHandler } from '../utilities/httpErrorHandler'
@@ -22,6 +23,16 @@ export class AccountsV2ApiWrapper extends BaseApiWrapper<AccountsApi> {
    */
   public async get(req: GetAccountV2Request): Promise<AccountV2Response> {
     return await this.api.getAccountV2(req.id)
+  }
+
+  /**
+   * Create an account in destination chain given an account.
+   * @param req Request to switch account given account id and chain target.
+   */
+  public async switchChain(
+    req: SwitchChainQueriesV2,
+  ): Promise<AccountV2Response> {
+    return await this.api.switchChainV2(req)
   }
 
   /**
