@@ -12,4 +12,3 @@ export default defineConfig({
   target: 'es2021',
   tsconfig: 'tsconfig.json',
 })
-
