@@ -15,8 +15,19 @@
   ],
   "license": "MIT",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
     "./*": "./dist/*"
   },
   "typesVersions": {
@@ -32,7 +43,7 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "prebuild": "node -p \"'export const VERSION = ' + JSON.stringify(require('./package.json').version) + ';\\nexport const PACKAGE = ' + JSON.stringify(require('./package.json').name) + ';'\" > src/version.ts",
-    "build": "tsc",
+    "build": "tsup",
     "prepublishOnly": "pnpm install && pnpm build",
     "changeset": "changeset",
     "changeset:version": "pnpm install --lockfile-only && changeset version",
@@ -63,6 +74,7 @@
     "simple-git-hooks": "^2.13.1",
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.29.7",
+    "tsup": "^8.5.0",
     "typescript": "^5.4.3"
   },
   "packageManager": "pnpm@10.16.1"
