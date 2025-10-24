@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.75
+
+### Patch Changes
+
+- Add dual package support for CommonJS and ESM
+
 ## 0.6.74
 
 ### Patch Changes
