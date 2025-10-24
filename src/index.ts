@@ -19,7 +19,7 @@ import type { Observable } from './utilities/observable'
 import type { Observer } from './utilities/observer'
 import { sign } from './utilities/signer'
 
-export default class Openfort {
+class Openfort {
   private readonly apiWrappers: { [name: string]: Observable } = {}
   private readonly observers: Observer[] = []
 
@@ -168,6 +168,10 @@ export default class Openfort {
     return jsonResponse.session_id
   }
 }
+
+// Export both as default and named export for better CommonJS/ESM interop
+export { Openfort }
+export default Openfort
 // biome-ignore lint/performance/noReExportAll: Re-exporting generated models for convenience
 // biome-ignore lint/performance/noBarrelFile: This is an intentional barrel file for public API
 export * from './models'
