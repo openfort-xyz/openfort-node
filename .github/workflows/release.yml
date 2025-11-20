@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Create version pull request and github release
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write       # To push commits and tags
+      pull-requests: write  # To create and update PRs
+      id-token: write       # For OIDC and provenance
+      # packages: write       # To publish package to GHCR
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Publish
+        uses: changesets/action@v1
+        with:
+          publish: pnpm changeset:publish
+          version: pnpm changeset:version
+          commit: "chore: version package" # Default is `Version Packages`
+          title: "chore: version package"  # Default is `Version Packages`
+        env:
+          NPM_CONFIG_PROVENANCE: true # this works only with npmjs and public repos, not ghcr
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    # we need this for PRs
+          NPM_TOKEN: '' # bug in changesets/action - https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
