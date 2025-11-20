@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.76
+
+### Patch Changes
+
+- [#30](https://github.com/openfort-xyz/openfort-node/pull/30) [`2514c7a8a30d23bdef6643bf5697da8a1825b98f`](https://github.com/openfort-xyz/openfort-node/commit/2514c7a8a30d23bdef6643bf5697da8a1825b98f) Thanks [@andrii-kravets-x](https://github.com/andrii-kravets-x)! - refactor actions, bump nodejs, bump glob, js-yaml, tsup, configure Trusted Publishing
+
 ## 0.6.75
 
 ### Patch Changes
