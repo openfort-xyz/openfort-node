@@ -52,6 +52,8 @@
     "check": "biome check --write --unsafe",
     "check:types": "tsc --noEmit",
     "lint": "biome lint",
+    "orval": "make check-openapi || echo 'NOTE: A newer OpenAPI spec is available. Run pnpm orval:update to update.'; orval --config orval.config.ts",
+    "orval:update": "make update-openapi && orval --config orval.config.ts",
     "docs": "typedoc --entryPoints src/index.ts --out docs/ --includes src/**/*.ts",
     "docs:json": "typedoc --entryPoints src/index.ts --includes src/**/*.ts --json docs/spec.json --excludeExternals"
   },
@@ -62,8 +64,13 @@
     "@openfort/shield-js": "^0.1.29",
     "@types/node": "*",
     "@types/node-fetch": "^2.5.7",
+    "axios": "^1.7.0",
+    "axios-retry": "^4.5.0",
+    "bs58": "^6.0.0",
     "form-data": "^2.5.0",
-    "node-fetch": "^2.6.0"
+    "jose": "^5.2.0",
+    "node-fetch": "^2.6.0",
+    "viem": "^2.21.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm check"
@@ -73,6 +80,7 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.29.7",
     "knip": "^5.70.1",
+    "orval": "^7.6.0",
     "simple-git-hooks": "^2.13.1",
     "tsup": "^8.5.1",
     "typescript": "^5.4.3"
