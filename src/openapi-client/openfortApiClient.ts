@@ -85,7 +85,7 @@ function validateRequest(config: AxiosRequestConfig): void {
  * @param options - The client configuration options
  */
 export const configure = (options: OpenfortClientOptions): void => {
-  const baseURL = options.basePath || 'https://api.openfort.xyz/v1'
+  const baseURL = options.basePath || 'https://api.openfort.io/v1'
 
   clientConfig = {
     ...options,

@@ -16,21 +16,17 @@ for (const account of result.accounts) {
   console.log(`  - ${account.address} (${account.id})`);
 }
 
-// List accounts for a specific user
-const player = await openfort.players.create({
-  name: `Player-${Date.now()}`,
-});
-
+const userId = `User-${Date.now()}`
 // Create a few accounts for this player
-await openfort.evm.createAccount({ user: player.id });
-await openfort.evm.createAccount({ user: player.id });
+await openfort.evm.createAccount({ user: userId });
+await openfort.evm.createAccount({ user: userId });
 
 const userAccounts = await openfort.evm.listAccounts({
-  user: player.id,
+  user: userId,
   limit: 10,
 });
 
-console.log(`\nFound ${userAccounts.total} accounts for player ${player.id}:`);
+console.log(`\nFound ${userAccounts.total} accounts for userId ${userId}:`);
 for (const account of userAccounts.accounts) {
   console.log(`  - ${account.address}`);
 }

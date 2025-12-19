@@ -23,3 +23,4 @@ export * from './generated/settings/settings'
 export * from './generated/subscriptions/subscriptions'
 export * from './generated/transaction-intents/transaction-intents'
 export * from './generated/users/users'
+export * from './generated/backend-wallets/backend-wallets';

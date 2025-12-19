@@ -27,11 +27,14 @@ export interface OpenfortOptions {
  *
  * const openfort = new Openfort('sk_test_...');
  *
+ * // Create a player
+ * const player = await openfort.players.create({ name: 'Player-1' });
+ *
  * // Create an account
- * const account = await openfort.accounts.create({ chainId: 1 });
+ * const account = await openfort.accounts.create({ player: player.id, chainId: 1 });
  *
  * // Create an EVM wallet
- * const evmAccount = await openfort.evm.createAccount({ name: 'MyWallet' });
+ * const evmAccount = await openfort.evm.createAccount({ user: player.id });
  * ```
  */
 class Openfort {
@@ -68,7 +71,7 @@ class Openfort {
   /**
    * Account management endpoints
    */
-  public get accountsV1() {
+  public get accounts() {
     return {
       /** List accounts */
       list: api.getAccounts,
@@ -98,7 +101,7 @@ class Openfort {
   /**
    * V2 Account management endpoints
    */
-  public get accounts() {
+  public get accountsV2() {
     return {
       /** List accounts */
       list: api.getAccountsV2,
@@ -134,6 +137,10 @@ class Openfort {
       update: api.updatePlayer,
       /** Delete a player */
       delete: api.deletePlayer,
+      /** Request transfer of account ownership */
+      requestTransferAccountOwnership: api.requestTransferAccountOwnership,
+      /** Cancel transfer of account ownership */
+      cancelTransferAccountOwnership: api.cancelTransferAccountOwnership,
     }
   }
 
@@ -184,6 +191,14 @@ class Openfort {
       disable: api.disablePolicy,
       /** Enable a policy */
       enable: api.enablePolicy,
+      /** Get policy balance */
+      getBalance: api.getPolicyBalance,
+      /** Get policy total gas usage */
+      getTotalGasUsage: api.getPolicyTotalGasUsage,
+      /** Get policy report transaction intents */
+      getReportTransactionIntents: api.getPolicyReportTransactionIntents,
+      /** Create policy withdrawal */
+      createWithdrawal: api.createPolicyWithdrawal,
     }
   }
 
@@ -248,13 +263,13 @@ class Openfort {
   }
 
   // ============================================
-  // Developer Accounts API
+  // Settings API
   // ============================================
 
   /**
-   * Developer account management endpoints
+   * Settings / Developer account management endpoints
    */
-  public get developerAccounts() {
+  public get settings() {
     return {
       /** List developer accounts */
       list: api.getDeveloperAccounts,
@@ -318,26 +333,6 @@ class Openfort {
   }
 
   // ============================================
-  // Events API
-  // ============================================
-
-  /**
-   * Event management endpoints
-   */
-  public get events() {
-    return {
-      /** List events */
-      list: api.getEvents,
-      /** Create an event */
-      create: api.createEvent,
-      /** Get an event by ID */
-      get: api.getEvent,
-      /** Delete an event */
-      delete: api.deleteEvent,
-    }
-  }
-
-  // ============================================
   // Exchange API
   // ============================================
 
@@ -354,13 +349,77 @@ class Openfort {
   }
 
   // ============================================
-  // Paymaster API
+  // IAM API
+  // ============================================
+
+  /**
+   * Identity and access management endpoints
+   */
+  public get iam() {
+    return {
+      /** Refresh or create auth session */
+      refresh: api.refresh,
+      /** Log out a player */
+      logout: api.logout,
+      /** Initialize SIWE */
+      initSIWE: api.initSIWE,
+      /** Authenticate with SIWE */
+      authenticateSIWE: api.authenticateSIWE,
+      /** Unlink external wallet */
+      unlinkSIWE: api.unlinkSIWE,
+      /** Link external wallet */
+      linkSIWE: api.linkSIWE,
+      /** Email and password signup */
+      signupEmailPassword: api.signupEmailPassword,
+      /** Email and password login */
+      loginEmailPassword: api.loginEmailPassword,
+      /** Request email verification */
+      requestEmailVerification: api.requestEmailVerification,
+      /** Verify email */
+      verifyEmail: api.verifyEmail,
+      /** Request password reset */
+      requestResetPassword: api.requestResetPassword,
+      /** Reset password */
+      resetPassword: api.resetPassword,
+      /** Link email */
+      linkEmail: api.linkEmail,
+      /** Unlink email */
+      unlinkEmail: api.unlinkEmail,
+      /** OIDC login */
+      loginOIDC: api.loginOIDC,
+      /** Initialize OAuth */
+      initOAuth: api.initOAuth,
+      /** Initialize link OAuth */
+      linkOAuth: api.linkOAuth,
+      /** Link third party */
+      linkThirdParty: api.linkThirdParty,
+      /** Pool OAuth */
+      poolOAuth: api.poolOAuth,
+      /** Login with ID token */
+      loginWithIdToken: api.loginWithIdToken,
+      /** Third party OAuth */
+      thirdParty: api.thirdParty,
+      /** Unlink OAuth */
+      unlinkOAuth: api.unlinkOAuth,
+      /** Register guest */
+      registerGuest: api.registerGuest,
+      /** Get JWKS */
+      getJwks: api.getJwks,
+      /** Get current user */
+      me: api.me,
+      /** Verify OAuth token */
+      verifyOAuthToken: api.verifyOAuthToken,
+    }
+  }
+
+  // ============================================
+  // Paymasters API
   // ============================================
 
   /**
    * Paymaster endpoints
    */
-  public get paymaster() {
+  public get paymasters() {
     return {
       /** List paymasters */
       list: api.listPaymasters,
@@ -372,64 +431,6 @@ class Openfort {
       update: api.updatePaymaster,
       /** Delete a paymaster */
       delete: api.deletePaymaster,
-    }
-  }
-
-  // ============================================
-  // Authentication API
-  // ============================================
-
-  /**
-   * Authentication endpoints
-   */
-  public get auth() {
-    return {
-      /** Refresh session */
-      refresh: api.refresh,
-      /** Logout */
-      logout: api.logout,
-      /** Initialize SIWE */
-      initSIWE: api.initSIWE,
-      /** Authenticate with SIWE */
-      authenticateSIWE: api.authenticateSIWE,
-      /** Sign up with email and password */
-      signupEmailPassword: api.signupEmailPassword,
-      /** Login with email and password */
-      loginEmailPassword: api.loginEmailPassword,
-      /** Request email verification */
-      requestEmailVerification: api.requestEmailVerification,
-      /** Verify email */
-      verifyEmail: api.verifyEmail,
-      /** Request password reset */
-      requestResetPassword: api.requestResetPassword,
-      /** Reset password */
-      resetPassword: api.resetPassword,
-      /** Login with OAuth */
-      loginOAuth: api.initOAuth,
-      /** Login with third party */
-      thirdParty: api.thirdParty,
-      /** Get current user */
-      me: api.me,
-      /** Get JWKS */
-      getJwks: api.getJwks,
-    }
-  }
-
-  // ============================================
-  // Users API (Admin)
-  // ============================================
-
-  /**
-   * User management endpoints (admin)
-   */
-  public get users() {
-    return {
-      /** Get user by ID */
-      get: api.getAuthUser,
-      /** List users */
-      list: api.getAuthUsers,
-      /** Delete a user */
-      delete: api.deleteUser,
     }
   }
 

@@ -104,24 +104,12 @@ export interface SignTransactionOptions {
 }
 
 /**
- * Account type for v2 API
- */
-export type EvmAccountType =
-  | 'Externally Owned Account'
-  | 'Smart Account'
-  | 'Delegated Account'
-
-/**
  * Options for creating an EVM account
  */
 export interface CreateEvmAccountOptions {
-  /** User ID (starts with pla_). If not provided, a new user will be created. */
-  user?: string
-  /** Account type. Defaults to 'Externally Owned Account' */
-  accountType?: EvmAccountType
-  /** Chain ID for the account */
-  chainId?: number
-  /** Optional name for the account (stored client-side only) */
+  /** Wallet ID (starts with pla_). Optional - associates the wallet with a player. */
+  wallet?: string
+  /** Optional name for the wallet */
   name?: string
   /** Idempotency key */
   idempotencyKey?: string
@@ -143,12 +131,10 @@ export interface GetEvmAccountOptions {
  * Options for listing EVM accounts
  */
 export interface ListEvmAccountsOptions {
-  /** Maximum number of accounts to return */
+  /** Maximum number of accounts to return (default: 10, max: 100) */
   limit?: number
-  /** Number of accounts to skip */
+  /** Number of accounts to skip (for pagination) */
   skip?: number
-  /** Filter by user */
-  user?: string
 }
 
 /**

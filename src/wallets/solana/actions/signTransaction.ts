@@ -3,7 +3,7 @@
  * Sign a Solana transaction
  */
 
-import { signTransactionV2 } from '../../../openapi-client'
+import { signTransaction as signTransactionApi } from '../../../openapi-client'
 import type { SignTransactionOptions } from '../types'
 
 /**
@@ -54,7 +54,7 @@ export async function signTransaction(
   const txHex = `0x${txBytes.toString('hex')}`
 
   // Sign via v2 API
-  const response = await signTransactionV2(accountId, { data: txHex })
+  const response = await signTransactionApi(accountId, { data: txHex })
 
   // The response signature is the signed transaction
   return {

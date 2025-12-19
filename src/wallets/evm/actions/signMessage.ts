@@ -5,7 +5,7 @@
 
 import { hashMessage, toHex } from 'viem'
 import { UserInputValidationError } from '../../../errors'
-import { signTransactionV2 } from '../../../openapi-client'
+import { signTransaction } from '../../../openapi-client'
 import type { Address, Hex, SignableMessage } from '../types'
 
 /**
@@ -57,7 +57,7 @@ export async function signMessage(
   const messageHash = hashMessage(messageStr)
 
   // Sign the hash directly via v2 API
-  const response = await signTransactionV2(accountId, { data: messageHash })
+  const response = await signTransaction(accountId, { data: messageHash })
 
   return {
     signature: response.signature as Hex,

@@ -11,13 +11,13 @@ import {
   UserInputValidationError,
 } from '../../errors'
 import {
-  type AccountV2Response,
-  createAccountV2,
-  exportPrivateKeyV2,
-  getAccountsV2,
-  getAccountV2,
-  importPrivateKeyV2,
-  signTransactionV2,
+  type BackendWalletResponse,
+  createBackendWallet,
+  exportPrivateKey,
+  getBackendWallet,
+  importPrivateKey,
+  listBackendWallets,
+  signTransaction,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -40,16 +40,13 @@ import type {
 } from './types'
 
 /**
- * Converts an AccountV2Response to SolanaAccountData
+ * Converts a BackendWalletResponse to SolanaAccountData
  */
-function toSolanaAccountData(
-  response: AccountV2Response,
-  name?: string,
-): SolanaAccountData {
+function toSolanaAccountData(response: BackendWalletResponse): SolanaAccountData {
   return {
     id: response.id,
     address: response.address,
-    name,
+    name: response.name,
   }
 }
 
@@ -86,40 +83,45 @@ export class SolanaClient {
   }
 
   /**
-   * Creates a new Solana account using the v2 API.
+   * Creates a new Solana backend wallet.
    *
    * @param options - Account creation options
    * @returns The created Solana account
    *
    * @example
    * ```typescript
+   * // Create a Solana wallet
    * const account = await openfort.solana.createAccount({
-   *   user: 'pla_...',
+   *   name: 'MyWallet',
+   * });
+   *
+   * // Create with a specific wallet/player
+   * const account = await openfort.solana.createAccount({
+   *   wallet: 'pla_...',
+   *   name: 'PlayerWallet',
    * });
    * ```
    */
   public async createAccount(
-    options: CreateSolanaAccountOptions,
+    options: CreateSolanaAccountOptions = {},
   ): Promise<SolanaAccount> {
-    if (!options.user) {
-      throw new UserInputValidationError(
-        'User ID is required. Please provide a user ID (starts with pla_) or create a user first.',
-      )
-    }
-
-    const response = await createAccountV2({
-      accountType: 'Externally Owned Account',
+    const response = await createBackendWallet({
       chainType: 'SVM',
-      user: options.user,
+      wallet: options.wallet,
+      name: options.name,
     })
 
-    return toSolanaAccount(toSolanaAccountData(response, options.name))
+    return toSolanaAccount({
+      id: response.id,
+      address: response.address,
+      name: options.name,
+    })
   }
 
   /**
-   * Retrieves an existing Solana account using the v2 API.
+   * Retrieves an existing Solana account.
    *
-   * @param options - Account retrieval options (id, address, or name)
+   * @param options - Account retrieval options (id or address)
    * @returns The Solana account
    *
    * @example
@@ -127,53 +129,48 @@ export class SolanaClient {
    * const account = await openfort.solana.getAccount({
    *   id: 'acc_...',
    * });
+   *
+   * // Or by address (requires listing and filtering)
+   * const account = await openfort.solana.getAccount({
+   *   address: 'So1ana...',
+   * });
    * ```
    */
   public async getAccount(
     options: GetSolanaAccountOptions,
   ): Promise<SolanaAccount> {
-    if (!options.id && !options.address && !options.name) {
+    if (!options.id && !options.address) {
       throw new UserInputValidationError(
-        'Must provide either id, address, or name to get account',
+        'Must provide either id or address to get account',
       )
     }
 
-    // If we have an ID, fetch directly using v2 API
+    // If we have an ID, fetch directly
     if (options.id) {
-      const response = await getAccountV2(options.id)
-      return toSolanaAccount(toSolanaAccountData(response, options.name))
+      const response = await getBackendWallet(options.id)
+      return toSolanaAccount(toSolanaAccountData(response))
     }
 
-    // For address lookup, use listAccounts with address filter
+    // For address lookup, use listBackendWallets with address filter
     if (options.address) {
-      const accounts = await getAccountsV2({
+      const wallets = await listBackendWallets({
         address: options.address,
         chainType: 'SVM',
         limit: 1,
       })
 
-      if (accounts.data.length === 0) {
+      if (wallets.data.length === 0) {
         throw new AccountNotFoundError()
       }
 
-      return toSolanaAccount(
-        toSolanaAccountData(accounts.data[0], options.name),
-      )
+      return toSolanaAccount(toSolanaAccountData(wallets.data[0]))
     }
 
-    // For name lookup, we need to list and filter (names are client-side only)
-    const accounts = await this.listAccounts({ limit: 100 })
-    const found = accounts.accounts.find((acc) => acc.name === options.name)
-
-    if (!found) {
-      throw new AccountNotFoundError()
-    }
-
-    return found
+    throw new AccountNotFoundError()
   }
 
   /**
-   * Lists all Solana accounts using the v2 API.
+   * Lists all Solana backend wallets.
    *
    * @param options - List options (limit, skip, filters)
    * @returns List of Solana accounts
@@ -182,22 +179,20 @@ export class SolanaClient {
    * ```typescript
    * const { accounts } = await openfort.solana.listAccounts({
    *   limit: 10,
-   *   user: 'pla_...',
    * });
    * ```
    */
   public async listAccounts(
     options: ListSolanaAccountsOptions = {},
   ): Promise<ListAccountsResult<SolanaAccount>> {
-    const response = await getAccountsV2({
+    const response = await listBackendWallets({
       limit: options.limit,
       skip: options.skip,
-      user: options.user,
       chainType: 'SVM',
     })
 
-    const accounts = response.data.map((acc) =>
-      toSolanaAccount(toSolanaAccountData(acc)),
+    const accounts = response.data.map((wallet) =>
+      toSolanaAccount(toSolanaAccountData(wallet)),
     )
 
     return {
@@ -282,7 +277,7 @@ export class SolanaClient {
     )
 
     // Call the import API
-    const response = await importPrivateKeyV2({
+    const response = await importPrivateKey({
       encryptedPrivateKey,
       encryptionKey: publicKey,
       chainType: 'SVM',
@@ -318,7 +313,7 @@ export class SolanaClient {
     const { publicKey, ecdh } = generateECDHKeyPair()
 
     // Call the export API with our ephemeral public key
-    const response = await exportPrivateKeyV2(options.id, {
+    const response = await exportPrivateKey(options.id, {
       encryptionKey: publicKey,
     })
 
@@ -342,7 +337,7 @@ export class SolanaClient {
    * @returns The signature
    */
   public async signData(accountId: string, data: string): Promise<string> {
-    const response = await signTransactionV2(accountId, { data })
+    const response = await signTransaction(accountId, { data })
     return response.signature
   }
 }

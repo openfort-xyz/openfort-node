@@ -3,7 +3,7 @@
  * Sign a raw hash directly (no EIP-191 prefix)
  */
 
-import { signTransactionV2 } from '../../../openapi-client'
+import { signTransaction } from '../../../openapi-client'
 import type { Hash, Hex } from '../types'
 
 /**
@@ -38,7 +38,7 @@ export async function signHash(
   const { accountId, hash } = options
 
   // Sign the hash directly via v2 API (no EIP-191 prefix)
-  const response = await signTransactionV2(accountId, { data: hash })
+  const response = await signTransaction(accountId, { data: hash })
 
   return {
     signature: response.signature as Hex,
