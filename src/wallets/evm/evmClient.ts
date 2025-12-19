@@ -229,7 +229,7 @@ export class EvmClient {
     if (!IMPORT_ENCRYPTION_PUBLIC_KEY) {
       throw new EncryptionError(
         'Import encryption public key is not configured. ' +
-        'Please contact Openfort to get the server public key.',
+          'Please contact Openfort to get the server public key.',
       )
     }
 

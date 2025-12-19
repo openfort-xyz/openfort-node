@@ -42,7 +42,9 @@ import type {
 /**
  * Converts a BackendWalletResponse to SolanaAccountData
  */
-function toSolanaAccountData(response: BackendWalletResponse): SolanaAccountData {
+function toSolanaAccountData(
+  response: BackendWalletResponse,
+): SolanaAccountData {
   return {
     id: response.id,
     address: response.address,
