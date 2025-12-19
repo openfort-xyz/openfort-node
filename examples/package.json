@@ -1,0 +1,25 @@
+{
+  "name": "@openfort/openfort-node-examples",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Examples for the Openfort Node SDK",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "check": "biome check --write"
+  },
+  "keywords": [],
+  "author": "Openfort",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@openfort/openfort-node": "link:..",
+    "dotenv": "^16.3.1",
+    "viem": "^2.21.0"
+  }
+}

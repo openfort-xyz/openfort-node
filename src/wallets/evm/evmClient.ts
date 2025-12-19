@@ -187,32 +187,6 @@ export class EvmClient {
   }
 
   /**
-   * Gets an existing account or creates a new one.
-   *
-   * @param options - Account options
-   * @returns The EVM account
-   *
-   * @example
-   * ```typescript
-   * const account = await openfort.evm.getOrCreateAccount({
-   *   name: 'MyWallet',
-   * });
-   * ```
-   */
-  public async getOrCreateAccount(
-    options: CreateEvmAccountOptions = {},
-  ): Promise<EvmAccount> {
-    if (options.name) {
-      try {
-        return await this.getAccount({ name: options.name })
-      } catch {
-        // Account doesn't exist, create it
-      }
-    }
-    return this.createAccount(options)
-  }
-
-  /**
    * Lists all EVM accounts using the v2 API.
    *
    * @param options - List options (limit, skip, filters)
