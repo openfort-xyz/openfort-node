@@ -11,12 +11,11 @@ export interface BaseServerConfiguration {
  *
  */
 export class ServerConfiguration<T extends { [key: string]: string }>
-  implements BaseServerConfiguration
-{
+  implements BaseServerConfiguration {
   public constructor(
     private url: string,
     private variableConfiguration: T,
-  ) {}
+  ) { }
 
   /**
    * Sets the value of the variables of this server. Variables are included in
@@ -59,7 +58,7 @@ export class ServerConfiguration<T extends { [key: string]: string }>
 }
 
 export const server1 = new ServerConfiguration<{}>(
-  'https://api.openfort.xyz',
+  'https://api.openfort.io',
   {},
 )
 
