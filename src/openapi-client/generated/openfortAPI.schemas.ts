@@ -2694,159 +2694,199 @@ export interface CreateEmbeddedRequest {
   implementationType?: string;
 }
 
-export interface SmartAccountData {
-  implementationType: string;
-  factoryAddress?: string;
-  implementationAddress: string;
-  salt?: string;
-  deployedTx?: string;
-  deployedAt?: number;
-  active: boolean;
-}
+/**
+ * The type of object.
+ */
+export type BackendWalletResponseObject = typeof BackendWalletResponseObject[keyof typeof BackendWalletResponseObject];
 
-export interface PasskeyEnv {
-  name?: string;
-  os?: string;
-  osVersion?: string;
-  device?: string;
-}
 
-export interface RecoveryMethodDetails {
-  passkeyId?: string;
-  passkeyEnv?: PasskeyEnv;
-}
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const BackendWalletResponseObject = {
+  backendWallet: 'backendWallet',
+} as const;
 
-export interface AccountV2Response {
+/**
+ * The chain type the wallet is associated with.
+ */
+export type BackendWalletResponseChainType = typeof BackendWalletResponseChainType[keyof typeof BackendWalletResponseChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const BackendWalletResponseChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Backend wallet details response.
+ */
+export interface BackendWalletResponse {
+  /**
+   * The type of object.
+   */
+  object: BackendWalletResponseObject;
+  /** The wallet ID (starts with `acc_`). */
   id: string;
-  user: string;
-  accountType: string;
+  /** The wallet address. */
   address: string;
-  ownerAddress?: string;
-  chainType: string;
-  chainId?: number;
+  /** The chain type the wallet is associated with. */
+  chainType: BackendWalletResponseChainType;
+  /** Optional name for the wallet. */
+  name?: string;
+  /** Creation timestamp (Unix epoch seconds). */
   createdAt: number;
+  /** Last updated timestamp (Unix epoch seconds). */
   updatedAt: number;
-  smartAccount?: SmartAccountData;
-  recoveryMethod?: string;
-  recoveryMethodDetails?: RecoveryMethodDetails;
 }
 
-export interface BaseEntityListResponseAccountV2Response {
-  object: ResponseTypeLIST;
+/**
+ * The type of object.
+ */
+export type BackendWalletListResponseObject = typeof BackendWalletListResponseObject[keyof typeof BackendWalletListResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const BackendWalletListResponseObject = {
+  list: 'list',
+} as const;
+
+/**
+ * List of backend wallets response.
+ */
+export interface BackendWalletListResponse {
+  /**
+   * The type of object.
+   */
+  object: BackendWalletListResponseObject;
+  /** API endpoint URL. */
   url: string;
-  data: AccountV2Response[];
+  /** List of backend wallets. */
+  data: BackendWalletResponse[];
+  /** Starting index. */
   start: number;
+  /** Ending index. */
   end: number;
+  /** Total number of wallets. */
   total: number;
 }
 
-export type AccountListV2Response = BaseEntityListResponseAccountV2Response;
-
 /**
- * The chain type. Must be either "EVM" or "SVM".
+ * Filter by chain type.
  */
-export type AccountListQueriesV2ChainType = typeof AccountListQueriesV2ChainType[keyof typeof AccountListQueriesV2ChainType];
+export type BackendWalletListQueriesChainType = typeof BackendWalletListQueriesChainType[keyof typeof BackendWalletListQueriesChainType];
 
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const AccountListQueriesV2ChainType = {
+export const BackendWalletListQueriesChainType = {
   EVM: 'EVM',
   SVM: 'SVM',
 } as const;
 
 /**
- * Specifies the type of account. Must be either "Smart Account" or "Externally Owned Account".
+ * Query parameters for listing backend wallets.
  */
-export type AccountListQueriesV2AccountType = typeof AccountListQueriesV2AccountType[keyof typeof AccountListQueriesV2AccountType];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const AccountListQueriesV2AccountType = {
-  Externally_Owned_Account: 'Externally Owned Account',
-  Smart_Account: 'Smart Account',
-  Delegated_Account: 'Delegated Account',
-} as const;
-
-export interface AccountListQueriesV2 {
-  /**
-   * Specifies the maximum number of records to return.
-   * @minimum 1
-   */
+export interface BackendWalletListQueries {
+  /** Number of wallets to return (default: 10, max: 100). */
   limit?: number;
-  /**
-   * Specifies the offset for the first records to return.
-   * @minimum 0
-   */
+  /** Number of wallets to skip (for pagination). */
   skip?: number;
-  /** Specifies the order in which to sort the results. */
-  order?: PrismaSortOrder;
-  /** The chain ID. Must be a [supported chain](/development/chains). */
-  chainId?: number;
-  /** Specifies the unique user ID (starts with pla_) */
-  user?: string;
-  /** The chain type. Must be either "EVM" or "SVM". */
-  chainType?: AccountListQueriesV2ChainType;
-  /** Specifies the type of account. Must be either "Smart Account" or "Externally Owned Account". */
-  accountType?: AccountListQueriesV2AccountType;
-  /** Specifies the account address */
+  /** Filter by chain type. */
+  chainType?: BackendWalletListQueriesChainType;
+  /** Filter by wallet address. */
   address?: string;
-}
-
-export interface SignerIdResponse {
-  id: string;
-}
-
-export interface SwitchChainQueriesV2 {
-  /** The account ID (starts with acc_) */
-  account: string;
-  /** The target chain ID. Must be a [supported chain](/development/chains). */
-  chainId: number;
+  /** Filter by wallet name. */
+  name?: string;
+  /** Filter by associated wallet ID (starts with `pla_`). */
+  wallet?: string;
 }
 
 /**
- * The type of smart account that will be created. "Externally Owned Account", "Smart Account" or "Delegated Account".
+ * The type of object.
  */
-export type CreateAccountRequestV2AccountType = typeof CreateAccountRequestV2AccountType[keyof typeof CreateAccountRequestV2AccountType];
+export type CreateBackendWalletResponseObject = typeof CreateBackendWalletResponseObject[keyof typeof CreateBackendWalletResponseObject];
 
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const CreateAccountRequestV2AccountType = {
-  Externally_Owned_Account: 'Externally Owned Account',
-  Smart_Account: 'Smart Account',
-  Delegated_Account: 'Delegated Account',
+export const CreateBackendWalletResponseObject = {
+  account: 'account',
 } as const;
 
 /**
- * The chain type. "EVM" or "SVM".
+ * The chain type the wallet is associated with.
  */
-export type CreateAccountRequestV2ChainType = typeof CreateAccountRequestV2ChainType[keyof typeof CreateAccountRequestV2ChainType];
+export type CreateBackendWalletResponseChainType = typeof CreateBackendWalletResponseChainType[keyof typeof CreateBackendWalletResponseChainType];
 
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const CreateAccountRequestV2ChainType = {
+export const CreateBackendWalletResponseChainType = {
   EVM: 'EVM',
   SVM: 'SVM',
 } as const;
 
-export interface CreateAccountRequestV2 {
-  /** The type of smart account that will be created. "Externally Owned Account", "Smart Account" or "Delegated Account". */
-  accountType: CreateAccountRequestV2AccountType;
-  /** The chain type. "EVM" or "SVM". */
-  chainType: CreateAccountRequestV2ChainType;
-  address?: string;
-  /** The type of smart account that will be created (e.g. UpgradeableV6, UpgradeableV5, Calibur). Defaults to UpgradeableV6 in mainnets. */
-  implementationType?: string;
-  /** The chain ID. Must be a [supported chain](/development/chains). */
-  chainId?: number;
-  /** ID of the user this account belongs to (starts with `pla_`). If none is provided, a new user will be created. */
-  user: string;
-  /** ID of the account (starts with `acc_`) to be linked with. Required for accountType "Smart Account". */
-  account?: string;
+/**
+ * Response from creating a new backend wallet account.
+ */
+export interface CreateBackendWalletResponse {
+  /**
+   * The type of object.
+   */
+  object: CreateBackendWalletResponseObject;
+  /** The created account ID (starts with `acc_`). */
+  id: string;
+  /** The wallet address generated for this account. */
+  address: string;
+  /** The chain type the wallet is associated with. */
+  chainType: CreateBackendWalletResponseChainType;
+  /** Creation timestamp (Unix epoch seconds). */
+  createdAt: number;
 }
 
-export interface DeleteAccountResponse {
+/**
+ * The chain type for the new wallet.
+ */
+export type CreateBackendWalletRequestChainType = typeof CreateBackendWalletRequestChainType[keyof typeof CreateBackendWalletRequestChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateBackendWalletRequestChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Request to create a new backend wallet account.
+ */
+export interface CreateBackendWalletRequest {
+  /** The chain type for the new wallet. */
+  chainType: CreateBackendWalletRequestChainType;
+  /** The wallet ID to associate with this wallet (starts with `pla_`). */
+  wallet?: string;
+  /** Optional name for the wallet. */
+  name?: string;
+}
+
+/**
+ * The type of object.
+ */
+export type DeleteBackendWalletResponseObject = typeof DeleteBackendWalletResponseObject[keyof typeof DeleteBackendWalletResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const DeleteBackendWalletResponseObject = {
+  backendWallet: 'backendWallet',
+} as const;
+
+/**
+ * Response from deleting a backend wallet.
+ */
+export interface DeleteBackendWalletResponse {
+  /**
+   * The type of object.
+   */
+  object: DeleteBackendWalletResponseObject;
+  /** The deleted wallet ID. */
   id: string;
-  object: EntityTypeACCOUNT;
+  /** Whether the wallet was deleted. */
   deleted: boolean;
 }
 
@@ -3019,6 +3059,162 @@ export interface RotateWalletSecretRequest {
   /** New ECDSA P-256 public key for wallet authentication.
 This will replace the current wallet secret used for X-Wallet-Auth JWT signing. */
   newSecretPublicKey: string;
+}
+
+export interface SmartAccountData {
+  implementationType: string;
+  factoryAddress?: string;
+  implementationAddress: string;
+  salt?: string;
+  deployedTx?: string;
+  deployedAt?: number;
+  active: boolean;
+}
+
+export interface PasskeyEnv {
+  name?: string;
+  os?: string;
+  osVersion?: string;
+  device?: string;
+}
+
+export interface RecoveryMethodDetails {
+  passkeyId?: string;
+  passkeyEnv?: PasskeyEnv;
+}
+
+export interface AccountV2Response {
+  id: string;
+  user: string;
+  accountType: string;
+  address: string;
+  ownerAddress?: string;
+  chainType: string;
+  chainId?: number;
+  createdAt: number;
+  updatedAt: number;
+  smartAccount?: SmartAccountData;
+  recoveryMethod?: string;
+  recoveryMethodDetails?: RecoveryMethodDetails;
+}
+
+export interface BaseEntityListResponseAccountV2Response {
+  object: ResponseTypeLIST;
+  url: string;
+  data: AccountV2Response[];
+  start: number;
+  end: number;
+  total: number;
+}
+
+export type AccountListV2Response = BaseEntityListResponseAccountV2Response;
+
+/**
+ * The chain type. Must be either "EVM" or "SVM".
+ */
+export type AccountListQueriesV2ChainType = typeof AccountListQueriesV2ChainType[keyof typeof AccountListQueriesV2ChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const AccountListQueriesV2ChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Specifies the type of account. Must be either "Smart Account" or "Externally Owned Account".
+ */
+export type AccountListQueriesV2AccountType = typeof AccountListQueriesV2AccountType[keyof typeof AccountListQueriesV2AccountType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const AccountListQueriesV2AccountType = {
+  Externally_Owned_Account: 'Externally Owned Account',
+  Smart_Account: 'Smart Account',
+  Delegated_Account: 'Delegated Account',
+} as const;
+
+export interface AccountListQueriesV2 {
+  /**
+   * Specifies the maximum number of records to return.
+   * @minimum 1
+   */
+  limit?: number;
+  /**
+   * Specifies the offset for the first records to return.
+   * @minimum 0
+   */
+  skip?: number;
+  /** Specifies the order in which to sort the results. */
+  order?: PrismaSortOrder;
+  /** The chain ID. Must be a [supported chain](/development/chains). */
+  chainId?: number;
+  /** Specifies the unique user ID (starts with pla_) */
+  user?: string;
+  /** The chain type. Must be either "EVM" or "SVM". */
+  chainType?: AccountListQueriesV2ChainType;
+  /** Specifies the type of account. Must be either "Smart Account" or "Externally Owned Account". */
+  accountType?: AccountListQueriesV2AccountType;
+  /** Specifies the account address */
+  address?: string;
+}
+
+export interface SignerIdResponse {
+  id: string;
+}
+
+export interface SwitchChainQueriesV2 {
+  /** The account ID (starts with acc_) */
+  account: string;
+  /** The target chain ID. Must be a [supported chain](/development/chains). */
+  chainId: number;
+}
+
+/**
+ * The type of smart account that will be created. "Externally Owned Account", "Smart Account" or "Delegated Account".
+ */
+export type CreateAccountRequestV2AccountType = typeof CreateAccountRequestV2AccountType[keyof typeof CreateAccountRequestV2AccountType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateAccountRequestV2AccountType = {
+  Externally_Owned_Account: 'Externally Owned Account',
+  Smart_Account: 'Smart Account',
+  Delegated_Account: 'Delegated Account',
+} as const;
+
+/**
+ * The chain type. "EVM" or "SVM".
+ */
+export type CreateAccountRequestV2ChainType = typeof CreateAccountRequestV2ChainType[keyof typeof CreateAccountRequestV2ChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateAccountRequestV2ChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+export interface CreateAccountRequestV2 {
+  /** The type of smart account that will be created. "Externally Owned Account", "Smart Account" or "Delegated Account". */
+  accountType: CreateAccountRequestV2AccountType;
+  /** The chain type. "EVM" or "SVM". */
+  chainType: CreateAccountRequestV2ChainType;
+  address?: string;
+  /** The type of smart account that will be created (e.g. UpgradeableV6, UpgradeableV5, Calibur). Defaults to UpgradeableV6 in mainnets. */
+  implementationType?: string;
+  /** The chain ID. Must be a [supported chain](/development/chains). */
+  chainId?: number;
+  /** ID of the user this account belongs to (starts with `pla_`). If none is provided, a new user will be created. */
+  user: string;
+  /** ID of the account (starts with `acc_`) to be linked with. Required for accountType "Smart Account". */
+  account?: string;
+}
+
+export interface DeleteAccountResponse {
+  id: string;
+  object: EntityTypeACCOUNT;
+  deleted: boolean;
 }
 
 export type UserProjectRole = typeof UserProjectRole[keyof typeof UserProjectRole];
@@ -5078,6 +5274,42 @@ name?: string;
  */
 externalUserId?: string;
 };
+
+export type ListBackendWalletsParams = {
+/**
+ * Number of wallets to return (default: 10, max: 100).
+ */
+limit?: number;
+/**
+ * Number of wallets to skip (for pagination).
+ */
+skip?: number;
+/**
+ * Filter by chain type.
+ */
+chainType?: ListBackendWalletsChainType;
+/**
+ * Filter by wallet address.
+ */
+address?: string;
+/**
+ * Filter by wallet name.
+ */
+name?: string;
+/**
+ * Filter by associated wallet ID (starts with `pla_`).
+ */
+wallet?: string;
+};
+
+export type ListBackendWalletsChainType = typeof ListBackendWalletsChainType[keyof typeof ListBackendWalletsChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ListBackendWalletsChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
 
 export type GetAccountsV2Params = {
 /**

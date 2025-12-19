@@ -16,20 +16,12 @@ import type {
   CreateAccountRequestV2,
   DeleteAccountResponse,
   DeployRequest,
-  ExportPrivateKeyRequest,
-  ExportPrivateKeyResponse,
   GetAccountParams,
   GetAccountsParams,
   GetAccountsV2Params,
   GetSignerIdByAddressParams,
-  ImportPrivateKeyRequest,
-  ImportPrivateKeyResponse,
-  RotateWalletSecretRequest,
-  RotateWalletSecretResponse,
   SignPayloadRequest,
   SignPayloadResponse,
-  SignTransactionRequest,
-  SignTransactionResponse,
   SignerIdResponse,
   StartRecoveryRequest,
   SwitchChainQueriesV2,
@@ -281,77 +273,6 @@ export const removeAccount = (
     },
       options);
     }
-  /**
- * Sign transaction or message via backend wallet.
-
-Signs the provided data using the account's private key managed by the backend wallet.
-The private key is securely stored and never exposed.
- * @summary Sign transaction via backend wallet.
- */
-export const signTransactionV2 = (
-    id: string,
-    signTransactionRequest: SignTransactionRequest,
- options?: SecondParameter<typeof openfortApiClient<SignTransactionResponse>>,) => {
-      return openfortApiClient<SignTransactionResponse>(
-      {url: `/v2/accounts/${id}/sign`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: signTransactionRequest
-    },
-      options);
-    }
-  /**
- * Export private key with E2E encryption via backend wallet.
-
-Exports the account's private key encrypted using ECDH key exchange.
-The client must provide their ephemeral P-256 public key, and will receive
-the encrypted private key along with the server's ephemeral public key for decryption.
- * @summary Export private key (E2E encrypted).
- */
-export const exportPrivateKeyV2 = (
-    id: string,
-    exportPrivateKeyRequest: ExportPrivateKeyRequest,
- options?: SecondParameter<typeof openfortApiClient<ExportPrivateKeyResponse>>,) => {
-      return openfortApiClient<ExportPrivateKeyResponse>(
-      {url: `/v2/accounts/${id}/export`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: exportPrivateKeyRequest
-    },
-      options);
-    }
-  /**
- * Import private key with E2E encryption via backend wallet.
-
-Imports a private key into the backend wallet system.
-The private key must be encrypted using ECDH key exchange with the client's ephemeral key.
- * @summary Import private key (E2E encrypted).
- */
-export const importPrivateKeyV2 = (
-    importPrivateKeyRequest: ImportPrivateKeyRequest,
- options?: SecondParameter<typeof openfortApiClient<ImportPrivateKeyResponse>>,) => {
-      return openfortApiClient<ImportPrivateKeyResponse>(
-      {url: `/v2/accounts/import`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: importPrivateKeyRequest
-    },
-      options);
-    }
-  /**
- * Rotate wallet secret (authentication key).
-
-Replaces the current wallet secret (ECDSA P-256 public key) used for
-X-Wallet-Auth JWT signing. The old secret will be revoked.
- * @summary Rotate wallet secret.
- */
-export const rotateWalletSecretV2 = (
-    rotateWalletSecretRequest: RotateWalletSecretRequest,
- options?: SecondParameter<typeof openfortApiClient<RotateWalletSecretResponse>>,) => {
-      return openfortApiClient<RotateWalletSecretResponse>(
-      {url: `/v2/accounts/secrets/rotate`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: rotateWalletSecretRequest
-    },
-      options);
-    }
   export type GetAccountsResult = NonNullable<Awaited<ReturnType<typeof getAccounts>>>
 export type CreateAccountResult = NonNullable<Awaited<ReturnType<typeof createAccount>>>
 export type GetAccountResult = NonNullable<Awaited<ReturnType<typeof getAccount>>>
@@ -369,7 +290,3 @@ export type GetSignerIdByAddressResult = NonNullable<Awaited<ReturnType<typeof g
 export type GetAccountV2Result = NonNullable<Awaited<ReturnType<typeof getAccountV2>>>
 export type RemoveAccountResult = NonNullable<Awaited<ReturnType<typeof removeAccount>>>
 export type SwitchChainV2Result = NonNullable<Awaited<ReturnType<typeof switchChainV2>>>
-export type SignTransactionV2Result = NonNullable<Awaited<ReturnType<typeof signTransactionV2>>>
-export type ExportPrivateKeyV2Result = NonNullable<Awaited<ReturnType<typeof exportPrivateKeyV2>>>
-export type ImportPrivateKeyV2Result = NonNullable<Awaited<ReturnType<typeof importPrivateKeyV2>>>
-export type RotateWalletSecretV2Result = NonNullable<Awaited<ReturnType<typeof rotateWalletSecretV2>>>

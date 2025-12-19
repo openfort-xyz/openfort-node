@@ -29,7 +29,7 @@ console.log("\nTransaction (base64):", sampleTransaction);
 
 // Sign the transaction
 // Note: This example uses a placeholder. In production, create a proper
-// Solana transaction using @solana/web3.js and serialize it to base64
+// Solana transaction using @solana/web3.js or @solana/kit and serialize it to base64
 try {
   const signedTransaction = await account.signTransaction({
     transaction: sampleTransaction,

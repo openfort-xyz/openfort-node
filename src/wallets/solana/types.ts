@@ -43,10 +43,12 @@ export type SolanaAccount = SolanaAccountBase & SolanaSigningMethods
  * Options for creating a Solana account
  */
 export interface CreateSolanaAccountOptions {
-  /** User ID (starts with pla_). Required. */
-  user: string
-  /** Optional name for the account (stored client-side only) */
+  /** Wallet ID (starts with pla_). Optional - associates the wallet with a player. */
+  wallet?: string
+  /** Optional name for the wallet */
   name?: string
+  /** Idempotency key */
+  idempotencyKey?: string
 }
 
 /**
@@ -65,12 +67,10 @@ export interface GetSolanaAccountOptions {
  * Options for listing Solana accounts
  */
 export interface ListSolanaAccountsOptions {
-  /** Maximum number of accounts to return */
+  /** Maximum number of accounts to return (default: 10, max: 100) */
   limit?: number
-  /** Number of accounts to skip */
+  /** Number of accounts to skip (for pagination) */
   skip?: number
-  /** Filter by user */
-  user?: string
 }
 
 /**

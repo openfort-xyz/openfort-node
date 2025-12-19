@@ -10,14 +10,13 @@ import {
   UserInputValidationError,
 } from '../../errors'
 import {
-  type AccountV2Response,
-  type CreateAccountRequestV2AccountType,
-  createAccountV2,
-  exportPrivateKeyV2,
-  getAccountsV2,
-  getAccountV2,
-  importPrivateKeyV2,
-  signTransactionV2,
+  type BackendWalletResponse,
+  createBackendWallet,
+  exportPrivateKey,
+  getBackendWallet,
+  importPrivateKey,
+  listBackendWallets,
+  signTransaction,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -38,16 +37,13 @@ import type {
 } from './types'
 
 /**
- * Converts an AccountV2Response to EvmAccountData
+ * Converts a BackendWalletResponse to EvmAccountData
  */
-function toEvmAccountData(
-  response: AccountV2Response,
-  name?: string,
-): EvmAccountData {
+function toEvmAccountData(response: BackendWalletResponse): EvmAccountData {
   return {
     id: response.id,
     address: response.address,
-    name,
+    name: response.name,
   }
 }
 
@@ -84,55 +80,45 @@ export class EvmClient {
   }
 
   /**
-   * Creates a new EVM account using the v2 API.
+   * Creates a new EVM backend wallet.
    *
    * @param options - Account creation options
    * @returns The created EVM account
    *
    * @example
    * ```typescript
-   * // Create an EOA wallet
+   * // Create an EVM wallet
    * const account = await openfort.evm.createAccount({
-   *   user: 'pla_...',  // Optional - will create new user if not provided
-   *   accountType: 'Externally Owned Account',
+   *   name: 'MyWallet',
    * });
    *
-   * // Create a smart account
-   * const smartAccount = await openfort.evm.createAccount({
-   *   accountType: 'Smart Account',
-   *   chainId: 8453,  // Base
+   * // Create with a specific wallet
+   * const account = await openfort.evm.createAccount({
+   *   wallet: 'pla_...',
+   *   name: 'PlayerWallet',
    * });
    * ```
    */
   public async createAccount(
     options: CreateEvmAccountOptions = {},
   ): Promise<EvmAccount> {
-    // Map the account type to the API enum value
-    const accountType = (options.accountType ||
-      'Externally Owned Account') as CreateAccountRequestV2AccountType
-
-    // For v2 API, user is required. If not provided, we need to create a player first
-    // or the API will create one automatically
-    if (!options.user) {
-      throw new UserInputValidationError(
-        'User ID is required. Please provide a user ID (starts with pla_) or create a user first.',
-      )
-    }
-
-    const response = await createAccountV2({
-      accountType,
+    const response = await createBackendWallet({
       chainType: 'EVM',
-      user: options.user,
-      chainId: options.chainId,
+      wallet: options.wallet,
+      name: options.name,
     })
 
-    return toEvmAccount(toEvmAccountData(response, options.name))
+    return toEvmAccount({
+      id: response.id,
+      address: response.address,
+      name: options.name,
+    })
   }
 
   /**
-   * Retrieves an existing EVM account using the v2 API.
+   * Retrieves an existing EVM account.
    *
-   * @param options - Account retrieval options (id, address, or name)
+   * @param options - Account retrieval options (id or address)
    * @returns The EVM account
    *
    * @example
@@ -148,46 +134,38 @@ export class EvmClient {
    * ```
    */
   public async getAccount(options: GetEvmAccountOptions): Promise<EvmAccount> {
-    if (!options.id && !options.address && !options.name) {
+    if (!options.id && !options.address) {
       throw new UserInputValidationError(
-        'Must provide either id, address, or name to get account',
+        'Must provide either id or address to get account',
       )
     }
 
-    // If we have an ID, fetch directly using v2 API
+    // If we have an ID, fetch directly
     if (options.id) {
-      const response = await getAccountV2(options.id)
-      return toEvmAccount(toEvmAccountData(response, options.name))
+      const response = await getBackendWallet(options.id)
+      return toEvmAccount(toEvmAccountData(response))
     }
 
-    // For address lookup, use listAccounts with address filter
+    // For address lookup, use listBackendWallets with address filter
     if (options.address) {
-      const accounts = await getAccountsV2({
+      const wallets = await listBackendWallets({
         address: options.address,
         chainType: 'EVM',
         limit: 1,
       })
 
-      if (accounts.data.length === 0) {
+      if (wallets.data.length === 0) {
         throw new AccountNotFoundError()
       }
 
-      return toEvmAccount(toEvmAccountData(accounts.data[0], options.name))
+      return toEvmAccount(toEvmAccountData(wallets.data[0]))
     }
 
-    // For name lookup, we need to list and filter (names are client-side only)
-    const accounts = await this.listAccounts({ limit: 100 })
-    const found = accounts.accounts.find((acc) => acc.name === options.name)
-
-    if (!found) {
-      throw new AccountNotFoundError()
-    }
-
-    return found
+    throw new AccountNotFoundError()
   }
 
   /**
-   * Lists all EVM accounts using the v2 API.
+   * Lists all EVM backend wallets.
    *
    * @param options - List options (limit, skip, filters)
    * @returns List of EVM accounts
@@ -196,22 +174,20 @@ export class EvmClient {
    * ```typescript
    * const { accounts } = await openfort.evm.listAccounts({
    *   limit: 10,
-   *   user: 'pla_...',
    * });
    * ```
    */
   public async listAccounts(
     options: ListEvmAccountsOptions = {},
   ): Promise<ListAccountsResult<EvmAccount>> {
-    const response = await getAccountsV2({
+    const response = await listBackendWallets({
       limit: options.limit,
       skip: options.skip,
-      user: options.user,
       chainType: 'EVM',
     })
 
-    const accounts = response.data.map((acc) =>
-      toEvmAccount(toEvmAccountData(acc)),
+    const accounts = response.data.map((wallet) =>
+      toEvmAccount(toEvmAccountData(wallet)),
     )
 
     return {
@@ -253,7 +229,7 @@ export class EvmClient {
     if (!IMPORT_ENCRYPTION_PUBLIC_KEY) {
       throw new EncryptionError(
         'Import encryption public key is not configured. ' +
-          'Please contact Openfort to get the server public key.',
+        'Please contact Openfort to get the server public key.',
       )
     }
 
@@ -270,7 +246,7 @@ export class EvmClient {
     )
 
     // Call the import API
-    const response = await importPrivateKeyV2({
+    const response = await importPrivateKey({
       encryptedPrivateKey,
       encryptionKey: publicKey,
       chainType: 'EVM',
@@ -306,7 +282,7 @@ export class EvmClient {
     const { publicKey, ecdh } = generateECDHKeyPair()
 
     // Call the export API with our ephemeral public key
-    const response = await exportPrivateKeyV2(options.id, {
+    const response = await exportPrivateKey(options.id, {
       encryptionKey: publicKey,
     })
 
@@ -335,7 +311,7 @@ export class EvmClient {
    * ```
    */
   public async signData(options: SignDataOptions): Promise<string> {
-    const response = await signTransactionV2(options.id, {
+    const response = await signTransaction(options.id, {
       data: options.data,
     })
 
