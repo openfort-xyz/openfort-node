@@ -20,7 +20,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@openfort/openfort-node": "file:../../src/index.ts",
+    "@openfort/openfort-node": "file:../..",
     "dotenv": "^16.3.1"
   }
 }
