@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.77
+
+### Patch Changes
+
+- [#33](https://github.com/openfort-xyz/openfort-node/pull/33) [`a2c4f1a991273fc3bda444c3237246513c0eb0e8`](https://github.com/openfort-xyz/openfort-node/commit/a2c4f1a991273fc3bda444c3237246513c0eb0e8) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update basepath
+
 ## 0.6.76
 
 ### Patch Changes
