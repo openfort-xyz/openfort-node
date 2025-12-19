@@ -61,13 +61,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@openfort/shield-js": "^0.1.29",
     "@types/node": "*",
     "@types/node-fetch": "^2.5.7",
     "axios": "^1.7.0",
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
-    "form-data": "^2.5.0",
     "jose": "^5.2.0",
     "node-fetch": "^2.6.0",
     "viem": "^2.21.0"
