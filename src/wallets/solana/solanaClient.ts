@@ -173,33 +173,6 @@ export class SolanaClient {
   }
 
   /**
-   * Gets an existing account or creates a new one.
-   *
-   * @param options - Account options
-   * @returns The Solana account
-   *
-   * @example
-   * ```typescript
-   * const account = await openfort.solana.getOrCreateAccount({
-   *   user: 'pla_...',
-   *   name: 'MySolanaWallet',
-   * });
-   * ```
-   */
-  public async getOrCreateAccount(
-    options: CreateSolanaAccountOptions,
-  ): Promise<SolanaAccount> {
-    if (options.name) {
-      try {
-        return await this.getAccount({ name: options.name })
-      } catch {
-        // Account doesn't exist, create it
-      }
-    }
-    return this.createAccount(options)
-  }
-
-  /**
    * Lists all Solana accounts using the v2 API.
    *
    * @param options - List options (limit, skip, filters)
