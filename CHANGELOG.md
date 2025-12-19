@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.78
+
+### Patch Changes
+
+- [#35](https://github.com/openfort-xyz/openfort-node/pull/35) [`3573158f25ae6f8efa8c9a1c60857d4b1a94604f`](https://github.com/openfort-xyz/openfort-node/commit/3573158f25ae6f8efa8c9a1c60857d4b1a94604f) Thanks [@jamalavedra](https://github.com/jamalavedra)! - fix verify
+
 ## 0.6.77
 
 ### Patch Changes
