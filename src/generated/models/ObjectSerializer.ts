@@ -782,6 +782,7 @@ let enumsMap: Set<string> = new Set<string>([
     "AssetType",
     "AuthMigrationStatus",
     "AuthProviderResponse",
+    "AuthenticateOAuthRequestProvider",
     "AuthenticationType",
     "BasicAuthProvider",
     "BasicAuthProviderEMAIL",
