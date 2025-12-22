@@ -79,8 +79,6 @@ class Openfort {
       create: api.createAccount,
       /** Get an account by ID */
       get: api.getAccount,
-      /** Disable an account */
-      disable: api.disableAccount,
       /** Request transfer of ownership */
       requestTransferOwnership: api.requestTransferOwnership,
       /** Cancel transfer of ownership */
@@ -105,14 +103,8 @@ class Openfort {
     return {
       /** List accounts */
       list: api.getAccountsV2,
-      /** Create an account */
-      create: api.createAccountV2,
       /** Get an account by ID */
       get: api.getAccountV2,
-      /** Remove an account */
-      remove: api.removeAccount,
-      /** Get signer ID by address */
-      getSignerIdByAddress: api.getSignerIdByAddress,
       /** Switch chain */
       switchChain: api.switchChainV2,
     }
@@ -137,10 +129,6 @@ class Openfort {
       update: api.updatePlayer,
       /** Delete a player */
       delete: api.deletePlayer,
-      /** Request transfer of account ownership */
-      requestTransferAccountOwnership: api.requestTransferAccountOwnership,
-      /** Cancel transfer of account ownership */
-      cancelTransferAccountOwnership: api.cancelTransferAccountOwnership,
     }
   }
 
@@ -191,14 +179,8 @@ class Openfort {
       disable: api.disablePolicy,
       /** Enable a policy */
       enable: api.enablePolicy,
-      /** Get policy balance */
-      getBalance: api.getPolicyBalance,
       /** Get policy total gas usage */
       getTotalGasUsage: api.getPolicyTotalGasUsage,
-      /** Get policy report transaction intents */
-      getReportTransactionIntents: api.getPolicyReportTransactionIntents,
-      /** Create policy withdrawal */
-      createWithdrawal: api.createPolicyWithdrawal,
     }
   }
 
@@ -235,8 +217,8 @@ class Openfort {
       get: api.getTransactionIntent,
       /** Sign a transaction intent */
       signature: api.signature,
-      /** Estimate gas */
-      estimateGas: api.estimateTransactionIntentCost,
+      /** Estimate cost */
+      estimateCost: api.estimateTransactionIntentCost,
     }
   }
 
@@ -258,7 +240,7 @@ class Openfort {
       /** Revoke a session */
       revoke: api.revokeSession,
       /** Sign a session */
-      sign: api.signatureSession,
+      signature: api.signatureSession,
     }
   }
 
@@ -272,17 +254,13 @@ class Openfort {
   public get settings() {
     return {
       /** List developer accounts */
-      list: api.getDeveloperAccounts,
+      getDeveloperAccounts: api.getDeveloperAccounts,
       /** Create a developer account */
-      create: api.createDeveloperAccount,
+      createDeveloperAccount: api.createDeveloperAccount,
       /** Get a developer account by ID */
-      get: api.getDeveloperAccount,
-      /** Update a developer account */
-      update: api.updateDeveloperAccount,
+      getDeveloperAccount: api.getDeveloperAccount,
       /** Delete a developer account */
-      delete: api.deleteDeveloperAccount,
-      /** Sign payload with developer account */
-      signPayload: api.signPayloadDeveloperAccount,
+      deleteDeveloperAccount: api.deleteDeveloperAccount,
       /** Get verification payload */
       getVerificationPayload: api.getVerificationPayload,
     }
@@ -305,8 +283,6 @@ class Openfort {
       get: api.getSubscription,
       /** Delete a subscription */
       delete: api.deleteSubscription,
-      /** List subscription logs */
-      getLogs: api.listSubscriptionLogs,
     }
   }
 
@@ -327,8 +303,6 @@ class Openfort {
       get: api.getTrigger,
       /** Delete a trigger */
       delete: api.deleteTrigger,
-      /** Test a trigger */
-      test: api.testTrigger,
     }
   }
 
@@ -341,10 +315,10 @@ class Openfort {
    */
   public get exchange() {
     return {
-      /** Get swap quote */
-      quote: api.quoteSwap,
       /** Create swap */
-      swap: api.createSwap,
+      createSwap: api.createSwap,
+      /** Get swap quote */
+      quoteSwap: api.quoteSwap,
     }
   }
 
@@ -357,58 +331,26 @@ class Openfort {
    */
   public get iam() {
     return {
-      /** Refresh or create auth session */
-      refresh: api.refresh,
-      /** Log out a player */
-      logout: api.logout,
-      /** Initialize SIWE */
-      initSIWE: api.initSIWE,
-      /** Authenticate with SIWE */
-      authenticateSIWE: api.authenticateSIWE,
-      /** Unlink external wallet */
-      unlinkSIWE: api.unlinkSIWE,
-      /** Link external wallet */
-      linkSIWE: api.linkSIWE,
-      /** Email and password signup */
-      signupEmailPassword: api.signupEmailPassword,
-      /** Email and password login */
-      loginEmailPassword: api.loginEmailPassword,
-      /** Request email verification */
-      requestEmailVerification: api.requestEmailVerification,
-      /** Verify email */
-      verifyEmail: api.verifyEmail,
-      /** Request password reset */
-      requestResetPassword: api.requestResetPassword,
-      /** Reset password */
-      resetPassword: api.resetPassword,
-      /** Link email */
-      linkEmail: api.linkEmail,
-      /** Unlink email */
-      unlinkEmail: api.unlinkEmail,
-      /** OIDC login */
-      loginOIDC: api.loginOIDC,
-      /** Initialize OAuth */
-      initOAuth: api.initOAuth,
-      /** Initialize link OAuth */
-      linkOAuth: api.linkOAuth,
-      /** Link third party */
-      linkThirdParty: api.linkThirdParty,
-      /** Pool OAuth */
-      poolOAuth: api.poolOAuth,
-      /** Login with ID token */
-      loginWithIdToken: api.loginWithIdToken,
-      /** Third party OAuth */
-      thirdParty: api.thirdParty,
-      /** Unlink OAuth */
-      unlinkOAuth: api.unlinkOAuth,
-      /** Register guest */
-      registerGuest: api.registerGuest,
-      /** Get JWKS */
-      getJwks: api.getJwks,
-      /** Get current user */
-      me: api.me,
+      /** Create auth player */
+      createAuthPlayer: api.createAuthPlayer,
+      /** Verify auth token */
+      verifyAuthToken: api.verifyAuthToken,
       /** Verify OAuth token */
       verifyOAuthToken: api.verifyOAuthToken,
+      /** Create OAuth config */
+      createOAuthConfig: api.createOAuthConfig,
+      /** Delete auth player */
+      deleteAuthPlayer: api.deleteAuthPlayer,
+      /** Delete OAuth config */
+      deleteOAuthConfig: api.deleteOAuthConfig,
+      /** Get auth players */
+      getAuthPlayers: api.getAuthPlayers,
+      /** Get OAuth config */
+      getOAuthConfig: api.getOAuthConfig,
+      /** List OAuth config */
+      listOAuthConfig: api.listOAuthConfig,
+      /** Authorize */
+      authorize: api.authorize,
     }
   }
 
@@ -421,8 +363,6 @@ class Openfort {
    */
   public get paymasters() {
     return {
-      /** List paymasters */
-      list: api.listPaymasters,
       /** Create a paymaster */
       create: api.createPaymaster,
       /** Get a paymaster by ID */
@@ -507,6 +447,14 @@ class Openfort {
   }
 
   /**
+   * Subscribe to events from the SDK.
+   * @param observer - The observer to subscribe
+   */
+  public subscribe(observer: Observer): void {
+    this.observers.push(observer)
+  }
+
+  /**
    * Registers a recovery session with Shield.
    * @param apiKey - Shield API key
    * @param secretKey - Shield secret key
@@ -571,6 +519,9 @@ export {
   encryptWithSharedSecret,
   generateECDHKeyPair,
 } from './utilities/encryption'
+// Observer types
+export type { Observer } from './utilities/observer'
+export { ValidationError } from './utilities/validationError'
 // Re-export wallet types
 export * from './wallets'
 // Wallet clients
