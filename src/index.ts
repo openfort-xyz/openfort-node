@@ -447,14 +447,6 @@ class Openfort {
   }
 
   /**
-   * Subscribe to events from the SDK.
-   * @param observer - The observer to subscribe
-   */
-  public subscribe(observer: Observer): void {
-    this.observers.push(observer)
-  }
-
-  /**
    * Registers a recovery session with Shield.
    * @param apiKey - Shield API key
    * @param secretKey - Shield secret key
@@ -519,9 +511,6 @@ export {
   encryptWithSharedSecret,
   generateECDHKeyPair,
 } from './utilities/encryption'
-// Observer types
-export type { Observer } from './utilities/observer'
-export { ValidationError } from './utilities/validationError'
 // Re-export wallet types
 export * from './wallets'
 // Wallet clients
