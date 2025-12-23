@@ -1,6 +1,10 @@
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
 import axiosRetry, { exponentialDelay } from 'axios-retry'
-import { generateWalletJwt, requiresWalletAuth } from '../utilities/walletAuth'
+import {
+  generateWalletJwt,
+  requiresWalletAuth,
+  sortKeys,
+} from '../utilities/walletAuth'
 import { PACKAGE, VERSION } from '../version'
 import {
   APIError,
@@ -136,6 +140,14 @@ export const configure = (options: OpenfortClientOptions): void => {
         let requestData: Record<string, unknown> = {}
         if (config.data && typeof config.data === 'object') {
           requestData = config.data as Record<string, unknown>
+        }
+
+        // IMPORTANT: Sort the request data keys to ensure the HTTP body
+        // matches the hash computed for the JWT's reqHash claim.
+        // The TEE hashes the raw body bytes without sorting, so we must
+        // send the sorted JSON to match what generateWalletJwt hashes.
+        if (Object.keys(requestData).length > 0) {
+          config.data = sortKeys(requestData)
         }
 
         const walletAuthToken = await generateWalletJwt({
