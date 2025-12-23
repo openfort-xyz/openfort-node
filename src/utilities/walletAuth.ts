@@ -40,9 +40,11 @@ function hashRequestData(data: Record<string, unknown>): string {
 }
 
 /**
- * Recursively sorts object keys
+ * Recursively sorts object keys alphabetically.
+ * This ensures deterministic JSON serialization for hash computation.
+ * Exported for use in request body serialization (must match hash computation).
  */
-function sortKeys(obj: unknown): unknown {
+export function sortKeys(obj: unknown): unknown {
   if (obj === null || typeof obj !== 'object') {
     return obj
   }
