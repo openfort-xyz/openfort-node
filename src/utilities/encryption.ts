@@ -1,101 +1,68 @@
 /**
  * Encryption utilities for key import/export operations.
- * Uses ECDH P-256 for end-to-end encrypted key transfer.
+ * Uses RSA-4096 OAEP SHA-256 for end-to-end encrypted key transfer.
+ *
+ * Import: SDK encrypts with server's static RSA public key
+ * Export: SDK generates ephemeral RSA key pair, server encrypts with client's public key
  *
  * @module Utilities/Encryption
  */
 
 import {
-  createCipheriv,
-  createDecipheriv,
-  createECDH,
-  randomBytes,
+  constants,
+  generateKeyPairSync,
+  privateDecrypt,
+  publicEncrypt,
 } from 'node:crypto'
 import { UserInputValidationError } from '../errors'
 
 /**
- * ECDH key pair for encryption/decryption
+ * RSA key pair for export decryption
  */
-export interface ECDHKeyPair {
-  /** Base64-encoded public key (uncompressed format) */
+export interface RSAKeyPair {
+  /** Base64-encoded SPKI DER public key (to send to server) */
   publicKey: string
-  /** The ECDH instance containing the private key */
-  ecdh: ReturnType<typeof createECDH>
+  /** PEM-encoded private key (for decryption) */
+  privateKeyPem: string
 }
 
 /**
- * Generates an ephemeral ECDH P-256 key pair for export encryption.
+ * Generates an ephemeral RSA-4096 key pair for export encryption.
  * The public key is sent to the server, and the private key is used
- * to derive a shared secret for decryption.
+ * to decrypt the response.
  *
- * @returns ECDH key pair with base64-encoded public key
+ * @returns RSA key pair with base64-encoded public key
  */
-export const generateECDHKeyPair = (): ECDHKeyPair => {
-  const ecdh = createECDH('prime256v1') // P-256
-  ecdh.generateKeys()
+export const generateRSAKeyPair = (): RSAKeyPair => {
+  const { publicKey, privateKey } = generateKeyPairSync('rsa', {
+    modulusLength: 4096,
+    publicKeyEncoding: {
+      type: 'spki',
+      format: 'der',
+    },
+    privateKeyEncoding: {
+      type: 'pkcs1',
+      format: 'pem',
+    },
+  })
 
   return {
-    publicKey: ecdh.getPublicKey('base64'),
-    ecdh,
+    publicKey: (publicKey as Buffer).toString('base64'),
+    privateKeyPem: privateKey as string,
   }
 }
 
 /**
- * Derives a shared secret from your private key and the server's public key.
- *
- * @param ecdh - Your ECDH instance with private key
- * @param serverPublicKeyBase64 - Server's public key (base64-encoded)
- * @returns Shared secret buffer (32 bytes for AES-256)
- */
-export const deriveSharedSecret = (
-  ecdh: ReturnType<typeof createECDH>,
-  serverPublicKeyBase64: string,
-): Buffer => {
-  const serverPublicKey = Buffer.from(serverPublicKeyBase64, 'base64')
-  return ecdh.computeSecret(serverPublicKey)
-}
-
-/**
- * Decrypts an encrypted private key using ECDH shared secret.
- * Uses AES-256-GCM with the shared secret as the key.
- *
- * @param encryptedDataBase64 - Encrypted data (base64-encoded, format: iv + authTag + ciphertext)
- * @param sharedSecret - ECDH shared secret (32 bytes)
- * @returns Decrypted private key as hex string
- */
-export const decryptWithSharedSecret = (
-  encryptedDataBase64: string,
-  sharedSecret: Buffer,
-): string => {
-  const encryptedData = Buffer.from(encryptedDataBase64, 'base64')
-
-  // Extract IV (12 bytes), auth tag (16 bytes), and ciphertext
-  const iv = encryptedData.subarray(0, 12)
-  const authTag = encryptedData.subarray(12, 28)
-  const ciphertext = encryptedData.subarray(28)
-
-  const decipher = createDecipheriv('aes-256-gcm', sharedSecret, iv)
-  decipher.setAuthTag(authTag)
-
-  const decrypted = Buffer.concat([
-    decipher.update(ciphertext),
-    decipher.final(),
-  ])
-
-  return decrypted.toString('hex')
-}
-
-/**
- * Encrypts a private key using ECDH shared secret.
- * Uses AES-256-GCM with the shared secret as the key.
+ * Encrypts a private key for import using RSA-OAEP with SHA-256.
+ * Uses the server's static RSA public key embedded in the SDK.
  *
  * @param privateKeyHex - Private key as hex string (with or without 0x prefix)
- * @param sharedSecret - ECDH shared secret (32 bytes)
- * @returns Encrypted data (base64-encoded, format: iv + authTag + ciphertext)
+ * @param serverPublicKeyPem - Server's RSA public key in PEM format
+ * @returns Encrypted data (base64-encoded)
  */
-export const encryptWithSharedSecret = (
+export const encryptForImport = (
   privateKeyHex: string,
-  sharedSecret: Buffer,
+  serverPublicKeyPem: string,
 ): string => {
   const keyHex = privateKeyHex.startsWith('0x')
     ? privateKeyHex.slice(2)
@@ -109,52 +76,40 @@ export const encryptWithSharedSecret = (
 
   const privateKeyBytes = Buffer.from(keyHex, 'hex')
 
-  // Generate random IV (12 bytes for GCM)
-  const iv = randomBytes(12)
+  const encrypted = publicEncrypt(
+    {
+      key: serverPublicKeyPem,
+      padding: constants.RSA_PKCS1_OAEP_PADDING,
+      oaepHash: 'sha256',
+    },
+    privateKeyBytes,
+  )
 
-  const cipher = createCipheriv('aes-256-gcm', sharedSecret, iv)
-  const ciphertext = Buffer.concat([
-    cipher.update(privateKeyBytes),
-    cipher.final(),
-  ])
-  const authTag = cipher.getAuthTag()
-
-  // Concatenate: iv (12) + authTag (16) + ciphertext
-  const result = Buffer.concat([iv, authTag, ciphertext])
-
-  return result.toString('base64')
+  return encrypted.toString('base64')
 }
 
 /**
  * Decrypts a private key received from the export endpoint.
+ * Uses the ephemeral RSA private key generated for this request.
  *
- * @param encryptedPrivateKey - Encrypted private key from server (base64)
- * @param serverPublicKey - Server's ephemeral public key (base64)
- * @param ecdh - Your ECDH instance with private key
+ * @param encryptedPrivateKeyBase64 - Encrypted private key from server (base64)
+ * @param privateKeyPem - Your RSA private key in PEM format
  * @returns Decrypted private key as hex string (without 0x prefix)
  */
 export const decryptExportedPrivateKey = (
-  encryptedPrivateKey: string,
-  serverPublicKey: string,
-  ecdh: ReturnType<typeof createECDH>,
+  encryptedPrivateKeyBase64: string,
+  privateKeyPem: string,
 ): string => {
-  const sharedSecret = deriveSharedSecret(ecdh, serverPublicKey)
-  return decryptWithSharedSecret(encryptedPrivateKey, sharedSecret)
-}
+  const encryptedData = Buffer.from(encryptedPrivateKeyBase64, 'base64')
 
-/**
- * Prepares a private key for import by encrypting it with ECDH.
- *
- * @param privateKeyHex - Private key as hex string (with or without 0x prefix)
- * @param serverPublicKey - Server's public key (base64)
- * @param ecdh - Your ECDH instance with private key
- * @returns Encrypted private key (base64)
- */
-export const encryptForImport = (
-  privateKeyHex: string,
-  serverPublicKey: string,
-  ecdh: ReturnType<typeof createECDH>,
-): string => {
-  const sharedSecret = deriveSharedSecret(ecdh, serverPublicKey)
-  return encryptWithSharedSecret(privateKeyHex, sharedSecret)
+  const decrypted = privateDecrypt(
+    {
+      key: privateKeyPem,
+      padding: constants.RSA_PKCS1_OAEP_PADDING,
+      oaepHash: 'sha256',
+    },
+    encryptedData,
+  )
+
+  return decrypted.toString('hex')
 }

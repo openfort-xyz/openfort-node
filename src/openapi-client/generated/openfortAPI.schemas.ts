@@ -2942,20 +2942,17 @@ export interface ExportPrivateKeyResponse {
    * The type of object.
    */
   object: ExportPrivateKeyResponseObject;
-  /** The private key encrypted with ECDH shared secret (base64-encoded).
-Decrypt using the shared secret derived from your ephemeral private key and the server's public key. */
+  /** The private key encrypted with RSA-OAEP SHA-256 using your ephemeral public key (base64-encoded).
+Decrypt using your ephemeral RSA private key. */
   encryptedPrivateKey: string;
-  /** Server's ephemeral ECDH P-256 public key for client decryption.
-Use this with your ephemeral private key to derive the shared secret for decryption. */
-  serverPublicKey: string;
 }
 
 /**
  * Request to export private key with E2E encryption.
  */
 export interface ExportPrivateKeyRequest {
-  /** Client's ephemeral ECDH P-256 public key for end-to-end encryption.
-The backend wallet will use this to derive a shared secret for encrypting the private key. */
+  /** Client's ephemeral RSA-4096 public key for end-to-end encryption (base64 SPKI DER format).
+The backend wallet will encrypt the private key using RSA-OAEP SHA-256. */
   encryptionKey: string;
 }
 
@@ -3016,15 +3013,85 @@ export const ImportPrivateKeyRequestChainType = {
  * Request to import private key with E2E encryption.
  */
 export interface ImportPrivateKeyRequest {
-  /** The private key encrypted with ECDH shared secret.
-Must be encrypted using the shared secret derived from the client's ephemeral key. */
+  /** The private key encrypted with RSA-OAEP SHA-256 using the server's static import public key.
+Obtain the server's import public key out-of-band (e.g., from SDK or documentation). */
   encryptedPrivateKey: string;
-  /** Client's ephemeral ECDH P-256 public key for decryption by the backend wallet. */
-  encryptionKey: string;
   /** The chain type for the imported wallet. */
   chainType?: ImportPrivateKeyRequestChainType;
   /** Optional name for the imported wallet. */
   name?: string;
+}
+
+/**
+ * The type of object.
+ */
+export type RegisterWalletSecretResponseObject = typeof RegisterWalletSecretResponseObject[keyof typeof RegisterWalletSecretResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const RegisterWalletSecretResponseObject = {
+  walletSecret: 'walletSecret',
+} as const;
+
+/**
+ * Response from registering a new wallet secret.
+ */
+export interface RegisterWalletSecretResponse {
+  /**
+   * The type of object.
+   */
+  object: RegisterWalletSecretResponseObject;
+  /** The key ID for the registered secret. */
+  keyId: string;
+  /** Timestamp when the secret was registered (Unix epoch seconds). */
+  registeredAt: number;
+}
+
+/**
+ * Request to register a new wallet secret (authentication key).
+ */
+export interface RegisterWalletSecretRequest {
+  /** ECDSA P-256 public key for wallet authentication (PEM or raw hex format).
+This will be used to verify X-Wallet-Auth JWT signatures. */
+  publicKey: string;
+  /** Key identifier for the secret.
+Used to identify this key in X-Wallet-Auth JWT headers. */
+  keyId?: string;
+}
+
+/**
+ * The type of object.
+ */
+export type RevokeWalletSecretResponseObject = typeof RevokeWalletSecretResponseObject[keyof typeof RevokeWalletSecretResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const RevokeWalletSecretResponseObject = {
+  walletSecretRevocation: 'walletSecretRevocation',
+} as const;
+
+/**
+ * Response from revoking a wallet secret.
+ */
+export interface RevokeWalletSecretResponse {
+  /**
+   * The type of object.
+   */
+  object: RevokeWalletSecretResponseObject;
+  /** The key ID of the revoked secret. */
+  keyId: string;
+  /** Whether the secret was successfully revoked. */
+  revoked: boolean;
+  /** Timestamp when the secret was revoked (Unix epoch seconds). */
+  revokedAt: number;
+}
+
+/**
+ * Request to revoke a wallet secret (authentication key).
+ */
+export interface RevokeWalletSecretRequest {
+  /** Key identifier of the secret to revoke. */
+  keyId: string;
 }
 
 /**
