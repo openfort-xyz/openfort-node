@@ -16,21 +16,17 @@ for (const account of result.accounts) {
   console.log(`  - ${account.address} (${account.id})`);
 }
 
-// List accounts for a specific user
-const player = await openfort.players.create({
-  name: `Player-${Date.now()}`,
+// Create a few more accounts
+await openfort.solana.createAccount({ name: `SolanaWallet-${Date.now()}-1` });
+await openfort.solana.createAccount({ name: `SolanaWallet-${Date.now()}-2` });
+
+// List accounts with pagination
+const moreAccounts = await openfort.solana.listAccounts({
+  limit: 5,
+  skip: 0,
 });
 
-// Create a few accounts for this player
-await openfort.solana.createAccount({ user: player.id });
-await openfort.solana.createAccount({ user: player.id });
-
-const userAccounts = await openfort.solana.listAccounts({
-  user: player.id,
-  limit: 10,
-});
-
-console.log(`\nFound ${userAccounts.total} accounts for player ${player.id}:`);
-for (const account of userAccounts.accounts) {
+console.log(`\nPaginated results (first 5):`);
+for (const account of moreAccounts.accounts) {
   console.log(`  - ${account.address}`);
 }

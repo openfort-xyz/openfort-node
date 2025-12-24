@@ -24,7 +24,7 @@ const player = await openfort.players.create({
 });
 
 const playerIntents = await openfort.transactionIntents.list({
-  playerId: [player.id],
+  player: [player.id],
   limit: 10,
 });
 

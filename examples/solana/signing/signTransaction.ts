@@ -8,13 +8,9 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });
 
-// Create a player and Solana account
-const player = await openfort.players.create({
-  name: `Player-${Date.now()}`,
-});
-
+// Create a Solana account
 const account = await openfort.solana.createAccount({
-  user: player.id,
+  name: `SolanaWallet-${Date.now()}`,
 });
 console.log("Created Solana account:", account.address);
 

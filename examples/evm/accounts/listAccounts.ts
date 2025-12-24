@@ -16,17 +16,17 @@ for (const account of result.accounts) {
   console.log(`  - ${account.address} (${account.id})`);
 }
 
-const userId = `User-${Date.now()}`
-// Create a few accounts for this player
-await openfort.evm.createAccount({ user: userId });
-await openfort.evm.createAccount({ user: userId });
+// Create a few more accounts
+await openfort.evm.createAccount({ name: `Wallet-${Date.now()}-1` });
+await openfort.evm.createAccount({ name: `Wallet-${Date.now()}-2` });
 
-const userAccounts = await openfort.evm.listAccounts({
-  user: userId,
-  limit: 10,
+// List accounts with pagination
+const moreAccounts = await openfort.evm.listAccounts({
+  limit: 5,
+  skip: 0,
 });
 
-console.log(`\nFound ${userAccounts.total} accounts for userId ${userId}:`);
-for (const account of userAccounts.accounts) {
+console.log(`\nPaginated results (first 5):`);
+for (const account of moreAccounts.accounts) {
   console.log(`  - ${account.address}`);
 }

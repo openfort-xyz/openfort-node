@@ -23,7 +23,9 @@
   },
   "dependencies": {
     "@openfort/openfort-node": "link:..",
+    "@types/express": "^4.17.17",
     "dotenv": "^16.3.1",
+    "express": "^4.19.2",
     "viem": "^2.21.0"
   }
 }
