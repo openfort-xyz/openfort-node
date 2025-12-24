@@ -16,6 +16,10 @@ import type {
   ImportPrivateKeyRequest,
   ImportPrivateKeyResponse,
   ListBackendWalletsParams,
+  RegisterWalletSecretRequest,
+  RegisterWalletSecretResponse,
+  RevokeWalletSecretRequest,
+  RevokeWalletSecretResponse,
   RotateWalletSecretRequest,
   RotateWalletSecretResponse,
   SignRequest,
@@ -109,9 +113,9 @@ export const sign = (
   /**
  * Export private key with E2E encryption via backend wallet.
 
-Exports the account's private key encrypted using ECDH key exchange.
-The client must provide their ephemeral P-256 public key, and will receive
-the encrypted private key along with the server's ephemeral public key for decryption.
+Exports the account's private key encrypted using RSA-4096 OAEP SHA-256.
+The client must provide their ephemeral RSA-4096 public key (base64 SPKI DER format).
+The response contains the encrypted private key that can be decrypted with the client's private key.
  * @summary Export private key (E2E encrypted).
  */
 export const exportPrivateKey = (
@@ -129,7 +133,8 @@ export const exportPrivateKey = (
  * Import private key with E2E encryption via backend wallet.
 
 Imports a private key into the backend wallet system.
-The private key must be encrypted using ECDH key exchange with the client's ephemeral key.
+The private key must be encrypted using RSA-4096 OAEP SHA-256 with the server's
+static import public key (obtain out-of-band from SDK or documentation).
  * @summary Import private key (E2E encrypted).
  */
 export const importPrivateKey = (
@@ -139,6 +144,41 @@ export const importPrivateKey = (
       {url: `/v2/accounts/backend/import`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: importPrivateKeyRequest
+    },
+      options);
+    }
+  /**
+ * Register a new wallet secret (authentication key).
+
+Registers an ECDSA P-256 public key that will be used to verify
+X-Wallet-Auth JWT signatures. This is required before using WALLET_AUTH
+for other backend wallet operations.
+ * @summary Register wallet secret.
+ */
+export const registerWalletSecret = (
+    registerWalletSecretRequest: RegisterWalletSecretRequest,
+ options?: SecondParameter<typeof openfortApiClient<RegisterWalletSecretResponse>>,) => {
+      return openfortApiClient<RegisterWalletSecretResponse>(
+      {url: `/v2/accounts/backend/register-secret`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: registerWalletSecretRequest
+    },
+      options);
+    }
+  /**
+ * Revoke a wallet secret (authentication key).
+
+Permanently revokes a wallet secret so it can no longer be used
+for X-Wallet-Auth JWT signing.
+ * @summary Revoke wallet secret.
+ */
+export const revokeWalletSecret = (
+    revokeWalletSecretRequest: RevokeWalletSecretRequest,
+ options?: SecondParameter<typeof openfortApiClient<RevokeWalletSecretResponse>>,) => {
+      return openfortApiClient<RevokeWalletSecretResponse>(
+      {url: `/v2/accounts/backend/revoke-secret`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: revokeWalletSecretRequest
     },
       options);
     }
@@ -166,4 +206,6 @@ export type DeleteBackendWalletResult = NonNullable<Awaited<ReturnType<typeof de
 export type SignResult = NonNullable<Awaited<ReturnType<typeof sign>>>
 export type ExportPrivateKeyResult = NonNullable<Awaited<ReturnType<typeof exportPrivateKey>>>
 export type ImportPrivateKeyResult = NonNullable<Awaited<ReturnType<typeof importPrivateKey>>>
+export type RegisterWalletSecretResult = NonNullable<Awaited<ReturnType<typeof registerWalletSecret>>>
+export type RevokeWalletSecretResult = NonNullable<Awaited<ReturnType<typeof revokeWalletSecret>>>
 export type RotateWalletSecretResult = NonNullable<Awaited<ReturnType<typeof rotateWalletSecret>>>

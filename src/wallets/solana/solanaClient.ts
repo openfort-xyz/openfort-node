@@ -21,9 +21,8 @@ import {
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
-  deriveSharedSecret,
-  encryptWithSharedSecret,
-  generateECDHKeyPair,
+  encryptForImport,
+  generateRSAKeyPair,
 } from '../../utilities/encryption'
 import type { ListAccountsResult } from '../types'
 import {
@@ -205,7 +204,7 @@ export class SolanaClient {
 
   /**
    * Imports a Solana account using a private key.
-   * The private key is encrypted using ECDH P-256 key exchange with AES-256-GCM.
+   * The private key is encrypted using RSA-OAEP with SHA-256.
    *
    * @param options - Import options including the private key
    * @returns The imported Solana account
@@ -266,36 +265,38 @@ export class SolanaClient {
       )
     }
 
-    // Generate ephemeral ECDH key pair for encryption
-    const { publicKey, ecdh } = generateECDHKeyPair()
+    try {
+      // Encrypt the private key with the server's RSA public key
+      const encryptedPrivateKey = encryptForImport(
+        privateKeyHex,
+        IMPORT_ENCRYPTION_PUBLIC_KEY,
+      )
 
-    // Derive shared secret using server's static public key
-    const sharedSecret = deriveSharedSecret(ecdh, IMPORT_ENCRYPTION_PUBLIC_KEY)
+      // Call the import API
+      const response = await importPrivateKey({
+        encryptedPrivateKey,
+        chainType: 'SVM',
+        name: options.name,
+      })
 
-    // Encrypt the private key with the shared secret
-    const encryptedPrivateKey = encryptWithSharedSecret(
-      privateKeyHex,
-      sharedSecret,
-    )
-
-    // Call the import API
-    const response = await importPrivateKey({
-      encryptedPrivateKey,
-      encryptionKey: publicKey,
-      chainType: 'SVM',
-      name: options.name,
-    })
-
-    return toSolanaAccount({
-      id: response.id,
-      address: response.address,
-      name: options.name,
-    })
+      return toSolanaAccount({
+        id: response.id,
+        address: response.address,
+        name: options.name,
+      })
+    } catch (error) {
+      if (error instanceof UserInputValidationError) {
+        throw error
+      }
+      throw new EncryptionError(
+        `Failed to encrypt private key: ${error instanceof Error ? error.message : String(error)}`,
+      )
+    }
   }
 
   /**
    * Exports a Solana account's private key.
-   * Uses ECDH P-256 key exchange with AES-256-GCM for E2E encryption.
+   * Uses RSA-OAEP with SHA-256 for E2E encryption.
    *
    * @param options - Export options with account ID
    * @returns The private key as a base58 encoded string (standard Solana format)
@@ -311,19 +312,18 @@ export class SolanaClient {
   public async exportAccount(
     options: ExportSolanaAccountOptions,
   ): Promise<string> {
-    // Generate ephemeral ECDH key pair for decryption
-    const { publicKey, ecdh } = generateECDHKeyPair()
+    // Generate ephemeral RSA key pair for decryption
+    const { publicKey, privateKeyPem } = generateRSAKeyPair()
 
     // Call the export API with our ephemeral public key
     const response = await exportPrivateKey(options.id, {
       encryptionKey: publicKey,
     })
 
-    // Decrypt the private key using ECDH shared secret
+    // Decrypt the private key using our ephemeral private key
     const privateKeyHex = decryptExportedPrivateKey(
       response.encryptedPrivateKey,
-      response.serverPublicKey,
-      ecdh,
+      privateKeyPem,
     )
 
     // Convert hex to base58 (standard Solana format)

@@ -501,15 +501,12 @@ export {
 export * from './openapi-client'
 // Export the configure function for advanced use cases
 export { configure, getConfig } from './openapi-client/openfortApiClient'
-// ECDH encryption utilities for key import/export
+// RSA encryption utilities for key import/export
 export {
   decryptExportedPrivateKey,
-  decryptWithSharedSecret,
-  deriveSharedSecret,
-  type ECDHKeyPair,
   encryptForImport,
-  encryptWithSharedSecret,
-  generateECDHKeyPair,
+  generateRSAKeyPair,
+  type RSAKeyPair,
 } from './utilities/encryption'
 // Re-export wallet types
 export * from './wallets'

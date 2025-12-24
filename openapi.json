@@ -6133,16 +6133,11 @@
           },
           "encryptedPrivateKey": {
             "type": "string",
-            "description": "The private key encrypted with ECDH shared secret (base64-encoded).\nDecrypt using the shared secret derived from your ephemeral private key and the server's public key.",
+            "description": "The private key encrypted with RSA-OAEP SHA-256 using your ephemeral public key (base64-encoded).\nDecrypt using your ephemeral RSA private key.",
             "example": "base64_encrypted_data..."
-          },
-          "serverPublicKey": {
-            "type": "string",
-            "description": "Server's ephemeral ECDH P-256 public key for client decryption.\nUse this with your ephemeral private key to derive the shared secret for decryption.",
-            "example": "04abc123def456..."
           }
         },
-        "required": ["object", "encryptedPrivateKey", "serverPublicKey"],
+        "required": ["object", "encryptedPrivateKey"],
         "type": "object",
         "additionalProperties": false
       },
@@ -6151,8 +6146,8 @@
         "properties": {
           "encryptionKey": {
             "type": "string",
-            "description": "Client's ephemeral ECDH P-256 public key for end-to-end encryption.\nThe backend wallet will use this to derive a shared secret for encrypting the private key.",
-            "example": "04abc123def456..."
+            "description": "Client's ephemeral RSA-4096 public key for end-to-end encryption (base64 SPKI DER format).\nThe backend wallet will encrypt the private key using RSA-OAEP SHA-256.",
+            "example": "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA..."
           }
         },
         "required": ["encryptionKey"],
@@ -6199,13 +6194,8 @@
         "properties": {
           "encryptedPrivateKey": {
             "type": "string",
-            "description": "The private key encrypted with ECDH shared secret.\nMust be encrypted using the shared secret derived from the client's ephemeral key.",
+            "description": "The private key encrypted with RSA-OAEP SHA-256 using the server's static import public key.\nObtain the server's import public key out-of-band (e.g., from SDK or documentation).",
             "example": "base64_encrypted_data..."
-          },
-          "encryptionKey": {
-            "type": "string",
-            "description": "Client's ephemeral ECDH P-256 public key for decryption by the backend wallet.",
-            "example": "04abc123def456..."
           },
           "chainType": {
             "type": "string",
@@ -6219,7 +6209,90 @@
             "example": "Treasury Wallet"
           }
         },
-        "required": ["encryptedPrivateKey", "encryptionKey"],
+        "required": ["encryptedPrivateKey"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RegisterWalletSecretResponse": {
+        "description": "Response from registering a new wallet secret.",
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": ["walletSecret"],
+            "nullable": false,
+            "description": "The type of object."
+          },
+          "keyId": {
+            "type": "string",
+            "description": "The key ID for the registered secret.",
+            "example": "ws_1234567890"
+          },
+          "registeredAt": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Timestamp when the secret was registered (Unix epoch seconds)."
+          }
+        },
+        "required": ["object", "keyId", "registeredAt"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RegisterWalletSecretRequest": {
+        "description": "Request to register a new wallet secret (authentication key).",
+        "properties": {
+          "publicKey": {
+            "type": "string",
+            "description": "ECDSA P-256 public key for wallet authentication (PEM or raw hex format).\nThis will be used to verify X-Wallet-Auth JWT signatures.",
+            "example": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE..."
+          },
+          "keyId": {
+            "type": "string",
+            "description": "Key identifier for the secret.\nUsed to identify this key in X-Wallet-Auth JWT headers.",
+            "example": "ws_1234567890"
+          }
+        },
+        "required": ["publicKey"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RevokeWalletSecretResponse": {
+        "description": "Response from revoking a wallet secret.",
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": ["walletSecretRevocation"],
+            "nullable": false,
+            "description": "The type of object."
+          },
+          "keyId": {
+            "type": "string",
+            "description": "The key ID of the revoked secret.",
+            "example": "ws_1234567890"
+          },
+          "revoked": {
+            "type": "boolean",
+            "description": "Whether the secret was successfully revoked."
+          },
+          "revokedAt": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Timestamp when the secret was revoked (Unix epoch seconds)."
+          }
+        },
+        "required": ["object", "keyId", "revoked", "revokedAt"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RevokeWalletSecretRequest": {
+        "description": "Request to revoke a wallet secret (authentication key).",
+        "properties": {
+          "keyId": {
+            "type": "string",
+            "description": "Key identifier of the secret to revoke.",
+            "example": "ws_1234567890"
+          }
+        },
+        "required": ["keyId"],
         "type": "object",
         "additionalProperties": false
       },
@@ -17459,7 +17532,7 @@
             "description": "Account not found."
           }
         },
-        "description": "Export private key with E2E encryption via backend wallet.\n\nExports the account's private key encrypted using ECDH key exchange.\nThe client must provide their ephemeral P-256 public key, and will receive\nthe encrypted private key along with the server's ephemeral public key for decryption.",
+        "description": "Export private key with E2E encryption via backend wallet.\n\nExports the account's private key encrypted using RSA-4096 OAEP SHA-256.\nThe client must provide their ephemeral RSA-4096 public key (base64 SPKI DER format).\nThe response contains the encrypted private key that can be decrypted with the client's private key.",
         "summary": "Export private key (E2E encrypted).",
         "tags": ["Backend Wallets"],
         "security": [
@@ -17511,7 +17584,7 @@
             "description": "Unauthorized."
           }
         },
-        "description": "Import private key with E2E encryption via backend wallet.\n\nImports a private key into the backend wallet system.\nThe private key must be encrypted using ECDH key exchange with the client's ephemeral key.",
+        "description": "Import private key with E2E encryption via backend wallet.\n\nImports a private key into the backend wallet system.\nThe private key must be encrypted using RSA-4096 OAEP SHA-256 with the server's\nstatic import public key (obtain out-of-band from SDK or documentation).",
         "summary": "Import private key (E2E encrypted).",
         "tags": ["Backend Wallets"],
         "security": [
@@ -17526,6 +17599,87 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ImportPrivateKeyRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/accounts/backend/register-secret": {
+      "post": {
+        "operationId": "registerWalletSecret",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterWalletSecretResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "description": "Register a new wallet secret (authentication key).\n\nRegisters an ECDSA P-256 public key that will be used to verify\nX-Wallet-Auth JWT signatures. This is required before using WALLET_AUTH\nfor other backend wallet operations.",
+        "summary": "Register wallet secret.",
+        "tags": ["Backend Wallets"],
+        "security": [
+          {
+            "sk": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterWalletSecretRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/accounts/backend/revoke-secret": {
+      "post": {
+        "operationId": "revokeWalletSecret",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevokeWalletSecretResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Secret not found."
+          }
+        },
+        "description": "Revoke a wallet secret (authentication key).\n\nPermanently revokes a wallet secret so it can no longer be used\nfor X-Wallet-Auth JWT signing.",
+        "summary": "Revoke wallet secret.",
+        "tags": ["Backend Wallets"],
+        "security": [
+          {
+            "wallet_auth": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevokeWalletSecretRequest"
               }
             }
           }
