@@ -9,13 +9,8 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create a player and account first
-const player = await openfort.players.create({
-  name: `Player-${Date.now()}`,
-});
-
-const account = await openfort.accountsV1.create({
-  player: player.id,
+// Create an account
+const account = await openfort.accounts.create({
   chainId,
 });
 
@@ -31,13 +26,10 @@ const policy = await openfort.policies.create({
 await openfort.policyRules.create({
   type: "account_functions",
   policy: policy.id,
-  functionName: null,
-  contract: null,
 });
 
-// Create a transaction intent
-const intent = await openfort.transactionIntents.create({
-  player: player.id,
+// Define transaction intent request
+const transactionIntentRequest = {
   chainId,
   policy: policy.id,
   interactions: [
@@ -47,13 +39,14 @@ const intent = await openfort.transactionIntents.create({
       functionArgs: [account.address],
     },
   ],
-});
+};
 
-console.log("Created transaction intent:", intent.id);
+// Estimate cost for the transaction before creating it
+const estimate = await openfort.transactionIntents.estimateCost(
+  transactionIntentRequest,
+);
 
-// Estimate gas for the transaction
-const estimate = await openfort.transactionIntents.estimateGas(intent.id);
-
-console.log("\nGas estimate:");
-console.log("  Estimated gas:", estimate.estimatedTxGas);
-console.log("  Data:", JSON.stringify(estimate, null, 2));
+console.log("Cost estimate:");
+console.log("  Estimated TX Gas:", estimate.estimatedTXGas);
+console.log("  Estimated TX Gas Fee:", estimate.estimatedTXGasFee);
+console.log("  Estimated TX Gas Fee (USD):", estimate.estimatedTXGasFeeUSD);

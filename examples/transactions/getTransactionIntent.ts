@@ -9,13 +9,8 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create a player and account first
-const player = await openfort.players.create({
-  name: `Player-${Date.now()}`,
-});
-
-const account = await openfort.accountsV1.create({
-  player: player.id,
+// Create an account
+const account = await openfort.accounts.create({
   chainId,
 });
 
@@ -31,13 +26,10 @@ const policy = await openfort.policies.create({
 await openfort.policyRules.create({
   type: "account_functions",
   policy: policy.id,
-  functionName: null,
-  contract: null,
 });
 
 // Create a transaction intent
 const created = await openfort.transactionIntents.create({
-  player: player.id,
   chainId,
   policy: policy.id,
   interactions: [

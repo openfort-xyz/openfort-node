@@ -22,8 +22,6 @@ const policy = await openfort.policies.create({
 await openfort.policyRules.create({
   type: "account_functions",
   policy: policy.id,
-  functionName: null,
-  contract: null,
 });
 
 // List rules for this policy
@@ -33,5 +31,7 @@ console.log(`Found ${result.total} rules for policy ${policy.id}:`);
 for (const rule of result.data) {
   console.log(`  - ${rule.id}`);
   console.log(`    Type: ${rule.type}`);
-  console.log(`    Function: ${rule.functionName || "Any"}`);
+  if ("functionName" in rule && rule.functionName) {
+    console.log(`    Function: ${rule.functionName}`);
+  }
 }

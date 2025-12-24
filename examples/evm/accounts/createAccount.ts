@@ -8,14 +8,9 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });
 
-// First create a user since it's required for account creation
-const userId = `User-${Date.now()}`
-console.log("Created user:", userId);
-
-// Create an EVM account for this player
+// Create an EVM account
 const account = await openfort.evm.createAccount({
-  user: userId,
-  accountType: "Externally Owned Account",
+  name: `MyWallet-${Date.now()}`,
 });
 
 console.log("Created EVM account:");

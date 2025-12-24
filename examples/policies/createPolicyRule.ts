@@ -38,4 +38,6 @@ const rule = await openfort.policyRules.create({
 console.log("\nCreated policy rule:");
 console.log("  ID:", rule.id);
 console.log("  Type:", rule.type);
-console.log("  Function:", rule.functionName);
+if ("functionName" in rule && rule.functionName) {
+  console.log("  Function:", rule.functionName);
+}

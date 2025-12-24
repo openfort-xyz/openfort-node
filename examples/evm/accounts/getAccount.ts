@@ -15,7 +15,6 @@ const player = await openfort.players.create({
 console.log("Created player:", player.id);
 
 const account = await openfort.evm.createAccount({
-  user: player.id,
   name: `MyWallet-${Date.now()}`,
 });
 console.log("Created account:", account.address);
