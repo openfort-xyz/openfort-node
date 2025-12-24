@@ -8,7 +8,7 @@
     "moduleResolution": "bundler",
     "types": ["node"],
     "target": "es2021",
-    "lib": ["es2021", "esnext.disposable"],
+    "lib": ["es2021", "esnext.disposable", "dom"],
     "typeRoots": ["node_modules/@types", "./typings"],
     "downlevelIteration": true,
     "experimentalDecorators": true,
