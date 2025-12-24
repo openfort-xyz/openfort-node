@@ -18,8 +18,8 @@ import type {
   ListBackendWalletsParams,
   RotateWalletSecretRequest,
   RotateWalletSecretResponse,
-  SignTransactionRequest,
-  SignTransactionResponse
+  SignRequest,
+  SignResponse
 } from '../openfortAPI.schemas';
 
 import { openfortApiClient } from '../../openfortApiClient';
@@ -89,20 +89,20 @@ export const deleteBackendWallet = (
       options);
     }
   /**
- * Sign transaction or message via backend wallet.
+ * Sign data via backend wallet.
 
 Signs the provided data using the account's private key managed by the backend wallet.
 The private key is securely stored and never exposed.
- * @summary Sign transaction via backend wallet.
+ * @summary Sign data via backend wallet.
  */
-export const signTransaction = (
+export const sign = (
     id: string,
-    signTransactionRequest: SignTransactionRequest,
- options?: SecondParameter<typeof openfortApiClient<SignTransactionResponse>>,) => {
-      return openfortApiClient<SignTransactionResponse>(
+    signRequest: SignRequest,
+ options?: SecondParameter<typeof openfortApiClient<SignResponse>>,) => {
+      return openfortApiClient<SignResponse>(
       {url: `/v2/accounts/backend/${id}/sign`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: signTransactionRequest
+      data: signRequest
     },
       options);
     }
@@ -163,7 +163,7 @@ export const rotateWalletSecret = (
 export type CreateBackendWalletResult = NonNullable<Awaited<ReturnType<typeof createBackendWallet>>>
 export type GetBackendWalletResult = NonNullable<Awaited<ReturnType<typeof getBackendWallet>>>
 export type DeleteBackendWalletResult = NonNullable<Awaited<ReturnType<typeof deleteBackendWallet>>>
-export type SignTransactionResult = NonNullable<Awaited<ReturnType<typeof signTransaction>>>
+export type SignResult = NonNullable<Awaited<ReturnType<typeof sign>>>
 export type ExportPrivateKeyResult = NonNullable<Awaited<ReturnType<typeof exportPrivateKey>>>
 export type ImportPrivateKeyResult = NonNullable<Awaited<ReturnType<typeof importPrivateKey>>>
 export type RotateWalletSecretResult = NonNullable<Awaited<ReturnType<typeof rotateWalletSecret>>>

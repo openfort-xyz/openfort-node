@@ -2893,22 +2893,22 @@ export interface DeleteBackendWalletResponse {
 /**
  * The type of object.
  */
-export type SignTransactionResponseObject = typeof SignTransactionResponseObject[keyof typeof SignTransactionResponseObject];
+export type SignResponseObject = typeof SignResponseObject[keyof typeof SignResponseObject];
 
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const SignTransactionResponseObject = {
+export const SignResponseObject = {
   signature: 'signature',
 } as const;
 
 /**
- * Response from signing a transaction or message via backend wallet.
+ * Response from signing data via backend wallet.
  */
-export interface SignTransactionResponse {
+export interface SignResponse {
   /**
    * The type of object.
    */
-  object: SignTransactionResponseObject;
+  object: SignResponseObject;
   /** The account ID that signed the data (starts with `acc_`). */
   account: string;
   /** The signature bytes (hex-encoded). */
@@ -2916,9 +2916,9 @@ export interface SignTransactionResponse {
 }
 
 /**
- * Request to sign transaction or message via backend wallet.
+ * Request to sign data via backend wallet.
  */
-export interface SignTransactionRequest {
+export interface SignRequest {
   /** The data to sign (hex-encoded transaction data or message hash). */
   data: string;
 }
@@ -3059,6 +3059,9 @@ export interface RotateWalletSecretRequest {
   /** New ECDSA P-256 public key for wallet authentication.
 This will replace the current wallet secret used for X-Wallet-Auth JWT signing. */
   newSecretPublicKey: string;
+  /** Key identifier for the new secret.
+Used to identify this key in X-Wallet-Auth JWT headers. */
+  newKeyId?: string;
 }
 
 export interface SmartAccountData {

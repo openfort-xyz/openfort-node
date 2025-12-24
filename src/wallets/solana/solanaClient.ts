@@ -17,7 +17,7 @@ import {
   getBackendWallet,
   importPrivateKey,
   listBackendWallets,
-  signTransaction,
+  sign,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -339,7 +339,7 @@ export class SolanaClient {
    * @returns The signature
    */
   public async signData(accountId: string, data: string): Promise<string> {
-    const response = await signTransaction(accountId, { data })
+    const response = await sign(accountId, { data })
     return response.signature
   }
 }
