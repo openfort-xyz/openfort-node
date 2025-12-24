@@ -16,7 +16,7 @@ import {
   getBackendWallet,
   importPrivateKey,
   listBackendWallets,
-  signTransaction,
+  sign,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -311,7 +311,7 @@ export class EvmClient {
    * ```
    */
   public async signData(options: SignDataOptions): Promise<string> {
-    const response = await signTransaction(options.id, {
+    const response = await sign(options.id, {
       data: options.data,
     })
 

@@ -3,7 +3,7 @@
  * Sign a Solana message
  */
 
-import { signTransaction } from '../../../openapi-client'
+import { sign } from '../../../openapi-client'
 import type { SignMessageOptions } from '../types'
 
 /**
@@ -31,7 +31,7 @@ export async function signMessage(
   const messageHex = `0x${messageBytes.toString('hex')}`
 
   // Sign via v2 API
-  const response = await signTransaction(accountId, { data: messageHex })
+  const response = await sign(accountId, { data: messageHex })
 
   return {
     signature: response.signature,

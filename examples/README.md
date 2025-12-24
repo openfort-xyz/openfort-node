@@ -57,8 +57,8 @@ pnpm example evm/accounts/createAccount.ts
 ### EVM Wallet Examples
 
 #### Accounts (`evm/accounts/`)
-| Example                 | Description                          |
-| ----------------------- | ------------------------------------ |
+| Example            | Description                          |
+| ------------------ | ------------------------------------ |
 | `createAccount.ts` | Create a new EVM account             |
 | `getAccount.ts`    | Retrieve an account by ID or address |
 | `listAccounts.ts`  | List all EVM accounts                |
@@ -76,8 +76,8 @@ pnpm example evm/accounts/createAccount.ts
 ### Solana Wallet Examples
 
 #### Accounts (`solana/accounts/`)
-| Example                 | Description                          |
-| ----------------------- | ------------------------------------ |
+| Example            | Description                          |
+| ------------------ | ------------------------------------ |
 | `createAccount.ts` | Create a new Solana account          |
 | `getAccount.ts`    | Retrieve an account by ID or address |
 | `listAccounts.ts`  | List all Solana accounts             |
@@ -127,6 +127,11 @@ pnpm example evm/accounts/createAccount.ts
 | `exchange/quoteSwap.ts`  | Get a quote for token swap |
 | `exchange/createSwap.ts` | Execute a token swap       |
 
+### Webhooks
+
+| Example            | Description                                         |
+| ------------------ | --------------------------------------------------- |
+| `webhook/index.ts` | Express server to receive and verify webhook events |
 
 ## Additional Resources
 

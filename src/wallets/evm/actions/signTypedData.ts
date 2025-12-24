@@ -4,7 +4,7 @@
  */
 
 import { hashTypedData } from 'viem'
-import { signTransaction } from '../../../openapi-client'
+import { sign } from '../../../openapi-client'
 import type { Address, Hex, TypedData, TypedDataDefinition } from '../types'
 
 /**
@@ -47,7 +47,7 @@ export async function signTypedData<
   const hash = hashTypedData(typedData)
 
   // Sign the hash via v2 API
-  const response = await signTransaction(accountId, { data: hash })
+  const response = await sign(accountId, { data: hash })
 
   return {
     signature: response.signature as Hex,

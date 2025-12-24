@@ -7,7 +7,7 @@
   "scripts": {
     "build:sdk": "pnpm --dir .. build",
     "preinstall": "pnpm --dir .. install",
-    "setup": "pnpm build:sdk && pnpm install",
+    "setup": "pnpm install && pnpm build:sdk",
     "example": "tsx",
     "format": "biome format --write",
     "lint": "biome lint",

@@ -6085,8 +6085,8 @@
         "type": "object",
         "additionalProperties": false
       },
-      "SignTransactionResponse": {
-        "description": "Response from signing a transaction or message via backend wallet.",
+      "SignResponse": {
+        "description": "Response from signing data via backend wallet.",
         "properties": {
           "object": {
             "type": "string",
@@ -6109,8 +6109,8 @@
         "type": "object",
         "additionalProperties": false
       },
-      "SignTransactionRequest": {
-        "description": "Request to sign transaction or message via backend wallet.",
+      "SignRequest": {
+        "description": "Request to sign data via backend wallet.",
         "properties": {
           "data": {
             "type": "string",
@@ -6253,6 +6253,11 @@
             "type": "string",
             "description": "New ECDSA P-256 public key for wallet authentication.\nThis will replace the current wallet secret used for X-Wallet-Auth JWT signing.",
             "example": "04abc123def456..."
+          },
+          "newKeyId": {
+            "type": "string",
+            "description": "Key identifier for the new secret.\nUsed to identify this key in X-Wallet-Auth JWT headers.",
+            "example": "ws_1234567890"
           }
         },
         "required": ["newSecretPublicKey"],
@@ -17383,14 +17388,14 @@
     },
     "/v2/accounts/backend/{id}/sign": {
       "post": {
-        "operationId": "signTransaction",
+        "operationId": "sign",
         "responses": {
           "200": {
             "description": "Successful response.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SignTransactionResponse"
+                  "$ref": "#/components/schemas/SignResponse"
                 }
               }
             }
@@ -17402,8 +17407,8 @@
             "description": "Account not found."
           }
         },
-        "description": "Sign transaction or message via backend wallet.\n\nSigns the provided data using the account's private key managed by the backend wallet.\nThe private key is securely stored and never exposed.",
-        "summary": "Sign transaction via backend wallet.",
+        "description": "Sign data via backend wallet.\n\nSigns the provided data using the account's private key managed by the backend wallet.\nThe private key is securely stored and never exposed.",
+        "summary": "Sign data via backend wallet.",
         "tags": ["Backend Wallets"],
         "security": [
           {
@@ -17426,7 +17431,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SignTransactionRequest"
+                "$ref": "#/components/schemas/SignRequest"
               }
             }
           }
