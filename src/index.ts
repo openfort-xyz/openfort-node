@@ -1,144 +1,404 @@
 import fetch from 'node-fetch'
-import { AccountsApiWrapper } from './apis/accountsApiWrapper'
-import { AccountsV2ApiWrapper } from './apis/accountsV2ApiWrapper'
-import { ContractsApiWrapper } from './apis/contractsApiWrapper'
-import { EventsApiWrapper } from './apis/eventsApiWrapper'
-import { ExchangeApiWrapper } from './apis/exchangeApiWrapper'
-import { IamApiWrapper } from './apis/iamApiWrapper'
-import { InventoriesApiWrapper } from './apis/inventoriesApiWrapper'
-import { PaymasterApiWrapper } from './apis/paymasterApiWrapper'
-import { PlayersApiWrapper } from './apis/playersApiWrapper'
-import { PoliciesApiWrapper } from './apis/policiesApiWrapper'
-import { PolicyRulesApiWrapper } from './apis/policyRulesApiWrapper'
-import { SessionsApiWrapper } from './apis/sessionsApiWrapper'
-import { SettingsApiWrapper } from './apis/settingsApiWrapper'
-import { SubscriptionsApiWrapper } from './apis/subscriptionsApiWrapper'
-import { TransactionIntentsApiWrapper } from './apis/transactionIntentsApiWrapper'
-import type { WebHookEvent } from './models'
-import type { Observable } from './utilities/observable'
-import type { Observer } from './utilities/observer'
+import * as api from './openapi-client'
+import { configure } from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
 
-class Openfort {
-  private readonly apiWrappers: { [name: string]: Observable } = {}
-  private readonly observers: Observer[] = []
+/**
+ * Configuration options for the Openfort client
+ */
+export interface OpenfortOptions {
+  /** API base URL (optional) */
+  basePath?: string
+  /** Enable debug logging (optional) */
+  debugging?: boolean
+}
 
+/**
+ * The Openfort SDK client.
+ * Provides access to all Openfort API endpoints.
+ *
+ * @example
+ * ```typescript
+ * import Openfort from '@openfort/openfort-node';
+ *
+ * const openfort = new Openfort('sk_test_...');
+ *
+ * // Create a player
+ * const player = await openfort.players.create({ name: 'Player-1' });
+ *
+ * // Create an account
+ * const account = await openfort.accounts.create({ player: player.id, chainId: 1 });
+ * ```
+ */
+class Openfort {
   constructor(
     private readonly apiKey: string,
-    private readonly basePath?: string,
-  ) {}
+    options?: string | OpenfortOptions,
+  ) {
+    // Support both old signature (basePath string) and new options object
+    let basePath: string | undefined
+    if (typeof options === 'string') {
+      basePath = options
+    } else if (options) {
+      basePath = options.basePath
+    }
 
-  public get accounts(): AccountsApiWrapper {
-    return this.getOrCreateWrapper(AccountsApiWrapper)
+    // Configure the API client
+    configure({
+      apiKey: this.apiKey,
+      basePath,
+      debugging: typeof options === 'object' ? options.debugging : undefined,
+    })
   }
 
-  public get accountsV2(): AccountsV2ApiWrapper {
-    return this.getOrCreateWrapper(AccountsV2ApiWrapper)
-  }
+  // ============================================
+  // Accounts API
+  // ============================================
 
-  public get contracts(): ContractsApiWrapper {
-    return this.getOrCreateWrapper(ContractsApiWrapper)
-  }
-
-  public get paymasters(): PaymasterApiWrapper {
-    return this.getOrCreateWrapper(PaymasterApiWrapper)
-  }
-
-  public get players(): PlayersApiWrapper {
-    return this.getOrCreateWrapper(PlayersApiWrapper)
-  }
-
-  public get policies(): PoliciesApiWrapper {
-    return this.getOrCreateWrapper(PoliciesApiWrapper)
-  }
-
-  public get policyRules(): PolicyRulesApiWrapper {
-    return this.getOrCreateWrapper(PolicyRulesApiWrapper)
-  }
-
-  public get sessions(): SessionsApiWrapper {
-    return this.getOrCreateWrapper(SessionsApiWrapper)
-  }
-
-  public get transactionIntents(): TransactionIntentsApiWrapper {
-    return this.getOrCreateWrapper(TransactionIntentsApiWrapper)
-  }
-
-  public get inventories(): InventoriesApiWrapper {
-    return this.getOrCreateWrapper(InventoriesApiWrapper)
-  }
-
-  public get settings(): SettingsApiWrapper {
-    return this.getOrCreateWrapper(SettingsApiWrapper)
-  }
-
-  public get iam(): IamApiWrapper {
-    return this.getOrCreateWrapper(IamApiWrapper)
-  }
-
-  public get subscriptions(): SubscriptionsApiWrapper {
-    return this.getOrCreateWrapper(SubscriptionsApiWrapper)
-  }
-
-  public get triggers(): EventsApiWrapper {
-    return this.getOrCreateWrapper(EventsApiWrapper)
-  }
-
-  public get exchange(): ExchangeApiWrapper {
-    return this.getOrCreateWrapper(ExchangeApiWrapper)
-  }
-
-  public subscribe(observer: Observer): void {
-    this.observers.push(observer)
-    for (const apiWrapper of Object.values(this.apiWrappers)) {
-      apiWrapper.observers?.push(observer)
+  /**
+   * Account management endpoints
+   */
+  public get accounts() {
+    return {
+      /** List accounts */
+      list: api.getAccounts,
+      /** Create an account */
+      create: api.createAccount,
+      /** Get an account by ID */
+      get: api.getAccount,
+      /** Request transfer of ownership */
+      requestTransferOwnership: api.requestTransferOwnership,
+      /** Cancel transfer of ownership */
+      cancelTransferOwnership: api.cancelTransferOwnership,
+      /** Sign a payload */
+      signPayload: api.signPayload,
+      /** Sync account state */
+      sync: api.syncAccount,
+      /** Deploy an account */
+      deploy: api.deployAccount,
+      /** Start recovery */
+      startRecovery: api.startRecovery,
+      /** Complete recovery */
+      completeRecovery: api.completeRecovery,
     }
   }
 
-  private getWrapperKey(wrapper: any): string {
-    if ('type' in wrapper && typeof wrapper.type === 'string') {
-      return wrapper.type
+  /**
+   * V2 Account management endpoints
+   */
+  public get accountsV2() {
+    return {
+      /** List accounts */
+      list: api.getAccountsV2,
+      /** Get an account by ID */
+      get: api.getAccountV2,
+      /** Switch chain */
+      switchChain: api.switchChainV2,
     }
-
-    if ('name' in wrapper && typeof wrapper.name === 'string') {
-      return wrapper.name
-    }
-
-    throw new Error('getWrapperKey failed')
   }
 
-  private getOrCreateWrapper<T extends Observable>(
-    type: new (_accessToken: string, _basePath?: string) => T,
-  ): T {
-    const key = this.getWrapperKey(type)
-    const wrapper = this.apiWrappers[key]
-    if (wrapper) {
-      return wrapper as T
-    }
+  // ============================================
+  // Players API
+  // ============================================
 
-    const result = new type(this.apiKey, this.basePath)
-    for (const observer of this.observers) {
-      result.subscribe?.(observer)
+  /**
+   * Player management endpoints
+   */
+  public get players() {
+    return {
+      /** List players */
+      list: api.getPlayers,
+      /** Create a player */
+      create: api.createPlayer,
+      /** Get a player by ID */
+      get: api.getPlayer,
+      /** Update a player */
+      update: api.updatePlayer,
+      /** Delete a player */
+      delete: api.deletePlayer,
     }
-    this.apiWrappers[key] = result
-    return result
   }
 
-  public async constructWebhookEvent(
+  // ============================================
+  // Contracts API
+  // ============================================
+
+  /**
+   * Contract management endpoints
+   */
+  public get contracts() {
+    return {
+      /** List contracts */
+      list: api.getContracts,
+      /** Create a contract */
+      create: api.createContract,
+      /** Get a contract by ID */
+      get: api.getContract,
+      /** Update a contract */
+      update: api.updateContract,
+      /** Delete a contract */
+      delete: api.deleteContract,
+      /** Read a contract */
+      read: api.readContract,
+    }
+  }
+
+  // ============================================
+  // Policies API
+  // ============================================
+
+  /**
+   * Policy management endpoints
+   */
+  public get policies() {
+    return {
+      /** List policies */
+      list: api.getPolicies,
+      /** Create a policy */
+      create: api.createPolicy,
+      /** Get a policy by ID */
+      get: api.getPolicy,
+      /** Update a policy */
+      update: api.updatePolicy,
+      /** Delete a policy */
+      delete: api.deletePolicy,
+      /** Disable a policy */
+      disable: api.disablePolicy,
+      /** Enable a policy */
+      enable: api.enablePolicy,
+      /** Get policy total gas usage */
+      getTotalGasUsage: api.getPolicyTotalGasUsage,
+    }
+  }
+
+  /**
+   * Policy rules management endpoints
+   */
+  public get policyRules() {
+    return {
+      /** List policy rules */
+      list: api.getPolicyRules,
+      /** Create a policy rule */
+      create: api.createPolicyRule,
+      /** Update a policy rule */
+      update: api.updatePolicyRule,
+      /** Delete a policy rule */
+      delete: api.deletePolicyRule,
+    }
+  }
+
+  // ============================================
+  // Transaction Intents API
+  // ============================================
+
+  /**
+   * Transaction intent management endpoints
+   */
+  public get transactionIntents() {
+    return {
+      /** List transaction intents */
+      list: api.getTransactionIntents,
+      /** Create a transaction intent */
+      create: api.createTransactionIntent,
+      /** Get a transaction intent by ID */
+      get: api.getTransactionIntent,
+      /** Sign a transaction intent */
+      signature: api.signature,
+      /** Estimate cost */
+      estimateCost: api.estimateTransactionIntentCost,
+    }
+  }
+
+  // ============================================
+  // Sessions API
+  // ============================================
+
+  /**
+   * Session management endpoints
+   */
+  public get sessions() {
+    return {
+      /** List sessions */
+      list: api.getPlayerSessions,
+      /** Create a session */
+      create: api.createSession,
+      /** Get a session by ID */
+      get: api.getSession,
+      /** Revoke a session */
+      revoke: api.revokeSession,
+      /** Sign a session */
+      signature: api.signatureSession,
+    }
+  }
+
+  // ============================================
+  // Settings API
+  // ============================================
+
+  /**
+   * Settings / Developer account management endpoints
+   */
+  public get settings() {
+    return {
+      /** List developer accounts */
+      getDeveloperAccounts: api.getDeveloperAccounts,
+      /** Create a developer account */
+      createDeveloperAccount: api.createDeveloperAccount,
+      /** Get a developer account by ID */
+      getDeveloperAccount: api.getDeveloperAccount,
+      /** Delete a developer account */
+      deleteDeveloperAccount: api.deleteDeveloperAccount,
+      /** Get verification payload */
+      getVerificationPayload: api.getVerificationPayload,
+    }
+  }
+
+  // ============================================
+  // Subscriptions API
+  // ============================================
+
+  /**
+   * Subscription management endpoints
+   */
+  public get subscriptions() {
+    return {
+      /** List subscriptions */
+      list: api.getSubscriptions,
+      /** Create a subscription */
+      create: api.createSubscription,
+      /** Get a subscription by ID */
+      get: api.getSubscription,
+      /** Delete a subscription */
+      delete: api.deleteSubscription,
+    }
+  }
+
+  // ============================================
+  // Triggers API
+  // ============================================
+
+  /**
+   * Trigger management endpoints
+   */
+  public get triggers() {
+    return {
+      /** List triggers */
+      list: api.getTriggers,
+      /** Create a trigger */
+      create: api.createTrigger,
+      /** Get a trigger by ID */
+      get: api.getTrigger,
+      /** Delete a trigger */
+      delete: api.deleteTrigger,
+    }
+  }
+
+  // ============================================
+  // Exchange API
+  // ============================================
+
+  /**
+   * Exchange endpoints
+   */
+  public get exchange() {
+    return {
+      /** Create swap */
+      createSwap: api.createSwap,
+      /** Get swap quote */
+      quoteSwap: api.quoteSwap,
+    }
+  }
+
+  // ============================================
+  // IAM API
+  // ============================================
+
+  /**
+   * Identity and access management endpoints
+   */
+  public get iam() {
+    return {
+      /** Create auth player */
+      createAuthPlayer: api.createAuthPlayer,
+      /** Verify auth token */
+      verifyAuthToken: api.verifyAuthToken,
+      /** Verify OAuth token */
+      verifyOAuthToken: api.verifyOAuthToken,
+      /** Create OAuth config */
+      createOAuthConfig: api.createOAuthConfig,
+      /** Delete auth player */
+      deleteAuthPlayer: api.deleteAuthPlayer,
+      /** Delete OAuth config */
+      deleteOAuthConfig: api.deleteOAuthConfig,
+      /** Get auth players */
+      getAuthPlayers: api.getAuthPlayers,
+      /** Get OAuth config */
+      getOAuthConfig: api.getOAuthConfig,
+      /** List OAuth config */
+      listOAuthConfig: api.listOAuthConfig,
+      /** Authorize */
+      authorize: api.authorize,
+    }
+  }
+
+  // ============================================
+  // Paymasters API
+  // ============================================
+
+  /**
+   * Paymaster endpoints
+   */
+  public get paymasters() {
+    return {
+      /** Create a paymaster */
+      create: api.createPaymaster,
+      /** Get a paymaster by ID */
+      get: api.getPaymaster,
+      /** Update a paymaster */
+      update: api.updatePaymaster,
+      /** Delete a paymaster */
+      delete: api.deletePaymaster,
+    }
+  }
+
+  // ============================================
+  // Utility Methods
+  // ============================================
+
+  /**
+   * Constructs and validates a webhook event from the request body and signature.
+   * @param body - The raw request body
+   * @param signature - The signature header value
+   * @returns The validated webhook event
+   */
+  public async constructWebhookEvent<T = unknown>(
     body: string,
     signature: string,
-  ): Promise<WebHookEvent> {
+  ): Promise<T> {
     const signedPayload = await sign(this.apiKey, body)
     if (signedPayload !== signature) {
       throw Error('Invalid signature')
     }
-    return JSON.parse(body) as WebHookEvent
+    return JSON.parse(body) as T
   }
 
+  /**
+   * Signs a nonce with the API key.
+   * @param nonce - The nonce to sign
+   * @returns The signed nonce
+   */
   public async signNonce(nonce: string): Promise<string> {
     return await sign(this.apiKey, nonce)
   }
 
+  /**
+   * Registers a recovery session with Shield.
+   * @param apiKey - Shield API key
+   * @param secretKey - Shield secret key
+   * @param encryptionPart - Encryption part
+   * @param shieldAPIBaseURL - Shield API base URL
+   * @returns The session ID
+   */
   public async registerRecoverySession(
     apiKey: string,
     secretKey: string,
@@ -172,6 +432,24 @@ class Openfort {
 // Export both as default and named export for better CommonJS/ESM interop
 export { Openfort }
 export default Openfort
-// biome-ignore lint/performance/noReExportAll: Re-exporting generated models for convenience
-// biome-ignore lint/performance/noBarrelFile: This is an intentional barrel file for public API
-export * from './models'
+
+// Constants
+export { IMPORT_ENCRYPTION_PUBLIC_KEY } from './constants'
+// Error classes
+export {
+  AccountNotFoundError,
+  EncryptionError,
+  TimeoutError,
+  UserInputValidationError,
+} from './errors'
+// Re-export all types from the generated API
+export * from './openapi-client'
+// Export the configure function for advanced use cases
+export { configure, getConfig } from './openapi-client/openfortApiClient'
+// RSA encryption utilities for key import/export
+export {
+  decryptExportedPrivateKey,
+  encryptForImport,
+  generateRSAKeyPair,
+  type RSAKeyPair,
+} from './utilities/encryption'
