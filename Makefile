@@ -1,7 +1,7 @@
 .PHONY: update-openapi check-openapi generate-client help
 
 # OpenAPI spec URL with timestamp for cache-busting
-OPENAPI_URL := http://localhost:3000/api-docs/swagger.json?timestamp=$(shell date +%s)
+OPENAPI_URL := https://api.openfort.io/api-docs/swagger.json?timestamp=$(shell date +%s)
 OPENAPI_LOCAL := openapi.json
 OPENAPI_TEMP := openapi.json.new
 
