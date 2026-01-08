@@ -433,23 +433,7 @@ class Openfort {
 export { Openfort }
 export default Openfort
 
-// Constants
-export { IMPORT_ENCRYPTION_PUBLIC_KEY } from './constants'
-// Error classes
-export {
-  AccountNotFoundError,
-  EncryptionError,
-  TimeoutError,
-  UserInputValidationError,
-} from './errors'
 // Re-export all types from the generated API
 export * from './openapi-client'
 // Export the configure function for advanced use cases
 export { configure, getConfig } from './openapi-client/openfortApiClient'
-// RSA encryption utilities for key import/export
-export {
-  decryptExportedPrivateKey,
-  encryptForImport,
-  generateRSAKeyPair,
-  type RSAKeyPair,
-} from './utilities/encryption'
