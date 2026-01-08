@@ -51,7 +51,12 @@
     "changeset:prepublish": "pnpm build",
     "check": "biome check --write --unsafe",
     "check:types": "tsc --noEmit",
+    "check:exports": "attw --pack . --ignore-rules false-esm",
     "lint": "biome lint",
+    "test": "vitest run",
+    "test:ci": "vitest run --reporter=verbose",
+    "test:cov": "vitest run --coverage",
+    "test:build": "publint --strict && attw --pack . --ignore-rules false-esm",
     "orval": "make check-openapi || echo 'NOTE: A newer OpenAPI spec is available. Run pnpm orval:update to update.'; orval --config orval.config.ts",
     "orval:update": "make update-openapi && orval --config orval.config.ts",
     "docs": "typedoc --entryPoints src/index.ts --out docs/ --includes src/**/*.ts",
@@ -74,14 +79,18 @@
     "pre-commit": "pnpm check"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
     "@biomejs/biome": "^2.3.6",
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.29.7",
+    "@vitest/coverage-v8": "^3.0.0",
     "knip": "^5.70.1",
     "orval": "^7.6.0",
+    "publint": "^0.2.12",
     "simple-git-hooks": "^2.13.1",
     "tsup": "^8.5.1",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "vitest": "^3.0.0"
   },
   "packageManager": "pnpm@10.16.1"
 }
