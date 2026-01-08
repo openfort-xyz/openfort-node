@@ -310,34 +310,86 @@ class Openfort {
   }
 
   // ============================================
-  // IAM API
+  // Auth API
   // ============================================
 
   /**
-   * Identity and access management endpoints
+   * Authentication endpoints
+   *
+   * @example
+   * ```typescript
+   * await openfort.auth.verifyThirdParty({ provider: 'firebase', token: '...' });
+   * ```
+   */
+  public get auth() {
+    return {
+      /** Verify third-party auth provider token (Supabase, Firebase, etc.) */
+      verifyThirdParty: api.thirdPartyV2,
+    }
+  }
+
+  // ============================================
+  // IAM API (V2 default, V1 legacy)
+  // ============================================
+
+  /**
+   * Identity and access management endpoints (V2 default)
+   *
+   * @example
+   * ```typescript
+   * // V2 (default) - Users
+   * const users = await openfort.iam.users.list();
+   * const user = await openfort.iam.users.get('usr_...');
+   *
+   * // V1 (legacy) - Players
+   * const players = await openfort.iam.v1.players.list();
+   * await openfort.iam.v1.oauthConfig.create({ provider: 'google', ... });
+   * ```
    */
   public get iam() {
     return {
-      /** Create auth player */
-      createAuthPlayer: api.createAuthPlayer,
-      /** Verify auth token */
-      verifyAuthToken: api.verifyAuthToken,
-      /** Verify OAuth token */
-      verifyOAuthToken: api.verifyOAuthToken,
-      /** Create OAuth config */
-      createOAuthConfig: api.createOAuthConfig,
-      /** Delete auth player */
-      deleteAuthPlayer: api.deleteAuthPlayer,
-      /** Delete OAuth config */
-      deleteOAuthConfig: api.deleteOAuthConfig,
-      /** Get auth players */
-      getAuthPlayers: api.getAuthPlayers,
-      /** Get OAuth config */
-      getOAuthConfig: api.getOAuthConfig,
-      /** List OAuth config */
-      listOAuthConfig: api.listOAuthConfig,
-      /** Authorize */
-      authorize: api.authorize,
+      /** Get session from auth token (server-side verification) */
+      getSession: api.verifyAuthToken,
+      /** User management (V2) */
+      users: {
+        /** List authenticated users */
+        list: api.getAuthUsers,
+        /** Get an authenticated user by ID */
+        get: api.getAuthUser,
+        /** Delete a user */
+        delete: api.deleteUser,
+      },
+      /** OAuth configuration */
+      oauthConfig: {
+        /** Create OAuth config */
+        create: api.createOAuthConfig,
+        /** Get OAuth config */
+        get: api.getOAuthConfig,
+        /** List OAuth configs */
+        list: api.listOAuthConfig,
+        /** Delete OAuth config */
+        delete: api.deleteOAuthConfig,
+      },
+      /** V1 IAM methods (legacy) */
+      v1: {
+        /** Auth player management (V1) */
+        players: {
+          /** Create an auth player */
+          create: api.createAuthPlayer,
+          /** List auth players */
+          list: api.getAuthPlayers,
+          /** Get an auth player by ID */
+          get: api.getAuthPlayer,
+          /** Delete an auth player */
+          delete: api.deleteAuthPlayer,
+        },
+        /** Verify auth token */
+        verifyToken: api.verifyAuthToken,
+        /** Verify OAuth token */
+        verifyOAuthToken: api.verifyOAuthToken,
+        /** Authorize */
+        authorize: api.authorize,
+      },
     }
   }
 
