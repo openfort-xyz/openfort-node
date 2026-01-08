@@ -1,51 +1,134 @@
-name: Run pnpm build
+name: Verify
 on:
-    pull_request:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call:
+  workflow_dispatch:
 
 jobs:
-  pnpm-build:
-    name: pnpm build
+  check:
+    name: Check
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read
-      # packages: read    # required for pulling packages from GHCR
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - name: Clone repository
+        uses: actions/checkout@v4
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: pnpm
-          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Security audit
         run: pnpm audit
-      
+
       - name: Lint (Biome)
         run: pnpm lint
 
       - name: Code check (Biome)
         run: pnpm biome check
 
-      - name: Check TypeScript types
-        run: pnpm check:types
+  build:
+    name: Build
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Validate package exports (publint + attw)
+        run: pnpm test:build
 
       - name: Check for unused files, dependencies, and exports
         run: pnpm knip --production
 
-      - name: Build project
-        run: pnpm build
+  types:
+    name: Types
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        typescript-version: ['5.4', '5.5', '5.6', '5.7', 'latest']
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install TypeScript ${{ matrix.typescript-version }}
+        run: pnpm add -D typescript@${{ matrix.typescript-version }}
+
+      - name: Check TypeScript types
+        run: pnpm check:types
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm test:ci
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
