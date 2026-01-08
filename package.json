@@ -1,18 +1,12 @@
 {
   "name": "@openfort/openfort-node",
   "version": "0.6.78",
-  "description": "OpenAPI client for Openfort API",
+  "description": "Openfort Node SDK",
   "author": "Openfort",
   "repository": {
     "type": "git",
     "url": "https://github.com/openfort-xyz/openfort-node.git"
   },
-  "keywords": [
-    "fetch",
-    "typescript",
-    "openapi-client",
-    "openapi-generator"
-  ],
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
