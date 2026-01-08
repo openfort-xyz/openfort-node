@@ -1,7 +1,14 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["src/**/*", "*.ts", "*.js", "!src/generated", "*.json"]
+    "includes": [
+      "src/**/*",
+      "*.ts",
+      "*.js",
+      "!src/generated",
+      "!src/openapi-client/generated",
+      "*.json"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -24,8 +31,14 @@
         "noUnusedVariables": "error"
       },
       "performance": {
-        "noBarrelFile": "error",
-        "noReExportAll": "error",
+        "noBarrelFile": {
+          "level": "error",
+          "options": {}
+        },
+        "noReExportAll": {
+          "level": "error",
+          "options": {}
+        },
         "noDelete": "off"
       },
       "style": {
@@ -52,5 +65,22 @@
       "semicolons": "asNeeded"
     }
   },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } }
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "overrides": [
+    {
+      "includes": [
+        "src/index.ts",
+        "src/openapi-client/index.ts",
+        "src/wallets/**/index.ts"
+      ],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noBarrelFile": "off",
+            "noReExportAll": "off"
+          }
+        }
+      }
+    }
+  ]
 }
