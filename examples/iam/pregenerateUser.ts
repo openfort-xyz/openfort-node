@@ -7,21 +7,18 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   basePath: process.env.OPENFORT_BASE_URL,
 });
 
-const chainId = Number(process.env.CHAIN_ID) || 80002;
-
 // Pre-generate a user with an embedded wallet
 // This creates the user and wallet before they authenticate
 const result = await openfort.iam.users.pregenerate(
   {
-    email: "user@example.com",
-    accountType: "Smart Account",
-    chainId,
+    email: "jaume+1@openfort.xyz",
+    accountType: "Externally Owned Account"
   },
   {
     shieldApiKey: process.env.SHIELD_API_KEY!,
     shieldApiSecret: process.env.SHIELD_API_SECRET!,
     shieldAuthProvider: ShieldAuthProvider.OPENFORT,
-    encryptionPart: process.env.SHIELD_ENCRYPTION_PART!,
+    encryptionShare: process.env.SHIELD_ENCRYPTION_SHARE!,
   }
 );
 

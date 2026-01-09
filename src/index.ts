@@ -1,7 +1,17 @@
+import {
+  entropy,
+  type Share,
+  type ShieldAuthOptions,
+  ShieldAuthProvider,
+  ShieldSDK,
+} from '@openfort/shield-js'
 import fetch from 'node-fetch'
 import * as api from './openapi-client'
 import { configure } from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
+
+// Re-export ShieldAuthProvider for convenience
+export { ShieldAuthProvider } from '@openfort/shield-js'
 
 /**
  * Configuration options for the Openfort client
@@ -14,16 +24,6 @@ export interface OpenfortOptions {
 }
 
 /**
- * Shield authentication provider type
- */
-export enum ShieldAuthProvider {
-  /** Use Openfort as the auth provider */
-  OPENFORT = 'openfort',
-  /** Use a custom auth provider */
-  CUSTOM = 'custom',
-}
-
-/**
  * Configuration for pre-generating embedded accounts with Shield
  */
 export interface ShieldConfiguration {
@@ -31,22 +31,13 @@ export interface ShieldConfiguration {
   shieldApiKey: string
   /** Shield API secret */
   shieldApiSecret: string
-  /** Encryption part for the recovery share */
-  encryptionPart: string
+  /** Encryption share for the recovery share */
+  encryptionShare: string
   /** Shield auth provider type */
   shieldAuthProvider: ShieldAuthProvider
-  /** Shield API base URL (optional, defaults to https://shield.openfort.io) */
+  /** Shield API base URL (optional, defaults to https://shield.openfort.xyz) */
   shieldApiBaseUrl?: string
 }
-
-/**
- * Entropy values for Shield share encryption
- */
-const entropy = {
-  none: 0,
-  project: 1,
-  user: 2,
-} as const
 
 /**
  * The Openfort SDK client.
@@ -61,8 +52,11 @@ const entropy = {
  * // Create a player
  * const player = await openfort.players.create({ name: 'Player-1' });
  *
- * // Create an account
- * const account = await openfort.accounts.create({ player: player.id, chainId: 1 });
+ * // Get an account (V2)
+ * const account = await openfort.accounts.get('acc_...');
+ *
+ * // Create an account (V1 legacy)
+ * const newAccount = await openfort.accounts.v1.create({ player: player.id, chainId: 1 });
  * ```
  */
 class Openfort {
@@ -91,37 +85,21 @@ class Openfort {
   // ============================================
 
   /**
-   * Account management endpoints
+   * Account management endpoints (V2 default)
+   *
+   * @example
+   * ```typescript
+   * // V2 (default)
+   * const accounts = await openfort.accounts.list({ player: 'pla_...' });
+   * const account = await openfort.accounts.get('acc_...');
+   * await openfort.accounts.switchChain('acc_...', { chainId: 137 });
+   *
+   * // V1 (legacy)
+   * const legacyAccounts = await openfort.accounts.v1.list({ player: 'pla_...' });
+   * await openfort.accounts.v1.create({ player: 'pla_...', chainId: 1 });
+   * ```
    */
   public get accounts() {
-    return {
-      /** List accounts */
-      list: api.getAccounts,
-      /** Create an account */
-      create: api.createAccount,
-      /** Get an account by ID */
-      get: api.getAccount,
-      /** Request transfer of ownership */
-      requestTransferOwnership: api.requestTransferOwnership,
-      /** Cancel transfer of ownership */
-      cancelTransferOwnership: api.cancelTransferOwnership,
-      /** Sign a payload */
-      signPayload: api.signPayload,
-      /** Sync account state */
-      sync: api.syncAccount,
-      /** Deploy an account */
-      deploy: api.deployAccount,
-      /** Start recovery */
-      startRecovery: api.startRecovery,
-      /** Complete recovery */
-      completeRecovery: api.completeRecovery,
-    }
-  }
-
-  /**
-   * V2 Account management endpoints
-   */
-  public get accountsV2() {
     return {
       /** List accounts */
       list: api.getAccountsV2,
@@ -129,6 +107,29 @@ class Openfort {
       get: api.getAccountV2,
       /** Switch chain */
       switchChain: api.switchChainV2,
+      /** V1 account methods (legacy) */
+      v1: {
+        /** List accounts */
+        list: api.getAccounts,
+        /** Create an account */
+        create: api.createAccount,
+        /** Get an account by ID */
+        get: api.getAccount,
+        /** Request transfer of ownership */
+        requestTransferOwnership: api.requestTransferOwnership,
+        /** Cancel transfer of ownership */
+        cancelTransferOwnership: api.cancelTransferOwnership,
+        /** Sign a payload */
+        signPayload: api.signPayload,
+        /** Sync account state */
+        sync: api.syncAccount,
+        /** Deploy an account */
+        deploy: api.deployAccount,
+        /** Start recovery */
+        startRecovery: api.startRecovery,
+        /** Complete recovery */
+        completeRecovery: api.completeRecovery,
+      },
     }
   }
 
@@ -511,17 +512,11 @@ class Openfort {
     thirdPartyUserId: string | undefined,
     config: ShieldConfiguration,
   ): Promise<void> {
-    const shieldBaseUrl =
-      config.shieldApiBaseUrl ?? 'https://shield.openfort.io'
-
-    let authProvider: string
     let externalUserId: string
 
     if (config.shieldAuthProvider === ShieldAuthProvider.OPENFORT) {
-      authProvider = 'openfort'
       externalUserId = openfortUserId
     } else if (config.shieldAuthProvider === ShieldAuthProvider.CUSTOM) {
-      authProvider = 'custom'
       if (!thirdPartyUserId) {
         throw new Error(
           'thirdPartyUserId is required when using CUSTOM Shield auth provider.',
@@ -532,28 +527,25 @@ class Openfort {
       throw new Error('Invalid Shield auth provider.')
     }
 
-    const shareEntropy = entropy.project
+    const authOptions: ShieldAuthOptions = {
+      authProvider: config.shieldAuthProvider,
+      encryptionPart: config.encryptionShare,
+      externalUserId,
+      apiKey: config.shieldApiKey,
+      apiSecret: config.shieldApiSecret,
+    }
 
-    const response = await fetch(`${shieldBaseUrl}/shares`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': config.shieldApiKey,
-        'x-api-secret': config.shieldApiSecret,
-      },
-      body: JSON.stringify({
-        secret: recoveryShare,
-        entropy: shareEntropy,
-        auth_provider: authProvider,
-        external_user_id: externalUserId,
-        encryption_part: config.encryptionPart,
-      }),
+    const share: Share = {
+      secret: recoveryShare,
+      entropy: entropy.project,
+    }
+
+    const shieldSDK = new ShieldSDK({
+      apiKey: config.shieldApiKey,
+      baseURL: config.shieldApiBaseUrl,
     })
 
-    if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(`Failed to pre-register with Shield: ${errorText}`)
-    }
+    await shieldSDK.preRegister(share, authOptions)
   }
 
   // ============================================
@@ -598,45 +590,47 @@ class Openfort {
   }
 
   /**
-   * Signs a nonce with the API key.
-   * @param nonce - The nonce to sign
-   * @returns The signed nonce
+   * Creates an encryption session with Shield.
+   * This is a setup step for configuring encryption before using pregenerate.
+   *
+   * @param shieldApiKey - Shield API key
+   * @param shieldApiSecret - Shield API secret
+   * @param encryptionShare - Encryption share for the recovery share
+   * @param shieldApiBaseUrl - Shield API base URL (defaults to https://shield.openfort.xyz)
+   * @returns The encryption session ID
+   *
+   * @example
+   * ```typescript
+   * const sessionId = await openfort.createEncryptionSession(
+   *   'shield_api_key',
+   *   'shield_api_secret',
+   *   'encryption_share',
+   * );
+   * ```
    */
-  public async signNonce(nonce: string): Promise<string> {
-    return await sign(this.apiKey, nonce)
-  }
-
-  /**
-   * Registers a recovery session with Shield.
-   * @param apiKey - Shield API key
-   * @param secretKey - Shield secret key
-   * @param encryptionPart - Encryption part
-   * @param shieldAPIBaseURL - Shield API base URL
-   * @returns The session ID
-   */
-  public async registerRecoverySession(
-    apiKey: string,
-    secretKey: string,
-    encryptionPart: string,
-    shieldAPIBaseURL = 'https://shield.openfort.io',
+  public async createEncryptionSession(
+    shieldApiKey: string,
+    shieldApiSecret: string,
+    encryptionShare: string,
+    shieldApiBaseUrl = 'https://shield.openfort.xyz',
   ): Promise<string> {
     const response = await fetch(
-      `${shieldAPIBaseURL}/project/encryption-session`,
+      `${shieldApiBaseUrl}/project/encryption-session`,
       {
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'x-api-secret': secretKey,
+          'x-api-key': shieldApiKey,
+          'x-api-secret': shieldApiSecret,
         },
         method: 'POST',
         body: JSON.stringify({
-          encryption_part: encryptionPart,
+          encryption_part: encryptionShare,
         }),
       },
     )
 
     if (!response.ok) {
-      throw new Error('Failed to authorize user')
+      throw new Error('Failed to create encryption session')
     }
 
     const jsonResponse = await response.json()

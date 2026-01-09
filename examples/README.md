@@ -90,6 +90,21 @@ pnpm example contracts/createContract.ts
 | `exchange/quoteSwap.ts`  | Get a quote for token swap |
 | `exchange/createSwap.ts` | Execute a token swap       |
 
+### IAM (Identity & Access Management)
+
+| Example                     | Description                                      |
+| --------------------------- | ------------------------------------------------ |
+| `iam/listUsers.ts`          | List all authenticated users                     |
+| `iam/getUser.ts`            | Get a user by ID                                 |
+| `iam/deleteUser.ts`         | Delete a user                                    |
+| `iam/pregenerateUser.ts`    | Pre-generate a user with embedded wallet         |
+| `iam/getSession.ts`         | Verify auth token server-side                    |
+
+> **Note:** The `pregenerateUser.ts` example requires additional Shield configuration. See `.env.example` for the required environment variables:
+> - `SHIELD_API_KEY`
+> - `SHIELD_API_SECRET`
+> - `SHIELD_ENCRYPTION_SHARE`
+
 ### Webhooks
 
 | Example            | Description                                         |
