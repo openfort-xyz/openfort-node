@@ -14,6 +14,41 @@ export interface OpenfortOptions {
 }
 
 /**
+ * Shield authentication provider type
+ */
+export enum ShieldAuthProvider {
+  /** Use Openfort as the auth provider */
+  OPENFORT = 'openfort',
+  /** Use a custom auth provider */
+  CUSTOM = 'custom',
+}
+
+/**
+ * Configuration for pre-generating embedded accounts with Shield
+ */
+export interface ShieldConfiguration {
+  /** Shield API key */
+  shieldApiKey: string
+  /** Shield API secret */
+  shieldApiSecret: string
+  /** Encryption part for the recovery share */
+  encryptionPart: string
+  /** Shield auth provider type */
+  shieldAuthProvider: ShieldAuthProvider
+  /** Shield API base URL (optional, defaults to https://shield.openfort.io) */
+  shieldApiBaseUrl?: string
+}
+
+/**
+ * Entropy values for Shield share encryption
+ */
+const entropy = {
+  none: 0,
+  project: 1,
+  user: 2,
+} as const
+
+/**
  * The Openfort SDK client.
  * Provides access to all Openfort API endpoints.
  *
@@ -340,10 +375,11 @@ class Openfort {
    * // V2 (default) - Users
    * const users = await openfort.iam.users.list();
    * const user = await openfort.iam.users.get('usr_...');
+   * await openfort.iam.users.pregenerate({ email: 'user@example.com' }, shieldConfig);
    *
    * // V1 (legacy) - Players
    * const players = await openfort.iam.v1.players.list();
-   * await openfort.iam.v1.oauthConfig.create({ provider: 'google', ... });
+   * await openfort.iam.v1.players.create(request, shieldConfig);
    * ```
    */
   public get iam() {
@@ -358,6 +394,14 @@ class Openfort {
         get: api.getAuthUser,
         /** Delete a user */
         delete: api.deleteUser,
+        /**
+         * Pre-generate a user with an embedded account before they authenticate.
+         * Creates a user record and an embedded account.
+         * @param req - The pregenerate user request
+         * @param shieldConfig - Optional Shield configuration for storing the recovery share
+         * @returns The pregenerated account response
+         */
+        pregenerate: this.pregenerateUser.bind(this),
       },
       /** OAuth configuration */
       oauthConfig: {
@@ -374,8 +418,13 @@ class Openfort {
       v1: {
         /** Auth player management (V1) */
         players: {
-          /** Create an auth player */
-          create: api.createAuthPlayer,
+          /**
+           * Create an auth player with optional embedded account pre-generation.
+           * @param req - The create auth player request
+           * @param shieldConfig - Optional Shield configuration for storing the recovery share
+           * @returns The auth player response
+           */
+          create: this.createAuthPlayerWithShield.bind(this),
           /** List auth players */
           list: api.getAuthPlayers,
           /** Get an auth player by ID */
@@ -390,6 +439,118 @@ class Openfort {
         /** Authorize */
         authorize: api.authorize,
       },
+    }
+  }
+
+  /**
+   * Pre-generate a user with an embedded account (V2).
+   * If Shield pre-registration fails, the created user will be deleted.
+   * @internal
+   */
+  private async pregenerateUser(
+    req: api.PregenerateUserRequestV2,
+    shieldConfig: ShieldConfiguration,
+  ): Promise<api.PregenerateAccountResponse> {
+    const response = await api.pregenerateUserV2(req)
+
+    try {
+      await this.preRegisterWithShield(
+        response.recoveryShare,
+        response.user,
+        req.thirdPartyUserId,
+        shieldConfig,
+      )
+
+      return response
+    } catch (error) {
+      // If anything fails after user creation, delete the created user
+      await api.deleteUser(response.user)
+      throw error
+    }
+  }
+
+  /**
+   * Create an auth player with optional Shield pre-registration (V1).
+   * @internal
+   */
+  private async createAuthPlayerWithShield(
+    req: api.CreateAuthPlayerRequest,
+    shieldConfig?: ShieldConfiguration,
+  ): Promise<api.AuthPlayerResponse> {
+    if (req.preGenerateEmbeddedAccount && !shieldConfig) {
+      throw new Error(
+        'Pre-generating embedded account requires Shield configuration.',
+      )
+    }
+
+    const response = await api.createAuthPlayer(req)
+
+    if (response.recoveryShare && shieldConfig) {
+      await this.preRegisterWithShield(
+        response.recoveryShare,
+        response.id,
+        req.thirdPartyUserId,
+        shieldConfig,
+      )
+    }
+
+    // Return without recoveryShare (it's been stored in Shield)
+    const { recoveryShare: _, ...playerResponse } = response
+    return playerResponse as api.AuthPlayerResponse
+  }
+
+  /**
+   * Pre-register a recovery share with Shield.
+   * @internal
+   */
+  private async preRegisterWithShield(
+    recoveryShare: string,
+    openfortUserId: string,
+    thirdPartyUserId: string | undefined,
+    config: ShieldConfiguration,
+  ): Promise<void> {
+    const shieldBaseUrl =
+      config.shieldApiBaseUrl ?? 'https://shield.openfort.io'
+
+    let authProvider: string
+    let externalUserId: string
+
+    if (config.shieldAuthProvider === ShieldAuthProvider.OPENFORT) {
+      authProvider = 'openfort'
+      externalUserId = openfortUserId
+    } else if (config.shieldAuthProvider === ShieldAuthProvider.CUSTOM) {
+      authProvider = 'custom'
+      if (!thirdPartyUserId) {
+        throw new Error(
+          'thirdPartyUserId is required when using CUSTOM Shield auth provider.',
+        )
+      }
+      externalUserId = thirdPartyUserId
+    } else {
+      throw new Error('Invalid Shield auth provider.')
+    }
+
+    const shareEntropy = entropy.project
+
+    const response = await fetch(`${shieldBaseUrl}/shares`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': config.shieldApiKey,
+        'x-api-secret': config.shieldApiSecret,
+      },
+      body: JSON.stringify({
+        secret: recoveryShare,
+        entropy: shareEntropy,
+        auth_provider: authProvider,
+        external_user_id: externalUserId,
+        encryption_part: config.encryptionPart,
+      }),
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      throw new Error(`Failed to pre-register with Shield: ${errorText}`)
     }
   }
 

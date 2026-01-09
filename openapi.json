@@ -5760,6 +5760,186 @@
       "UserDeleteResponse": {
         "$ref": "#/components/schemas/BaseDeleteEntityResponse_EntityType.PLAYER_"
       },
+      "SmartAccountData": {
+        "properties": {
+          "implementationType": {
+            "type": "string"
+          },
+          "factoryAddress": {
+            "type": "string"
+          },
+          "implementationAddress": {
+            "type": "string"
+          },
+          "salt": {
+            "type": "string"
+          },
+          "deployedTx": {
+            "type": "string"
+          },
+          "deployedAt": {
+            "type": "number",
+            "format": "double"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "required": ["implementationType", "implementationAddress", "active"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PasskeyEnv": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "os": {
+            "type": "string"
+          },
+          "osVersion": {
+            "type": "string"
+          },
+          "device": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RecoveryMethodDetails": {
+        "properties": {
+          "passkeyId": {
+            "type": "string"
+          },
+          "passkeyEnv": {
+            "$ref": "#/components/schemas/PasskeyEnv"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PregenerateAccountResponse": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "user": {
+            "type": "string"
+          },
+          "accountType": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "ownerAddress": {
+            "type": "string"
+          },
+          "chainType": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number",
+            "format": "double"
+          },
+          "createdAt": {
+            "type": "number",
+            "format": "double"
+          },
+          "updatedAt": {
+            "type": "number",
+            "format": "double"
+          },
+          "smartAccount": {
+            "$ref": "#/components/schemas/SmartAccountData"
+          },
+          "recoveryMethod": {
+            "type": "string"
+          },
+          "recoveryMethodDetails": {
+            "$ref": "#/components/schemas/RecoveryMethodDetails"
+          },
+          "recoveryShare": {
+            "type": "string",
+            "description": "The recovery share for the user's embedded signer.\nThis should be stored securely and provided to the user for account recovery."
+          }
+        },
+        "required": [
+          "id",
+          "user",
+          "accountType",
+          "address",
+          "chainType",
+          "createdAt",
+          "updatedAt",
+          "recoveryShare"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ThirdPartyOAuthProvider": {
+        "description": "Enum of the supporting third party auth providers.",
+        "enum": [
+          "accelbyte",
+          "firebase",
+          "lootlocker",
+          "playfab",
+          "supabase",
+          "custom",
+          "oidc",
+          "better-auth"
+        ],
+        "type": "string"
+      },
+      "PregenerateUserRequestV2": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address of the user to pregenerate.\nRequired if thirdPartyUserId is not provided.",
+            "example": "user@example.com"
+          },
+          "thirdPartyUserId": {
+            "type": "string",
+            "description": "The third-party user ID from an external auth provider (Firebase, Supabase, etc.).\nRequired if email is not provided.",
+            "example": "firebase_uid_abc123"
+          },
+          "thirdPartyProvider": {
+            "$ref": "#/components/schemas/ThirdPartyOAuthProvider",
+            "description": "The third-party auth provider. Required when thirdPartyUserId is provided.",
+            "example": "firebase"
+          },
+          "accountType": {
+            "type": "string",
+            "enum": [
+              "Externally Owned Account",
+              "Smart Account",
+              "Delegated Account"
+            ],
+            "description": "The type of account to pregenerate. \"Externally Owned Account\", \"Smart Account\" or \"Delegated Account\".\nDefaults to \"Smart Account\".",
+            "example": "Smart Account"
+          },
+          "chainType": {
+            "type": "string",
+            "enum": ["EVM", "SVM"],
+            "description": "The chain type. \"EVM\" or \"SVM\". Defaults to \"EVM\".",
+            "example": "EVM"
+          },
+          "chainId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The chain ID. Required for Smart Account and Delegated Account types.\nMust be a [supported chain](/development/chains).",
+            "example": 137
+          },
+          "implementationType": {
+            "type": "string",
+            "description": "The implementation type for Smart Account or Delegated Account (e.g. Calibur, UpgradeableV6).\nRequired for Smart Account and Delegated Account types.",
+            "example": "Calibur"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
       "RecoverV2Response": {
         "properties": {
           "id": {
@@ -5868,65 +6048,6 @@
           }
         },
         "required": ["accountType", "chainType", "address"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "SmartAccountData": {
-        "properties": {
-          "implementationType": {
-            "type": "string"
-          },
-          "factoryAddress": {
-            "type": "string"
-          },
-          "implementationAddress": {
-            "type": "string"
-          },
-          "salt": {
-            "type": "string"
-          },
-          "deployedTx": {
-            "type": "string"
-          },
-          "deployedAt": {
-            "type": "number",
-            "format": "double"
-          },
-          "active": {
-            "type": "boolean"
-          }
-        },
-        "required": ["implementationType", "implementationAddress", "active"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "PasskeyEnv": {
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "os": {
-            "type": "string"
-          },
-          "osVersion": {
-            "type": "string"
-          },
-          "device": {
-            "type": "string"
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
-      "RecoveryMethodDetails": {
-        "properties": {
-          "passkeyId": {
-            "type": "string"
-          },
-          "passkeyEnv": {
-            "$ref": "#/components/schemas/PasskeyEnv"
-          }
-        },
         "type": "object",
         "additionalProperties": false
       },
@@ -7774,20 +7895,6 @@
         "required": ["provider"],
         "type": "object",
         "additionalProperties": false
-      },
-      "ThirdPartyOAuthProvider": {
-        "description": "Enum of the supporting third party auth providers.",
-        "enum": [
-          "accelbyte",
-          "firebase",
-          "lootlocker",
-          "playfab",
-          "supabase",
-          "custom",
-          "oidc",
-          "better-auth"
-        ],
-        "type": "string"
       },
       "ThirdPartyLinkRequest": {
         "properties": {
@@ -16788,6 +16895,51 @@
             "example": "pla_48eeba57-2cd5-4159-a2cb-057a23a35e65"
           }
         ]
+      }
+    },
+    "/v2/users/pregenerate": {
+      "post": {
+        "operationId": "pregenerateUserV2",
+        "responses": {
+          "200": {
+            "description": "User and account pre-generated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PregenerateAccountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters."
+          },
+          "401": {
+            "description": "Unauthorized - invalid API key."
+          },
+          "409": {
+            "description": "Conflict - user with this identifier already exists."
+          }
+        },
+        "description": "Pre-generate a user with an embedded account before they authenticate.\nCreates a user record and an embedded account using the provided SSS key shares.\nWhen the user later authenticates (via email, OAuth, third-party auth, etc.)\nwith the same identifier, they will be linked to this pre-generated account.\n\nYou can pregenerate using either:\n- `email`: User will be linked when they authenticate with the same email\n- `thirdPartyUserId` + `thirdPartyProvider`: User will be linked when they authenticate via the same third-party provider",
+        "summary": "Pre-generate a user with an embedded account.",
+        "tags": ["Users"],
+        "security": [
+          {
+            "sk": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PregenerateUserRequestV2"
+              }
+            }
+          }
+        }
       }
     },
     "/v2/accounts": {
