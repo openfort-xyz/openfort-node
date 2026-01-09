@@ -60,6 +60,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
+    "@openfort/shield-js": "^0.1.33",
     "@types/node": "*",
     "@types/node-fetch": "^2.5.7",
     "axios": "^1.7.0",
