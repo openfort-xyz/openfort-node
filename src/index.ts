@@ -450,7 +450,7 @@ class Openfort {
   private async pregenerateUser(
     req: api.PregenerateUserRequestV2,
     shieldConfig: ShieldConfiguration,
-  ): Promise<api.PregenerateAccountResponse> {
+  ): Promise<api.AccountV2Response> {
     const response = await api.pregenerateUserV2(req)
 
     try {
@@ -461,7 +461,9 @@ class Openfort {
         shieldConfig,
       )
 
-      return response
+      // Return without recoveryShare (it's been stored in Shield)
+      const { recoveryShare: _, ...accountResponse } = response
+      return accountResponse
     } catch (error) {
       // If anything fails after user creation, delete the created user
       await api.deleteUser(response.user)
