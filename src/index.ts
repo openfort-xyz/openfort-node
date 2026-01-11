@@ -2,6 +2,8 @@ import fetch from 'node-fetch'
 import * as api from './openapi-client'
 import { configure } from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
+import { EvmClient } from './wallets/evm/evmClient'
+import { SolanaClient } from './wallets/solana/solanaClient'
 
 /**
  * Configuration options for the Openfort client
@@ -9,13 +11,15 @@ import { sign } from './utilities/signer'
 export interface OpenfortOptions {
   /** API base URL (optional) */
   basePath?: string
+  /** Wallet secret for X-Wallet-Auth header (optional) */
+  walletSecret?: string
   /** Enable debug logging (optional) */
   debugging?: boolean
 }
 
 /**
  * The Openfort SDK client.
- * Provides access to all Openfort API endpoints.
+ * Provides access to all Openfort API endpoints and wallet functionality.
  *
  * @example
  * ```typescript
@@ -28,25 +32,34 @@ export interface OpenfortOptions {
  *
  * // Create an account
  * const account = await openfort.accounts.create({ player: player.id, chainId: 1 });
+ *
+ * // Create an EVM wallet
+ * const evmAccount = await openfort.evm.createAccount({ user: player.id });
  * ```
  */
 class Openfort {
+  private readonly walletSecret?: string
+  private readonly basePath?: string
+  private _evmClient?: EvmClient
+  private _solanaClient?: SolanaClient
+
   constructor(
     private readonly apiKey: string,
     options?: string | OpenfortOptions,
   ) {
     // Support both old signature (basePath string) and new options object
-    let basePath: string | undefined
     if (typeof options === 'string') {
-      basePath = options
+      this.basePath = options
     } else if (options) {
-      basePath = options.basePath
+      this.basePath = options.basePath
+      this.walletSecret = options.walletSecret
     }
 
     // Configure the API client
     configure({
       apiKey: this.apiKey,
-      basePath,
+      basePath: this.basePath,
+      walletSecret: this.walletSecret,
       debugging: typeof options === 'object' ? options.debugging : undefined,
     })
   }
@@ -362,6 +375,48 @@ class Openfort {
   }
 
   // ============================================
+  // EVM Wallet
+  // ============================================
+
+  /**
+   * EVM wallet client for creating and managing EVM accounts.
+   *
+   * @example
+   * ```typescript
+   * const account = await openfort.evm.createAccount({ name: 'MyWallet' });
+   * const signature = await account.signMessage({ message: 'Hello' });
+   * ```
+   */
+  public get evm(): EvmClient {
+    if (!this._evmClient) {
+      this._evmClient = new EvmClient(this.apiKey, {
+        basePath: this.basePath,
+        walletSecret: this.walletSecret,
+      })
+    }
+    return this._evmClient
+  }
+
+  /**
+   * Solana wallet client for creating and managing Solana accounts.
+   *
+   * @example
+   * ```typescript
+   * const account = await openfort.solana.createAccount({ user: 'pla_...' });
+   * const signature = await account.signMessage({ message: 'Hello' });
+   * ```
+   */
+  public get solana(): SolanaClient {
+    if (!this._solanaClient) {
+      this._solanaClient = new SolanaClient(this.apiKey, {
+        basePath: this.basePath,
+        walletSecret: this.walletSecret,
+      })
+    }
+    return this._solanaClient
+  }
+
+  // ============================================
   // Utility Methods
   // ============================================
 
@@ -433,7 +488,28 @@ class Openfort {
 export { Openfort }
 export default Openfort
 
+// Constants
+export { IMPORT_ENCRYPTION_PUBLIC_KEY } from './constants'
+// Error classes
+export {
+  AccountNotFoundError,
+  EncryptionError,
+  TimeoutError,
+  UserInputValidationError,
+} from './errors'
 // Re-export all types from the generated API
 export * from './openapi-client'
 // Export the configure function for advanced use cases
 export { configure, getConfig } from './openapi-client/openfortApiClient'
+// RSA encryption utilities for key import/export
+export {
+  decryptExportedPrivateKey,
+  encryptForImport,
+  generateRSAKeyPair,
+  type RSAKeyPair,
+} from './utilities/encryption'
+// Re-export wallet types
+export * from './wallets'
+// Wallet clients
+export { EvmClient } from './wallets/evm/evmClient'
+export { SolanaClient } from './wallets/solana/solanaClient'

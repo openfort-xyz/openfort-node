@@ -1,5 +1,10 @@
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
 import axiosRetry, { exponentialDelay } from 'axios-retry'
+import {
+  generateWalletJwt,
+  requiresWalletAuth,
+  sortKeys,
+} from '../utilities/walletAuth'
 import { PACKAGE, VERSION } from '../version'
 import {
   APIError,
@@ -17,6 +22,8 @@ const ERROR_DOCS_URL = 'https://www.openfort.io/docs/errors'
 export interface OpenfortClientOptions {
   /** The API key (secret key starting with sk_) */
   apiKey: string
+  /** Optional wallet secret for X-Wallet-Auth header */
+  walletSecret?: string
   /** Optional base URL for the API */
   basePath?: string
   /** If true, logs API requests and responses to the console */
@@ -121,6 +128,38 @@ export const configure = (options: OpenfortClientOptions): void => {
     // Convert BigInts in request body to strings
     if (config.data) {
       config.data = convertBigIntsToStrings(config.data)
+    }
+
+    // Add X-Wallet-Auth header if needed
+    if (options.walletSecret && config.url && config.method) {
+      const url = new URL(config.url, baseURL)
+      const method = config.method.toUpperCase()
+      const path = url.pathname
+
+      if (requiresWalletAuth(method, path)) {
+        let requestData: Record<string, unknown> = {}
+        if (config.data && typeof config.data === 'object') {
+          requestData = config.data as Record<string, unknown>
+        }
+
+        // IMPORTANT: Sort the request data keys to ensure the HTTP body
+        // matches the hash computed for the JWT's reqHash claim.
+        // The TEE hashes the raw body bytes without sorting, so we must
+        // send the sorted JSON to match what generateWalletJwt hashes.
+        if (Object.keys(requestData).length > 0) {
+          config.data = sortKeys(requestData)
+        }
+
+        const walletAuthToken = await generateWalletJwt({
+          walletSecret: options.walletSecret,
+          requestMethod: method,
+          requestHost: url.host,
+          requestPath: path,
+          requestData,
+        })
+
+        config.headers['X-Wallet-Auth'] = walletAuthToken
+      }
     }
 
     return config
