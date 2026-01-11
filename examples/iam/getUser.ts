@@ -19,11 +19,14 @@ const user = await openfort.iam.users.get(userId);
 
 console.log("User details:");
 console.log("  ID:", user.id);
+console.log("  Name:", user.name);
+console.log("  Email:", user.email ?? "N/A");
+console.log("  Email Verified:", user.emailVerified);
 console.log("  Created:", new Date(user.createdAt * 1000).toISOString());
 console.log("  Linked Accounts:");
 for (const account of user.linkedAccounts) {
   console.log(`    - Provider: ${account.provider}`);
-  if (account.email) {
-    console.log(`      Email: ${account.email}`);
+  if (account.accountId) {
+    console.log(`      Account ID: ${account.accountId}`);
   }
 }

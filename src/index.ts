@@ -21,6 +21,8 @@ export interface OpenfortOptions {
   basePath?: string
   /** Enable debug logging (optional) */
   debugging?: boolean
+  /** Publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
+  publishableKey?: string
 }
 
 /**
@@ -77,6 +79,8 @@ class Openfort {
       apiKey: this.apiKey,
       basePath,
       debugging: typeof options === 'object' ? options.debugging : undefined,
+      publishableKey:
+        typeof options === 'object' ? options.publishableKey : undefined,
     })
   }
 
@@ -385,8 +389,8 @@ class Openfort {
    */
   public get iam() {
     return {
-      /** Get session from auth token (server-side verification) */
-      getSession: api.verifyAuthToken,
+      /** Get session from access token */
+      getSession: this.getSession.bind(this),
       /** User management (V2) */
       users: {
         /** List authenticated users */
@@ -441,6 +445,21 @@ class Openfort {
         authorize: api.authorize,
       },
     }
+  }
+
+  /**
+   * Get session from access token.
+   * @internal
+   */
+  private getSession(options: {
+    accessToken: string
+    disableCookieCache?: boolean
+  }): Promise<api.authSchemas.GetGetSession200> {
+    const { accessToken, disableCookieCache } = options
+    return api.authApi.getGetSession(
+      disableCookieCache !== undefined ? { disableCookieCache } : undefined,
+      { accessToken },
+    )
   }
 
   /**
