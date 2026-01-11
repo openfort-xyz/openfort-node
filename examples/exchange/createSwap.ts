@@ -9,8 +9,8 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create an account
-const account = await openfort.accounts.create({
+// Create an account (V1 legacy API)
+const account = await openfort.accounts.v1.create({
   chainId,
 });
 
