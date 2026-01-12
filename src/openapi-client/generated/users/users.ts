@@ -9,7 +9,9 @@ import type {
   AuthUserResponse,
   BaseDeleteEntityResponseEntityTypePLAYER,
   BaseEntityListResponseAuthUserResponse,
-  GetAuthUsersParams
+  GetAuthUsersParams,
+  PregenerateAccountResponse,
+  PregenerateUserRequestV2
 } from '../openfortAPI.schemas';
 
 import { openfortApiClient } from '../../openfortApiClient';
@@ -60,6 +62,28 @@ export const deleteUser = (
     },
       options);
     }
+  /**
+ * Pre-generate a user with an embedded account before they authenticate.
+Creates a user record and an embedded account using the provided SSS key shares.
+When the user later authenticates (via email, OAuth, third-party auth, etc.)
+with the same identifier, they will be linked to this pre-generated account.
+
+You can pregenerate using either:
+- `email`: User will be linked when they authenticate with the same email
+- `thirdPartyUserId` + `thirdPartyProvider`: User will be linked when they authenticate via the same third-party provider
+ * @summary Pre-generate a user with an embedded account.
+ */
+export const pregenerateUserV2 = (
+    pregenerateUserRequestV2: PregenerateUserRequestV2,
+ options?: SecondParameter<typeof openfortApiClient<PregenerateAccountResponse>>,) => {
+      return openfortApiClient<PregenerateAccountResponse>(
+      {url: `/v2/users/pregenerate`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: pregenerateUserRequestV2
+    },
+      options);
+    }
   export type GetAuthUsersResult = NonNullable<Awaited<ReturnType<typeof getAuthUsers>>>
 export type GetAuthUserResult = NonNullable<Awaited<ReturnType<typeof getAuthUser>>>
 export type DeleteUserResult = NonNullable<Awaited<ReturnType<typeof deleteUser>>>
+export type PregenerateUserV2Result = NonNullable<Awaited<ReturnType<typeof pregenerateUserV2>>>

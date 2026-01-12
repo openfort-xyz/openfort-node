@@ -1,9 +1,15 @@
 // Error classes
 export * from './errors'
-
-// Generated API functions
+// Generated API functions (main API)
 export * from './generated/accounts/accounts'
 export * from './generated/admin-authentication/admin-authentication'
+export * as authAnonymous from './generated/auth/anonymous/anonymous'
+// Generated API functions (auth API) - namespaced to avoid conflicts
+export * as authApi from './generated/auth/default/default'
+export * as authEmailOtp from './generated/auth/email-otp/email-otp'
+export * as authSchemas from './generated/auth/openfortAuth.schemas'
+export * as authPhoneNumber from './generated/auth/phone-number/phone-number'
+export * as authSiwe from './generated/auth/siwe/siwe'
 export * from './generated/authentication/authentication'
 export * from './generated/authentication-v2/authentication-v2'
 export * from './generated/backend-wallets/backend-wallets'
@@ -24,3 +30,5 @@ export * from './generated/settings/settings'
 export * from './generated/subscriptions/subscriptions'
 export * from './generated/transaction-intents/transaction-intents'
 export * from './generated/users/users'
+// Request options type
+export type { RequestOptions } from './openfortApiClient'
