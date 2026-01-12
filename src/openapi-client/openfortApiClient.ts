@@ -24,6 +24,8 @@ export interface OpenfortClientOptions {
   apiKey: string
   /** Optional wallet secret for X-Wallet-Auth header */
   walletSecret?: string
+  /** Optional publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
+  publishableKey?: string
   /** Optional base URL for the API */
   basePath?: string
   /** If true, logs API requests and responses to the console */
@@ -89,7 +91,7 @@ function validateRequest(config: AxiosRequestConfig): void {
  * @param options - The client configuration options
  */
 export const configure = (options: OpenfortClientOptions): void => {
-  const baseURL = options.basePath || 'https://api.openfort.io/v1'
+  const baseURL = options.basePath || 'https://api.openfort.io'
 
   clientConfig = {
     ...options,
@@ -103,6 +105,9 @@ export const configure = (options: OpenfortClientOptions): void => {
       ...(options.source && { 'X-Source': options.source }),
       ...(options.sourceVersion && {
         'X-Source-Version': options.sourceVersion,
+      }),
+      ...(options.publishableKey && {
+        'x-project-key': options.publishableKey,
       }),
     },
   })
@@ -122,8 +127,10 @@ export const configure = (options: OpenfortClientOptions): void => {
 
   // Add request interceptor for authentication and data transformation
   axiosInstance.interceptors.request.use(async (config) => {
-    // Add API key authentication
-    config.headers.Authorization = `Bearer ${options.apiKey}`
+    // Add API key authentication only if not already set (e.g., by accessToken)
+    if (!config.headers.Authorization) {
+      config.headers.Authorization = `Bearer ${options.apiKey}`
+    }
 
     // Convert BigInts in request body to strings
     if (config.data) {
@@ -194,13 +201,41 @@ export const configure = (options: OpenfortClientOptions): void => {
 }
 
 /**
- * Adds an idempotency key to request config if provided
+ * Request options for the API client
  */
-const addIdempotencyKey = (
+export interface RequestOptions {
+  /** Idempotency key for the request */
+  idempotencyKey?: string
+  /** Access token for authenticated requests (overrides default Authorization header) */
+  accessToken?: string
+}
+
+/**
+ * Adds custom headers to request config based on options
+ */
+const addRequestHeaders = (
   config: AxiosRequestConfig,
-  idempotencyKey?: string,
+  options?: RequestOptions | string,
 ): AxiosRequestConfig => {
-  if (!idempotencyKey) {
+  // Support legacy string parameter (idempotency key only)
+  const opts: RequestOptions | undefined =
+    typeof options === 'string' ? { idempotencyKey: options } : options
+
+  if (!opts) {
+    return config
+  }
+
+  const additionalHeaders: Record<string, string> = {}
+
+  if (opts.idempotencyKey) {
+    additionalHeaders['X-Idempotency-Key'] = opts.idempotencyKey
+  }
+
+  if (opts.accessToken) {
+    additionalHeaders.Authorization = `Bearer ${opts.accessToken}`
+  }
+
+  if (Object.keys(additionalHeaders).length === 0) {
     return config
   }
 
@@ -208,7 +243,7 @@ const addIdempotencyKey = (
     ...config,
     headers: {
       ...(config.headers || {}),
-      'X-Idempotency-Key': idempotencyKey,
+      ...additionalHeaders,
     },
   }
 }
@@ -428,20 +463,20 @@ function handleResponseError(
  * This function is called by generated API functions to make HTTP requests.
  *
  * @param config - The Axios request configuration
- * @param idempotencyKey - Optional idempotency key for the request
+ * @param options - Optional request options (idempotency key, access token)
  * @returns Promise resolving to the response data
  */
 export const openfortApiClient = async <T>(
   config: AxiosRequestConfig,
-  idempotencyKey?: string,
+  options?: RequestOptions | string,
 ): Promise<T> => {
   // Validate the request
   validateRequest(config)
 
-  const configWithIdempotencyKey = addIdempotencyKey(config, idempotencyKey)
+  const configWithHeaders = addRequestHeaders(config, options)
 
   try {
-    const response = await axiosInstance(configWithIdempotencyKey)
+    const response = await axiosInstance(configWithHeaders)
     return response.data as T
   } catch (error) {
     // Handle validation errors (pass through)

@@ -1,9 +1,19 @@
+import {
+  entropy,
+  type Share,
+  type ShieldAuthOptions,
+  ShieldAuthProvider,
+  ShieldSDK,
+} from '@openfort/shield-js'
 import fetch from 'node-fetch'
 import * as api from './openapi-client'
 import { configure } from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
 import { EvmClient } from './wallets/evm/evmClient'
 import { SolanaClient } from './wallets/solana/solanaClient'
+
+// Re-export ShieldAuthProvider for convenience
+export { ShieldAuthProvider } from '@openfort/shield-js'
 
 /**
  * Configuration options for the Openfort client
@@ -15,6 +25,24 @@ export interface OpenfortOptions {
   walletSecret?: string
   /** Enable debug logging (optional) */
   debugging?: boolean
+  /** Publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
+  publishableKey?: string
+}
+
+/**
+ * Configuration for pre-generating embedded accounts with Shield
+ */
+export interface ShieldConfiguration {
+  /** Shield API key */
+  shieldApiKey: string
+  /** Shield API secret */
+  shieldApiSecret: string
+  /** Encryption share for the recovery share */
+  encryptionShare: string
+  /** Shield auth provider type */
+  shieldAuthProvider: ShieldAuthProvider
+  /** Shield API base URL (optional, defaults to https://shield.openfort.xyz) */
+  shieldApiBaseUrl?: string
 }
 
 /**
@@ -30,11 +58,11 @@ export interface OpenfortOptions {
  * // Create a player
  * const player = await openfort.players.create({ name: 'Player-1' });
  *
- * // Create an account
- * const account = await openfort.accounts.create({ player: player.id, chainId: 1 });
+ * // Get an account (V2)
+ * const account = await openfort.accounts.get('acc_...');
  *
- * // Create an EVM wallet
- * const evmAccount = await openfort.evm.createAccount({ user: player.id });
+ * // Create an account (V1 legacy)
+ * const newAccount = await openfort.accounts.v1.create({ player: player.id, chainId: 1 });
  * ```
  */
 class Openfort {
@@ -61,6 +89,8 @@ class Openfort {
       basePath: this.basePath,
       walletSecret: this.walletSecret,
       debugging: typeof options === 'object' ? options.debugging : undefined,
+      publishableKey:
+        typeof options === 'object' ? options.publishableKey : undefined,
     })
   }
 
@@ -69,37 +99,21 @@ class Openfort {
   // ============================================
 
   /**
-   * Account management endpoints
+   * Account management endpoints (V2 default)
+   *
+   * @example
+   * ```typescript
+   * // V2 (default)
+   * const accounts = await openfort.accounts.list({ player: 'pla_...' });
+   * const account = await openfort.accounts.get('acc_...');
+   * await openfort.accounts.switchChain('acc_...', { chainId: 137 });
+   *
+   * // V1 (legacy)
+   * const legacyAccounts = await openfort.accounts.v1.list({ player: 'pla_...' });
+   * await openfort.accounts.v1.create({ player: 'pla_...', chainId: 1 });
+   * ```
    */
   public get accounts() {
-    return {
-      /** List accounts */
-      list: api.getAccounts,
-      /** Create an account */
-      create: api.createAccount,
-      /** Get an account by ID */
-      get: api.getAccount,
-      /** Request transfer of ownership */
-      requestTransferOwnership: api.requestTransferOwnership,
-      /** Cancel transfer of ownership */
-      cancelTransferOwnership: api.cancelTransferOwnership,
-      /** Sign a payload */
-      signPayload: api.signPayload,
-      /** Sync account state */
-      sync: api.syncAccount,
-      /** Deploy an account */
-      deploy: api.deployAccount,
-      /** Start recovery */
-      startRecovery: api.startRecovery,
-      /** Complete recovery */
-      completeRecovery: api.completeRecovery,
-    }
-  }
-
-  /**
-   * V2 Account management endpoints
-   */
-  public get accountsV2() {
     return {
       /** List accounts */
       list: api.getAccountsV2,
@@ -107,6 +121,29 @@ class Openfort {
       get: api.getAccountV2,
       /** Switch chain */
       switchChain: api.switchChainV2,
+      /** V1 account methods (legacy) */
+      v1: {
+        /** List accounts */
+        list: api.getAccounts,
+        /** Create an account */
+        create: api.createAccount,
+        /** Get an account by ID */
+        get: api.getAccount,
+        /** Request transfer of ownership */
+        requestTransferOwnership: api.requestTransferOwnership,
+        /** Cancel transfer of ownership */
+        cancelTransferOwnership: api.cancelTransferOwnership,
+        /** Sign a payload */
+        signPayload: api.signPayload,
+        /** Sync account state */
+        sync: api.syncAccount,
+        /** Deploy an account */
+        deploy: api.deployAccount,
+        /** Start recovery */
+        startRecovery: api.startRecovery,
+        /** Complete recovery */
+        completeRecovery: api.completeRecovery,
+      },
     }
   }
 
@@ -323,35 +360,221 @@ class Openfort {
   }
 
   // ============================================
-  // IAM API
+  // Auth API
   // ============================================
 
   /**
-   * Identity and access management endpoints
+   * Authentication endpoints
+   *
+   * @example
+   * ```typescript
+   * await openfort.auth.verifyThirdParty({ provider: 'firebase', token: '...' });
+   * ```
+   */
+  public get auth() {
+    return {
+      /** Verify third-party auth provider token (Supabase, Firebase, etc.) */
+      verifyThirdParty: api.thirdPartyV2,
+    }
+  }
+
+  // ============================================
+  // IAM API (V2 default, V1 legacy)
+  // ============================================
+
+  /**
+   * Identity and access management endpoints (V2 default)
+   *
+   * @example
+   * ```typescript
+   * // V2 (default) - Users
+   * const users = await openfort.iam.users.list();
+   * const user = await openfort.iam.users.get('usr_...');
+   * await openfort.iam.users.pregenerate({ email: 'user@example.com' }, shieldConfig);
+   *
+   * // V1 (legacy) - Players
+   * const players = await openfort.iam.v1.players.list();
+   * await openfort.iam.v1.players.create(request, shieldConfig);
+   * ```
    */
   public get iam() {
     return {
-      /** Create auth player */
-      createAuthPlayer: api.createAuthPlayer,
-      /** Verify auth token */
-      verifyAuthToken: api.verifyAuthToken,
-      /** Verify OAuth token */
-      verifyOAuthToken: api.verifyOAuthToken,
-      /** Create OAuth config */
-      createOAuthConfig: api.createOAuthConfig,
-      /** Delete auth player */
-      deleteAuthPlayer: api.deleteAuthPlayer,
-      /** Delete OAuth config */
-      deleteOAuthConfig: api.deleteOAuthConfig,
-      /** Get auth players */
-      getAuthPlayers: api.getAuthPlayers,
-      /** Get OAuth config */
-      getOAuthConfig: api.getOAuthConfig,
-      /** List OAuth config */
-      listOAuthConfig: api.listOAuthConfig,
-      /** Authorize */
-      authorize: api.authorize,
+      /** Get session from access token */
+      getSession: this.getSession.bind(this),
+      /** User management (V2) */
+      users: {
+        /** List authenticated users */
+        list: api.getAuthUsers,
+        /** Get an authenticated user by ID */
+        get: api.getAuthUser,
+        /** Delete a user */
+        delete: api.deleteUser,
+        /**
+         * Pre-generate a user with an embedded account before they authenticate.
+         * Creates a user record and an embedded account.
+         * @param req - The pregenerate user request
+         * @param shieldConfig - Optional Shield configuration for storing the recovery share
+         * @returns The pregenerated account response
+         */
+        pregenerate: this.pregenerateUser.bind(this),
+      },
+      /** OAuth configuration */
+      oauthConfig: {
+        /** Create OAuth config */
+        create: api.createOAuthConfig,
+        /** Get OAuth config */
+        get: api.getOAuthConfig,
+        /** List OAuth configs */
+        list: api.listOAuthConfig,
+        /** Delete OAuth config */
+        delete: api.deleteOAuthConfig,
+      },
+      /** V1 IAM methods (legacy) */
+      v1: {
+        /** Auth player management (V1) */
+        players: {
+          /**
+           * Create an auth player with optional embedded account pre-generation.
+           * @param req - The create auth player request
+           * @param shieldConfig - Optional Shield configuration for storing the recovery share
+           * @returns The auth player response
+           */
+          create: this.createAuthPlayerWithShield.bind(this),
+          /** List auth players */
+          list: api.getAuthPlayers,
+          /** Get an auth player by ID */
+          get: api.getAuthPlayer,
+          /** Delete an auth player */
+          delete: api.deleteAuthPlayer,
+        },
+        /** Verify auth token */
+        verifyToken: api.verifyAuthToken,
+        /** Verify OAuth token */
+        verifyOAuthToken: api.verifyOAuthToken,
+        /** Authorize */
+        authorize: api.authorize,
+      },
     }
+  }
+
+  /**
+   * Get session from access token.
+   * @internal
+   */
+  private getSession(options: {
+    accessToken: string
+    disableCookieCache?: boolean
+  }): Promise<api.authSchemas.GetGetSession200> {
+    const { accessToken, disableCookieCache } = options
+    return api.authApi.getGetSession(
+      disableCookieCache !== undefined ? { disableCookieCache } : undefined,
+      { accessToken },
+    )
+  }
+
+  /**
+   * Pre-generate a user with an embedded account (V2).
+   * If Shield pre-registration fails, the created user will be deleted.
+   * @internal
+   */
+  private async pregenerateUser(
+    req: api.PregenerateUserRequestV2,
+    shieldConfig: ShieldConfiguration,
+  ): Promise<api.AccountV2Response> {
+    const response = await api.pregenerateUserV2(req)
+
+    try {
+      await this.preRegisterWithShield(
+        response.recoveryShare,
+        response.user,
+        req.thirdPartyUserId,
+        shieldConfig,
+      )
+
+      // Return without recoveryShare (it's been stored in Shield)
+      const { recoveryShare: _, ...accountResponse } = response
+      return accountResponse
+    } catch (error) {
+      // If anything fails after user creation, delete the created user
+      await api.deleteUser(response.user)
+      throw error
+    }
+  }
+
+  /**
+   * Create an auth player with optional Shield pre-registration (V1).
+   * @internal
+   */
+  private async createAuthPlayerWithShield(
+    req: api.CreateAuthPlayerRequest,
+    shieldConfig?: ShieldConfiguration,
+  ): Promise<api.AuthPlayerResponse> {
+    if (req.preGenerateEmbeddedAccount && !shieldConfig) {
+      throw new Error(
+        'Pre-generating embedded account requires Shield configuration.',
+      )
+    }
+
+    const response = await api.createAuthPlayer(req)
+
+    if (response.recoveryShare && shieldConfig) {
+      await this.preRegisterWithShield(
+        response.recoveryShare,
+        response.id,
+        req.thirdPartyUserId,
+        shieldConfig,
+      )
+    }
+
+    // Return without recoveryShare (it's been stored in Shield)
+    const { recoveryShare: _, ...playerResponse } = response
+    return playerResponse as api.AuthPlayerResponse
+  }
+
+  /**
+   * Pre-register a recovery share with Shield.
+   * @internal
+   */
+  private async preRegisterWithShield(
+    recoveryShare: string,
+    openfortUserId: string,
+    thirdPartyUserId: string | undefined,
+    config: ShieldConfiguration,
+  ): Promise<void> {
+    let externalUserId: string
+
+    if (config.shieldAuthProvider === ShieldAuthProvider.OPENFORT) {
+      externalUserId = openfortUserId
+    } else if (config.shieldAuthProvider === ShieldAuthProvider.CUSTOM) {
+      if (!thirdPartyUserId) {
+        throw new Error(
+          'thirdPartyUserId is required when using CUSTOM Shield auth provider.',
+        )
+      }
+      externalUserId = thirdPartyUserId
+    } else {
+      throw new Error('Invalid Shield auth provider.')
+    }
+
+    const authOptions: ShieldAuthOptions = {
+      authProvider: config.shieldAuthProvider,
+      encryptionPart: config.encryptionShare,
+      externalUserId,
+      apiKey: config.shieldApiKey,
+      apiSecret: config.shieldApiSecret,
+    }
+
+    const share: Share = {
+      secret: recoveryShare,
+      entropy: entropy.project,
+    }
+
+    const shieldSDK = new ShieldSDK({
+      apiKey: config.shieldApiKey,
+      baseURL: config.shieldApiBaseUrl,
+    })
+
+    await shieldSDK.preRegister(share, authOptions)
   }
 
   // ============================================
@@ -438,45 +661,47 @@ class Openfort {
   }
 
   /**
-   * Signs a nonce with the API key.
-   * @param nonce - The nonce to sign
-   * @returns The signed nonce
+   * Creates an encryption session with Shield.
+   * This is a setup step for configuring encryption before using pregenerate.
+   *
+   * @param shieldApiKey - Shield API key
+   * @param shieldApiSecret - Shield API secret
+   * @param encryptionShare - Encryption share for the recovery share
+   * @param shieldApiBaseUrl - Shield API base URL (defaults to https://shield.openfort.xyz)
+   * @returns The encryption session ID
+   *
+   * @example
+   * ```typescript
+   * const sessionId = await openfort.createEncryptionSession(
+   *   'shield_api_key',
+   *   'shield_api_secret',
+   *   'encryption_share',
+   * );
+   * ```
    */
-  public async signNonce(nonce: string): Promise<string> {
-    return await sign(this.apiKey, nonce)
-  }
-
-  /**
-   * Registers a recovery session with Shield.
-   * @param apiKey - Shield API key
-   * @param secretKey - Shield secret key
-   * @param encryptionPart - Encryption part
-   * @param shieldAPIBaseURL - Shield API base URL
-   * @returns The session ID
-   */
-  public async registerRecoverySession(
-    apiKey: string,
-    secretKey: string,
-    encryptionPart: string,
-    shieldAPIBaseURL = 'https://shield.openfort.io',
+  public async createEncryptionSession(
+    shieldApiKey: string,
+    shieldApiSecret: string,
+    encryptionShare: string,
+    shieldApiBaseUrl = 'https://shield.openfort.xyz',
   ): Promise<string> {
     const response = await fetch(
-      `${shieldAPIBaseURL}/project/encryption-session`,
+      `${shieldApiBaseUrl}/project/encryption-session`,
       {
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'x-api-secret': secretKey,
+          'x-api-key': shieldApiKey,
+          'x-api-secret': shieldApiSecret,
         },
         method: 'POST',
         body: JSON.stringify({
-          encryption_part: encryptionPart,
+          encryption_part: encryptionShare,
         }),
       },
     )
 
     if (!response.ok) {
-      throw new Error('Failed to authorize user')
+      throw new Error('Failed to create encryption session')
     }
 
     const jsonResponse = await response.json()
