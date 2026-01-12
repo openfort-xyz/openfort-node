@@ -19,4 +19,23 @@ export default defineConfig({
       workspace: './src/openapi-client',
     },
   },
+  openfortAuth: {
+    input: {
+      target: './openapi-auth.json',
+    },
+    output: {
+      clean: false,
+      target: './generated/auth',
+      mode: 'tags-split',
+      mock: false,
+      baseUrl: '/iam/v2/auth',
+      override: {
+        mutator: {
+          path: './openfortApiClient.ts',
+          name: 'openfortApiClient',
+        },
+      },
+      workspace: './src/openapi-client',
+    },
+  },
 })

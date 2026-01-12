@@ -2633,6 +2633,112 @@ export interface BaseDeleteEntityResponseEntityTypePLAYER {
 
 export type UserDeleteResponse = BaseDeleteEntityResponseEntityTypePLAYER;
 
+export interface SmartAccountData {
+  implementationType: string;
+  factoryAddress?: string;
+  implementationAddress: string;
+  salt?: string;
+  deployedTx?: string;
+  deployedAt?: number;
+  active: boolean;
+}
+
+export interface PasskeyEnv {
+  name?: string;
+  os?: string;
+  osVersion?: string;
+  device?: string;
+}
+
+export interface RecoveryMethodDetails {
+  passkeyId?: string;
+  passkeyEnv?: PasskeyEnv;
+}
+
+export interface PregenerateAccountResponse {
+  id: string;
+  user: string;
+  accountType: string;
+  address: string;
+  ownerAddress?: string;
+  chainType: string;
+  chainId?: number;
+  createdAt: number;
+  updatedAt: number;
+  smartAccount?: SmartAccountData;
+  recoveryMethod?: string;
+  recoveryMethodDetails?: RecoveryMethodDetails;
+  /** The recovery share for the user's embedded signer.
+This should be stored securely and provided to the user for account recovery. */
+  recoveryShare: string;
+}
+
+/**
+ * Enum of the supporting third party auth providers.
+ */
+export type ThirdPartyOAuthProvider = typeof ThirdPartyOAuthProvider[keyof typeof ThirdPartyOAuthProvider];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ThirdPartyOAuthProvider = {
+  accelbyte: 'accelbyte',
+  firebase: 'firebase',
+  lootlocker: 'lootlocker',
+  playfab: 'playfab',
+  supabase: 'supabase',
+  custom: 'custom',
+  oidc: 'oidc',
+  'better-auth': 'better-auth',
+} as const;
+
+/**
+ * The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
+Defaults to "Smart Account".
+ */
+export type PregenerateUserRequestV2AccountType = typeof PregenerateUserRequestV2AccountType[keyof typeof PregenerateUserRequestV2AccountType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const PregenerateUserRequestV2AccountType = {
+  Externally_Owned_Account: 'Externally Owned Account',
+  Smart_Account: 'Smart Account',
+  Delegated_Account: 'Delegated Account',
+} as const;
+
+/**
+ * The chain type. "EVM" or "SVM". Defaults to "EVM".
+ */
+export type PregenerateUserRequestV2ChainType = typeof PregenerateUserRequestV2ChainType[keyof typeof PregenerateUserRequestV2ChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const PregenerateUserRequestV2ChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+export interface PregenerateUserRequestV2 {
+  /** The email address of the user to pregenerate.
+Required if thirdPartyUserId is not provided. */
+  email?: string;
+  /** The third-party user ID from an external auth provider (Firebase, Supabase, etc.).
+Required if email is not provided. */
+  thirdPartyUserId?: string;
+  /** The third-party auth provider. Required when thirdPartyUserId is provided. */
+  thirdPartyProvider?: ThirdPartyOAuthProvider;
+  /** The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
+Defaults to "Smart Account". */
+  accountType?: PregenerateUserRequestV2AccountType;
+  /** The chain type. "EVM" or "SVM". Defaults to "EVM". */
+  chainType?: PregenerateUserRequestV2ChainType;
+  /** The chain ID. Required for Smart Account and Delegated Account types.
+Must be a [supported chain](/development/chains). */
+  chainId?: number;
+  /** The implementation type for Smart Account or Delegated Account (e.g. Calibur, UpgradeableV6).
+Required for Smart Account and Delegated Account types. */
+  implementationType?: string;
+}
+
 export interface RecoverV2Response {
   id: string;
   account: string;
@@ -2692,28 +2798,6 @@ export interface CreateEmbeddedRequest {
   signerUuid?: string;
   /** The type of smart account that will be created (e.g. UpgradeableV6, UpgradeableV5, Calibur, Simple). Defaults to UpgradeableV6 in mainnets. Must support EIP-7702 for Delegated Accounts. */
   implementationType?: string;
-}
-
-export interface SmartAccountData {
-  implementationType: string;
-  factoryAddress?: string;
-  implementationAddress: string;
-  salt?: string;
-  deployedTx?: string;
-  deployedAt?: number;
-  active: boolean;
-}
-
-export interface PasskeyEnv {
-  name?: string;
-  os?: string;
-  osVersion?: string;
-  device?: string;
-}
-
-export interface RecoveryMethodDetails {
-  passkeyId?: string;
-  passkeyEnv?: PasskeyEnv;
 }
 
 export interface AccountV2Response {
@@ -3597,24 +3681,6 @@ The client should poll the server to check if the user has authorized the applic
   /** One of the providers supported by Openfort */
   provider: OAuthProvider;
 }
-
-/**
- * Enum of the supporting third party auth providers.
- */
-export type ThirdPartyOAuthProvider = typeof ThirdPartyOAuthProvider[keyof typeof ThirdPartyOAuthProvider];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ThirdPartyOAuthProvider = {
-  accelbyte: 'accelbyte',
-  firebase: 'firebase',
-  lootlocker: 'lootlocker',
-  playfab: 'playfab',
-  supabase: 'supabase',
-  custom: 'custom',
-  oidc: 'oidc',
-  'better-auth': 'better-auth',
-} as const;
 
 export interface ThirdPartyLinkRequest {
   provider: ThirdPartyOAuthProvider;
