@@ -41,7 +41,7 @@ export interface ShieldConfiguration {
   encryptionShare: string
   /** Shield auth provider type */
   shieldAuthProvider: ShieldAuthProvider
-  /** Shield API base URL (optional, defaults to https://shield.openfort.xyz) */
+  /** Shield API base URL (optional, defaults to https://shield.openfort.io) */
   shieldApiBaseUrl?: string
 }
 
@@ -667,7 +667,7 @@ class Openfort {
    * @param shieldApiKey - Shield API key
    * @param shieldApiSecret - Shield API secret
    * @param encryptionShare - Encryption share for the recovery share
-   * @param shieldApiBaseUrl - Shield API base URL (defaults to https://shield.openfort.xyz)
+   * @param shieldApiBaseUrl - Shield API base URL (defaults to https://shield.openfort.io)
    * @returns The encryption session ID
    *
    * @example
@@ -683,7 +683,7 @@ class Openfort {
     shieldApiKey: string,
     shieldApiSecret: string,
     encryptionShare: string,
-    shieldApiBaseUrl = 'https://shield.openfort.xyz',
+    shieldApiBaseUrl = 'https://shield.openfort.io',
   ): Promise<string> {
     const response = await fetch(
       `${shieldApiBaseUrl}/project/encryption-session`,
