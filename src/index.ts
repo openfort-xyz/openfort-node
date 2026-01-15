@@ -337,8 +337,6 @@ class Openfort {
       update: api.updateContract,
       /** Delete a contract */
       delete: api.deleteContract,
-      /** Read a contract */
-      read: api.readContract,
     }
   }
 
@@ -539,7 +537,6 @@ class Openfort {
    * // V2 (default) - Users
    * const users = await openfort.iam.users.list();
    * const user = await openfort.iam.users.get('usr_...');
-   * await openfort.iam.users.pregenerate({ email: 'user@example.com' }, shieldConfig);
    *
    * // V1 - Players
    * const players = await openfort.iam.v1.players.list();
@@ -558,14 +555,6 @@ class Openfort {
         get: api.getAuthUser,
         /** Delete a user */
         delete: api.deleteUser,
-        /**
-         * Pre-generate a user with an embedded account before they authenticate.
-         * Creates a user record and an embedded account.
-         * @param req - The pregenerate user request
-         * @param shieldConfig - Optional Shield configuration for storing the recovery share
-         * @returns The pregenerated account response
-         */
-        pregenerate: this.pregenerateUser.bind(this),
       },
       /** OAuth configuration */
       authProvidersConfig: {

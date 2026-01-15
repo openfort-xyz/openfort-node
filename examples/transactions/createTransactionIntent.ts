@@ -9,11 +9,6 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create an account (V1 legacy API)
-const account = await openfort.accounts.v1.create({
-  chainId,
-});
-
 // Create a policy for gas sponsorship
 const policy = await openfort.policies.create({
   name: `TxPolicy-${Date.now()}`,
@@ -23,9 +18,19 @@ const policy = await openfort.policies.create({
   },
 });
 
+const contract = await openfort.contracts.create({
+  name: "My Token Contract",
+  chainId,
+  address: "0xbabe0001489722187FbaF0689C47B2f5E97545C5",
+  // Optional: provide ABI for function name validation
+  // abi: [...]
+});
+
 // Create a policy rule to allow all account functions
 await openfort.policyRules.create({
-  type: "account_functions",
+  type: "contract_functions",
+  functionName: "All functions",
+  wildcard: true,
   policy: policy.id,
 });
 
@@ -35,9 +40,9 @@ const transactionIntent = await openfort.transactionIntents.create({
   policy: policy.id,
   interactions: [
     {
-      contract: "0x38090d1636069c0ff1af6bc1737fb996b7f63ac0",
+      contract: contract.id,
       functionName: "mint",
-      functionArgs: [account.address],
+      functionArgs: ['0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d', '123'],
     },
   ],
 });

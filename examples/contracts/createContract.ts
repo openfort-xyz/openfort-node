@@ -11,9 +11,9 @@ const chainId = Number(process.env.CHAIN_ID) || 80002;
 
 // Create a contract reference
 const contract = await openfort.contracts.create({
-  name: "My NFT Contract",
+  name: "My Token Contract",
   chainId,
-  address: "0x38090d1636069c0ff1af6bc1737fb996b7f63ac0",
+  address: "0xbabe0001489722187FbaF0689C47B2f5E97545C5",
   // Optional: provide ABI for function name validation
   // abi: [...]
 });
