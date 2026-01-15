@@ -74,9 +74,9 @@ pnpm example evm/accounts/createAccount.ts
 | `signTransaction.ts` | Sign a transaction                 |
 
 #### Embedded Wallets (`evm/embedded/`)
-| Example           | Description                              |
-| ----------------- | ---------------------------------------- |
-| `pregenerate.ts`  | Pre-generate a user with embedded wallet |
+| Example          | Description                              |
+| ---------------- | ---------------------------------------- |
+| `pregenerate.ts` | Pre-generate a user with embedded wallet |
 
 > **Note:** The `pregenerate.ts` example requires Shield configuration. See `.env.example` for required environment variables:
 > - `SHIELD_API_KEY`
@@ -115,11 +115,10 @@ pnpm example evm/accounts/createAccount.ts
 
 ### Contracts
 
-| Example                       | Description               |
-| ----------------------------- | ------------------------- |
-| `contracts/createContract.ts` | Register a contract       |
-| `contracts/listContracts.ts`  | List all contracts        |
-| `contracts/readContract.ts`   | Read data from a contract |
+| Example                       | Description         |
+| ----------------------------- | ------------------- |
+| `contracts/createContract.ts` | Register a contract |
+| `contracts/listContracts.ts`  | List all contracts  |
 
 ### Transaction Intents
 
@@ -139,12 +138,12 @@ pnpm example evm/accounts/createAccount.ts
 
 ### IAM (Identity & Access Management)
 
-| Example                     | Description                                      |
-| --------------------------- | ------------------------------------------------ |
-| `iam/listUsers.ts`          | List all authenticated users                     |
-| `iam/getUser.ts`            | Get a user by ID                                 |
-| `iam/deleteUser.ts`         | Delete a user                                    |
-| `iam/getSession.ts`         | Verify auth token server-side                    |
+| Example             | Description                   |
+| ------------------- | ----------------------------- |
+| `iam/listUsers.ts`  | List all authenticated users  |
+| `iam/getUser.ts`    | Get a user by ID              |
+| `iam/deleteUser.ts` | Delete a user                 |
+| `iam/getSession.ts` | Verify auth token server-side |
 
 ### Webhooks
 

@@ -337,8 +337,6 @@ class Openfort {
       update: api.updateContract,
       /** Delete a contract */
       delete: api.deleteContract,
-      /** Read a contract */
-      read: api.readContract,
     }
   }
 
