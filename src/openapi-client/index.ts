@@ -1,7 +1,15 @@
 // Error classes
 export * from './errors'
+export * from './generated/accs-v1/accs-v1'
+export * from './generated/accs-v2/accs-v2'
 // Generated API functions (main API)
 export * from './generated/admin-authentication/admin-authentication'
+export * as authApi from './generated/auth/auth-v2/auth-v2'
+// Generated API functions (auth API) - namespaced to avoid conflicts
+export * as authSchemas from './generated/auth/openfortAuth.schemas'
+export * from './generated/auth-v1/auth-v1'
+export * from './generated/auth-v2/auth-v2'
+export * from './generated/backend-wallets/backend-wallets'
 export * from './generated/contracts/contracts'
 export * from './generated/events/events'
 export * from './generated/exchange/exchange'
@@ -20,13 +28,5 @@ export * from './generated/settings/settings'
 export * from './generated/subscriptions/subscriptions'
 export * from './generated/transaction-intents/transaction-intents'
 export * from './generated/users/users'
-export * from './generated/backend-wallets/backend-wallets'
-// Generated API functions (auth API) - namespaced to avoid conflicts
-export * as authSchemas from './generated/auth/openfortAuth.schemas'
-export * as authApi from './generated/auth/auth-v2/auth-v2'
-export * from './generated/accs-v1/accs-v1'
-export * from './generated/accs-v2/accs-v2'
-export * from './generated/auth-v1/auth-v1'
-export * from './generated/auth-v2/auth-v2'
 // Request options type
 export type { RequestOptions } from './openfortApiClient'
