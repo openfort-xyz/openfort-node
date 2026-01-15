@@ -2800,6 +2800,445 @@ export interface CreateEmbeddedRequest {
   implementationType?: string;
 }
 
+/**
+ * The type of object.
+ */
+export type BackendWalletResponseObject = typeof BackendWalletResponseObject[keyof typeof BackendWalletResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const BackendWalletResponseObject = {
+  backendWallet: 'backendWallet',
+} as const;
+
+/**
+ * The chain type the wallet is associated with.
+ */
+export type BackendWalletResponseChainType = typeof BackendWalletResponseChainType[keyof typeof BackendWalletResponseChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const BackendWalletResponseChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Backend wallet details response.
+ */
+export interface BackendWalletResponse {
+  /**
+   * The type of object.
+   */
+  object: BackendWalletResponseObject;
+  /** The wallet ID (starts with `acc_`). */
+  id: string;
+  /** The wallet address. */
+  address: string;
+  /** The chain type the wallet is associated with. */
+  chainType: BackendWalletResponseChainType;
+  /** Optional name for the wallet. */
+  name?: string;
+  /** Creation timestamp (Unix epoch seconds). */
+  createdAt: number;
+  /** Last updated timestamp (Unix epoch seconds). */
+  updatedAt: number;
+}
+
+/**
+ * The type of object.
+ */
+export type BackendWalletListResponseObject = typeof BackendWalletListResponseObject[keyof typeof BackendWalletListResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const BackendWalletListResponseObject = {
+  list: 'list',
+} as const;
+
+/**
+ * List of backend wallets response.
+ */
+export interface BackendWalletListResponse {
+  /**
+   * The type of object.
+   */
+  object: BackendWalletListResponseObject;
+  /** API endpoint URL. */
+  url: string;
+  /** List of backend wallets. */
+  data: BackendWalletResponse[];
+  /** Starting index. */
+  start: number;
+  /** Ending index. */
+  end: number;
+  /** Total number of wallets. */
+  total: number;
+}
+
+/**
+ * Filter by chain type.
+ */
+export type BackendWalletListQueriesChainType = typeof BackendWalletListQueriesChainType[keyof typeof BackendWalletListQueriesChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const BackendWalletListQueriesChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Query parameters for listing backend wallets.
+ */
+export interface BackendWalletListQueries {
+  /** Number of wallets to return (default: 10, max: 100). */
+  limit?: number;
+  /** Number of wallets to skip (for pagination). */
+  skip?: number;
+  /** Filter by chain type. */
+  chainType?: BackendWalletListQueriesChainType;
+  /** Filter by wallet address. */
+  address?: string;
+  /** Filter by wallet name. */
+  name?: string;
+  /** Filter by associated wallet ID (starts with `pla_`). */
+  wallet?: string;
+}
+
+/**
+ * The type of object.
+ */
+export type CreateBackendWalletResponseObject = typeof CreateBackendWalletResponseObject[keyof typeof CreateBackendWalletResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateBackendWalletResponseObject = {
+  account: 'account',
+} as const;
+
+/**
+ * The chain type the wallet is associated with.
+ */
+export type CreateBackendWalletResponseChainType = typeof CreateBackendWalletResponseChainType[keyof typeof CreateBackendWalletResponseChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateBackendWalletResponseChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Response from creating a new backend wallet account.
+ */
+export interface CreateBackendWalletResponse {
+  /**
+   * The type of object.
+   */
+  object: CreateBackendWalletResponseObject;
+  /** The created account ID (starts with `acc_`). */
+  id: string;
+  /** The wallet address generated for this account. */
+  address: string;
+  /** The chain type the wallet is associated with. */
+  chainType: CreateBackendWalletResponseChainType;
+  /** Creation timestamp (Unix epoch seconds). */
+  createdAt: number;
+}
+
+/**
+ * The chain type for the new wallet.
+ */
+export type CreateBackendWalletRequestChainType = typeof CreateBackendWalletRequestChainType[keyof typeof CreateBackendWalletRequestChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateBackendWalletRequestChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Request to create a new backend wallet account.
+ */
+export interface CreateBackendWalletRequest {
+  /** The chain type for the new wallet. */
+  chainType: CreateBackendWalletRequestChainType;
+  /** The wallet ID to associate with this wallet (starts with `pla_`). */
+  wallet?: string;
+  /** Optional name for the wallet. */
+  name?: string;
+}
+
+/**
+ * The type of object.
+ */
+export type DeleteBackendWalletResponseObject = typeof DeleteBackendWalletResponseObject[keyof typeof DeleteBackendWalletResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const DeleteBackendWalletResponseObject = {
+  backendWallet: 'backendWallet',
+} as const;
+
+/**
+ * Response from deleting a backend wallet.
+ */
+export interface DeleteBackendWalletResponse {
+  /**
+   * The type of object.
+   */
+  object: DeleteBackendWalletResponseObject;
+  /** The deleted wallet ID. */
+  id: string;
+  /** Whether the wallet was deleted. */
+  deleted: boolean;
+}
+
+/**
+ * The type of object.
+ */
+export type SignResponseObject = typeof SignResponseObject[keyof typeof SignResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const SignResponseObject = {
+  signature: 'signature',
+} as const;
+
+/**
+ * Response from signing data via backend wallet.
+ */
+export interface SignResponse {
+  /**
+   * The type of object.
+   */
+  object: SignResponseObject;
+  /** The account ID that signed the data (starts with `acc_`). */
+  account: string;
+  /** The signature bytes (hex-encoded). */
+  signature: string;
+}
+
+/**
+ * Request to sign data via backend wallet.
+ */
+export interface SignRequest {
+  /** The data to sign (hex-encoded transaction data or message hash). */
+  data: string;
+}
+
+/**
+ * The type of object.
+ */
+export type ExportPrivateKeyResponseObject = typeof ExportPrivateKeyResponseObject[keyof typeof ExportPrivateKeyResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ExportPrivateKeyResponseObject = {
+  exportedKey: 'exportedKey',
+} as const;
+
+/**
+ * Response from exporting a private key with E2E encryption.
+ */
+export interface ExportPrivateKeyResponse {
+  /**
+   * The type of object.
+   */
+  object: ExportPrivateKeyResponseObject;
+  /** The private key encrypted with RSA-OAEP SHA-256 using your ephemeral public key (base64-encoded).
+Decrypt using your ephemeral RSA private key. */
+  encryptedPrivateKey: string;
+}
+
+/**
+ * Request to export private key with E2E encryption.
+ */
+export interface ExportPrivateKeyRequest {
+  /** Client's ephemeral RSA-4096 public key for end-to-end encryption (base64 SPKI DER format).
+The backend wallet will encrypt the private key using RSA-OAEP SHA-256. */
+  encryptionKey: string;
+}
+
+/**
+ * The type of object.
+ */
+export type ImportPrivateKeyResponseObject = typeof ImportPrivateKeyResponseObject[keyof typeof ImportPrivateKeyResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ImportPrivateKeyResponseObject = {
+  account: 'account',
+} as const;
+
+/**
+ * The chain type the wallet is associated with.
+ */
+export type ImportPrivateKeyResponseChainType = typeof ImportPrivateKeyResponseChainType[keyof typeof ImportPrivateKeyResponseChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ImportPrivateKeyResponseChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Response from importing a private key with E2E encryption.
+ */
+export interface ImportPrivateKeyResponse {
+  /**
+   * The type of object.
+   */
+  object: ImportPrivateKeyResponseObject;
+  /** The created account ID (starts with `acc_`). */
+  id: string;
+  /** The wallet address derived from the imported private key. */
+  address: string;
+  /** The chain type the wallet is associated with. */
+  chainType?: ImportPrivateKeyResponseChainType;
+  /** Creation timestamp (Unix epoch seconds). */
+  createdAt: number;
+}
+
+/**
+ * The chain type for the imported wallet.
+ */
+export type ImportPrivateKeyRequestChainType = typeof ImportPrivateKeyRequestChainType[keyof typeof ImportPrivateKeyRequestChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ImportPrivateKeyRequestChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Request to import private key with E2E encryption.
+ */
+export interface ImportPrivateKeyRequest {
+  /** The private key encrypted with RSA-OAEP SHA-256 using the server's static import public key.
+Obtain the server's import public key out-of-band (e.g., from SDK or documentation). */
+  encryptedPrivateKey: string;
+  /** The chain type for the imported wallet. */
+  chainType?: ImportPrivateKeyRequestChainType;
+  /** The wallet ID to associate with this wallet (starts with `pla_`). */
+  wallet?: string;
+  /** Optional name for the imported wallet. */
+  name?: string;
+}
+
+/**
+ * The type of object.
+ */
+export type RegisterWalletSecretResponseObject = typeof RegisterWalletSecretResponseObject[keyof typeof RegisterWalletSecretResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const RegisterWalletSecretResponseObject = {
+  walletSecret: 'walletSecret',
+} as const;
+
+/**
+ * Response from registering a new wallet secret.
+ */
+export interface RegisterWalletSecretResponse {
+  /**
+   * The type of object.
+   */
+  object: RegisterWalletSecretResponseObject;
+  /** The key ID for the registered secret. */
+  keyId: string;
+  /** Timestamp when the secret was registered (Unix epoch seconds). */
+  registeredAt: number;
+}
+
+/**
+ * Request to register a new wallet secret (authentication key).
+ */
+export interface RegisterWalletSecretRequest {
+  /** ECDSA P-256 public key for wallet authentication (PEM or raw hex format).
+This will be used to verify X-Wallet-Auth JWT signatures. */
+  publicKey: string;
+  /** Key identifier for the secret.
+Used to identify this key in X-Wallet-Auth JWT headers. */
+  keyId?: string;
+}
+
+/**
+ * The type of object.
+ */
+export type RevokeWalletSecretResponseObject = typeof RevokeWalletSecretResponseObject[keyof typeof RevokeWalletSecretResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const RevokeWalletSecretResponseObject = {
+  walletSecretRevocation: 'walletSecretRevocation',
+} as const;
+
+/**
+ * Response from revoking a wallet secret.
+ */
+export interface RevokeWalletSecretResponse {
+  /**
+   * The type of object.
+   */
+  object: RevokeWalletSecretResponseObject;
+  /** The key ID of the revoked secret. */
+  keyId: string;
+  /** Whether the secret was successfully revoked. */
+  revoked: boolean;
+  /** Timestamp when the secret was revoked (Unix epoch seconds). */
+  revokedAt: number;
+}
+
+/**
+ * Request to revoke a wallet secret (authentication key).
+ */
+export interface RevokeWalletSecretRequest {
+  /** Key identifier of the secret to revoke. */
+  keyId: string;
+}
+
+/**
+ * The type of object.
+ */
+export type RotateWalletSecretResponseObject = typeof RotateWalletSecretResponseObject[keyof typeof RotateWalletSecretResponseObject];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const RotateWalletSecretResponseObject = {
+  walletSecretRotation: 'walletSecretRotation',
+} as const;
+
+/**
+ * Response from rotating a wallet secret.
+ */
+export interface RotateWalletSecretResponse {
+  /**
+   * The type of object.
+   */
+  object: RotateWalletSecretResponseObject;
+  /** Whether the rotation was successful. */
+  success: boolean;
+  /** Timestamp when the rotation occurred (Unix epoch seconds). */
+  rotatedAt: number;
+}
+
+/**
+ * Request to rotate wallet secret (authentication key).
+ */
+export interface RotateWalletSecretRequest {
+  /** New ECDSA P-256 public key for wallet authentication.
+This will replace the current wallet secret used for X-Wallet-Auth JWT signing. */
+  newSecretPublicKey: string;
+  /** Key identifier for the new secret.
+Used to identify this key in X-Wallet-Auth JWT headers. */
+  newKeyId?: string;
+}
+
 export interface AccountV2Response {
   id: string;
   user: string;
@@ -2851,6 +3290,18 @@ export const AccountListQueriesV2AccountType = {
   Delegated_Account: 'Delegated Account',
 } as const;
 
+/**
+ * Specifies the key custody of the account. Must be either "Developer" or "User".
+ */
+export type AccountListQueriesV2Custody = typeof AccountListQueriesV2Custody[keyof typeof AccountListQueriesV2Custody];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const AccountListQueriesV2Custody = {
+  Developer: 'Developer',
+  User: 'User',
+} as const;
+
 export interface AccountListQueriesV2 {
   /**
    * Specifies the maximum number of records to return.
@@ -2872,6 +3323,8 @@ export interface AccountListQueriesV2 {
   chainType?: AccountListQueriesV2ChainType;
   /** Specifies the type of account. Must be either "Smart Account" or "Externally Owned Account". */
   accountType?: AccountListQueriesV2AccountType;
+  /** Specifies the key custody of the account. Must be either "Developer" or "User". */
+  custody?: AccountListQueriesV2Custody;
   /** Specifies the account address */
   address?: string;
 }
@@ -4974,6 +5427,42 @@ name?: string;
 externalUserId?: string;
 };
 
+export type ListBackendWalletsParams = {
+/**
+ * Number of wallets to return (default: 10, max: 100).
+ */
+limit?: number;
+/**
+ * Number of wallets to skip (for pagination).
+ */
+skip?: number;
+/**
+ * Filter by chain type.
+ */
+chainType?: ListBackendWalletsChainType;
+/**
+ * Filter by wallet address.
+ */
+address?: string;
+/**
+ * Filter by wallet name.
+ */
+name?: string;
+/**
+ * Filter by associated wallet ID (starts with `pla_`).
+ */
+wallet?: string;
+};
+
+export type ListBackendWalletsChainType = typeof ListBackendWalletsChainType[keyof typeof ListBackendWalletsChainType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ListBackendWalletsChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
 export type GetAccountsV2Params = {
 /**
  * Specifies the maximum number of records to return.
@@ -5006,6 +5495,10 @@ chainType?: GetAccountsV2ChainType;
  */
 accountType?: GetAccountsV2AccountType;
 /**
+ * Specifies the key custody of the account. Must be either "Developer" or "User".
+ */
+custody?: GetAccountsV2Custody;
+/**
  * Specifies the account address
  */
 address?: string;
@@ -5028,6 +5521,15 @@ export const GetAccountsV2AccountType = {
   Externally_Owned_Account: 'Externally Owned Account',
   Smart_Account: 'Smart Account',
   Delegated_Account: 'Delegated Account',
+} as const;
+
+export type GetAccountsV2Custody = typeof GetAccountsV2Custody[keyof typeof GetAccountsV2Custody];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const GetAccountsV2Custody = {
+  Developer: 'Developer',
+  User: 'User',
 } as const;
 
 export type GetSignerIdByAddressParams = {
