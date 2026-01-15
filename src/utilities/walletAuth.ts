@@ -5,7 +5,10 @@
 
 import { createHash, randomBytes } from 'node:crypto'
 import { importPKCS8, SignJWT } from 'jose'
-import { EncryptionError, UserInputValidationError } from '../errors'
+import {
+  InvalidWalletSecretFormatError,
+  UserInputValidationError,
+} from '../errors'
 
 /**
  * Options for generating a wallet JWT
@@ -109,8 +112,8 @@ export async function generateWalletJwt(
       .setJti(generateNonce())
       .sign(ecKey)
   } catch (error) {
-    throw new EncryptionError(
-      `Failed to generate wallet JWT: ${error instanceof Error ? error.message : String(error)}`,
+    throw new InvalidWalletSecretFormatError(
+      `Could not create the EC key: ${error instanceof Error ? error.message : String(error)}`,
     )
   }
 }
@@ -126,13 +129,13 @@ export function requiresWalletAuth(
   requestMethod: string,
   requestPath: string,
 ): boolean {
+  // Other account-related paths only require auth for mutating methods
   const methodRequiresAuth =
     requestMethod === 'POST' ||
     requestMethod === 'DELETE' ||
     requestMethod === 'PUT'
 
-  const pathRequiresAuth =
-    requestPath?.includes('/accounts') || requestPath?.includes('/sign_payload')
+  const pathRequiresAuth = requestPath?.includes('/accounts/backend')
 
   return methodRequiresAuth && pathRequiresAuth
 }
