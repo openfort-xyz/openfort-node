@@ -15,8 +15,12 @@ import type {
   AuthenticateOAuthRequest,
   Authorize200,
   AuthorizePlayerRequest,
+  CallbackOAuthParams,
   CreateAuthPlayerRequest,
+  DeprecatedCallbackOAuthParams,
   GetAuthPlayersParams,
+  GrantCallbackRequest,
+  GrantOAuthResponse,
   ListParams,
   OAuthConfigListResponse,
   OAuthProvider,
@@ -71,6 +75,46 @@ export const createOAuthConfig = (
       {url: `/iam/v1/oauth`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: authConfig
+    },
+      options);
+    }
+  /**
+ * @deprecated
+ * @summary oauth callback.
+ */
+export const deprecatedCallbackOAuth = (
+    params: DeprecatedCallbackOAuthParams,
+ options?: SecondParameter<typeof openfortApiClient<unknown>>,) => {
+      return openfortApiClient<unknown>(
+      {url: `/iam/v1/oauth/callback`, method: 'GET',
+        params
+    },
+      options);
+    }
+  /**
+ * @summary oauth grant.
+ */
+export const grantOAuth = (
+    provider: OAuthProvider,
+    grantCallbackRequest: GrantCallbackRequest,
+ options?: SecondParameter<typeof openfortApiClient<GrantOAuthResponse>>,) => {
+      return openfortApiClient<GrantOAuthResponse>(
+      {url: `/iam/v1/oauth/grant/${provider}`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: grantCallbackRequest
+    },
+      options);
+    }
+  /**
+ * @summary oauth callback.
+ */
+export const callbackOAuth = (
+    provider: OAuthProvider,
+    params: CallbackOAuthParams,
+ options?: SecondParameter<typeof openfortApiClient<unknown>>,) => {
+      return openfortApiClient<unknown>(
+      {url: `/iam/v1/oauth/callback/${provider}`, method: 'GET',
+        params
     },
       options);
     }
@@ -213,6 +257,9 @@ export const verifyAuthToken = (
   export type VerifyOAuthTokenResult = NonNullable<Awaited<ReturnType<typeof verifyOAuthToken>>>
 export type ListOAuthConfigResult = NonNullable<Awaited<ReturnType<typeof listOAuthConfig>>>
 export type CreateOAuthConfigResult = NonNullable<Awaited<ReturnType<typeof createOAuthConfig>>>
+export type DeprecatedCallbackOAuthResult = NonNullable<Awaited<ReturnType<typeof deprecatedCallbackOAuth>>>
+export type GrantOAuthResult = NonNullable<Awaited<ReturnType<typeof grantOAuth>>>
+export type CallbackOAuthResult = NonNullable<Awaited<ReturnType<typeof callbackOAuth>>>
 export type GetOAuthConfigResult = NonNullable<Awaited<ReturnType<typeof getOAuthConfig>>>
 export type DeleteOAuthConfigResult = NonNullable<Awaited<ReturnType<typeof deleteOAuthConfig>>>
 export type ListResult = NonNullable<Awaited<ReturnType<typeof list>>>

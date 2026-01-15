@@ -16,7 +16,10 @@ import { openfortApiClient } from '../../openfortApiClient';
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
-  export const meV2 = (
+  /**
+ * @summary Get user information.
+ */
+export const meV2 = (
     
  options?: SecondParameter<typeof openfortApiClient<AuthUserResponse>>,) => {
       return openfortApiClient<AuthUserResponse>(
