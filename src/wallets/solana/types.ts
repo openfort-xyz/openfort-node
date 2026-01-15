@@ -12,7 +12,7 @@ export interface SolanaAccountBase {
   /** The account's address (base58 encoded) */
   address: string
   /** Account type identifier */
-  custody: 'developer'
+  custody: 'Developer'
 }
 
 /**

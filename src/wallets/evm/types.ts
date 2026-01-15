@@ -22,7 +22,7 @@ export interface EvmAccountBase {
   /** The account's address */
   address: Address
   /** Account type identifier */
-  custody: 'developer'
+  custody: 'Developer'
 }
 
 /**
