@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0
+
+### Minor Changes
+
+- [#32](https://github.com/openfort-xyz/openfort-node/pull/32) [`105c4668d86686698d260822347dd873925b446f`](https://github.com/openfort-xyz/openfort-node/commit/105c4668d86686698d260822347dd873925b446f) Thanks [@jamalavedra](https://github.com/jamalavedra)! - include backend wallets and update account namespace interactions'
+
 ## 0.6.78
 
 ### Patch Changes
