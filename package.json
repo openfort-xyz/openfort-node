@@ -65,7 +65,10 @@
     "@types/node-fetch": "^2.5.7",
     "axios": "^1.7.0",
     "axios-retry": "^4.5.0",
-    "node-fetch": "^2.6.0"
+    "bs58": "^6.0.0",
+    "jose": "^5.2.0",
+    "node-fetch": "^2.6.0",
+    "viem": "^2.21.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm check"

@@ -29,13 +29,13 @@ CHAIN_ID=80002  # Polygon Amoy testnet
 Run any example using `pnpm example`:
 
 ```bash
-pnpm example contracts/createContract.ts
+pnpm example evm/accounts/createAccount.ts
 ```
 
 Or directly with tsx:
 
 ```bash
-npx tsx contracts/createContract.ts
+npx tsx evm/accounts/createAccount.ts
 ```
 
 ## Development Workflow
@@ -49,10 +49,47 @@ pnpm build:sdk
 ```
 3. Run an example to test:
 ```bash
-pnpm example contracts/createContract.ts
+pnpm example evm/accounts/createAccount.ts
 ```
 
 ## Examples Overview
+
+### EVM Wallet Examples
+
+#### Accounts (`evm/accounts/`)
+| Example            | Description                          |
+| ------------------ | ------------------------------------ |
+| `createAccount.ts` | Create a new EVM account             |
+| `getAccount.ts`    | Retrieve an account by ID or address |
+| `listAccounts.ts`  | List all EVM accounts                |
+| `importAccount.ts` | Import an account from private key   |
+| `exportAccount.ts` | Export an account's private key      |
+
+#### Signing (`evm/signing/`)
+| Example              | Description                        |
+| -------------------- | ---------------------------------- |
+| `signMessage.ts`     | Sign a message with an EVM account |
+| `signTypedData.ts`   | Sign EIP-712 typed data            |
+| `signHash.ts`        | Sign a raw hash                    |
+| `signTransaction.ts` | Sign a transaction                 |
+
+### Solana Wallet Examples
+
+#### Accounts (`solana/accounts/`)
+| Example            | Description                          |
+| ------------------ | ------------------------------------ |
+| `createAccount.ts` | Create a new Solana account          |
+| `getAccount.ts`    | Retrieve an account by ID or address |
+| `listAccounts.ts`  | List all Solana accounts             |
+| `importAccount.ts` | Import an account from private key   |
+| `exportAccount.ts` | Export an account's private key      |
+
+#### Signing (`solana/signing/`)
+| Example              | Description                          |
+| -------------------- | ------------------------------------ |
+| `signMessage.ts`     | Sign a message with a Solana account |
+| `signTransaction.ts` | Sign a Solana transaction            |
+
 
 ### Policies
 
