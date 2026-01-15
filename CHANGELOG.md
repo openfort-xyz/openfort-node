@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1
+
+### Patch Changes
+
+- [#44](https://github.com/openfort-xyz/openfort-node/pull/44) [`c59124b217a20296358e181425be37e80b9e176d`](https://github.com/openfort-xyz/openfort-node/commit/c59124b217a20296358e181425be37e80b9e176d) Thanks [@jamalavedra](https://github.com/jamalavedra)! - pregenerate only through account endpoints
+
 ## 0.7.0
 
 ### Minor Changes
