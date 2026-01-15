@@ -73,6 +73,16 @@ pnpm example evm/accounts/createAccount.ts
 | `signHash.ts`        | Sign a raw hash                    |
 | `signTransaction.ts` | Sign a transaction                 |
 
+#### Embedded Wallets (`evm/embedded/`)
+| Example           | Description                              |
+| ----------------- | ---------------------------------------- |
+| `pregenerate.ts`  | Pre-generate a user with embedded wallet |
+
+> **Note:** The `pregenerate.ts` example requires Shield configuration. See `.env.example` for required environment variables:
+> - `SHIELD_API_KEY`
+> - `SHIELD_API_SECRET`
+> - `SHIELD_ENCRYPTION_SHARE`
+
 ### Solana Wallet Examples
 
 #### Accounts (`solana/accounts/`)
@@ -134,13 +144,7 @@ pnpm example evm/accounts/createAccount.ts
 | `iam/listUsers.ts`          | List all authenticated users                     |
 | `iam/getUser.ts`            | Get a user by ID                                 |
 | `iam/deleteUser.ts`         | Delete a user                                    |
-| `iam/pregenerateUser.ts`    | Pre-generate a user with embedded wallet         |
 | `iam/getSession.ts`         | Verify auth token server-side                    |
-
-> **Note:** The `pregenerateUser.ts` example requires additional Shield configuration. See `.env.example` for the required environment variables:
-> - `SHIELD_API_KEY`
-> - `SHIELD_API_SECRET`
-> - `SHIELD_ENCRYPTION_SHARE`
 
 ### Webhooks
 
