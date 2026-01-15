@@ -72,11 +72,17 @@ function isValidPublishableKey(key: string): boolean {
  * The Openfort SDK client.
  * Provides access to all Openfort API endpoints and wallet functionality.
  *
+ * Environment variables (all optional, constructor options take precedence):
+ * - `OPENFORT_API_KEY` - Secret API key (sk_test_... or sk_live_...)
+ * - `OPENFORT_WALLET_SECRET` - Wallet secret for backend wallet operations
+ * - `OPENFORT_PUBLISHABLE_KEY` - Publishable key for auth endpoints (pk_test_... or pk_live_...)
+ * - `OPENFORT_BASE_URL` - Custom API base URL
+ *
  * @example
  * ```typescript
  * import Openfort from '@openfort/openfort-node';
  *
- * // Using environment variables (OPENFORT_API_KEY, OPENFORT_WALLET_SECRET, OPENFORT_BASE_URL)
+ * // Using environment variables
  * const openfort = new Openfort();
  *
  * // Or with explicit API key
@@ -85,7 +91,7 @@ function isValidPublishableKey(key: string): boolean {
  * // Or with options
  * const openfort = new Openfort('sk_test_...', {
  *   walletSecret: 'your-wallet-secret',
- *   basePath: 'https://api.openfort.io',
+ *   publishableKey: 'pk_test_...',
  * });
  *
  * // Create a player
@@ -119,7 +125,9 @@ class Openfort {
         : process.env.OPENFORT_WALLET_SECRET
 
     const resolvedPublishableKey =
-      typeof options === 'object' ? options.publishableKey : undefined
+      typeof options === 'object'
+        ? options.publishableKey || process.env.OPENFORT_PUBLISHABLE_KEY
+        : process.env.OPENFORT_PUBLISHABLE_KEY
 
     const debugging =
       typeof options === 'object' ? options.debugging : undefined
@@ -820,6 +828,7 @@ export {
   EncryptionError,
   InvalidAPIKeyFormatError,
   InvalidPublishableKeyFormatError,
+  InvalidWalletSecretFormatError,
   MissingAPIKeyError,
   MissingPublishableKeyError,
   MissingWalletSecretError,
