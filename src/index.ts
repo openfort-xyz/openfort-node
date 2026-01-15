@@ -6,6 +6,11 @@ import {
   ShieldSDK,
 } from '@openfort/shield-js'
 import fetch from 'node-fetch'
+import {
+  InvalidAPIKeyFormatError,
+  InvalidPublishableKeyFormatError,
+  MissingAPIKeyError,
+} from './errors'
 import * as api from './openapi-client'
 import { configure } from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
@@ -46,6 +51,24 @@ export interface ShieldConfiguration {
 }
 
 /**
+ * Validates that a string is a valid Openfort secret API key format.
+ * @param key - The key to validate
+ * @returns true if valid
+ */
+function isValidSecretKey(key: string): boolean {
+  return key.startsWith('sk_test_') || key.startsWith('sk_live_')
+}
+
+/**
+ * Validates that a string is a valid Openfort publishable key format.
+ * @param key - The key to validate
+ * @returns true if valid
+ */
+function isValidPublishableKey(key: string): boolean {
+  return key.startsWith('pk_test_') || key.startsWith('pk_live_')
+}
+
+/**
  * The Openfort SDK client.
  * Provides access to all Openfort API endpoints and wallet functionality.
  *
@@ -53,7 +76,17 @@ export interface ShieldConfiguration {
  * ```typescript
  * import Openfort from '@openfort/openfort-node';
  *
+ * // Using environment variables (OPENFORT_API_KEY, OPENFORT_WALLET_SECRET, OPENFORT_BASE_URL)
+ * const openfort = new Openfort();
+ *
+ * // Or with explicit API key
  * const openfort = new Openfort('sk_test_...');
+ *
+ * // Or with options
+ * const openfort = new Openfort('sk_test_...', {
+ *   walletSecret: 'your-wallet-secret',
+ *   basePath: 'https://api.openfort.io',
+ * });
  *
  * // Create a player
  * const player = await openfort.players.create({ name: 'Player-1' });
@@ -66,29 +99,59 @@ export interface ShieldConfiguration {
  * ```
  */
 class Openfort {
+  private readonly _apiKey: string
   private _evmClient?: EvmClient
   private _solanaClient?: SolanaClient
 
-  constructor(
-    private readonly apiKey: string,
-    options?: string | OpenfortOptions,
-  ) {
-    // Support both old signature (basePath string) and new options object
-    if (typeof options === 'string') {
-      this.basePath = options
-    } else if (options) {
-      this.basePath = options.basePath
-      this.walletSecret = options.walletSecret
+  constructor(apiKey?: string, options?: string | OpenfortOptions) {
+    // Resolve API key: explicit parameter > environment variable
+    const resolvedApiKey = apiKey || process.env.OPENFORT_API_KEY
+
+    // Resolve options
+    const resolvedBasePath =
+      typeof options === 'string'
+        ? options
+        : options?.basePath || process.env.OPENFORT_BASE_URL
+
+    const resolvedWalletSecret =
+      typeof options === 'object'
+        ? options.walletSecret || process.env.OPENFORT_WALLET_SECRET
+        : process.env.OPENFORT_WALLET_SECRET
+
+    const resolvedPublishableKey =
+      typeof options === 'object' ? options.publishableKey : undefined
+
+    const debugging =
+      typeof options === 'object' ? options.debugging : undefined
+
+    // Validate API key presence
+    if (!resolvedApiKey) {
+      throw new MissingAPIKeyError()
     }
+
+    // Validate API key format
+    if (!isValidSecretKey(resolvedApiKey)) {
+      throw new InvalidAPIKeyFormatError(resolvedApiKey)
+    }
+
+    // Validate publishable key format if provided
+    if (
+      resolvedPublishableKey &&
+      !isValidPublishableKey(resolvedPublishableKey)
+    ) {
+      throw new InvalidPublishableKeyFormatError(resolvedPublishableKey)
+    }
+
+    // Store API key for webhook signature verification
+    this._apiKey = resolvedApiKey
 
     // Configure the API client
     configure({
-      apiKey: this.apiKey,
-      basePath: this.basePath,
-      walletSecret: this.walletSecret,
-      debugging: typeof options === 'object' ? options.debugging : undefined,
-      publishableKey:
-        typeof options === 'object' ? options.publishableKey : undefined,
+      apiKey: resolvedApiKey,
+      basePath: resolvedBasePath,
+      walletSecret: resolvedWalletSecret,
+      debugging,
+      publishableKey: resolvedPublishableKey,
     })
   }
 
@@ -689,7 +752,7 @@ class Openfort {
     body: string,
     signature: string,
   ): Promise<T> {
-    const signedPayload = await sign(this.apiKey, body)
+    const signedPayload = await sign(this._apiKey, body)
     if (signedPayload !== signature) {
       throw Error('Invalid signature')
     }
@@ -755,6 +818,11 @@ export { IMPORT_ENCRYPTION_PUBLIC_KEY } from './constants'
 export {
   AccountNotFoundError,
   EncryptionError,
+  InvalidAPIKeyFormatError,
+  InvalidPublishableKeyFormatError,
+  MissingAPIKeyError,
+  MissingPublishableKeyError,
+  MissingWalletSecretError,
   TimeoutError,
   UserInputValidationError,
 } from './errors'

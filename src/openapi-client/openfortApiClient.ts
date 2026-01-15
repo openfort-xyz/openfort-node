@@ -1,5 +1,6 @@
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
 import axiosRetry, { exponentialDelay } from 'axios-retry'
+import { MissingPublishableKeyError, MissingWalletSecretError } from '../errors'
 import {
   generateWalletJwt,
   requiresWalletAuth,
@@ -86,6 +87,14 @@ function validateRequest(config: AxiosRequestConfig): void {
 }
 
 /**
+ * Checks if a request path requires the publishable key (x-project-key header).
+ * Auth V2 endpoints require the publishable key for proper project identification.
+ */
+function requiresPublishableKey(requestPath: string): boolean {
+  return requestPath.startsWith('/iam/v2/auth/')
+}
+
+/**
  * Configures the Openfort API client with the given options.
  *
  * @param options - The client configuration options
@@ -138,12 +147,22 @@ export const configure = (options: OpenfortClientOptions): void => {
     }
 
     // Add X-Wallet-Auth header if needed
-    if (options.walletSecret && config.url && config.method) {
+    if (config.url && config.method) {
       const url = new URL(config.url, baseURL)
       const method = config.method.toUpperCase()
       const path = url.pathname
 
+      // Validate publishable key for auth endpoints
+      if (requiresPublishableKey(path) && !options.publishableKey) {
+        throw new MissingPublishableKeyError(`${method} ${path}`)
+      }
+
       if (requiresWalletAuth(method, path)) {
+        // Throw early if wallet secret is required but not configured
+        if (!options.walletSecret) {
+          throw new MissingWalletSecretError(`${method} ${path}`)
+        }
+
         let requestData: Record<string, unknown> = {}
         if (config.data && typeof config.data === 'object') {
           requestData = config.data as Record<string, unknown>

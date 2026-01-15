@@ -40,7 +40,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
   const account: EvmAccount = {
     id,
     address: address as Address,
-    custody: 'developer',
+    custody: 'Developer',
 
     async sign(parameters: { hash: Hash }): Promise<Hex> {
       const result = await signHashAction({

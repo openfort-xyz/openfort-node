@@ -29,7 +29,7 @@ export function toSolanaAccount(data: SolanaAccountData): SolanaAccount {
   const account: SolanaAccount = {
     id,
     address,
-    custody: 'developer',
+    custody: 'Developer',
 
     async signMessage(parameters: { message: string }): Promise<string> {
       const result = await signMessageAction({
