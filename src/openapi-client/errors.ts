@@ -135,7 +135,7 @@ export class NetworkError extends APIError {
       errorType,
       errorMessage,
       undefined,
-      'https://www.openfort.io/docs/errors#network-errors',
+      'https://www.openfort.io/docs',
       cause,
     )
     this.name = 'NetworkError'
