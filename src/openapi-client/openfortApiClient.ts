@@ -15,7 +15,7 @@ import {
   ValidationError,
 } from './errors'
 
-const ERROR_DOCS_URL = 'https://www.openfort.io/docs/errors'
+const ERROR_DOCS_URL = 'https://www.openfort.io/docs'
 
 /**
  * Configuration options for the Openfort API client
