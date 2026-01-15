@@ -103,6 +103,9 @@ export const configure = (options: OpenfortClientOptions): void => {
         'x-project-key': options.publishableKey,
       }),
     },
+    paramsSerializer: {
+      indexes: null, // Use repeat style for arrays: ?player=a&player=b instead of ?player[0]=a&player[1]=b
+    },
   })
 
   // Add retry logic with exponential backoff
