@@ -8,8 +8,8 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });
 
-// Create a Solana account
-const account = await openfort.solana.createAccount({
+// Create a Solana backend account
+const account = await openfort.accounts.solana.backend.create({
   name: "ExportTestSolanaWallet",
 });
 
@@ -19,7 +19,7 @@ console.log("  Address:", account.address);
 
 // Export the account's private key
 // Returns base58 encoded private key (standard Solana format)
-const exportedPrivateKey = await openfort.solana.exportAccount({
+const exportedPrivateKey = await openfort.accounts.solana.backend.export({
   id: account.id,
 });
 

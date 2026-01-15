@@ -18,7 +18,7 @@ console.log("Private key (hex):", privateKeyHex);
 
 // Import the account to Openfort
 // Openfort accepts both base58 and hex format for Solana keys
-const account = await openfort.solana.importAccount({
+const account = await openfort.accounts.solana.backend.import({
   privateKey: privateKeyHex, // Can also be base58 format
   name: "ImportedSolanaWallet",
 });

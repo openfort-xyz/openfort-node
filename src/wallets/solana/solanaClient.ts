@@ -47,7 +47,6 @@ function toSolanaAccountData(
   return {
     id: response.id,
     address: response.address,
-    name: response.name,
   }
 }
 
@@ -92,14 +91,11 @@ export class SolanaClient {
    * @example
    * ```typescript
    * // Create a Solana wallet
-   * const account = await openfort.solana.createAccount({
-   *   name: 'MyWallet',
-   * });
+   * const account = await openfort.solana.createAccount();
    *
    * // Create with a specific wallet/player
    * const account = await openfort.solana.createAccount({
    *   wallet: 'pla_...',
-   *   name: 'PlayerWallet',
    * });
    * ```
    */
@@ -109,13 +105,11 @@ export class SolanaClient {
     const response = await createBackendWallet({
       chainType: 'SVM',
       wallet: options.wallet,
-      name: options.name,
     })
 
     return toSolanaAccount({
       id: response.id,
       address: response.address,
-      name: options.name,
     })
   }
 
@@ -282,7 +276,6 @@ export class SolanaClient {
       return toSolanaAccount({
         id: response.id,
         address: response.address,
-        name: options.name,
       })
     } catch (error) {
       if (error instanceof UserInputValidationError) {

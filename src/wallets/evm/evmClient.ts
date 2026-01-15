@@ -42,7 +42,6 @@ function toEvmAccountData(response: BackendWalletResponse): EvmAccountData {
   return {
     id: response.id,
     address: response.address,
-    name: response.name,
   }
 }
 
@@ -87,14 +86,11 @@ export class EvmClient {
    * @example
    * ```typescript
    * // Create an EVM wallet
-   * const account = await openfort.evm.createAccount({
-   *   name: 'MyWallet',
-   * });
+   * const account = await openfort.evm.createAccount();
    *
    * // Create with a specific wallet
    * const account = await openfort.evm.createAccount({
    *   wallet: 'pla_...',
-   *   name: 'PlayerWallet',
    * });
    * ```
    */
@@ -104,13 +100,11 @@ export class EvmClient {
     const response = await createBackendWallet({
       chainType: 'EVM',
       wallet: options.wallet,
-      name: options.name,
     })
 
     return toEvmAccount({
       id: response.id,
       address: response.address,
-      name: options.name,
     })
   }
 
@@ -206,7 +200,6 @@ export class EvmClient {
    * ```typescript
    * const account = await openfort.evm.importAccount({
    *   privateKey: '0x...',
-   *   name: 'ImportedWallet',
    * });
    * ```
    */
@@ -249,7 +242,6 @@ export class EvmClient {
       return toEvmAccount({
         id: response.id,
         address: response.address,
-        name: options.name,
       })
     } catch (error) {
       if (error instanceof UserInputValidationError) {

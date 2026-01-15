@@ -14,17 +14,17 @@ const player = await openfort.players.create({
 });
 console.log("Created player:", player.id);
 
-const account = await openfort.evm.createAccount({
+const account = await openfort.accounts.evm.backend.create({
   name: `MyWallet-${Date.now()}`,
 });
 console.log("Created account:", account.address);
 
 // Retrieve account by ID
-const accountById = await openfort.evm.getAccount({ id: account.id });
+const accountById = await openfort.accounts.evm.backend.get({ id: account.id });
 console.log("Retrieved account by ID:", accountById.address);
 
 // Retrieve account by address
-const accountByAddress = await openfort.evm.getAccount({
+const accountByAddress = await openfort.accounts.evm.backend.get({
   address: account.address,
 });
 console.log("Retrieved account by address:", accountByAddress.address);

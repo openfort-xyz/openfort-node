@@ -15,8 +15,6 @@ export interface SolanaAccountData {
   id: string
   /** Account address (base58 encoded) */
   address: string
-  /** Optional account name */
-  name?: string
 }
 
 /**
@@ -26,13 +24,12 @@ export interface SolanaAccountData {
  * @returns Solana account object with signing methods
  */
 export function toSolanaAccount(data: SolanaAccountData): SolanaAccount {
-  const { id, address, name } = data
+  const { id, address } = data
 
   const account: SolanaAccount = {
     id,
     address,
-    name,
-    type: 'solana-server',
+    custody: 'developer',
 
     async signMessage(parameters: { message: string }): Promise<string> {
       const result = await signMessageAction({

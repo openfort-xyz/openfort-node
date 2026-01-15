@@ -66,8 +66,6 @@ export interface ShieldConfiguration {
  * ```
  */
 class Openfort {
-  private readonly walletSecret?: string
-  private readonly basePath?: string
   private _evmClient?: EvmClient
   private _solanaClient?: SolanaClient
 
@@ -99,49 +97,129 @@ class Openfort {
   // ============================================
 
   /**
-   * Account management endpoints (V2 default)
+   * Unified accounts namespace for managing wallets across chains.
    *
    * @example
    * ```typescript
-   * // V2 (default)
-   * const accounts = await openfort.accounts.list({ player: 'pla_...' });
-   * const account = await openfort.accounts.get('acc_...');
-   * await openfort.accounts.switchChain('acc_...', { chainId: 137 });
+   * // Create a backend wallet (Developer custody)
+   * const wallet = await openfort.accounts.evm.backend.create({ name: 'Treasury' })
    *
-   * // V1 (legacy)
-   * const legacyAccounts = await openfort.accounts.v1.list({ player: 'pla_...' });
-   * await openfort.accounts.v1.create({ player: 'pla_...', chainId: 1 });
+   * // Pregenerate an embedded wallet (User custody)
+   * const embedded = await openfort.accounts.evm.embedded.pregenerate(
+   *   { email: 'user@example.com' },
+   *   shieldConfig
+   * )
+   *
+   * // List all accounts
+   * const all = await openfort.accounts.list()
+   *
+   * // List with filters
+   * const evmBackend = await openfort.accounts.list({
+   *   chainType: 'EVM',
+   *   custody: 'Developer',
+   * })
+   *
+   * // V1 API
+   * await openfort.accounts.v1.create({ player: 'pla_...', chainId: 1 })
    * ```
    */
   public get accounts() {
+    // Lazily initialize clients
+    if (!this._evmClient) {
+      this._evmClient = new EvmClient()
+    }
+    if (!this._solanaClient) {
+      this._solanaClient = new SolanaClient()
+    }
+    const evmClient = this._evmClient
+    const solanaClient = this._solanaClient
+
     return {
-      /** List accounts */
+      /** List all accounts across chains */
       list: api.getAccountsV2,
-      /** Get an account by ID */
-      get: api.getAccountV2,
-      /** Switch chain */
-      switchChain: api.switchChainV2,
-      /** V1 account methods (legacy) */
+      /** EVM accounts */
+      evm: {
+        /** List EVM accounts */
+        list: (params?: Omit<api.GetAccountsV2Params, 'chainType'>) =>
+          api.getAccountsV2({ ...params, chainType: 'EVM' }),
+        /** Backend wallet operations (Developer custody) */
+        backend: {
+          /** Create EVM backend wallet */
+          create: evmClient.createAccount.bind(evmClient),
+          /** List EVM backend wallets */
+          list: evmClient.listAccounts.bind(evmClient),
+          /** Get backend wallet by ID or address */
+          get: evmClient.getAccount.bind(evmClient),
+          /** Delete backend wallet */
+          delete: api.deleteBackendWallet,
+          /** Sign data */
+          sign: evmClient.signData.bind(evmClient),
+          /** Import private key (with E2E encryption) */
+          import: evmClient.importAccount.bind(evmClient),
+          /** Export private key (with E2E encryption) */
+          export: evmClient.exportAccount.bind(evmClient),
+        },
+        /** Embedded wallet operations (User custody) */
+        embedded: {
+          /** Pregenerate embedded account */
+          pregenerate: (
+            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            shieldConfig: ShieldConfiguration,
+          ) => this.pregenerateUser({ ...req, chainType: 'EVM' }, shieldConfig),
+          /** List embedded accounts */
+          list: (
+            params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
+          ) =>
+            api.getAccountsV2({ ...params, chainType: 'EVM', custody: 'User' }),
+        },
+      },
+      /** Solana accounts */
+      solana: {
+        /** List Solana accounts */
+        list: (params?: Omit<api.GetAccountsV2Params, 'chainType'>) =>
+          api.getAccountsV2({ ...params, chainType: 'SVM' }),
+        /** Backend wallet operations (Developer custody) */
+        backend: {
+          /** Create Solana backend wallet */
+          create: solanaClient.createAccount.bind(solanaClient),
+          /** List Solana backend wallets */
+          list: solanaClient.listAccounts.bind(solanaClient),
+          /** Get backend wallet by ID or address */
+          get: solanaClient.getAccount.bind(solanaClient),
+          /** Delete backend wallet */
+          delete: api.deleteBackendWallet,
+          /** Sign data */
+          sign: solanaClient.signData.bind(solanaClient),
+          /** Import private key (with E2E encryption) */
+          import: solanaClient.importAccount.bind(solanaClient),
+          /** Export private key (with E2E encryption) */
+          export: solanaClient.exportAccount.bind(solanaClient),
+        },
+        /** Embedded wallet operations (User custody) */
+        embedded: {
+          /** Pregenerate embedded account */
+          pregenerate: (
+            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            shieldConfig: ShieldConfiguration,
+          ) => this.pregenerateUser({ ...req, chainType: 'SVM' }, shieldConfig),
+          /** List embedded accounts */
+          list: (
+            params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
+          ) =>
+            api.getAccountsV2({ ...params, chainType: 'SVM', custody: 'User' }),
+        },
+      },
+      /** V1 legacy API */
       v1: {
-        /** List accounts */
         list: api.getAccounts,
-        /** Create an account */
         create: api.createAccount,
-        /** Get an account by ID */
         get: api.getAccount,
-        /** Request transfer of ownership */
         requestTransferOwnership: api.requestTransferOwnership,
-        /** Cancel transfer of ownership */
         cancelTransferOwnership: api.cancelTransferOwnership,
-        /** Sign a payload */
         signPayload: api.signPayload,
-        /** Sync account state */
         sync: api.syncAccount,
-        /** Deploy an account */
         deploy: api.deployAccount,
-        /** Start recovery */
         startRecovery: api.startRecovery,
-        /** Complete recovery */
         completeRecovery: api.completeRecovery,
       },
     }
@@ -392,7 +470,7 @@ class Openfort {
    * const user = await openfort.iam.users.get('usr_...');
    * await openfort.iam.users.pregenerate({ email: 'user@example.com' }, shieldConfig);
    *
-   * // V1 (legacy) - Players
+   * // V1 - Players
    * const players = await openfort.iam.v1.players.list();
    * await openfort.iam.v1.players.create(request, shieldConfig);
    * ```
@@ -419,7 +497,7 @@ class Openfort {
         pregenerate: this.pregenerateUser.bind(this),
       },
       /** OAuth configuration */
-      oauthConfig: {
+      authProvidersConfig: {
         /** Create OAuth config */
         create: api.createOAuthConfig,
         /** Get OAuth config */
@@ -429,7 +507,7 @@ class Openfort {
         /** Delete OAuth config */
         delete: api.deleteOAuthConfig,
       },
-      /** V1 IAM methods (legacy) */
+      /** V1 IAM methods */
       v1: {
         /** Auth player management (V1) */
         players: {
@@ -598,48 +676,6 @@ class Openfort {
   }
 
   // ============================================
-  // EVM Wallet
-  // ============================================
-
-  /**
-   * EVM wallet client for creating and managing EVM accounts.
-   *
-   * @example
-   * ```typescript
-   * const account = await openfort.evm.createAccount({ name: 'MyWallet' });
-   * const signature = await account.signMessage({ message: 'Hello' });
-   * ```
-   */
-  public get evm(): EvmClient {
-    if (!this._evmClient) {
-      this._evmClient = new EvmClient(this.apiKey, {
-        basePath: this.basePath,
-        walletSecret: this.walletSecret,
-      })
-    }
-    return this._evmClient
-  }
-
-  /**
-   * Solana wallet client for creating and managing Solana accounts.
-   *
-   * @example
-   * ```typescript
-   * const account = await openfort.solana.createAccount({ user: 'pla_...' });
-   * const signature = await account.signMessage({ message: 'Hello' });
-   * ```
-   */
-  public get solana(): SolanaClient {
-    if (!this._solanaClient) {
-      this._solanaClient = new SolanaClient(this.apiKey, {
-        basePath: this.basePath,
-        walletSecret: this.walletSecret,
-      })
-    }
-    return this._solanaClient
-  }
-
-  // ============================================
   // Utility Methods
   // ============================================
 
@@ -735,6 +771,3 @@ export {
 } from './utilities/encryption'
 // Re-export wallet types
 export * from './wallets'
-// Wallet clients
-export { EvmClient } from './wallets/evm/evmClient'
-export { SolanaClient } from './wallets/solana/solanaClient'

@@ -8,8 +8,8 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });
 
-// Create an EVM account
-const account = await openfort.evm.createAccount({
+// Create an EVM backend account
+const account = await openfort.accounts.evm.backend.create({
   name: `MyWallet-${Date.now()}`,
 });
 
