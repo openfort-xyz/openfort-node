@@ -8,23 +8,15 @@
 import type {
   AccountListResponse,
   AccountResponse,
-  AccountV2Response,
-  BaseEntityListResponseAccountV2Response,
   CancelTransferOwnershipRequest,
   CompleteRecoveryRequest,
   CreateAccountRequest,
-  CreateAccountRequestV2,
-  DeleteAccountResponse,
   DeployRequest,
   GetAccountParams,
   GetAccountsParams,
-  GetAccountsV2Params,
-  GetSignerIdByAddressParams,
   SignPayloadRequest,
   SignPayloadResponse,
-  SignerIdResponse,
   StartRecoveryRequest,
-  SwitchChainQueriesV2,
   TransactionIntentResponse,
   TransferOwnershipRequest
 } from '../openfortAPI.schemas';
@@ -92,7 +84,13 @@ export const getAccount = (
     },
       options);
     }
-  export const disableAccount = (
+  /**
+ * Disables an account.
+
+Accounts won't be shown for user and won't be accessible for transactions.
+ * @summary Disable account by id.
+ */
+export const disableAccount = (
     id: string,
  options?: SecondParameter<typeof openfortApiClient<void>>,) => {
       return openfortApiClient<void>(
@@ -204,75 +202,6 @@ export const completeRecovery = (
     },
       options);
     }
-  /**
- * Returns a list of accounts for the given user.
-
-This object represents a user's account, which is a blockchain smart account that can be used to interact with the blockchain.
-
-The accounts are returned sorted by creation date, with the most recently created accounts appearing first.
-
-Returns the latest 10 transaction intents for each account.
-
-By default, a maximum of 10 accounts are shown per page.
- * @summary List accounts of a user.
- */
-export const getAccountsV2 = (
-    params?: GetAccountsV2Params,
- options?: SecondParameter<typeof openfortApiClient<BaseEntityListResponseAccountV2Response>>,) => {
-      return openfortApiClient<BaseEntityListResponseAccountV2Response>(
-      {url: `/v2/accounts`, method: 'GET',
-        params
-    },
-      options);
-    }
-  export const createAccountV2 = (
-    createAccountRequestV2: CreateAccountRequestV2,
- options?: SecondParameter<typeof openfortApiClient<AccountV2Response>>,) => {
-      return openfortApiClient<AccountV2Response>(
-      {url: `/v2/accounts`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createAccountRequestV2
-    },
-      options);
-    }
-  export const getSignerIdByAddress = (
-    params: GetSignerIdByAddressParams,
- options?: SecondParameter<typeof openfortApiClient<SignerIdResponse>>,) => {
-      return openfortApiClient<SignerIdResponse>(
-      {url: `/v2/accounts/signer`, method: 'GET',
-        params
-    },
-      options);
-    }
-  export const getAccountV2 = (
-    id: string,
- options?: SecondParameter<typeof openfortApiClient<AccountV2Response>>,) => {
-      return openfortApiClient<AccountV2Response>(
-      {url: `/v2/accounts/${id}`, method: 'GET'
-    },
-      options);
-    }
-  /**
- * Removes an account from a project.
- */
-export const removeAccount = (
-    id: string,
- options?: SecondParameter<typeof openfortApiClient<DeleteAccountResponse>>,) => {
-      return openfortApiClient<DeleteAccountResponse>(
-      {url: `/v2/accounts/${id}`, method: 'DELETE'
-    },
-      options);
-    }
-  export const switchChainV2 = (
-    switchChainQueriesV2: SwitchChainQueriesV2,
- options?: SecondParameter<typeof openfortApiClient<AccountV2Response>>,) => {
-      return openfortApiClient<AccountV2Response>(
-      {url: `/v2/accounts/switch-chain`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: switchChainQueriesV2
-    },
-      options);
-    }
   export type GetAccountsResult = NonNullable<Awaited<ReturnType<typeof getAccounts>>>
 export type CreateAccountResult = NonNullable<Awaited<ReturnType<typeof createAccount>>>
 export type GetAccountResult = NonNullable<Awaited<ReturnType<typeof getAccount>>>
@@ -284,9 +213,3 @@ export type SyncAccountResult = NonNullable<Awaited<ReturnType<typeof syncAccoun
 export type DeployAccountResult = NonNullable<Awaited<ReturnType<typeof deployAccount>>>
 export type StartRecoveryResult = NonNullable<Awaited<ReturnType<typeof startRecovery>>>
 export type CompleteRecoveryResult = NonNullable<Awaited<ReturnType<typeof completeRecovery>>>
-export type GetAccountsV2Result = NonNullable<Awaited<ReturnType<typeof getAccountsV2>>>
-export type CreateAccountV2Result = NonNullable<Awaited<ReturnType<typeof createAccountV2>>>
-export type GetSignerIdByAddressResult = NonNullable<Awaited<ReturnType<typeof getSignerIdByAddress>>>
-export type GetAccountV2Result = NonNullable<Awaited<ReturnType<typeof getAccountV2>>>
-export type RemoveAccountResult = NonNullable<Awaited<ReturnType<typeof removeAccount>>>
-export type SwitchChainV2Result = NonNullable<Awaited<ReturnType<typeof switchChainV2>>>

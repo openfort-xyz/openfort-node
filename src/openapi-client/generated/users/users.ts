@@ -24,7 +24,7 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * Retrieves an authenticated users.
 
 Users have linked accounts and are authenticated with a provider.
- * @summary Authenticated user.
+ * @summary List authenticated users.
  */
 export const getAuthUsers = (
     params?: GetAuthUsersParams,
@@ -39,7 +39,7 @@ export const getAuthUsers = (
  * Retrieves an authenticated user.
 
 Users have linked accounts and are authenticated with a provider.
- * @summary Authenticated user.
+ * @summary Get authenticated user by id.
  */
 export const getAuthUser = (
     id: string,
@@ -52,7 +52,7 @@ export const getAuthUser = (
   /**
  * It will delete all linked accounts the user is authenticated with.
 If the user has a linked embedded signer, it will be deleted as well.
- * @summary Deletes a user object.
+ * @summary Delete user by id.
  */
 export const deleteUser = (
     id: string,
