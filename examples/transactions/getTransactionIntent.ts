@@ -34,7 +34,7 @@ const created = await openfort.transactionIntents.create({
   policy: policy.id,
   interactions: [
     {
-      contract: "0x38090d1636069c0ff1af6bc1737fb996b7f63ac0",
+      contract: "con_***",
       functionName: "mint",
       functionArgs: [account.address],
     },
