@@ -11,10 +11,8 @@ export interface SolanaAccountBase {
   id: string
   /** The account's address (base58 encoded) */
   address: string
-  /** Optional name for the account */
-  name?: string
   /** Account type identifier */
-  type: 'solana-server'
+  custody: 'developer'
 }
 
 /**

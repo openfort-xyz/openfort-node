@@ -8,8 +8,8 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });
 
-// List all EVM accounts
-const result = await openfort.evm.listAccounts({ limit: 10 });
+// List all EVM backend accounts
+const result = await openfort.accounts.evm.backend.list({ limit: 10 });
 
 console.log(`Found ${result.total} EVM accounts:`);
 for (const account of result.accounts) {
@@ -17,11 +17,11 @@ for (const account of result.accounts) {
 }
 
 // Create a few more accounts
-await openfort.evm.createAccount({ name: `Wallet-${Date.now()}-1` });
-await openfort.evm.createAccount({ name: `Wallet-${Date.now()}-2` });
+await openfort.accounts.evm.backend.create({ name: `Wallet-${Date.now()}-1` });
+await openfort.accounts.evm.backend.create({ name: `Wallet-${Date.now()}-2` });
 
 // List accounts with pagination
-const moreAccounts = await openfort.evm.listAccounts({
+const moreAccounts = await openfort.accounts.evm.backend.list({
   limit: 5,
   skip: 0,
 });

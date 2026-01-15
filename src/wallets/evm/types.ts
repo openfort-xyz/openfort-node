@@ -21,10 +21,8 @@ export interface EvmAccountBase {
   id: string
   /** The account's address */
   address: Address
-  /** Optional name for the account */
-  name?: string
   /** Account type identifier */
-  type: 'evm-server'
+  custody: 'developer'
 }
 
 /**

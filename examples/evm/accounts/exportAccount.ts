@@ -16,7 +16,7 @@ const originalAccount = privateKeyToAccount(originalPrivateKey);
 console.log("Original private key:", originalPrivateKey);
 console.log("Original address:", originalAccount.address);
 
-const account = await openfort.evm.importAccount({
+const account = await openfort.accounts.evm.backend.import({
   privateKey: originalPrivateKey,
   name: "ExportTestWallet",
 });
@@ -24,7 +24,7 @@ const account = await openfort.evm.importAccount({
 console.log("\nImported account ID:", account.id);
 
 // Export the account's private key
-const exportedPrivateKey = await openfort.evm.exportAccount({
+const exportedPrivateKey = await openfort.accounts.evm.backend.export({
   id: account.id,
 });
 
