@@ -32,7 +32,6 @@ await openfort.policyRules.create({
   functionName: "All functions",
   wildcard: true,
   policy: policy.id,
-  contract: contract.id,
 });
 
 // Create a transaction intent

@@ -15,45 +15,7 @@ const contract = await openfort.contracts.create({
   chainId,
   address: "0xbabe0001489722187FbaF0689C47B2f5E97545C5",
   // Optional: provide ABI for function name validation
-  abi: [
-        {
-          "type": "function",
-          "name": "transfer",
-          "inputs": [
-            {
-              "name": "_to",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "_amount",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "balanceOf",
-          "inputs": [
-            {
-              "name": "account",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        }
-      ]
+  // abi: []
 });
 
 console.log("Created contract:");
