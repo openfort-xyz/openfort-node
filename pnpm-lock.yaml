@@ -806,9 +806,6 @@ packages:
   '@orval/core@8.0.0':
     resolution: {integrity: sha512-3em1vCuqQKd4oKWKcIXgghaagR/8nW+6Hk5WFxRcSu9eOxuFSfnUpgj2+Dn5+N+Db5Ph+NtAqIo0Y47Vk4fEjA==}
 
-  '@orval/core@8.0.0':
-    resolution: {integrity: sha512-3em1vCuqQKd4oKWKcIXgghaagR/8nW+6Hk5WFxRcSu9eOxuFSfnUpgj2+Dn5+N+Db5Ph+NtAqIo0Y47Vk4fEjA==}
-
   '@orval/fetch@7.17.0':
     resolution: {integrity: sha512-VZuSKa2tMhHyL4BKiPyXmNj0Z5jF92lisTgWdm24WdmFfrzeGCHDyBbim6ivOMnrcvf0v7o16EeaTdMeNiaGdQ==}
 
