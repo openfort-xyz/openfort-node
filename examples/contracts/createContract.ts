@@ -15,7 +15,7 @@ const contract = await openfort.contracts.create({
   chainId,
   address: "0xbabe0001489722187FbaF0689C47B2f5E97545C5",
   // Optional: provide ABI for function name validation
-  // abi: [...]
+  // abi: []
 });
 
 console.log("Created contract:");
