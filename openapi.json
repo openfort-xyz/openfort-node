@@ -12,7 +12,9 @@
         "properties": {
           "jsonrpc": {
             "type": "string",
-            "enum": ["2.0"],
+            "enum": [
+              "2.0"
+            ],
             "nullable": false
           },
           "result": {},
@@ -29,7 +31,11 @@
             "nullable": true
           }
         },
-        "required": ["jsonrpc", "result", "id"],
+        "required": [
+          "jsonrpc",
+          "result",
+          "id"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -45,7 +51,10 @@
           },
           "data": {}
         },
-        "required": ["code", "message"],
+        "required": [
+          "code",
+          "message"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -54,7 +63,9 @@
         "properties": {
           "jsonrpc": {
             "type": "string",
-            "enum": ["2.0"],
+            "enum": [
+              "2.0"
+            ],
             "nullable": false
           },
           "error": {
@@ -73,7 +84,11 @@
             "nullable": true
           }
         },
-        "required": ["jsonrpc", "error", "id"],
+        "required": [
+          "jsonrpc",
+          "error",
+          "id"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -93,7 +108,9 @@
         "properties": {
           "jsonrpc": {
             "type": "string",
-            "enum": ["2.0"],
+            "enum": [
+              "2.0"
+            ],
             "nullable": false
           },
           "method": {
@@ -113,7 +130,10 @@
             "nullable": true
           }
         },
-        "required": ["jsonrpc", "method"],
+        "required": [
+          "jsonrpc",
+          "method"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -123,12 +143,16 @@
             "type": "string"
           }
         },
-        "required": ["url"],
+        "required": [
+          "url"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "Currency": {
-        "enum": ["usd"],
+        "enum": [
+          "usd"
+        ],
         "type": "string"
       },
       "CheckoutRequest": {
@@ -149,7 +173,10 @@
             "type": "string"
           }
         },
-        "required": ["amount", "currency"],
+        "required": [
+          "amount",
+          "currency"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -165,7 +192,9 @@
             "type": "string"
           }
         },
-        "required": ["plan"],
+        "required": [
+          "plan"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -181,7 +210,10 @@
             "$ref": "#/components/schemas/Currency"
           }
         },
-        "required": ["amount", "currency"],
+        "required": [
+          "amount",
+          "currency"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -197,12 +229,18 @@
             "$ref": "#/components/schemas/Money"
           }
         },
-        "required": ["balance", "expenses", "payments"],
+        "required": [
+          "balance",
+          "expenses",
+          "payments"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ResponseType.LIST": {
-        "enum": ["list"],
+        "enum": [
+          "list"
+        ],
         "type": "string"
       },
       "EntityIdResponse": {
@@ -211,16 +249,24 @@
             "type": "string"
           }
         },
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SponsorSchema.PAY_FOR_USER": {
-        "enum": ["pay_for_user"],
+        "enum": [
+          "pay_for_user"
+        ],
         "type": "string"
       },
       "SponsorSchema": {
-        "enum": ["pay_for_user", "charge_custom_tokens", "fixed_rate"],
+        "enum": [
+          "pay_for_user",
+          "charge_custom_tokens",
+          "fixed_rate"
+        ],
         "type": "string"
       },
       "PayForUserPolicyStrategy": {
@@ -233,12 +279,16 @@
             "nullable": true
           }
         },
-        "required": ["sponsorSchema"],
+        "required": [
+          "sponsorSchema"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SponsorSchema.CHARGE_CUSTOM_TOKENS": {
-        "enum": ["charge_custom_tokens"],
+        "enum": [
+          "charge_custom_tokens"
+        ],
         "type": "string"
       },
       "ChargeCustomTokenPolicyStrategy": {
@@ -257,12 +307,18 @@
             "type": "string"
           }
         },
-        "required": ["sponsorSchema", "tokenContract", "tokenContractAmount"],
+        "required": [
+          "sponsorSchema",
+          "tokenContract",
+          "tokenContractAmount"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SponsorSchema.FIXED_RATE": {
-        "enum": ["fixed_rate"],
+        "enum": [
+          "fixed_rate"
+        ],
         "type": "string"
       },
       "FixedRateTokenPolicyStrategy": {
@@ -281,7 +337,11 @@
             "type": "string"
           }
         },
-        "required": ["sponsorSchema", "tokenContract", "tokenContractAmount"],
+        "required": [
+          "sponsorSchema",
+          "tokenContract",
+          "tokenContractAmount"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -299,7 +359,9 @@
         ]
       },
       "EntityType.POLICY": {
-        "enum": ["policy"],
+        "enum": [
+          "policy"
+        ],
         "type": "string"
       },
       "Policy": {
@@ -382,7 +444,9 @@
         }
       },
       "EntityType.PLAYER": {
-        "enum": ["player"],
+        "enum": [
+          "player"
+        ],
         "type": "string"
       },
       "Player": {
@@ -419,12 +483,19 @@
             "type": "array"
           }
         },
-        "required": ["id", "object", "createdAt", "name"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "name"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.ACCOUNT": {
-        "enum": ["account"],
+        "enum": [
+          "account"
+        ],
         "type": "string"
       },
       "Account": {
@@ -492,7 +563,9 @@
         "additionalProperties": false
       },
       "EntityType.DEVELOPER_ACCOUNT": {
-        "enum": ["developerAccount"],
+        "enum": [
+          "developerAccount"
+        ],
         "type": "string"
       },
       "DeveloperAccount": {
@@ -523,7 +596,13 @@
             "type": "array"
           }
         },
-        "required": ["id", "object", "createdAt", "address", "custodial"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "address",
+          "custodial"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -566,7 +645,11 @@
             "format": "double"
           }
         },
-        "required": ["fromStatus", "toStatus", "at"],
+        "required": [
+          "fromStatus",
+          "toStatus",
+          "at"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -704,7 +787,10 @@
             "description": "A User Operation hash."
           }
         },
-        "required": ["userOperation", "userOperationHash"],
+        "required": [
+          "userOperation",
+          "userOperationHash"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -795,7 +881,10 @@
             "description": "A User Operation hash."
           }
         },
-        "required": ["userOperation", "userOperationHash"],
+        "required": [
+          "userOperation",
+          "userOperationHash"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -892,7 +981,10 @@
             "description": "A User Operation hash."
           }
         },
-        "required": ["userOperation", "userOperationHash"],
+        "required": [
+          "userOperation",
+          "userOperationHash"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1054,7 +1146,9 @@
             "description": "The error of the transaction of this log."
           }
         },
-        "required": ["createdAt"],
+        "required": [
+          "createdAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1083,7 +1177,9 @@
             "items": {},
             "type": "array",
             "description": "The function arguments of the contract, in string format. If you provide one of a `pla_...`, `con_...` or `acc_...` it will be converted to the corresponding address.",
-            "example": ["0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"]
+            "example": [
+              "0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"
+            ]
           },
           "dataSuffix": {
             "type": "string",
@@ -1098,7 +1194,9 @@
         "additionalProperties": false
       },
       "NextActionType": {
-        "enum": ["sign_with_wallet"],
+        "enum": [
+          "sign_with_wallet"
+        ],
         "type": "string"
       },
       "NextActionPayload": {
@@ -1138,12 +1236,17 @@
             "$ref": "#/components/schemas/NextActionPayload"
           }
         },
-        "required": ["type", "payload"],
+        "required": [
+          "type",
+          "payload"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.TRANSACTION_INTENT": {
-        "enum": ["transactionIntent"],
+        "enum": [
+          "transactionIntent"
+        ],
         "type": "string"
       },
       "TransactionIntentResponse": {
@@ -1299,12 +1402,21 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ErrorType.INVALID_REQUEST_ERROR": {
-        "enum": ["invalid_request_error"],
+        "enum": [
+          "invalid_request_error"
+        ],
         "type": "string"
       },
       "FieldErrors": {
@@ -1317,7 +1429,9 @@
               "type": "string"
             }
           },
-          "required": ["message"],
+          "required": [
+            "message"
+          ],
           "type": "object"
         }
       },
@@ -1333,7 +1447,10 @@
             "$ref": "#/components/schemas/FieldErrors"
           }
         },
-        "required": ["type", "message"],
+        "required": [
+          "type",
+          "message"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1343,18 +1460,27 @@
             "$ref": "#/components/schemas/InvalidRequestError"
           }
         },
-        "required": ["error"],
+        "required": [
+          "error"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "TransactionIntentResponseExpandable": {
         "type": "string",
-        "enum": ["policy", "player", "account"],
+        "enum": [
+          "policy",
+          "player",
+          "account"
+        ],
         "nullable": false
       },
       "Prisma.SortOrder": {
         "type": "string",
-        "enum": ["asc", "desc"]
+        "enum": [
+          "asc",
+          "desc"
+        ]
       },
       "TransactionIntentListQueries": {
         "properties": {
@@ -1393,7 +1519,9 @@
             },
             "type": "array",
             "description": "Filter by account ID or developer account (starts with acc_ or dac_ respectively).",
-            "example": ["acc_dc981458-a653-4539-b120-a321915b2896"]
+            "example": [
+              "acc_dc981458-a653-4539-b120-a321915b2896"
+            ]
           },
           "player": {
             "items": {
@@ -1401,7 +1529,9 @@
             },
             "type": "array",
             "description": "Filter by player ID (starts with pla_).",
-            "example": ["pla_556166c9-77ad-4a39-aaf8-c432defa8a0f"]
+            "example": [
+              "pla_556166c9-77ad-4a39-aaf8-c432defa8a0f"
+            ]
           },
           "status": {
             "type": "number",
@@ -1415,7 +1545,9 @@
             },
             "type": "array",
             "description": "Filter by policy ID (starts with pol_).",
-            "example": ["pol_7e07ae30-2a4d-48fa-803f-361da94905dd"]
+            "example": [
+              "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
+            ]
           }
         },
         "type": "object",
@@ -1466,7 +1598,10 @@
             "type": "array"
           }
         },
-        "required": ["chainId", "interactions"],
+        "required": [
+          "chainId",
+          "interactions"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1516,7 +1651,9 @@
             "example": true
           }
         },
-        "required": ["signature"],
+        "required": [
+          "signature"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1534,11 +1671,16 @@
         "type": "string"
       },
       "APITriggerType": {
-        "enum": ["webhook", "email"],
+        "enum": [
+          "webhook",
+          "email"
+        ],
         "type": "string"
       },
       "EntityType.TRIGGER": {
-        "enum": ["trigger"],
+        "enum": [
+          "trigger"
+        ],
         "type": "string"
       },
       "TriggerResponse": {
@@ -1579,7 +1721,9 @@
         "additionalProperties": false
       },
       "EntityType.SUBSCRIPTION": {
-        "enum": ["subscription"],
+        "enum": [
+          "subscription"
+        ],
         "type": "string"
       },
       "SubscriptionResponse": {
@@ -1608,7 +1752,13 @@
             "format": "double"
           }
         },
-        "required": ["id", "object", "createdAt", "topic", "triggers"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "topic",
+          "triggers"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1639,16 +1789,28 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "Status": {
-        "enum": ["success", "failed"],
+        "enum": [
+          "success",
+          "failed"
+        ],
         "type": "string"
       },
       "EntityType.LOG": {
-        "enum": ["log"],
+        "enum": [
+          "log"
+        ],
         "type": "string"
       },
       "LogResponse": {
@@ -1719,7 +1881,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1802,7 +1971,10 @@
             "example": "sub_6f6c9067-89fa-4fc8-ac72-c242a268c584"
           }
         },
-        "required": ["target", "type"],
+        "required": [
+          "target",
+          "type"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1821,7 +1993,10 @@
             "description": "Specifies the triggers of the subscription"
           }
         },
-        "required": ["topic", "triggers"],
+        "required": [
+          "topic",
+          "triggers"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1837,7 +2012,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1868,7 +2047,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1893,7 +2079,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2034,7 +2224,13 @@
             "type": "array"
           }
         },
-        "required": ["id", "object", "createdAt", "address", "custodial"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "address",
+          "custodial"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2065,13 +2261,22 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "DeveloperAccountResponseExpandable": {
         "type": "string",
-        "enum": ["transactionIntents"],
+        "enum": [
+          "transactionIntents"
+        ],
         "nullable": false
       },
       "DeveloperAccountListQueries": {
@@ -2098,7 +2303,9 @@
             },
             "type": "array",
             "description": "Specifies the fields to expand in the response.",
-            "example": ["transactionIntents"]
+            "example": [
+              "transactionIntents"
+            ]
           },
           "deleted": {
             "type": "boolean",
@@ -2131,7 +2338,9 @@
         "additionalProperties": false
       },
       "EntityType.SIGNATURE": {
-        "enum": ["signature"],
+        "enum": [
+          "signature"
+        ],
         "type": "string"
       },
       "SignPayloadResponse": {
@@ -2152,7 +2361,13 @@
             "type": "string"
           }
         },
-        "required": ["object", "account", "address", "hash", "signature"],
+        "required": [
+          "object",
+          "account",
+          "address",
+          "hash",
+          "signature"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2185,7 +2400,9 @@
             "example": "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558"
           }
         },
-        "required": ["chainId"],
+        "required": [
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2198,7 +2415,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "type"],
+        "required": [
+          "name",
+          "type"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2233,7 +2453,12 @@
             "example": "0x3d8c6cab96bc24c87162c529bed5ba88b4617a7ea8bef66489a541d043ac6e8b"
           }
         },
-        "required": ["domain", "types", "primaryType", "value"],
+        "required": [
+          "domain",
+          "types",
+          "primaryType",
+          "value"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2257,7 +2482,10 @@
             "type": "string"
           }
         },
-        "required": ["message", "address"],
+        "required": [
+          "message",
+          "address"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2273,12 +2501,18 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.SESSION": {
-        "enum": ["session"],
+        "enum": [
+          "session"
+        ],
         "type": "string"
       },
       "SessionResponse": {
@@ -2384,13 +2618,22 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SessionResponseExpandable": {
         "type": "string",
-        "enum": ["transactionIntents"],
+        "enum": [
+          "transactionIntents"
+        ],
         "nullable": false,
         "description": "Contains list of the expandable fields for the session response"
       },
@@ -2425,7 +2668,9 @@
             "description": "Specifies the fields to expand in the response."
           }
         },
-        "required": ["player"],
+        "required": [
+          "player"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2482,7 +2727,9 @@
             },
             "type": "array",
             "description": "The list of whitelisted addresses (contracts the session key can interact with).",
-            "example": ["0x1234567890abcdef1234567890abcdef12345678"]
+            "example": [
+              "0x1234567890abcdef1234567890abcdef12345678"
+            ]
           },
           "player": {
             "type": "string",
@@ -2495,7 +2742,12 @@
             "example": "acc_e1b24353-1741-4a3d-9e91-2b0fd2942f60"
           }
         },
-        "required": ["address", "chainId", "validAfter", "validUntil"],
+        "required": [
+          "address",
+          "chainId",
+          "validAfter",
+          "validUntil"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2533,20 +2785,31 @@
             "example": "acc_e1b24353-1741-4a3d-9e91-2b0fd2942f60"
           }
         },
-        "required": ["address", "chainId"],
+        "required": [
+          "address",
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "PolicyRuleType.CONTRACT": {
-        "enum": ["contract_functions"],
+        "enum": [
+          "contract_functions"
+        ],
         "type": "string"
       },
       "PolicyRuleType": {
-        "enum": ["contract_functions", "account_functions", "rate_limit"],
+        "enum": [
+          "contract_functions",
+          "account_functions",
+          "rate_limit"
+        ],
         "type": "string"
       },
       "EntityType.POLICY_RULE": {
-        "enum": ["policyRule"],
+        "enum": [
+          "policyRule"
+        ],
         "type": "string"
       },
       "AbiType": {
@@ -2654,7 +2917,9 @@
         "additionalProperties": false
       },
       "EntityType.CONTRACT": {
-        "enum": ["contract"],
+        "enum": [
+          "contract"
+        ],
         "type": "string"
       },
       "ContractResponse": {
@@ -2714,7 +2979,9 @@
             "type": "string"
           }
         },
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "type": "object",
         "description": "From T, pick a set of properties whose keys are in the union K"
       },
@@ -2750,12 +3017,20 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "createdAt", "type", "wildcard"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "type",
+          "wildcard"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "PolicyRuleType.ACCOUNT": {
-        "enum": ["account_functions"],
+        "enum": [
+          "account_functions"
+        ],
         "type": "string"
       },
       "AccountPolicyRuleResponse": {
@@ -2774,16 +3049,25 @@
             "$ref": "#/components/schemas/PolicyRuleType.ACCOUNT"
           }
         },
-        "required": ["id", "object", "createdAt", "type"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "type"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "PolicyRateLimit.GAS_PER_TRANSACTION": {
-        "enum": ["gas_per_transaction"],
+        "enum": [
+          "gas_per_transaction"
+        ],
         "type": "string"
       },
       "PolicyRuleType.RATE_LIMIT": {
-        "enum": ["rate_limit"],
+        "enum": [
+          "rate_limit"
+        ],
         "type": "string"
       },
       "PolicyRateLimit": {
@@ -2828,11 +3112,19 @@
         "additionalProperties": false
       },
       "PolicyRateLimit.GAS_PER_INTERVAL": {
-        "enum": ["gas_per_interval"],
+        "enum": [
+          "gas_per_interval"
+        ],
         "type": "string"
       },
       "TimeIntervalType": {
-        "enum": ["minute", "hour", "day", "week", "month"],
+        "enum": [
+          "minute",
+          "hour",
+          "day",
+          "week",
+          "month"
+        ],
         "type": "string"
       },
       "GasPerIntervalLimitPolicyRuleResponse": {
@@ -2878,7 +3170,9 @@
         "additionalProperties": false
       },
       "PolicyRateLimit.COUNT_PER_INTERVAL": {
-        "enum": ["count_per_interval"],
+        "enum": [
+          "count_per_interval"
+        ],
         "type": "string"
       },
       "CountPerIntervalLimitPolicyRuleResponse": {
@@ -2970,7 +3264,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -2995,7 +3296,9 @@
           "expand": {
             "items": {
               "type": "string",
-              "enum": ["contract"],
+              "enum": [
+                "contract"
+              ],
               "nullable": false
             },
             "type": "array",
@@ -3007,7 +3310,9 @@
             "example": "pol_48eeba57-2cd5-4159-a2cb-057a23a35e65"
           }
         },
-        "required": ["policy"],
+        "required": [
+          "policy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3060,7 +3365,10 @@
             "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
           }
         },
-        "required": ["type", "policy"],
+        "required": [
+          "type",
+          "policy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3108,7 +3416,9 @@
             "example": 1
           }
         },
-        "required": ["type"],
+        "required": [
+          "type"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3124,7 +3434,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3233,13 +3547,23 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "PolicyResponseExpandable": {
         "type": "string",
-        "enum": ["transactionIntents", "policyRules"],
+        "enum": [
+          "transactionIntents",
+          "policyRules"
+        ],
         "nullable": false
       },
       "PolicyListQueries": {
@@ -3314,7 +3638,9 @@
             "description": "If the you want to use your own native tokens to pay for gas, specify the developer account ID (starts with dac_)"
           }
         },
-        "required": ["sponsorSchema"],
+        "required": [
+          "sponsorSchema"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3346,7 +3672,11 @@
             "example": "cfo_f0f89cf2-c185-40f4-beef-2a250d7a472b"
           }
         },
-        "required": ["name", "chainId", "strategy"],
+        "required": [
+          "name",
+          "chainId",
+          "strategy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3398,7 +3728,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3413,7 +3747,10 @@
             "format": "double"
           }
         },
-        "required": ["start", "end"],
+        "required": [
+          "start",
+          "end"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3435,7 +3772,13 @@
             "type": "string"
           }
         },
-        "required": ["id", "gasFee", "gasPrice", "gasUsed", "gasFeeInUSD"],
+        "required": [
+          "id",
+          "gasFee",
+          "gasPrice",
+          "gasUsed",
+          "gasFeeInUSD"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3502,7 +3845,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3555,7 +3905,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3574,7 +3931,10 @@
             "example": 1612137600
           }
         },
-        "required": ["to", "from"],
+        "required": [
+          "to",
+          "from"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3590,7 +3950,11 @@
             "type": "string"
           }
         },
-        "required": ["policy", "balance", "contract"],
+        "required": [
+          "policy",
+          "balance",
+          "contract"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3607,7 +3971,10 @@
             "example": "300000"
           }
         },
-        "required": ["account", "amount"],
+        "required": [
+          "account",
+          "amount"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3659,7 +4026,12 @@
             "type": "array"
           }
         },
-        "required": ["id", "object", "createdAt", "name"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "name"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3690,13 +4062,23 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "PlayerResponseExpandable": {
         "type": "string",
-        "enum": ["transactionIntents", "accounts"],
+        "enum": [
+          "transactionIntents",
+          "accounts"
+        ],
         "nullable": false
       },
       "PlayerListQueries": {
@@ -3789,7 +4171,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3817,7 +4203,11 @@
             "example": "pla_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
           }
         },
-        "required": ["policy", "chainId", "newOwnerAddress"],
+        "required": [
+          "policy",
+          "chainId",
+          "newOwnerAddress"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3835,12 +4225,17 @@
             "example": 80002
           }
         },
-        "required": ["policy", "chainId"],
+        "required": [
+          "policy",
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.PAYMASTER": {
-        "enum": ["paymaster"],
+        "enum": [
+          "paymaster"
+        ],
         "type": "string"
       },
       "PaymasterResponse": {
@@ -3866,7 +4261,12 @@
             "type": "object"
           }
         },
-        "required": ["id", "object", "createdAt", "address"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "address"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3898,7 +4298,9 @@
             "description": "Specifies the name of the paymaster"
           }
         },
-        "required": ["address"],
+        "required": [
+          "address"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -3936,12 +4338,19 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "OnrampProvider": {
-        "enum": ["coinbase", "stripe"],
+        "enum": [
+          "coinbase",
+          "stripe"
+        ],
         "type": "string"
       },
       "OnrampFee": {
@@ -3957,7 +4366,11 @@
             "type": "string"
           }
         },
-        "required": ["type", "amount", "currency"],
+        "required": [
+          "type",
+          "amount",
+          "currency"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4012,7 +4425,10 @@
             "type": "object"
           }
         },
-        "required": ["provider", "onrampUrl"],
+        "required": [
+          "provider",
+          "onrampUrl"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4218,12 +4634,21 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.FORWARDER_CONTRACT": {
-        "enum": ["forwarderContract"],
+        "enum": [
+          "forwarderContract"
+        ],
         "type": "string"
       },
       "ForwarderContractResponse": {
@@ -4249,7 +4674,13 @@
             "type": "string"
           }
         },
-        "required": ["id", "object", "createdAt", "address", "chainId"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "address",
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4274,7 +4705,10 @@
             "description": "Specifies the name of the paymaster"
           }
         },
-        "required": ["address", "chainId"],
+        "required": [
+          "address",
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4290,12 +4724,19 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "TradeType": {
-        "enum": ["EXACT_INPUT", "EXACT_OUTPUT"],
+        "enum": [
+          "EXACT_INPUT",
+          "EXACT_OUTPUT"
+        ],
         "type": "string"
       },
       "CreateExchangeRequest": {
@@ -4391,7 +4832,11 @@
             "format": "double"
           }
         },
-        "required": ["decimals", "address", "chainId"],
+        "required": [
+          "decimals",
+          "address",
+          "chainId"
+        ],
         "type": "object",
         "description": "Type representing a token"
       },
@@ -4404,7 +4849,10 @@
             "$ref": "#/components/schemas/Token"
           }
         },
-        "required": ["value", "token"],
+        "required": [
+          "value",
+          "token"
+        ],
         "type": "object",
         "description": "Interface representing a token amount"
       },
@@ -4421,7 +4869,11 @@
             "type": "string"
           }
         },
-        "required": ["amount", "basisPoints", "recipient"],
+        "required": [
+          "amount",
+          "basisPoints",
+          "recipient"
+        ],
         "type": "object",
         "description": "Type representing the fees returned in the quote"
       },
@@ -4465,11 +4917,15 @@
         "additionalProperties": false
       },
       "APITopic.BALANCE_CONTRACT": {
-        "enum": ["balance.contract"],
+        "enum": [
+          "balance.contract"
+        ],
         "type": "string"
       },
       "EntityType.EVENT": {
-        "enum": ["event"],
+        "enum": [
+          "event"
+        ],
         "type": "string"
       },
       "ContractEventResponse": {
@@ -4517,7 +4973,9 @@
         "additionalProperties": false
       },
       "APITopic.BALANCE_DEV_ACCOUNT": {
-        "enum": ["balance.dev_account"],
+        "enum": [
+          "balance.dev_account"
+        ],
         "type": "string"
       },
       "AccountEventResponse": {
@@ -4559,7 +5017,9 @@
         "additionalProperties": false
       },
       "APITopic.BALANCE_PROJECT": {
-        "enum": ["balance.project"],
+        "enum": [
+          "balance.project"
+        ],
         "type": "string"
       },
       "BalanceEventResponse": {
@@ -4581,12 +5041,20 @@
             "type": "string"
           }
         },
-        "required": ["id", "object", "createdAt", "topic", "threshold"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "topic",
+          "threshold"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "APITopic.TRANSACTION_SUCCESSFUL": {
-        "enum": ["transaction_intent.successful"],
+        "enum": [
+          "transaction_intent.successful"
+        ],
         "type": "string"
       },
       "TransactionConfirmedEventResponse": {
@@ -4609,7 +5077,13 @@
             "format": "double"
           }
         },
-        "required": ["id", "object", "createdAt", "topic", "numberOfBlocks"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "topic",
+          "numberOfBlocks"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4656,7 +5130,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4721,7 +5202,10 @@
             },
             "type": "array",
             "description": "Specifies the function arguments (if the event is a contract event)",
-            "example": ["arg1", "arg2"]
+            "example": [
+              "arg1",
+              "arg2"
+            ]
           },
           "functionName": {
             "type": "string",
@@ -4751,7 +5235,10 @@
             "default": 5
           }
         },
-        "required": ["name", "topic"],
+        "required": [
+          "name",
+          "topic"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4767,7 +5254,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4790,7 +5281,12 @@
             "type": "string"
           }
         },
-        "required": ["share", "accountType", "address", "chainId"],
+        "required": [
+          "share",
+          "accountType",
+          "address",
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4798,7 +5294,10 @@
         "properties": {
           "nextAction": {
             "type": "string",
-            "enum": ["RECOVER", "REGISTER"]
+            "enum": [
+              "RECOVER",
+              "REGISTER"
+            ]
           },
           "player": {
             "type": "string"
@@ -4807,7 +5306,10 @@
             "$ref": "#/components/schemas/EmbeddedResponse"
           }
         },
-        "required": ["nextAction", "player"],
+        "required": [
+          "nextAction",
+          "player"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4818,7 +5320,9 @@
             "format": "double"
           }
         },
-        "required": ["chainId"],
+        "required": [
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4892,7 +5396,11 @@
             "type": "string"
           }
         },
-        "required": ["chainId", "address", "share"],
+        "required": [
+          "chainId",
+          "address",
+          "share"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4906,7 +5414,10 @@
             "type": "string"
           }
         },
-        "required": ["chainId", "deviceId"],
+        "required": [
+          "chainId",
+          "deviceId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -4916,12 +5427,16 @@
             "type": "string"
           }
         },
-        "required": ["address"],
+        "required": [
+          "address"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.DEVICE": {
-        "enum": ["device"],
+        "enum": [
+          "device"
+        ],
         "type": "string"
       },
       "DeviceResponse": {
@@ -4984,7 +5499,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5015,7 +5537,9 @@
             "example": "acc_6f6c9067-89fa-4fc8-ac72-c242a268c584"
           }
         },
-        "required": ["account"],
+        "required": [
+          "account"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5038,7 +5562,10 @@
             "example": "7d526b7e99fbf52850a183..."
           }
         },
-        "required": ["account", "share"],
+        "required": [
+          "account",
+          "share"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5069,7 +5596,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5173,7 +5707,11 @@
             "example": false
           }
         },
-        "required": ["name", "chainId", "address"],
+        "required": [
+          "name",
+          "chainId",
+          "address"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5243,7 +5781,9 @@
         "additionalProperties": false
       },
       "EntityType.READCONTRACT": {
-        "enum": ["readContract"],
+        "enum": [
+          "readContract"
+        ],
         "type": "string"
       },
       "ContractReadResponse": {
@@ -5263,7 +5803,13 @@
           },
           "result": {}
         },
-        "required": ["id", "object", "createdAt", "functionName", "result"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "functionName",
+          "result"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5278,10 +5824,14 @@
             "items": {},
             "type": "array",
             "description": "The function arguments of the contract, in string format. Accepts pla_, con_ and acc_ IDs.",
-            "example": ["0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"]
+            "example": [
+              "0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"
+            ]
           }
         },
-        "required": ["functionName"],
+        "required": [
+          "functionName"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5297,7 +5847,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5406,13 +5960,23 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "AccountResponseExpandable": {
         "type": "string",
-        "enum": ["player", "transactionIntents"],
+        "enum": [
+          "player",
+          "transactionIntents"
+        ],
         "nullable": false
       },
       "AccountListQueries": {
@@ -5455,7 +6019,9 @@
             },
             "type": "array",
             "description": "Specifies the fields to expand in the response.",
-            "example": ["transactionIntents"]
+            "example": [
+              "transactionIntents"
+            ]
           }
         },
         "type": "object",
@@ -5490,7 +6056,9 @@
             "example": "pla_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
           }
         },
-        "required": ["chainId"],
+        "required": [
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5507,7 +6075,10 @@
             "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
           }
         },
-        "required": ["newOwnerAddress", "policy"],
+        "required": [
+          "newOwnerAddress",
+          "policy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5519,7 +6090,9 @@
             "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
           }
         },
-        "required": ["policy"],
+        "required": [
+          "policy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5531,7 +6104,9 @@
             "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
           }
         },
-        "required": ["policy"],
+        "required": [
+          "policy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5548,7 +6123,10 @@
             "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
           }
         },
-        "required": ["newOwnerAddress", "policy"],
+        "required": [
+          "newOwnerAddress",
+          "policy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5576,7 +6154,10 @@
             "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
           }
         },
-        "required": ["newOwnerAddress", "policy"],
+        "required": [
+          "newOwnerAddress",
+          "policy"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5622,7 +6203,11 @@
             "type": "string"
           }
         },
-        "required": ["provider", "createdAt", "updatedAt"],
+        "required": [
+          "provider",
+          "createdAt",
+          "updatedAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5702,7 +6287,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5753,7 +6345,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5785,7 +6381,11 @@
             "type": "boolean"
           }
         },
-        "required": ["implementationType", "implementationAddress", "active"],
+        "required": [
+          "implementationType",
+          "implementationAddress",
+          "active"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -5860,6 +6460,15 @@
           "recoveryMethodDetails": {
             "$ref": "#/components/schemas/RecoveryMethodDetails"
           },
+          "custody": {
+            "type": "string",
+            "enum": [
+              "Developer",
+              "User"
+            ],
+            "description": "Indicates key custody: \"Developer\" for server-managed keys (WALLTEE), \"User\" for user-managed keys (DB).",
+            "example": "Developer"
+          },
           "recoveryShare": {
             "type": "string",
             "description": "The recovery share for the user's embedded signer.\nThis should be stored securely and provided to the user for account recovery."
@@ -5873,6 +6482,7 @@
           "chainType",
           "createdAt",
           "updatedAt",
+          "custody",
           "recoveryShare"
         ],
         "type": "object",
@@ -5921,7 +6531,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type. \"EVM\" or \"SVM\". Defaults to \"EVM\".",
             "example": "EVM"
           },
@@ -5987,7 +6600,9 @@
             "type": "string"
           }
         },
-        "required": ["account"],
+        "required": [
+          "account"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6000,7 +6615,10 @@
             "type": "string"
           }
         },
-        "required": ["account", "share"],
+        "required": [
+          "account",
+          "share"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6018,7 +6636,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type. \"EVM\" or \"SVM\".",
             "example": "EVM"
           },
@@ -6047,7 +6668,11 @@
             "example": "UpgradeableV6"
           }
         },
-        "required": ["accountType", "chainType", "address"],
+        "required": [
+          "accountType",
+          "chainType",
+          "address"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6056,7 +6681,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["backendWallet"],
+            "enum": [
+              "backendWallet"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6072,7 +6699,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type the wallet is associated with.",
             "example": "EVM"
           },
@@ -6080,6 +6710,15 @@
             "type": "string",
             "description": "Optional name for the wallet.",
             "example": "Treasury Wallet"
+          },
+          "custody": {
+            "type": "string",
+            "enum": [
+              "Developer"
+            ],
+            "nullable": false,
+            "description": "Key custody: always \"Developer\" for backend wallets (server-managed keys in TEE).",
+            "example": "Developer"
           },
           "createdAt": {
             "type": "integer",
@@ -6097,6 +6736,7 @@
           "id",
           "address",
           "chainType",
+          "custody",
           "createdAt",
           "updatedAt"
         ],
@@ -6108,7 +6748,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["list"],
+            "enum": [
+              "list"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6139,7 +6781,14 @@
             "description": "Total number of wallets."
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6160,7 +6809,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "Filter by chain type.",
             "example": "EVM"
           },
@@ -6188,7 +6840,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["account"],
+            "enum": [
+              "account"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6204,7 +6858,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type the wallet is associated with.",
             "example": "EVM"
           },
@@ -6214,7 +6871,13 @@
             "description": "Creation timestamp (Unix epoch seconds)."
           }
         },
-        "required": ["object", "id", "address", "chainType", "createdAt"],
+        "required": [
+          "object",
+          "id",
+          "address",
+          "chainType",
+          "createdAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6223,7 +6886,10 @@
         "properties": {
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type for the new wallet.",
             "example": "EVM"
           },
@@ -6238,7 +6904,9 @@
             "example": "Treasury Wallet"
           }
         },
-        "required": ["chainType"],
+        "required": [
+          "chainType"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6247,7 +6915,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["backendWallet"],
+            "enum": [
+              "backendWallet"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6261,7 +6931,11 @@
             "description": "Whether the wallet was deleted."
           }
         },
-        "required": ["object", "id", "deleted"],
+        "required": [
+          "object",
+          "id",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6270,7 +6944,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["signature"],
+            "enum": [
+              "signature"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6285,7 +6961,11 @@
             "example": "0x1234567890abcdef..."
           }
         },
-        "required": ["object", "account", "signature"],
+        "required": [
+          "object",
+          "account",
+          "signature"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6298,7 +6978,9 @@
             "example": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
           }
         },
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6307,7 +6989,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["exportedKey"],
+            "enum": [
+              "exportedKey"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6317,7 +7001,10 @@
             "example": "base64_encrypted_data..."
           }
         },
-        "required": ["object", "encryptedPrivateKey"],
+        "required": [
+          "object",
+          "encryptedPrivateKey"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6330,7 +7017,9 @@
             "example": "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA..."
           }
         },
-        "required": ["encryptionKey"],
+        "required": [
+          "encryptionKey"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6339,7 +7028,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["account"],
+            "enum": [
+              "account"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6355,7 +7046,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type the wallet is associated with.",
             "example": "EVM"
           },
@@ -6365,7 +7059,12 @@
             "description": "Creation timestamp (Unix epoch seconds)."
           }
         },
-        "required": ["object", "id", "address", "createdAt"],
+        "required": [
+          "object",
+          "id",
+          "address",
+          "createdAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6379,7 +7078,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type for the imported wallet.",
             "example": "EVM"
           },
@@ -6394,7 +7096,9 @@
             "example": "Treasury Wallet"
           }
         },
-        "required": ["encryptedPrivateKey"],
+        "required": [
+          "encryptedPrivateKey"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6403,7 +7107,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["walletSecret"],
+            "enum": [
+              "walletSecret"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6418,7 +7124,11 @@
             "description": "Timestamp when the secret was registered (Unix epoch seconds)."
           }
         },
-        "required": ["object", "keyId", "registeredAt"],
+        "required": [
+          "object",
+          "keyId",
+          "registeredAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6436,7 +7146,9 @@
             "example": "ws_1234567890"
           }
         },
-        "required": ["publicKey"],
+        "required": [
+          "publicKey"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6445,7 +7157,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["walletSecretRevocation"],
+            "enum": [
+              "walletSecretRevocation"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6464,7 +7178,12 @@
             "description": "Timestamp when the secret was revoked (Unix epoch seconds)."
           }
         },
-        "required": ["object", "keyId", "revoked", "revokedAt"],
+        "required": [
+          "object",
+          "keyId",
+          "revoked",
+          "revokedAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6477,7 +7196,9 @@
             "example": "ws_1234567890"
           }
         },
-        "required": ["keyId"],
+        "required": [
+          "keyId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6486,7 +7207,9 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": ["walletSecretRotation"],
+            "enum": [
+              "walletSecretRotation"
+            ],
             "nullable": false,
             "description": "The type of object."
           },
@@ -6500,7 +7223,11 @@
             "description": "Timestamp when the rotation occurred (Unix epoch seconds)."
           }
         },
-        "required": ["object", "success", "rotatedAt"],
+        "required": [
+          "object",
+          "success",
+          "rotatedAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6518,7 +7245,9 @@
             "example": "ws_1234567890"
           }
         },
-        "required": ["newSecretPublicKey"],
+        "required": [
+          "newSecretPublicKey"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6562,6 +7291,15 @@
           },
           "recoveryMethodDetails": {
             "$ref": "#/components/schemas/RecoveryMethodDetails"
+          },
+          "custody": {
+            "type": "string",
+            "enum": [
+              "Developer",
+              "User"
+            ],
+            "description": "Indicates key custody: \"Developer\" for server-managed keys (WALLTEE), \"User\" for user-managed keys (DB).",
+            "example": "Developer"
           }
         },
         "required": [
@@ -6571,7 +7309,8 @@
           "address",
           "chainType",
           "createdAt",
-          "updatedAt"
+          "updatedAt",
+          "custody"
         ],
         "type": "object",
         "additionalProperties": false
@@ -6603,7 +7342,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6641,7 +7387,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type. Must be either \"EVM\" or \"SVM\".",
             "example": "EVM"
           },
@@ -6657,7 +7406,10 @@
           },
           "custody": {
             "type": "string",
-            "enum": ["Developer", "User"],
+            "enum": [
+              "Developer",
+              "User"
+            ],
             "description": "Specifies the key custody of the account. Must be either \"Developer\" or \"User\".",
             "example": "Developer"
           },
@@ -6676,7 +7428,9 @@
             "type": "string"
           }
         },
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6693,7 +7447,10 @@
             "example": 80002
           }
         },
-        "required": ["account", "chainId"],
+        "required": [
+          "account",
+          "chainId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6711,7 +7468,10 @@
           },
           "chainType": {
             "type": "string",
-            "enum": ["EVM", "SVM"],
+            "enum": [
+              "EVM",
+              "SVM"
+            ],
             "description": "The chain type. \"EVM\" or \"SVM\".",
             "example": "EVM"
           },
@@ -6740,7 +7500,11 @@
             "example": "acc_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
           }
         },
-        "required": ["accountType", "chainType", "user"],
+        "required": [
+          "accountType",
+          "chainType",
+          "user"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6756,16 +7520,26 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "UserProjectRole": {
-        "enum": ["OWNER", "ADMIN", "MEMBER"],
+        "enum": [
+          "OWNER",
+          "ADMIN",
+          "MEMBER"
+        ],
         "type": "string"
       },
       "EntityType.USER": {
-        "enum": ["user"],
+        "enum": [
+          "user"
+        ],
         "type": "string"
       },
       "UserProjectResponse": {
@@ -6837,16 +7611,27 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "UserProjectRole.ADMIN": {
-        "enum": ["ADMIN"],
+        "enum": [
+          "ADMIN"
+        ],
         "type": "string"
       },
       "UserProjectRole.MEMBER": {
-        "enum": ["MEMBER"],
+        "enum": [
+          "MEMBER"
+        ],
         "type": "string"
       },
       "UserProjectCreateRequest": {
@@ -6869,7 +7654,9 @@
             "example": "name@company.com"
           }
         },
-        "required": ["email"],
+        "required": [
+          "email"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6888,7 +7675,9 @@
             "example": "MEMBER"
           }
         },
-        "required": ["role"],
+        "required": [
+          "role"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6904,7 +7693,11 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "deleted"],
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6928,7 +7721,13 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "createdAt", "token", "name", "livemode"],
+        "required": [
+          "id",
+          "createdAt",
+          "token",
+          "name",
+          "livemode"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6942,12 +7741,17 @@
             "type": "boolean"
           }
         },
-        "required": ["webhook", "livemode"],
+        "required": [
+          "webhook",
+          "livemode"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.PROJECT": {
-        "enum": ["project"],
+        "enum": [
+          "project"
+        ],
         "type": "string"
       },
       "ChildProjectResponse": {
@@ -6966,7 +7770,12 @@
             "type": "string"
           }
         },
-        "required": ["id", "object", "createdAt", "name"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "name"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -6997,7 +7806,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7042,7 +7858,14 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "object", "createdAt", "updatedAt", "name", "isV2"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "isV2"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7073,7 +7896,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7094,7 +7924,12 @@
             "type": "string"
           }
         },
-        "required": ["timestamp", "total", "successful", "gasUsed"],
+        "required": [
+          "timestamp",
+          "total",
+          "successful",
+          "gasUsed"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7108,7 +7943,10 @@
             "format": "int32"
           }
         },
-        "required": ["timestamp", "total"],
+        "required": [
+          "timestamp",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7130,7 +7968,10 @@
             "type": "array"
           }
         },
-        "required": ["transactionIntents", "devices"],
+        "required": [
+          "transactionIntents",
+          "devices"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7138,10 +7979,17 @@
         "properties": {
           "timeFrame": {
             "type": "string",
-            "enum": ["day", "week", "month", "all"]
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "all"
+            ]
           }
         },
-        "required": ["timeFrame"],
+        "required": [
+          "timeFrame"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7162,13 +8010,23 @@
           },
           "change_type": {
             "type": "string",
-            "enum": ["upgrade", "downgrade", "none"]
+            "enum": [
+              "upgrade",
+              "downgrade",
+              "none"
+            ]
           },
           "legacy": {
             "type": "boolean"
           }
         },
-        "required": ["id", "name", "price", "is_current", "change_type"],
+        "required": [
+          "id",
+          "name",
+          "price",
+          "is_current",
+          "change_type"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7181,7 +8039,9 @@
             "type": "array"
           }
         },
-        "required": ["plans"],
+        "required": [
+          "plans"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7212,16 +8072,25 @@
                 "type": "string"
               }
             },
-            "required": ["price", "name", "id"],
+            "required": [
+              "price",
+              "name",
+              "id"
+            ],
             "type": "object"
           }
         },
-        "required": ["plan"],
+        "required": [
+          "plan"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "PrivateKeyPolicy": {
-        "enum": ["INDIVIDUAL", "PROJECT"],
+        "enum": [
+          "INDIVIDUAL",
+          "PROJECT"
+        ],
         "type": "string"
       },
       "CreateProjectRequest": {
@@ -7239,7 +8108,9 @@
             "example": "PROJECT"
           }
         },
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7253,7 +8124,9 @@
             "maxLength": 256
           }
         },
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7266,7 +8139,9 @@
             "type": "array"
           }
         },
-        "required": ["allowedOrigins"],
+        "required": [
+          "allowedOrigins"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7279,12 +8154,16 @@
             "type": "array"
           }
         },
-        "required": ["allowedOrigins"],
+        "required": [
+          "allowedOrigins"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EntityType.SMTP_CONFIG": {
-        "enum": ["smtpConfig"],
+        "enum": [
+          "smtpConfig"
+        ],
         "type": "string"
       },
       "SMTPConfigResponse": {
@@ -7376,16 +8255,24 @@
             "$ref": "#/components/schemas/EntityType.SMTP_CONFIG"
           }
         },
-        "required": ["deleted", "object"],
+        "required": [
+          "deleted",
+          "object"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "EmailTypeResponse": {
-        "enum": ["emailVerification", "passwordReset"],
+        "enum": [
+          "emailVerification",
+          "passwordReset"
+        ],
         "type": "string"
       },
       "EntityType.EMAIL_SAMPLE": {
-        "enum": ["emailSample"],
+        "enum": [
+          "emailSample"
+        ],
         "type": "string"
       },
       "EmailSampleResponse": {
@@ -7429,7 +8316,10 @@
         "$ref": "#/components/schemas/EmailSampleResponse"
       },
       "EmailTypeRequest": {
-        "enum": ["emailVerification", "passwordReset"],
+        "enum": [
+          "emailVerification",
+          "passwordReset"
+        ],
         "type": "string"
       },
       "CreateEmailSampleRequest": {
@@ -7455,7 +8345,12 @@
             "example": "emailVerification"
           }
         },
-        "required": ["name", "subject", "body", "type"],
+        "required": [
+          "name",
+          "subject",
+          "body",
+          "type"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7489,7 +8384,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7508,7 +8410,11 @@
             "$ref": "#/components/schemas/EntityType.EMAIL_SAMPLE"
           }
         },
-        "required": ["deleted", "id", "object"],
+        "required": [
+          "deleted",
+          "id",
+          "object"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7731,12 +8637,20 @@
             "$ref": "#/components/schemas/EcosystemConfigurationResponse"
           }
         },
-        "required": ["publishableKey", "name"],
+        "required": [
+          "publishableKey",
+          "name"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ApiKeyType": {
-        "enum": ["pk", "sk", "pk_shield", "sk_shield"],
+        "enum": [
+          "pk",
+          "sk",
+          "pk_shield",
+          "sk_shield"
+        ],
         "type": "string"
       },
       "CreateProjectApiKeyRequest": {
@@ -7747,7 +8661,9 @@
             "example": "sk"
           }
         },
-        "required": ["type"],
+        "required": [
+          "type"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7769,7 +8685,10 @@
             "example": true
           }
         },
-        "required": ["type", "uuid"],
+        "required": [
+          "type",
+          "uuid"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7782,7 +8701,9 @@
             "type": "array"
           }
         },
-        "required": ["origins"],
+        "required": [
+          "origins"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7795,7 +8716,9 @@
             "type": "array"
           }
         },
-        "required": ["origins"],
+        "required": [
+          "origins"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7811,13 +8734,18 @@
                   "type": "string"
                 }
               },
-              "required": ["network", "name"],
+              "required": [
+                "network",
+                "name"
+              ],
               "type": "object"
             },
             "type": "array"
           }
         },
-        "required": ["authorizedNetworks"],
+        "required": [
+          "authorizedNetworks"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7830,7 +8758,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "network"],
+        "required": [
+          "name",
+          "network"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7843,7 +8774,9 @@
             "type": "array"
           }
         },
-        "required": ["authorizedNetworks"],
+        "required": [
+          "authorizedNetworks"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7862,13 +8795,18 @@
                   "type": "string"
                 }
               },
-              "required": ["appIdentifier", "name"],
+              "required": [
+                "appIdentifier",
+                "name"
+              ],
               "type": "object"
             },
             "type": "array"
           }
         },
-        "required": ["authorizedApps"],
+        "required": [
+          "authorizedApps"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7884,7 +8822,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "appIdentifier"],
+        "required": [
+          "name",
+          "appIdentifier"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7897,7 +8838,9 @@
             "type": "array"
           }
         },
-        "required": ["authorizedApps"],
+        "required": [
+          "authorizedApps"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7955,7 +8898,10 @@
             "$ref": "#/components/schemas/PlayerMetadata"
           }
         },
-        "required": ["provider", "disabled"],
+        "required": [
+          "provider",
+          "disabled"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -7965,7 +8911,9 @@
             "type": "string"
           }
         },
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "type": "object",
         "description": "From T, pick a set of properties whose keys are in the union K"
       },
@@ -7998,7 +8946,12 @@
             "type": "array"
           }
         },
-        "required": ["id", "object", "createdAt", "linkedAccounts"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "linkedAccounts"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8017,7 +8970,11 @@
             "description": "Refresh token."
           }
         },
-        "required": ["player", "token", "refreshToken"],
+        "required": [
+          "player",
+          "token",
+          "refreshToken"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8033,7 +8990,9 @@
             "example": false
           }
         },
-        "required": ["refreshToken"],
+        "required": [
+          "refreshToken"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8044,7 +9003,9 @@
             "description": "Specifies the refresh token."
           }
         },
-        "required": ["refreshToken"],
+        "required": [
+          "refreshToken"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8063,7 +9024,11 @@
             "format": "double"
           }
         },
-        "required": ["address", "nonce", "expiresAt"],
+        "required": [
+          "address",
+          "nonce",
+          "expiresAt"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8075,7 +9040,9 @@
             "example": "0x8C5cedA46A26214A52A9D7BF036Ad2F6255BdBEa"
           }
         },
-        "required": ["address"],
+        "required": [
+          "address"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8112,7 +9079,9 @@
         "additionalProperties": false
       },
       "Actions": {
-        "enum": ["verify_email"],
+        "enum": [
+          "verify_email"
+        ],
         "type": "string"
       },
       "ActionRequiredResponse": {
@@ -8121,7 +9090,9 @@
             "$ref": "#/components/schemas/Actions"
           }
         },
-        "required": ["action"],
+        "required": [
+          "action"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8148,7 +9119,10 @@
             "example": "I'm a developer."
           }
         },
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8165,7 +9139,10 @@
             "example": "password"
           }
         },
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8178,12 +9155,18 @@
           },
           "method": {
             "type": "string",
-            "enum": ["plain", "S256"],
+            "enum": [
+              "plain",
+              "S256"
+            ],
             "description": "The code verifier.",
             "example": "S256"
           }
         },
-        "required": ["codeChallenge", "method"],
+        "required": [
+          "codeChallenge",
+          "method"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8204,7 +9187,10 @@
             "description": "The Code Challenge if you want to use PKCE."
           }
         },
-        "required": ["email", "redirectUrl"],
+        "required": [
+          "email",
+          "redirectUrl"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8216,7 +9202,9 @@
             "example": "verifier"
           }
         },
-        "required": ["codeVerifier"],
+        "required": [
+          "codeVerifier"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8237,7 +9225,10 @@
             "description": "The Code Challenge to verify the PKCE if you used it in the request."
           }
         },
-        "required": ["email", "token"],
+        "required": [
+          "email",
+          "token"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8258,7 +9249,10 @@
             "description": "The Code Challenge if you want to use PKCE."
           }
         },
-        "required": ["email", "redirectUrl"],
+        "required": [
+          "email",
+          "redirectUrl"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8283,7 +9277,10 @@
             "description": "The Code Challenge to verify the PKCE if you used it in the request."
           }
         },
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8295,7 +9292,9 @@
             "example": "user@email.com"
           }
         },
-        "required": ["email"],
+        "required": [
+          "email"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8307,7 +9306,9 @@
             "example": "token"
           }
         },
-        "required": ["identityToken"],
+        "required": [
+          "identityToken"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8320,7 +9321,10 @@
             "type": "string"
           }
         },
-        "required": ["url", "key"],
+        "required": [
+          "url",
+          "key"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8369,7 +9373,9 @@
             "description": "One of the providers supported by Openfort"
           }
         },
-        "required": ["provider"],
+        "required": [
+          "provider"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8385,7 +9391,11 @@
             "type": "string"
           }
         },
-        "required": ["provider", "token", "tokenType"],
+        "required": [
+          "provider",
+          "token",
+          "tokenType"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8402,13 +9412,19 @@
             "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
           }
         },
-        "required": ["provider", "token"],
+        "required": [
+          "provider",
+          "token"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "TokenType": {
         "description": "Enum of the supporting OAuth providers.",
-        "enum": ["idToken", "customToken"],
+        "enum": [
+          "idToken",
+          "customToken"
+        ],
         "type": "string"
       },
       "ThirdPartyOAuthRequest": {
@@ -8427,7 +9443,10 @@
             "$ref": "#/components/schemas/TokenType"
           }
         },
-        "required": ["provider", "token"],
+        "required": [
+          "provider",
+          "token"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8461,10 +9480,16 @@
             },
             "type": "array",
             "description": "Specifies the fields to expand in the response.",
-            "example": ["transactionIntents"]
+            "example": [
+              "transactionIntents"
+            ]
           }
         },
-        "required": ["provider", "token", "tokenType"],
+        "required": [
+          "provider",
+          "token",
+          "tokenType"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8477,17 +9502,27 @@
             "example": "Google"
           }
         },
-        "required": ["provider"],
+        "required": [
+          "provider"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "BasicAuthProvider.EMAIL": {
-        "enum": ["email"],
+        "enum": [
+          "email"
+        ],
         "type": "string"
       },
       "BasicAuthProvider": {
         "description": "Enum of the supporting Basic Auth providers.",
-        "enum": ["email", "wallet", "guest", "web3", "phone"],
+        "enum": [
+          "email",
+          "wallet",
+          "guest",
+          "web3",
+          "phone"
+        ],
         "type": "string"
       },
       "AuthProvider": {
@@ -8548,7 +9583,9 @@
                 "description": "Minimum password length (default: 6)"
               }
             },
-            "required": ["minLength"],
+            "required": [
+              "minLength"
+            ],
             "type": "object",
             "description": "Password requirements configuration"
           }
@@ -8564,7 +9601,9 @@
         "additionalProperties": false
       },
       "BasicAuthProvider.GUEST": {
-        "enum": ["guest"],
+        "enum": [
+          "guest"
+        ],
         "type": "string"
       },
       "GuestAuthConfig": {
@@ -8578,12 +9617,17 @@
             "description": "Auth provider type"
           }
         },
-        "required": ["enabled", "provider"],
+        "required": [
+          "enabled",
+          "provider"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "BasicAuthProvider.WEB3": {
-        "enum": ["web3"],
+        "enum": [
+          "web3"
+        ],
         "type": "string"
       },
       "Web3AuthConfig": {
@@ -8597,16 +9641,23 @@
             "description": "Auth provider type"
           }
         },
-        "required": ["enabled", "provider"],
+        "required": [
+          "enabled",
+          "provider"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "BasicAuthProvider.PHONE": {
-        "enum": ["phone"],
+        "enum": [
+          "phone"
+        ],
         "type": "string"
       },
       "SmsProvider.TWILIO": {
-        "enum": ["twilio"],
+        "enum": [
+          "twilio"
+        ],
         "type": "string"
       },
       "TwilioSmsProviderConfig": {
@@ -8628,12 +9679,19 @@
             "description": "Twilio phone number (from)"
           }
         },
-        "required": ["provider", "accountSid", "authToken", "phoneNumber"],
+        "required": [
+          "provider",
+          "accountSid",
+          "authToken",
+          "phoneNumber"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SmsProvider.MESSAGEBIRD": {
-        "enum": ["messagebird"],
+        "enum": [
+          "messagebird"
+        ],
         "type": "string"
       },
       "MessageBirdSmsProviderConfig": {
@@ -8651,12 +9709,18 @@
             "description": "Sender name or number"
           }
         },
-        "required": ["provider", "accessKey", "originator"],
+        "required": [
+          "provider",
+          "accessKey",
+          "originator"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SmsProvider.TXTLOCAL": {
-        "enum": ["txtlocal"],
+        "enum": [
+          "txtlocal"
+        ],
         "type": "string"
       },
       "TxtLocalSmsProviderConfig": {
@@ -8674,12 +9738,18 @@
             "description": "Sender name"
           }
         },
-        "required": ["provider", "apiKey", "sender"],
+        "required": [
+          "provider",
+          "apiKey",
+          "sender"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SmsProvider.VONAGE": {
-        "enum": ["vonage"],
+        "enum": [
+          "vonage"
+        ],
         "type": "string"
       },
       "VonageSmsProviderConfig": {
@@ -8701,12 +9771,19 @@
             "description": "Sender ID or phone number"
           }
         },
-        "required": ["provider", "apiKey", "apiSecret", "from"],
+        "required": [
+          "provider",
+          "apiKey",
+          "apiSecret",
+          "from"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "SmsProvider.SMS_API": {
-        "enum": ["sms_api"],
+        "enum": [
+          "sms_api"
+        ],
         "type": "string"
       },
       "SmsApiProviderConfig": {
@@ -8724,7 +9801,11 @@
             "description": "SMSAPI OAuth token"
           }
         },
-        "required": ["provider", "from", "token"],
+        "required": [
+          "provider",
+          "from",
+          "token"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -8764,12 +9845,19 @@
             "description": "SMS message template. Use {{ .Code }} to format the OTP code (default: \"Your code is {{ .Code }}\")"
           }
         },
-        "required": ["enabled", "provider", "smsProviderConfig", "smsTemplate"],
+        "required": [
+          "enabled",
+          "provider",
+          "smsProviderConfig",
+          "smsTemplate"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.SUPABASE": {
-        "enum": ["supabase"],
+        "enum": [
+          "supabase"
+        ],
         "type": "string"
       },
       "SupabaseAuthConfig": {
@@ -8792,12 +9880,19 @@
             "description": "The unique Supabase Key which is supplied when you create a new project in your project dashboard."
           }
         },
-        "required": ["enabled", "provider", "url", "key"],
+        "required": [
+          "enabled",
+          "provider",
+          "url",
+          "key"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.OIDC": {
-        "enum": ["oidc"],
+        "enum": [
+          "oidc"
+        ],
         "type": "string"
       },
       "OIDCAuthConfig": {
@@ -8823,12 +9918,18 @@
             "description": "JWKS URL to fetch the public key"
           }
         },
-        "required": ["enabled", "provider", "aud"],
+        "required": [
+          "enabled",
+          "provider",
+          "aud"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.ACCELBYTE": {
-        "enum": ["accelbyte"],
+        "enum": [
+          "accelbyte"
+        ],
         "type": "string"
       },
       "AccelbyteOAuthConfig": {
@@ -8866,7 +9967,9 @@
         "additionalProperties": false
       },
       "OAuthProvider.GOOGLE": {
-        "enum": ["google"],
+        "enum": [
+          "google"
+        ],
         "type": "string"
       },
       "GoogleOAuthConfig": {
@@ -8889,12 +9992,18 @@
             "description": "Google API client secret."
           }
         },
-        "required": ["enabled", "provider", "clientId"],
+        "required": [
+          "enabled",
+          "provider",
+          "clientId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "OAuthProvider.TWITTER": {
-        "enum": ["twitter"],
+        "enum": [
+          "twitter"
+        ],
         "type": "string"
       },
       "TwitterOAuthConfig": {
@@ -8917,12 +10026,19 @@
             "description": "Twitter API consumer secret."
           }
         },
-        "required": ["enabled", "provider", "clientId", "clientSecret"],
+        "required": [
+          "enabled",
+          "provider",
+          "clientId",
+          "clientSecret"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "OAuthProvider.FACEBOOK": {
-        "enum": ["facebook"],
+        "enum": [
+          "facebook"
+        ],
         "type": "string"
       },
       "FacebookOAuthConfig": {
@@ -8944,12 +10060,19 @@
             "description": "Facebook API client secret."
           }
         },
-        "required": ["enabled", "provider", "clientId", "clientSecret"],
+        "required": [
+          "enabled",
+          "provider",
+          "clientId",
+          "clientSecret"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "OAuthProvider.APPLE": {
-        "enum": ["apple"],
+        "enum": [
+          "apple"
+        ],
         "type": "string"
       },
       "AppleOAuthConfig": {
@@ -8971,12 +10094,18 @@
             "description": "Pre-generated client secret JWT"
           }
         },
-        "required": ["enabled", "provider", "clientId"],
+        "required": [
+          "enabled",
+          "provider",
+          "clientId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "OAuthProvider.LINE": {
-        "enum": ["line"],
+        "enum": [
+          "line"
+        ],
         "type": "string"
       },
       "LineOAuthConfig": {
@@ -8998,12 +10127,19 @@
             "description": "Line Channel secret."
           }
         },
-        "required": ["enabled", "provider", "channelId", "channelSecret"],
+        "required": [
+          "enabled",
+          "provider",
+          "channelId",
+          "channelSecret"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "OAuthProvider.DISCORD": {
-        "enum": ["discord"],
+        "enum": [
+          "discord"
+        ],
         "type": "string"
       },
       "DiscordOAuthConfig": {
@@ -9025,12 +10161,19 @@
             "description": "Discord API client secret."
           }
         },
-        "required": ["enabled", "provider", "clientId", "clientSecret"],
+        "required": [
+          "enabled",
+          "provider",
+          "clientId",
+          "clientSecret"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "OAuthProvider.EPIC_GAMES": {
-        "enum": ["epic_games"],
+        "enum": [
+          "epic_games"
+        ],
         "type": "string"
       },
       "EpicGamesOAuthConfig": {
@@ -9052,12 +10195,19 @@
             "description": "Epic Games API client secret."
           }
         },
-        "required": ["enabled", "provider", "clientId", "clientSecret"],
+        "required": [
+          "enabled",
+          "provider",
+          "clientId",
+          "clientSecret"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.PLAYFAB": {
-        "enum": ["playfab"],
+        "enum": [
+          "playfab"
+        ],
         "type": "string"
       },
       "PlayFabOAuthConfig": {
@@ -9076,12 +10226,18 @@
             "description": "Title ID of your Play Fab gaming service environment."
           }
         },
-        "required": ["enabled", "provider", "titleId"],
+        "required": [
+          "enabled",
+          "provider",
+          "titleId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.FIREBASE": {
-        "enum": ["firebase"],
+        "enum": [
+          "firebase"
+        ],
         "type": "string"
       },
       "FirebaseOAuthConfig": {
@@ -9100,12 +10256,18 @@
             "description": "Project ID of your Firebase service environment."
           }
         },
-        "required": ["enabled", "provider", "projectId"],
+        "required": [
+          "enabled",
+          "provider",
+          "projectId"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.CUSTOM": {
-        "enum": ["custom"],
+        "enum": [
+          "custom"
+        ],
         "type": "string"
       },
       "CustomAuthConfig": {
@@ -9127,12 +10289,18 @@
             "description": "URL to send the request to to verify the payload"
           }
         },
-        "required": ["enabled", "provider", "authenticationUrl"],
+        "required": [
+          "enabled",
+          "provider",
+          "authenticationUrl"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.LOOTLOCKER": {
-        "enum": ["lootlocker"],
+        "enum": [
+          "lootlocker"
+        ],
         "type": "string"
       },
       "LootLockerOAuthConfig": {
@@ -9147,12 +10315,17 @@
             "description": "OAuth provider type"
           }
         },
-        "required": ["enabled", "provider"],
+        "required": [
+          "enabled",
+          "provider"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "ThirdPartyOAuthProvider.BETTER_AUTH": {
-        "enum": ["better-auth"],
+        "enum": [
+          "better-auth"
+        ],
         "type": "string"
       },
       "BetterAuthConfig": {
@@ -9171,7 +10344,11 @@
             "description": "Base URL of the Better Auth instance. E.g. https://your-app.com/api/auth"
           }
         },
-        "required": ["enabled", "provider", "baseUrl"],
+        "required": [
+          "enabled",
+          "provider",
+          "baseUrl"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9247,7 +10424,9 @@
             "description": "List of the OAuth providers configurations"
           }
         },
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9278,7 +10457,10 @@
             "type": "string"
           }
         },
-        "required": ["code", "state"],
+        "required": [
+          "code",
+          "state"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9383,7 +10565,10 @@
             "description": "Source provider"
           }
         },
-        "required": ["destinationProvider", "sourceProvider"],
+        "required": [
+          "destinationProvider",
+          "sourceProvider"
+        ],
         "type": "object",
         "description": "Request for migrating authentication from one provider to another"
       },
@@ -9414,7 +10599,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9467,12 +10659,18 @@
             "description": "Status of the migration"
           }
         },
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "type": "object",
         "description": "Request for update the status of a migration"
       },
       "AuthenticationType": {
-        "enum": ["oauth", "basic", "third_party"],
+        "enum": [
+          "oauth",
+          "basic",
+          "third_party"
+        ],
         "type": "string"
       },
       "AuthProviderWithTypeResponse": {
@@ -9484,7 +10682,10 @@
             "$ref": "#/components/schemas/AuthProvider"
           }
         },
-        "required": ["type", "provider"],
+        "required": [
+          "type",
+          "provider"
+        ],
         "type": "object"
       },
       "AuthProviderListResponse": {
@@ -9496,7 +10697,9 @@
             "type": "array"
           }
         },
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9541,7 +10744,12 @@
             "type": "string"
           }
         },
-        "required": ["id", "object", "createdAt", "linkedAccounts"],
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "linkedAccounts"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9608,7 +10816,14 @@
             "format": "int32"
           }
         },
-        "required": ["object", "url", "data", "start", "end", "total"],
+        "required": [
+          "object",
+          "url",
+          "data",
+          "start",
+          "end",
+          "total"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9706,7 +10921,15 @@
             "type": "string"
           }
         },
-        "required": ["kty", "x", "y", "crv", "kid", "use", "alg"],
+        "required": [
+          "kty",
+          "x",
+          "y",
+          "crv",
+          "kid",
+          "use",
+          "alg"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9719,7 +10942,9 @@
             "type": "array"
           }
         },
-        "required": ["keys"],
+        "required": [
+          "keys"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9730,7 +10955,9 @@
             "description": "Player's identifier."
           }
         },
-        "required": ["player"],
+        "required": [
+          "player"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -9742,7 +10969,9 @@
             "example": "d9e215f74e715853"
           }
         },
-        "required": ["authorizationCode"],
+        "required": [
+          "authorizationCode"
+        ],
         "type": "object",
         "additionalProperties": false
       }
@@ -9787,7 +11016,9 @@
         },
         "description": "Execute JSON-RPC 2.0 wallet methods\n\nThis endpoint handles wallet-namespace JSON-RPC 2.0 requests following the specification at https://www.jsonrpc.org/specification.\nIt supports EIP-7811 wallet methods that operate across multiple chains.\n\n**Supported methods:**\n- `wallet_getAssets`: Retrieve wallet assets across multiple chains with optional filtering\n\n**Authentication:**\nSupports multiple authentication methods including public key access tokens and third-party tokens",
         "summary": "Execute wallet JSON-RPC methods",
-        "tags": ["RPC"],
+        "tags": [
+          "RPC"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -9829,7 +11060,9 @@
         },
         "description": "Execute chain-specific JSON-RPC 2.0 methods (bundler & paymaster)\n\nThis endpoint handles chain-specific JSON-RPC 2.0 requests for ERC-4337 bundler operations and ERC-7677 paymaster operations.\nThe chainId is specified in the URL path following the standard pattern.\n\n**Supported namespaces:**\n- `eth_*`: ERC-4337 bundler methods (sendUserOperation, estimateUserOperationGas, getUserOperationReceipt, getUserOperationByHash, supportedEntryPoints)\n- `openfort_*`: Openfort bundler extensions (getUserOperationGasPrice, getUserOperationStatus)\n- `pm_*`: ERC-7677 paymaster methods (getPaymasterStubData, getPaymasterData)\n- `wallet_*`: EIP-7811 wallet methods (can also be called here with chainId context)",
         "summary": "Execute chain-specific bundler and paymaster JSON-RPC methods",
-        "tags": ["RPC"],
+        "tags": [
+          "RPC"
+        ],
         "security": [
           {
             "pk": []
@@ -9919,7 +11152,9 @@
                                 "blockNumber": 44904492,
                                 "transactionHash": "0x25d3...005c",
                                 "address": "0x5FF1...2789",
-                                "topics": ["0xbb47...f972"],
+                                "topics": [
+                                  "0xbb47...f972"
+                                ],
                                 "data": "0x",
                                 "logIndex": 0,
                                 "blockHash": "0x8a69...6d59"
@@ -9935,7 +11170,9 @@
                             {
                               "functionName": "mint",
                               "contract": "con_...",
-                              "functionArgs": ["0x63B7...484f"]
+                              "functionArgs": [
+                                "0x63B7...484f"
+                              ]
                             }
                           ],
                           "transitions": [
@@ -9976,7 +11213,9 @@
         },
         "description": "Returns a list of TransactionIntents.",
         "summary": "List transaction intents.",
-        "tags": ["TransactionIntents"],
+        "tags": [
+          "TransactionIntents"
+        ],
         "security": [
           {
             "sk": []
@@ -10051,7 +11290,9 @@
                 "type": "string"
               }
             },
-            "example": ["acc_dc981458-a653-4539-b120-a321915b2896"]
+            "example": [
+              "acc_dc981458-a653-4539-b120-a321915b2896"
+            ]
           },
           {
             "description": "Filter by player ID (starts with pla_).",
@@ -10064,7 +11305,9 @@
                 "type": "string"
               }
             },
-            "example": ["pla_556166c9-77ad-4a39-aaf8-c432defa8a0f"]
+            "example": [
+              "pla_556166c9-77ad-4a39-aaf8-c432defa8a0f"
+            ]
           },
           {
             "description": "Filter by successful (1) or failed (0) transaction intents.",
@@ -10088,7 +11331,9 @@
                 "type": "string"
               }
             },
-            "example": ["pol_7e07ae30-2a4d-48fa-803f-361da94905dd"]
+            "example": [
+              "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
+            ]
           }
         ]
       },
@@ -10145,7 +11390,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -10161,7 +11408,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ],
                       "transitions": [
@@ -10227,7 +11476,9 @@
                           "functionName": "mint",
                           "value": "100000000000000",
                           "contract": "0x0576...1B57",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ]
                     }
@@ -10265,7 +11516,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ]
                     }
@@ -10307,7 +11560,9 @@
         },
         "description": "Creates a TransactionIntent.\n\nA pending TransactionIntent has the `response` attribute as undefined.\n\nAfter the TransactionIntent is created and broadcasted to the blockchain, `response` will be populated with the transaction hash and a status (1 success, 0 fail).\n\nWhen using a non-custodial account, a `nextAction` attribute is returned with the `userOperationHash` that must be signed by the owner of the account.",
         "summary": "Create a transaction intent object.",
-        "tags": ["TransactionIntents"],
+        "tags": [
+          "TransactionIntents"
+        ],
         "security": [
           {
             "sk": []
@@ -10401,7 +11656,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -10417,7 +11674,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ],
                       "transitions": [
@@ -10456,7 +11715,9 @@
         },
         "description": "Retrieves the details of a TransactionIntent that has previously been created.",
         "summary": "Get a transaction intent object.",
-        "tags": ["TransactionIntents"],
+        "tags": [
+          "TransactionIntents"
+        ],
         "security": [
           {
             "sk": []
@@ -10500,7 +11761,9 @@
                 "$ref": "#/components/schemas/TransactionIntentResponseExpandable"
               }
             },
-            "example": ["players"]
+            "example": [
+              "players"
+            ]
           }
         ]
       }
@@ -10571,7 +11834,9 @@
         },
         "description": "Estimate the gas cost of broadcasting a TransactionIntent.\n\nThis is a simulation, it does not send the transaction on-chain.\n\nIf a Policy ID is used that includes payment of gas in ERC-20 tokens, an extra field `estimatedTXGasFeeToken` is returned with the estimated amount of tokens that will be used.",
         "summary": "Estimate gas cost of creating a transaction",
-        "tags": ["TransactionIntents"],
+        "tags": [
+          "TransactionIntents"
+        ],
         "security": [
           {
             "sk": []
@@ -10656,7 +11921,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -10672,7 +11939,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ],
                       "transitions": [
@@ -10721,7 +11990,9 @@
         },
         "description": "Broadcasts a signed TransactionIntent to the blockchain.\n\nUse this endpoint to send the signed `signableHash`. Openfort will then put it on-chain.",
         "summary": "Send a signed transaction signableHash.",
-        "tags": ["TransactionIntents"],
+        "tags": [
+          "TransactionIntents"
+        ],
         "security": [
           {
             "pk": []
@@ -10808,7 +12079,9 @@
         },
         "description": "Returns a list of subscriptions for the given project.\n\nThis object represents the subscriptions where the project owner has subscribed to.\n\nSubscriptions are returned sorted by creation date, with the most recently created subscriptions appearing first.\n\nBy default, a maximum of 10 subscriptions are shown per page.",
         "summary": "List subscriptions of project.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -10860,7 +12133,9 @@
         },
         "description": "Creates a subscription for the given project.\n\nThis object represents the subscription where the project owner has subscribed to.",
         "summary": "Create subscription for project.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -10925,7 +12200,9 @@
         },
         "description": "Lists logs of the triggered subscriptions for the given project.\n\nThis object represents the logs of the triggered subscriptions where the project owner has subscribed to.",
         "summary": "List logs of triggered subscriptions.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11072,7 +12349,9 @@
         },
         "description": "Returns a subscription for the given project.\n\nThis object represents the subscription where the project owner has subscribed to.",
         "summary": "Get subscription of project.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11125,7 +12404,9 @@
         },
         "description": "Deletes a subscription for the given project.\n\nThis object represents the subscription where the project owner has subscribed to.",
         "summary": "Delete subscription of project.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11193,7 +12474,9 @@
         },
         "description": "Returns a list of triggers for the given subscription.\n\nThis object represents the triggers where the subscription owner has subscribed to.\n\nTriggers are returned sorted by creation date, with the most recently created triggers appearing first.\n\nBy default, a maximum of 10 triggers are shown per page.",
         "summary": "List triggers of subscription.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11250,7 +12533,9 @@
         },
         "description": "Creates a trigger for the given subscription.\n\nThis object represents the trigger where the subscription owner has subscribed to.",
         "summary": "Create trigger for subscription.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11319,7 +12604,9 @@
         },
         "description": "Returns a trigger for the given id.\n\nThis object represents the trigger where the subscription owner has subscribed to.",
         "summary": "Get trigger by id.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11382,7 +12669,9 @@
         },
         "description": "Deletes a trigger for the given subscription.\n\nThis object represents the trigger where the subscription owner has subscribed to.",
         "summary": "Delete trigger of subscription.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11429,7 +12718,9 @@
                       "type": "boolean"
                     }
                   },
-                  "required": ["sent"],
+                  "required": [
+                    "sent"
+                  ],
                   "type": "object"
                 }
               }
@@ -11444,7 +12735,9 @@
         },
         "description": "Test a trigger\n\nReturns a trigger for the given id.",
         "summary": "Test trigger by id.",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "security": [
           {
             "sk": []
@@ -11513,7 +12806,9 @@
         },
         "description": "Retrieve the list of the developer accounts for the current project.\n\nReturns the latest 10 transaction intents that were created with each developer account.\n\nBy default, a maximum of 10 accounts are shown per page.",
         "summary": "List of developer accounts.",
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "security": [
           {
             "sk": []
@@ -11565,7 +12860,9 @@
                 "$ref": "#/components/schemas/DeveloperAccountResponseExpandable"
               }
             },
-            "example": ["transactionIntents"]
+            "example": [
+              "transactionIntents"
+            ]
           },
           {
             "description": "Specifies whether to include deleted dev accounts.",
@@ -11618,7 +12915,9 @@
         },
         "description": "Create or add a developer account.\nTo add your own external account, add a signature and the address of the account. This verified account can then be used as a verified depositor",
         "summary": "Create a developer account.",
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "security": [
           {
             "sk": []
@@ -11663,7 +12962,9 @@
         },
         "description": "Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.",
         "summary": "Sign a given payload",
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "security": [
           {
             "sk": []
@@ -11733,7 +13034,9 @@
         },
         "description": "Update a developer account.",
         "summary": "Update a developer account.",
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "security": [
           {
             "sk": []
@@ -11802,7 +13105,9 @@
         },
         "description": "Retrieve a developer account.\n\nReturns the latest 10 transaction intents that were created with each developer account.",
         "summary": "Get existing developer account.",
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "security": [
           {
             "sk": []
@@ -11867,7 +13172,9 @@
         },
         "description": "Delete a developer account from the current project.",
         "summary": "Delete a developer account.",
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "security": [
           {
             "sk": []
@@ -11921,7 +13228,9 @@
         },
         "description": "Generate message, which should be signed by the account your want to add as a developer account.",
         "summary": "Generate message to sign",
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "security": [
           {
             "sk": []
@@ -12003,7 +13312,9 @@
         },
         "description": "Returns a list of Sessions.\n\nReturns the latest 10 transaction intents for each session.",
         "summary": "List session keys of a player.",
-        "tags": ["Sessions"],
+        "tags": [
+          "Sessions"
+        ],
         "security": [
           {
             "sk": []
@@ -12120,7 +13431,9 @@
         },
         "description": "Creates a Session.",
         "summary": "Create a session key.",
-        "tags": ["Sessions"],
+        "tags": [
+          "Sessions"
+        ],
         "security": [
           {
             "sk": []
@@ -12212,7 +13525,9 @@
           }
         },
         "summary": "Revoke the session session key.",
-        "tags": ["Sessions"],
+        "tags": [
+          "Sessions"
+        ],
         "security": [
           {
             "sk": []
@@ -12304,7 +13619,9 @@
           }
         },
         "summary": "Send signed userOperationHash to create session.",
-        "tags": ["Sessions"],
+        "tags": [
+          "Sessions"
+        ],
         "security": [
           {
             "pk": []
@@ -12399,7 +13716,9 @@
         },
         "description": "Retrieves the details of a Session that has previously been created.\n\nReturns the latest 10 transaction intents that used this session.",
         "summary": "Returns a player session by session id",
-        "tags": ["Sessions"],
+        "tags": [
+          "Sessions"
+        ],
         "security": [
           {
             "sk": []
@@ -12431,7 +13750,9 @@
                 "$ref": "#/components/schemas/SessionResponseExpandable"
               }
             },
-            "example": ["transactionIntents"]
+            "example": [
+              "transactionIntents"
+            ]
           }
         ]
       }
@@ -12480,7 +13801,9 @@
         },
         "description": "Returns a list of policy rules of a policy.\n\nThe policy rules are returned sorted by creation date, with the most recently created policy rules appearing first.\n\nBy default, a maximum of 10 policy rules are shown per page.",
         "summary": "List policy rules of a policy.",
-        "tags": ["PolicyRules"],
+        "tags": [
+          "PolicyRules"
+        ],
         "security": [
           {
             "sk": []
@@ -12530,7 +13853,9 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["contract"],
+                "enum": [
+                  "contract"
+                ],
                 "nullable": false
               }
             }
@@ -12625,7 +13950,9 @@
           }
         },
         "summary": "Create a policy rule object.",
-        "tags": ["PolicyRules"],
+        "tags": [
+          "PolicyRules"
+        ],
         "security": [
           {
             "sk": []
@@ -12683,7 +14010,9 @@
           }
         },
         "summary": "Update a policy rule object.",
-        "tags": ["PolicyRules"],
+        "tags": [
+          "PolicyRules"
+        ],
         "security": [
           {
             "sk": []
@@ -12745,7 +14074,9 @@
           }
         },
         "summary": "Deletes a policy rule object.",
-        "tags": ["PolicyRules"],
+        "tags": [
+          "PolicyRules"
+        ],
         "security": [
           {
             "sk": []
@@ -12825,7 +14156,9 @@
         },
         "description": "Returns a list of Policies.\n\nReturns the latest 10 transaction intents for each policy.",
         "summary": "List policies.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -12970,7 +14303,9 @@
           }
         },
         "summary": "Create a policy object.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13040,7 +14375,9 @@
         },
         "description": "Retrieves the details of a Policy that has previously been created.\n\nReturns the latest 10 transaction intents that used this policy.",
         "summary": "Get a policy object.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13072,7 +14409,9 @@
                 "$ref": "#/components/schemas/PolicyResponseExpandable"
               }
             },
-            "example": ["transactionIntents"]
+            "example": [
+              "transactionIntents"
+            ]
           }
         ]
       },
@@ -13125,7 +14464,9 @@
           }
         },
         "summary": "Update a policy object.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13187,7 +14528,9 @@
           }
         },
         "summary": "Delete a policy object.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13260,7 +14603,9 @@
           }
         },
         "summary": "Disable a policy object.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13333,7 +14678,9 @@
           }
         },
         "summary": "Enable a policy object.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13417,7 +14764,9 @@
           }
         },
         "summary": "List all gas reports of a policy.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13520,7 +14869,9 @@
           }
         },
         "summary": "List transaction intents of a policy report.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13627,7 +14978,9 @@
         },
         "description": "Get the amount of ERC-20 tokens collected by policy.\n\nWhen using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas.\nThis is specific to a policy that doesn't use your own deposited tokens in the paymaster.",
         "summary": "Get amount of tokens paid for gas policy.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13702,7 +15055,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -13718,7 +15073,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ],
                       "transitions": [
@@ -13753,7 +15110,9 @@
         },
         "description": "Transfer ERC-20 tokens collected by policy.\n\nWhen using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas.\nThis is specific to a policy that doesn't use your own deposited tokens in the paymaster.",
         "summary": "Withdraw tokens collected by policy.",
-        "tags": ["Policies"],
+        "tags": [
+          "Policies"
+        ],
         "security": [
           {
             "sk": []
@@ -13840,7 +15199,9 @@
         },
         "description": "By default, a maximum of 10 players are shown.\n\nReturns the latest 10 transaction intents that were created with each player.",
         "summary": "List players.",
-        "tags": ["Players"],
+        "tags": [
+          "Players"
+        ],
         "security": [
           {
             "sk": []
@@ -13952,7 +15313,9 @@
         },
         "description": "Creates a player.",
         "summary": "Create a player object.",
-        "tags": ["Players"],
+        "tags": [
+          "Players"
+        ],
         "security": [
           {
             "sk": []
@@ -14019,7 +15382,9 @@
         },
         "description": "Retrieves the details of a player that has previously been created.\n\nReturns the latest 10 transaction intents that were created with this player.",
         "summary": "Retrieves the details of an existing player.",
-        "tags": ["Players"],
+        "tags": [
+          "Players"
+        ],
         "security": [
           {
             "sk": []
@@ -14051,7 +15416,9 @@
                 "$ref": "#/components/schemas/PlayerResponseExpandable"
               }
             },
-            "example": ["accounts"]
+            "example": [
+              "accounts"
+            ]
           }
         ]
       },
@@ -14102,7 +15469,9 @@
         },
         "description": "Updates the specified player by setting the values of the parameters passed.",
         "summary": "Updates a player object.",
-        "tags": ["Players"],
+        "tags": [
+          "Players"
+        ],
         "security": [
           {
             "sk": []
@@ -14162,7 +15531,9 @@
         },
         "description": "It will delete all linked accounts the player is authenticated with.\nIf the player has a linked embedded signer, it will be deleted as well.",
         "summary": "Deletes a player object.",
-        "tags": ["Players"],
+        "tags": [
+          "Players"
+        ],
         "security": [
           {
             "sk": []
@@ -14239,7 +15610,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -14255,7 +15628,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ],
                       "transitions": [
@@ -14290,7 +15665,9 @@
         },
         "description": "This endpoint allows you to perform a request to change the owner of an account.\nTo perform an update on the owner of an account, first you must provide a new owner address.\nOnce requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.",
         "summary": "Request transfer ownership of a player.",
-        "tags": ["Players"],
+        "tags": [
+          "Players"
+        ],
         "security": [
           {
             "sk": []
@@ -14374,7 +15751,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -14390,7 +15769,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ],
                       "transitions": [
@@ -14425,7 +15806,9 @@
         },
         "description": "This endpoint allows you to cancel a pending transfer of ownership.",
         "summary": "Cancel request to transfer ownership of a player.",
-        "tags": ["Players"],
+        "tags": [
+          "Players"
+        ],
         "security": [
           {
             "sk": []
@@ -14490,7 +15873,9 @@
         },
         "description": "Create a new paymaster.\n\nThis object represents the paymaster that will be used to pay the gas fees of the transactions.",
         "summary": "Create a new paymaster.",
-        "tags": ["Paymaster"],
+        "tags": [
+          "Paymaster"
+        ],
         "security": [
           {
             "user_project": []
@@ -14533,7 +15918,9 @@
         },
         "description": "Returns a list of paymasters.\n\nThis object represents the paymasters that will be used to pay the gas fees for the transactions.\n\nBy default, a maximum of 10 paymasters are shown per page.",
         "summary": "List paymasters.",
-        "tags": ["Paymaster"],
+        "tags": [
+          "Paymaster"
+        ],
         "security": [
           {
             "user_project": []
@@ -14614,7 +16001,9 @@
         },
         "description": "Update a paymaster.\n\nThis object represents the paymaster that will be used to pay the gas fees of the transactions.",
         "summary": "Update a paymaster.",
-        "tags": ["Paymaster"],
+        "tags": [
+          "Paymaster"
+        ],
         "security": [
           {
             "user_project": []
@@ -14680,7 +16069,9 @@
         },
         "description": "Returns the paymaster with the given id.\n\nThis object represents the paymaster that will be used to pay the gas fees for the transactions.",
         "summary": "Get paymaster by id.",
-        "tags": ["Paymaster"],
+        "tags": [
+          "Paymaster"
+        ],
         "security": [
           {
             "user_project": []
@@ -14722,7 +16113,9 @@
         },
         "description": "Delete the paymaster with the given id.\n\nThis object represents the paymaster that will be used to pay the gas fees for the transactions.",
         "summary": "Delete paymaster by id.",
-        "tags": ["Paymaster"],
+        "tags": [
+          "Paymaster"
+        ],
         "security": [
           {
             "user_project": []
@@ -14766,7 +16159,9 @@
         },
         "description": "Creates an onramp session for the selected provider.\n\nThe provider is selected via the `provider` field. All request and response formats are unified\nand provider-agnostic. The service layer handles translation between the common format and\nprovider-specific APIs.",
         "summary": "Create onramp session",
-        "tags": ["Onramp"],
+        "tags": [
+          "Onramp"
+        ],
         "security": [
           {
             "pk": []
@@ -14808,7 +16203,9 @@
         },
         "description": "Retrieves onramp quote(s) without creating an actual transaction.\n\nIf provider is specified, returns a single quote for that provider.\nIf provider is not specified, returns quotes from all available providers.\n\nAll request and response formats are unified and provider-agnostic.",
         "summary": "Get onramp quote(s)",
-        "tags": ["Onramp"],
+        "tags": [
+          "Onramp"
+        ],
         "security": [
           {
             "pk": []
@@ -14846,7 +16243,9 @@
           }
         },
         "summary": "Get logs for a project.",
-        "tags": ["Logs"],
+        "tags": [
+          "Logs"
+        ],
         "security": [
           {
             "sk": []
@@ -14899,7 +16298,9 @@
           }
         },
         "summary": "Get webhook logs for a project.",
-        "tags": ["Logs"],
+        "tags": [
+          "Logs"
+        ],
         "security": [
           {
             "sk": []
@@ -14924,7 +16325,9 @@
             }
           }
         },
-        "tags": ["GraphQL"],
+        "tags": [
+          "GraphQL"
+        ],
         "security": [
           {
             "user": []
@@ -14976,7 +16379,9 @@
         },
         "description": "Create a new forwarder contract.\n\nThis object represents the forwarder contract that will be used to pay the gas fees of the transactions.",
         "summary": "Create a new forwarder contract.",
-        "tags": ["ForwarderContract"],
+        "tags": [
+          "ForwarderContract"
+        ],
         "security": [
           {
             "user_project": []
@@ -15019,7 +16424,9 @@
         },
         "description": "Returns a list of forwarder contract.\n\nThis object represents the forwarder contract that will be used to pay the gas fees for the transactions.\n\nBy default, a maximum of 10 forwarder contract are shown per page.",
         "summary": "List forwarder contract.",
-        "tags": ["ForwarderContract"],
+        "tags": [
+          "ForwarderContract"
+        ],
         "security": [
           {
             "user_project": []
@@ -15098,7 +16505,9 @@
         },
         "description": "Update a forwarder contract.\n\nThis object represents the forwarder contract that will be used to pay the gas fees of the transactions.",
         "summary": "Update a forwarder contract.",
-        "tags": ["ForwarderContract"],
+        "tags": [
+          "ForwarderContract"
+        ],
         "security": [
           {
             "user_project": []
@@ -15162,7 +16571,9 @@
         },
         "description": "Returns the forwarder contract with the given id.\n\nThis object represents the forwarder contract that will be used to pay the gas fees for the transactions.",
         "summary": "Get forwarder contract by id.",
-        "tags": ["ForwarderContract"],
+        "tags": [
+          "ForwarderContract"
+        ],
         "security": [
           {
             "user_project": []
@@ -15204,7 +16615,9 @@
         },
         "description": "Delete the forwarder contract with the given id.\n\nThis object represents the forwarder contract that will be used to pay the gas fees for the transactions.",
         "summary": "Delete forwarder contract by id.",
-        "tags": ["ForwarderContract"],
+        "tags": [
+          "ForwarderContract"
+        ],
         "security": [
           {
             "user_project": []
@@ -15279,7 +16692,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -15295,7 +16710,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ],
                       "transitions": [
@@ -15334,7 +16751,9 @@
         },
         "description": "Creates token swap.",
         "summary": "Create token swap.",
-        "tags": ["Exchange"],
+        "tags": [
+          "Exchange"
+        ],
         "security": [
           {
             "sk": []
@@ -15426,7 +16845,9 @@
         },
         "description": "Quote token swap.",
         "summary": "Quote token swap.",
-        "tags": ["Exchange"],
+        "tags": [
+          "Exchange"
+        ],
         "security": [
           {
             "sk": []
@@ -15485,7 +16906,9 @@
         },
         "description": "Returns a list of events.\n\nBy default, a maximum of 10 events are shown per page.",
         "summary": "List events.",
-        "tags": ["Events"],
+        "tags": [
+          "Events"
+        ],
         "security": [
           {
             "user_project": []
@@ -15578,7 +17001,9 @@
         },
         "description": "Create a new event.",
         "summary": "Create a new event.",
-        "tags": ["Events"],
+        "tags": [
+          "Events"
+        ],
         "security": [
           {
             "user_project": []
@@ -15634,7 +17059,9 @@
         },
         "description": "Get a single event.",
         "summary": "Get a single event.",
-        "tags": ["Events"],
+        "tags": [
+          "Events"
+        ],
         "security": [
           {
             "user_project": []
@@ -15687,7 +17114,9 @@
         },
         "description": "Delete an event.",
         "summary": "Delete an event.",
-        "tags": ["Events"],
+        "tags": [
+          "Events"
+        ],
         "security": [
           {
             "user_project": []
@@ -15764,7 +17193,9 @@
         },
         "description": "List of all contracts per project.\nBy default, a maximum of ten contracts are shown.",
         "summary": "List contracts.",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "security": [
           {
             "sk": []
@@ -15895,7 +17326,9 @@
         },
         "description": "Add a new contract to your project in Openfort",
         "summary": "Create contract object.",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "security": [
           {
             "sk": []
@@ -15962,7 +17395,9 @@
         },
         "description": "Retrieve a contract by providing their contract id.",
         "summary": "Get a contract.",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "security": [
           {
             "sk": []
@@ -16030,7 +17465,9 @@
           }
         },
         "summary": "Updates a contract object.",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "security": [
           {
             "sk": []
@@ -16093,7 +17530,9 @@
         },
         "description": "Delete a contract from the project by providing its contract id.",
         "summary": "Deletes a contract object.",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "security": [
           {
             "sk": []
@@ -16153,7 +17592,9 @@
         },
         "description": "Using this endpoint, you can get the repositories returned by any readable\nfunction listed in a contracts ABI. This could be things like querying\nthe totalSupply of a currency contract, the number of owners of an items\ncontract, and more.",
         "summary": "Read on chain contract repositories.",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "security": [
           {
             "sk": []
@@ -16192,7 +17633,9 @@
               "type": "array",
               "items": {}
             },
-            "example": ["0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"]
+            "example": [
+              "0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"
+            ]
           }
         ]
       }
@@ -16250,7 +17693,9 @@
         },
         "description": "Returns a list of accounts for the given player.\n\nThis object represents a player's account, which is a blockchain smart account that can be used to interact with the blockchain.\n\nThe accounts are returned sorted by creation date, with the most recently created accounts appearing first.\n\nReturns the latest 10 transaction intents for each account.\n\nBy default, a maximum of 10 accounts are shown per page.",
         "summary": "List accounts of a player.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -16342,7 +17787,9 @@
                 "$ref": "#/components/schemas/AccountResponseExpandable"
               }
             },
-            "example": ["transactionIntents"]
+            "example": [
+              "transactionIntents"
+            ]
           }
         ]
       },
@@ -16392,7 +17839,9 @@
         },
         "description": "Creates a new blockchain account for the provided player. If not player is provided, a new one will be created.\n\nAccount creation does not consume any gas. All accounts of a player will use the same address across blockchains.\n\nEach player can only have one account per chain.",
         "summary": "Create an account object.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -16467,7 +17916,9 @@
         },
         "description": "Retrieves the details of an existing account.\n\nSupply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.\n\nReturns the latest 10 transaction intents created by this account.",
         "summary": "Get existing account.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -16518,7 +17969,9 @@
         },
         "description": "Disables an account.\n\nAccounts won't be shown for user and won't be accessible for transactions.",
         "summary": "Disable account by id.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -16596,7 +18049,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -16612,7 +18067,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ]
                     }
@@ -16630,7 +18087,9 @@
         },
         "description": "Perform a request to change the owner of an account.\n\nTo perform an update on the owner of an account, first you must provide a new owner address.\nOnce requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.",
         "summary": "Request transfer ownership of account.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -16708,7 +18167,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -16724,7 +18185,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ]
                     }
@@ -16742,7 +18205,9 @@
         },
         "description": "Cancel a pending transfer of ownership.",
         "summary": "Cancel request to transfer ownership of an account.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -16806,7 +18271,9 @@
         },
         "description": "**Custodial Accounts only** - Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.",
         "summary": "Sign a given payload",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -16886,7 +18353,9 @@
         },
         "description": "Synchronize the account state with the blockchain.\nSpecifically, it updates the account owner and whether its deployed or not.",
         "summary": "Sync account state with the blockchain",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -16956,7 +18425,9 @@
         },
         "description": "This endpoint can be used to deploy a smart contract account that was counterfactually generated.",
         "summary": "Deploy an account.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -17037,7 +18508,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -17053,7 +18526,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ]
                     }
@@ -17070,7 +18545,9 @@
           }
         },
         "summary": "Start a recovery process of a recoverable account.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -17148,7 +18625,9 @@
                             "blockNumber": 44904492,
                             "transactionHash": "0x25d3...005c",
                             "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
+                            "topics": [
+                              "0xbb47...f972"
+                            ],
                             "data": "0x",
                             "logIndex": 0,
                             "blockHash": "0x8a69...6d59"
@@ -17164,7 +18643,9 @@
                         {
                           "functionName": "mint",
                           "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
+                          "functionArgs": [
+                            "0x63B7...484f"
+                          ]
                         }
                       ]
                     }
@@ -17181,7 +18662,9 @@
           }
         },
         "summary": "Complete a recovery process of a recoverable account.",
-        "tags": ["accs v1"],
+        "tags": [
+          "accs v1"
+        ],
         "security": [
           {
             "sk": []
@@ -17280,7 +18763,9 @@
         },
         "description": "Retrieves an authenticated users.\n\nUsers have linked accounts and are authenticated with a provider.",
         "summary": "List authenticated users.",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
             "sk": []
@@ -17386,7 +18871,9 @@
         },
         "description": "Retrieves an authenticated user.\n\nUsers have linked accounts and are authenticated with a provider.",
         "summary": "Get authenticated user by id.",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
             "sk": []
@@ -17437,7 +18924,9 @@
         },
         "description": "It will delete all linked accounts the user is authenticated with.\nIf the user has a linked embedded signer, it will be deleted as well.",
         "summary": "Delete user by id.",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
             "sk": []
@@ -17486,7 +18975,9 @@
         },
         "description": "Pre-generate a user with an embedded account before they authenticate.\nCreates a user record and an embedded account using the provided SSS key shares.\nWhen the user later authenticates (via email, OAuth, third-party auth, etc.)\nwith the same identifier, they will be linked to this pre-generated account.\n\nYou can pregenerate using either:\n- `email`: User will be linked when they authenticate with the same email\n- `thirdPartyUserId` + `thirdPartyProvider`: User will be linked when they authenticate via the same third-party provider",
         "summary": "Pre-generate a user with an embedded account.",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
             "sk": []
@@ -17525,7 +19016,9 @@
         },
         "description": "List backend wallets.\n\nReturns a paginated list of backend wallets for the project.",
         "summary": "List backend wallets.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "sk": []
@@ -17561,7 +19054,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["EVM", "SVM"]
+              "enum": [
+                "EVM",
+                "SVM"
+              ]
             },
             "example": "EVM"
           },
@@ -17616,7 +19112,9 @@
         },
         "description": "Create a new backend wallet account.\n\nGenerates a new keypair securely in the backend wallet system.\nThe private key is stored encrypted and never exposed.",
         "summary": "Create backend wallet.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "wallet_auth": []
@@ -17658,7 +19156,9 @@
         },
         "description": "Get backend wallet details.\n\nReturns details for a specific backend wallet.",
         "summary": "Get backend wallet.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "sk": []
@@ -17698,7 +19198,9 @@
         },
         "description": "Delete a backend wallet.\n\nPermanently deletes a backend wallet and its associated private key.",
         "summary": "Delete backend wallet.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "wallet_auth": []
@@ -17740,7 +19242,9 @@
         },
         "description": "Sign data via backend wallet.\n\nSigns the provided data using the account's private key managed by the backend wallet.\nThe private key is securely stored and never exposed.",
         "summary": "Sign data via backend wallet.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "wallet_auth": []
@@ -17792,7 +19296,9 @@
         },
         "description": "Export private key with E2E encryption via backend wallet.\n\nExports the account's private key encrypted using RSA-4096 OAEP SHA-256.\nThe client must provide their ephemeral RSA-4096 public key (base64 SPKI DER format).\nThe response contains the encrypted private key that can be decrypted with the client's private key.",
         "summary": "Export private key (E2E encrypted).",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "wallet_auth": []
@@ -17844,7 +19350,9 @@
         },
         "description": "Import private key with E2E encryption via backend wallet.\n\nImports a private key into the backend wallet system.\nThe private key must be encrypted using RSA-4096 OAEP SHA-256 with the server's\nstatic import public key (obtain out-of-band from SDK or documentation).",
         "summary": "Import private key (E2E encrypted).",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "wallet_auth": []
@@ -17883,10 +19391,12 @@
         },
         "description": "Register a new wallet secret (authentication key).\n\nRegisters an ECDSA P-256 public key that will be used to verify\nX-Wallet-Auth JWT signatures. This is required before using WALLET_AUTH\nfor other backend wallet operations.",
         "summary": "Register wallet secret.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
-            "sk": []
+            "user_project": []
           }
         ],
         "parameters": [],
@@ -17925,7 +19435,9 @@
         },
         "description": "Revoke a wallet secret (authentication key).\n\nPermanently revokes a wallet secret so it can no longer be used\nfor X-Wallet-Auth JWT signing.",
         "summary": "Revoke wallet secret.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "wallet_auth": []
@@ -17964,7 +19476,9 @@
         },
         "description": "Rotate wallet secret (authentication key).\n\nReplaces the current wallet secret (ECDSA P-256 public key) used for\nX-Wallet-Auth JWT signing. The old secret will be revoked.",
         "summary": "Rotate wallet secret.",
-        "tags": ["Backend Wallets"],
+        "tags": [
+          "Backend Wallets"
+        ],
         "security": [
           {
             "wallet_auth": []
@@ -18003,7 +19517,9 @@
         },
         "description": "Returns a list of accounts for the given user.\n\nThis object represents a user's account, which is a blockchain smart account that can be used to interact with the blockchain.\n\nThe accounts are returned sorted by creation date, with the most recently created accounts appearing first.",
         "summary": "List user accounts.",
-        "tags": ["accs v2"],
+        "tags": [
+          "accs v2"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -18081,7 +19597,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["EVM", "SVM"]
+              "enum": [
+                "EVM",
+                "SVM"
+              ]
             },
             "example": "EVM"
           },
@@ -18107,7 +19626,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["Developer", "User"]
+              "enum": [
+                "Developer",
+                "User"
+              ]
             },
             "example": "Developer"
           },
@@ -18142,7 +19664,9 @@
         },
         "description": "Creates a new blockchain account for a user.\n\nAccount creation does not consume any gas. The account can be used to interact with the blockchain.",
         "summary": "Create new account.",
-        "tags": ["accs v2"],
+        "tags": [
+          "accs v2"
+        ],
         "security": [
           {
             "sk": []
@@ -18181,7 +19705,9 @@
         },
         "description": "Retrieves the signer ID associated with a given blockchain address.",
         "summary": "Get signer ID by address.",
-        "tags": ["accs v2"],
+        "tags": [
+          "accs v2"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -18231,7 +19757,9 @@
         },
         "description": "Retrieves the details of an existing account.\n\nSupply the unique account ID and Openfort will return the corresponding account information.",
         "summary": "Get existing account.",
-        "tags": ["accs v2"],
+        "tags": [
+          "accs v2"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -18282,7 +19810,9 @@
         },
         "description": "Removes an account from a project.",
         "summary": "Delete account.",
-        "tags": ["accs v2"],
+        "tags": [
+          "accs v2"
+        ],
         "security": [
           {
             "user_project": []
@@ -18323,7 +19853,9 @@
         },
         "description": "Switches the blockchain network for an existing account.\n\nThis allows moving an account between different blockchain networks while maintaining the same account identity.",
         "summary": "Switch account blockchain.",
-        "tags": ["accs v2"],
+        "tags": [
+          "accs v2"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -18391,7 +19923,9 @@
         },
         "description": "Get or create a new session for the player based on the refresh token.",
         "summary": "Refresh or create auth session.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18423,7 +19957,9 @@
         },
         "description": "When using Openfort Auth, the endpoint logs out the player.",
         "summary": "Log out a player.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -18471,7 +20007,9 @@
         },
         "description": "Create a challenge to link external wallet to the player.",
         "summary": "Initialize SIWE.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18541,7 +20079,9 @@
           }
         },
         "summary": "Authenticate player with SIWE",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18582,7 +20122,9 @@
           }
         },
         "summary": "Unlink external wallet.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -18626,7 +20168,9 @@
           }
         },
         "summary": "Link external wallet.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -18698,7 +20242,9 @@
         },
         "description": "Create and authenticate a player based on email and password.",
         "summary": "Email and password signup.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18773,7 +20319,9 @@
         },
         "description": "Authenticate a player based on email and password.",
         "summary": "Email and password login.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18814,7 +20362,9 @@
         },
         "description": "Start the Email Verification process for a player.",
         "summary": "Request an Email Verification.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18846,7 +20396,9 @@
         },
         "description": "Verify a player's email address.",
         "summary": "Verify an email.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18878,7 +20430,9 @@
         },
         "description": "Start the Reset process for a player's password.",
         "summary": "Request a Reset password.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18910,7 +20464,9 @@
         },
         "description": "Reset a player's password.",
         "summary": "Reset a password.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -18954,7 +20510,9 @@
             "description": ""
           }
         },
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -19003,7 +20561,9 @@
             "description": ""
           }
         },
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -19065,7 +20625,9 @@
         },
         "description": "Authenticate a player from an identity token.",
         "summary": "OIDC Identity token.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -19112,7 +20674,9 @@
           }
         },
         "summary": "Initialize OAuth.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -19159,7 +20723,9 @@
           }
         },
         "summary": "Initialize Link OAuth.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -19209,7 +20775,9 @@
           }
         },
         "summary": "Initialize Link OAuth.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -19259,7 +20827,9 @@
           }
         },
         "summary": "Initialize OAuth.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -19316,7 +20886,9 @@
           }
         },
         "summary": "Authenticate player with oauth token.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -19377,7 +20949,9 @@
           }
         },
         "summary": "Verify oauth token of a third party auth provider.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -19453,7 +21027,10 @@
         },
         "description": "The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.\n\nReturns the latest 10 transaction intents for the player.",
         "summary": "Retrieve player by oauth token.",
-        "tags": ["AdminAuthentication", "auth v1"],
+        "tags": [
+          "AdminAuthentication",
+          "auth v1"
+        ],
         "security": [
           {
             "sk": []
@@ -19507,7 +21084,9 @@
           }
         },
         "summary": "Unlink OAuth account",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -19564,7 +21143,9 @@
         },
         "description": "List configured OAuth methods for the current project environment.",
         "summary": "List of oauth configurations.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "deprecated": true,
         "security": [
           {
@@ -19606,7 +21187,9 @@
         },
         "description": "The endpoint creates oauth configuration for the current project environment.",
         "summary": "Create oauth configuration.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "deprecated": true,
         "security": [
           {
@@ -19648,7 +21231,9 @@
           }
         },
         "summary": "oauth callback.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "deprecated": true,
         "security": [],
         "parameters": [
@@ -19692,7 +21277,9 @@
           }
         },
         "summary": "oauth grant.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "pk": []
@@ -19738,7 +21325,9 @@
           }
         },
         "summary": "oauth callback.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [],
         "parameters": [
           {
@@ -19802,7 +21391,9 @@
         },
         "description": "The endpoint retrieves oauth configuration for specified provider for the current project environment.",
         "summary": "Get oauth configuration.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "deprecated": true,
         "security": [
           {
@@ -19836,7 +21427,9 @@
         },
         "description": "The endpoint deletes oauth configuration for specified provider for the current project environment.",
         "summary": "Delete oauth configuration.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "deprecated": true,
         "security": [
           {
@@ -19902,7 +21495,9 @@
         },
         "description": "Create a guest player.",
         "summary": "Create a guest player.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk": []
@@ -19952,7 +21547,9 @@
         },
         "description": "List configured auth methods for the current project environment.",
         "summary": "List of auth configurations.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "pk": []
@@ -20002,7 +21599,9 @@
         },
         "description": "The endpoint creates oauth configuration for the current project environment.",
         "summary": "Create oauth configuration.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "sk": []
@@ -20065,7 +21664,9 @@
         },
         "description": "Creates an authenticated player.\n\nThe player will be authenticated with the provider and an embedded account can be pre generated.",
         "summary": "Create an authenticated player.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "sk": []
@@ -20130,7 +21731,9 @@
         },
         "description": "Retrieves a list of authenticated players.\n\nPlayers have linked accounts and are authenticated with a provider.",
         "summary": "List authenticated players.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "sk": []
@@ -20230,7 +21833,9 @@
         },
         "description": "Retrieves an authenticated player.\n\nPlayers have linked accounts and are authenticated with a provider.",
         "summary": "Authenticated player.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "sk": []
@@ -20288,7 +21893,9 @@
         },
         "description": "Deletes a player auth object.\n\nIt will delete all linked accounts the player is authenticated with.\nIf the player has a linked embedded signer, it will be deleted as well.",
         "summary": "Deletes a player auth object.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "sk": []
@@ -20344,7 +21951,9 @@
         },
         "description": "Verifies the token generated by Openfort Auth.",
         "summary": "Verify auth token.",
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "sk": []
@@ -20407,7 +22016,9 @@
         },
         "description": "Get the jwks.json file.\n\nYou can use the jwks.json file to verify the signature of a JWT token issued by Openfort Auth.",
         "summary": "Get the jwks.json file.",
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [],
         "parameters": [
           {
@@ -20457,7 +22068,9 @@
             "description": "Error response."
           }
         },
-        "tags": ["auth v1"],
+        "tags": [
+          "auth v1"
+        ],
         "security": [
           {
             "pk_access_token": []
@@ -20513,7 +22126,9 @@
             "description": "Player not found."
           }
         },
-        "tags": ["AdminAuthentication"],
+        "tags": [
+          "AdminAuthentication"
+        ],
         "security": [
           {
             "sk": []
@@ -20576,7 +22191,9 @@
           }
         },
         "summary": "Get user information.",
-        "tags": ["auth v2"],
+        "tags": [
+          "auth v2"
+        ],
         "security": [
           {
             "pk_third_party": []
@@ -20629,7 +22246,9 @@
           }
         },
         "summary": "Verify oauth token of a third party auth provider.",
-        "tags": ["auth v2"],
+        "tags": [
+          "auth v2"
+        ],
         "security": [
           {
             "pk": []
@@ -20661,27 +22280,41 @@
   "x-tagGroups": [
     {
       "name": "Users",
-      "tags": ["Users"]
+      "tags": [
+        "Users"
+      ]
     },
     {
       "name": "Accounts",
-      "tags": ["accs v1", "accs v2"]
+      "tags": [
+        "accs v1",
+        "accs v2"
+      ]
     },
     {
       "name": "Transactions",
-      "tags": ["TransactionIntents"]
+      "tags": [
+        "TransactionIntents"
+      ]
     },
     {
       "name": "Authentication",
-      "tags": ["auth v1", "auth v2"]
+      "tags": [
+        "auth v1",
+        "auth v2"
+      ]
     },
     {
       "name": "Session keys",
-      "tags": ["Sessions"]
+      "tags": [
+        "Sessions"
+      ]
     },
     {
       "name": "Sponsor transactions & Models",
-      "tags": ["Policies"]
+      "tags": [
+        "Policies"
+      ]
     }
   ]
 }

@@ -2515,6 +2515,17 @@ export interface RecoveryMethodDetails {
   passkeyEnv?: PasskeyEnv;
 }
 
+/**
+ * Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB).
+ */
+export type PregenerateAccountResponseCustody = typeof PregenerateAccountResponseCustody[keyof typeof PregenerateAccountResponseCustody];
+
+
+export const PregenerateAccountResponseCustody = {
+  Developer: 'Developer',
+  User: 'User',
+} as const;
+
 export interface PregenerateAccountResponse {
   id: string;
   user: string;
@@ -2528,6 +2539,8 @@ export interface PregenerateAccountResponse {
   smartAccount?: SmartAccountData;
   recoveryMethod?: string;
   recoveryMethodDetails?: RecoveryMethodDetails;
+  /** Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB). */
+  custody: PregenerateAccountResponseCustody;
   /** The recovery share for the user's embedded signer.
 This should be stored securely and provided to the user for account recovery. */
   recoveryShare: string;
@@ -2677,6 +2690,16 @@ export const BackendWalletResponseChainType = {
 } as const;
 
 /**
+ * Key custody: always "Developer" for backend wallets (server-managed keys in TEE).
+ */
+export type BackendWalletResponseCustody = typeof BackendWalletResponseCustody[keyof typeof BackendWalletResponseCustody];
+
+
+export const BackendWalletResponseCustody = {
+  Developer: 'Developer',
+} as const;
+
+/**
  * Backend wallet details response.
  */
 export interface BackendWalletResponse {
@@ -2690,6 +2713,8 @@ export interface BackendWalletResponse {
   chainType: BackendWalletResponseChainType;
   /** Optional name for the wallet. */
   name?: string;
+  /** Key custody: always "Developer" for backend wallets (server-managed keys in TEE). */
+  custody: BackendWalletResponseCustody;
   /** Creation timestamp (Unix epoch seconds). */
   createdAt: number;
   /** Last updated timestamp (Unix epoch seconds). */
@@ -3058,6 +3083,17 @@ Used to identify this key in X-Wallet-Auth JWT headers. */
   newKeyId?: string;
 }
 
+/**
+ * Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB).
+ */
+export type AccountV2ResponseCustody = typeof AccountV2ResponseCustody[keyof typeof AccountV2ResponseCustody];
+
+
+export const AccountV2ResponseCustody = {
+  Developer: 'Developer',
+  User: 'User',
+} as const;
+
 export interface AccountV2Response {
   id: string;
   user: string;
@@ -3071,6 +3107,8 @@ export interface AccountV2Response {
   smartAccount?: SmartAccountData;
   recoveryMethod?: string;
   recoveryMethodDetails?: RecoveryMethodDetails;
+  /** Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB). */
+  custody: AccountV2ResponseCustody;
 }
 
 export interface BaseEntityListResponseAccountV2Response {
@@ -3113,7 +3151,6 @@ export const AccountListQueriesV2AccountType = {
 export type AccountListQueriesV2Custody = typeof AccountListQueriesV2Custody[keyof typeof AccountListQueriesV2Custody];
 
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const AccountListQueriesV2Custody = {
   Developer: 'Developer',
   User: 'User',
@@ -5288,7 +5325,6 @@ export const GetAccountsV2AccountType = {
 export type GetAccountsV2Custody = typeof GetAccountsV2Custody[keyof typeof GetAccountsV2Custody];
 
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetAccountsV2Custody = {
   Developer: 'Developer',
   User: 'User',
