@@ -3107,6 +3107,18 @@ export const AccountListQueriesV2AccountType = {
   Delegated_Account: 'Delegated Account',
 } as const;
 
+/**
+ * Specifies the key custody of the account. Must be either "Developer" or "User".
+ */
+export type AccountListQueriesV2Custody = typeof AccountListQueriesV2Custody[keyof typeof AccountListQueriesV2Custody];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const AccountListQueriesV2Custody = {
+  Developer: 'Developer',
+  User: 'User',
+} as const;
+
 export interface AccountListQueriesV2 {
   /**
    * Specifies the maximum number of records to return.
@@ -3128,6 +3140,8 @@ export interface AccountListQueriesV2 {
   chainType?: AccountListQueriesV2ChainType;
   /** Specifies the type of account. Must be either "Smart Account" or "Externally Owned Account". */
   accountType?: AccountListQueriesV2AccountType;
+  /** Specifies the key custody of the account. Must be either "Developer" or "User". */
+  custody?: AccountListQueriesV2Custody;
   /** Specifies the account address */
   address?: string;
 }
@@ -5245,6 +5259,10 @@ chainType?: GetAccountsV2ChainType;
  */
 accountType?: GetAccountsV2AccountType;
 /**
+ * Specifies the key custody of the account. Must be either "Developer" or "User".
+ */
+custody?: GetAccountsV2Custody;
+/**
  * Specifies the account address
  */
 address?: string;
@@ -5265,6 +5283,15 @@ export const GetAccountsV2AccountType = {
   Externally_Owned_Account: 'Externally Owned Account',
   Smart_Account: 'Smart Account',
   Delegated_Account: 'Delegated Account',
+} as const;
+
+export type GetAccountsV2Custody = typeof GetAccountsV2Custody[keyof typeof GetAccountsV2Custody];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const GetAccountsV2Custody = {
+  Developer: 'Developer',
+  User: 'User',
 } as const;
 
 export type GetSignerIdByAddressParams = {

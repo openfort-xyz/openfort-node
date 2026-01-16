@@ -1,4 +1,4 @@
-// Usage: npx tsx iam/pregenerateUser.ts
+// Usage: npx tsx evm/embedded/pregenerate.ts
 
 import Openfort, { ShieldAuthProvider } from "@openfort/openfort-node";
 import "dotenv/config";
@@ -9,7 +9,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 // Pre-generate a user with an embedded wallet
 // This creates the user and wallet before they authenticate
-const result = await openfort.iam.users.pregenerate(
+const result = await openfort.accounts.evm.embedded.pregenerate(
   {
     email: "jaume+1@openfort.xyz",
     accountType: "Externally Owned Account"
