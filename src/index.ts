@@ -6,9 +6,16 @@ import {
   ShieldSDK,
 } from '@openfort/shield-js'
 import fetch from 'node-fetch'
+import {
+  InvalidAPIKeyFormatError,
+  InvalidPublishableKeyFormatError,
+  MissingAPIKeyError,
+} from './errors'
 import * as api from './openapi-client'
 import { configure } from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
+import { EvmClient } from './wallets/evm/evmClient'
+import { SolanaClient } from './wallets/solana/solanaClient'
 
 // Re-export ShieldAuthProvider for convenience
 export { ShieldAuthProvider } from '@openfort/shield-js'
@@ -19,6 +26,8 @@ export { ShieldAuthProvider } from '@openfort/shield-js'
 export interface OpenfortOptions {
   /** API base URL (optional) */
   basePath?: string
+  /** Wallet secret for X-Wallet-Auth header (optional) */
+  walletSecret?: string
   /** Enable debug logging (optional) */
   debugging?: boolean
   /** Publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
@@ -37,19 +46,53 @@ export interface ShieldConfiguration {
   encryptionShare: string
   /** Shield auth provider type */
   shieldAuthProvider: ShieldAuthProvider
-  /** Shield API base URL (optional, defaults to https://shield.openfort.xyz) */
+  /** Shield API base URL (optional, defaults to https://shield.openfort.io) */
   shieldApiBaseUrl?: string
 }
 
 /**
+ * Validates that a string is a valid Openfort secret API key format.
+ * @param key - The key to validate
+ * @returns true if valid
+ */
+function isValidSecretKey(key: string): boolean {
+  return key.startsWith('sk_test_') || key.startsWith('sk_live_')
+}
+
+/**
+ * Validates that a string is a valid Openfort publishable key format.
+ * @param key - The key to validate
+ * @returns true if valid
+ */
+function isValidPublishableKey(key: string): boolean {
+  return key.startsWith('pk_test_') || key.startsWith('pk_live_')
+}
+
+/**
  * The Openfort SDK client.
- * Provides access to all Openfort API endpoints.
+ * Provides access to all Openfort API endpoints and wallet functionality.
+ *
+ * Environment variables (all optional, constructor options take precedence):
+ * - `OPENFORT_API_KEY` - Secret API key (sk_test_... or sk_live_...)
+ * - `OPENFORT_WALLET_SECRET` - Wallet secret for backend wallet operations
+ * - `OPENFORT_PUBLISHABLE_KEY` - Publishable key for auth endpoints (pk_test_... or pk_live_...)
+ * - `OPENFORT_BASE_URL` - Custom API base URL
  *
  * @example
  * ```typescript
  * import Openfort from '@openfort/openfort-node';
  *
+ * // Using environment variables
+ * const openfort = new Openfort();
+ *
+ * // Or with explicit API key
  * const openfort = new Openfort('sk_test_...');
+ *
+ * // Or with options
+ * const openfort = new Openfort('sk_test_...', {
+ *   walletSecret: 'your-wallet-secret',
+ *   publishableKey: 'pk_test_...',
+ * });
  *
  * // Create a player
  * const player = await openfort.players.create({ name: 'Player-1' });
@@ -62,25 +105,61 @@ export interface ShieldConfiguration {
  * ```
  */
 class Openfort {
-  constructor(
-    private readonly apiKey: string,
-    options?: string | OpenfortOptions,
-  ) {
-    // Support both old signature (basePath string) and new options object
-    let basePath: string | undefined
-    if (typeof options === 'string') {
-      basePath = options
-    } else if (options) {
-      basePath = options.basePath
+  private readonly _apiKey: string
+  private _evmClient?: EvmClient
+  private _solanaClient?: SolanaClient
+
+  constructor(apiKey?: string, options?: string | OpenfortOptions) {
+    // Resolve API key: explicit parameter > environment variable
+    const resolvedApiKey = apiKey || process.env.OPENFORT_API_KEY
+
+    // Resolve options
+    const resolvedBasePath =
+      typeof options === 'string'
+        ? options
+        : options?.basePath || process.env.OPENFORT_BASE_URL
+
+    const resolvedWalletSecret =
+      typeof options === 'object'
+        ? options.walletSecret || process.env.OPENFORT_WALLET_SECRET
+        : process.env.OPENFORT_WALLET_SECRET
+
+    const resolvedPublishableKey =
+      typeof options === 'object'
+        ? options.publishableKey || process.env.OPENFORT_PUBLISHABLE_KEY
+        : process.env.OPENFORT_PUBLISHABLE_KEY
+
+    const debugging =
+      typeof options === 'object' ? options.debugging : undefined
+
+    // Validate API key presence
+    if (!resolvedApiKey) {
+      throw new MissingAPIKeyError()
     }
+
+    // Validate API key format
+    if (!isValidSecretKey(resolvedApiKey)) {
+      throw new InvalidAPIKeyFormatError(resolvedApiKey)
+    }
+
+    // Validate publishable key format if provided
+    if (
+      resolvedPublishableKey &&
+      !isValidPublishableKey(resolvedPublishableKey)
+    ) {
+      throw new InvalidPublishableKeyFormatError(resolvedPublishableKey)
+    }
+
+    // Store API key for webhook signature verification
+    this._apiKey = resolvedApiKey
 
     // Configure the API client
     configure({
-      apiKey: this.apiKey,
-      basePath,
-      debugging: typeof options === 'object' ? options.debugging : undefined,
-      publishableKey:
-        typeof options === 'object' ? options.publishableKey : undefined,
+      apiKey: resolvedApiKey,
+      basePath: resolvedBasePath,
+      walletSecret: resolvedWalletSecret,
+      debugging,
+      publishableKey: resolvedPublishableKey,
     })
   }
 
@@ -89,49 +168,129 @@ class Openfort {
   // ============================================
 
   /**
-   * Account management endpoints (V2 default)
+   * Unified accounts namespace for managing wallets across chains.
    *
    * @example
    * ```typescript
-   * // V2 (default)
-   * const accounts = await openfort.accounts.list({ player: 'pla_...' });
-   * const account = await openfort.accounts.get('acc_...');
-   * await openfort.accounts.switchChain('acc_...', { chainId: 137 });
+   * // Create a backend wallet (Developer custody)
+   * const wallet = await openfort.accounts.evm.backend.create({ name: 'Treasury' })
    *
-   * // V1 (legacy)
-   * const legacyAccounts = await openfort.accounts.v1.list({ player: 'pla_...' });
-   * await openfort.accounts.v1.create({ player: 'pla_...', chainId: 1 });
+   * // Pregenerate an embedded wallet (User custody)
+   * const embedded = await openfort.accounts.evm.embedded.pregenerate(
+   *   { email: 'user@example.com' },
+   *   shieldConfig
+   * )
+   *
+   * // List all accounts
+   * const all = await openfort.accounts.list()
+   *
+   * // List with filters
+   * const evmBackend = await openfort.accounts.list({
+   *   chainType: 'EVM',
+   *   custody: 'Developer',
+   * })
+   *
+   * // V1 API
+   * await openfort.accounts.v1.create({ player: 'pla_...', chainId: 1 })
    * ```
    */
   public get accounts() {
+    // Lazily initialize clients
+    if (!this._evmClient) {
+      this._evmClient = new EvmClient()
+    }
+    if (!this._solanaClient) {
+      this._solanaClient = new SolanaClient()
+    }
+    const evmClient = this._evmClient
+    const solanaClient = this._solanaClient
+
     return {
-      /** List accounts */
+      /** List all accounts across chains */
       list: api.getAccountsV2,
-      /** Get an account by ID */
-      get: api.getAccountV2,
-      /** Switch chain */
-      switchChain: api.switchChainV2,
-      /** V1 account methods (legacy) */
+      /** EVM accounts */
+      evm: {
+        /** List EVM accounts */
+        list: (params?: Omit<api.GetAccountsV2Params, 'chainType'>) =>
+          api.getAccountsV2({ ...params, chainType: 'EVM' }),
+        /** Backend wallet operations (Developer custody) */
+        backend: {
+          /** Create EVM backend wallet */
+          create: evmClient.createAccount.bind(evmClient),
+          /** List EVM backend wallets */
+          list: evmClient.listAccounts.bind(evmClient),
+          /** Get backend wallet by ID or address */
+          get: evmClient.getAccount.bind(evmClient),
+          /** Delete backend wallet */
+          delete: api.deleteBackendWallet,
+          /** Sign data */
+          sign: evmClient.signData.bind(evmClient),
+          /** Import private key (with E2E encryption) */
+          import: evmClient.importAccount.bind(evmClient),
+          /** Export private key (with E2E encryption) */
+          export: evmClient.exportAccount.bind(evmClient),
+        },
+        /** Embedded wallet operations (User custody) */
+        embedded: {
+          /** Pregenerate embedded account */
+          pregenerate: (
+            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            shieldConfig: ShieldConfiguration,
+          ) => this.pregenerateUser({ ...req, chainType: 'EVM' }, shieldConfig),
+          /** List embedded accounts */
+          list: (
+            params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
+          ) =>
+            api.getAccountsV2({ ...params, chainType: 'EVM', custody: 'User' }),
+        },
+      },
+      /** Solana accounts */
+      solana: {
+        /** List Solana accounts */
+        list: (params?: Omit<api.GetAccountsV2Params, 'chainType'>) =>
+          api.getAccountsV2({ ...params, chainType: 'SVM' }),
+        /** Backend wallet operations (Developer custody) */
+        backend: {
+          /** Create Solana backend wallet */
+          create: solanaClient.createAccount.bind(solanaClient),
+          /** List Solana backend wallets */
+          list: solanaClient.listAccounts.bind(solanaClient),
+          /** Get backend wallet by ID or address */
+          get: solanaClient.getAccount.bind(solanaClient),
+          /** Delete backend wallet */
+          delete: api.deleteBackendWallet,
+          /** Sign data */
+          sign: solanaClient.signData.bind(solanaClient),
+          /** Import private key (with E2E encryption) */
+          import: solanaClient.importAccount.bind(solanaClient),
+          /** Export private key (with E2E encryption) */
+          export: solanaClient.exportAccount.bind(solanaClient),
+        },
+        /** Embedded wallet operations (User custody) */
+        embedded: {
+          /** Pregenerate embedded account */
+          pregenerate: (
+            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            shieldConfig: ShieldConfiguration,
+          ) => this.pregenerateUser({ ...req, chainType: 'SVM' }, shieldConfig),
+          /** List embedded accounts */
+          list: (
+            params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
+          ) =>
+            api.getAccountsV2({ ...params, chainType: 'SVM', custody: 'User' }),
+        },
+      },
+      /** V1 legacy API */
       v1: {
-        /** List accounts */
         list: api.getAccounts,
-        /** Create an account */
         create: api.createAccount,
-        /** Get an account by ID */
         get: api.getAccount,
-        /** Request transfer of ownership */
         requestTransferOwnership: api.requestTransferOwnership,
-        /** Cancel transfer of ownership */
         cancelTransferOwnership: api.cancelTransferOwnership,
-        /** Sign a payload */
         signPayload: api.signPayload,
-        /** Sync account state */
         sync: api.syncAccount,
-        /** Deploy an account */
         deploy: api.deployAccount,
-        /** Start recovery */
         startRecovery: api.startRecovery,
-        /** Complete recovery */
         completeRecovery: api.completeRecovery,
       },
     }
@@ -178,8 +337,6 @@ class Openfort {
       update: api.updateContract,
       /** Delete a contract */
       delete: api.deleteContract,
-      /** Read a contract */
-      read: api.readContract,
     }
   }
 
@@ -380,9 +537,8 @@ class Openfort {
    * // V2 (default) - Users
    * const users = await openfort.iam.users.list();
    * const user = await openfort.iam.users.get('usr_...');
-   * await openfort.iam.users.pregenerate({ email: 'user@example.com' }, shieldConfig);
    *
-   * // V1 (legacy) - Players
+   * // V1 - Players
    * const players = await openfort.iam.v1.players.list();
    * await openfort.iam.v1.players.create(request, shieldConfig);
    * ```
@@ -399,17 +555,9 @@ class Openfort {
         get: api.getAuthUser,
         /** Delete a user */
         delete: api.deleteUser,
-        /**
-         * Pre-generate a user with an embedded account before they authenticate.
-         * Creates a user record and an embedded account.
-         * @param req - The pregenerate user request
-         * @param shieldConfig - Optional Shield configuration for storing the recovery share
-         * @returns The pregenerated account response
-         */
-        pregenerate: this.pregenerateUser.bind(this),
       },
       /** OAuth configuration */
-      oauthConfig: {
+      authProvidersConfig: {
         /** Create OAuth config */
         create: api.createOAuthConfig,
         /** Get OAuth config */
@@ -419,7 +567,7 @@ class Openfort {
         /** Delete OAuth config */
         delete: api.deleteOAuthConfig,
       },
-      /** V1 IAM methods (legacy) */
+      /** V1 IAM methods */
       v1: {
         /** Auth player management (V1) */
         players: {
@@ -601,7 +749,7 @@ class Openfort {
     body: string,
     signature: string,
   ): Promise<T> {
-    const signedPayload = await sign(this.apiKey, body)
+    const signedPayload = await sign(this._apiKey, body)
     if (signedPayload !== signature) {
       throw Error('Invalid signature')
     }
@@ -615,7 +763,7 @@ class Openfort {
    * @param shieldApiKey - Shield API key
    * @param shieldApiSecret - Shield API secret
    * @param encryptionShare - Encryption share for the recovery share
-   * @param shieldApiBaseUrl - Shield API base URL (defaults to https://shield.openfort.xyz)
+   * @param shieldApiBaseUrl - Shield API base URL (defaults to https://shield.openfort.io)
    * @returns The encryption session ID
    *
    * @example
@@ -631,7 +779,7 @@ class Openfort {
     shieldApiKey: string,
     shieldApiSecret: string,
     encryptionShare: string,
-    shieldApiBaseUrl = 'https://shield.openfort.xyz',
+    shieldApiBaseUrl = 'https://shield.openfort.io',
   ): Promise<string> {
     const response = await fetch(
       `${shieldApiBaseUrl}/project/encryption-session`,
@@ -661,7 +809,31 @@ class Openfort {
 export { Openfort }
 export default Openfort
 
+// Constants
+export { IMPORT_ENCRYPTION_PUBLIC_KEY } from './constants'
+// Error classes
+export {
+  AccountNotFoundError,
+  EncryptionError,
+  InvalidAPIKeyFormatError,
+  InvalidPublishableKeyFormatError,
+  InvalidWalletSecretFormatError,
+  MissingAPIKeyError,
+  MissingPublishableKeyError,
+  MissingWalletSecretError,
+  TimeoutError,
+  UserInputValidationError,
+} from './errors'
 // Re-export all types from the generated API
 export * from './openapi-client'
 // Export the configure function for advanced use cases
 export { configure, getConfig } from './openapi-client/openfortApiClient'
+// RSA encryption utilities for key import/export
+export {
+  decryptExportedPrivateKey,
+  encryptForImport,
+  generateRSAKeyPair,
+  type RSAKeyPair,
+} from './utilities/encryption'
+// Re-export wallet types
+export * from './wallets'

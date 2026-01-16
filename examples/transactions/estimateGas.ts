@@ -14,52 +14,6 @@ const account = await openfort.accounts.v1.create({
   chainId,
 });
 
-// Create a contract reference
-const contract = await openfort.contracts.create({
-  name: "My NFT Contract",
-  chainId,
-  address: "0x38090d1636069c0ff1af6bc1737fb996b7f63ac0",
-  abi: [
-        {
-          "type": "function",
-          "name": "transfer",
-          "inputs": [
-            {
-              "name": "_to",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "_amount",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "balanceOf",
-          "inputs": [
-            {
-              "name": "account",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        }
-      ]
-});
-
 // Create a policy
 const policy = await openfort.policies.create({
   name: `TxPolicy-${Date.now()}`,
@@ -69,14 +23,21 @@ const policy = await openfort.policies.create({
   },
 });
 
-// Create a policy rule to allow all contract functions
-await openfort.policyRules.create({
-  type: "contract_functions",
-  policy: policy.id,
-  functionName: "All functions",
-  contract: contract.id,
+const contract = await openfort.contracts.create({
+  name: "My Token Contract",
+  chainId,
+  address: "0xbabe0001489722187FbaF0689C47B2f5E97545C5",
+  // Optional: provide ABI for function name validation
+  // abi: [...]
 });
 
+// Create a policy rule to allow all account functions
+await openfort.policyRules.create({
+  type: "contract_functions",
+  functionName: "All functions",
+  wildcard: true,
+  policy: policy.id,
+});
 // Define transaction intent request
 const transactionIntentRequest = {
   chainId,
@@ -84,8 +45,8 @@ const transactionIntentRequest = {
   interactions: [
     {
       contract: contract.id,
-      functionName: "transfer",
-      functionArgs: [account.address, 1],
+      functionName: "mint",
+      functionArgs: ['0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d', '123'],
     },
   ],
 };

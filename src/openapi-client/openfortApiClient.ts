@@ -1,5 +1,11 @@
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
 import axiosRetry, { exponentialDelay } from 'axios-retry'
+import { MissingPublishableKeyError, MissingWalletSecretError } from '../errors'
+import {
+  generateWalletJwt,
+  requiresWalletAuth,
+  sortKeys,
+} from '../utilities/walletAuth'
 import { PACKAGE, VERSION } from '../version'
 import {
   APIError,
@@ -9,7 +15,7 @@ import {
   ValidationError,
 } from './errors'
 
-const ERROR_DOCS_URL = 'https://www.openfort.io/docs/errors'
+const ERROR_DOCS_URL = 'https://www.openfort.io/docs'
 
 /**
  * Configuration options for the Openfort API client
@@ -17,6 +23,8 @@ const ERROR_DOCS_URL = 'https://www.openfort.io/docs/errors'
 export interface OpenfortClientOptions {
   /** The API key (secret key starting with sk_) */
   apiKey: string
+  /** Optional wallet secret for X-Wallet-Auth header */
+  walletSecret?: string
   /** Optional publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
   publishableKey?: string
   /** Optional base URL for the API */
@@ -79,6 +87,14 @@ function validateRequest(config: AxiosRequestConfig): void {
 }
 
 /**
+ * Checks if a request path requires the publishable key (x-project-key header).
+ * Auth V2 endpoints require the publishable key for proper project identification.
+ */
+function requiresPublishableKey(requestPath: string): boolean {
+  return requestPath.startsWith('/iam/v2/auth/')
+}
+
+/**
  * Configures the Openfort API client with the given options.
  *
  * @param options - The client configuration options
@@ -131,6 +147,48 @@ export const configure = (options: OpenfortClientOptions): void => {
     // Convert BigInts in request body to strings
     if (config.data) {
       config.data = convertBigIntsToStrings(config.data)
+    }
+
+    // Add X-Wallet-Auth header if needed
+    if (config.url && config.method) {
+      const url = new URL(config.url, baseURL)
+      const method = config.method.toUpperCase()
+      const path = url.pathname
+
+      // Validate publishable key for auth endpoints
+      if (requiresPublishableKey(path) && !options.publishableKey) {
+        throw new MissingPublishableKeyError(`${method} ${path}`)
+      }
+
+      if (requiresWalletAuth(method, path)) {
+        // Throw early if wallet secret is required but not configured
+        if (!options.walletSecret) {
+          throw new MissingWalletSecretError(`${method} ${path}`)
+        }
+
+        let requestData: Record<string, unknown> = {}
+        if (config.data && typeof config.data === 'object') {
+          requestData = config.data as Record<string, unknown>
+        }
+
+        // IMPORTANT: Sort the request data keys to ensure the HTTP body
+        // matches the hash computed for the JWT's reqHash claim.
+        // The TEE hashes the raw body bytes without sorting, so we must
+        // send the sorted JSON to match what generateWalletJwt hashes.
+        if (Object.keys(requestData).length > 0) {
+          config.data = sortKeys(requestData)
+        }
+
+        const walletAuthToken = await generateWalletJwt({
+          walletSecret: options.walletSecret,
+          requestMethod: method,
+          requestHost: url.host,
+          requestPath: path,
+          requestData,
+        })
+
+        config.headers['X-Wallet-Auth'] = walletAuthToken
+      }
     }
 
     return config

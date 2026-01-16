@@ -29,13 +29,13 @@ CHAIN_ID=80002  # Polygon Amoy testnet
 Run any example using `pnpm example`:
 
 ```bash
-pnpm example contracts/createContract.ts
+pnpm example evm/accounts/createAccount.ts
 ```
 
 Or directly with tsx:
 
 ```bash
-npx tsx contracts/createContract.ts
+npx tsx evm/accounts/createAccount.ts
 ```
 
 ## Development Workflow
@@ -49,10 +49,57 @@ pnpm build:sdk
 ```
 3. Run an example to test:
 ```bash
-pnpm example contracts/createContract.ts
+pnpm example evm/accounts/createAccount.ts
 ```
 
 ## Examples Overview
+
+### EVM Wallet Examples
+
+#### Accounts (`evm/accounts/`)
+| Example            | Description                          |
+| ------------------ | ------------------------------------ |
+| `createAccount.ts` | Create a new EVM account             |
+| `getAccount.ts`    | Retrieve an account by ID or address |
+| `listAccounts.ts`  | List all EVM accounts                |
+| `importAccount.ts` | Import an account from private key   |
+| `exportAccount.ts` | Export an account's private key      |
+
+#### Signing (`evm/signing/`)
+| Example              | Description                        |
+| -------------------- | ---------------------------------- |
+| `signMessage.ts`     | Sign a message with an EVM account |
+| `signTypedData.ts`   | Sign EIP-712 typed data            |
+| `signHash.ts`        | Sign a raw hash                    |
+| `signTransaction.ts` | Sign a transaction                 |
+
+#### Embedded Wallets (`evm/embedded/`)
+| Example          | Description                              |
+| ---------------- | ---------------------------------------- |
+| `pregenerate.ts` | Pre-generate a user with embedded wallet |
+
+> **Note:** The `pregenerate.ts` example requires Shield configuration. See `.env.example` for required environment variables:
+> - `SHIELD_API_KEY`
+> - `SHIELD_API_SECRET`
+> - `SHIELD_ENCRYPTION_SHARE`
+
+### Solana Wallet Examples
+
+#### Accounts (`solana/accounts/`)
+| Example            | Description                          |
+| ------------------ | ------------------------------------ |
+| `createAccount.ts` | Create a new Solana account          |
+| `getAccount.ts`    | Retrieve an account by ID or address |
+| `listAccounts.ts`  | List all Solana accounts             |
+| `importAccount.ts` | Import an account from private key   |
+| `exportAccount.ts` | Export an account's private key      |
+
+#### Signing (`solana/signing/`)
+| Example              | Description                          |
+| -------------------- | ------------------------------------ |
+| `signMessage.ts`     | Sign a message with a Solana account |
+| `signTransaction.ts` | Sign a Solana transaction            |
+
 
 ### Policies
 
@@ -68,11 +115,10 @@ pnpm example contracts/createContract.ts
 
 ### Contracts
 
-| Example                       | Description               |
-| ----------------------------- | ------------------------- |
-| `contracts/createContract.ts` | Register a contract       |
-| `contracts/listContracts.ts`  | List all contracts        |
-| `contracts/readContract.ts`   | Read data from a contract |
+| Example                       | Description         |
+| ----------------------------- | ------------------- |
+| `contracts/createContract.ts` | Register a contract |
+| `contracts/listContracts.ts`  | List all contracts  |
 
 ### Transaction Intents
 
@@ -92,18 +138,12 @@ pnpm example contracts/createContract.ts
 
 ### IAM (Identity & Access Management)
 
-| Example                     | Description                                      |
-| --------------------------- | ------------------------------------------------ |
-| `iam/listUsers.ts`          | List all authenticated users                     |
-| `iam/getUser.ts`            | Get a user by ID                                 |
-| `iam/deleteUser.ts`         | Delete a user                                    |
-| `iam/pregenerateUser.ts`    | Pre-generate a user with embedded wallet         |
-| `iam/getSession.ts`         | Verify auth token server-side                    |
-
-> **Note:** The `pregenerateUser.ts` example requires additional Shield configuration. See `.env.example` for the required environment variables:
-> - `SHIELD_API_KEY`
-> - `SHIELD_API_SECRET`
-> - `SHIELD_ENCRYPTION_SHARE`
+| Example             | Description                   |
+| ------------------- | ----------------------------- |
+| `iam/listUsers.ts`  | List all authenticated users  |
+| `iam/getUser.ts`    | Get a user by ID              |
+| `iam/deleteUser.ts` | Delete a user                 |
+| `iam/getSession.ts` | Verify auth token server-side |
 
 ### Webhooks
 

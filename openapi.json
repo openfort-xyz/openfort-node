@@ -6655,6 +6655,12 @@
             "description": "Specifies the type of account. Must be either \"Smart Account\" or \"Externally Owned Account\".",
             "example": "Smart Account"
           },
+          "custody": {
+            "type": "string",
+            "enum": ["Developer", "User"],
+            "description": "Specifies the key custody of the account. Must be either \"Developer\" or \"User\".",
+            "example": "Developer"
+          },
           "address": {
             "type": "string",
             "description": "Specifies the account address",
@@ -18093,6 +18099,17 @@
               ]
             },
             "example": "Smart Account"
+          },
+          {
+            "description": "Specifies the key custody of the account. Must be either \"Developer\" or \"User\".",
+            "in": "query",
+            "name": "custody",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["Developer", "User"]
+            },
+            "example": "Developer"
           },
           {
             "description": "Specifies the account address",
