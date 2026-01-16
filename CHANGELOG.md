@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.3
+
+### Patch Changes
+
+- [#47](https://github.com/openfort-xyz/openfort-node/pull/47) [`ec21a8aa8f2d801a4ee705104d74868b16de521d`](https://github.com/openfort-xyz/openfort-node/commit/ec21a8aa8f2d801a4ee705104d74868b16de521d) Thanks [@n00m4d](https://github.com/n00m4d)! - Fix user and auth clients
+
 ## 0.7.2
 
 ### Patch Changes
