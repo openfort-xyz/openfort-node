@@ -11,7 +11,8 @@ import type {
   BaseEntityListResponseAuthUserResponse,
   GetAuthUsersParams,
   PregenerateAccountResponse,
-  PregenerateUserRequestV2
+  PregenerateUserRequestV2,
+  ThirdPartyOAuthRequest
 } from '../openfortAPI.schemas';
 
 import { openfortApiClient } from '../../openfortApiClient';
@@ -83,7 +84,33 @@ export const pregenerateUserV2 = (
     },
       options);
     }
+  /**
+ * @summary Get user information.
+ */
+export const meV2 = (
+    
+ options?: SecondParameter<typeof openfortApiClient<AuthUserResponse>>,) => {
+      return openfortApiClient<AuthUserResponse>(
+      {url: `/iam/v2/me`, method: 'GET'
+    },
+      options);
+    }
+  /**
+ * @summary Verify oauth token of a third party auth provider.
+ */
+export const thirdPartyV2 = (
+    thirdPartyOAuthRequest: ThirdPartyOAuthRequest,
+ options?: SecondParameter<typeof openfortApiClient<AuthUserResponse>>,) => {
+      return openfortApiClient<AuthUserResponse>(
+      {url: `/iam/v2/user/third_party`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: thirdPartyOAuthRequest
+    },
+      options);
+    }
   export type GetAuthUsersResult = NonNullable<Awaited<ReturnType<typeof getAuthUsers>>>
 export type GetAuthUserResult = NonNullable<Awaited<ReturnType<typeof getAuthUser>>>
 export type DeleteUserResult = NonNullable<Awaited<ReturnType<typeof deleteUser>>>
 export type PregenerateUserV2Result = NonNullable<Awaited<ReturnType<typeof pregenerateUserV2>>>
+export type MeV2Result = NonNullable<Awaited<ReturnType<typeof meV2>>>
+export type ThirdPartyV2Result = NonNullable<Awaited<ReturnType<typeof thirdPartyV2>>>
