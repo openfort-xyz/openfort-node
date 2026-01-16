@@ -20598,7 +20598,7 @@
           }
         },
         "summary": "Get user information.",
-        "tags": ["auth v2"],
+        "tags": ["Users"],
         "security": [
           {
             "pk_third_party": []
@@ -20651,7 +20651,7 @@
           }
         },
         "summary": "Verify oauth token of a third party auth provider.",
-        "tags": ["auth v2"],
+        "tags": ["Users"],
         "security": [
           {
             "pk": []
