@@ -8,7 +8,6 @@ export * as authApi from './generated/auth/auth-v2/auth-v2'
 // Generated API functions (auth API) - namespaced to avoid conflicts
 export * as authSchemas from './generated/auth/openfortAuth.schemas'
 export * from './generated/auth-v1/auth-v1'
-export * from './generated/auth-v2/auth-v2'
 export * from './generated/backend-wallets/backend-wallets'
 export * from './generated/contracts/contracts'
 export * from './generated/events/events'
