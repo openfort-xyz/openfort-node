@@ -7,7 +7,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   basePath: process.env.OPENFORT_BASE_URL,
 });
 
-const chainId = Number(process.env.CHAIN_ID) || 80002;
+const chainId = 84532; // Should be the chain which supports swaps
 
 // Create an account (V1 legacy API)
 const account = await openfort.accounts.v1.create({
@@ -30,6 +30,7 @@ await openfort.policyRules.create({
 
 console.log("Account address:", account.address);
 console.log("Policy ID:", policy.id);
+console.log("Account ID:", account.id);
 
 // Create a swap transaction
 // Note: Token addresses and amounts will vary by network

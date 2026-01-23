@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.7.3
+
+### Patch Changes
+
+- [#47](https://github.com/openfort-xyz/openfort-node/pull/47) [`ec21a8aa8f2d801a4ee705104d74868b16de521d`](https://github.com/openfort-xyz/openfort-node/commit/ec21a8aa8f2d801a4ee705104d74868b16de521d) Thanks [@n00m4d](https://github.com/n00m4d)! - Fix user and auth clients
+
+## 0.7.2
+
+### Patch Changes
+
+- [#40](https://github.com/openfort-xyz/openfort-node/pull/40) [`276202166cbae72d799e114d58c1f1d9413f223e`](https://github.com/openfort-xyz/openfort-node/commit/276202166cbae72d799e114d58c1f1d9413f223e) Thanks [@n00m4d](https://github.com/n00m4d)! - Update API client structure
+
+## 0.7.1
+
+### Patch Changes
+
+- [#44](https://github.com/openfort-xyz/openfort-node/pull/44) [`c59124b217a20296358e181425be37e80b9e176d`](https://github.com/openfort-xyz/openfort-node/commit/c59124b217a20296358e181425be37e80b9e176d) Thanks [@jamalavedra](https://github.com/jamalavedra)! - pregenerate only through account endpoints
+
 ## 0.7.0
 
 ### Minor Changes

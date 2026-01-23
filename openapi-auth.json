@@ -258,17 +258,12 @@
       "url": "https://api.openfort.io/iam/v2/auth"
     }
   ],
-  "tags": [
-    {
-      "name": "Default",
-      "description": "Authentication endpoints."
-    }
-  ],
   "paths": {
     "/sign-in/social": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Sign in with a social provider",
+        "summary": "Sign in with a social provider.",
         "operationId": "socialSignIn",
         "security": [
           {
@@ -521,8 +516,9 @@
     },
     "/get-session": {
       "get": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Get the current session",
+        "summary": "Get the current session.",
         "security": [
           {
             "bearerAuth": []
@@ -665,8 +661,9 @@
     },
     "/sign-out": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Sign out the current user",
+        "summary": "Sign out.",
         "security": [
           {
             "bearerAuth": []
@@ -796,8 +793,9 @@
     },
     "/sign-up/email": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Sign up a user using email and password",
+        "summary": "Sign up with email and password.",
         "security": [
           {
             "bearerAuth": []
@@ -974,8 +972,9 @@
     },
     "/sign-in/email": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Sign in with email and password",
+        "summary": "Sign in with email and password.",
         "security": [
           {
             "bearerAuth": []
@@ -1173,8 +1172,9 @@
     },
     "/forget-password": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Send a password reset email to the user",
+        "summary": "Forget password.",
         "security": [
           {
             "bearerAuth": []
@@ -1319,8 +1319,9 @@
     },
     "/reset-password": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Reset the password for a user",
+        "summary": "Reset password.",
         "security": [
           {
             "bearerAuth": []
@@ -1457,8 +1458,9 @@
     },
     "/verify-email": {
       "get": {
-        "tags": ["Default"],
-        "description": "Verify the email of the user",
+        "tags": ["auth v2"],
+        "description": "Verify the email of the user.\nUsually this endpoint is called when user clicks 'Verify email' link from the letter.",
+        "summary": "Verify email.",
         "security": [
           {
             "bearerAuth": []
@@ -1641,8 +1643,9 @@
     },
     "/send-verification-email": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Send a verification email to the user",
+        "summary": "Send verification email.",
         "security": [
           {
             "bearerAuth": []
@@ -1788,7 +1791,9 @@
     },
     "/change-email": {
       "post": {
-        "tags": ["Default"],
+        "description": "Change user's email",
+        "summary": "Change email.",
+        "tags": ["auth v2"],
         "security": [
           {
             "bearerAuth": []
@@ -1953,8 +1958,9 @@
     },
     "/change-password": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Change the password of the user",
+        "summary": "Change password.",
         "security": [
           {
             "bearerAuth": []
@@ -2106,8 +2112,9 @@
     },
     "/reset-password/{token}": {
       "get": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Redirects the user to the callback URL with the token",
+        "summary": "Reset password callback.",
         "security": [
           {
             "bearerAuth": []
@@ -2245,8 +2252,9 @@
     },
     "/request-password-reset": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Send a password reset email to the user",
+        "summary": "Request password reset.",
         "security": [
           {
             "bearerAuth": []
@@ -2391,8 +2399,9 @@
     },
     "/list-sessions": {
       "get": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "List all active sessions for the user",
+        "summary": "List sessions.",
         "security": [
           {
             "bearerAuth": []
@@ -2510,8 +2519,9 @@
     },
     "/revoke-session": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Revoke a single session",
+        "summary": "Revoke session.",
         "security": [
           {
             "bearerAuth": []
@@ -2649,8 +2659,9 @@
     },
     "/revoke-sessions": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Revoke all sessions for the user",
+        "summary": "Revoke sessions.",
         "security": [
           {
             "bearerAuth": []
@@ -2782,8 +2793,9 @@
     },
     "/revoke-other-sessions": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Revoke all other sessions for the user except the current one",
+        "summary": "Revoke other sessions.",
         "security": [
           {
             "bearerAuth": []
@@ -2915,8 +2927,9 @@
     },
     "/link-social": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Link a social account to the user",
+        "summary": "Link social account.",
         "security": [
           {
             "bearerAuth": []
@@ -3117,8 +3130,9 @@
     },
     "/list-accounts": {
       "get": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "List all accounts linked to the user",
+        "summary": "List lined accounts.",
         "security": [
           {
             "bearerAuth": []
@@ -3274,8 +3288,9 @@
     },
     "/unlink-account": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Unlink an account",
+        "summary": "Unlink account.",
         "security": [
           {
             "bearerAuth": []
@@ -3410,8 +3425,9 @@
     },
     "/refresh-token": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Refresh the access token using a refresh token",
+        "summary": "Refresh access token.",
         "security": [
           {
             "bearerAuth": []
@@ -3562,8 +3578,9 @@
     },
     "/get-access-token": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Get a valid access token, doing a refresh if needed",
+        "summary": "Get access token.",
         "security": [
           {
             "bearerAuth": []
@@ -3714,8 +3731,9 @@
     },
     "/account-info": {
       "post": {
-        "tags": ["Default"],
+        "tags": ["auth v2"],
         "description": "Get the account info provided by the provider",
+        "summary": "Get account info.",
         "security": [
           {
             "bearerAuth": []
@@ -3877,8 +3895,9 @@
     },
     "/sign-in/anonymous": {
       "post": {
-        "tags": ["Anonymous"],
+        "tags": ["auth v2"],
         "description": "Sign in anonymously",
+        "summary": "Anonymous sign in.",
         "security": [
           {
             "bearerAuth": []
@@ -4003,8 +4022,9 @@
     },
     "/sign-in/phone-number": {
       "post": {
-        "tags": ["Phone-number"],
+        "tags": ["auth v2"],
         "description": "Use this endpoint to sign in with phone number",
+        "summary": "Sign in with phone.",
         "security": [
           {
             "bearerAuth": []
@@ -4142,8 +4162,9 @@
     },
     "/phone-number/send-otp": {
       "post": {
-        "tags": ["Phone-number"],
+        "tags": ["auth v2"],
         "description": "Use this endpoint to send OTP to phone number",
+        "summary": "Send OTP to phone number.",
         "security": [
           {
             "bearerAuth": []
@@ -4280,8 +4301,9 @@
     },
     "/phone-number/verify": {
       "post": {
-        "tags": ["Phone-number"],
+        "tags": ["auth v2"],
         "description": "Use this endpoint to verify phone number",
+        "summary": "Verify phone OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -4485,8 +4507,9 @@
     },
     "/phone-number/forget-password": {
       "post": {
-        "tags": ["Phone-number"],
+        "tags": ["auth v2"],
         "description": "Request OTP for password reset via phone number",
+        "summary": "Reset password reset with phone(forget password flow).",
         "security": [
           {
             "bearerAuth": []
@@ -4626,8 +4649,9 @@
     },
     "/phone-number/request-password-reset": {
       "post": {
-        "tags": ["Phone-number"],
+        "tags": ["auth v2"],
         "description": "Request OTP for password reset via phone number",
+        "summary": "Request password reset with phone.",
         "security": [
           {
             "bearerAuth": []
@@ -4766,8 +4790,9 @@
     },
     "/phone-number/reset-password": {
       "post": {
-        "tags": ["Phone-number"],
+        "tags": ["auth v2"],
         "description": "Reset password using phone number OTP",
+        "summary": "Reset password with phone OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -4907,8 +4932,9 @@
     },
     "/email-otp/send-verification-otp": {
       "post": {
-        "tags": ["Email-otp"],
+        "tags": ["auth v2"],
         "description": "Send verification OTP",
+        "summary": "Request email verification with OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -5050,8 +5076,9 @@
     "/email-otp/check-verification-otp": {
       "post": {
         "operationId": "checkVerificationOtp",
-        "tags": ["Email-otp"],
+        "tags": ["auth v2"],
         "description": "Check if a verification OTP is valid",
+        "summary": "Check email OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -5201,8 +5228,9 @@
     },
     "/email-otp/verify-email": {
       "post": {
-        "tags": ["Email-otp"],
+        "tags": ["auth v2"],
         "description": "Verify email with OTP",
+        "summary": "Verify email with OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -5354,8 +5382,9 @@
     },
     "/sign-in/email-otp": {
       "post": {
-        "tags": ["Email-otp"],
+        "tags": ["auth v2"],
         "description": "Sign in with OTP",
+        "summary": "Sign in with email OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -5501,8 +5530,9 @@
     },
     "/forget-password/email-otp": {
       "post": {
-        "tags": ["Email-otp"],
+        "tags": ["auth v2"],
         "description": "Send a password reset OTP to the user",
+        "summary": "Request password reset with email OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -5640,8 +5670,9 @@
     },
     "/email-otp/reset-password": {
       "post": {
-        "tags": ["Email-otp"],
+        "tags": ["auth v2"],
         "description": "Reset user password with OTP",
+        "summary": "Reset password with email OTP.",
         "security": [
           {
             "bearerAuth": []
@@ -5781,8 +5812,9 @@
     },
     "/siwe/nonce": {
       "post": {
-        "tags": ["SIWE"],
+        "tags": ["auth v2"],
         "description": "Generate a nonce for Sign-In With Ethereum (SIWE) authentication",
+        "summary": "Initialize SIWE login.",
         "security": [
           {
             "bearerAuth": []
@@ -5886,8 +5918,9 @@
     },
     "/siwe/verify": {
       "post": {
-        "tags": ["SIWE"],
+        "tags": ["auth v2"],
         "description": "Verify a signed SIWE message and authenticate the user",
+        "summary": "Login with SIWE.",
         "security": [
           {
             "bearerAuth": []
@@ -6035,8 +6068,8 @@
     },
     "/link-siwe/nonce": {
       "post": {
-        "tags": ["SIWE"],
-        "summary": "Get nonce for linking SIWE wallet",
+        "tags": ["auth v2"],
+        "summary": "Initialize SIWE link.",
         "description": "Generates a cryptographically secure nonce for creating a SIWE message to link a wallet to the current authenticated user. Requires active session.",
         "security": [
           {
@@ -6141,8 +6174,8 @@
     },
     "/link-siwe/verify": {
       "post": {
-        "tags": ["SIWE"],
-        "summary": "Verify and link SIWE wallet",
+        "tags": ["auth v2"],
+        "summary": "Verify and link SIWE wallet.",
         "description": "Verifies the SIWE signature and links the wallet to the currently authenticated user. Requires active session.",
         "security": [
           {
@@ -6316,8 +6349,8 @@
     },
     "/link-siwe/list-wallets": {
       "get": {
-        "tags": ["SIWE"],
-        "summary": "List linked wallets",
+        "tags": ["auth v2"],
+        "summary": "List linked wallets.",
         "description": "Get all SIWE wallets linked to the authenticated user with full wallet metadata including primary status and chain information. Requires active session.",
         "security": [
           {
@@ -6410,8 +6443,8 @@
     },
     "/link-siwe/unlink": {
       "post": {
-        "tags": ["SIWE"],
-        "summary": "Unlink SIWE wallet",
+        "tags": ["auth v2"],
+        "summary": "Unlink SIWE wallet.",
         "description": "Remove a linked wallet from the authenticated user account. If the wallet being unlinked is the primary wallet, another wallet will be automatically promoted to primary. Requires active session.",
         "security": [
           {

@@ -5860,6 +5860,12 @@
           "recoveryMethodDetails": {
             "$ref": "#/components/schemas/RecoveryMethodDetails"
           },
+          "custody": {
+            "type": "string",
+            "enum": ["Developer", "User"],
+            "description": "Indicates key custody: \"Developer\" for server-managed keys (WALLTEE), \"User\" for user-managed keys (DB).",
+            "example": "Developer"
+          },
           "recoveryShare": {
             "type": "string",
             "description": "The recovery share for the user's embedded signer.\nThis should be stored securely and provided to the user for account recovery."
@@ -5873,6 +5879,7 @@
           "chainType",
           "createdAt",
           "updatedAt",
+          "custody",
           "recoveryShare"
         ],
         "type": "object",
@@ -6081,6 +6088,13 @@
             "description": "Optional name for the wallet.",
             "example": "Treasury Wallet"
           },
+          "custody": {
+            "type": "string",
+            "enum": ["Developer"],
+            "nullable": false,
+            "description": "Key custody: always \"Developer\" for backend wallets (server-managed keys in TEE).",
+            "example": "Developer"
+          },
           "createdAt": {
             "type": "integer",
             "format": "int32",
@@ -6097,6 +6111,7 @@
           "id",
           "address",
           "chainType",
+          "custody",
           "createdAt",
           "updatedAt"
         ],
@@ -6562,6 +6577,12 @@
           },
           "recoveryMethodDetails": {
             "$ref": "#/components/schemas/RecoveryMethodDetails"
+          },
+          "custody": {
+            "type": "string",
+            "enum": ["Developer", "User"],
+            "description": "Indicates key custody: \"Developer\" for server-managed keys (WALLTEE), \"User\" for user-managed keys (DB).",
+            "example": "Developer"
           }
         },
         "required": [
@@ -6571,7 +6592,8 @@
           "address",
           "chainType",
           "createdAt",
-          "updatedAt"
+          "updatedAt",
+          "custody"
         ],
         "type": "object",
         "additionalProperties": false
@@ -14827,6 +14849,90 @@
         }
       }
     },
+    "/v1/logs": {
+      "get": {
+        "operationId": "GetProjectLogs",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectLogs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error response."
+          }
+        },
+        "summary": "Get logs for a project.",
+        "tags": ["Logs"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": ".",
+            "in": "query",
+            "name": "method",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Specifies the unique project ID.",
+            "in": "query",
+            "name": "id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/logs/webhook": {
+      "get": {
+        "operationId": "GetWebhookLogsByProjectId",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectLogs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error response."
+          }
+        },
+        "summary": "Get webhook logs for a project.",
+        "tags": ["Logs"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": []
+      }
+    },
     "/v1/graphql": {
       "post": {
         "operationId": "Query",
@@ -16166,7 +16272,7 @@
         },
         "description": "Returns a list of accounts for the given player.\n\nThis object represents a player's account, which is a blockchain smart account that can be used to interact with the blockchain.\n\nThe accounts are returned sorted by creation date, with the most recently created accounts appearing first.\n\nReturns the latest 10 transaction intents for each account.\n\nBy default, a maximum of 10 accounts are shown per page.",
         "summary": "List accounts of a player.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "pk_access_token": []
@@ -16308,7 +16414,7 @@
         },
         "description": "Creates a new blockchain account for the provided player. If not player is provided, a new one will be created.\n\nAccount creation does not consume any gas. All accounts of a player will use the same address across blockchains.\n\nEach player can only have one account per chain.",
         "summary": "Create an account object.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "pk_access_token": []
@@ -16383,7 +16489,7 @@
         },
         "description": "Retrieves the details of an existing account.\n\nSupply the unique account ID from either a account creation request or the account list, and Openfort will return the corresponding account information.\n\nReturns the latest 10 transaction intents created by this account.",
         "summary": "Get existing account.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -16432,7 +16538,9 @@
             "description": "Error response."
           }
         },
-        "tags": ["Accounts"],
+        "description": "Disables an account.\n\nAccounts won't be shown for user and won't be accessible for transactions.",
+        "summary": "Disable account by id.",
+        "tags": ["accs v1"],
         "security": [
           {
             "pk_access_token": []
@@ -16544,7 +16652,7 @@
         },
         "description": "Perform a request to change the owner of an account.\n\nTo perform an update on the owner of an account, first you must provide a new owner address.\nOnce requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.",
         "summary": "Request transfer ownership of account.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -16656,7 +16764,7 @@
         },
         "description": "Cancel a pending transfer of ownership.",
         "summary": "Cancel request to transfer ownership of an account.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -16720,7 +16828,7 @@
         },
         "description": "**Custodial Accounts only** - Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.",
         "summary": "Sign a given payload",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -16800,7 +16908,7 @@
         },
         "description": "Synchronize the account state with the blockchain.\nSpecifically, it updates the account owner and whether its deployed or not.",
         "summary": "Sync account state with the blockchain",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -16870,7 +16978,7 @@
         },
         "description": "This endpoint can be used to deploy a smart contract account that was counterfactually generated.",
         "summary": "Deploy an account.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -16984,7 +17092,7 @@
           }
         },
         "summary": "Start a recovery process of a recoverable account.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -17095,7 +17203,7 @@
           }
         },
         "summary": "Complete a recovery process of a recoverable account.",
-        "tags": ["Accounts"],
+        "tags": ["accs v1"],
         "security": [
           {
             "sk": []
@@ -17193,7 +17301,7 @@
           }
         },
         "description": "Retrieves an authenticated users.\n\nUsers have linked accounts and are authenticated with a provider.",
-        "summary": "Authenticated user.",
+        "summary": "List authenticated users.",
         "tags": ["Users"],
         "security": [
           {
@@ -17299,7 +17407,7 @@
           }
         },
         "description": "Retrieves an authenticated user.\n\nUsers have linked accounts and are authenticated with a provider.",
-        "summary": "Authenticated user.",
+        "summary": "Get authenticated user by id.",
         "tags": ["Users"],
         "security": [
           {
@@ -17350,7 +17458,7 @@
           }
         },
         "description": "It will delete all linked accounts the user is authenticated with.\nIf the user has a linked embedded signer, it will be deleted as well.",
-        "summary": "Deletes a user object.",
+        "summary": "Delete user by id.",
         "tags": ["Users"],
         "security": [
           {
@@ -17800,7 +17908,7 @@
         "tags": ["Backend Wallets"],
         "security": [
           {
-            "sk": []
+            "user_project": []
           }
         ],
         "parameters": [],
@@ -17915,9 +18023,9 @@
             "description": "Error response."
           }
         },
-        "description": "Returns a list of accounts for the given user.\n\nThis object represents a user's account, which is a blockchain smart account that can be used to interact with the blockchain.\n\nThe accounts are returned sorted by creation date, with the most recently created accounts appearing first.\n\nReturns the latest 10 transaction intents for each account.\n\nBy default, a maximum of 10 accounts are shown per page.",
-        "summary": "List accounts of a user.",
-        "tags": ["Accounts"],
+        "description": "Returns a list of accounts for the given user.\n\nThis object represents a user's account, which is a blockchain smart account that can be used to interact with the blockchain.\n\nThe accounts are returned sorted by creation date, with the most recently created accounts appearing first.",
+        "summary": "List user accounts.",
+        "tags": ["accs v2"],
         "security": [
           {
             "pk_access_token": []
@@ -18054,7 +18162,9 @@
             "description": "Error response."
           }
         },
-        "tags": ["Accounts"],
+        "description": "Creates a new blockchain account for a user.\n\nAccount creation does not consume any gas. The account can be used to interact with the blockchain.",
+        "summary": "Create new account.",
+        "tags": ["accs v2"],
         "security": [
           {
             "sk": []
@@ -18091,7 +18201,9 @@
             "description": "Error response."
           }
         },
-        "tags": ["Accounts"],
+        "description": "Retrieves the signer ID associated with a given blockchain address.",
+        "summary": "Get signer ID by address.",
+        "tags": ["accs v2"],
         "security": [
           {
             "pk_access_token": []
@@ -18139,7 +18251,9 @@
             "description": "Error response."
           }
         },
-        "tags": ["Accounts"],
+        "description": "Retrieves the details of an existing account.\n\nSupply the unique account ID and Openfort will return the corresponding account information.",
+        "summary": "Get existing account.",
+        "tags": ["accs v2"],
         "security": [
           {
             "pk_access_token": []
@@ -18189,7 +18303,8 @@
           }
         },
         "description": "Removes an account from a project.",
-        "tags": ["Accounts"],
+        "summary": "Delete account.",
+        "tags": ["accs v2"],
         "security": [
           {
             "user_project": []
@@ -18228,7 +18343,9 @@
             "description": "Error response."
           }
         },
-        "tags": ["Accounts"],
+        "description": "Switches the blockchain network for an existing account.\n\nThis allows moving an account between different blockchain networks while maintaining the same account identity.",
+        "summary": "Switch account blockchain.",
+        "tags": ["accs v2"],
         "security": [
           {
             "pk_access_token": []
@@ -18296,7 +18413,7 @@
         },
         "description": "Get or create a new session for the player based on the refresh token.",
         "summary": "Refresh or create auth session.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18328,7 +18445,7 @@
         },
         "description": "When using Openfort Auth, the endpoint logs out the player.",
         "summary": "Log out a player.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -18376,7 +18493,7 @@
         },
         "description": "Create a challenge to link external wallet to the player.",
         "summary": "Initialize SIWE.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18446,7 +18563,7 @@
           }
         },
         "summary": "Authenticate player with SIWE",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18487,7 +18604,7 @@
           }
         },
         "summary": "Unlink external wallet.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -18531,7 +18648,7 @@
           }
         },
         "summary": "Link external wallet.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -18603,7 +18720,7 @@
         },
         "description": "Create and authenticate a player based on email and password.",
         "summary": "Email and password signup.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18678,7 +18795,7 @@
         },
         "description": "Authenticate a player based on email and password.",
         "summary": "Email and password login.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18719,7 +18836,7 @@
         },
         "description": "Start the Email Verification process for a player.",
         "summary": "Request an Email Verification.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18751,7 +18868,7 @@
         },
         "description": "Verify a player's email address.",
         "summary": "Verify an email.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18783,7 +18900,7 @@
         },
         "description": "Start the Reset process for a player's password.",
         "summary": "Request a Reset password.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18815,7 +18932,7 @@
         },
         "description": "Reset a player's password.",
         "summary": "Reset a password.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -18859,7 +18976,7 @@
             "description": ""
           }
         },
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -18908,7 +19025,7 @@
             "description": ""
           }
         },
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -18970,7 +19087,7 @@
         },
         "description": "Authenticate a player from an identity token.",
         "summary": "OIDC Identity token.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -19017,7 +19134,7 @@
           }
         },
         "summary": "Initialize OAuth.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -19064,7 +19181,7 @@
           }
         },
         "summary": "Initialize Link OAuth.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -19114,7 +19231,7 @@
           }
         },
         "summary": "Initialize Link OAuth.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -19164,7 +19281,7 @@
           }
         },
         "summary": "Initialize OAuth.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -19221,7 +19338,7 @@
           }
         },
         "summary": "Authenticate player with oauth token.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -19282,7 +19399,7 @@
           }
         },
         "summary": "Verify oauth token of a third party auth provider.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -19358,7 +19475,7 @@
         },
         "description": "The endpoint verifies the token generated by OAuth provider and retrieves a corresponding player.\n\nReturns the latest 10 transaction intents for the player.",
         "summary": "Retrieve player by oauth token.",
-        "tags": ["AdminAuthentication", "Authentication"],
+        "tags": ["AdminAuthentication", "auth v1"],
         "security": [
           {
             "sk": []
@@ -19412,7 +19529,7 @@
           }
         },
         "summary": "Unlink OAuth account",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -19534,6 +19651,146 @@
             }
           }
         }
+      }
+    },
+    "/iam/v1/oauth/callback": {
+      "get": {
+        "operationId": "DeprecatedCallbackOAuth",
+        "responses": {
+          "302": {
+            "description": "Redirect",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        },
+        "summary": "oauth callback.",
+        "tags": ["AdminAuthentication"],
+        "deprecated": true,
+        "security": [],
+        "parameters": [
+          {
+            "description": "Specifies the oauth code.",
+            "in": "query",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specifies the oauth state.",
+            "in": "query",
+            "name": "state",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/iam/v1/oauth/grant/{provider}": {
+      "post": {
+        "operationId": "GrantOAuth",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrantOAuthResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        },
+        "summary": "oauth grant.",
+        "tags": ["AdminAuthentication"],
+        "security": [
+          {
+            "pk": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the oauth provider.",
+            "in": "path",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/OAuthProvider"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrantCallbackRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iam/v1/oauth/callback/{provider}": {
+      "get": {
+        "operationId": "CallbackOAuth",
+        "responses": {
+          "302": {
+            "description": "Redirect",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        },
+        "summary": "oauth callback.",
+        "tags": ["AdminAuthentication"],
+        "security": [],
+        "parameters": [
+          {
+            "description": "Specifies the oauth code.",
+            "in": "query",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specifies the oauth state.",
+            "in": "query",
+            "name": "state",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specifies the oauth provider.",
+            "in": "path",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/OAuthProvider"
+            }
+          }
+        ]
       }
     },
     "/iam/v1/oauth/{provider}": {
@@ -19667,7 +19924,7 @@
         },
         "description": "Create a guest player.",
         "summary": "Create a guest player.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk": []
@@ -20172,7 +20429,7 @@
         },
         "description": "Get the jwks.json file.\n\nYou can use the jwks.json file to verify the signature of a JWT token issued by Openfort Auth.",
         "summary": "Get the jwks.json file.",
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [],
         "parameters": [
           {
@@ -20222,7 +20479,7 @@
             "description": "Error response."
           }
         },
-        "tags": ["Authentication"],
+        "tags": ["auth v1"],
         "security": [
           {
             "pk_access_token": []
@@ -20340,7 +20597,8 @@
             "description": "Error response."
           }
         },
-        "tags": ["AuthenticationV2"],
+        "summary": "Get user information.",
+        "tags": ["Users"],
         "security": [
           {
             "pk_third_party": []
@@ -20393,7 +20651,7 @@
           }
         },
         "summary": "Verify oauth token of a third party auth provider.",
-        "tags": ["AuthenticationV2"],
+        "tags": ["Users"],
         "security": [
           {
             "pk": []
@@ -20420,6 +20678,36 @@
     {
       "url": "https://api.openfort.io",
       "description": "Openfort API Server"
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Users",
+      "tags": ["Users"]
+    },
+    {
+      "name": "Accounts",
+      "tags": ["accs v1", "accs v2"]
+    },
+    {
+      "name": "Transactions",
+      "tags": ["TransactionIntents"]
+    },
+    {
+      "name": "Authentication",
+      "tags": ["auth v1", "auth v2"]
+    },
+    {
+      "name": "Session keys",
+      "tags": ["Sessions"]
+    },
+    {
+      "name": "Contracts",
+      "tags": ["Contracts"]
+    },
+    {
+      "name": "Sponsor transactions & Models",
+      "tags": ["Policies"]
     }
   ]
 }
