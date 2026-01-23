@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.4
+
+### Patch Changes
+
+- [#51](https://github.com/openfort-xyz/openfort-node/pull/51) [`67c46d076e3c541d3893eee73bc8074ff1a6cd10`](https://github.com/openfort-xyz/openfort-node/commit/67c46d076e3c541d3893eee73bc8074ff1a6cd10) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update pub key
+
 ## 0.7.3
 
 ### Patch Changes
