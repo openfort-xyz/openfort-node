@@ -403,6 +403,9 @@
                         "updatedAt": {
                           "type": "string",
                           "format": "date-time"
+                        },
+                        "isAnonymous": {
+                          "type": "boolean"
                         }
                       },
                       "required": [
@@ -1059,6 +1062,9 @@
                         "updatedAt": {
                           "type": "string",
                           "format": "date-time"
+                        },
+                        "isAnonymous": {
+                          "type": "boolean"
                         }
                       },
                       "required": [

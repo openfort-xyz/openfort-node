@@ -5734,8 +5734,28 @@
           },
           "externalUserId": {
             "type": "string",
-            "description": "Filter by external user ID.",
+            "description": "Filter by external user ID (accountId from linked accounts).",
             "example": "123454456687897"
+          },
+          "email": {
+            "type": "string",
+            "description": "Filter by user email.",
+            "example": "user@example.com"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Filter by user phone number.",
+            "example": "+1234567890"
+          },
+          "authProviderId": {
+            "type": "string",
+            "description": "Filter by provider ID (e.g., \"google\", \"apple\", \"siwe\", \"credential\").",
+            "example": "google"
+          },
+          "walletClientType": {
+            "type": "string",
+            "description": "Filter by wallet client type (for SIWE accounts).",
+            "example": "metamask"
           }
         },
         "type": "object",
@@ -5827,6 +5847,9 @@
           "user": {
             "type": "string"
           },
+          "wallet": {
+            "type": "string"
+          },
           "accountType": {
             "type": "string"
           },
@@ -5874,6 +5897,7 @@
         "required": [
           "id",
           "user",
+          "wallet",
           "accountType",
           "address",
           "chainType",
@@ -6438,12 +6462,17 @@
         "additionalProperties": false
       },
       "RegisterWalletSecretRequest": {
-        "description": "Request to register a new wallet secret (authentication key).",
+        "description": "Request to register a new wallet secret (authentication key).\n\nUses provided-key authentication: the walletAuthToken JWT must be signed by\nthe private key corresponding to the publicKey being registered.",
         "properties": {
           "publicKey": {
             "type": "string",
-            "description": "ECDSA P-256 public key for wallet authentication (PEM or raw hex format).\nThis will be used to verify X-Wallet-Auth JWT signatures.",
+            "description": "ECDSA P-256 public key for wallet authentication (PEM format).\nThis will be used to verify X-Wallet-Auth JWT signatures.",
             "example": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE..."
+          },
+          "walletAuthToken": {
+            "type": "string",
+            "description": "JWT signed with the private key corresponding to publicKey.\nThis proves possession of the private key without transmitting it.\n\nJWT must include: uris (matching request path), reqHash (SHA-256 of request body),\niat (issued at), nbf (not before), and optionally exp (expiration).",
+            "example": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9..."
           },
           "keyId": {
             "type": "string",
@@ -6451,7 +6480,7 @@
             "example": "ws_1234567890"
           }
         },
-        "required": ["publicKey"],
+        "required": ["publicKey", "walletAuthToken"],
         "type": "object",
         "additionalProperties": false
       },
@@ -6520,12 +6549,17 @@
         "additionalProperties": false
       },
       "RotateWalletSecretRequest": {
-        "description": "Request to rotate wallet secret (authentication key).",
+        "description": "Request to rotate wallet secret (authentication key).\n\nUses provided-key authentication: the walletAuthToken JWT must be signed by\nthe private key corresponding to the newPublicKey being registered.",
         "properties": {
-          "newSecretPublicKey": {
+          "newPublicKey": {
             "type": "string",
-            "description": "New ECDSA P-256 public key for wallet authentication.\nThis will replace the current wallet secret used for X-Wallet-Auth JWT signing.",
-            "example": "04abc123def456..."
+            "description": "New ECDSA P-256 public key for wallet authentication (PEM format).\nThis will replace the current wallet secret used for X-Wallet-Auth JWT signing.",
+            "example": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE..."
+          },
+          "walletAuthToken": {
+            "type": "string",
+            "description": "JWT signed with the private key corresponding to newPublicKey.\nThis proves possession of the private key without transmitting it.\n\nJWT must include: uris (matching request path), reqHash (SHA-256 of request body),\niat (issued at), nbf (not before), and optionally exp (expiration).",
+            "example": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9..."
           },
           "newKeyId": {
             "type": "string",
@@ -6533,7 +6567,7 @@
             "example": "ws_1234567890"
           }
         },
-        "required": ["newSecretPublicKey"],
+        "required": ["newPublicKey", "walletAuthToken"],
         "type": "object",
         "additionalProperties": false
       },
@@ -6543,6 +6577,9 @@
             "type": "string"
           },
           "user": {
+            "type": "string"
+          },
+          "wallet": {
             "type": "string"
           },
           "accountType": {
@@ -6588,6 +6625,7 @@
         "required": [
           "id",
           "user",
+          "wallet",
           "accountType",
           "address",
           "chainType",
@@ -6753,8 +6791,8 @@
           },
           "user": {
             "type": "string",
-            "description": "ID of the user this account belongs to (starts with `pla_`). If none is provided, a new user will be created.",
-            "example": "pla_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
+            "description": "ID of the user this account belongs to (starts with `usr_`). If none is provided, a new user will be created.",
+            "example": "usr_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
           },
           "account": {
             "type": "string",
@@ -7758,7 +7796,7 @@
         "additionalProperties": false
       },
       "ApiKeyType": {
-        "enum": ["pk", "sk", "pk_shield", "sk_shield"],
+        "enum": ["pk", "sk", "pk_shield", "sk_shield", "pk_wallet"],
         "type": "string"
       },
       "CreateProjectApiKeyRequest": {
@@ -9792,6 +9830,51 @@
     }
   },
   "paths": {
+    "/rpc/solana/{cluster}": {
+      "post": {
+        "operationId": "HandleSolanaRpcRequest",
+        "responses": {
+          "200": {
+            "description": "JSON-RPC response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse"
+                }
+              }
+            }
+          }
+        },
+        "description": "Execute Solana JSON-RPC 2.0 methods via Kora\n\nThis endpoint handles Solana-specific JSON-RPC 2.0 requests for gasless transactions\nusing the Kora paymaster service.\n\n**Supported clusters:**\n- `mainnet-beta` - Solana mainnet-beta\n- `devnet` - Solana devnet\n\n**Supported methods (per Kora JSON-RPC API spec):**\n- `getConfig`: Retrieve Kora server configuration\n- `getPayerSigner`: Get fee payer signer and payment destination\n- `getSupportedTokens`: List tokens accepted for fee payment\n- `getBlockhash`: Get latest blockhash\n- `estimateTransactionFee`: Estimate fees in lamports and token\n- `transferTransaction`: Create token transfer with Kora as fee payer\n- `signTransaction`: Sign transaction without broadcasting\n- `signAndSendTransaction`: Sign and broadcast to Solana",
+        "summary": "Execute Solana Kora JSON-RPC methods",
+        "tags": ["Solana RPC"],
+        "security": [
+          {
+            "pk": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cluster",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonRpcRequest"
+              }
+            }
+          }
+        }
+      }
+    },
     "/rpc": {
       "post": {
         "operationId": "HandleRpcRequest",
@@ -17251,7 +17334,7 @@
                       "url": "http://localhost:3000",
                       "data": [
                         {
-                          "id": "pla_***",
+                          "id": "usr_***",
                           "createdAt": 123456789,
                           "name": "Satoshi",
                           "email": "satoshi@openfort.io",
@@ -17269,7 +17352,7 @@
                           ]
                         },
                         {
-                          "id": "pla_***",
+                          "id": "usr_***",
                           "createdAt": 123456789,
                           "name": "Nakamoto",
                           "email": "nakamoto@openfort.io",
@@ -17354,7 +17437,7 @@
             "example": "John"
           },
           {
-            "description": "Filter by external user ID.",
+            "description": "Filter by external user ID (accountId from linked accounts).",
             "in": "query",
             "name": "externalUserId",
             "required": false,
@@ -17362,6 +17445,46 @@
               "type": "string"
             },
             "example": "123454456687897"
+          },
+          {
+            "description": "Filter by user email.",
+            "in": "query",
+            "name": "email",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "user@example.com"
+          },
+          {
+            "description": "Filter by user phone number.",
+            "in": "query",
+            "name": "phoneNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "+1234567890"
+          },
+          {
+            "description": "Filter by provider ID (e.g., \"google\", \"apple\", \"siwe\", \"credential\").",
+            "in": "query",
+            "name": "authProviderId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "google"
+          },
+          {
+            "description": "Filter by wallet client type (for SIWE accounts).",
+            "in": "query",
+            "name": "walletClientType",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "metamask"
           }
         ]
       }
@@ -17380,7 +17503,7 @@
                 "examples": {
                   "Example 1": {
                     "value": {
-                      "id": "pla_***",
+                      "id": "usr_***",
                       "createdAt": 123456789,
                       "name": "Satoshi",
                       "email": "satoshi@openfort.io",
@@ -17903,7 +18026,7 @@
             "description": "Unauthorized."
           }
         },
-        "description": "Register a new wallet secret (authentication key).\n\nRegisters an ECDSA P-256 public key that will be used to verify\nX-Wallet-Auth JWT signatures. This is required before using WALLET_AUTH\nfor other backend wallet operations.",
+        "description": "Register a new wallet secret (authentication key).\n\nRegisters an ECDSA P-256 public key that will be used to verify\nX-Wallet-Auth JWT signatures. This is required before using WALLET_AUTH\nfor other backend wallet operations.\n\nUses provided-key authentication: the request must include a walletAuthToken\nJWT signed by the private key corresponding to the publicKey being registered.\nThis proves possession of the private key without transmitting it.\n\nNote: Only ONE active secret is allowed per project. This call fails if an\nactive secret already exists; use rotateWalletSecret to replace an existing secret.",
         "summary": "Register wallet secret.",
         "tags": ["Backend Wallets"],
         "security": [
@@ -17950,7 +18073,7 @@
         "tags": ["Backend Wallets"],
         "security": [
           {
-            "wallet_auth": []
+            "user_project": []
           }
         ],
         "parameters": [],
@@ -17984,12 +18107,12 @@
             "description": "Unauthorized."
           }
         },
-        "description": "Rotate wallet secret (authentication key).\n\nReplaces the current wallet secret (ECDSA P-256 public key) used for\nX-Wallet-Auth JWT signing. The old secret will be revoked.",
+        "description": "Rotate wallet secret (authentication key).\n\nReplaces the current wallet secret (ECDSA P-256 public key) used for\nX-Wallet-Auth JWT signing. The old secret will be marked as \"rotated\"\nand immediately becomes unusable (no grace period).\n\nUses provided-key authentication: the request must include a walletAuthToken\nJWT signed by the private key corresponding to the NEW publicKey being registered.\nThis proves possession of the new private key without transmitting it.",
         "summary": "Rotate wallet secret.",
         "tags": ["Backend Wallets"],
         "security": [
           {
-            "wallet_auth": []
+            "user_project": []
           }
         ],
         "parameters": [],
@@ -20571,7 +20694,7 @@
                 "examples": {
                   "Example 1": {
                     "value": {
-                      "id": "pla_***",
+                      "id": "usr_***",
                       "createdAt": 123456789,
                       "name": "Satoshi",
                       "email": "satoshi@openfort.io",
@@ -20624,7 +20747,7 @@
                 "examples": {
                   "Example 1": {
                     "value": {
-                      "id": "pla_***",
+                      "id": "usr_***",
                       "createdAt": 123456789,
                       "name": "Satoshi",
                       "email": "satoshi@openfort.io",
