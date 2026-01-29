@@ -169,6 +169,7 @@ export type SocialSignIn200User = {
   emailVerified: boolean;
   createdAt: string;
   updatedAt: string;
+  isAnonymous?: boolean;
 };
 
 /**
@@ -349,6 +350,7 @@ export type PostSignInEmail200User = {
   emailVerified: boolean;
   createdAt: string;
   updatedAt: string;
+  isAnonymous?: boolean;
 };
 
 /**
