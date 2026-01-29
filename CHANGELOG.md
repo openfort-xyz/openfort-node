@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.5
+
+### Patch Changes
+
+- [#53](https://github.com/openfort-xyz/openfort-node/pull/53) [`e84f220dade4aad7c113234a249d73c2021bcabb`](https://github.com/openfort-xyz/openfort-node/commit/e84f220dade4aad7c113234a249d73c2021bcabb) Thanks [@n00m4d](https://github.com/n00m4d)! - Update API client
+
 ## 0.7.4
 
 ### Patch Changes
