@@ -2621,8 +2621,16 @@ export interface UserListQueries {
   order?: PrismaSortOrder;
   /** Filter by user name. */
   name?: string;
-  /** Filter by external user ID. */
+  /** Filter by external user ID (accountId from linked accounts). */
   externalUserId?: string;
+  /** Filter by user email. */
+  email?: string;
+  /** Filter by user phone number. */
+  phoneNumber?: string;
+  /** Filter by provider ID (e.g., "google", "apple", "siwe", "credential"). */
+  authProviderId?: string;
+  /** Filter by wallet client type (for SIWE accounts). */
+  walletClientType?: string;
 }
 
 export interface BaseDeleteEntityResponseEntityTypePLAYER {
@@ -2670,6 +2678,7 @@ export const PregenerateAccountResponseCustody = {
 export interface PregenerateAccountResponse {
   id: string;
   user: string;
+  wallet: string;
   accountType: string;
   address: string;
   ownerAddress?: string;
@@ -3186,11 +3195,20 @@ export interface RegisterWalletSecretResponse {
 
 /**
  * Request to register a new wallet secret (authentication key).
+
+Uses provided-key authentication: the walletAuthToken JWT must be signed by
+the private key corresponding to the publicKey being registered.
  */
 export interface RegisterWalletSecretRequest {
-  /** ECDSA P-256 public key for wallet authentication (PEM or raw hex format).
+  /** ECDSA P-256 public key for wallet authentication (PEM format).
 This will be used to verify X-Wallet-Auth JWT signatures. */
   publicKey: string;
+  /** JWT signed with the private key corresponding to publicKey.
+This proves possession of the private key without transmitting it.
+
+JWT must include: uris (matching request path), reqHash (SHA-256 of request body),
+iat (issued at), nbf (not before), and optionally exp (expiration). */
+  walletAuthToken: string;
   /** Key identifier for the secret.
 Used to identify this key in X-Wallet-Auth JWT headers. */
   keyId?: string;
@@ -3258,11 +3276,20 @@ export interface RotateWalletSecretResponse {
 
 /**
  * Request to rotate wallet secret (authentication key).
+
+Uses provided-key authentication: the walletAuthToken JWT must be signed by
+the private key corresponding to the newPublicKey being registered.
  */
 export interface RotateWalletSecretRequest {
-  /** New ECDSA P-256 public key for wallet authentication.
+  /** New ECDSA P-256 public key for wallet authentication (PEM format).
 This will replace the current wallet secret used for X-Wallet-Auth JWT signing. */
-  newSecretPublicKey: string;
+  newPublicKey: string;
+  /** JWT signed with the private key corresponding to newPublicKey.
+This proves possession of the private key without transmitting it.
+
+JWT must include: uris (matching request path), reqHash (SHA-256 of request body),
+iat (issued at), nbf (not before), and optionally exp (expiration). */
+  walletAuthToken: string;
   /** Key identifier for the new secret.
 Used to identify this key in X-Wallet-Auth JWT headers. */
   newKeyId?: string;
@@ -3283,6 +3310,7 @@ export const AccountV2ResponseCustody = {
 export interface AccountV2Response {
   id: string;
   user: string;
+  wallet: string;
   accountType: string;
   address: string;
   ownerAddress?: string;
@@ -3418,7 +3446,7 @@ export interface CreateAccountRequestV2 {
   implementationType?: string;
   /** The chain ID. Must be a [supported chain](/development/chains). */
   chainId?: number;
-  /** ID of the user this account belongs to (starts with `pla_`). If none is provided, a new user will be created. */
+  /** ID of the user this account belongs to (starts with `usr_`). If none is provided, a new user will be created. */
   user: string;
   /** ID of the account (starts with `acc_`) to be linked with. Required for accountType "Smart Account". */
   account?: string;
@@ -3871,6 +3899,7 @@ export const ApiKeyType = {
   sk: 'sk',
   pk_shield: 'pk_shield',
   sk_shield: 'sk_shield',
+  pk_wallet: 'pk_wallet',
 } as const;
 
 export interface CreateProjectApiKeyRequest {
@@ -5476,9 +5505,25 @@ order?: PrismaSortOrder;
  */
 name?: string;
 /**
- * Filter by external user ID.
+ * Filter by external user ID (accountId from linked accounts).
  */
 externalUserId?: string;
+/**
+ * Filter by user email.
+ */
+email?: string;
+/**
+ * Filter by user phone number.
+ */
+phoneNumber?: string;
+/**
+ * Filter by provider ID (e.g., "google", "apple", "siwe", "credential").
+ */
+authProviderId?: string;
+/**
+ * Filter by wallet client type (for SIWE accounts).
+ */
+walletClientType?: string;
 };
 
 export type ListBackendWalletsParams = {
