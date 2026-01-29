@@ -24,9 +24,9 @@ export * from './generated/policy-rules/policy-rules'
 export * from './generated/rpc/rpc'
 export * from './generated/sessions/sessions'
 export * from './generated/settings/settings'
+export * from './generated/solana-rpc/solana-rpc'
 export * from './generated/subscriptions/subscriptions'
 export * from './generated/transaction-intents/transaction-intents'
 export * from './generated/users/users'
 // Request options type
 export type { RequestOptions } from './openfortApiClient'
-export * from './generated/solana-rpc/solana-rpc';
