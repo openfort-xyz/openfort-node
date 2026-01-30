@@ -4294,176 +4294,6 @@
         "type": "object",
         "additionalProperties": false
       },
-      "TradeType": {
-        "enum": ["EXACT_INPUT", "EXACT_OUTPUT"],
-        "type": "string"
-      },
-      "CreateExchangeRequest": {
-        "properties": {
-          "chainId": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The chain ID. Must be a [supported chain](/development/chains).",
-            "example": 80002
-          },
-          "fromAddress": {
-            "type": "string",
-            "description": "The public address that will sign and submit the transaction. If you provide one of a `pla_...` or `acc_...` it will be converted to the corresponding address.",
-            "example": "0x680d2719F09B23F644c136Ab7336D42b6a76AdcC"
-          },
-          "tokenInAddress": {
-            "type": "string",
-            "description": "Token address or 'native' to sell",
-            "example": "0x008518e76FAD03f592Bbb7E394C762d5FD54cb97"
-          },
-          "tokenOutAddress": {
-            "type": "string",
-            "description": "Token address or 'native' to buy",
-            "example": "0xF65B6f9c94187276C7d91F4F74134751d248bFeA"
-          },
-          "amount": {
-            "type": "string",
-            "description": "Amount in the smallest unit of the token",
-            "example": "100000"
-          },
-          "tradeType": {
-            "$ref": "#/components/schemas/TradeType",
-            "description": "The type of trade, exact input or exact output",
-            "example": "EXACT_INPUT"
-          },
-          "slippagePercent": {
-            "type": "number",
-            "format": "double",
-            "description": "The percentage of slippage tolerance. Default = 0.1. Max = 50. Min = 0",
-            "example": 20
-          },
-          "maxHops": {
-            "type": "number",
-            "format": "double",
-            "description": "Maximum hops allowed in optimal route. Default is 2",
-            "example": 2
-          },
-          "deadline": {
-            "type": "number",
-            "format": "double",
-            "description": "Latest time swap can execute. Default is 15 minutes",
-            "example": 15
-          },
-          "policy": {
-            "type": "string",
-            "description": "ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). If no Policy is provided, the own Account native token funds will be used to pay for gas.",
-            "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
-          },
-          "optimistic": {
-            "type": "boolean",
-            "description": "Set to `true` to indicate that the transactionIntent request should be resolved as soon as possible, after the transactionIntent is created and simulated and before it arrives on chain.",
-            "example": true
-          }
-        },
-        "required": [
-          "chainId",
-          "fromAddress",
-          "tokenInAddress",
-          "tokenOutAddress",
-          "amount",
-          "tradeType"
-        ],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "Token": {
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "symbol": {
-            "type": "string"
-          },
-          "decimals": {
-            "type": "number",
-            "format": "double"
-          },
-          "address": {
-            "type": "string"
-          },
-          "chainId": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "required": ["decimals", "address", "chainId"],
-        "type": "object",
-        "description": "Type representing a token"
-      },
-      "Amount": {
-        "properties": {
-          "value": {
-            "type": "string"
-          },
-          "token": {
-            "$ref": "#/components/schemas/Token"
-          }
-        },
-        "required": ["value", "token"],
-        "type": "object",
-        "description": "Interface representing a token amount"
-      },
-      "Fee": {
-        "properties": {
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "basisPoints": {
-            "type": "number",
-            "format": "double"
-          },
-          "recipient": {
-            "type": "string"
-          }
-        },
-        "required": ["amount", "basisPoints", "recipient"],
-        "type": "object",
-        "description": "Type representing the fees returned in the quote"
-      },
-      "QuoteExchangeResult": {
-        "properties": {
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "amountWithMaxSlippage": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "slippage": {
-            "type": "number",
-            "format": "double"
-          },
-          "fees": {
-            "items": {
-              "$ref": "#/components/schemas/Fee"
-            },
-            "type": "array"
-          },
-          "estimatedTXGasFee": {
-            "type": "string"
-          },
-          "estimatedTXGasFeeUSD": {
-            "type": "string"
-          },
-          "estimatedTXGasFeeToken": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "amount",
-          "amountWithMaxSlippage",
-          "slippage",
-          "fees",
-          "estimatedTXGasFee",
-          "estimatedTXGasFeeUSD"
-        ],
-        "type": "object",
-        "additionalProperties": false
-      },
       "APITopic.BALANCE_CONTRACT": {
         "enum": ["balance.contract"],
         "type": "string"
@@ -5761,6 +5591,30 @@
         "type": "object",
         "additionalProperties": false
       },
+      "EntityType.WALLET": {
+        "enum": ["wallet"],
+        "type": "string"
+      },
+      "BaseEntityResponse_EntityType.WALLET_": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "$ref": "#/components/schemas/EntityType.WALLET"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "required": ["id", "object", "createdAt"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "WalletResponse": {
+        "$ref": "#/components/schemas/BaseEntityResponse_EntityType.WALLET_"
+      },
       "BaseDeleteEntityResponse_EntityType.PLAYER_": {
         "properties": {
           "id": {
@@ -5844,9 +5698,6 @@
           "id": {
             "type": "string"
           },
-          "user": {
-            "type": "string"
-          },
           "wallet": {
             "type": "string"
           },
@@ -5892,11 +5743,14 @@
           "recoveryShare": {
             "type": "string",
             "description": "The recovery share for the user's embedded signer.\nThis should be stored securely and provided to the user for account recovery."
+          },
+          "user": {
+            "type": "string",
+            "description": "User uuid"
           }
         },
         "required": [
           "id",
-          "user",
           "wallet",
           "accountType",
           "address",
@@ -5904,7 +5758,8 @@
           "createdAt",
           "updatedAt",
           "custody",
-          "recoveryShare"
+          "recoveryShare",
+          "user"
         ],
         "type": "object",
         "additionalProperties": false
@@ -6576,9 +6431,6 @@
           "id": {
             "type": "string"
           },
-          "user": {
-            "type": "string"
-          },
           "wallet": {
             "type": "string"
           },
@@ -6624,7 +6476,6 @@
         },
         "required": [
           "id",
-          "user",
           "wallet",
           "accountType",
           "address",
@@ -15330,226 +15181,6 @@
         ]
       }
     },
-    "/v1/exchange": {
-      "post": {
-        "operationId": "CreateSwap",
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionIntentResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "id": "tin_c502d628-5bb3-42f2-b8f5-62ba4d71df3a",
-                      "createdAt": 1689869074,
-                      "object": "transactionIntent",
-                      "details": {
-                        "userOperationHash": "0x25d3...005c",
-                        "userOperation": {
-                          "sender": "0x48930Cd730652bf0B18Ef8c80cD0Fa1Cc72A233E",
-                          "nonce": "0x2",
-                          "initCode": "0x",
-                          "callData": "0xb61d...0000",
-                          "callGasLimit": "0x27863",
-                          "verificationGasLimit": "0x16001",
-                          "preVerificationGas": "0xb818",
-                          "maxFeePerGas": "0x62590091",
-                          "maxPriorityFeePerGas": "0x62590091",
-                          "paymasterAndData": "0x3210...b51c",
-                          "signature": "0x6202...3d1b"
-                        }
-                      },
-                      "chainId": 80002,
-                      "abstractionType": "accountAbstractionV6",
-                      "updatedAt": 1689869074,
-                      "policy": {
-                        "id": "pol_..."
-                      },
-                      "player": {
-                        "id": "pla_..."
-                      },
-                      "account": {
-                        "id": "acc_..."
-                      },
-                      "response": {
-                        "createdAt": 1689869074,
-                        "logs": [
-                          {
-                            "removed": false,
-                            "transactionIndex": 0,
-                            "blockNumber": 44904492,
-                            "transactionHash": "0x25d3...005c",
-                            "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
-                            "data": "0x",
-                            "logIndex": 0,
-                            "blockHash": "0x8a69...6d59"
-                          }
-                        ],
-                        "blockNumber": 8789286,
-                        "transactionHash": "0x25d3...005c",
-                        "to": "0x0576...1B57",
-                        "gasUsed": "336730",
-                        "status": 1
-                      },
-                      "interactions": [
-                        {
-                          "functionName": "mint",
-                          "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
-                        }
-                      ],
-                      "transitions": [
-                        {
-                          "fromStatus": "none",
-                          "toStatus": "new",
-                          "at": 1750154762
-                        },
-                        {
-                          "fromStatus": "new",
-                          "toStatus": "sent",
-                          "at": 1750154762
-                        },
-                        {
-                          "fromStatus": "sent",
-                          "toStatus": "indexed",
-                          "at": 1750154762
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvalidRequestErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "description": "Creates token swap.",
-        "summary": "Create token swap.",
-        "tags": ["Exchange"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateExchangeRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/exchange/quote": {
-      "post": {
-        "operationId": "QuoteSwap",
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/QuoteExchangeResult"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "amount": {
-                        "token": {
-                          "address": "0x008518e76FAD03f592Bbb7E394C762d5FD54cb97",
-                          "chainId": 4337,
-                          "decimals": 18,
-                          "name": "TOKEN",
-                          "symbol": "TKN"
-                        },
-                        "value": "1000000000000000000"
-                      },
-                      "slippage": 0.5,
-                      "fees": [
-                        {
-                          "recipient": "0x008518e76FAD03f592Bbb7E394C762d5FD54cb97",
-                          "basisPoints": 100,
-                          "amount": {
-                            "token": {
-                              "address": "0x008518e76FAD03f592Bbb7E394C762d5FD54cb97",
-                              "chainId": 4337,
-                              "decimals": 18,
-                              "name": "TOKEN",
-                              "symbol": "TKN"
-                            },
-                            "value": "1000000000000000000"
-                          }
-                        }
-                      ],
-                      "amountWithMaxSlippage": {
-                        "token": {
-                          "address": "0x008518e76FAD03f592Bbb7E394C762d5FD54cb97",
-                          "chainId": 4337,
-                          "decimals": 18,
-                          "name": "TOKEN",
-                          "symbol": "TKN"
-                        },
-                        "value": "1000000000000000000"
-                      },
-                      "estimatedTXGasFee": "1000000000000000000",
-                      "estimatedTXGasFeeToken": "12000",
-                      "estimatedTXGasFeeUSD": "1"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvalidRequestErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "description": "Quote token swap.",
-        "summary": "Quote token swap.",
-        "tags": ["Exchange"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateExchangeRequest"
-              }
-            }
-          }
-        }
-      }
-    },
     "/v1/events": {
       "get": {
         "operationId": "GetEvents",
@@ -17601,6 +17232,59 @@
               "type": "string"
             },
             "example": "pla_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
+      }
+    },
+    "/v2/users/{id}/wallet": {
+      "get": {
+        "operationId": "GetUserWallet",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletResponse"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "pla_00000000-0000-0000-0000-000000000000",
+                      "object": "wallet",
+                      "createdAt": 1689869074
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error response."
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "description": "Retrieves the wallet associated with an authenticated user.",
+        "summary": "Get wallet for user.",
+        "tags": ["Users"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ]
       }
