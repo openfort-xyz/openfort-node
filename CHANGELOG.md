@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.6
+
+### Patch Changes
+
+- [#55](https://github.com/openfort-xyz/openfort-node/pull/55) [`df2ae4748bafafe5ae09e213b759033f505de061`](https://github.com/openfort-xyz/openfort-node/commit/df2ae4748bafafe5ae09e213b759033f505de061) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update schema
+
 ## 0.7.5
 
 ### Patch Changes
