@@ -491,22 +491,6 @@ class Openfort {
   }
 
   // ============================================
-  // Exchange API
-  // ============================================
-
-  /**
-   * Exchange endpoints
-   */
-  public get exchange() {
-    return {
-      /** Create swap */
-      createSwap: api.createSwap,
-      /** Get swap quote */
-      quoteSwap: api.quoteSwap,
-    }
-  }
-
-  // ============================================
   // Auth API
   // ============================================
 
