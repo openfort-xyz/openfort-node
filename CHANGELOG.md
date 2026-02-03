@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.7
+
+### Patch Changes
+
+- [#57](https://github.com/openfort-xyz/openfort-node/pull/57) [`a0024ae8e9ef5bdf557077c211cc097ce00f115e`](https://github.com/openfort-xyz/openfort-node/commit/a0024ae8e9ef5bdf557077c211cc097ce00f115e) Thanks [@jamalavedra](https://github.com/jamalavedra)! - fix toEvmAccount
+
 ## 0.7.6
 
 ### Patch Changes
