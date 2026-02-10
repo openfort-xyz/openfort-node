@@ -1529,7 +1529,11 @@
           "balance.project",
           "balance.contract",
           "balance.dev_account",
-          "test"
+          "test",
+          "user.created",
+          "user.updated",
+          "user.deleted",
+          "account.created"
         ],
         "type": "string"
       },
@@ -5324,92 +5328,6 @@
         "type": "object",
         "additionalProperties": false
       },
-      "TransferOwnershipRequest": {
-        "properties": {
-          "newOwnerAddress": {
-            "type": "string",
-            "description": "The address of the new owner",
-            "example": "0x1234567890abcdef1234567890abcdef12345678"
-          },
-          "policy": {
-            "type": "string",
-            "description": "ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.",
-            "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
-          }
-        },
-        "required": ["newOwnerAddress", "policy"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "CancelTransferOwnershipRequest": {
-        "properties": {
-          "policy": {
-            "type": "string",
-            "description": "ID of the Policy that defines the gas sponsorship strategy (starts with `pol_`). A policy must be provided.",
-            "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
-          }
-        },
-        "required": ["policy"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "DeployRequest": {
-        "properties": {
-          "policy": {
-            "type": "string",
-            "description": "The policy ID (starts with pol_)",
-            "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
-          }
-        },
-        "required": ["policy"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "StartRecoveryRequest": {
-        "properties": {
-          "newOwnerAddress": {
-            "type": "string",
-            "description": "Address of the new owner",
-            "example": "0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"
-          },
-          "policy": {
-            "type": "string",
-            "description": "The policy ID (starts with pol_)",
-            "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
-          }
-        },
-        "required": ["newOwnerAddress", "policy"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "CompleteRecoveryRequest": {
-        "properties": {
-          "newOwnerAddress": {
-            "type": "string",
-            "description": "Address of the new owner",
-            "example": "0x662D24Bf7Ea2dD6a7D0935F680a6056b94fE934d"
-          },
-          "signatures": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "description": "Signatures by the guardians",
-            "example": [
-              "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-              "0x1223567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
-            ]
-          },
-          "policy": {
-            "type": "string",
-            "description": "The policy ID (starts with pol_)",
-            "example": "pol_7e07ae30-2a4d-48fa-803f-361da94905dd"
-          }
-        },
-        "required": ["newOwnerAddress", "policy"],
-        "type": "object",
-        "additionalProperties": false
-      },
       "AuthProviderResponseV2": {
         "type": "string",
         "enum": [
@@ -5823,6 +5741,1628 @@
             "example": "Calibur"
           }
         },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PolicyV2Scope": {
+        "enum": ["project", "account"],
+        "type": "string"
+      },
+      "PolicyV2Action": {
+        "enum": ["accept", "reject"],
+        "type": "string"
+      },
+      "EvmCriteriaType.EVM_ADDRESS": {
+        "enum": ["evmAddress"],
+        "type": "string"
+      },
+      "CriteriaOperator.IN": {
+        "enum": ["in"],
+        "type": "string"
+      },
+      "CriteriaOperator.NOT_IN": {
+        "enum": ["not in"],
+        "type": "string"
+      },
+      "EvmCriteriaType": {
+        "enum": [
+          "evmAddress",
+          "ethValue",
+          "evmNetwork",
+          "evmMessage",
+          "evmData",
+          "evmTypedDataVerifyingContract",
+          "evmTypedDataField",
+          "netUSDChange"
+        ],
+        "type": "string"
+      },
+      "SolanaCriteriaType": {
+        "enum": [
+          "solAddress",
+          "solValue",
+          "splAddress",
+          "splValue",
+          "mintAddress",
+          "solData",
+          "programId",
+          "solNetwork",
+          "solMessage"
+        ],
+        "type": "string"
+      },
+      "CriteriaType": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/EvmCriteriaType"
+          },
+          {
+            "$ref": "#/components/schemas/SolanaCriteriaType"
+          }
+        ]
+      },
+      "CriteriaOperator": {
+        "enum": ["in", "not in", "<", "<=", ">", ">=", "==", "match"],
+        "type": "string"
+      },
+      "EvmAddressCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.EVM_ADDRESS"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.NOT_IN"
+              }
+            ]
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmCriteriaType.ETH_VALUE": {
+        "enum": ["ethValue"],
+        "type": "string"
+      },
+      "CriteriaOperator.LESS_THAN_OR_EQUAL": {
+        "enum": ["<="],
+        "type": "string"
+      },
+      "CriteriaOperator.GREATER_THAN_OR_EQUAL": {
+        "enum": [">="],
+        "type": "string"
+      },
+      "CriteriaOperator.LESS_THAN": {
+        "enum": ["<"],
+        "type": "string"
+      },
+      "CriteriaOperator.GREATER_THAN": {
+        "enum": [">"],
+        "type": "string"
+      },
+      "EthValueCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.ETH_VALUE"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.LESS_THAN_OR_EQUAL"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.GREATER_THAN_OR_EQUAL"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.LESS_THAN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.GREATER_THAN"
+              }
+            ]
+          },
+          "ethValue": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "operator", "ethValue"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmCriteriaType.EVM_NETWORK": {
+        "enum": ["evmNetwork"],
+        "type": "string"
+      },
+      "EvmNetworkCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.EVM_NETWORK"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.NOT_IN"
+              }
+            ]
+          },
+          "chainIds": {
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "chainIds"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmCriteriaType.EVM_MESSAGE": {
+        "enum": ["evmMessage"],
+        "type": "string"
+      },
+      "CriteriaOperator.MATCH": {
+        "enum": ["match"],
+        "type": "string"
+      },
+      "EvmMessageCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.EVM_MESSAGE"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/CriteriaOperator.MATCH"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "operator", "pattern"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmCriteriaType.EVM_DATA": {
+        "enum": ["evmData"],
+        "type": "string"
+      },
+      "Record_string.unknown_": {
+        "properties": {},
+        "additionalProperties": {},
+        "type": "object",
+        "description": "Construct a type with a set of properties K of type T"
+      },
+      "EvmDataCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.EVM_DATA"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/CriteriaOperator"
+          },
+          "abi": {
+            "type": "string"
+          },
+          "functionName": {
+            "type": "string"
+          },
+          "args": {
+            "$ref": "#/components/schemas/Record_string.unknown_"
+          }
+        },
+        "required": ["type", "operator", "abi", "functionName"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmCriteriaType.EVM_TYPED_DATA_VERIFYING_CONTRACT": {
+        "enum": ["evmTypedDataVerifyingContract"],
+        "type": "string"
+      },
+      "EvmTypedDataVerifyingContractCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.EVM_TYPED_DATA_VERIFYING_CONTRACT"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.NOT_IN"
+              }
+            ]
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmCriteriaType.EVM_TYPED_DATA_FIELD": {
+        "enum": ["evmTypedDataField"],
+        "type": "string"
+      },
+      "EvmTypedDataFieldCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.EVM_TYPED_DATA_FIELD"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.LESS_THAN_OR_EQUAL"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.MATCH"
+              }
+            ]
+          },
+          "fieldPath": {
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "operator", "fieldPath"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmCriteriaType.NET_USD_CHANGE": {
+        "enum": ["netUSDChange"],
+        "type": "string"
+      },
+      "NetUSDChangeCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvmCriteriaType.NET_USD_CHANGE"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.LESS_THAN_OR_EQUAL"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.GREATER_THAN_OR_EQUAL"
+              }
+            ]
+          },
+          "usdValue": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "operator", "usdValue"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.SOL_ADDRESS": {
+        "enum": ["solAddress"],
+        "type": "string"
+      },
+      "SolAddressCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.SOL_ADDRESS"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.NOT_IN"
+              }
+            ]
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.SOL_VALUE": {
+        "enum": ["solValue"],
+        "type": "string"
+      },
+      "SolValueCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.SOL_VALUE"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.LESS_THAN_OR_EQUAL"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.GREATER_THAN_OR_EQUAL"
+              }
+            ]
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "operator", "value"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.SPL_ADDRESS": {
+        "enum": ["splAddress"],
+        "type": "string"
+      },
+      "SplAddressCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.SPL_ADDRESS"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.NOT_IN"
+              }
+            ]
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.SPL_VALUE": {
+        "enum": ["splValue"],
+        "type": "string"
+      },
+      "SplValueCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.SPL_VALUE"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.LESS_THAN_OR_EQUAL"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.GREATER_THAN_OR_EQUAL"
+              }
+            ]
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "operator", "value"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.MINT_ADDRESS": {
+        "enum": ["mintAddress"],
+        "type": "string"
+      },
+      "CriteriaOperator.EQUAL": {
+        "enum": ["=="],
+        "type": "string"
+      },
+      "MintAddressCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.MINT_ADDRESS"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.EQUAL"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              }
+            ]
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.SOL_DATA": {
+        "enum": ["solData"],
+        "type": "string"
+      },
+      "SolDataCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.SOL_DATA"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/CriteriaOperator"
+          },
+          "idl": {
+            "type": "string"
+          },
+          "instructionName": {
+            "type": "string"
+          },
+          "args": {
+            "$ref": "#/components/schemas/Record_string.unknown_"
+          }
+        },
+        "required": ["type", "operator", "idl", "instructionName"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.PROGRAM_ID": {
+        "enum": ["programId"],
+        "type": "string"
+      },
+      "ProgramIdCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.PROGRAM_ID"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.NOT_IN"
+              }
+            ]
+          },
+          "programIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "programIds"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.SOL_NETWORK": {
+        "enum": ["solNetwork"],
+        "type": "string"
+      },
+      "SolNetworkCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.SOL_NETWORK"
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.IN"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaOperator.NOT_IN"
+              }
+            ]
+          },
+          "networks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["type", "operator", "networks"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolanaCriteriaType.SOL_MESSAGE": {
+        "enum": ["solMessage"],
+        "type": "string"
+      },
+      "SolMessageCriterion": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SolanaCriteriaType.SOL_MESSAGE"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/CriteriaOperator.MATCH"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "operator", "pattern"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PolicyV2Criterion": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/EvmAddressCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/EthValueCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/EvmNetworkCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/EvmMessageCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/EvmDataCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/EvmTypedDataVerifyingContractCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/EvmTypedDataFieldCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/NetUSDChangeCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/SolAddressCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/SolValueCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/SplAddressCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/SplValueCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/MintAddressCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/SolDataCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/ProgramIdCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/SolNetworkCriterion"
+          },
+          {
+            "$ref": "#/components/schemas/SolMessageCriterion"
+          }
+        ]
+      },
+      "EntityType.POLICY_V2_RULE": {
+        "enum": ["policyV2Rule"],
+        "type": "string"
+      },
+      "PolicyV2RuleResponse": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "$ref": "#/components/schemas/EntityType.POLICY_V2_RULE"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "action": {
+            "$ref": "#/components/schemas/PolicyV2Action",
+            "description": "The action to take when this rule matches.",
+            "example": "accept"
+          },
+          "operation": {
+            "type": "string",
+            "description": "The operation this rule applies to.\nEVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation\nSolana: signSolTransaction, sendSolTransaction, signSolMessage",
+            "example": "signEvmTransaction"
+          },
+          "criteria": {
+            "items": {
+              "$ref": "#/components/schemas/PolicyV2Criterion"
+            },
+            "type": "array",
+            "description": "Array of criteria to match for this rule. All criteria must match (AND logic)."
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "action",
+          "operation",
+          "criteria"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EntityType.POLICY_V2": {
+        "enum": ["policyV2"],
+        "type": "string"
+      },
+      "PolicyV2Response": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "$ref": "#/components/schemas/EntityType.POLICY_V2"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/PolicyV2Scope",
+            "description": "The scope of the policy.",
+            "example": "project"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "A description of what this policy does.",
+            "example": "Limit ETH transfers to 1 ETH to approved addresses"
+          },
+          "accountId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account ID for account-scoped policies.",
+            "example": "acc_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the policy is enabled.",
+            "example": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Priority of the policy.",
+            "example": 0
+          },
+          "rules": {
+            "items": {
+              "$ref": "#/components/schemas/PolicyV2RuleResponse"
+            },
+            "type": "array",
+            "description": "The rules that make up this policy. Rules are processed sequentially until a match occurs."
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "scope",
+          "description",
+          "accountId",
+          "enabled",
+          "priority",
+          "rules"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PolicyV2ListResponse": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/ResponseType.LIST"
+          },
+          "url": {
+            "type": "string"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/PolicyV2Response"
+            },
+            "type": "array"
+          },
+          "start": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "end": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "required": ["object", "url", "data", "start", "end", "total"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PolicyV2ListQueries": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the maximum number of records to return.",
+            "minimum": 1
+          },
+          "skip": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the offset for the first records to return.",
+            "minimum": 0
+          },
+          "order": {
+            "$ref": "#/components/schemas/Prisma.SortOrder",
+            "description": "Specifies the order in which to sort the results."
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["project", "account"],
+            "description": "Filter by scope.",
+            "example": "project"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Filter by enabled status.",
+            "example": true
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Filter by account ID (for account-scoped policies).",
+            "example": "acc_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmAddressCriterionRequest": {
+        "description": "EVM Address criterion - validates recipient addresses.\nOperators: \"in\", \"not in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["evmAddress"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "evmAddress"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "List of EVM addresses (hex format with 0x prefix).",
+            "example": ["0x742d35Cc6634C0532925a3b844Bc9e7595f0aB12"]
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EthValueCriterionRequest": {
+        "description": "ETH Value criterion - validates native asset amounts in wei.\nOperators: \"<=\", \">=\", \"<\", \">\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["ethValue"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "ethValue"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["<=", ">=", "<", ">"],
+            "description": "The operator to use for comparison.",
+            "example": "<="
+          },
+          "ethValue": {
+            "type": "string",
+            "description": "Value in wei as a string.",
+            "example": "1000000000000000000"
+          }
+        },
+        "required": ["type", "operator", "ethValue"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmNetworkCriterionRequest": {
+        "description": "EVM Network criterion - validates chain IDs.\nOperators: \"in\", \"not in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["evmNetwork"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "evmNetwork"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "chainIds": {
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "type": "array",
+            "description": "List of chain IDs.",
+            "example": [1, 137, 8453]
+          }
+        },
+        "required": ["type", "operator", "chainIds"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmMessageCriterionRequest": {
+        "description": "EVM Message criterion - validates message content with regex (RE2).\nOperators: \"match\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["evmMessage"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "evmMessage"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["match"],
+            "nullable": false,
+            "description": "The operator to use for comparison.",
+            "example": "match"
+          },
+          "pattern": {
+            "type": "string",
+            "description": "RE2 regex pattern to match against the message.",
+            "example": "^Sign this message"
+          }
+        },
+        "required": ["type", "operator", "pattern"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmDataCriterionRequest": {
+        "description": "EVM Data criterion - validates transaction calldata via ABI.\nOperators: \"in\", \"not in\", \"<\", \"<=\", \">\", \">=\", \"==\", \"match\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["evmData"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "evmData"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in", "<", "<=", ">", ">=", "==", "match"],
+            "description": "The operator to use for comparison."
+          },
+          "abi": {
+            "type": "string",
+            "description": "Contract ABI as JSON string."
+          },
+          "functionName": {
+            "type": "string",
+            "description": "Function name to match.",
+            "example": "transfer"
+          },
+          "args": {
+            "$ref": "#/components/schemas/Record_string.unknown_",
+            "description": "Argument constraints."
+          }
+        },
+        "required": ["type", "operator", "abi", "functionName"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmTypedDataVerifyingContractCriterionRequest": {
+        "description": "EVM Typed Data Verifying Contract criterion - validates EIP-712 domain contract.\nOperators: \"in\", \"not in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["evmTypedDataVerifyingContract"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "evmTypedDataVerifyingContract"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "List of verifying contract addresses."
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvmTypedDataFieldCriterionRequest": {
+        "description": "EVM Typed Data Field criterion - validates EIP-712 field values.\nOperators: \"in\", \"<=\", \"match\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["evmTypedDataField"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "evmTypedDataField"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "<=", "match"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "fieldPath": {
+            "type": "string",
+            "description": "Dot-notation path to field.",
+            "example": "message.spender"
+          },
+          "values": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "Values for \"in\" operator."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for \"<=\" or \"match\" operators."
+          }
+        },
+        "required": ["type", "operator", "fieldPath"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "NetUSDChangeCriterionRequest": {
+        "description": "Net USD Change criterion - validates USD exposure limits (mainnet only).\nOperators: \"<=\", \">=\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["netUSDChange"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "netUSDChange"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["<=", ">="],
+            "description": "The operator to use for comparison.",
+            "example": "<="
+          },
+          "usdValue": {
+            "type": "string",
+            "description": "USD value as string.",
+            "example": "1000.00"
+          }
+        },
+        "required": ["type", "operator", "usdValue"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolAddressCriterionRequest": {
+        "description": "Solana Address criterion - validates native SOL transfer recipients.\nOperators: \"in\", \"not in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["solAddress"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "solAddress"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "List of Solana addresses (Base58).",
+            "example": ["7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"]
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolValueCriterionRequest": {
+        "description": "SOL Value criterion - validates SOL amounts in lamports.\nOperators: \"<=\", \">=\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["solValue"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "solValue"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["<=", ">="],
+            "description": "The operator to use for comparison.",
+            "example": "<="
+          },
+          "value": {
+            "type": "string",
+            "description": "Value in lamports as string.",
+            "example": "1000000000"
+          }
+        },
+        "required": ["type", "operator", "value"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SplAddressCriterionRequest": {
+        "description": "SPL Address criterion - validates SPL token recipients.\nOperators: \"in\", \"not in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["splAddress"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "splAddress"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "List of recipient addresses (Base58)."
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SplValueCriterionRequest": {
+        "description": "SPL Value criterion - validates SPL token amounts.\nOperators: \"<=\", \">=\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["splValue"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "splValue"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["<=", ">="],
+            "description": "The operator to use for comparison.",
+            "example": "<="
+          },
+          "value": {
+            "type": "string",
+            "description": "Token amount as string."
+          }
+        },
+        "required": ["type", "operator", "value"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "MintAddressCriterionRequest": {
+        "description": "Mint Address criterion - validates token mint addresses.\nOperators: \"==\", \"in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["mintAddress"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "mintAddress"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["==", "in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "List of mint addresses (Base58)."
+          }
+        },
+        "required": ["type", "operator", "addresses"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolDataCriterionRequest": {
+        "description": "Solana Data criterion - validates instruction params via Anchor IDL.\nOperators: \"in\", \"not in\", \"<=\", \">=\", \"==\", \"match\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["solData"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "solData"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in", "<=", ">=", "==", "match"],
+            "description": "The operator to use for comparison."
+          },
+          "idl": {
+            "type": "string",
+            "description": "Anchor IDL JSON (v0.30+)."
+          },
+          "instructionName": {
+            "type": "string",
+            "description": "Instruction name."
+          },
+          "args": {
+            "$ref": "#/components/schemas/Record_string.unknown_",
+            "description": "Argument constraints."
+          }
+        },
+        "required": ["type", "operator", "idl", "instructionName"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProgramIdCriterionRequest": {
+        "description": "Program ID criterion - validates Solana program IDs.\nOperators: \"in\", \"not in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["programId"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "programId"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "programIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "List of program IDs (Base58)."
+          }
+        },
+        "required": ["type", "operator", "programIds"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolNetworkCriterionRequest": {
+        "description": "Solana Network criterion - validates Solana network.\nOperators: \"in\", \"not in\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["solNetwork"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "solNetwork"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in", "not in"],
+            "description": "The operator to use for comparison.",
+            "example": "in"
+          },
+          "networks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "List of networks: \"mainnet-beta\", \"devnet\", \"testnet\".",
+            "example": ["mainnet-beta"]
+          }
+        },
+        "required": ["type", "operator", "networks"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SolMessageCriterionRequest": {
+        "description": "Solana Message criterion - validates message content with regex.\nOperators: \"match\"",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["solMessage"],
+            "nullable": false,
+            "description": "The type of criterion.",
+            "example": "solMessage"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["match"],
+            "nullable": false,
+            "description": "The operator to use for comparison.",
+            "example": "match"
+          },
+          "pattern": {
+            "type": "string",
+            "description": "RE2 regex pattern."
+          }
+        },
+        "required": ["type", "operator", "pattern"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PolicyV2CriterionRequest": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/EvmAddressCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/EthValueCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/EvmNetworkCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/EvmMessageCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/EvmDataCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/EvmTypedDataVerifyingContractCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/EvmTypedDataFieldCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/NetUSDChangeCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SolAddressCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SolValueCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SplAddressCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SplValueCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/MintAddressCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SolDataCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/ProgramIdCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SolNetworkCriterionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SolMessageCriterionRequest"
+          }
+        ],
+        "description": "Union of all criterion request types."
+      },
+      "CreatePolicyV2RuleRequest": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["accept", "reject"],
+            "description": "The action to take when this rule matches.",
+            "example": "accept"
+          },
+          "operation": {
+            "type": "string",
+            "description": "The operation this rule applies to.\nEVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation\nSolana: signSolTransaction, sendSolTransaction, signSolMessage",
+            "example": "signEvmTransaction"
+          },
+          "criteria": {
+            "items": {
+              "$ref": "#/components/schemas/PolicyV2CriterionRequest"
+            },
+            "type": "array",
+            "description": "Array of criteria to match for this rule. All criteria must match (AND logic)."
+          }
+        },
+        "required": ["action", "operation"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "CreatePolicyV2Request": {
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": ["project", "account"],
+            "description": "The scope of the policy. 'project' applies to all accounts, 'account' applies to a specific account.",
+            "example": "project"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what this policy does.",
+            "example": "Limit ETH transfers to 1 ETH to approved addresses"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "The account ID for account-scoped policies (starts with acc_). Required when scope is 'account'.",
+            "example": "acc_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the policy is enabled.",
+            "example": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Priority of the policy. Higher priority policies are evaluated first.",
+            "example": 0
+          },
+          "rules": {
+            "items": {
+              "$ref": "#/components/schemas/CreatePolicyV2RuleRequest"
+            },
+            "type": "array",
+            "description": "The rules that make up this policy. Rules are processed sequentially until a match occurs."
+          }
+        },
+        "required": ["scope", "rules"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvaluatePolicyV2Response": {
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": ["policy_evaluation"],
+            "nullable": false,
+            "description": "The object type.",
+            "example": "policy_evaluation"
+          },
+          "allowed": {
+            "type": "boolean",
+            "description": "Whether the operation is allowed by the policy.",
+            "example": true
+          },
+          "reason": {
+            "type": "string",
+            "description": "The reason for the policy decision.",
+            "example": "Allowed by policy rule"
+          },
+          "operation": {
+            "type": "string",
+            "description": "The operation that was evaluated.",
+            "example": "signEvmTransaction"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "The account ID that was evaluated (if any).",
+            "example": "acc_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "matchedPolicyId": {
+            "type": "string",
+            "description": "The ID of the policy that matched (if any).",
+            "example": "ply_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "matchedRuleId": {
+            "type": "string",
+            "description": "The ID of the rule that matched (if any).",
+            "example": "plr_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        },
+        "required": ["object", "allowed", "reason", "operation"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvaluatePolicyV2Payload": {
+        "properties": {
+          "chainId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Chain ID for EVM operations.",
+            "example": 1
+          },
+          "to": {
+            "type": "string",
+            "description": "Recipient address for EVM transaction (hex with 0x prefix).",
+            "example": "0x742d35Cc6634C0532925a3b844Bc9e7595f0aB12"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value in wei for EVM transaction.",
+            "example": "1000000000000000000"
+          },
+          "data": {
+            "type": "string",
+            "description": "Transaction data/calldata for EVM transaction (hex with 0x prefix).",
+            "example": "0xa9059cbb..."
+          },
+          "verifyingContract": {
+            "type": "string",
+            "description": "Verifying contract address for EIP-712 typed data."
+          },
+          "domain": {
+            "$ref": "#/components/schemas/Record_string.unknown_",
+            "description": "EIP-712 domain object."
+          },
+          "message": {
+            "$ref": "#/components/schemas/Record_string.unknown_",
+            "description": "EIP-712 message object."
+          },
+          "primaryType": {
+            "type": "string",
+            "description": "Primary type for EIP-712 typed data.",
+            "example": "Permit"
+          },
+          "evmMessage": {
+            "type": "string",
+            "description": "Message content for signEvmMessage."
+          },
+          "network": {
+            "type": "string",
+            "description": "Solana network: \"mainnet-beta\", \"devnet\", \"testnet\".",
+            "example": "mainnet-beta"
+          },
+          "recipients": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "Recipient addresses for SOL transfers (Base58)."
+          },
+          "solValue": {
+            "type": "string",
+            "description": "SOL amount in lamports.",
+            "example": "1000000000"
+          },
+          "splRecipients": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "Recipient addresses for SPL token transfers (Base58)."
+          },
+          "splValue": {
+            "type": "string",
+            "description": "SPL token amount."
+          },
+          "mintAddress": {
+            "type": "string",
+            "description": "Token mint address (Base58)."
+          },
+          "programIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "Program IDs involved in transaction (Base58)."
+          },
+          "solMessage": {
+            "type": "string",
+            "description": "Message content for signSolMessage."
+          },
+          "instructionData": {
+            "type": "string",
+            "description": "Base64-encoded instruction data for Solana programs (includes 8-byte discriminator)."
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EvaluatePolicyV2Request": {
+        "properties": {
+          "operation": {
+            "type": "string",
+            "description": "The signing operation to evaluate.\nEVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation\nSolana: signSolTransaction, sendSolTransaction, signSolMessage",
+            "example": "signEvmTransaction"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "The account ID to evaluate policies for (starts with acc_). If not provided, only project-scoped policies are evaluated.",
+            "example": "acc_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/EvaluatePolicyV2Payload",
+            "description": "The payload to evaluate against policy criteria. Structure depends on the operation type."
+          }
+        },
+        "required": ["operation"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdatePolicyV2Request": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "A description of what this policy does.",
+            "example": "Limit ETH transfers to 1 ETH to approved addresses"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the policy is enabled.",
+            "example": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Priority of the policy. Higher priority policies are evaluated first.",
+            "example": 0
+          },
+          "rules": {
+            "items": {
+              "$ref": "#/components/schemas/CreatePolicyV2RuleRequest"
+            },
+            "type": "array",
+            "description": "The rules that make up this policy. If provided, replaces all existing rules."
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PolicyV2DeleteResponse": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "$ref": "#/components/schemas/EntityType.POLICY_V2"
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        },
+        "required": ["id", "object", "deleted"],
         "type": "object",
         "additionalProperties": false
       },
@@ -16284,669 +17824,6 @@
         ]
       }
     },
-    "/v1/accounts/{id}/request_transfer_ownership": {
-      "post": {
-        "operationId": "RequestTransferOwnership",
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionIntentResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "id": "tin_c502d628-5bb3-42f2-b8f5-62ba4d71df3a",
-                      "createdAt": 1689869074,
-                      "object": "transactionIntent",
-                      "userOperation": null,
-                      "chainId": 80002,
-                      "abstractionType": "standard",
-                      "details": {
-                        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
-                        "to": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
-                        "gas": "0x5208",
-                        "maxFeePerGas": "0x3b9aca00",
-                        "maxPriorityFeePerGas": "0x3b9aca00",
-                        "nonce": "0x0",
-                        "data": "0x3c44..."
-                      },
-                      "updatedAt": 1689869074,
-                      "policy": {
-                        "id": "pol_..."
-                      },
-                      "player": {
-                        "id": "pla_..."
-                      },
-                      "account": {
-                        "id": "acc_..."
-                      },
-                      "response": {
-                        "createdAt": 1689869074,
-                        "logs": [
-                          {
-                            "removed": false,
-                            "transactionIndex": 0,
-                            "blockNumber": 44904492,
-                            "transactionHash": "0x25d3...005c",
-                            "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
-                            "data": "0x",
-                            "logIndex": 0,
-                            "blockHash": "0x8a69...6d59"
-                          }
-                        ],
-                        "blockNumber": 8789286,
-                        "transactionHash": "0x25d3...005c",
-                        "to": "0x0576...1B57",
-                        "gasUsed": "336730",
-                        "status": 1
-                      },
-                      "interactions": [
-                        {
-                          "functionName": "mint",
-                          "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error response."
-          },
-          "409": {
-            "description": "Error response."
-          }
-        },
-        "description": "Perform a request to change the owner of an account.\n\nTo perform an update on the owner of an account, first you must provide a new owner address.\nOnce requested, the owner must accept to take ownership by calling `acceptOwnership()` in the smart contract account.",
-        "summary": "Request transfer ownership of account.",
-        "tags": ["accs v1"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [
-          {
-            "description": "Specifies the unique account ID (starts with acc_).",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "acc_4194ad24-c818-4e5c-b003-9cc2aa7df53b"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransferOwnershipRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/accounts/{id}/cancel_transfer_ownership": {
-      "post": {
-        "operationId": "CancelTransferOwnership",
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionIntentResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "id": "tin_c502d628-5bb3-42f2-b8f5-62ba4d71df3a",
-                      "createdAt": 1689869074,
-                      "object": "transactionIntent",
-                      "userOperation": null,
-                      "chainId": 80002,
-                      "abstractionType": "standard",
-                      "details": {
-                        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
-                        "to": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
-                        "gas": "0x5208",
-                        "maxFeePerGas": "0x3b9aca00",
-                        "maxPriorityFeePerGas": "0x3b9aca00",
-                        "nonce": "0x0",
-                        "data": "0x3c44..."
-                      },
-                      "updatedAt": 1689869074,
-                      "policy": {
-                        "id": "pol_..."
-                      },
-                      "player": {
-                        "id": "pla_..."
-                      },
-                      "account": {
-                        "id": "acc_..."
-                      },
-                      "response": {
-                        "createdAt": 1689869074,
-                        "logs": [
-                          {
-                            "removed": false,
-                            "transactionIndex": 0,
-                            "blockNumber": 44904492,
-                            "transactionHash": "0x25d3...005c",
-                            "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
-                            "data": "0x",
-                            "logIndex": 0,
-                            "blockHash": "0x8a69...6d59"
-                          }
-                        ],
-                        "blockNumber": 8789286,
-                        "transactionHash": "0x25d3...005c",
-                        "to": "0x0576...1B57",
-                        "gasUsed": "336730",
-                        "status": 1
-                      },
-                      "interactions": [
-                        {
-                          "functionName": "mint",
-                          "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error response."
-          },
-          "409": {
-            "description": "Error response."
-          }
-        },
-        "description": "Cancel a pending transfer of ownership.",
-        "summary": "Cancel request to transfer ownership of an account.",
-        "tags": ["accs v1"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [
-          {
-            "description": "Specifies the unique account ID (starts with acc_).",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "acc_4194ad24-c818-4e5c-b003-9cc2aa7df53b"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelTransferOwnershipRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/accounts/{id}/sign_payload": {
-      "post": {
-        "operationId": "SignPayload",
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SignPayloadResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "account": "acc_...",
-                      "hash": "0x25d3...005c",
-                      "object": "signature",
-                      "signature": "0x25d3...005c",
-                      "address": "0x8C5cedA46A2...36Ad2F6255BdBEa"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error response."
-          },
-          "409": {
-            "description": "Error response."
-          }
-        },
-        "description": "**Custodial Accounts only** - Signs the typed repositories value with types repositories structure for domain using the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification.",
-        "summary": "Sign a given payload",
-        "tags": ["accs v1"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [
-          {
-            "description": "Specifies the unique account ID (starts with acc_).",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "acc_4194ad24-c818-4e5c-b003-9cc2aa7df53b"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SignPayloadRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/accounts/{id}/sync": {
-      "post": {
-        "operationId": "SyncAccount",
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "id": "acc_c502d628-5bb3-42f2-b8d5-62ba46717f3a",
-                      "createdAt": 1689869074,
-                      "address": "0x8C5cedA46A26214A52A9D7BF036Ad2F6255BdBEa",
-                      "chainId": 80002,
-                      "deployed": true,
-                      "custodial": false,
-                      "embeddedSigner": false,
-                      "object": "account",
-                      "accountType": "Upgradeable_v06",
-                      "ownerAddress": "0x8C5cedA46A26214A52A9D7BF036Ad2F6255BdBEa",
-                      "player": {
-                        "id": "pla_c502d628-5bb3-42f2-b8d5-62ba46717f3a"
-                      },
-                      "transactionIntents": [
-                        {
-                          "id": "tin_c502d628-5bb3-42f2-b8f5-62ba4d71df3a"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Account not found"
-          }
-        },
-        "description": "Synchronize the account state with the blockchain.\nSpecifically, it updates the account owner and whether its deployed or not.",
-        "summary": "Sync account state with the blockchain",
-        "tags": ["accs v1"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [
-          {
-            "description": "Specifies the unique account ID (starts with acc_).",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "acc_4194ad24-c818-4e5c-b003-9cc2aa7df53b"
-          }
-        ]
-      }
-    },
-    "/v1/accounts/{id}/deploy": {
-      "post": {
-        "operationId": "DeployAccount",
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "id": "acc_c502d628-5bb3-42f2-b8d5-62ba46717f3a",
-                      "createdAt": 1689869074,
-                      "address": "0x8C5cedA46A26214A52A9D7BF036Ad2F6255BdBEa",
-                      "chainId": 80002,
-                      "deployed": true,
-                      "custodial": false,
-                      "embeddedSigner": false,
-                      "object": "account",
-                      "accountType": "Upgradeable_v06",
-                      "ownerAddress": "0x8C5cedA46A26214A52A9D7BF036Ad2F6255BdBEa",
-                      "player": {
-                        "id": "pla_c502d628-5bb3-42f2-b8d5-62ba46717f3a"
-                      },
-                      "transactionIntents": [
-                        {
-                          "id": "tin_c502d628-5bb3-42f2-b8f5-62ba4d71df3a"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Account not found"
-          }
-        },
-        "description": "This endpoint can be used to deploy a smart contract account that was counterfactually generated.",
-        "summary": "Deploy an account.",
-        "tags": ["accs v1"],
-        "security": [
-          {
-            "sk": []
-          },
-          {
-            "user_project": []
-          }
-        ],
-        "parameters": [
-          {
-            "description": "Specifies the unique account ID (starts with acc_).",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "acc_4194ad24-c818-4e5c-b003-9cc2aa7df53b"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeployRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/accounts/{id}/start_recovery": {
-      "post": {
-        "operationId": "StartRecovery",
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionIntentResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "id": "tin_c502d628-5bb3-42f2-b8f5-62ba4d71df3a",
-                      "createdAt": 1689869074,
-                      "object": "transactionIntent",
-                      "userOperation": null,
-                      "chainId": 80002,
-                      "abstractionType": "standard",
-                      "details": {
-                        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
-                        "to": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
-                        "gas": "0x5208",
-                        "maxFeePerGas": "0x3b9aca00",
-                        "maxPriorityFeePerGas": "0x3b9aca00",
-                        "nonce": "0x0",
-                        "data": "0x3c44..."
-                      },
-                      "updatedAt": 1689869074,
-                      "policy": {
-                        "id": "pol_..."
-                      },
-                      "player": {
-                        "id": "pla_..."
-                      },
-                      "account": {
-                        "id": "acc_..."
-                      },
-                      "response": {
-                        "createdAt": 1689869074,
-                        "logs": [
-                          {
-                            "removed": false,
-                            "transactionIndex": 0,
-                            "blockNumber": 44904492,
-                            "transactionHash": "0x25d3...005c",
-                            "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
-                            "data": "0x",
-                            "logIndex": 0,
-                            "blockHash": "0x8a69...6d59"
-                          }
-                        ],
-                        "blockNumber": 8789286,
-                        "transactionHash": "0x25d3...005c",
-                        "to": "0x0576...1B57",
-                        "gasUsed": "336730",
-                        "status": 1
-                      },
-                      "interactions": [
-                        {
-                          "functionName": "mint",
-                          "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error response."
-          },
-          "409": {
-            "description": "Error response."
-          }
-        },
-        "summary": "Start a recovery process of a recoverable account.",
-        "tags": ["accs v1"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [
-          {
-            "description": "Specifies the unique account ID (starts with acc_).",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "acc_4194ad24-c818-4e5c-b003-9cc2aa7df53b"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StartRecoveryRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/accounts/{id}/complete_recovery": {
-      "post": {
-        "operationId": "CompleteRecovery",
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionIntentResponse"
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "id": "tin_c502d628-5bb3-42f2-b8f5-62ba4d71df3a",
-                      "createdAt": 1689869074,
-                      "object": "transactionIntent",
-                      "userOperation": null,
-                      "chainId": 80002,
-                      "abstractionType": "standard",
-                      "details": {
-                        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
-                        "to": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
-                        "gas": "0x5208",
-                        "maxFeePerGas": "0x3b9aca00",
-                        "maxPriorityFeePerGas": "0x3b9aca00",
-                        "nonce": "0x0",
-                        "data": "0x3c44..."
-                      },
-                      "updatedAt": 1689869074,
-                      "policy": {
-                        "id": "pol_..."
-                      },
-                      "player": {
-                        "id": "pla_..."
-                      },
-                      "account": {
-                        "id": "acc_..."
-                      },
-                      "response": {
-                        "createdAt": 1689869074,
-                        "logs": [
-                          {
-                            "removed": false,
-                            "transactionIndex": 0,
-                            "blockNumber": 44904492,
-                            "transactionHash": "0x25d3...005c",
-                            "address": "0x5FF1...2789",
-                            "topics": ["0xbb47...f972"],
-                            "data": "0x",
-                            "logIndex": 0,
-                            "blockHash": "0x8a69...6d59"
-                          }
-                        ],
-                        "blockNumber": 8789286,
-                        "transactionHash": "0x25d3...005c",
-                        "to": "0x0576...1B57",
-                        "gasUsed": "336730",
-                        "status": 1
-                      },
-                      "interactions": [
-                        {
-                          "functionName": "mint",
-                          "contract": "con_...",
-                          "functionArgs": ["0x63B7...484f"]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error response."
-          },
-          "409": {
-            "description": "Error response."
-          }
-        },
-        "summary": "Complete a recovery process of a recoverable account.",
-        "tags": ["accs v1"],
-        "security": [
-          {
-            "sk": []
-          }
-        ],
-        "parameters": [
-          {
-            "description": "Specifies the unique account ID (starts with acc_).",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "acc_4194ad24-c818-4e5c-b003-9cc2aa7df53b"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CompleteRecoveryRequest"
-              }
-            }
-          }
-        }
-      }
-    },
     "/v2/users": {
       "get": {
         "operationId": "GetAuthUsers",
@@ -17328,6 +18205,339 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PregenerateUserRequestV2"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/policies": {
+      "get": {
+        "operationId": "ListPolicies",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyV2ListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "description": "Returns a list of policies.",
+        "summary": "List policies.",
+        "tags": ["Policies"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the maximum number of records to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "description": "Specifies the offset for the first records to return.",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "description": "Specifies the order in which to sort the results.",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Prisma.SortOrder"
+            }
+          },
+          {
+            "description": "Filter by scope.",
+            "in": "query",
+            "name": "scope",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["project", "account"]
+            },
+            "example": "project"
+          },
+          {
+            "description": "Filter by enabled status.",
+            "in": "query",
+            "name": "enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
+          },
+          {
+            "description": "Filter by account ID (for account-scoped policies).",
+            "in": "query",
+            "name": "accountId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "acc_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
+      },
+      "post": {
+        "operationId": "CreatePolicyV2",
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyV2Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "description": "Creates a new policy with the specified rules.",
+        "summary": "Create a policy.",
+        "tags": ["Policies"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyV2Request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/policies/{policyId}": {
+      "get": {
+        "operationId": "GetPolicyV2",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyV2Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Retrieves the details of a policy that has previously been created.",
+        "summary": "Get a policy.",
+        "tags": ["Policies"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique policy ID (starts with ply_).",
+            "in": "path",
+            "name": "policyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ply_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
+      },
+      "post": {
+        "operationId": "UpdatePolicyV2",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyV2Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Updates an existing policy.",
+        "summary": "Update a policy.",
+        "tags": ["Policies"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique policy ID (starts with ply_).",
+            "in": "path",
+            "name": "policyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ply_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyV2Request"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeletePolicyV2",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyV2DeleteResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Deletes a policy. This is a soft delete.",
+        "summary": "Delete a policy.",
+        "tags": ["Policies"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique policy ID (starts with ply_).",
+            "in": "path",
+            "name": "policyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ply_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
+      }
+    },
+    "/v2/policies/evaluate": {
+      "post": {
+        "operationId": "EvaluatePolicyV2",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatePolicyV2Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "description": "Evaluates an operation against policies without actually performing the operation.\nUse this endpoint to check if an operation would be allowed before attempting it.",
+        "summary": "Evaluate policy.",
+        "tags": ["Policies"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "pk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatePolicyV2Request"
               }
             }
           }

@@ -15,7 +15,7 @@ const account = await openfort.accounts.v1.create({
 });
 
 // Create a policy
-const policy = await openfort.policies.create({
+const policy = await openfort.feeSponsorship.create({
   name: `TxPolicy-${Date.now()}`,
   chainId,
   strategy: {
@@ -32,7 +32,7 @@ const contract = await openfort.contracts.create({
 });
 
 // Create a policy rule to allow all account functions
-await openfort.policyRules.create({
+await openfort.feeSponsorship.rules.create({
   type: "contract_functions",
   functionName: "All functions",
   wildcard: true,
