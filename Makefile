@@ -2,8 +2,8 @@
 
 # OpenAPI spec URLs with timestamp for cache-busting
 TIMESTAMP := $(shell date +%s)
-OPENAPI_MAIN_URL := http://localhost:3000/api-docs/swagger.json?timestamp=$(TIMESTAMP)
-OPENAPI_AUTH_URL := http://localhost:3000/iam/v2/auth/reference?timestamp=$(TIMESTAMP)
+OPENAPI_MAIN_URL := https://api.openfort.io/api-docs/swagger.json?timestamp=$(TIMESTAMP)
+OPENAPI_AUTH_URL := https://api.openfort.io/iam/v2/auth/reference?timestamp=$(TIMESTAMP)
 OPENAPI_MAIN_LOCAL := openapi.json
 OPENAPI_AUTH_LOCAL := openapi-auth.json
 OPENAPI_MAIN_TEMP := openapi.json.new
