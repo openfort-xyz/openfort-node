@@ -101,17 +101,34 @@ pnpm example evm/accounts/createAccount.ts
 | `signTransaction.ts` | Sign a Solana transaction            |
 
 
-### Policies
+### Policies (`policies/`)
 
-| Example                           | Description                     |
-| --------------------------------- | ------------------------------- |
-| `policies/createPolicy.ts`        | Create a gas sponsorship policy |
-| `policies/getPolicy.ts`           | Get a policy by ID              |
-| `policies/listPolicies.ts`        | List all policies               |
-| `policies/updatePolicy.ts`        | Update a policy                 |
-| `policies/disableEnablePolicy.ts` | Enable/disable a policy         |
-| `policies/createPolicyRule.ts`    | Create a policy rule            |
-| `policies/listPolicyRules.ts`     | List policy rules               |
+Policies provide fine-grained control over signing operations using Zod-validated rules with type-safe criteria.
+
+| Example                     | Description                                            |
+| --------------------------- | ------------------------------------------------------ |
+| `createEvmPolicy.ts`        | EVM policies: value caps, address allowlists, ABI data |
+| `createSolanaPolicy.ts`     | Solana policies: SOL/SPL limits, program IDs, messages |
+| `createTypedDataPolicy.ts`  | EIP-712 typed-data and message signing policies        |
+| `createAccountPolicy.ts`    | Account-scoped policy (vs project-scoped)              |
+| `multiRulePolicy.ts`        | Multi-rule policy covering EVM + Solana operations     |
+| `listPolicies.ts`           | List policies with scope filtering                     |
+| `getPolicy.ts`              | Retrieve a policy by ID                                |
+| `updatePolicy.ts`           | Update a policy's rules and description                |
+| `deletePolicy.ts`           | Delete a policy                                        |
+| `validatePolicy.ts`         | Client-side Zod validation without API calls           |
+
+### Fee Sponsorship (`fee-sponsorship/`)
+
+| Example                                  | Description                     |
+| ---------------------------------------- | ------------------------------- |
+| `fee-sponsorship/createPolicy.ts`        | Create a gas sponsorship policy |
+| `fee-sponsorship/getPolicy.ts`           | Get a policy by ID              |
+| `fee-sponsorship/listPolicies.ts`        | List all policies               |
+| `fee-sponsorship/updatePolicy.ts`        | Update a policy                 |
+| `fee-sponsorship/disableEnablePolicy.ts` | Enable/disable a policy         |
+| `fee-sponsorship/createPolicyRule.ts`    | Create a policy rule            |
+| `fee-sponsorship/listPolicyRules.ts`     | List policy rules               |
 
 ### Contracts
 

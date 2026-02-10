@@ -1,4 +1,4 @@
-// Usage: npx tsx policies/createPolicy.ts
+// Usage: npx tsx fee-sponsorship/getPolicy.ts
 
 import Openfort from "@openfort/openfort-node";
 import "dotenv/config";
@@ -9,17 +9,22 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create a gas sponsorship policy
-const policy = await openfort.policies.create({
-  name: "Gas Sponsorship Policy",
+// Create a policy first
+const created = await openfort.feeSponsorship.create({
+  name: `TestPolicy-${Date.now()}`,
   chainId,
   strategy: {
     sponsorSchema: "pay_for_user",
   },
 });
+console.log("Created policy:", created.id);
 
-console.log("Created policy:");
+// Retrieve the policy by ID
+const policy = await openfort.feeSponsorship.get(created.id);
+
+console.log("\nRetrieved policy:");
 console.log("  ID:", policy.id);
 console.log("  Name:", policy.name);
 console.log("  Chain ID:", policy.chainId);
 console.log("  Strategy:", policy.strategy.sponsorSchema);
+console.log("  Enabled:", policy.enabled);

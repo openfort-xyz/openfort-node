@@ -10,7 +10,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
 // Create a policy for gas sponsorship
-const policy = await openfort.policies.create({
+const policy = await openfort.feeSponsorship.create({
   name: `TxPolicy-${Date.now()}`,
   chainId,
   strategy: {
@@ -27,7 +27,7 @@ const contract = await openfort.contracts.create({
 });
 
 // Create a policy rule to allow all account functions
-await openfort.policyRules.create({
+await openfort.feeSponsorship.rules.create({
   type: "contract_functions",
   functionName: "All functions",
   wildcard: true,

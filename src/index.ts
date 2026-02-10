@@ -285,13 +285,6 @@ class Openfort {
         list: api.getAccounts,
         create: api.createAccount,
         get: api.getAccount,
-        requestTransferOwnership: api.requestTransferOwnership,
-        cancelTransferOwnership: api.cancelTransferOwnership,
-        signPayload: api.signPayload,
-        sync: api.syncAccount,
-        deploy: api.deployAccount,
-        startRecovery: api.startRecovery,
-        completeRecovery: api.completeRecovery,
       },
     }
   }
@@ -302,6 +295,7 @@ class Openfort {
 
   /**
    * Player management endpoints
+   * @deprecated
    */
   public get players() {
     return {
@@ -345,42 +339,79 @@ class Openfort {
   // ============================================
 
   /**
-   * Policy management endpoints
+   * Policy management endpoints for controlling account operations.
+   *
+   * Policies define rules that govern what operations accounts can perform,
+   * including transaction signing, message signing, and more.
+   *
+   * @example
+   * ```typescript
+   * // List all policies
+   * const all = await openfort.policies.list();
+   *
+   * // Create a policy
+   * const policy = await openfort.policies.create({
+   *   scope: 'project',
+   *   rules: [{ action: 'reject', operation: 'signEvmHash' }],
+   * });
+   *
+   * // Evaluate whether an operation would be allowed
+   * const result = await openfort.policies.evaluate({ operation: 'signEvmTransaction', accountId: 'acc_...' });
+   * ```
    */
   public get policies() {
     return {
       /** List policies */
-      list: api.getPolicies,
+      list: api.listPolicies,
       /** Create a policy */
-      create: api.createPolicy,
+      create: api.createPolicyV2,
       /** Get a policy by ID */
-      get: api.getPolicy,
+      get: api.getPolicyV2,
       /** Update a policy */
-      update: api.updatePolicy,
+      update: api.updatePolicyV2,
       /** Delete a policy */
-      delete: api.deletePolicy,
-      /** Disable a policy */
-      disable: api.disablePolicy,
-      /** Enable a policy */
-      enable: api.enablePolicy,
-      /** Get policy total gas usage */
-      getTotalGasUsage: api.getPolicyTotalGasUsage,
+      delete: api.deletePolicyV2,
+      /** Evaluate an operation against policies */
+      evaluate: api.evaluatePolicyV2,
     }
   }
 
+  // ============================================
+  // Fee Sponsorship API
+  // ============================================
+
   /**
-   * Policy rules management endpoints
+   * Fee sponsorship (gas policy) management endpoints
    */
-  public get policyRules() {
+  public get feeSponsorship() {
     return {
-      /** List policy rules */
-      list: api.getPolicyRules,
-      /** Create a policy rule */
-      create: api.createPolicyRule,
-      /** Update a policy rule */
-      update: api.updatePolicyRule,
-      /** Delete a policy rule */
-      delete: api.deletePolicyRule,
+      /** List fee sponsorship policies */
+      list: api.getPolicies,
+      /** Create a fee sponsorship policy */
+      create: api.createPolicy,
+      /** Get a fee sponsorship policy by ID */
+      get: api.getPolicy,
+      /** Update a fee sponsorship policy */
+      update: api.updatePolicy,
+      /** Delete a fee sponsorship policy */
+      delete: api.deletePolicy,
+      /** Disable a fee sponsorship policy */
+      disable: api.disablePolicy,
+      /** Enable a fee sponsorship policy */
+      enable: api.enablePolicy,
+      /** Get fee sponsorship policy total gas usage */
+      getTotalGasUsage: api.getPolicyTotalGasUsage,
+      /** Fee sponsorship policy rules */
+      rules: {
+        /** List policy rules */
+        list: api.getPolicyRules,
+        /** Create a policy rule */
+        create: api.createPolicyRule,
+        /** Update a policy rule */
+        update: api.updatePolicyRule,
+        /** Delete a policy rule */
+        delete: api.deletePolicyRule,
+      },
     }
   }
 
@@ -434,6 +465,7 @@ class Openfort {
 
   /**
    * Settings / Developer account management endpoints
+   * @deprecated
    */
   public get settings() {
     return {
@@ -812,6 +844,53 @@ export {
 export * from './openapi-client'
 // Export the configure function for advanced use cases
 export { configure, getConfig } from './openapi-client/openfortApiClient'
+// Re-export policy Zod schemas and types
+export {
+  type CreatePolicyBody,
+  CreatePolicyBodySchema,
+  /** @deprecated Use `CreatePolicyBody` instead. */
+  type CreateWalletPolicyBody,
+  /** @deprecated Use `CreatePolicyBodySchema` instead. */
+  CreateWalletPolicyBodySchema,
+  // EVM criterion schemas
+  EthValueCriterionSchema,
+  EvmAddressCriterionSchema,
+  EvmDataCriterionSchema,
+  EvmMessageCriterionSchema,
+  EvmNetworkCriterionSchema,
+  EvmTypedDataFieldCriterionSchema,
+  EvmTypedDataVerifyingContractCriterionSchema,
+  MintAddressCriterionSchema,
+  ProgramIdCriterionSchema,
+  // Types
+  type Rule,
+  // Composed schemas
+  RuleSchema,
+  // EVM rule schemas
+  SendEvmTransactionRuleSchema,
+  // Solana rule schemas
+  SendSolTransactionRuleSchema,
+  SignEvmHashRuleSchema,
+  SignEvmMessageRuleSchema,
+  SignEvmTransactionRuleSchema,
+  SignEvmTypedDataRuleSchema,
+  SignSolMessageRuleSchema,
+  SignSolTransactionRuleSchema,
+  // Solana criterion schemas
+  SolAddressCriterionSchema,
+  SolDataCriterionSchema,
+  SolMessageCriterionSchema,
+  SolNetworkCriterionSchema,
+  SolValueCriterionSchema,
+  SplAddressCriterionSchema,
+  SplValueCriterionSchema,
+  type UpdatePolicyBody,
+  UpdatePolicyBodySchema,
+  /** @deprecated Use `UpdatePolicyBody` instead. */
+  type UpdateWalletPolicyBody,
+  /** @deprecated Use `UpdatePolicyBodySchema` instead. */
+  UpdateWalletPolicyBodySchema,
+} from './policies'
 // RSA encryption utilities for key import/export
 export {
   decryptExportedPrivateKey,
