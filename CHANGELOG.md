@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0
+
+### Minor Changes
+
+- [#59](https://github.com/openfort-xyz/openfort-node/pull/59) [`603654426522adbc3fbbc5bcaea2888eca6f1c14`](https://github.com/openfort-xyz/openfort-node/commit/603654426522adbc3fbbc5bcaea2888eca6f1c14) Thanks [@jamalavedra](https://github.com/jamalavedra)! - policies
+
 ## 0.7.7
 
 ### Patch Changes
