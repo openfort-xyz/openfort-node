@@ -848,10 +848,6 @@ export { configure, getConfig } from './openapi-client/openfortApiClient'
 export {
   type CreatePolicyBody,
   CreatePolicyBodySchema,
-  /** @deprecated Use `CreatePolicyBody` instead. */
-  type CreateWalletPolicyBody,
-  /** @deprecated Use `CreatePolicyBodySchema` instead. */
-  CreateWalletPolicyBodySchema,
   // EVM criterion schemas
   EthValueCriterionSchema,
   EvmAddressCriterionSchema,
@@ -886,10 +882,6 @@ export {
   SplValueCriterionSchema,
   type UpdatePolicyBody,
   UpdatePolicyBodySchema,
-  /** @deprecated Use `UpdatePolicyBody` instead. */
-  type UpdateWalletPolicyBody,
-  /** @deprecated Use `UpdatePolicyBodySchema` instead. */
-  UpdateWalletPolicyBodySchema,
 } from './policies'
 // RSA encryption utilities for key import/export
 export {

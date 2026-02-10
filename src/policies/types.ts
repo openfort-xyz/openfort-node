@@ -58,11 +58,6 @@ export const CreatePolicyBodySchema = z.object({
 
 export type CreatePolicyBody = z.infer<typeof CreatePolicyBodySchema>
 
-/** @deprecated Use `CreatePolicyBodySchema` instead. */
-export const CreateWalletPolicyBodySchema = CreatePolicyBodySchema
-/** @deprecated Use `CreatePolicyBody` instead. */
-export type CreateWalletPolicyBody = CreatePolicyBody
-
 export const UpdatePolicyBodySchema = z.object({
   /** A description of what this policy does. */
   description: z.string().optional(),
@@ -75,8 +70,3 @@ export const UpdatePolicyBodySchema = z.object({
 })
 
 export type UpdatePolicyBody = z.infer<typeof UpdatePolicyBodySchema>
-
-/** @deprecated Use `UpdatePolicyBodySchema` instead. */
-export const UpdateWalletPolicyBodySchema = UpdatePolicyBodySchema
-/** @deprecated Use `UpdatePolicyBody` instead. */
-export type UpdateWalletPolicyBody = UpdatePolicyBody
