@@ -12,6 +12,23 @@ const result = await openfort.policies.list({ limit: 10 });
 
 console.log(`Found ${result.total} policies:`);
 for (const policy of result.data) {
-  console.log(`  - ${policy.name} (${policy.id})`);
-  console.log(`    Chain: ${policy.chainId}, Strategy: ${policy.strategy.sponsorSchema}`);
+  console.log(`  - ${policy.id}`);
+  console.log(`    Scope: ${policy.scope}`);
+  console.log(`    Description: ${policy.description ?? "(none)"}`);
+  console.log(`    Enabled: ${policy.enabled}`);
+  console.log(`    Rules: ${policy.rules.length}`);
 }
+
+// List only project-scoped policies
+console.log("\nProject-scoped policies:");
+const projectPolicies = await openfort.policies.list({
+  scope: "project",
+});
+console.log(`  Found: ${projectPolicies.total}`);
+
+// List only account-scoped policies
+console.log("\nAccount-scoped policies:");
+const accountPolicies = await openfort.policies.list({
+  scope: "account",
+});
+console.log(`  Found: ${accountPolicies.total}`);

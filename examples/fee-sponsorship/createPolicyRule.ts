@@ -1,4 +1,4 @@
-// Usage: npx tsx policies/createPolicyRule.ts
+// Usage: npx tsx fee-sponsorship/createPolicyRule.ts
 
 import Openfort from "@openfort/openfort-node";
 import "dotenv/config";
@@ -10,7 +10,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
 // Create a policy first
-const policy = await openfort.policies.create({
+const policy = await openfort.feeSponsorship.create({
   name: `PolicyWithRules-${Date.now()}`,
   chainId,
   strategy: {
@@ -28,7 +28,7 @@ const contract = await openfort.contracts.create({
 console.log("Created contract:", contract.id);
 
 // Create a policy rule for account functions
-const rule = await openfort.policyRules.create({
+const rule = await openfort.feeSponsorship.rules.create({
   type: "account_functions",
   policy: policy.id,
   functionName: "transfer",
