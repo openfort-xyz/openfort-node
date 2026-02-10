@@ -71,7 +71,8 @@
       "includes": [
         "src/index.ts",
         "src/openapi-client/index.ts",
-        "src/wallets/**/index.ts"
+        "src/wallets/**/index.ts",
+        "src/policies/index.ts"
       ],
       "linter": {
         "rules": {
