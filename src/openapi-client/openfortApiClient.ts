@@ -129,6 +129,14 @@ export const configure = (options: OpenfortClientOptions): void => {
     retryDelay: exponentialDelay,
     retries: 3,
     retryCondition: (error) => {
+      // Don't retry wallet auth requests — they contain a nonce (jti) that
+      // can only be used once. Retrying would cause a replay detection error.
+      const hasWalletAuth =
+        error.config?.headers?.['X-Wallet-Auth'] !== undefined
+      if (hasWalletAuth) {
+        return false
+      }
+
       // Retry on network errors and 5xx responses
       return (
         axiosRetry.isNetworkOrIdempotentRequestError(error) ||
@@ -361,7 +369,18 @@ function handleResponseError(
   // Extract error message
   let errorMessage: string
   if (isOpenfortError(responseData)) {
-    errorMessage = responseData.message || responseData.error || 'Unknown error'
+    // Handle nested error format: { error: { type, message } }
+    const nestedMessage =
+      responseData.error && typeof responseData.error === 'object'
+        ? (responseData.error as { message?: string }).message
+        : undefined
+    errorMessage =
+      responseData.message ||
+      nestedMessage ||
+      (typeof responseData.error === 'string'
+        ? responseData.error
+        : undefined) ||
+      'Unknown error'
   } else if (typeof responseData === 'string') {
     errorMessage = responseData
   } else if (responseData) {
@@ -389,7 +408,7 @@ function handleResponseError(
       throw new APIError(
         statusCode,
         'unauthorized',
-        'Unauthorized. Check your API key.',
+        errorMessage || 'Unauthorized. Check your API key.',
         correlationId,
         `${ERROR_DOCS_URL}#unauthorized`,
         cause,

@@ -8,6 +8,7 @@ import {
   type HashTypedDataParameters,
   hashMessage,
   hashTypedData,
+  keccak256,
   parseSignature,
   type Signature,
   serializeTransaction,
@@ -75,11 +76,12 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
     },
 
     async signTransaction(transaction: TransactionSerializable): Promise<Hex> {
-      // Serialize the transaction before sending to API
+      // Serialize the transaction and hash it (TEE expects a 32-byte keccak256 hash)
       const serialized = serializeTransaction(transaction)
+      const hash = keccak256(serialized)
 
-      // Sign the serialized transaction via API
-      const response = await sign(id, { data: serialized })
+      // Sign the hash via API
+      const response = await sign(id, { data: hash })
 
       // Parse signature into v, r, s components
       const signature = parseSignature(response.signature as Hex) as Signature
