@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1
+
+### Patch Changes
+
+- [#61](https://github.com/openfort-xyz/openfort-node/pull/61) [`8618e2248ef6f0cd92c0cb469c20562c27d2761c`](https://github.com/openfort-xyz/openfort-node/commit/8618e2248ef6f0cd92c0cb469c20562c27d2761c) Thanks [@jamalavedra](https://github.com/jamalavedra)! - fix signing
+
 ## 0.8.0
 
 ### Minor Changes
