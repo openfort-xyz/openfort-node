@@ -207,7 +207,7 @@ export class SolanaClient {
    * ```typescript
    * const account = await openfort.solana.importAccount({
    *   privateKey: '5K...', // base58 or hex format
-   *   name: 'ImportedWallet',
+   *   // base58 or hex format
    * });
    * ```
    */
@@ -270,7 +270,6 @@ export class SolanaClient {
       const response = await importPrivateKey({
         encryptedPrivateKey,
         chainType: 'SVM',
-        name: options.name,
       })
 
       return toSolanaAccount({

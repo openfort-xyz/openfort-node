@@ -2913,7 +2913,7 @@ export interface PolicyV2RuleResponse {
   /** The action to take when this rule matches. */
   action: PolicyV2Action;
   /** The operation this rule applies to.
-EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation
+EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash
 Solana: signSolTransaction, sendSolTransaction, signSolMessage */
   operation: string;
   /** Array of criteria to match for this rule. All criteria must match (AND logic). */
@@ -3613,7 +3613,7 @@ export interface CreatePolicyV2RuleRequest {
   /** The action to take when this rule matches. */
   action: CreatePolicyV2RuleRequestAction;
   /** The operation this rule applies to.
-EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation
+EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash
 Solana: signSolTransaction, sendSolTransaction, signSolMessage */
   operation: string;
   /** Array of criteria to match for this rule. All criteria must match (AND logic). */
@@ -3714,7 +3714,7 @@ export interface EvaluatePolicyV2Payload {
 
 export interface EvaluatePolicyV2Request {
   /** The signing operation to evaluate.
-EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation
+EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash
 Solana: signSolTransaction, sendSolTransaction, signSolMessage */
   operation: string;
   /** The account ID to evaluate policies for (starts with acc_). If not provided, only project-scoped policies are evaluated. */
@@ -3842,8 +3842,6 @@ export interface BackendWalletResponse {
   address: string;
   /** The chain type the wallet is associated with. */
   chainType: BackendWalletResponseChainType;
-  /** Optional name for the wallet. */
-  name?: string;
   /** Key custody: always "Developer" for backend wallets (server-managed keys in TEE). */
   custody: BackendWalletResponseCustody;
   /** Creation timestamp (Unix epoch seconds). */
@@ -3903,8 +3901,6 @@ export interface BackendWalletListQueries {
   chainType?: BackendWalletListQueriesChainType;
   /** Filter by wallet address. */
   address?: string;
-  /** Filter by wallet name. */
-  name?: string;
   /** Filter by associated wallet ID (starts with `pla_`). */
   wallet?: string;
 }
@@ -3965,8 +3961,6 @@ export interface CreateBackendWalletRequest {
   chainType: CreateBackendWalletRequestChainType;
   /** The wallet ID to associate with this wallet (starts with `pla_`). */
   wallet?: string;
-  /** Optional name for the wallet. */
-  name?: string;
 }
 
 /**
@@ -4110,8 +4104,6 @@ Obtain the server's import public key out-of-band (e.g., from SDK or documentati
   chainType?: ImportPrivateKeyRequestChainType;
   /** The wallet ID to associate with this wallet (starts with `pla_`). */
   wallet?: string;
-  /** Optional name for the imported wallet. */
-  name?: string;
 }
 
 /**
@@ -6449,10 +6441,6 @@ chainType?: ListBackendWalletsChainType;
  * Filter by wallet address.
  */
 address?: string;
-/**
- * Filter by wallet name.
- */
-name?: string;
 /**
  * Filter by associated wallet ID (starts with `pla_`).
  */

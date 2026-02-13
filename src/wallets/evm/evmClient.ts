@@ -236,7 +236,6 @@ export class EvmClient {
       const response = await importPrivateKey({
         encryptedPrivateKey,
         chainType: 'EVM',
-        name: options.name,
       })
 
       return toEvmAccount({

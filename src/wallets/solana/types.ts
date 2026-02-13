@@ -43,8 +43,6 @@ export type SolanaAccount = SolanaAccountBase & SolanaSigningMethods
 export interface CreateSolanaAccountOptions {
   /** Wallet ID (starts with pla_). Optional - associates the wallet with a player. */
   wallet?: string
-  /** Optional name for the wallet */
-  name?: string
   /** Idempotency key */
   idempotencyKey?: string
 }
@@ -55,8 +53,6 @@ export interface CreateSolanaAccountOptions {
 export interface GetSolanaAccountOptions {
   /** Account address (base58 encoded) */
   address?: string
-  /** Account name */
-  name?: string
   /** Account ID */
   id?: string
 }
@@ -77,8 +73,6 @@ export interface ListSolanaAccountsOptions {
 export interface ImportSolanaAccountOptions {
   /** Private key as base58 string or 64-byte hex string */
   privateKey: string
-  /** Optional name for the account */
-  name?: string
 }
 
 /**
