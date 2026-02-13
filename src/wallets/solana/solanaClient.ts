@@ -105,6 +105,7 @@ export class SolanaClient {
     const response = await createBackendWallet({
       chainType: 'SVM',
       wallet: options.wallet,
+      name: options.name,
     })
 
     return toSolanaAccount({
@@ -134,9 +135,9 @@ export class SolanaClient {
   public async getAccount(
     options: GetSolanaAccountOptions,
   ): Promise<SolanaAccount> {
-    if (!options.id && !options.address) {
+    if (!options.id && !options.address && !options.name) {
       throw new UserInputValidationError(
-        'Must provide either id or address to get account',
+        'Must provide either id, address, or name to get account',
       )
     }
 
@@ -146,10 +147,11 @@ export class SolanaClient {
       return toSolanaAccount(toSolanaAccountData(response))
     }
 
-    // For address lookup, use listBackendWallets with address filter
-    if (options.address) {
+    // For address or name lookup, use listBackendWallets with filters
+    if (options.address || options.name) {
       const wallets = await listBackendWallets({
         address: options.address,
+        name: options.name,
         chainType: 'SVM',
         limit: 1,
       })
