@@ -7502,11 +7502,6 @@
             "description": "The chain type the wallet is associated with.",
             "example": "EVM"
           },
-          "name": {
-            "type": "string",
-            "description": "Optional name for the wallet.",
-            "example": "Treasury Wallet"
-          },
           "custody": {
             "type": "string",
             "enum": ["Developer"],
@@ -7603,11 +7598,6 @@
             "description": "Filter by wallet address.",
             "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
           },
-          "name": {
-            "type": "string",
-            "description": "Filter by wallet name.",
-            "example": "Treasury Wallet"
-          },
           "wallet": {
             "type": "string",
             "description": "Filter by associated wallet ID (starts with `pla_`).",
@@ -7665,11 +7655,6 @@
             "type": "string",
             "description": "The wallet ID to associate with this wallet (starts with `pla_`).",
             "example": "pla_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional name for the wallet.",
-            "example": "Treasury Wallet"
           }
         },
         "required": ["chainType"],
@@ -7821,11 +7806,6 @@
             "type": "string",
             "description": "The wallet ID to associate with this wallet (starts with `pla_`).",
             "example": "pla_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional name for the imported wallet.",
-            "example": "Treasury Wallet"
           }
         },
         "required": ["encryptedPrivateKey"],
@@ -18613,16 +18593,6 @@
               "type": "string"
             },
             "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
-          },
-          {
-            "description": "Filter by wallet name.",
-            "in": "query",
-            "name": "name",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "example": "Treasury Wallet"
           },
           {
             "description": "Filter by associated wallet ID (starts with `pla_`).",

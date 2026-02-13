@@ -100,7 +100,6 @@ export class EvmClient {
     const response = await createBackendWallet({
       chainType: 'EVM',
       wallet: options.wallet,
-      name: options.name,
     })
 
     return toEvmAccount({
@@ -128,9 +127,9 @@ export class EvmClient {
    * ```
    */
   public async getAccount(options: GetEvmAccountOptions): Promise<EvmAccount> {
-    if (!options.id && !options.address && !options.name) {
+    if (!options.id && !options.address) {
       throw new UserInputValidationError(
-        'Must provide either id, address, or name to get account',
+        'Must provide either id or address to get account',
       )
     }
 
@@ -140,11 +139,10 @@ export class EvmClient {
       return toEvmAccount(toEvmAccountData(response))
     }
 
-    // For address or name lookup, use listBackendWallets with filters
-    if (options.address || options.name) {
+    // For address lookup, use listBackendWallets with address filter
+    if (options.address) {
       const wallets = await listBackendWallets({
         address: options.address,
-        name: options.name,
         chainType: 'EVM',
         limit: 1,
       })
@@ -238,7 +236,6 @@ export class EvmClient {
       const response = await importPrivateKey({
         encryptedPrivateKey,
         chainType: 'EVM',
-        name: options.name,
       })
 
       return toEvmAccount({

@@ -107,8 +107,6 @@ export interface SignTransactionOptions {
 export interface CreateEvmAccountOptions {
   /** Wallet ID (starts with pla_). Optional - associates the wallet with a player. */
   wallet?: string
-  /** Optional name for the wallet */
-  name?: string
   /** Idempotency key */
   idempotencyKey?: string
 }
@@ -119,8 +117,6 @@ export interface CreateEvmAccountOptions {
 export interface GetEvmAccountOptions {
   /** Account address */
   address?: Address
-  /** Account name */
-  name?: string
   /** Account ID */
   id?: string
 }
@@ -141,8 +137,6 @@ export interface ListEvmAccountsOptions {
 export interface ImportEvmAccountOptions {
   /** Private key as hex string (with or without 0x prefix) */
   privateKey: string
-  /** Optional name for the account */
-  name?: string
   /** Idempotency key */
   idempotencyKey?: string
 }

@@ -105,7 +105,6 @@ export class SolanaClient {
     const response = await createBackendWallet({
       chainType: 'SVM',
       wallet: options.wallet,
-      name: options.name,
     })
 
     return toSolanaAccount({
@@ -135,9 +134,9 @@ export class SolanaClient {
   public async getAccount(
     options: GetSolanaAccountOptions,
   ): Promise<SolanaAccount> {
-    if (!options.id && !options.address && !options.name) {
+    if (!options.id && !options.address) {
       throw new UserInputValidationError(
-        'Must provide either id, address, or name to get account',
+        'Must provide either id or address to get account',
       )
     }
 
@@ -147,11 +146,10 @@ export class SolanaClient {
       return toSolanaAccount(toSolanaAccountData(response))
     }
 
-    // For address or name lookup, use listBackendWallets with filters
-    if (options.address || options.name) {
+    // For address lookup, use listBackendWallets with address filter
+    if (options.address) {
       const wallets = await listBackendWallets({
         address: options.address,
-        name: options.name,
         chainType: 'SVM',
         limit: 1,
       })
@@ -209,7 +207,7 @@ export class SolanaClient {
    * ```typescript
    * const account = await openfort.solana.importAccount({
    *   privateKey: '5K...', // base58 or hex format
-   *   name: 'ImportedWallet',
+   *   // base58 or hex format
    * });
    * ```
    */
@@ -272,7 +270,6 @@ export class SolanaClient {
       const response = await importPrivateKey({
         encryptedPrivateKey,
         chainType: 'SVM',
-        name: options.name,
       })
 
       return toSolanaAccount({
