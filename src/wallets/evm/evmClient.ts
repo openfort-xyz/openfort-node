@@ -100,6 +100,7 @@ export class EvmClient {
     const response = await createBackendWallet({
       chainType: 'EVM',
       wallet: options.wallet,
+      name: options.name
     })
 
     return toEvmAccount({
@@ -127,9 +128,9 @@ export class EvmClient {
    * ```
    */
   public async getAccount(options: GetEvmAccountOptions): Promise<EvmAccount> {
-    if (!options.id && !options.address) {
+    if (!options.id && !options.address && !options.name) {
       throw new UserInputValidationError(
-        'Must provide either id or address to get account',
+        'Must provide either id, address, or name to get account',
       )
     }
 
@@ -139,10 +140,11 @@ export class EvmClient {
       return toEvmAccount(toEvmAccountData(response))
     }
 
-    // For address lookup, use listBackendWallets with address filter
-    if (options.address) {
+    // For address or name lookup, use listBackendWallets with filters
+    if (options.address || options.name) {
       const wallets = await listBackendWallets({
         address: options.address,
+        name: options.name,
         chainType: 'EVM',
         limit: 1,
       })
@@ -221,7 +223,7 @@ export class EvmClient {
     if (!IMPORT_ENCRYPTION_PUBLIC_KEY) {
       throw new EncryptionError(
         'Import encryption public key is not configured. ' +
-          'Please contact Openfort to get the server public key.',
+        'Please contact Openfort to get the server public key.',
       )
     }
 

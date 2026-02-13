@@ -2913,7 +2913,7 @@ export interface PolicyV2RuleResponse {
   /** The action to take when this rule matches. */
   action: PolicyV2Action;
   /** The operation this rule applies to.
-EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation
+EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash
 Solana: signSolTransaction, sendSolTransaction, signSolMessage */
   operation: string;
   /** Array of criteria to match for this rule. All criteria must match (AND logic). */
@@ -3613,7 +3613,7 @@ export interface CreatePolicyV2RuleRequest {
   /** The action to take when this rule matches. */
   action: CreatePolicyV2RuleRequestAction;
   /** The operation this rule applies to.
-EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation
+EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash
 Solana: signSolTransaction, sendSolTransaction, signSolMessage */
   operation: string;
   /** Array of criteria to match for this rule. All criteria must match (AND logic). */
@@ -3714,7 +3714,7 @@ export interface EvaluatePolicyV2Payload {
 
 export interface EvaluatePolicyV2Request {
   /** The signing operation to evaluate.
-EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash, prepareUserOperation, sendUserOperation
+EVM: signEvmTransaction, sendEvmTransaction, signEvmTypedData, signEvmMessage, signEvmHash
 Solana: signSolTransaction, sendSolTransaction, signSolMessage */
   operation: string;
   /** The account ID to evaluate policies for (starts with acc_). If not provided, only project-scoped policies are evaluated. */
