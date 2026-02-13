@@ -100,7 +100,7 @@ export class EvmClient {
     const response = await createBackendWallet({
       chainType: 'EVM',
       wallet: options.wallet,
-      name: options.name
+      name: options.name,
     })
 
     return toEvmAccount({
@@ -223,7 +223,7 @@ export class EvmClient {
     if (!IMPORT_ENCRYPTION_PUBLIC_KEY) {
       throw new EncryptionError(
         'Import encryption public key is not configured. ' +
-        'Please contact Openfort to get the server public key.',
+          'Please contact Openfort to get the server public key.',
       )
     }
 
