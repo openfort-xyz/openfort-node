@@ -10,9 +10,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 });
 
 // Create a backend account
-const account = await openfort.accounts.evm.backend.create({
-  name: `Wallet-${Date.now()}`,
-});
+const account = await openfort.accounts.evm.backend.create();
 console.log("Created account:", account.address);
 
 // Sign a message

@@ -15,9 +15,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 });
 
 // Create an EVM backend wallet to attach the policy to
-const account = await openfort.accounts.evm.backend.create({
-  name: `PolicyAccount-${Date.now()}`,
-});
+const account = await openfort.accounts.evm.backend.create();
 console.log("Created account:", account.id);
 
 // ---------------------------------------------------------------------------

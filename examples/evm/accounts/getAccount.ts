@@ -14,9 +14,7 @@ const player = await openfort.players.create({
 });
 console.log("Created player:", player.id);
 
-const account = await openfort.accounts.evm.backend.create({
-  name: `MyWallet-${Date.now()}`,
-});
+const account = await openfort.accounts.evm.backend.create();
 console.log("Created account:", account.address);
 
 // Retrieve account by ID

@@ -17,8 +17,8 @@ for (const account of result.accounts) {
 }
 
 // Create a few more accounts
-await openfort.accounts.evm.backend.create({ name: `Wallet-${Date.now()}-1` });
-await openfort.accounts.evm.backend.create({ name: `Wallet-${Date.now()}-2` });
+await openfort.accounts.evm.backend.create();
+await openfort.accounts.evm.backend.create();
 
 // List accounts with pagination
 const moreAccounts = await openfort.accounts.evm.backend.list({
