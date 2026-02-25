@@ -546,7 +546,7 @@ export const openfortApiClient = async <T>(
 
     // Unknown errors
     throw new UnknownError(
-      'Something went wrong. Please contact support at https://www.openfort.io/support',
+      'Something went wrong. Please contact support at support@openfort.xyz',
       error instanceof Error ? error : undefined,
     )
   }

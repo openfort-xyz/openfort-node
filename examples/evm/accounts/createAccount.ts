@@ -9,9 +9,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 });
 
 // Create an EVM backend account
-const account = await openfort.accounts.evm.backend.create({
-  name: `MyWallet-${Date.now()}`,
-});
+const account = await openfort.accounts.evm.backend.create();
 
 console.log("Created EVM account:");
 console.log("  ID:", account.id);

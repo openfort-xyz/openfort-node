@@ -24,7 +24,7 @@ const result = await openfort.accounts.evm.embedded.pregenerate(
 
 console.log("Pre-generated user with embedded wallet:");
 console.log("  Account ID:", result.id);
-console.log("  User ID:", result.user);
+console.log("  Wallet ID:", result.wallet);
 console.log("  Address:", result.address);
 console.log("  Owner Address:", result.ownerAddress);
 console.log("  Account Type:", result.accountType);
