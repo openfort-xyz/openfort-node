@@ -47,12 +47,9 @@ export async function signTransaction(
 ): Promise<SignTransactionResult> {
   const { accountId, transaction } = options
 
-  // Serialize the unsigned transaction and hash it
+  // Send serialized transaction (backend detects type, hashes, signs)
   const serialized = serializeTransaction(transaction)
-  const hash = keccak256(serialized)
-
-  // Sign the hash via API
-  const response = await signApi(accountId, { data: hash })
+  const response = await signApi(accountId, { data: serialized })
 
   // Parse signature into v, r, s components
   const signature = parseSignature(response.signature as Hex) as Signature
