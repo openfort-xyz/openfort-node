@@ -6,12 +6,11 @@
 import {
   getTypesForEIP712Domain,
   type HashTypedDataParameters,
-  hashMessage,
   hashTypedData,
-  keccak256,
   parseSignature,
   type Signature,
   serializeTransaction,
+  toPrefixedMessage,
 } from 'viem'
 import { sign } from '../../../openapi-client'
 import { signHash as signHashAction } from '../actions/signHash'
@@ -61,27 +60,16 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
     async signMessage(parameters: { message: SignableMessage }): Promise<Hex> {
       const { message } = parameters
 
-      // Handle string messages differently from raw messages
-      if (typeof message === 'string') {
-        // For string messages, hash with EIP-191 prefix and sign
-        const hash = hashMessage(message)
-        const result = await sign(id, { data: hash })
-        return result.signature as Hex
-      }
-
-      // For raw messages (Uint8Array or { raw: ... }), hash and sign
-      const hash = hashMessage(message)
-      const result = await sign(id, { data: hash })
+      // Send EIP-191 preimage (backend detects type, hashes, signs)
+      const preimage = toPrefixedMessage(message)
+      const result = await sign(id, { data: preimage })
       return result.signature as Hex
     },
 
     async signTransaction(transaction: TransactionSerializable): Promise<Hex> {
-      // Serialize the transaction and hash it (TEE expects a 32-byte keccak256 hash)
+      // Send serialized transaction (backend detects type, hashes, signs)
       const serialized = serializeTransaction(transaction)
-      const hash = keccak256(serialized)
-
-      // Sign the hash via API
-      const response = await sign(id, { data: hash })
+      const response = await sign(id, { data: serialized })
 
       // Parse signature into v, r, s components
       const signature = parseSignature(response.signature as Hex) as Signature
