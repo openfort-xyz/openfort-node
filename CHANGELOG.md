@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.4
+
+### Patch Changes
+
+- [#72](https://github.com/openfort-xyz/openfort-node/pull/72) [`f6e6bbd249644bdb9fe287d3b363c06dabb2d77b`](https://github.com/openfort-xyz/openfort-node/commit/f6e6bbd249644bdb9fe287d3b363c06dabb2d77b) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update backend wallet interactions
+
 ## 0.8.3
 
 ### Patch Changes
