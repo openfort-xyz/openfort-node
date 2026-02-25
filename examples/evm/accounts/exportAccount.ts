@@ -18,7 +18,6 @@ console.log("Original address:", originalAccount.address);
 
 const account = await openfort.accounts.evm.backend.import({
   privateKey: originalPrivateKey,
-  name: "ExportTestWallet",
 });
 
 console.log("\nImported account ID:", account.id);

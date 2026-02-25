@@ -17,8 +17,8 @@ for (const account of result.accounts) {
 }
 
 // Create a few more accounts
-await openfort.accounts.solana.backend.create({ name: `SolanaWallet-${Date.now()}-1` });
-await openfort.accounts.solana.backend.create({ name: `SolanaWallet-${Date.now()}-2` });
+await openfort.accounts.solana.backend.create();
+await openfort.accounts.solana.backend.create();
 
 // List accounts with pagination
 const moreAccounts = await openfort.accounts.solana.backend.list({

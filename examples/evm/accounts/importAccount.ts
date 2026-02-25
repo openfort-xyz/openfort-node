@@ -19,7 +19,6 @@ console.log("Expected address:", localAccount.address);
 // Import the account to Openfort
 const account = await openfort.accounts.evm.backend.import({
   privateKey,
-  name: "ImportedWallet",
 });
 
 console.log("\nImported account:");
