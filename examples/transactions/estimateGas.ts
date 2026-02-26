@@ -9,18 +9,27 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create an account (V1 legacy API)
-const account = await openfort.accounts.v1.create({
-  chainId,
+// Create a policy for gas sponsorship
+const policy = await openfort.policies.create({
+  scope: "project",
+  rules: [
+    {
+      action: "accept",
+      operation: "sponsorEvmTransaction",
+      criteria: [
+        { type: "evmNetwork", operator: "in", chainIds: [chainId] },
+      ],
+    },
+  ],
 });
 
-// Create a policy
-const policy = await openfort.feeSponsorship.create({
+// Create a fee sponsorship linked to the policy
+const sponsorship = await openfort.feeSponsorship.create({
   name: `TxPolicy-${Date.now()}`,
-  chainId,
   strategy: {
     sponsorSchema: "pay_for_user",
   },
+  policyId: policy.id,
 });
 
 const contract = await openfort.contracts.create({
@@ -31,17 +40,10 @@ const contract = await openfort.contracts.create({
   // abi: [...]
 });
 
-// Create a policy rule to allow all account functions
-await openfort.feeSponsorship.rules.create({
-  type: "contract_functions",
-  functionName: "All functions",
-  wildcard: true,
-  policy: policy.id,
-});
 // Define transaction intent request
 const transactionIntentRequest = {
   chainId,
-  policy: policy.id,
+  policy: sponsorship.id,
   interactions: [
     {
       contract: contract.id,
