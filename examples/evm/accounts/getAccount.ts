@@ -8,12 +8,6 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });
 
-// Create a player and account first
-const player = await openfort.players.create({
-  name: `Player-${Date.now()}`,
-});
-console.log("Created player:", player.id);
-
 const account = await openfort.accounts.evm.backend.create();
 console.log("Created account:", account.address);
 

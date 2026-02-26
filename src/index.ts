@@ -1,3 +1,4 @@
+import { timingSafeEqual } from 'node:crypto'
 import {
   entropy,
   type Share,
@@ -294,8 +295,8 @@ class Openfort {
   // ============================================
 
   /**
-   * Player management endpoints
-   * @deprecated
+   * Player management endpoints.
+   * @deprecated Use `openfort.iam.users` for V2 user management.
    */
   public get players() {
     return {
@@ -339,39 +340,60 @@ class Openfort {
   // ============================================
 
   /**
-   * Policy management endpoints for controlling account operations.
+   * Policy management endpoints for criteria-based access control.
    *
    * Policies define rules that govern what operations accounts can perform,
-   * including transaction signing, message signing, and more.
+   * including transaction signing, message signing, and gas sponsorship.
+   * Each policy has a scope (project, account, or transaction), a priority,
+   * and an ordered list of rules. Each rule specifies an action (accept/reject),
+   * an operation, and criteria that must all match (AND logic).
+   *
+   * **Supported operations:**
+   * - EVM: `signEvmTransaction`, `sendEvmTransaction`, `signEvmTypedData`, `signEvmMessage`, `signEvmHash`, `sponsorEvmTransaction`
+   * - Solana: `signSolTransaction`, `sendSolTransaction`, `signSolMessage`, `sponsorSolTransaction`
+   *
+   * **Supported criteria types:**
+   * - EVM: `evmAddress`, `ethValue`, `evmNetwork`, `evmData`, `evmMessage`, `evmTypedDataVerifyingContract`, `evmTypedDataField`
+   * - Solana: `solAddress`, `solValue`, `splAddress`, `splValue`, `mintAddress`, `programId`, `solNetwork`, `solMessage`, `solData`
+   *
+   * Policies are evaluated in priority order (highest first). The first matching rule determines the outcome.
+   * If policies exist but no rule matches, the operation is rejected (fail-closed).
    *
    * @example
    * ```typescript
-   * // List all policies
-   * const all = await openfort.policies.list();
-   *
-   * // Create a policy
+   * // Create a policy that only allows transactions to specific addresses on certain chains
    * const policy = await openfort.policies.create({
    *   scope: 'project',
-   *   rules: [{ action: 'reject', operation: 'signEvmHash' }],
+   *   rules: [{
+   *     action: 'accept',
+   *     operation: 'sponsorEvmTransaction',
+   *     criteria: [
+   *       { type: 'evmNetwork', operator: 'in', chainIds: [1, 137] },
+   *       { type: 'evmAddress', operator: 'in', addresses: ['0x...'] },
+   *     ],
+   *   }],
    * });
    *
    * // Evaluate whether an operation would be allowed
-   * const result = await openfort.policies.evaluate({ operation: 'signEvmTransaction', accountId: 'acc_...' });
+   * const result = await openfort.policies.evaluate({
+   *   operation: 'signEvmTransaction',
+   *   accountId: 'acc_...',
+   * });
    * ```
    */
   public get policies() {
     return {
-      /** List policies */
+      /** List policies, optionally filtered by scope, enabled status, or account */
       list: api.listPolicies,
-      /** Create a policy */
+      /** Create a policy with scope, priority, and criteria-based rules */
       create: api.createPolicyV2,
-      /** Get a policy by ID */
+      /** Get a policy by ID (ply_...) */
       get: api.getPolicyV2,
-      /** Update a policy */
+      /** Update a policy's description, priority, enabled status, or rules */
       update: api.updatePolicyV2,
-      /** Delete a policy */
+      /** Soft-delete a policy */
       delete: api.deletePolicyV2,
-      /** Evaluate an operation against policies */
+      /** Pre-flight check: evaluate whether an operation would be allowed without executing it */
       evaluate: api.evaluatePolicyV2,
     }
   }
@@ -381,37 +403,60 @@ class Openfort {
   // ============================================
 
   /**
-   * Fee sponsorship (gas policy) management endpoints
+   * Fee sponsorship endpoints for sponsoring gas costs on behalf of users.
+   *
+   * A fee sponsorship links a strategy (how gas is paid) to a policy (which
+   * transactions qualify). Create a policy first via `openfort.policies.create()`,
+   * then create a fee sponsorship referencing it.
+   *
+   * **Strategies (`sponsorSchema`):**
+   * - `pay_for_user` — Developer fully sponsors gas costs
+   * - `charge_custom_tokens` — User pays in ERC-20 tokens (fixed or dynamic exchange rate)
+   * - `fixed_rate` — User pays a fixed token amount per transaction
+   *
+   * **Workflow:**
+   * 1. Create a policy via `openfort.policies.create()` with criteria rules
+   * 2. Create a fee sponsorship via `openfort.feeSponsorship.create()` linking to that policy
+   *
+   * When a transaction is submitted without an explicit policy, project-scoped fee
+   * sponsorships are auto-discovered and the first matching one is applied.
+   *
+   * @example
+   * ```typescript
+   * // 1. Create a policy to sponsor transactions on Polygon
+   * const policy = await openfort.policies.create({
+   *   scope: 'project',
+   *   rules: [{
+   *     action: 'accept',
+   *     operation: 'sponsorEvmTransaction',
+   *     criteria: [{ type: 'evmNetwork', operator: 'in', chainIds: [137] }],
+   *   }],
+   * });
+   *
+   * // 2. Create a fee sponsorship with pay_for_user strategy
+   * const sponsorship = await openfort.feeSponsorship.create({
+   *   name: 'Polygon Gas Sponsorship',
+   *   strategy: { sponsorSchema: 'pay_for_user' },
+   *   policyId: policy.id,
+   * });
+   * ```
    */
   public get feeSponsorship() {
     return {
-      /** List fee sponsorship policies */
-      list: api.getPolicies,
-      /** Create a fee sponsorship policy */
-      create: api.createPolicy,
-      /** Get a fee sponsorship policy by ID */
-      get: api.getPolicy,
-      /** Update a fee sponsorship policy */
-      update: api.updatePolicy,
-      /** Delete a fee sponsorship policy */
-      delete: api.deletePolicy,
-      /** Disable a fee sponsorship policy */
-      disable: api.disablePolicy,
-      /** Enable a fee sponsorship policy */
-      enable: api.enablePolicy,
-      /** Get fee sponsorship policy total gas usage */
-      getTotalGasUsage: api.getPolicyTotalGasUsage,
-      /** Fee sponsorship policy rules */
-      rules: {
-        /** List policy rules */
-        list: api.getPolicyRules,
-        /** Create a policy rule */
-        create: api.createPolicyRule,
-        /** Update a policy rule */
-        update: api.updatePolicyRule,
-        /** Delete a policy rule */
-        delete: api.deletePolicyRule,
-      },
+      /** List fee sponsorships, optionally filtered by name, chainId, or enabled status */
+      list: api.listFeeSponsorships,
+      /** Create a fee sponsorship linked to a policy (policyId required) */
+      create: api.createFeeSponsorship,
+      /** Get a fee sponsorship by ID (pol_...) */
+      get: api.getFeeSponsorship,
+      /** Update a fee sponsorship's name, strategy, or linked policy */
+      update: api.updateFeeSponsorship,
+      /** Soft-delete a fee sponsorship */
+      delete: api.deleteFeeSponsorship,
+      /** Disable a fee sponsorship (stops it from being applied to transactions) */
+      disable: api.disableFeeSponsorship,
+      /** Enable a previously disabled fee sponsorship */
+      enable: api.enableFeeSponsorship,
     }
   }
 
@@ -420,19 +465,23 @@ class Openfort {
   // ============================================
 
   /**
-   * Transaction intent management endpoints
+   * Transaction intent endpoints for creating and managing on-chain transactions.
+   *
+   * Transaction intents represent a desired on-chain action (contract calls, transfers).
+   * When a fee sponsorship policy is provided (or auto-discovered from project-scoped policies),
+   * gas costs are sponsored according to the policy's strategy.
    */
   public get transactionIntents() {
     return {
       /** List transaction intents */
       list: api.getTransactionIntents,
-      /** Create a transaction intent */
+      /** Create a transaction intent with contract interactions */
       create: api.createTransactionIntent,
       /** Get a transaction intent by ID */
       get: api.getTransactionIntent,
       /** Sign a transaction intent */
       signature: api.signature,
-      /** Estimate cost */
+      /** Estimate gas cost for a transaction before creating it */
       estimateCost: api.estimateTransactionIntentCost,
     }
   }
@@ -456,29 +505,6 @@ class Openfort {
       revoke: api.revokeSession,
       /** Sign a session */
       signature: api.signatureSession,
-    }
-  }
-
-  // ============================================
-  // Settings API
-  // ============================================
-
-  /**
-   * Settings / Developer account management endpoints
-   * @deprecated
-   */
-  public get settings() {
-    return {
-      /** List developer accounts */
-      getDeveloperAccounts: api.getDeveloperAccounts,
-      /** Create a developer account */
-      createDeveloperAccount: api.createDeveloperAccount,
-      /** Get a developer account by ID */
-      getDeveloperAccount: api.getDeveloperAccount,
-      /** Delete a developer account */
-      deleteDeveloperAccount: api.deleteDeveloperAccount,
-      /** Get verification payload */
-      getVerificationPayload: api.getVerificationPayload,
     }
   }
 
@@ -650,7 +676,11 @@ class Openfort {
       return accountResponse
     } catch (error) {
       // If anything fails after user creation, delete the created user
-      await api.deleteUser(response.user)
+      try {
+        await api.deleteUser(response.user)
+      } catch {
+        // Cleanup failed — user may be orphaned, but re-throw original error
+      }
       throw error
     }
   }
@@ -695,6 +725,16 @@ class Openfort {
     thirdPartyUserId: string | undefined,
     config: ShieldConfiguration,
   ): Promise<void> {
+    if (
+      !config.shieldApiKey ||
+      !config.shieldApiSecret ||
+      !config.encryptionShare
+    ) {
+      throw new Error(
+        'Shield configuration requires shieldApiKey, shieldApiSecret, and encryptionShare',
+      )
+    }
+
     let externalUserId: string
 
     if (config.shieldAuthProvider === ShieldAuthProvider.OPENFORT) {
@@ -736,13 +776,16 @@ class Openfort {
   // ============================================
 
   /**
-   * Paymaster endpoints
+   * Paymaster endpoints for managing ERC-4337 paymasters.
+   *
+   * Paymasters handle gas payment on-chain for account abstraction (ERC-4337).
+   * Fee sponsorships reference a paymaster to determine how user operations are sponsored.
    */
   public get paymasters() {
     return {
       /** Create a paymaster */
       create: api.createPaymaster,
-      /** Get a paymaster by ID */
+      /** Get a paymaster by ID (pay_...) */
       get: api.getPaymaster,
       /** Update a paymaster */
       update: api.updatePaymaster,
@@ -766,10 +809,19 @@ class Openfort {
     signature: string,
   ): Promise<T> {
     const signedPayload = await sign(this._apiKey, body)
-    if (signedPayload !== signature) {
-      throw Error('Invalid signature')
+    const expectedBuffer = Buffer.from(signedPayload, 'hex')
+    const receivedBuffer = Buffer.from(signature, 'hex')
+    if (
+      expectedBuffer.length !== receivedBuffer.length ||
+      !timingSafeEqual(expectedBuffer, receivedBuffer)
+    ) {
+      throw new Error('Invalid signature')
     }
-    return JSON.parse(body) as T
+    try {
+      return JSON.parse(body) as T
+    } catch {
+      throw new Error('Failed to parse webhook payload')
+    }
   }
 
   /**
@@ -880,6 +932,8 @@ export {
   SolValueCriterionSchema,
   SplAddressCriterionSchema,
   SplValueCriterionSchema,
+  SponsorEvmTransactionRuleSchema,
+  SponsorSolTransactionRuleSchema,
   type UpdatePolicyBody,
   UpdatePolicyBodySchema,
 } from './policies'

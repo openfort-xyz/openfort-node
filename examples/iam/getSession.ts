@@ -6,7 +6,6 @@ import "dotenv/config";
 const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   basePath: process.env.OPENFORT_BASE_URL,
   publishableKey: process.env.OPENFORT_PUBLISHABLE_KEY,
-  debugging: true,
 });
 
 const accessToken = process.argv[2];
@@ -22,7 +21,6 @@ if (response === null) {
   console.error("Invalid token");
   process.exit(1);
 }
-console.log(response)
 console.log("Session verified:");
 console.log("  User ID:", response.user.id);
 console.log("  User Email:", response.user.email);

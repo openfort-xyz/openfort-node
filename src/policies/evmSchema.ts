@@ -203,3 +203,24 @@ export const SignEvmHashRuleSchema = z.object({
   operation: z.literal('signEvmHash'),
 })
 export type SignEvmHashRule = z.infer<typeof SignEvmHashRuleSchema>
+
+/** Sponsor EVM transaction uses the same criteria as send (address, value, network, data). */
+export const SponsorEvmTransactionCriteriaSchema = z
+  .array(
+    z.discriminatedUnion('type', [
+      EthValueCriterionSchema,
+      EvmAddressCriterionSchema,
+      EvmNetworkCriterionSchema,
+      EvmDataCriterionSchema,
+    ]),
+  )
+  .max(10)
+
+export const SponsorEvmTransactionRuleSchema = z.object({
+  action: ActionEnum,
+  operation: z.literal('sponsorEvmTransaction'),
+  criteria: SponsorEvmTransactionCriteriaSchema,
+})
+export type SponsorEvmTransactionRule = z.infer<
+  typeof SponsorEvmTransactionRuleSchema
+>

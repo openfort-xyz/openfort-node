@@ -9,17 +9,33 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create a gas sponsorship policy
-const policy = await openfort.feeSponsorship.create({
+// 1. Create a policy with criteria rules
+const policy = await openfort.policies.create({
+  scope: "project",
+  description: "Sponsor all transactions on this chain",
+  rules: [
+    {
+      action: "accept",
+      operation: "sponsorEvmTransaction",
+      criteria: [
+        { type: "evmNetwork", operator: "in", chainIds: [chainId] },
+      ],
+    },
+  ],
+});
+console.log("Created policy:", policy.id);
+
+// 2. Create a fee sponsorship linked to that policy
+const sponsorship = await openfort.feeSponsorship.create({
   name: "Gas Sponsorship Policy",
-  chainId,
   strategy: {
     sponsorSchema: "pay_for_user",
   },
+  policyId: policy.id,
 });
 
-console.log("Created policy:");
-console.log("  ID:", policy.id);
-console.log("  Name:", policy.name);
-console.log("  Chain ID:", policy.chainId);
-console.log("  Strategy:", policy.strategy.sponsorSchema);
+console.log("Created fee sponsorship:");
+console.log("  ID:", sponsorship.id);
+console.log("  Name:", sponsorship.name);
+console.log("  Strategy:", sponsorship.strategy.sponsorSchema);
+console.log("  Policy ID:", sponsorship.policyId);

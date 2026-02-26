@@ -5745,7 +5745,7 @@
         "additionalProperties": false
       },
       "PolicyV2Scope": {
-        "enum": ["project", "account"],
+        "enum": ["project", "account", "transaction"],
         "type": "string"
       },
       "PolicyV2Action": {
@@ -6533,10 +6533,13 @@
             "description": "Specifies the order in which to sort the results."
           },
           "scope": {
-            "type": "string",
-            "enum": ["project", "account"],
+            "items": {
+              "type": "string",
+              "enum": ["project", "account", "transaction"]
+            },
+            "type": "array",
             "description": "Filter by scope.",
-            "example": "project"
+            "example": ["project", "account"]
           },
           "enabled": {
             "type": "boolean",
@@ -7124,8 +7127,8 @@
         "properties": {
           "scope": {
             "type": "string",
-            "enum": ["project", "account"],
-            "description": "The scope of the policy. 'project' applies to all accounts, 'account' applies to a specific account.",
+            "enum": ["project", "account", "transaction"],
+            "description": "The scope of the policy.\n- 'project': applies to all accounts (soft validation - no match = user pays)\n- 'account': applies to a specific account (soft validation)\n- 'transaction': only when explicitly passed (hard validation - no match = tx fails)",
             "example": "project"
           },
           "description": {
@@ -7357,6 +7360,295 @@
           },
           "object": {
             "$ref": "#/components/schemas/EntityType.POLICY_V2"
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        },
+        "required": ["id", "object", "deleted"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "FeeSponsorshipStrategyResponse": {
+        "description": "Strategy information in fee sponsorship response.",
+        "properties": {
+          "sponsorSchema": {
+            "type": "string",
+            "description": "The sponsorship schema type.",
+            "example": "pay_for_user"
+          },
+          "tokenContract": {
+            "type": "string",
+            "description": "Token contract ID for charge_custom_tokens or fixed_rate schemas.",
+            "example": "con_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "tokenContractAmount": {
+            "type": "string",
+            "description": "Token amount for charge_custom_tokens or fixed_rate schemas.",
+            "example": "1000000000000000000"
+          },
+          "dynamicExchangeRate": {
+            "type": "boolean",
+            "description": "Whether the exchange rate is computed dynamically from cached prices.\nTrue when tokenContractAmount was not provided at creation time.",
+            "example": true
+          }
+        },
+        "required": ["sponsorSchema"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EntityType.FEE_SPONSORSHIP": {
+        "enum": ["feeSponsorship"],
+        "type": "string"
+      },
+      "FeeSponsorshipResponse": {
+        "description": "Fee sponsorship policy response.",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "$ref": "#/components/schemas/EntityType.FEE_SPONSORSHIP"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of the fee sponsorship policy.",
+            "example": "My DeFi Gas Sponsorship"
+          },
+          "chainId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "Chain ID for single-chain sponsorship.",
+            "example": 8453,
+            "deprecated": true
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the policy is enabled.",
+            "example": true
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/FeeSponsorshipStrategyResponse",
+            "description": "Sponsorship strategy configuration."
+          },
+          "paymasterId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Paymaster ID (optional).",
+            "example": "pay_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "forwarderContractId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Forwarder contract ID (optional, for meta-transactions).",
+            "example": "cfo_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "policyId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Linked policy ID for criteria-based transaction filtering.",
+            "example": "ply_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "createdAt",
+          "name",
+          "chainId",
+          "enabled",
+          "strategy",
+          "paymasterId",
+          "forwarderContractId",
+          "policyId"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "FeeSponsorshipListResponse": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/ResponseType.LIST"
+          },
+          "url": {
+            "type": "string"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/FeeSponsorshipResponse"
+            },
+            "type": "array"
+          },
+          "start": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "end": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "required": ["object", "url", "data", "start", "end", "total"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "FeeSponsorshipListQueries": {
+        "description": "Query parameters for listing fee sponsorship policies.",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the maximum number of records to return.",
+            "minimum": 1
+          },
+          "skip": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the offset for the first records to return.",
+            "minimum": 0
+          },
+          "order": {
+            "$ref": "#/components/schemas/Prisma.SortOrder",
+            "description": "Specifies the order in which to sort the results."
+          },
+          "name": {
+            "type": "string",
+            "description": "Filter by policy name (partial match).",
+            "example": "DeFi"
+          },
+          "chainId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Filter by chain ID.",
+            "example": 1
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Filter by enabled status.",
+            "example": true
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Include deleted policies.",
+            "example": false,
+            "default": false
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "FeeSponsorshipStrategy": {
+        "description": "Strategy configuration for fee sponsorship.",
+        "properties": {
+          "sponsorSchema": {
+            "$ref": "#/components/schemas/SponsorSchema",
+            "description": "The sponsorship schema type.",
+            "example": "pay_for_user"
+          },
+          "tokenContract": {
+            "type": "string",
+            "description": "Token contract UUID for charge_custom_tokens or fixed_rate schemas.",
+            "example": "con_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "tokenContractAmount": {
+            "type": "string",
+            "description": "Token amount for charge_custom_tokens or fixed_rate schemas.",
+            "example": "1000000000000000000"
+          }
+        },
+        "required": ["sponsorSchema"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "CreateFeeSponsorshipRequest": {
+        "description": "Request to create a new fee sponsorship policy.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the fee sponsorship policy.",
+            "example": "My DeFi Gas Sponsorship"
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/FeeSponsorshipStrategy",
+            "description": "Sponsorship strategy configuration."
+          },
+          "paymaster": {
+            "type": "string",
+            "description": "Paymaster UUID (optional, for pay_for_user schema).",
+            "example": "pay_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "chainId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Chain ID for single-chain sponsorship.",
+            "example": 8453,
+            "deprecated": true
+          },
+          "forwarderContractId": {
+            "type": "string",
+            "description": "Forwarder contract UUID (optional, for meta-transactions).",
+            "example": "cfo_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "policyId": {
+            "type": "string",
+            "description": "Link to a policy for criteria-based transaction filtering.\nCreate the policy first via /v2/policies, then reference it here.",
+            "example": "ply_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        },
+        "required": ["strategy", "policyId"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateFeeSponsorshipRequest": {
+        "description": "Request to update a fee sponsorship policy.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the fee sponsorship policy.",
+            "example": "Updated Gas Sponsorship"
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/FeeSponsorshipStrategy",
+            "description": "Sponsorship strategy configuration."
+          },
+          "chainId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Chain ID for single-chain sponsorship.",
+            "example": 8453,
+            "deprecated": true
+          },
+          "forwarderContractId": {
+            "type": "string",
+            "description": "Forwarder contract UUID (optional, for meta-transactions).",
+            "example": "cfo_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          },
+          "policyId": {
+            "type": "string",
+            "description": "Link to a policy for criteria-based transaction filtering.",
+            "example": "ply_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "FeeSponsorshipDeleteResponse": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "$ref": "#/components/schemas/EntityType.FEE_SPONSORSHIP"
           },
           "deleted": {
             "type": "boolean"
@@ -13914,7 +14206,7 @@
     },
     "/v1/policy_rules": {
       "get": {
-        "operationId": "GetPolicyRules",
+        "operationId": "GetGasPolicyRulesLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -13954,9 +14246,9 @@
             "description": "Error response."
           }
         },
-        "description": "Returns a list of policy rules of a policy.\n\nThe policy rules are returned sorted by creation date, with the most recently created policy rules appearing first.\n\nBy default, a maximum of 10 policy rules are shown per page.",
-        "summary": "List policy rules of a policy.",
-        "tags": ["PolicyRules"],
+        "description": "Returns a list of rules for a gas sponsorship policy.\n\nThe policy rules are returned sorted by creation date, with the most recently created policy rules appearing first.\n\nBy default, a maximum of 10 policy rules are shown per page.",
+        "summary": "List gas policy rules (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policy Rules (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14024,7 +14316,7 @@
         ]
       },
       "post": {
-        "operationId": "CreatePolicyRule",
+        "operationId": "CreateGasPolicyRuleLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14100,8 +14392,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Create a policy rule object.",
-        "tags": ["PolicyRules"],
+        "summary": "Create a gas policy rule (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policy Rules (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14125,7 +14417,7 @@
     },
     "/v1/policy_rules/{id}": {
       "post": {
-        "operationId": "UpdatePolicyRule",
+        "operationId": "UpdateGasPolicyRuleLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14158,8 +14450,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Update a policy rule object.",
-        "tags": ["PolicyRules"],
+        "summary": "Update a gas policy rule (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policy Rules (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14192,7 +14484,7 @@
         }
       },
       "delete": {
-        "operationId": "DeletePolicyRule",
+        "operationId": "DeleteGasPolicyRuleLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14220,8 +14512,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Deletes a policy rule object.",
-        "tags": ["PolicyRules"],
+        "summary": "Delete a gas policy rule (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policy Rules (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14246,7 +14538,7 @@
     },
     "/v1/policies": {
       "get": {
-        "operationId": "GetPolicies",
+        "operationId": "GetGasPoliciesLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14299,9 +14591,9 @@
             "description": "Error response."
           }
         },
-        "description": "Returns a list of Policies.\n\nReturns the latest 10 transaction intents for each policy.",
-        "summary": "List policies.",
-        "tags": ["Policies"],
+        "description": "Returns a list of gas sponsorship policies.\n\nReturns the latest 10 transaction intents for each policy.",
+        "summary": "List gas policies (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14398,7 +14690,7 @@
         ]
       },
       "post": {
-        "operationId": "CreatePolicy",
+        "operationId": "CreateGasPolicyLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14445,8 +14737,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Create a policy object.",
-        "tags": ["Policies"],
+        "summary": "Create a gas policy (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14470,7 +14762,7 @@
     },
     "/v1/policies/{id}": {
       "get": {
-        "operationId": "GetPolicy",
+        "operationId": "GetGasPolicyLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14514,9 +14806,9 @@
             "description": "Error response."
           }
         },
-        "description": "Retrieves the details of a Policy that has previously been created.\n\nReturns the latest 10 transaction intents that used this policy.",
-        "summary": "Get a policy object.",
-        "tags": ["Policies"],
+        "description": "Retrieves the details of a gas sponsorship policy that has previously been created.\n\nReturns the latest 10 transaction intents that used this policy.",
+        "summary": "Get a gas policy (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14553,7 +14845,7 @@
         ]
       },
       "post": {
-        "operationId": "UpdatePolicy",
+        "operationId": "UpdateGasPolicyLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14600,8 +14892,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Update a policy object.",
-        "tags": ["Policies"],
+        "summary": "Update a gas policy (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14634,7 +14926,7 @@
         }
       },
       "delete": {
-        "operationId": "DeletePolicy",
+        "operationId": "DeleteGasPolicyLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14662,8 +14954,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Delete a policy object.",
-        "tags": ["Policies"],
+        "summary": "Delete a gas policy (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14688,7 +14980,7 @@
     },
     "/v1/policies/{id}/disable": {
       "put": {
-        "operationId": "DisablePolicy",
+        "operationId": "DisableGasPolicyLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14735,8 +15027,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Disable a policy object.",
-        "tags": ["Policies"],
+        "summary": "Disable a gas policy (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14761,7 +15053,7 @@
     },
     "/v1/policies/{id}/enable": {
       "put": {
-        "operationId": "EnablePolicy",
+        "operationId": "EnableGasPolicyLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14808,8 +15100,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Enable a policy object.",
-        "tags": ["Policies"],
+        "summary": "Enable a gas policy (legacy - use /v2/fee-sponsorship for new integrations).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14834,7 +15126,7 @@
     },
     "/v1/policies/{id}/reports": {
       "get": {
-        "operationId": "GetPolicyTotalGasUsage",
+        "operationId": "GetGasPolicyTotalGasUsageLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14892,8 +15184,8 @@
             "description": ""
           }
         },
-        "summary": "List all gas reports of a policy.",
-        "tags": ["Policies"],
+        "summary": "List all gas reports of a gas policy (legacy).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -14949,7 +15241,7 @@
     },
     "/v1/policies/{id}/reports/transaction_intents": {
       "get": {
-        "operationId": "GetPolicyReportTransactionIntents",
+        "operationId": "GetGasPolicyReportTransactionIntentsLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -14995,8 +15287,8 @@
             "description": ""
           }
         },
-        "summary": "List transaction intents of a policy report.",
-        "tags": ["Policies"],
+        "summary": "List transaction intents of a gas policy report (legacy).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -15043,7 +15335,7 @@
     },
     "/v1/policies/{id}/withdraw": {
       "get": {
-        "operationId": "GetPolicyBalance",
+        "operationId": "GetGasPolicyBalanceLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -15101,9 +15393,9 @@
             "description": ""
           }
         },
-        "description": "Get the amount of ERC-20 tokens collected by policy.\n\nWhen using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas.\nThis is specific to a policy that doesn't use your own deposited tokens in the paymaster.",
-        "summary": "Get amount of tokens paid for gas policy.",
-        "tags": ["Policies"],
+        "description": "Get the amount of ERC-20 tokens collected by a gas policy.\n\nWhen using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas.\nThis is specific to a policy that doesn't use your own deposited tokens in the paymaster.",
+        "summary": "Get amount of tokens paid for gas policy (legacy).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -15126,7 +15418,7 @@
         ]
       },
       "post": {
-        "operationId": "CreatePolicyWithdrawal",
+        "operationId": "CreateGasPolicyWithdrawalLegacy",
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -15227,9 +15519,9 @@
             "description": ""
           }
         },
-        "description": "Transfer ERC-20 tokens collected by policy.\n\nWhen using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas.\nThis is specific to a policy that doesn't use your own deposited tokens in the paymaster.",
-        "summary": "Withdraw tokens collected by policy.",
-        "tags": ["Policies"],
+        "description": "Transfer ERC-20 tokens collected by a gas policy.\n\nWhen using a policy that includes payment of gas in ERC-20 tokens, this endpoint returns the amount of tokens paid for gas.\nThis is specific to a policy that doesn't use your own deposited tokens in the paymaster.",
+        "summary": "Withdraw tokens collected by gas policy (legacy).",
+        "tags": ["Gas Policies (Legacy)"],
         "security": [
           {
             "sk": []
@@ -18258,10 +18550,13 @@
             "name": "scope",
             "required": false,
             "schema": {
-              "type": "string",
-              "enum": ["project", "account"]
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["project", "account", "transaction"]
+              }
             },
-            "example": "project"
+            "example": ["project", "account"]
           },
           {
             "description": "Filter by enabled status.",
@@ -18522,6 +18817,394 @@
             }
           }
         }
+      }
+    },
+    "/v2/fee-sponsorship": {
+      "get": {
+        "operationId": "ListFeeSponsorships",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSponsorshipListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "description": "Returns a list of fee sponsorship policies.\n\nFee sponsorship policies define gas sponsorship rules by linking to a policy\nwith rich criteria (evmAddress, ethValue, evmNetwork, evmData).",
+        "summary": "List fee sponsorship policies.",
+        "tags": ["Fee Sponsorship"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the maximum number of records to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "description": "Specifies the offset for the first records to return.",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "description": "Specifies the order in which to sort the results.",
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Prisma.SortOrder"
+            }
+          },
+          {
+            "description": "Filter by policy name (partial match).",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "DeFi"
+          },
+          {
+            "description": "Filter by chain ID.",
+            "in": "query",
+            "name": "chainId",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "example": 1
+          },
+          {
+            "description": "Filter by enabled status.",
+            "in": "query",
+            "name": "enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
+          },
+          {
+            "description": "Include deleted policies.",
+            "in": "query",
+            "name": "deleted",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            },
+            "example": false
+          }
+        ]
+      },
+      "post": {
+        "operationId": "CreateFeeSponsorship",
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSponsorshipResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "description": "Creates a new fee sponsorship.\n\nThis endpoint requires linking to an existing policy via `policyId`.\nCreate the policy first via `/v2/policies` with your criteria rules.\n\n**Workflow:**\n1. Create a policy via `/v2/policies` with criteria rules\n2. Create a fee sponsorship with `policyId` linking to that policy\n\n**Supported criteria types:**\n- `evmAddress`: Filter by recipient address (in/not in)\n- `ethValue`: Filter by ETH amount (<=, >=, <, >)\n- `evmNetwork`: Filter by chain ID (in/not in)\n- `evmData`: Filter by function selector or parameters",
+        "summary": "Create a fee sponsorship.",
+        "tags": ["Fee Sponsorship"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFeeSponsorshipRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/fee-sponsorship/{feeSponsorshipId}": {
+      "get": {
+        "operationId": "GetFeeSponsorship",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSponsorshipResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Retrieves the details of a fee sponsorship.",
+        "summary": "Get a fee sponsorship.",
+        "tags": ["Fee Sponsorship"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique fee sponsorship ID (starts with pol_).",
+            "in": "path",
+            "name": "feeSponsorshipId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pol_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "UpdateFeeSponsorship",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSponsorshipResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Updates a fee sponsorship.",
+        "summary": "Update a fee sponsorship.",
+        "tags": ["Fee Sponsorship"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique fee sponsorship ID (starts with pol_).",
+            "in": "path",
+            "name": "feeSponsorshipId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pol_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeeSponsorshipRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteFeeSponsorship",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSponsorshipDeleteResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Deletes a fee sponsorship.\n\nThis is a soft delete - the fee sponsorship is marked as deleted but not removed from the database.",
+        "summary": "Delete a fee sponsorship.",
+        "tags": ["Fee Sponsorship"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique fee sponsorship ID (starts with pol_).",
+            "in": "path",
+            "name": "feeSponsorshipId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pol_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
+      }
+    },
+    "/v2/fee-sponsorship/{feeSponsorshipId}/enable": {
+      "put": {
+        "operationId": "EnableFeeSponsorship",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSponsorshipResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Enables a fee sponsorship.",
+        "summary": "Enable a fee sponsorship.",
+        "tags": ["Fee Sponsorship"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique fee sponsorship ID (starts with pol_).",
+            "in": "path",
+            "name": "feeSponsorshipId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pol_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
+      }
+    },
+    "/v2/fee-sponsorship/{feeSponsorshipId}/disable": {
+      "put": {
+        "operationId": "DisableFeeSponsorship",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSponsorshipResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        },
+        "description": "Disables a fee sponsorship.",
+        "summary": "Disable a fee sponsorship.",
+        "tags": ["Fee Sponsorship"],
+        "security": [
+          {
+            "sk": []
+          },
+          {
+            "user_project": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Specifies the unique fee sponsorship ID (starts with pol_).",
+            "in": "path",
+            "name": "feeSponsorshipId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pol_48eeba57-2cd5-4159-a2cb-057a23a35e65"
+          }
+        ]
       }
     },
     "/v2/accounts/backend": {

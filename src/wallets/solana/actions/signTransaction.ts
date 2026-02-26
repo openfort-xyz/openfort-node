@@ -10,7 +10,7 @@ import type { SignTransactionOptions } from '../types'
  * Result of sign transaction operation
  */
 export interface SignTransactionResult {
-  /** Signed transaction as base64 string */
+  /** Signature as hex string (raw signature from the API, not a reconstructed signed transaction) */
   signedTransaction: string
 }
 
