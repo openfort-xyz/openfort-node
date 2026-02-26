@@ -9,22 +9,35 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create a policy first
+// Create a policy and fee sponsorship first
+const policy = await openfort.policies.create({
+  scope: "project",
+  rules: [
+    {
+      action: "accept",
+      operation: "sponsorEvmTransaction",
+      criteria: [
+        { type: "evmNetwork", operator: "in", chainIds: [chainId] },
+      ],
+    },
+  ],
+});
+
 const created = await openfort.feeSponsorship.create({
   name: `TestPolicy-${Date.now()}`,
-  chainId,
   strategy: {
     sponsorSchema: "pay_for_user",
   },
+  policyId: policy.id,
 });
-console.log("Created policy:", created.id);
+console.log("Created fee sponsorship:", created.id);
 
-// Retrieve the policy by ID
-const policy = await openfort.feeSponsorship.get(created.id);
+// Retrieve the fee sponsorship by ID
+const sponsorship = await openfort.feeSponsorship.get(created.id);
 
-console.log("\nRetrieved policy:");
-console.log("  ID:", policy.id);
-console.log("  Name:", policy.name);
-console.log("  Chain ID:", policy.chainId);
-console.log("  Strategy:", policy.strategy.sponsorSchema);
-console.log("  Enabled:", policy.enabled);
+console.log("\nRetrieved fee sponsorship:");
+console.log("  ID:", sponsorship.id);
+console.log("  Name:", sponsorship.name);
+console.log("  Strategy:", sponsorship.strategy.sponsorSchema);
+console.log("  Enabled:", sponsorship.enabled);
+console.log("  Policy ID:", sponsorship.policyId);

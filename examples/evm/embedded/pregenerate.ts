@@ -11,7 +11,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 // This creates the user and wallet before they authenticate
 const result = await openfort.accounts.evm.embedded.pregenerate(
   {
-    email: "jaume+1123123@openfort.xyz",
+    email: process.env.TEST_EMAIL || `user-${Date.now()}@example.com`,
     accountType: "Externally Owned Account"
   },
   {

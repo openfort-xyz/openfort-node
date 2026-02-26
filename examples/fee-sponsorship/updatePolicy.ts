@@ -9,21 +9,34 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 
 const chainId = Number(process.env.CHAIN_ID) || 80002;
 
-// Create a policy first
-const policy = await openfort.feeSponsorship.create({
+// Create a policy and fee sponsorship first
+const policy = await openfort.policies.create({
+  scope: "project",
+  rules: [
+    {
+      action: "accept",
+      operation: "sponsorEvmTransaction",
+      criteria: [
+        { type: "evmNetwork", operator: "in", chainIds: [chainId] },
+      ],
+    },
+  ],
+});
+
+const sponsorship = await openfort.feeSponsorship.create({
   name: "Original Policy Name",
-  chainId,
   strategy: {
     sponsorSchema: "pay_for_user",
   },
+  policyId: policy.id,
 });
-console.log("Created policy:", policy.name);
+console.log("Created fee sponsorship:", sponsorship.name);
 
-// Update the policy
-const updated = await openfort.feeSponsorship.update(policy.id, {
+// Update the fee sponsorship
+const updated = await openfort.feeSponsorship.update(sponsorship.id, {
   name: "Updated Policy Name",
 });
 
-console.log("\nUpdated policy:");
+console.log("\nUpdated fee sponsorship:");
 console.log("  ID:", updated.id);
 console.log("  Name:", updated.name);

@@ -200,3 +200,28 @@ export const SignSolMessageRuleSchema = z.object({
   criteria: SignSolMessageCriteriaSchema,
 })
 export type SignSolMessageRule = z.infer<typeof SignSolMessageRuleSchema>
+
+/** Sponsor Solana transaction uses the same criteria as send (address, value, SPL, mint, data, program, network). */
+export const SponsorSolTransactionCriteriaSchema = z
+  .array(
+    z.discriminatedUnion('type', [
+      SolAddressCriterionSchema,
+      SolValueCriterionSchema,
+      SplAddressCriterionSchema,
+      SplValueCriterionSchema,
+      MintAddressCriterionSchema,
+      SolDataCriterionSchema,
+      ProgramIdCriterionSchema,
+      SolNetworkCriterionSchema,
+    ]),
+  )
+  .max(10)
+
+export const SponsorSolTransactionRuleSchema = z.object({
+  action: ActionEnum,
+  operation: z.literal('sponsorSolTransaction'),
+  criteria: SponsorSolTransactionCriteriaSchema,
+})
+export type SponsorSolTransactionRule = z.infer<
+  typeof SponsorSolTransactionRuleSchema
+>

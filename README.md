@@ -43,7 +43,7 @@ The Openfort Node.js SDK provides convenient access to the [Openfort API](https:
 
 ## Installation
 
-Requires Node.js 14 or higher.
+Requires Node.js 18 or higher.
 
 ```bash
 npm install @openfort/openfort-node
@@ -69,9 +69,7 @@ const openfort = new Openfort("sk_test_...", {
 });
 
 // Create an EVM backend account
-const account = await openfort.accounts.evm.backend.create({
-  name: "MyWallet",
-});
+const account = await openfort.accounts.evm.backend.create();
 console.log("Account address:", account.address);
 
 // Sign a message (methods are on the account object)
@@ -89,19 +87,14 @@ Create and manage wallets across EVM chains and Solana:
 
 ```typescript
 // EVM backend accounts
-const evmAccount = await openfort.accounts.evm.backend.create({
-  name: "MyEVMWallet",
-});
+const evmAccount = await openfort.accounts.evm.backend.create();
 
 // Solana backend accounts
-const solanaAccount = await openfort.accounts.solana.backend.create({
-  name: "MySolanaWallet",
-});
+const solanaAccount = await openfort.accounts.solana.backend.create();
 
 // Import existing wallet
 const imported = await openfort.accounts.evm.backend.import({
   privateKey: "0x...",
-  name: "ImportedWallet",
 });
 ```
 
@@ -131,29 +124,28 @@ const typedSig = await account.signTypedData({
 
 ### Gas Sponsorship
 
-Sponsor gas fees for your users with policies:
+Sponsor gas fees for your users. Create a policy with criteria-based rules, then link it to a fee sponsorship:
 
 ```typescript
-// Create a sponsorship policy
+// 1. Create a policy that accepts transactions on Polygon
 const policy = await openfort.policies.create({
+  scope: "project",
+  rules: [
+    {
+      action: "accept",
+      operation: "sponsorEvmTransaction",
+      criteria: [
+        { type: "evmNetwork", operator: "in", chainIds: [137] },
+      ],
+    },
+  ],
+});
+
+// 2. Create a fee sponsorship linked to that policy
+const sponsorship = await openfort.feeSponsorship.create({
   name: "Free gas for users",
-  chainId: 80002,
   strategy: { sponsorSchema: "pay_for_user" },
-});
-
-// Register a contract
-const contract = await openfort.contracts.create({
-  name: "MyContract",
-  chainId: 80002,
-  address: "0x38090d1636069c0ff1af6bc1737fb996b7f63ac0",
-});
-
-// Add rules to control sponsorship
-await openfort.policyRules.create({
-  policy: policy.id,
-  type: "account_functions",
-  contract: contract.id,
-  functionName: "mint",
+  policyId: policy.id,
 });
 ```
 
@@ -176,14 +168,14 @@ console.log("Session expires:", session.session.expiresAt);
 
 The SDK includes comprehensive examples for all features. See the [examples directory](./examples) for runnable code.
 
-| Category       | Examples                                           |
-| -------------- | -------------------------------------------------- |
-| EVM Wallets    | Create, import, export, sign messages/transactions |
-| Solana Wallets | Create, import, export, sign messages/transactions |
-| Policies       | Gas sponsorship, policy rules, enable/disable      |
-| Transactions   | Create intents, estimate gas, read contracts       |
-| Exchange       | Token swap quotes and execution                    |
-| IAM            | User management, session verification              |
+| Category         | Examples                                           |
+| ---------------- | -------------------------------------------------- |
+| EVM Wallets      | Create, import, export, sign messages/transactions |
+| Solana Wallets   | Create, import, export, sign messages/transactions |
+| Policies         | Criteria-based rules for EVM and Solana operations |
+| Fee Sponsorship  | Create, update, enable/disable gas sponsorship     |
+| Transactions     | Create intents, estimate gas                       |
+| IAM              | User management, session verification              |
 
 Run examples:
 

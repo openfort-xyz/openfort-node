@@ -6,11 +6,13 @@ import {
   SignEvmMessageRuleSchema,
   SignEvmTransactionRuleSchema,
   SignEvmTypedDataRuleSchema,
+  SponsorEvmTransactionRuleSchema,
 } from './evmSchema'
 import {
   SendSolTransactionRuleSchema,
   SignSolMessageRuleSchema,
   SignSolTransactionRuleSchema,
+  SponsorSolTransactionRuleSchema,
 } from './solanaSchema'
 
 // ---------------------------------------------------------------------------
@@ -30,9 +32,11 @@ export const RuleSchema = z.discriminatedUnion('operation', [
   SignEvmMessageRuleSchema,
   SignEvmTypedDataRuleSchema,
   SignEvmHashRuleSchema,
+  SponsorEvmTransactionRuleSchema,
   SignSolTransactionRuleSchema,
   SendSolTransactionRuleSchema,
   SignSolMessageRuleSchema,
+  SponsorSolTransactionRuleSchema,
 ])
 
 export type Rule = z.infer<typeof RuleSchema>

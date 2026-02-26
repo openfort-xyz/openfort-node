@@ -120,15 +120,13 @@ Policies provide fine-grained control over signing operations using Zod-validate
 
 ### Fee Sponsorship (`fee-sponsorship/`)
 
-| Example                                  | Description                     |
-| ---------------------------------------- | ------------------------------- |
-| `fee-sponsorship/createPolicy.ts`        | Create a gas sponsorship policy |
-| `fee-sponsorship/getPolicy.ts`           | Get a policy by ID              |
-| `fee-sponsorship/listPolicies.ts`        | List all policies               |
-| `fee-sponsorship/updatePolicy.ts`        | Update a policy                 |
-| `fee-sponsorship/disableEnablePolicy.ts` | Enable/disable a policy         |
-| `fee-sponsorship/createPolicyRule.ts`    | Create a policy rule            |
-| `fee-sponsorship/listPolicyRules.ts`     | List policy rules               |
+| Example                                  | Description                                     |
+| ---------------------------------------- | ----------------------------------------------- |
+| `fee-sponsorship/createPolicy.ts`        | Create a policy and fee sponsorship              |
+| `fee-sponsorship/getPolicy.ts`           | Get a fee sponsorship by ID                      |
+| `fee-sponsorship/listPolicies.ts`        | List all fee sponsorships                        |
+| `fee-sponsorship/updatePolicy.ts`        | Update a fee sponsorship                         |
+| `fee-sponsorship/disableEnablePolicy.ts` | Enable/disable a fee sponsorship                 |
 
 ### Contracts
 
@@ -145,13 +143,6 @@ Policies provide fine-grained control over signing operations using Zod-validate
 | `transactions/getTransactionIntent.ts`    | Get a transaction intent       |
 | `transactions/listTransactionIntents.ts`  | List transaction intents       |
 | `transactions/estimateGas.ts`             | Estimate gas for a transaction |
-
-### Exchange / Swaps
-
-| Example                  | Description                |
-| ------------------------ | -------------------------- |
-| `exchange/quoteSwap.ts`  | Get a quote for token swap |
-| `exchange/createSwap.ts` | Execute a token swap       |
 
 ### IAM (Identity & Access Management)
 
