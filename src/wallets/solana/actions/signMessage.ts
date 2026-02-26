@@ -10,7 +10,7 @@ import type { SignMessageOptions } from '../types'
  * Result of sign message operation
  */
 export interface SignMessageResult {
-  /** Signature as base58 string */
+  /** Signature as hex string */
   signature: string
 }
 
