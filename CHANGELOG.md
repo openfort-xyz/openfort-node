@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0
+
+### Minor Changes
+
+- [#74](https://github.com/openfort-xyz/openfort-node/pull/74) [`abcacadd74444ba58efc5f8b1436a45baad83f4b`](https://github.com/openfort-xyz/openfort-node/commit/abcacadd74444ba58efc5f8b1436a45baad83f4b) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update fee sponsorship
+
 ## 0.8.4
 
 ### Patch Changes
