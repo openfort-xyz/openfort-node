@@ -7,6 +7,7 @@ import { toHex, toPrefixedMessage } from 'viem'
 import { UserInputValidationError } from '../../../errors'
 import { sign } from '../../../openapi-client'
 import type { Address, Hex, SignableMessage } from '../types'
+import { normalizeSignature } from './normalizeSignature'
 
 /**
  * Options for signing a message
@@ -56,7 +57,9 @@ export async function signMessage(
   const preimage = toPrefixedMessage(normalizedMessage)
   const response = await sign(accountId, { data: preimage })
 
+  const signature = normalizeSignature(response.signature)
+
   return {
-    signature: response.signature as Hex,
+    signature: signature as Hex,
   }
 }

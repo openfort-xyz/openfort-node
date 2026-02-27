@@ -4127,6 +4127,100 @@ export interface CreateBackendWalletRequest {
 /**
  * The type of object.
  */
+export type UpdateBackendWalletResponseObject = typeof UpdateBackendWalletResponseObject[keyof typeof UpdateBackendWalletResponseObject];
+
+
+export const UpdateBackendWalletResponseObject = {
+  backendWallet: 'backendWallet',
+} as const;
+
+/**
+ * Chain type.
+ */
+export type UpdateBackendWalletResponseChainType = typeof UpdateBackendWalletResponseChainType[keyof typeof UpdateBackendWalletResponseChainType];
+
+
+export const UpdateBackendWalletResponseChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * Chain configuration for a delegated account.
+ */
+export interface UpdateBackendWalletResponseDelegatedAccountChain {
+  /** The chain type. */
+  chainType: UpdateBackendWalletResponseChainType;
+  /** The chain ID. */
+  chainId: number;
+}
+
+/**
+ * Present when the wallet has been upgraded to a delegated account.
+ */
+export interface UpdateBackendWalletResponseDelegatedAccount {
+  /** The delegated account ID (starts with `acc_`). */
+  id: string;
+  /** The implementation type used for delegation. */
+  implementationType: string;
+  /** The implementation contract address. */
+  implementationAddress: string;
+  /** The chain configuration for this delegation. */
+  chain: UpdateBackendWalletResponseDelegatedAccountChain;
+}
+
+/**
+ * Response from updating a backend wallet.
+ */
+export interface UpdateBackendWalletResponse {
+  /** The type of object. */
+  object: UpdateBackendWalletResponseObject;
+  /** The wallet ID (starts with `acc_`). */
+  id: string;
+  /** The wallet address. */
+  address: string;
+  /** The chain type the wallet is associated with. */
+  chainType: UpdateBackendWalletResponseChainType;
+  /** Key custody: always "Developer" for backend wallets. */
+  custody: 'Developer';
+  /** The current account type. */
+  accountType: string;
+  /** Creation timestamp (Unix epoch seconds). */
+  createdAt: number;
+  /** Last updated timestamp (Unix epoch seconds). */
+  updatedAt: number;
+  /** Present when the wallet has been upgraded to a delegated account. */
+  delegatedAccount?: UpdateBackendWalletResponseDelegatedAccount;
+}
+
+/**
+ * Chain configuration for backend wallet updates.
+ */
+export interface UpdateBackendWalletChain {
+  /** The chain type. */
+  chainType: 'EVM' | 'SVM';
+  /** The chain ID. Must be a supported chain. */
+  chainId: number;
+}
+
+/**
+ * Request to update a backend wallet.
+ *
+ * All fields are optional — only provide the fields you want to update.
+ * Currently supports upgrading to a Delegated Account (EIP-7702).
+ */
+export interface UpdateBackendWalletRequest {
+  /** Upgrade the account type. Currently only supports upgrading to "Delegated Account". */
+  accountType?: 'Delegated Account';
+  /** Target chain for the update. Required when accountType is "Delegated Account". */
+  chain?: UpdateBackendWalletChain;
+  /** The implementation type for delegation (e.g., "Calibur", "CaliburV9"). Required when accountType is "Delegated Account". */
+  implementationType?: string;
+}
+
+/**
+ * The type of object.
+ */
 export type DeleteBackendWalletResponseObject = typeof DeleteBackendWalletResponseObject[keyof typeof DeleteBackendWalletResponseObject];
 
 

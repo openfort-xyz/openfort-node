@@ -11,6 +11,7 @@ import {
 } from 'viem'
 import { sign as signApi } from '../../../openapi-client'
 import type { Address, Hex, TransactionSerializable } from '../types'
+import { normalizeSignature } from './normalizeSignature'
 
 /**
  * Options for signing a transaction
@@ -52,7 +53,7 @@ export async function signTransaction(
   const response = await signApi(accountId, { data: serialized })
 
   // Parse signature into v, r, s components
-  const signature = parseSignature(response.signature as Hex) as Signature
+  const signature = parseSignature(normalizeSignature(response.signature) as Hex) as Signature
 
   // Re-serialize with signature to get fully signed transaction
   const signedTransaction = serializeTransaction(transaction, signature) as Hex

@@ -230,6 +230,8 @@ class Openfort {
           import: evmClient.importAccount.bind(evmClient),
           /** Export private key (with E2E encryption) */
           export: evmClient.exportAccount.bind(evmClient),
+          /** Update EOA to delegated account */
+          update: evmClient.update.bind(evmClient),
         },
         /** Embedded wallet operations (User custody) */
         embedded: {

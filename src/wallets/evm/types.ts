@@ -152,6 +152,25 @@ export interface ExportEvmAccountOptions {
 }
 
 /**
+ * Options for updating an EVM account (e.g., upgrading to Delegated Account)
+ */
+export interface UpdateEvmAccountOptions {
+  /** Account ID (starts with acc_) */
+  id: string
+  /** Upgrade the account type. Currently only supports "Delegated Account". */
+  accountType?: 'Delegated Account'
+  /** Target chain for the update. Required when accountType is "Delegated Account". */
+  chain?: {
+    /** The chain type. */
+    chainType: 'EVM' | 'SVM'
+    /** The chain ID. Must be a supported chain. */
+    chainId: number
+  }
+  /** The implementation type for delegation (e.g., "Calibur"). Required when accountType is "Delegated Account". */
+  implementationType?: string
+}
+
+/**
  * Options for signing data
  */
 export interface SignDataOptions {
