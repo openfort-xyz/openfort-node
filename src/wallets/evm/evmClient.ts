@@ -11,13 +11,13 @@ import {
 } from '../../errors'
 import {
   type BackendWalletResponse,
-  type UpdateBackendWalletResponse,
   createBackendWallet,
   exportPrivateKey,
   getBackendWallet,
   importPrivateKey,
   listBackendWallets,
   sign,
+  type UpdateBackendWalletResponse,
   updateBackendWallet,
 } from '../../openapi-client'
 import {
