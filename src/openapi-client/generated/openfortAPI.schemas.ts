@@ -4194,16 +4194,6 @@ export interface UpdateBackendWalletResponse {
 }
 
 /**
- * Chain configuration for backend wallet updates.
- */
-export interface UpdateBackendWalletChain {
-  /** The chain type. */
-  chainType: 'EVM' | 'SVM';
-  /** The chain ID. Must be a supported chain. */
-  chainId: number;
-}
-
-/**
  * Request to update a backend wallet.
  *
  * All fields are optional — only provide the fields you want to update.
@@ -4212,8 +4202,10 @@ export interface UpdateBackendWalletChain {
 export interface UpdateBackendWalletRequest {
   /** Upgrade the account type. Currently only supports upgrading to "Delegated Account". */
   accountType?: 'Delegated Account';
-  /** Target chain for the update. Required when accountType is "Delegated Account". */
-  chain?: UpdateBackendWalletChain;
+  /** The chain type. */
+  chainType: 'EVM' | 'SVM';
+  /** The chain ID. Must be a supported chain. */
+  chainId: number;
   /** The implementation type for delegation (e.g., "Calibur", "CaliburV9"). Required when accountType is "Delegated Account". */
   implementationType?: string;
 }
