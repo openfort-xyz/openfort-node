@@ -4135,7 +4135,7 @@ export const UpdateBackendWalletResponseObject = {
 } as const;
 
 /**
- * Chain type.
+ * The chain type the wallet is associated with.
  */
 export type UpdateBackendWalletResponseChainType = typeof UpdateBackendWalletResponseChainType[keyof typeof UpdateBackendWalletResponseChainType];
 
@@ -4146,28 +4146,49 @@ export const UpdateBackendWalletResponseChainType = {
 } as const;
 
 /**
- * Chain configuration for a delegated account.
+ * Key custody: always "Developer" for backend wallets (server-managed keys in TEE).
  */
-export interface UpdateBackendWalletResponseDelegatedAccountChain {
-  /** The chain type. */
-  chainType: UpdateBackendWalletResponseChainType;
+export type UpdateBackendWalletResponseCustody = typeof UpdateBackendWalletResponseCustody[keyof typeof UpdateBackendWalletResponseCustody];
+
+
+export const UpdateBackendWalletResponseCustody = {
+  Developer: 'Developer',
+} as const;
+
+/**
+ * The chain type.
+ */
+export type UpdateBackendWalletResponseDelegatedAccountChainChainType = typeof UpdateBackendWalletResponseDelegatedAccountChainChainType[keyof typeof UpdateBackendWalletResponseDelegatedAccountChainChainType];
+
+
+export const UpdateBackendWalletResponseDelegatedAccountChainChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
+ * The chain configuration for this delegation.
+ */
+export type UpdateBackendWalletResponseDelegatedAccountChain = {
   /** The chain ID. */
   chainId: number;
-}
+  /** The chain type. */
+  chainType: UpdateBackendWalletResponseDelegatedAccountChainChainType;
+};
 
 /**
  * Present when the wallet has been upgraded to a delegated account.
  */
-export interface UpdateBackendWalletResponseDelegatedAccount {
-  /** The delegated account ID (starts with `acc_`). */
-  id: string;
-  /** The implementation type used for delegation. */
-  implementationType: string;
-  /** The implementation contract address. */
-  implementationAddress: string;
+export type UpdateBackendWalletResponseDelegatedAccount = {
   /** The chain configuration for this delegation. */
   chain: UpdateBackendWalletResponseDelegatedAccountChain;
-}
+  /** The implementation contract address. */
+  implementationAddress: string;
+  /** The implementation type used for delegation. */
+  implementationType: string;
+  /** The delegated account ID (starts with `acc_`). */
+  id: string;
+};
 
 /**
  * Response from updating a backend wallet.
@@ -4181,8 +4202,8 @@ export interface UpdateBackendWalletResponse {
   address: string;
   /** The chain type the wallet is associated with. */
   chainType: UpdateBackendWalletResponseChainType;
-  /** Key custody: always "Developer" for backend wallets. */
-  custody: 'Developer';
+  /** Key custody: always "Developer" for backend wallets (server-managed keys in TEE). */
+  custody: UpdateBackendWalletResponseCustody;
   /** The current account type. */
   accountType: string;
   /** Creation timestamp (Unix epoch seconds). */
@@ -4194,19 +4215,41 @@ export interface UpdateBackendWalletResponse {
 }
 
 /**
+ * Upgrade the account type. Currently only supports upgrading to "Delegated Account".
+ */
+export type UpdateBackendWalletRequestAccountType = typeof UpdateBackendWalletRequestAccountType[keyof typeof UpdateBackendWalletRequestAccountType];
+
+
+export const UpdateBackendWalletRequestAccountType = {
+  Delegated_Account: 'Delegated Account',
+} as const;
+
+/**
+ * The chain type.
+ */
+export type UpdateBackendWalletRequestChainType = typeof UpdateBackendWalletRequestChainType[keyof typeof UpdateBackendWalletRequestChainType];
+
+
+export const UpdateBackendWalletRequestChainType = {
+  EVM: 'EVM',
+  SVM: 'SVM',
+} as const;
+
+/**
  * Request to update a backend wallet.
- *
- * All fields are optional — only provide the fields you want to update.
- * Currently supports upgrading to a Delegated Account (EIP-7702).
+
+All fields are optional — only provide the fields you want to update.
+Currently supports upgrading to a Delegated Account (EIP-7702).
  */
 export interface UpdateBackendWalletRequest {
   /** Upgrade the account type. Currently only supports upgrading to "Delegated Account". */
-  accountType?: 'Delegated Account';
+  accountType?: UpdateBackendWalletRequestAccountType;
   /** The chain type. */
-  chainType: 'EVM' | 'SVM';
-  /** The chain ID. Must be a supported chain. */
+  chainType: UpdateBackendWalletRequestChainType;
+  /** The chain ID. Must be a [supported chain](/development/chains). */
   chainId: number;
-  /** The implementation type for delegation (e.g., "Calibur", "CaliburV9"). Required when accountType is "Delegated Account". */
+  /** The implementation type for delegation (e.g., "Calibur", "CaliburV9").
+Required when accountType is "Delegated Account". */
   implementationType?: string;
 }
 
@@ -4695,6 +4738,60 @@ export interface UserProjectDeleteResponse {
   id: string;
   object: EntityTypeUSER;
   deleted: boolean;
+}
+
+export type UsageAlertType = typeof UsageAlertType[keyof typeof UsageAlertType];
+
+
+export const UsageAlertType = {
+  warning: 'warning',
+  critical: 'critical',
+  info: 'info',
+} as const;
+
+export interface UsageAlert {
+  type: UsageAlertType;
+  message: string;
+  percentUsed: number;
+}
+
+export type UsageSummaryResponsePlan = {
+  priceUsd: number;
+  name: string;
+  tier: string;
+};
+
+export type UsageSummaryResponseOperations = {
+  /** @nullable */
+  estimatedOverageCostUsd: number | null;
+  overageCount: number;
+  percentUsed: number;
+  included: number;
+  current: number;
+};
+
+export type UsageSummaryResponseBillingPeriod = {
+  end: string;
+  start: string;
+};
+
+export interface UsageSummaryResponse {
+  plan: UsageSummaryResponsePlan;
+  operations: UsageSummaryResponseOperations;
+  billingPeriod: UsageSummaryResponseBillingPeriod;
+  alerts: UsageAlert[];
+}
+
+export type MonthlyUsageHistoryResponseMonthsItem = {
+  /** @nullable */
+  overageCostUsd: number | null;
+  operationsIncluded: number;
+  operationsCount: number;
+  month: string;
+};
+
+export interface MonthlyUsageHistoryResponse {
+  months: MonthlyUsageHistoryResponseMonthsItem[];
 }
 
 export interface ApiKeyResponse {
