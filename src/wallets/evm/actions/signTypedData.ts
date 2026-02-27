@@ -6,6 +6,7 @@
 import { hashTypedData } from 'viem'
 import { sign } from '../../../openapi-client'
 import type { Address, Hex, TypedData, TypedDataDefinition } from '../types'
+import { normalizeSignature } from './normalizeSignature'
 
 /**
  * Options for signing typed data
@@ -49,7 +50,9 @@ export async function signTypedData<
   // Sign the hash via v2 API
   const response = await sign(accountId, { data: hash })
 
+  const signature = normalizeSignature(response.signature)
+
   return {
-    signature: response.signature as Hex,
+    signature: signature as Hex,
   }
 }

@@ -11,12 +11,14 @@ import {
 } from '../../errors'
 import {
   type BackendWalletResponse,
+  type UpdateBackendWalletResponse,
   createBackendWallet,
   exportPrivateKey,
   getBackendWallet,
   importPrivateKey,
   listBackendWallets,
   sign,
+  updateBackendWallet,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -33,6 +35,7 @@ import type {
   ImportEvmAccountOptions,
   ListEvmAccountsOptions,
   SignDataOptions,
+  UpdateEvmAccountOptions,
 } from './types'
 
 /**
@@ -307,5 +310,30 @@ export class EvmClient {
     })
 
     return response.signature
+  }
+
+  /**
+   * Updates an EVM backend wallet.
+   *
+   * Currently supports upgrading an EVM EOA to a Delegated Account (EIP-7702).
+   *
+   * @param options - Update options including account ID and delegation parameters
+   * @returns The updated backend wallet response
+   *
+   * @example
+   * ```typescript
+   * const updated = await openfort.accounts.evm.backend.update({
+   *   id: 'acc_...',
+   *   accountType: 'Delegated Account',
+   *   chain: { chainType: 'EVM', chainId: 8453 },
+   *   implementationType: 'Calibur',
+   * });
+   * ```
+   */
+  public async update(
+    options: UpdateEvmAccountOptions,
+  ): Promise<UpdateBackendWalletResponse> {
+    const { id, ...req } = options
+    return updateBackendWallet(id, req)
   }
 }
