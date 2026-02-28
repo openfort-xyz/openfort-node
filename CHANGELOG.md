@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.2
+
+### Patch Changes
+
+- [#78](https://github.com/openfort-xyz/openfort-node/pull/78) [`38e97e4`](https://github.com/openfort-xyz/openfort-node/commit/38e97e465915390186a87bda7cf71b322b8b3a16) Thanks [@jamalavedra](https://github.com/jamalavedra)! - updat deps
+
+- [#78](https://github.com/openfort-xyz/openfort-node/pull/78) [`38e97e4`](https://github.com/openfort-xyz/openfort-node/commit/38e97e465915390186a87bda7cf71b322b8b3a16) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update deps
+
 ## 0.9.1
 
 ### Patch Changes
