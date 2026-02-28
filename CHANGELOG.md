@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1
+
+### Patch Changes
+
+- [#76](https://github.com/openfort-xyz/openfort-node/pull/76) [`d120fdaaf2d15b34ece961aee29c606babc139c5`](https://github.com/openfort-xyz/openfort-node/commit/d120fdaaf2d15b34ece961aee29c606babc139c5) Thanks [@n00m4d](https://github.com/n00m4d)! - Add new update method for embedded wallet
+
 ## 0.9.0
 
 ### Minor Changes
