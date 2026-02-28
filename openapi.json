@@ -7953,6 +7953,145 @@
         "type": "object",
         "additionalProperties": false
       },
+      "UpdateBackendWalletResponse": {
+        "description": "Response from updating a backend wallet.",
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": ["backendWallet"],
+            "nullable": false,
+            "description": "The type of object."
+          },
+          "id": {
+            "type": "string",
+            "description": "The wallet ID (starts with `acc_`).",
+            "example": "acc_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
+          },
+          "address": {
+            "type": "string",
+            "description": "The wallet address.",
+            "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+          },
+          "chainType": {
+            "type": "string",
+            "enum": ["EVM", "SVM"],
+            "description": "The chain type the wallet is associated with.",
+            "example": "EVM"
+          },
+          "custody": {
+            "type": "string",
+            "enum": ["Developer"],
+            "nullable": false,
+            "description": "Key custody: always \"Developer\" for backend wallets (server-managed keys in TEE).",
+            "example": "Developer"
+          },
+          "accountType": {
+            "type": "string",
+            "description": "The current account type.",
+            "example": "Delegated Account"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Creation timestamp (Unix epoch seconds)."
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Last updated timestamp (Unix epoch seconds)."
+          },
+          "delegatedAccount": {
+            "properties": {
+              "chain": {
+                "properties": {
+                  "chainId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The chain ID.",
+                    "example": 8453
+                  },
+                  "chainType": {
+                    "type": "string",
+                    "enum": ["EVM", "SVM"],
+                    "description": "The chain type.",
+                    "example": "EVM"
+                  }
+                },
+                "required": ["chainId", "chainType"],
+                "type": "object",
+                "description": "The chain configuration for this delegation."
+              },
+              "implementationAddress": {
+                "type": "string",
+                "description": "The implementation contract address.",
+                "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+              },
+              "implementationType": {
+                "type": "string",
+                "description": "The implementation type used for delegation.",
+                "example": "Calibur"
+              },
+              "id": {
+                "type": "string",
+                "description": "The delegated account ID (starts with `acc_`).",
+                "example": "acc_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
+              }
+            },
+            "required": [
+              "chain",
+              "implementationAddress",
+              "implementationType",
+              "id"
+            ],
+            "type": "object",
+            "description": "Present when the wallet has been upgraded to a delegated account."
+          }
+        },
+        "required": [
+          "object",
+          "id",
+          "address",
+          "chainType",
+          "custody",
+          "accountType",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateBackendWalletRequest": {
+        "description": "Request to update a backend wallet.\n\nAll fields are optional — only provide the fields you want to update.\nCurrently supports upgrading to a Delegated Account (EIP-7702).",
+        "properties": {
+          "accountType": {
+            "type": "string",
+            "enum": ["Delegated Account"],
+            "nullable": false,
+            "description": "Upgrade the account type. Currently only supports upgrading to \"Delegated Account\".",
+            "example": "Delegated Account"
+          },
+          "chainType": {
+            "type": "string",
+            "enum": ["EVM", "SVM"],
+            "description": "The chain type.",
+            "example": "EVM"
+          },
+          "chainId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The chain ID. Must be a [supported chain](/development/chains).",
+            "example": 8453
+          },
+          "implementationType": {
+            "type": "string",
+            "description": "The implementation type for delegation (e.g., \"Calibur\", \"CaliburV9\").\nRequired when accountType is \"Delegated Account\".",
+            "example": "Calibur"
+          }
+        },
+        "required": ["chainType", "chainId"],
+        "type": "object",
+        "additionalProperties": false
+      },
       "DeleteBackendWalletResponse": {
         "description": "Response from deleting a backend wallet.",
         "properties": {
@@ -8628,6 +8767,135 @@
           }
         },
         "required": ["id", "object", "deleted"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UsageAlert": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["warning", "critical", "info"]
+          },
+          "message": {
+            "type": "string"
+          },
+          "percentUsed": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": ["type", "message", "percentUsed"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UsageSummaryResponse": {
+        "properties": {
+          "plan": {
+            "properties": {
+              "priceUsd": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "name": {
+                "type": "string"
+              },
+              "tier": {
+                "type": "string"
+              }
+            },
+            "required": ["priceUsd", "name", "tier"],
+            "type": "object"
+          },
+          "operations": {
+            "properties": {
+              "estimatedOverageCostUsd": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "overageCount": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "percentUsed": {
+                "type": "number",
+                "format": "double"
+              },
+              "included": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "current": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "required": [
+              "estimatedOverageCostUsd",
+              "overageCount",
+              "percentUsed",
+              "included",
+              "current"
+            ],
+            "type": "object"
+          },
+          "billingPeriod": {
+            "properties": {
+              "end": {
+                "type": "string"
+              },
+              "start": {
+                "type": "string"
+              }
+            },
+            "required": ["end", "start"],
+            "type": "object"
+          },
+          "alerts": {
+            "items": {
+              "$ref": "#/components/schemas/UsageAlert"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["plan", "operations", "billingPeriod", "alerts"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "MonthlyUsageHistoryResponse": {
+        "properties": {
+          "months": {
+            "items": {
+              "properties": {
+                "overageCostUsd": {
+                  "type": "number",
+                  "format": "double",
+                  "nullable": true
+                },
+                "operationsIncluded": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "operationsCount": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "month": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "overageCostUsd",
+                "operationsIncluded",
+                "operationsCount",
+                "month"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["months"],
         "type": "object",
         "additionalProperties": false
       },
@@ -19367,6 +19635,59 @@
             }
           }
         ]
+      },
+      "put": {
+        "operationId": "updateBackendWallet",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBackendWalletResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Wallet not found."
+          }
+        },
+        "description": "Update a backend wallet.\n\nCurrently supports upgrading an EOA backend wallet to a Delegated Account (EIP-7702).\nProvide the target accountType along with the required delegation parameters (chainId, implementationType).",
+        "summary": "Update backend wallet.",
+        "tags": ["Backend Wallets"],
+        "security": [
+          {
+            "sk": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "The wallet ID (starts with acc_).",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBackendWalletRequest"
+              }
+            }
+          }
+        }
       },
       "delete": {
         "operationId": "deleteBackendWallet",

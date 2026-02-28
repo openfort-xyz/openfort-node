@@ -23,7 +23,9 @@ import type {
   RotateWalletSecretRequest,
   RotateWalletSecretResponse,
   SignRequest,
-  SignResponse
+  SignResponse,
+  UpdateBackendWalletRequest,
+  UpdateBackendWalletResponse
 } from '../openfortAPI.schemas';
 
 import { openfortApiClient } from '../../openfortApiClient';
@@ -75,6 +77,24 @@ export const getBackendWallet = (
  options?: SecondParameter<typeof openfortApiClient<BackendWalletResponse>>,) => {
       return openfortApiClient<BackendWalletResponse>(
       {url: `/v2/accounts/backend/${id}`, method: 'GET'
+    },
+      options);
+    }
+  /**
+ * Update a backend wallet.
+
+Currently supports upgrading an EOA backend wallet to a Delegated Account (EIP-7702).
+Provide the target accountType along with the required delegation parameters (chainId, implementationType).
+ * @summary Update backend wallet.
+ */
+export const updateBackendWallet = (
+    id: string,
+    updateBackendWalletRequest: UpdateBackendWalletRequest,
+ options?: SecondParameter<typeof openfortApiClient<UpdateBackendWalletResponse>>,) => {
+      return openfortApiClient<UpdateBackendWalletResponse>(
+      {url: `/v2/accounts/backend/${id}`, method: 'PUT',
+      headers: {'Content-Type': 'application/json', },
+      data: updateBackendWalletRequest
     },
       options);
     }
@@ -214,6 +234,7 @@ export const rotateWalletSecret = (
   export type ListBackendWalletsResult = NonNullable<Awaited<ReturnType<typeof listBackendWallets>>>
 export type CreateBackendWalletResult = NonNullable<Awaited<ReturnType<typeof createBackendWallet>>>
 export type GetBackendWalletResult = NonNullable<Awaited<ReturnType<typeof getBackendWallet>>>
+export type UpdateBackendWalletResult = NonNullable<Awaited<ReturnType<typeof updateBackendWallet>>>
 export type DeleteBackendWalletResult = NonNullable<Awaited<ReturnType<typeof deleteBackendWallet>>>
 export type SignResult = NonNullable<Awaited<ReturnType<typeof sign>>>
 export type ExportPrivateKeyResult = NonNullable<Awaited<ReturnType<typeof exportPrivateKey>>>
