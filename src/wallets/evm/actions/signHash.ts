@@ -5,6 +5,7 @@
 
 import { sign } from '../../../openapi-client'
 import type { Hash, Hex } from '../types'
+import { normalizeSignature } from './normalizeSignature'
 
 /**
  * Options for signing a hash
@@ -40,7 +41,9 @@ export async function signHash(
   // Sign the hash directly via v2 API (no EIP-191 prefix)
   const response = await sign(accountId, { data: hash })
 
+  const signature = normalizeSignature(response.signature)
+
   return {
-    signature: response.signature as Hex,
+    signature: signature as Hex,
   }
 }
