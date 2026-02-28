@@ -60,15 +60,15 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@openfort/shield-js": "^0.1.33",
-    "@types/node": "*",
-    "@types/node-fetch": "^2.5.7",
-    "axios": "^1.7.0",
+    "@openfort/shield-js": "^0.1.35",
+    "@types/node": "^25.3.2",
+    "@types/node-fetch": "^2.6.13",
+    "axios": "^1.13.6",
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
-    "jose": "^5.2.0",
-    "node-fetch": "^2.6.0",
-    "viem": "^2.21.0",
+    "jose": "^5.10.0",
+    "node-fetch": "^2.7.0",
+    "viem": "^2.46.3",
     "zod": "^3.25.76"
   },
   "simple-git-hooks": {
@@ -76,17 +76,17 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
-    "@biomejs/biome": "^2.3.6",
-    "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.29.7",
-    "@vitest/coverage-v8": "^3.0.0",
-    "knip": "^5.70.1",
-    "orval": "^8.2.0",
+    "@biomejs/biome": "^2.4.4",
+    "@changesets/changelog-github": "^0.5.2",
+    "@changesets/cli": "^2.29.8",
+    "@vitest/coverage-v8": "^3.2.4",
+    "knip": "^5.85.0",
+    "orval": "^8.5.1",
     "publint": "^0.2.12",
     "simple-git-hooks": "^2.13.1",
     "tsup": "^8.5.1",
-    "typescript": "^5.4.3",
-    "vitest": "^3.0.0"
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@10.16.1"
 }
