@@ -232,8 +232,6 @@ class Openfort {
           export: evmClient.exportAccount.bind(evmClient),
           /** Update EOA to delegated account */
           update: evmClient.update.bind(evmClient),
-          /** Delegate + create + sign + submit a gasless transaction in one call */
-          sendTransaction: evmClient.sendTransaction.bind(evmClient),
         },
         /** Embedded wallet operations (User custody) */
         embedded: {
@@ -476,11 +474,41 @@ class Openfort {
    * gas costs are sponsored according to the policy's strategy.
    */
   public get transactionIntents() {
+    if (!this._evmClient) {
+      this._evmClient = new EvmClient()
+    }
+    const evmClient = this._evmClient
+
     return {
       /** List transaction intents */
       list: api.getTransactionIntents,
-      /** Create a transaction intent with contract interactions */
-      create: api.createTransactionIntent,
+      /**
+       * Create a transaction intent.
+       *
+       * For backend wallets (Developer custody), automatically handles
+       * EIP-7702 delegation + signing. For other account types, creates
+       * a plain transaction intent via the API.
+       */
+      create: async (
+        request: api.CreateTransactionIntentRequest,
+      ): Promise<api.TransactionIntentResponse> => {
+        try {
+          const evmAccount = await evmClient.getAccount({
+            id: request.account,
+          })
+          return await evmClient.sendTransaction({
+            account: evmAccount,
+            chainId: request.chainId,
+            interactions: request.interactions,
+            policy: request.policy,
+          })
+        } catch (error) {
+          if (error instanceof api.APIError && error.statusCode === 404) {
+            return api.createTransactionIntent(request)
+          }
+          throw error
+        }
+      },
       /** Get a transaction intent by ID */
       get: api.getTransactionIntent,
       /** Sign a transaction intent */

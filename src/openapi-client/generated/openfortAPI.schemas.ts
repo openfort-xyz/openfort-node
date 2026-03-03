@@ -667,8 +667,10 @@ export interface TransactionIntentListQueries {
 export interface CreateTransactionIntentRequest {
   /** The chain ID. Must be a [supported chain](/development/chains). */
   chainId: number;
-  /** ID of the Player this TransactionIntent belongs to, if one exists (starts with `pla_`).
 
+  rpcUrl?: string;
+
+  /** ID of the Player this TransactionIntent belongs to, if one exists (starts with `pla_`).
 If you omit this parameter a new Player will be created. */
   player?: string;
   /** ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).

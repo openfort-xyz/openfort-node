@@ -236,7 +236,7 @@ export class EvmClient {
     if (!IMPORT_ENCRYPTION_PUBLIC_KEY) {
       throw new EncryptionError(
         'Import encryption public key is not configured. ' +
-          'Please contact Openfort to get the server public key.',
+        'Please contact Openfort to get the server public key.',
       )
     }
 
@@ -386,6 +386,7 @@ export class EvmClient {
     const publicClient = createPublicClient({ chain, transport })
 
     // 2. Get or create delegated account
+    let signedAuthorization: string | undefined
     let txAccountId: string
     try {
       const delegated = await getDelegatedAccount(account.id, { chainId })
@@ -405,26 +406,26 @@ export class EvmClient {
           )
         }
         txAccountId = updated.delegatedAccount.id
+
+        const implementationAddress: Hex = '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+
+        // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
+        const eoaNonce = await publicClient.getTransactionCount({
+          address: account.address,
+        })
+        const authHash = hashAuthorization({
+          contractAddress: implementationAddress,
+          chainId,
+          nonce: eoaNonce,
+        })
+        signedAuthorization = await account.sign({ hash: authHash })
+
       } else {
         throw error
       }
     }
 
-    // 3. Sign EIP-7702 authorization if not yet delegated on-chain
-    const implementationAddress: Hex =
-      '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
-    const eoaNonce = await publicClient.getTransactionCount({
-      address: account.address,
-    })
-    const authHash = hashAuthorization({
-      contractAddress: implementationAddress,
-      chainId,
-      nonce: eoaNonce,
-    })
-
-    const signedAuthorization = await account.sign({ hash: authHash })
-
-    // 4. Create transaction intent
+    // 3. Create transaction intent
     const txIntent = await createTransactionIntent({
       chainId,
       account: txAccountId,
@@ -433,7 +434,7 @@ export class EvmClient {
       interactions,
     })
 
-    // 5. Sign and submit if needed
+    // 4. Sign and submit if needed
     if (!txIntent.nextAction?.payload?.signableHash) {
       return txIntent
     }
