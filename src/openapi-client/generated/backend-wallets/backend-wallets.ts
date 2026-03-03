@@ -6,9 +6,6 @@
  * OpenAPI spec version: 1.0.0
  */
 import type {
-  AccountV2Response,
-  BackendWalletListResponse,
-  BackendWalletResponse,
   CreateBackendWalletRequest,
   CreateBackendWalletResponse,
   DeleteBackendWalletResponse,
@@ -16,7 +13,6 @@ import type {
   ExportPrivateKeyResponse,
   ImportPrivateKeyRequest,
   ImportPrivateKeyResponse,
-  ListBackendWalletsParams,
   RegisterWalletSecretRequest,
   RegisterWalletSecretResponse,
   RevokeWalletSecretRequest,
@@ -24,9 +20,7 @@ import type {
   RotateWalletSecretRequest,
   RotateWalletSecretResponse,
   SignRequest,
-  SignResponse,
-  UpdateBackendWalletRequest,
-  UpdateBackendWalletResponse
+  SignResponse
 } from '../openfortAPI.schemas';
 
 import { openfortApiClient } from '../../openfortApiClient';
@@ -35,164 +29,94 @@ import { openfortApiClient } from '../../openfortApiClient';
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
-/**
-* List backend wallets.
-
-Returns a paginated list of backend wallets for the project.
-* @summary List backend wallets.
-*/
-export const listBackendWallets = (
-  params?: ListBackendWalletsParams,
-  options?: SecondParameter<typeof openfortApiClient<BackendWalletListResponse>>,) => {
-  return openfortApiClient<BackendWalletListResponse>(
-    {
-      url: `/v2/accounts/backend`, method: 'GET',
-      params
-    },
-    options);
-}
-/**
-* Create a new backend wallet account.
+  /**
+ * Create a new backend wallet account.
 
 Generates a new keypair securely in the backend wallet system.
 The private key is stored encrypted and never exposed.
-* @summary Create backend wallet.
-*/
+ * @summary Create backend wallet.
+ */
 export const createBackendWallet = (
-  createBackendWalletRequest: CreateBackendWalletRequest,
-  options?: SecondParameter<typeof openfortApiClient<CreateBackendWalletResponse>>,) => {
-  return openfortApiClient<CreateBackendWalletResponse>(
-    {
-      url: `/v2/accounts/backend`, method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+    createBackendWalletRequest: CreateBackendWalletRequest,
+ options?: SecondParameter<typeof openfortApiClient<CreateBackendWalletResponse>>,) => {
+      return openfortApiClient<CreateBackendWalletResponse>(
+      {url: `/v2/accounts/backend`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
       data: createBackendWalletRequest
     },
-    options);
-}
-/**
-* Get backend wallet details.
-
-Returns details for a specific backend wallet.
-* @summary Get backend wallet.
-*/
-export const getBackendWallet = (
-  id: string,
-  options?: SecondParameter<typeof openfortApiClient<BackendWalletResponse>>,) => {
-  return openfortApiClient<BackendWalletResponse>(
-    {
-      url: `/v2/accounts/backend/${id}`, method: 'GET'
-    },
-    options);
-}
-
-
-export const getDelegatedAccount = (
-  id: string,
-  params: { chainId: number },
-  options?: SecondParameter<typeof openfortApiClient<AccountV2Response>>,) => {
-  return openfortApiClient<AccountV2Response>(
-    {
-      url: `/v2/accounts/backend/${id}/delegated-account`, method: 'GET',
-      params
-    },
-    options);
-}
-
-
-/**
- * Update a backend wallet.
-
-Currently supports upgrading an EOA backend wallet to a Delegated Account (EIP-7702).
-Provide the target accountType along with the required delegation parameters (chainId, implementationType).
- * @summary Update backend wallet.
- */
-export const updateBackendWallet = (
-  id: string,
-  updateBackendWalletRequest: UpdateBackendWalletRequest,
-  options?: SecondParameter<typeof openfortApiClient<UpdateBackendWalletResponse>>,) => {
-  return openfortApiClient<UpdateBackendWalletResponse>(
-    {
-      url: `/v2/accounts/backend/${id}`, method: 'PUT',
-      headers: { 'Content-Type': 'application/json', },
-      data: updateBackendWalletRequest
-    },
-    options);
-}
-/**
-* Delete a backend wallet.
+      options);
+    }
+  /**
+ * Delete a backend wallet.
 
 Permanently deletes a backend wallet and its associated private key.
-* @summary Delete backend wallet.
-*/
+ * @summary Delete backend wallet.
+ */
 export const deleteBackendWallet = (
-  id: string,
-  options?: SecondParameter<typeof openfortApiClient<DeleteBackendWalletResponse>>,) => {
-  return openfortApiClient<DeleteBackendWalletResponse>(
-    {
-      url: `/v2/accounts/backend/${id}`, method: 'DELETE'
+    id: string,
+ options?: SecondParameter<typeof openfortApiClient<DeleteBackendWalletResponse>>,) => {
+      return openfortApiClient<DeleteBackendWalletResponse>(
+      {url: `/v2/accounts/backend/${id}`, method: 'DELETE'
     },
-    options);
-}
-/**
-* Sign data via backend wallet.
+      options);
+    }
+  /**
+ * Sign data via backend wallet.
 
 Signs the provided data using the account's private key managed by the backend wallet.
 The private key is securely stored and never exposed.
-* @summary Sign data via backend wallet.
-*/
+ * @summary Sign data via backend wallet.
+ */
 export const sign = (
-  id: string,
-  signRequest: SignRequest,
-  options?: SecondParameter<typeof openfortApiClient<SignResponse>>,) => {
-  return openfortApiClient<SignResponse>(
-    {
-      url: `/v2/accounts/backend/${id}/sign`, method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+    id: string,
+    signRequest: SignRequest,
+ options?: SecondParameter<typeof openfortApiClient<SignResponse>>,) => {
+      return openfortApiClient<SignResponse>(
+      {url: `/v2/accounts/backend/${id}/sign`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
       data: signRequest
     },
-    options);
-}
-/**
-* Export private key with E2E encryption via backend wallet.
+      options);
+    }
+  /**
+ * Export private key with E2E encryption via backend wallet.
 
 Exports the account's private key encrypted using RSA-4096 OAEP SHA-256.
 The client must provide their ephemeral RSA-4096 public key (base64 SPKI DER format).
 The response contains the encrypted private key that can be decrypted with the client's private key.
-* @summary Export private key (E2E encrypted).
-*/
+ * @summary Export private key (E2E encrypted).
+ */
 export const exportPrivateKey = (
-  id: string,
-  exportPrivateKeyRequest: ExportPrivateKeyRequest,
-  options?: SecondParameter<typeof openfortApiClient<ExportPrivateKeyResponse>>,) => {
-  return openfortApiClient<ExportPrivateKeyResponse>(
-    {
-      url: `/v2/accounts/backend/${id}/export`, method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+    id: string,
+    exportPrivateKeyRequest: ExportPrivateKeyRequest,
+ options?: SecondParameter<typeof openfortApiClient<ExportPrivateKeyResponse>>,) => {
+      return openfortApiClient<ExportPrivateKeyResponse>(
+      {url: `/v2/accounts/backend/${id}/export`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
       data: exportPrivateKeyRequest
     },
-    options);
-}
-/**
-* Import private key with E2E encryption via backend wallet.
+      options);
+    }
+  /**
+ * Import private key with E2E encryption via backend wallet.
 
 Imports a private key into the backend wallet system.
 The private key must be encrypted using RSA-4096 OAEP SHA-256 with the server's
 static import public key (obtain out-of-band from SDK or documentation).
-* @summary Import private key (E2E encrypted).
-*/
+ * @summary Import private key (E2E encrypted).
+ */
 export const importPrivateKey = (
-  importPrivateKeyRequest: ImportPrivateKeyRequest,
-  options?: SecondParameter<typeof openfortApiClient<ImportPrivateKeyResponse>>,) => {
-  return openfortApiClient<ImportPrivateKeyResponse>(
-    {
-      url: `/v2/accounts/backend/import`, method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+    importPrivateKeyRequest: ImportPrivateKeyRequest,
+ options?: SecondParameter<typeof openfortApiClient<ImportPrivateKeyResponse>>,) => {
+      return openfortApiClient<ImportPrivateKeyResponse>(
+      {url: `/v2/accounts/backend/import`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
       data: importPrivateKeyRequest
     },
-    options);
-}
-/**
-* Register a new wallet secret (authentication key).
+      options);
+    }
+  /**
+ * Register a new wallet secret (authentication key).
 
 Registers an ECDSA P-256 public key that will be used to verify
 X-Wallet-Auth JWT signatures. This is required before using WALLET_AUTH
@@ -204,39 +128,37 @@ This proves possession of the private key without transmitting it.
 
 Note: Only ONE active secret is allowed per project. This call fails if an
 active secret already exists; use rotateWalletSecret to replace an existing secret.
-* @summary Register wallet secret.
-*/
+ * @summary Register wallet secret.
+ */
 export const registerWalletSecret = (
-  registerWalletSecretRequest: RegisterWalletSecretRequest,
-  options?: SecondParameter<typeof openfortApiClient<RegisterWalletSecretResponse>>,) => {
-  return openfortApiClient<RegisterWalletSecretResponse>(
-    {
-      url: `/v2/accounts/backend/register-secret`, method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+    registerWalletSecretRequest: RegisterWalletSecretRequest,
+ options?: SecondParameter<typeof openfortApiClient<RegisterWalletSecretResponse>>,) => {
+      return openfortApiClient<RegisterWalletSecretResponse>(
+      {url: `/v2/accounts/backend/register-secret`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
       data: registerWalletSecretRequest
     },
-    options);
-}
-/**
-* Revoke a wallet secret (authentication key).
+      options);
+    }
+  /**
+ * Revoke a wallet secret (authentication key).
 
 Permanently revokes a wallet secret so it can no longer be used
 for X-Wallet-Auth JWT signing.
-* @summary Revoke wallet secret.
-*/
+ * @summary Revoke wallet secret.
+ */
 export const revokeWalletSecret = (
-  revokeWalletSecretRequest: RevokeWalletSecretRequest,
-  options?: SecondParameter<typeof openfortApiClient<RevokeWalletSecretResponse>>,) => {
-  return openfortApiClient<RevokeWalletSecretResponse>(
-    {
-      url: `/v2/accounts/backend/revoke-secret`, method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+    revokeWalletSecretRequest: RevokeWalletSecretRequest,
+ options?: SecondParameter<typeof openfortApiClient<RevokeWalletSecretResponse>>,) => {
+      return openfortApiClient<RevokeWalletSecretResponse>(
+      {url: `/v2/accounts/backend/revoke-secret`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
       data: revokeWalletSecretRequest
     },
-    options);
-}
-/**
-* Rotate wallet secret (authentication key).
+      options);
+    }
+  /**
+ * Rotate wallet secret (authentication key).
 
 Replaces the current wallet secret (ECDSA P-256 public key) used for
 X-Wallet-Auth JWT signing. The old secret will be marked as "rotated"
@@ -245,24 +167,19 @@ and immediately becomes unusable (no grace period).
 Uses provided-key authentication: the request must include a walletAuthToken
 JWT signed by the private key corresponding to the NEW publicKey being registered.
 This proves possession of the new private key without transmitting it.
-* @summary Rotate wallet secret.
-*/
+ * @summary Rotate wallet secret.
+ */
 export const rotateWalletSecret = (
-  rotateWalletSecretRequest: RotateWalletSecretRequest,
-  options?: SecondParameter<typeof openfortApiClient<RotateWalletSecretResponse>>,) => {
-  return openfortApiClient<RotateWalletSecretResponse>(
-    {
-      url: `/v2/accounts/backend/rotate-secrets`, method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+    rotateWalletSecretRequest: RotateWalletSecretRequest,
+ options?: SecondParameter<typeof openfortApiClient<RotateWalletSecretResponse>>,) => {
+      return openfortApiClient<RotateWalletSecretResponse>(
+      {url: `/v2/accounts/backend/rotate-secrets`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
       data: rotateWalletSecretRequest
     },
-    options);
-}
-export type ListBackendWalletsResult = NonNullable<Awaited<ReturnType<typeof listBackendWallets>>>
-export type CreateBackendWalletResult = NonNullable<Awaited<ReturnType<typeof createBackendWallet>>>
-export type GetBackendWalletResult = NonNullable<Awaited<ReturnType<typeof getBackendWallet>>>
-export type GetDelegatedAccountResult = NonNullable<Awaited<ReturnType<typeof getDelegatedAccount>>>
-export type UpdateBackendWalletResult = NonNullable<Awaited<ReturnType<typeof updateBackendWallet>>>
+      options);
+    }
+  export type CreateBackendWalletResult = NonNullable<Awaited<ReturnType<typeof createBackendWallet>>>
 export type DeleteBackendWalletResult = NonNullable<Awaited<ReturnType<typeof deleteBackendWallet>>>
 export type SignResult = NonNullable<Awaited<ReturnType<typeof sign>>>
 export type ExportPrivateKeyResult = NonNullable<Awaited<ReturnType<typeof exportPrivateKey>>>

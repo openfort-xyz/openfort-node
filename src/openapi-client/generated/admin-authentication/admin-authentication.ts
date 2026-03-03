@@ -13,8 +13,6 @@ import type {
   AuthProviderListResponse,
   AuthSessionResponse,
   AuthenticateOAuthRequest,
-  AuthenticatedPlayerResponse,
-  AuthorizePlayerRequest,
   CallbackOAuthParams,
   CreateAuthPlayerRequest,
   DeprecatedCallbackOAuthParams,
@@ -244,16 +242,6 @@ export const verifyAuthToken = (
     },
       options);
     }
-  export const authorize = (
-    authorizePlayerRequest: AuthorizePlayerRequest,
- options?: SecondParameter<typeof openfortApiClient<AuthPlayerResponse | AuthenticatedPlayerResponse>>,) => {
-      return openfortApiClient<AuthPlayerResponse | AuthenticatedPlayerResponse>(
-      {url: `/iam/v1/authorize`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: authorizePlayerRequest
-    },
-      options);
-    }
   export type VerifyOAuthTokenResult = NonNullable<Awaited<ReturnType<typeof verifyOAuthToken>>>
 export type ListOAuthConfigResult = NonNullable<Awaited<ReturnType<typeof listOAuthConfig>>>
 export type CreateOAuthConfigResult = NonNullable<Awaited<ReturnType<typeof createOAuthConfig>>>
@@ -269,4 +257,3 @@ export type GetAuthPlayersResult = NonNullable<Awaited<ReturnType<typeof getAuth
 export type GetAuthPlayerResult = NonNullable<Awaited<ReturnType<typeof getAuthPlayer>>>
 export type DeleteAuthPlayerResult = NonNullable<Awaited<ReturnType<typeof deleteAuthPlayer>>>
 export type VerifyAuthTokenResult = NonNullable<Awaited<ReturnType<typeof verifyAuthToken>>>
-export type AuthorizeResult = NonNullable<Awaited<ReturnType<typeof authorize>>>
