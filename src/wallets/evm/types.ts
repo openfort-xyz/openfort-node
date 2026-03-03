@@ -12,6 +12,10 @@ import type {
   TypedData,
   TypedDataDefinition,
 } from 'viem'
+import type {
+  Interaction,
+  TransactionIntentResponse,
+} from '../../openapi-client'
 
 /**
  * Base EVM account with signing capabilities
@@ -179,6 +183,24 @@ export interface SignDataOptions {
   idempotencyKey?: string
 }
 
+/**
+ * Options for sending a gasless transaction with EIP-7702 delegation
+ */
+export interface SendTransactionOptions {
+  /** Account ID (starts with acc_) */
+  account: EvmAccount
+  /** Chain ID to execute on */
+  chainId: number
+  /** Contract interactions to execute */
+  interactions: Interaction[]
+  /** Policy ID for gas sponsorship (starts with pol_). Optional. */
+  policy?: string
+  /** Custom RPC URL. If omitted, uses viem's default public RPC for the chain. */
+  rpcUrl?: string
+
+  signature?: string
+}
+
 // Re-export viem types for convenience
 export type {
   Address,
@@ -189,3 +211,6 @@ export type {
   TypedData,
   TypedDataDefinition,
 }
+
+// Re-export openapi types for convenience
+export type { Interaction, TransactionIntentResponse }

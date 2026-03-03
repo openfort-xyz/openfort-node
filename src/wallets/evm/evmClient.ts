@@ -3,20 +3,29 @@
  * Main client for EVM wallet operations
  */
 
+import { createPublicClient, http } from 'viem'
+import * as chains from 'viem/chains'
+import { hashAuthorization } from 'viem/utils'
 import { IMPORT_ENCRYPTION_PUBLIC_KEY } from '../../constants'
 import {
   AccountNotFoundError,
+  DelegationError,
   EncryptionError,
   UserInputValidationError,
 } from '../../errors'
 import {
+  APIError,
   type BackendWalletResponse,
   createBackendWallet,
+  createTransactionIntent,
   exportPrivateKey,
   getBackendWallet,
+  getDelegatedAccount,
   importPrivateKey,
   listBackendWallets,
   sign,
+  signature as submitSignature,
+  type TransactionIntentResponse,
   type UpdateBackendWalletResponse,
   updateBackendWallet,
 } from '../../openapi-client'
@@ -32,8 +41,11 @@ import type {
   EvmAccount,
   ExportEvmAccountOptions,
   GetEvmAccountOptions,
+  Hash,
+  Hex,
   ImportEvmAccountOptions,
   ListEvmAccountsOptions,
+  SendTransactionOptions,
   SignDataOptions,
   UpdateEvmAccountOptions,
 } from './types'
@@ -335,5 +347,103 @@ export class EvmClient {
   ): Promise<UpdateBackendWalletResponse> {
     const { id, ...req } = options
     return updateBackendWallet(id, req)
+  }
+
+  /**
+   * Delegates an EVM account via EIP-7702 and sends a gasless transaction in one call.
+   *
+   * Internally: registers delegation -> fetches EOA nonce via RPC -> hashes and signs
+   * EIP-7702 authorization -> creates transaction intent -> signs and submits if needed.
+   *
+   * @param options - Transaction options including account ID, chain, interactions, and optional policy
+   * @returns The transaction intent response
+   *
+   * @example
+   * ```typescript
+   * const result = await openfort.accounts.evm.backend.sendTransaction({
+   *   id: 'acc_...',
+   *   chainId: 84532,
+   *   interactions: [{ to: '0x...', data: '0x...' }],
+   *   policy: 'pol_...',
+   * });
+   * console.log(result.response?.transactionHash);
+   * ```
+   */
+  public async sendTransaction(
+    options: SendTransactionOptions,
+  ): Promise<TransactionIntentResponse> {
+    const { account, chainId, interactions, policy, rpcUrl } = options
+
+    // 1. Resolve chain + RPC
+    const transport = rpcUrl ? http(rpcUrl) : http()
+    const allChains = Object.values(chains) as chains.Chain[]
+    const chain = allChains.find((c) => c.id === chainId)
+    if (!chain) {
+      throw new DelegationError(
+        `Unknown chain ID ${chainId}. Provide a custom rpcUrl for unsupported chains.`,
+      )
+    }
+    const publicClient = createPublicClient({ chain, transport })
+
+    // 2. Get or create delegated account
+    let txAccountId: string
+    try {
+      const delegated = await getDelegatedAccount(account.id, { chainId })
+      txAccountId = delegated.id
+    } catch (error) {
+      if (error instanceof APIError && error.statusCode === 404) {
+        // No delegation yet - register it
+        const updated = await updateBackendWallet(account.id, {
+          accountType: 'Delegated Account',
+          chainType: 'EVM',
+          chainId,
+          implementationType: 'Calibur',
+        })
+        if (!updated.delegatedAccount) {
+          throw new DelegationError(
+            'Server did not return delegation details. The chain may not support EIP-7702.',
+          )
+        }
+        txAccountId = updated.delegatedAccount.id
+      } else {
+        throw error
+      }
+    }
+
+    // 3. Sign EIP-7702 authorization if not yet delegated on-chain
+    const implementationAddress: Hex =
+      '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+    const eoaNonce = await publicClient.getTransactionCount({
+      address: account.address,
+    })
+    const authHash = hashAuthorization({
+      contractAddress: implementationAddress,
+      chainId,
+      nonce: eoaNonce,
+    })
+
+    const signedAuthorization = await account.sign({ hash: authHash })
+
+    // 4. Create transaction intent
+    const txIntent = await createTransactionIntent({
+      chainId,
+      account: txAccountId,
+      policy,
+      signedAuthorization,
+      interactions,
+    })
+
+    // 5. Sign and submit if needed
+    if (!txIntent.nextAction?.payload?.signableHash) {
+      return txIntent
+    }
+
+    const txSignature = await account.sign({
+      hash: txIntent.nextAction.payload.signableHash as Hash,
+    })
+
+    return submitSignature(txIntent.id, {
+      signature: txSignature,
+    })
   }
 }
