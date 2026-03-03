@@ -232,6 +232,8 @@ class Openfort {
           export: evmClient.exportAccount.bind(evmClient),
           /** Update EOA to delegated account */
           update: evmClient.update.bind(evmClient),
+          /** Delegate + create + sign + submit a gasless transaction in one call */
+          sendTransaction: evmClient.sendTransaction.bind(evmClient),
         },
         /** Embedded wallet operations (User custody) */
         embedded: {
@@ -884,6 +886,7 @@ export { IMPORT_ENCRYPTION_PUBLIC_KEY } from './constants'
 // Error classes
 export {
   AccountNotFoundError,
+  DelegationError,
   EncryptionError,
   InvalidAPIKeyFormatError,
   InvalidPublishableKeyFormatError,
