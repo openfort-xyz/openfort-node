@@ -10,7 +10,6 @@ import type {
   AuthPlayerResponse,
   AuthResponse,
   JwtKeyResponse,
-  LoginOIDCRequest,
   LoginRequest,
   LoginWithIdTokenRequest,
   LogoutRequest,
@@ -224,20 +223,6 @@ export const resetPassword = (
       options);
     }
   /**
- * Authenticate a player from an identity token.
- * @summary OIDC Identity token.
- */
-export const loginOIDC = (
-    loginOIDCRequest: LoginOIDCRequest,
- options?: SecondParameter<typeof openfortApiClient<AuthResponse>>,) => {
-      return openfortApiClient<AuthResponse>(
-      {url: `/iam/v1/oidc/login`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: loginOIDCRequest
-    },
-      options);
-    }
-  /**
  * @summary Initialize OAuth.
  */
 export const initOAuth = (
@@ -375,7 +360,6 @@ export type RequestResetPasswordResult = NonNullable<Awaited<ReturnType<typeof r
 export type ResetPasswordResult = NonNullable<Awaited<ReturnType<typeof resetPassword>>>
 export type LinkEmailResult = NonNullable<Awaited<ReturnType<typeof linkEmail>>>
 export type UnlinkEmailResult = NonNullable<Awaited<ReturnType<typeof unlinkEmail>>>
-export type LoginOIDCResult = NonNullable<Awaited<ReturnType<typeof loginOIDC>>>
 export type InitOAuthResult = NonNullable<Awaited<ReturnType<typeof initOAuth>>>
 export type LinkOAuthResult = NonNullable<Awaited<ReturnType<typeof linkOAuth>>>
 export type LinkThirdPartyResult = NonNullable<Awaited<ReturnType<typeof linkThirdParty>>>

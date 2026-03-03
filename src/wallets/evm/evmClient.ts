@@ -15,19 +15,18 @@ import {
 } from '../../errors'
 import {
   APIError,
-  type BackendWalletResponse,
   createBackendWallet,
   createTransactionIntent,
   exportPrivateKey,
-  getBackendWallet,
-  getDelegatedAccount,
   importPrivateKey,
-  listBackendWallets,
   sign,
   signature as submitSignature,
   type TransactionIntentResponse,
-  type UpdateBackendWalletResponse,
-  updateBackendWallet,
+  getAccountsV2,
+  getAccountV2,
+  AccountV2Response,
+  createAccountV2,
+  AccountListV2Response,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -41,6 +40,7 @@ import type {
   EvmAccount,
   ExportEvmAccountOptions,
   GetEvmAccountOptions,
+  GetLinkedAccountsOptions,
   Hash,
   Hex,
   ImportEvmAccountOptions,
@@ -53,7 +53,7 @@ import type {
 /**
  * Converts a BackendWalletResponse to EvmAccountData
  */
-function toEvmAccountData(response: BackendWalletResponse): EvmAccountData {
+function toEvmAccountData(response: AccountV2Response): EvmAccountData {
   return {
     id: response.id,
     address: response.address,
@@ -150,15 +150,21 @@ export class EvmClient {
 
     // If we have an ID, fetch directly
     if (options.id) {
-      const response = await getBackendWallet(options.id)
+      const response = await getAccountV2(options.id)
+
+      if (response.custody !== 'Developer') {
+        throw new AccountNotFoundError()
+      }
+
       return toEvmAccount(toEvmAccountData(response))
     }
 
     // For address lookup, use listBackendWallets with address filter
     if (options.address) {
-      const wallets = await listBackendWallets({
+      const wallets = await getAccountsV2({
         address: options.address,
         chainType: 'EVM',
+        custody: 'Developer',
         limit: 1,
       })
 
@@ -170,6 +176,17 @@ export class EvmClient {
     }
 
     throw new AccountNotFoundError()
+  }
+
+  public async getLinkedAccounts(options: GetLinkedAccountsOptions): Promise<AccountListV2Response> {
+    const response = await getAccountsV2({
+      address: options.address,
+      accountType: 'Delegated Account',
+      chainType: 'EVM',
+      chainId: options.chainId,
+    })
+
+    return response
   }
 
   /**
@@ -188,11 +205,12 @@ export class EvmClient {
   public async listAccounts(
     options: ListEvmAccountsOptions = {},
   ): Promise<ListAccountsResult<EvmAccount>> {
-    const response = await listBackendWallets({
+    const response = await getAccountsV2({
       limit: options.limit,
       skip: options.skip,
       chainType: 'EVM',
-    })
+      custody: 'Developer',
+    });
 
     const accounts = response.data.map((wallet) =>
       toEvmAccount(toEvmAccountData(wallet)),
@@ -344,9 +362,14 @@ export class EvmClient {
    */
   public async update(
     options: UpdateEvmAccountOptions,
-  ): Promise<UpdateBackendWalletResponse> {
-    const { id, ...req } = options
-    return updateBackendWallet(id, req)
+  ): Promise<AccountV2Response> { //* Debatable, here we could introduce a new structure
+    const { chainId, walletId } = options
+    return createAccountV2({
+      accountType: 'Delegated Account',
+      chainType: 'EVM',
+      chainId,
+      user: walletId,
+    })
   }
 
   /**
@@ -374,6 +397,9 @@ export class EvmClient {
   ): Promise<TransactionIntentResponse> {
     const { account, chainId, interactions, policy, rpcUrl } = options
 
+    // Just to get wallet ID
+    const accountInfo = await getAccountV2(account.id)
+
     // 1. Resolve chain + RPC
     const transport = rpcUrl ? http(rpcUrl) : http()
     const allChains = Object.values(chains) as chains.Chain[]
@@ -388,41 +414,38 @@ export class EvmClient {
     // 2. Get or create delegated account
     let signedAuthorization: string | undefined
     let txAccountId: string
-    try {
-      const delegated = await getDelegatedAccount(account.id, { chainId })
-      txAccountId = delegated.id
-    } catch (error) {
-      if (error instanceof APIError && error.statusCode === 404) {
-        // No delegation yet - register it
-        const updated = await updateBackendWallet(account.id, {
-          accountType: 'Delegated Account',
-          chainType: 'EVM',
-          chainId,
-          implementationType: 'Calibur',
-        })
-        if (!updated.delegatedAccount) {
-          throw new DelegationError(
-            'Server did not return delegation details. The chain may not support EIP-7702.',
-          )
-        }
-        txAccountId = updated.delegatedAccount.id
 
-        const implementationAddress: Hex = '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+    const response = await await getAccountsV2({
+        address: account.address, //* Maybe has to checksum
+        accountType: 'Delegated Account',
+        chainType: 'EVM',
+        chainId: chainId,
+      })
 
-        // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
-        const eoaNonce = await publicClient.getTransactionCount({
-          address: account.address,
-        })
-        const authHash = hashAuthorization({
-          contractAddress: implementationAddress,
-          chainId,
-          nonce: eoaNonce,
-        })
-        signedAuthorization = await account.sign({ hash: authHash })
+    if (response.data.length === 0) {
+      // No delegation yet - register it
+      const updated = await this.update({
+        walletId: accountInfo.wallet,
+        chainId,
+        implementationType: 'Calibur',
+      })
 
-      } else {
-        throw error
-      }
+      txAccountId = updated.id
+
+      const implementationAddress: Hex = '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+
+      // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
+      const eoaNonce = await publicClient.getTransactionCount({
+        address: account.address,
+      })
+      const authHash = hashAuthorization({
+        contractAddress: implementationAddress,
+        chainId,
+        nonce: eoaNonce,
+      })
+      signedAuthorization = await account.sign({ hash: authHash })
+    } else {
+      txAccountId = response.data[0].id
     }
 
     // 3. Create transaction intent

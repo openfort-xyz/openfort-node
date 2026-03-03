@@ -667,10 +667,8 @@ export interface TransactionIntentListQueries {
 export interface CreateTransactionIntentRequest {
   /** The chain ID. Must be a [supported chain](/development/chains). */
   chainId: number;
-
-  rpcUrl?: string;
-
   /** ID of the Player this TransactionIntent belongs to, if one exists (starts with `pla_`).
+
 If you omit this parameter a new Player will be created. */
   player?: string;
   /** ID of the Account this TransactionIntent is executed with, if one exists (starts with `acc_` or `dac_`).
@@ -2426,6 +2424,8 @@ export interface SmartAccountData {
   deployedTx?: string;
   deployedAt?: number;
   active: boolean;
+  ownerAddress?: string;
+  chainId?: number;
 }
 
 export interface PasskeyEnv {
@@ -2441,7 +2441,7 @@ export interface RecoveryMethodDetails {
 }
 
 /**
- * Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB).
+ * Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys.
  */
 export type PregenerateAccountResponseCustody = typeof PregenerateAccountResponseCustody[keyof typeof PregenerateAccountResponseCustody];
 
@@ -2464,7 +2464,7 @@ export interface PregenerateAccountResponse {
   smartAccount?: SmartAccountData;
   recoveryMethod?: string;
   recoveryMethodDetails?: RecoveryMethodDetails;
-  /** Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB). */
+  /** Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys. */
   custody: PregenerateAccountResponseCustody;
   /** The recovery share for the user's embedded signer.
 This should be stored securely and provided to the user for account recovery. */
@@ -3965,112 +3965,6 @@ export interface CreateEmbeddedRequest {
 /**
  * The type of object.
  */
-export type BackendWalletResponseObject = typeof BackendWalletResponseObject[keyof typeof BackendWalletResponseObject];
-
-
-export const BackendWalletResponseObject = {
-  backendWallet: 'backendWallet',
-} as const;
-
-/**
- * The chain type the wallet is associated with.
- */
-export type BackendWalletResponseChainType = typeof BackendWalletResponseChainType[keyof typeof BackendWalletResponseChainType];
-
-
-export const BackendWalletResponseChainType = {
-  EVM: 'EVM',
-  SVM: 'SVM',
-} as const;
-
-/**
- * Key custody: always "Developer" for backend wallets (server-managed keys in TEE).
- */
-export type BackendWalletResponseCustody = typeof BackendWalletResponseCustody[keyof typeof BackendWalletResponseCustody];
-
-
-export const BackendWalletResponseCustody = {
-  Developer: 'Developer',
-} as const;
-
-/**
- * Backend wallet details response.
- */
-export interface BackendWalletResponse {
-  /** The type of object. */
-  object: BackendWalletResponseObject;
-  /** The wallet ID (starts with `acc_`). */
-  id: string;
-  /** The wallet address. */
-  address: string;
-  /** The chain type the wallet is associated with. */
-  chainType: BackendWalletResponseChainType;
-  /** Key custody: always "Developer" for backend wallets (server-managed keys in TEE). */
-  custody: BackendWalletResponseCustody;
-  /** Creation timestamp (Unix epoch seconds). */
-  createdAt: number;
-  /** Last updated timestamp (Unix epoch seconds). */
-  updatedAt: number;
-}
-
-/**
- * The type of object.
- */
-export type BackendWalletListResponseObject = typeof BackendWalletListResponseObject[keyof typeof BackendWalletListResponseObject];
-
-
-export const BackendWalletListResponseObject = {
-  list: 'list',
-} as const;
-
-/**
- * List of backend wallets response.
- */
-export interface BackendWalletListResponse {
-  /** The type of object. */
-  object: BackendWalletListResponseObject;
-  /** API endpoint URL. */
-  url: string;
-  /** List of backend wallets. */
-  data: BackendWalletResponse[];
-  /** Starting index. */
-  start: number;
-  /** Ending index. */
-  end: number;
-  /** Total number of wallets. */
-  total: number;
-}
-
-/**
- * Filter by chain type.
- */
-export type BackendWalletListQueriesChainType = typeof BackendWalletListQueriesChainType[keyof typeof BackendWalletListQueriesChainType];
-
-
-export const BackendWalletListQueriesChainType = {
-  EVM: 'EVM',
-  SVM: 'SVM',
-} as const;
-
-/**
- * Query parameters for listing backend wallets.
- */
-export interface BackendWalletListQueries {
-  /** Number of wallets to return (default: 10, max: 100). */
-  limit?: number;
-  /** Number of wallets to skip (for pagination). */
-  skip?: number;
-  /** Filter by chain type. */
-  chainType?: BackendWalletListQueriesChainType;
-  /** Filter by wallet address. */
-  address?: string;
-  /** Filter by associated wallet ID (starts with `pla_`). */
-  wallet?: string;
-}
-
-/**
- * The type of object.
- */
 export type CreateBackendWalletResponseObject = typeof CreateBackendWalletResponseObject[keyof typeof CreateBackendWalletResponseObject];
 
 
@@ -4124,135 +4018,6 @@ export interface CreateBackendWalletRequest {
   chainType: CreateBackendWalletRequestChainType;
   /** The wallet ID to associate with this wallet (starts with `pla_`). */
   wallet?: string;
-}
-
-/**
- * The type of object.
- */
-export type UpdateBackendWalletResponseObject = typeof UpdateBackendWalletResponseObject[keyof typeof UpdateBackendWalletResponseObject];
-
-
-export const UpdateBackendWalletResponseObject = {
-  backendWallet: 'backendWallet',
-} as const;
-
-/**
- * The chain type the wallet is associated with.
- */
-export type UpdateBackendWalletResponseChainType = typeof UpdateBackendWalletResponseChainType[keyof typeof UpdateBackendWalletResponseChainType];
-
-
-export const UpdateBackendWalletResponseChainType = {
-  EVM: 'EVM',
-  SVM: 'SVM',
-} as const;
-
-/**
- * Key custody: always "Developer" for backend wallets (server-managed keys in TEE).
- */
-export type UpdateBackendWalletResponseCustody = typeof UpdateBackendWalletResponseCustody[keyof typeof UpdateBackendWalletResponseCustody];
-
-
-export const UpdateBackendWalletResponseCustody = {
-  Developer: 'Developer',
-} as const;
-
-/**
- * The chain type.
- */
-export type UpdateBackendWalletResponseDelegatedAccountChainChainType = typeof UpdateBackendWalletResponseDelegatedAccountChainChainType[keyof typeof UpdateBackendWalletResponseDelegatedAccountChainChainType];
-
-
-export const UpdateBackendWalletResponseDelegatedAccountChainChainType = {
-  EVM: 'EVM',
-  SVM: 'SVM',
-} as const;
-
-/**
- * The chain configuration for this delegation.
- */
-export type UpdateBackendWalletResponseDelegatedAccountChain = {
-  /** The chain ID. */
-  chainId: number;
-  /** The chain type. */
-  chainType: UpdateBackendWalletResponseDelegatedAccountChainChainType;
-};
-
-/**
- * Present when the wallet has been upgraded to a delegated account.
- */
-export type UpdateBackendWalletResponseDelegatedAccount = {
-  /** The chain configuration for this delegation. */
-  chain: UpdateBackendWalletResponseDelegatedAccountChain;
-  /** The implementation contract address. */
-  implementationAddress: string;
-  /** The implementation type used for delegation. */
-  implementationType: string;
-  /** The delegated account ID (starts with `acc_`). */
-  id: string;
-};
-
-/**
- * Response from updating a backend wallet.
- */
-export interface UpdateBackendWalletResponse {
-  /** The type of object. */
-  object: UpdateBackendWalletResponseObject;
-  /** The wallet ID (starts with `acc_`). */
-  id: string;
-  /** The wallet address. */
-  address: string;
-  /** The chain type the wallet is associated with. */
-  chainType: UpdateBackendWalletResponseChainType;
-  /** Key custody: always "Developer" for backend wallets (server-managed keys in TEE). */
-  custody: UpdateBackendWalletResponseCustody;
-  /** The current account type. */
-  accountType: string;
-  /** Creation timestamp (Unix epoch seconds). */
-  createdAt: number;
-  /** Last updated timestamp (Unix epoch seconds). */
-  updatedAt: number;
-  /** Present when the wallet has been upgraded to a delegated account. */
-  delegatedAccount?: UpdateBackendWalletResponseDelegatedAccount;
-}
-
-/**
- * Upgrade the account type. Currently only supports upgrading to "Delegated Account".
- */
-export type UpdateBackendWalletRequestAccountType = typeof UpdateBackendWalletRequestAccountType[keyof typeof UpdateBackendWalletRequestAccountType];
-
-
-export const UpdateBackendWalletRequestAccountType = {
-  Delegated_Account: 'Delegated Account',
-} as const;
-
-/**
- * The chain type.
- */
-export type UpdateBackendWalletRequestChainType = typeof UpdateBackendWalletRequestChainType[keyof typeof UpdateBackendWalletRequestChainType];
-
-
-export const UpdateBackendWalletRequestChainType = {
-  EVM: 'EVM',
-  SVM: 'SVM',
-} as const;
-
-/**
- * Request to update a backend wallet.
-
-All fields are optional — only provide the fields you want to update.
-Currently supports upgrading to a Delegated Account (EIP-7702).
- */
-export interface UpdateBackendWalletRequest {
-  /** Upgrade the account type. Currently only supports upgrading to "Delegated Account". */
-  accountType?: UpdateBackendWalletRequestAccountType;
-  /** The chain type. */
-  chainType: UpdateBackendWalletRequestChainType;
-  /** The chain ID. Must be a [supported chain](/development/chains). */
-  chainId: number;
-  /** The implementation type for delegation (e.g., "Calibur", "CaliburV9").
-Required when accountType is "Delegated Account". */
-  implementationType?: string;
 }
 
 /**
@@ -4517,7 +4282,7 @@ Used to identify this key in X-Wallet-Auth JWT headers. */
 }
 
 /**
- * Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB).
+ * Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys.
  */
 export type AccountV2ResponseCustody = typeof AccountV2ResponseCustody[keyof typeof AccountV2ResponseCustody];
 
@@ -4540,7 +4305,7 @@ export interface AccountV2Response {
   smartAccount?: SmartAccountData;
   recoveryMethod?: string;
   recoveryMethodDetails?: RecoveryMethodDetails;
-  /** Indicates key custody: "Developer" for server-managed keys (WALLTEE), "User" for user-managed keys (DB). */
+  /** Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys. */
   custody: AccountV2ResponseCustody;
 }
 
@@ -5403,11 +5168,6 @@ export interface UnlinkEmailRequest {
   email: string;
 }
 
-export interface LoginOIDCRequest {
-  /** The identity token of the user. */
-  identityToken: string;
-}
-
 export interface OAuthResponse {
   url: string;
   key: string;
@@ -6234,16 +5994,6 @@ export interface JwtKeyResponse {
   keys: JwtKey[];
 }
 
-export interface AuthenticatedPlayerResponse {
-  /** Player's identifier. */
-  player: AuthPlayerResponse;
-}
-
-export interface AuthorizePlayerRequest {
-  /** The authorization code received from the api to authorize the project to use the Ecosystem player. */
-  authorizationCode: string;
-}
-
 export type GetTransactionIntentsParams = {
 /**
  * Specifies the maximum number of records to return.
@@ -6803,37 +6553,6 @@ enabled?: boolean;
  */
 deleted?: boolean;
 };
-
-export type ListBackendWalletsParams = {
-/**
- * Number of wallets to return (default: 10, max: 100).
- */
-limit?: number;
-/**
- * Number of wallets to skip (for pagination).
- */
-skip?: number;
-/**
- * Filter by chain type.
- */
-chainType?: ListBackendWalletsChainType;
-/**
- * Filter by wallet address.
- */
-address?: string;
-/**
- * Filter by associated wallet ID (starts with `pla_`).
- */
-wallet?: string;
-};
-
-export type ListBackendWalletsChainType = typeof ListBackendWalletsChainType[keyof typeof ListBackendWalletsChainType];
-
-
-export const ListBackendWalletsChainType = {
-  EVM: 'EVM',
-  SVM: 'SVM',
-} as const;
 
 export type GetAccountsV2Params = {
 /**
