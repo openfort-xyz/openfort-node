@@ -48,10 +48,6 @@ When using a non-custodial account, a `nextAction` attribute is returned with th
 export const createTransactionIntent = (
   createTransactionIntentRequest: CreateTransactionIntentRequest,
   options?: SecondParameter<typeof openfortApiClient<TransactionIntentResponse>>,) => {
-    
-
-
-
   return openfortApiClient<TransactionIntentResponse>(
     {
       url: `/v1/transaction_intents`, method: 'POST',
