@@ -21,6 +21,8 @@ import { SolanaClient } from './wallets/solana/solanaClient'
 // Re-export ShieldAuthProvider for convenience
 export { ShieldAuthProvider } from '@openfort/shield-js'
 
+import { sendTransaction, update } from './wallets/evm/actions/'
+
 /**
  * Configuration options for the Openfort client
  */
@@ -231,7 +233,9 @@ class Openfort {
           /** Export private key (with E2E encryption) */
           export: evmClient.exportAccount.bind(evmClient),
           /** Update EOA to delegated account */
-          update: evmClient.update.bind(evmClient),
+          update: update,
+          /** Delegate + create + sign + submit a gasless transaction in one call */
+          sendTransaction: sendTransaction,
         },
         /** Embedded wallet operations (User custody) */
         embedded: {
@@ -474,10 +478,15 @@ class Openfort {
    * gas costs are sponsored according to the policy's strategy.
    */
   public get transactionIntents() {
+    if (!this._evmClient) {
+      this._evmClient = new EvmClient()
+    }
+    const _evmClient = this._evmClient
+
     return {
       /** List transaction intents */
       list: api.getTransactionIntents,
-      /** Create a transaction intent with contract interactions */
+      /** Create a transaction intent with contract interactions. */
       create: api.createTransactionIntent,
       /** Get a transaction intent by ID */
       get: api.getTransactionIntent,
@@ -633,8 +642,6 @@ class Openfort {
         verifyToken: api.verifyAuthToken,
         /** Verify OAuth token */
         verifyOAuthToken: api.verifyOAuthToken,
-        /** Authorize */
-        authorize: api.authorize,
       },
     }
   }
@@ -884,6 +891,7 @@ export { IMPORT_ENCRYPTION_PUBLIC_KEY } from './constants'
 // Error classes
 export {
   AccountNotFoundError,
+  DelegationError,
   EncryptionError,
   InvalidAPIKeyFormatError,
   InvalidPublishableKeyFormatError,

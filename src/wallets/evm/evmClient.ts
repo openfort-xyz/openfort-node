@@ -2,7 +2,6 @@
  * @module Wallets/EVM/EvmClient
  * Main client for EVM wallet operations
  */
-
 import { IMPORT_ENCRYPTION_PUBLIC_KEY } from '../../constants'
 import {
   AccountNotFoundError,
@@ -10,15 +9,14 @@ import {
   UserInputValidationError,
 } from '../../errors'
 import {
-  type BackendWalletResponse,
+  type AccountListV2Response,
+  type AccountV2Response,
   createBackendWallet,
   exportPrivateKey,
-  getBackendWallet,
+  getAccountsV2,
+  getAccountV2,
   importPrivateKey,
-  listBackendWallets,
   sign,
-  type UpdateBackendWalletResponse,
-  updateBackendWallet,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -32,19 +30,20 @@ import type {
   EvmAccount,
   ExportEvmAccountOptions,
   GetEvmAccountOptions,
+  GetLinkedAccountsOptions,
   ImportEvmAccountOptions,
   ListEvmAccountsOptions,
   SignDataOptions,
-  UpdateEvmAccountOptions,
 } from './types'
 
 /**
  * Converts a BackendWalletResponse to EvmAccountData
  */
-function toEvmAccountData(response: BackendWalletResponse): EvmAccountData {
+function toEvmAccountData(response: AccountV2Response): EvmAccountData {
   return {
     id: response.id,
     address: response.address,
+    walletId: response.wallet,
   }
 }
 
@@ -108,6 +107,7 @@ export class EvmClient {
     return toEvmAccount({
       id: response.id,
       address: response.address,
+      walletId: response.walletId,
     })
   }
 
@@ -135,18 +135,24 @@ export class EvmClient {
         'Must provide either id or address to get account',
       )
     }
-
     // If we have an ID, fetch directly
     if (options.id) {
-      const response = await getBackendWallet(options.id)
+      const response = await getAccountV2(options.id)
+
+      if (response.custody !== 'Developer') {
+        throw new AccountNotFoundError()
+      }
+
       return toEvmAccount(toEvmAccountData(response))
     }
 
     // For address lookup, use listBackendWallets with address filter
+
     if (options.address) {
-      const wallets = await listBackendWallets({
+      const wallets = await getAccountsV2({
         address: options.address,
         chainType: 'EVM',
+        custody: 'Developer',
         limit: 1,
       })
 
@@ -158,6 +164,19 @@ export class EvmClient {
     }
 
     throw new AccountNotFoundError()
+  }
+
+  public async getLinkedAccounts(
+    options: GetLinkedAccountsOptions,
+  ): Promise<AccountListV2Response> {
+    const response = await getAccountsV2({
+      address: options.address,
+      accountType: 'Delegated Account',
+      chainType: 'EVM',
+      chainId: options.chainId,
+    })
+
+    return response
   }
 
   /**
@@ -176,10 +195,11 @@ export class EvmClient {
   public async listAccounts(
     options: ListEvmAccountsOptions = {},
   ): Promise<ListAccountsResult<EvmAccount>> {
-    const response = await listBackendWallets({
+    const response = await getAccountsV2({
       limit: options.limit,
       skip: options.skip,
       chainType: 'EVM',
+      custody: 'Developer',
     })
 
     const accounts = response.data.map((wallet) =>
@@ -244,6 +264,7 @@ export class EvmClient {
       return toEvmAccount({
         id: response.id,
         address: response.address,
+        walletId: response.walletId,
       })
     } catch (error) {
       if (error instanceof UserInputValidationError) {
@@ -310,30 +331,5 @@ export class EvmClient {
     })
 
     return response.signature
-  }
-
-  /**
-   * Updates an EVM backend wallet.
-   *
-   * Currently supports upgrading an EVM EOA to a Delegated Account (EIP-7702).
-   *
-   * @param options - Update options including account ID and delegation parameters
-   * @returns The updated backend wallet response
-   *
-   * @example
-   * ```typescript
-   * const updated = await openfort.accounts.evm.backend.update({
-   *   id: 'acc_...',
-   *   accountType: 'Delegated Account',
-   *   chain: { chainType: 'EVM', chainId: 8453 },
-   *   implementationType: 'Calibur',
-   * });
-   * ```
-   */
-  public async update(
-    options: UpdateEvmAccountOptions,
-  ): Promise<UpdateBackendWalletResponse> {
-    const { id, ...req } = options
-    return updateBackendWallet(id, req)
   }
 }
