@@ -48,7 +48,6 @@ export async function sendTransaction(
       `Unknown chain ID ${chainId}. Provide a custom rpcUrl for unsupported chains.`,
     )
   }
-  const publicClient = createPublicClient({ chain, transport })
 
   // 2. Get or create delegated account
   let signedAuthorization: string | undefined
@@ -71,8 +70,9 @@ export async function sendTransaction(
     })
     txAccountId = updated.id
 
-    const implementationAddress: Hex =
-      '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+    const implementationAddress: Hex = '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+
+    const publicClient = createPublicClient({ chain, transport })
 
     // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
     const eoaNonce = await publicClient.getTransactionCount({
