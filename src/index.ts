@@ -496,6 +496,7 @@ class Openfort {
           const evmAccount = await evmClient.getAccount({
             id: request.account,
           })
+          console.log('Found account', evmAccount)
           return await evmClient.sendTransaction({
             account: evmAccount,
             chainId: request.chainId,
@@ -504,6 +505,9 @@ class Openfort {
           })
         } catch (error) {
           if (error instanceof api.APIError && error.statusCode === 404) {
+            console.log(
+              'Account not found as backend wallet, falling back to creating transaction intent without delegation...',
+            )
             return api.createTransactionIntent(request)
           }
           throw error
@@ -663,8 +667,6 @@ class Openfort {
         verifyToken: api.verifyAuthToken,
         /** Verify OAuth token */
         verifyOAuthToken: api.verifyOAuthToken,
-        /** Authorize */
-        authorize: api.authorize,
       },
     }
   }

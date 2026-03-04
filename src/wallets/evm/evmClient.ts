@@ -5,7 +5,7 @@
 
 import { createPublicClient, http } from 'viem'
 import * as chains from 'viem/chains'
-import { hashAuthorization } from 'viem/utils'
+import { getAddress, hashAuthorization } from 'viem/utils'
 import { IMPORT_ENCRYPTION_PUBLIC_KEY } from '../../constants'
 import {
   AccountNotFoundError,
@@ -14,19 +14,18 @@ import {
   UserInputValidationError,
 } from '../../errors'
 import {
-  APIError,
+  type AccountListV2Response,
+  type AccountV2Response,
+  createAccountV2,
   createBackendWallet,
   createTransactionIntent,
   exportPrivateKey,
+  getAccountsV2,
+  getAccountV2,
   importPrivateKey,
   sign,
   signature as submitSignature,
   type TransactionIntentResponse,
-  getAccountsV2,
-  getAccountV2,
-  AccountV2Response,
-  createAccountV2,
-  AccountListV2Response,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -149,7 +148,7 @@ export class EvmClient {
         'Must provide either id or address to get account',
       )
     }
-
+    console.log('WTF')
     // If we have an ID, fetch directly
     if (options.id) {
       const response = await getAccountV2(options.id)
@@ -162,6 +161,7 @@ export class EvmClient {
     }
 
     // For address lookup, use listBackendWallets with address filter
+
     if (options.address) {
       const wallets = await getAccountsV2({
         address: options.address,
@@ -180,7 +180,9 @@ export class EvmClient {
     throw new AccountNotFoundError()
   }
 
-  public async getLinkedAccounts(options: GetLinkedAccountsOptions): Promise<AccountListV2Response> {
+  public async getLinkedAccounts(
+    options: GetLinkedAccountsOptions,
+  ): Promise<AccountListV2Response> {
     const response = await getAccountsV2({
       address: options.address,
       accountType: 'Delegated Account',
@@ -212,7 +214,7 @@ export class EvmClient {
       skip: options.skip,
       chainType: 'EVM',
       custody: 'Developer',
-    });
+    })
 
     const accounts = response.data.map((wallet) =>
       toEvmAccount(toEvmAccountData(wallet)),
@@ -256,7 +258,7 @@ export class EvmClient {
     if (!IMPORT_ENCRYPTION_PUBLIC_KEY) {
       throw new EncryptionError(
         'Import encryption public key is not configured. ' +
-        'Please contact Openfort to get the server public key.',
+          'Please contact Openfort to get the server public key.',
       )
     }
 
@@ -365,7 +367,8 @@ export class EvmClient {
    */
   public async update(
     options: UpdateEvmAccountOptions,
-  ): Promise<AccountV2Response> { //* Debatable, here we could introduce a new structure
+  ): Promise<AccountV2Response> {
+    //* Debatable, here we could introduce a new structure
     const { chainId, walletId } = options
     return createAccountV2({
       accountType: 'Delegated Account',
@@ -398,6 +401,7 @@ export class EvmClient {
   public async sendTransaction(
     options: SendTransactionOptions,
   ): Promise<TransactionIntentResponse> {
+    console.log('wtf')
     const { account, chainId, interactions, policy, rpcUrl } = options
 
     // 1. Resolve chain + RPC
@@ -410,18 +414,19 @@ export class EvmClient {
       )
     }
     const publicClient = createPublicClient({ chain, transport })
+    console.log('wtf')
 
     // 2. Get or create delegated account
     let signedAuthorization: string | undefined
     let txAccountId: string
-
-    const response = await await getAccountsV2({
-        address: account.address, //* Maybe has to checksum
-        accountType: 'Delegated Account',
-        chainType: 'EVM',
-        chainId: chainId,
-      })
-
+    console.log('wtf')
+    const response = await getAccountsV2({
+      address: getAddress(account.address),
+      accountType: 'Delegated Account',
+      chainType: 'EVM',
+      chainId: chainId,
+    })
+    console.log('Existing delegations', response.data)
     if (response.data.length === 0) {
       // No delegation yet - register it
       const updated = await this.update({
@@ -432,7 +437,8 @@ export class EvmClient {
 
       txAccountId = updated.id
 
-      const implementationAddress: Hex = '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+      const implementationAddress: Hex =
+        '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
 
       // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
       const eoaNonce = await publicClient.getTransactionCount({
