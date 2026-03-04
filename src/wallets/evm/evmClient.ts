@@ -2,30 +2,21 @@
  * @module Wallets/EVM/EvmClient
  * Main client for EVM wallet operations
  */
-
-import { createPublicClient, http } from 'viem'
-import * as chains from 'viem/chains'
-import { getAddress, hashAuthorization } from 'viem/utils'
 import { IMPORT_ENCRYPTION_PUBLIC_KEY } from '../../constants'
 import {
   AccountNotFoundError,
-  DelegationError,
   EncryptionError,
   UserInputValidationError,
 } from '../../errors'
 import {
   type AccountListV2Response,
   type AccountV2Response,
-  createAccountV2,
   createBackendWallet,
-  createTransactionIntent,
   exportPrivateKey,
   getAccountsV2,
   getAccountV2,
   importPrivateKey,
   sign,
-  signature as submitSignature,
-  type TransactionIntentResponse,
 } from '../../openapi-client'
 import {
   decryptExportedPrivateKey,
@@ -40,13 +31,9 @@ import type {
   ExportEvmAccountOptions,
   GetEvmAccountOptions,
   GetLinkedAccountsOptions,
-  Hash,
-  Hex,
   ImportEvmAccountOptions,
   ListEvmAccountsOptions,
-  SendTransactionOptions,
   SignDataOptions,
-  UpdateEvmAccountOptions,
 } from './types'
 
 /**
@@ -344,135 +331,5 @@ export class EvmClient {
     })
 
     return response.signature
-  }
-
-  /**
-   * Updates an EVM backend wallet.
-   *
-   * Currently supports upgrading an EVM EOA to a Delegated Account (EIP-7702).
-   *
-   * @param options - Update options including account ID and delegation parameters
-   * @returns The updated backend wallet response
-   *
-   * @example
-   * ```typescript
-   * const updated = await openfort.accounts.evm.backend.update({
-   *   id: 'acc_...',
-   *   accountType: 'Delegated Account',
-   *   chain: { chainType: 'EVM', chainId: 8453 },
-   *   implementationType: 'Calibur',
-   * });
-   * ```
-   */
-  public async update(
-    options: UpdateEvmAccountOptions,
-  ): Promise<AccountV2Response> {
-    //* Debatable, here we could introduce a new structure
-    const { chainId, walletId, implementationType, accountId } = options
-    return createAccountV2({
-      accountType: 'Delegated Account',
-      chainType: 'EVM',
-      chainId,
-      user: walletId,
-      implementationType,
-      account: accountId,
-    })
-  }
-
-  /**
-   * Delegates an EVM account via EIP-7702 and sends a gasless transaction in one call.
-   *
-   * Internally: registers delegation -> fetches EOA nonce via RPC -> hashes and signs
-   * EIP-7702 authorization -> creates transaction intent -> signs and submits if needed.
-   *
-   * @param options - Transaction options including account ID, chain, interactions, and optional policy
-   * @returns The transaction intent response
-   *
-   * @example
-   * ```typescript
-   * const result = await openfort.accounts.evm.backend.sendTransaction({
-   *   id: 'acc_...',
-   *   chainId: 84532,
-   *   interactions: [{ to: '0x...', data: '0x...' }],
-   *   policy: 'pol_...',
-   * });
-   * console.log(result.response?.transactionHash);
-   * ```
-   */
-  public async sendTransaction(
-    options: SendTransactionOptions,
-  ): Promise<TransactionIntentResponse> {
-    const { account, chainId, interactions, policy, rpcUrl } = options
-
-    // 1. Resolve chain + RPC
-    const transport = rpcUrl ? http(rpcUrl) : http()
-    const allChains = Object.values(chains) as chains.Chain[]
-    const chain = allChains.find((c) => c.id === chainId)
-    if (!chain) {
-      throw new DelegationError(
-        `Unknown chain ID ${chainId}. Provide a custom rpcUrl for unsupported chains.`,
-      )
-    }
-    const publicClient = createPublicClient({ chain, transport })
-
-    // 2. Get or create delegated account
-    let signedAuthorization: string | undefined
-    let txAccountId: string
-
-    const response = await getAccountsV2({
-      address: getAddress(account.address),
-      accountType: 'Delegated Account',
-      chainType: 'EVM',
-      chainId: chainId,
-    })
-
-    if (response.data.length === 0) {
-      // No delegation yet - register it
-      const updated = await this.update({
-        walletId: account.walletId,
-        chainId,
-        implementationType: 'Calibur',
-        accountId: account.id,
-      })
-      txAccountId = updated.id
-
-      const implementationAddress: Hex =
-        '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
-
-      // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
-      const eoaNonce = await publicClient.getTransactionCount({
-        address: account.address,
-      })
-      const authHash = hashAuthorization({
-        contractAddress: implementationAddress,
-        chainId,
-        nonce: eoaNonce,
-      })
-      signedAuthorization = await account.sign({ hash: authHash })
-    } else {
-      txAccountId = response.data[0].id
-    }
-
-    // 3. Create transaction intent
-    const txIntent = await createTransactionIntent({
-      chainId,
-      account: txAccountId,
-      policy,
-      signedAuthorization,
-      interactions,
-    })
-
-    // 4. Sign and submit if needed
-    if (!txIntent.nextAction?.payload?.signableHash) {
-      return txIntent
-    }
-
-    const txSignature = await account.sign({
-      hash: txIntent.nextAction.payload.signableHash as Hash,
-    })
-
-    return submitSignature(txIntent.id, {
-      signature: txSignature,
-    })
   }
 }
