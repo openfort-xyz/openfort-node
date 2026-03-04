@@ -27,6 +27,8 @@ export interface EvmAccountBase {
   address: Address
   /** Account type identifier */
   custody: 'Developer'
+  /** Wallet ID */
+  walletId: string
 }
 
 /**

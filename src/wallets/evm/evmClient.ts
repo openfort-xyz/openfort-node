@@ -57,6 +57,7 @@ function toEvmAccountData(response: AccountV2Response): EvmAccountData {
   return {
     id: response.id,
     address: response.address,
+    walletId: response.wallet,
   }
 }
 
@@ -397,9 +398,6 @@ export class EvmClient {
   ): Promise<TransactionIntentResponse> {
     const { account, chainId, interactions, policy, rpcUrl } = options
 
-    // Just to get wallet ID
-    const accountInfo = await getAccountV2(account.id)
-
     // 1. Resolve chain + RPC
     const transport = rpcUrl ? http(rpcUrl) : http()
     const allChains = Object.values(chains) as chains.Chain[]
@@ -425,7 +423,7 @@ export class EvmClient {
     if (response.data.length === 0) {
       // No delegation yet - register it
       const updated = await this.update({
-        walletId: accountInfo.wallet,
+        walletId: account.walletId,
         chainId,
         implementationType: 'Calibur',
       })
