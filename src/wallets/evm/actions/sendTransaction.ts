@@ -70,7 +70,8 @@ export async function sendTransaction(
     })
     txAccountId = updated.id
 
-    const implementationAddress: Hex = '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+    const implementationAddress: Hex =
+      '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
 
     const publicClient = createPublicClient({ chain, transport })
 
