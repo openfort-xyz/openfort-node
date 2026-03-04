@@ -121,6 +121,7 @@ export class EvmClient {
     return toEvmAccount({
       id: response.id,
       address: response.address,
+      walletId: response.walletId,
     })
   }
 
@@ -275,6 +276,7 @@ export class EvmClient {
       return toEvmAccount({
         id: response.id,
         address: response.address,
+        walletId: response.walletId,
       })
     } catch (error) {
       if (error instanceof UserInputValidationError) {
@@ -425,7 +427,7 @@ export class EvmClient {
       const updated = await this.update({
         walletId: account.walletId,
         chainId,
-        implementationType: 'Calibur',
+        implementationType: 'Calibur', //* Maybe impl type and address should be an option arguments
       })
 
       txAccountId = updated.id

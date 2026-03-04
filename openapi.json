@@ -8770,6 +8770,11 @@
             "description": "The wallet address generated for this account.",
             "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
           },
+          "walletId": {
+            "type": "string",
+            "description": "The wallet ID",
+            "example": "pla_6f6c9067-89fa-4fc8-ac72-c242a268c584"
+          },
           "chainType": {
             "type": "string",
             "enum": [
@@ -8789,6 +8794,7 @@
           "object",
           "id",
           "address",
+          "walletId",
           "chainType",
           "createdAt"
         ],
@@ -8953,6 +8959,11 @@
             "description": "The wallet address derived from the imported private key.",
             "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
           },
+          "walletId": {
+            "type": "string",
+            "description": "The wallet ID",
+            "example": "pla_6f6c9067-89fa-4fc8-ac72-c242a268c584"
+          },
           "chainType": {
             "type": "string",
             "enum": [
@@ -8972,6 +8983,7 @@
           "object",
           "id",
           "address",
+          "walletId",
           "createdAt"
         ],
         "type": "object",
@@ -9407,7 +9419,7 @@
           },
           "user": {
             "type": "string",
-            "description": "ID of the user this account belongs to (starts with `usr_`). If none is provided, a new user will be created.",
+            "description": "ID of the user this account belongs to (starts with `usr_`). Also might take wallet ID (starts with `pla_`)",
             "example": "usr_e0b84653-1741-4a3d-9e91-2b0fd2942f60"
           },
           "account": {
