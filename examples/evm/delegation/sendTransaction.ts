@@ -1,9 +1,5 @@
 import 'dotenv/config'
-import Openfort, { getAccount, Hex } from '@openfort/openfort-node'
-import { hashAuthorization } from 'viem/utils'
-import { createPublicClient, http } from 'viem'
-import { baseSepolia } from 'viem/chains'
-import { get } from 'node:http'
+import Openfort from '@openfort/openfort-node'
 
 const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET!,
