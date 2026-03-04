@@ -218,6 +218,19 @@ export class AccountNotFoundError extends Error {
 }
 
 /**
+ * DelegationError is thrown when EIP-7702 delegation or gasless transaction flow fails.
+ */
+export class DelegationError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'DelegationError'
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, DelegationError)
+    }
+  }
+}
+
+/**
  * EncryptionError is thrown when encryption or decryption fails.
  */
 export class EncryptionError extends Error {

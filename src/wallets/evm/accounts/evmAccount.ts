@@ -33,6 +33,8 @@ export interface EvmAccountData {
   id: string
   /** Account address */
   address: string
+  /** Wallet ID */
+  walletId: string
 }
 
 /**
@@ -42,12 +44,13 @@ export interface EvmAccountData {
  * @returns EVM account object with signing methods
  */
 export function toEvmAccount(data: EvmAccountData): EvmAccount {
-  const { id, address } = data
+  const { id, address, walletId } = data
 
   const account: EvmAccount = {
     id,
     address: address as Address,
     custody: 'Developer',
+    walletId,
 
     async sign(parameters: { hash: Hash }): Promise<Hex> {
       const result = await signHashAction({

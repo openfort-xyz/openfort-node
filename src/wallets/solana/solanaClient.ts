@@ -11,12 +11,12 @@ import {
   UserInputValidationError,
 } from '../../errors'
 import {
-  type BackendWalletResponse,
+  type AccountV2Response,
   createBackendWallet,
   exportPrivateKey,
-  getBackendWallet,
+  getAccountsV2,
+  getAccountV2,
   importPrivateKey,
-  listBackendWallets,
   sign,
 } from '../../openapi-client'
 import {
@@ -41,9 +41,7 @@ import type {
 /**
  * Converts a BackendWalletResponse to SolanaAccountData
  */
-function toSolanaAccountData(
-  response: BackendWalletResponse,
-): SolanaAccountData {
+function toSolanaAccountData(response: AccountV2Response): SolanaAccountData {
   return {
     id: response.id,
     address: response.address,
@@ -142,15 +140,16 @@ export class SolanaClient {
 
     // If we have an ID, fetch directly
     if (options.id) {
-      const response = await getBackendWallet(options.id)
+      const response = await getAccountV2(options.id)
       return toSolanaAccount(toSolanaAccountData(response))
     }
 
     // For address lookup, use listBackendWallets with address filter
     if (options.address) {
-      const wallets = await listBackendWallets({
+      const wallets = await getAccountsV2({
         address: options.address,
         chainType: 'SVM',
+        custody: 'Developer',
         limit: 1,
       })
 
@@ -180,10 +179,11 @@ export class SolanaClient {
   public async listAccounts(
     options: ListSolanaAccountsOptions = {},
   ): Promise<ListAccountsResult<SolanaAccount>> {
-    const response = await listBackendWallets({
+    const response = await getAccountsV2({
       limit: options.limit,
       skip: options.skip,
       chainType: 'SVM',
+      custody: 'Developer',
     })
 
     const accounts = response.data.map((wallet) =>

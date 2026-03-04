@@ -12,6 +12,10 @@ import type {
   TypedData,
   TypedDataDefinition,
 } from 'viem'
+import type {
+  Interaction,
+  TransactionIntentResponse,
+} from '../../openapi-client'
 
 /**
  * Base EVM account with signing capabilities
@@ -23,6 +27,8 @@ export interface EvmAccountBase {
   address: Address
   /** Account type identifier */
   custody: 'Developer'
+  /** Wallet ID */
+  walletId: string
 }
 
 /**
@@ -121,6 +127,11 @@ export interface GetEvmAccountOptions {
   id?: string
 }
 
+export interface GetLinkedAccountsOptions {
+  address: string
+  chainId: number
+}
+
 /**
  * Options for listing EVM accounts
  */
@@ -155,16 +166,16 @@ export interface ExportEvmAccountOptions {
  * Options for updating an EVM account (e.g., upgrading to Delegated Account)
  */
 export interface UpdateEvmAccountOptions {
-  /** Account ID (starts with acc_) */
-  id: string
+  /** WalletId (starts with pla_) */
+  walletId: string
   /** Upgrade the account type. Currently only supports "Delegated Account". */
   accountType?: 'Delegated Account'
-  /** The chain type. */
-  chainType: 'EVM' | 'SVM'
   /** The chain ID. Must be a supported chain. */
   chainId: number
   /** The implementation type for delegation (e.g., "Calibur"). Required when accountType is "Delegated Account". */
   implementationType?: string
+  /** The ID of the existing account to upgrade. Required when accountType is "Delegated Account". */
+  accountId?: string
 }
 
 /**
@@ -179,6 +190,22 @@ export interface SignDataOptions {
   idempotencyKey?: string
 }
 
+/**
+ * Options for sending a gasless transaction with EIP-7702 delegation
+ */
+export interface SendTransactionOptions {
+  /** Account ID (starts with acc_) */
+  account: EvmAccount
+  /** Chain ID to execute on */
+  chainId: number
+  /** Contract interactions to execute */
+  interactions: Interaction[]
+  /** Policy ID for gas sponsorship (starts with pol_). Optional. */
+  policy?: string
+  /** Custom RPC URL. If omitted, uses viem's default public RPC for the chain. */
+  rpcUrl?: string
+}
+
 // Re-export viem types for convenience
 export type {
   Address,
@@ -189,3 +216,6 @@ export type {
   TypedData,
   TypedDataDefinition,
 }
+
+// Re-export openapi types for convenience
+export type { Interaction, TransactionIntentResponse }
