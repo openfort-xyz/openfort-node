@@ -20,8 +20,8 @@ import { SolanaClient } from './wallets/solana/solanaClient'
 
 // Re-export ShieldAuthProvider for convenience
 export { ShieldAuthProvider } from '@openfort/shield-js'
-import { sendTransaction , update} from './wallets/evm/actions/'
-import { sendTransaction as sendSolanaTransaction } from './wallets/solana/actions/'
+
+import { sendTransaction, update } from './wallets/evm/actions/'
 
 /**
  * Configuration options for the Openfort client
@@ -272,8 +272,6 @@ class Openfort {
           import: solanaClient.importAccount.bind(solanaClient),
           /** Export private key (with E2E encryption) */
           export: solanaClient.exportAccount.bind(solanaClient),
-          /** Send a gasless transaction via Kora */
-          sendTransaction: sendSolanaTransaction,
         },
         /** Embedded wallet operations (User custody) */
         embedded: {
