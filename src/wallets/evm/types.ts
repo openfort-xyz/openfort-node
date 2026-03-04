@@ -174,7 +174,7 @@ export interface UpdateEvmAccountOptions {
   chainId: number
   /** The implementation type for delegation (e.g., "Calibur"). Required when accountType is "Delegated Account". */
   implementationType?: string
-  /** The address of the existing account to upgrade. Required when accountType is "Delegated Account". */
+  /** The ID of the existing account to upgrade. Required when accountType is "Delegated Account". */
   accountId?: string
 }
 
@@ -204,8 +204,6 @@ export interface SendTransactionOptions {
   policy?: string
   /** Custom RPC URL. If omitted, uses viem's default public RPC for the chain. */
   rpcUrl?: string
-
-  signature?: string
 }
 
 // Re-export viem types for convenience
