@@ -174,6 +174,8 @@ export interface UpdateEvmAccountOptions {
   chainId: number
   /** The implementation type for delegation (e.g., "Calibur"). Required when accountType is "Delegated Account". */
   implementationType?: string
+  /** The address of the existing account to upgrade. Required when accountType is "Delegated Account". */
+  accountId?: string
 }
 
 /**

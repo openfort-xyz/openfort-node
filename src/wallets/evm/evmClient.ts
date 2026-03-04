@@ -148,7 +148,6 @@ export class EvmClient {
         'Must provide either id or address to get account',
       )
     }
-    console.log('WTF')
     // If we have an ID, fetch directly
     if (options.id) {
       const response = await getAccountV2(options.id)
@@ -369,12 +368,14 @@ export class EvmClient {
     options: UpdateEvmAccountOptions,
   ): Promise<AccountV2Response> {
     //* Debatable, here we could introduce a new structure
-    const { chainId, walletId } = options
+    const { chainId, walletId, implementationType, accountId } = options
     return createAccountV2({
       accountType: 'Delegated Account',
       chainType: 'EVM',
       chainId,
       user: walletId,
+      implementationType,
+      account: accountId,
     })
   }
 
@@ -401,7 +402,6 @@ export class EvmClient {
   public async sendTransaction(
     options: SendTransactionOptions,
   ): Promise<TransactionIntentResponse> {
-    console.log('wtf')
     const { account, chainId, interactions, policy, rpcUrl } = options
 
     // 1. Resolve chain + RPC
@@ -414,27 +414,26 @@ export class EvmClient {
       )
     }
     const publicClient = createPublicClient({ chain, transport })
-    console.log('wtf')
 
     // 2. Get or create delegated account
     let signedAuthorization: string | undefined
     let txAccountId: string
-    console.log('wtf')
+
     const response = await getAccountsV2({
       address: getAddress(account.address),
       accountType: 'Delegated Account',
       chainType: 'EVM',
       chainId: chainId,
     })
-    console.log('Existing delegations', response.data)
+
     if (response.data.length === 0) {
       // No delegation yet - register it
       const updated = await this.update({
         walletId: account.walletId,
         chainId,
-        implementationType: 'Calibur', //* Maybe impl type and address should be an option arguments
+        implementationType: 'Calibur',
+        accountId: account.id,
       })
-
       txAccountId = updated.id
 
       const implementationAddress: Hex =
