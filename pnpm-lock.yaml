@@ -4,10 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@solana/kora>@solana/kit': ^6.1.0
-  '@solana/kora>@solana-program/token': ^0.12.0
-
 importers:
 
   .:
@@ -15,6 +11,21 @@ importers:
       '@openfort/shield-js':
         specifier: ^0.1.35
         version: 0.1.35
+      '@solana-program/compute-budget':
+        specifier: ^0.14.0
+        version: 0.14.0(@solana/kit@6.1.0(typescript@5.9.3))
+      '@solana-program/token':
+        specifier: ^0.12.0
+        version: 0.12.0(@solana/kit@6.1.0(typescript@5.9.3))
+      '@solana/kit':
+        specifier: ^6.1.0
+        version: 6.1.0(typescript@5.9.3)
+      '@solana/kora':
+        specifier: ^0.1.3
+        version: 0.1.3(@solana-program/token@0.12.0(@solana/kit@6.1.0(typescript@5.9.3)))(@solana/kit@6.1.0(typescript@5.9.3))
+      '@solana/transaction-confirmation':
+        specifier: ^6.1.0
+        version: 6.1.0(typescript@5.9.3)
       '@types/node':
         specifier: ^25.3.2
         version: 25.3.2
@@ -55,21 +66,6 @@ importers:
       '@changesets/cli':
         specifier: ^2.29.8
         version: 2.29.8(@types/node@25.3.2)
-      '@solana-program/compute-budget':
-        specifier: ^0.14.0
-        version: 0.14.0(@solana/kit@6.1.0(typescript@5.9.3))
-      '@solana-program/token':
-        specifier: ^0.12.0
-        version: 0.12.0(@solana/kit@6.1.0(typescript@5.9.3))
-      '@solana/kit':
-        specifier: ^6.1.0
-        version: 6.1.0(typescript@5.9.3)
-      '@solana/kora':
-        specifier: ^0.1.3
-        version: 0.1.3(@solana-program/token@0.12.0(@solana/kit@6.1.0(typescript@5.9.3)))(@solana/kit@6.1.0(typescript@5.9.3))
-      '@solana/transaction-confirmation':
-        specifier: ^6.1.0
-        version: 6.1.0(typescript@5.9.3)
       '@vitest/coverage-v8':
         specifier: ^3.2.4
         version: 3.2.4(vitest@3.2.4(@types/node@25.3.2)(jiti@2.6.1)(yaml@2.8.2))
@@ -983,8 +979,8 @@ packages:
   '@solana/kora@0.1.3':
     resolution: {integrity: sha512-5lZOMvheT24sDP9bMo9MH4xJNDmnlrHBpzLF0azy85fCVdUy1rttnHPB7TWmqp2WX1OAA7IdHdTvOD+FZdYi1A==}
     peerDependencies:
-      '@solana-program/token': ^0.12.0
-      '@solana/kit': ^6.1.0
+      '@solana-program/token': ^0.9.0
+      '@solana/kit': ^5.0.0
 
   '@solana/nominal-types@6.1.0':
     resolution: {integrity: sha512-+skHjN0arNNB9TLsGqA94VCx7euyGURI+qG6wck6E4D7hH6i6DxGiVrtKRghx+smJkkLtTm9BvdVKGoeNQYr7Q==}

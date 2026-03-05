@@ -1,3 +1,5 @@
+// Usage: pnpm tsx evm/transactions/sendTransaction.ts
+
 import 'dotenv/config'
 import Openfort from '@openfort/openfort-node'
 
@@ -15,12 +17,17 @@ const interactions = [
 ]
 
 console.log("=== Full delegation + signing flow via sendTransaction() ===")
+
 // 2. First call: account is new -> delegates via EIP-7702, then sends the transaction
 const result = await openfort.accounts.evm.backend.sendTransaction({
   account: account,
   chainId: 84532, // Base Sepolia
   interactions,
-})
+  // To send the transaction without native token in the wallet, use a fee sponsor.
+  // https://www.openfort.io/docs/configuration/gas-sponsorship
+  // policy: pol_...,
+});
+
 console.log("First tx", result.response?.transactionHash)
 
 // 3. Second call: account is already delegated -> skips delegation, sends directly
@@ -28,6 +35,9 @@ const result2 = await openfort.accounts.evm.backend.sendTransaction({
   account: account,
   chainId: 84532,
   interactions,
+  // To send the transaction without native token in the wallet, use a fee sponsor.
+  // https://www.openfort.io/docs/configuration/gas-sponsorship
+  // policy: pol_...,
 })
 console.log("Second tx", result2.response?.transactionHash)
 

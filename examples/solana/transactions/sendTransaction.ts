@@ -1,6 +1,4 @@
-// Usage: npx tsx solana/sendTransaction.ts
-//
-// Requires: pnpm add @solana/kit @solana/transaction-confirmation @solana-program/compute-budget
+// Usage: pnpm tsx solana/transactions/sendTransaction.ts
 
 import Openfort from "@openfort/openfort-node";
 import "dotenv/config";
@@ -9,14 +7,15 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   basePath: process.env.OPENFORT_BASE_URL,
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
   publishableKey: process.env.OPENFORT_PUBLISHABLE_KEY,
-  debugging: true,
 });
 
 // Create a Solana backend account
 const account = await openfort.accounts.solana.backend.create();
 console.log("Created Solana account:", account.address);
 
-// Send a gasless SOL transfer via Kora
+// To send the transaction without native token in the wallet, use a fee sponsor.
+// https://www.openfort.io/docs/configuration/gas-sponsorship
+
 const result = await openfort.accounts.solana.backend.sendTransaction({
   account,
   cluster: "devnet",
