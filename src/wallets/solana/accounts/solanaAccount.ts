@@ -5,7 +5,8 @@
 
 import { signMessage as signMessageAction } from '../actions/signMessage'
 import { signTransaction as signTransactionAction } from '../actions/signTransaction'
-import type { SolanaAccount } from '../types'
+import { transfer as transferAction } from '../actions/transfer'
+import type { AccountTransferOptions, SolanaAccount } from '../types'
 
 /**
  * Raw account data from API response
@@ -47,6 +48,12 @@ export function toSolanaAccount(data: SolanaAccountData): SolanaAccount {
         transaction: parameters.transaction,
       })
       return result.signedTransaction
+    },
+
+    async transfer(
+      options: AccountTransferOptions,
+    ): Promise<{ signature: string }> {
+      return transferAction({ ...options, account })
     },
   }
 

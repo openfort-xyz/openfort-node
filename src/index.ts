@@ -22,7 +22,10 @@ import { SolanaClient } from './wallets/solana/solanaClient'
 export { ShieldAuthProvider } from '@openfort/shield-js'
 
 import { sendTransaction, update } from './wallets/evm/actions/'
-import { sendTransaction as sendSolanaTransaction } from './wallets/solana/actions/'
+import {
+  sendTransaction as sendSolanaTransaction,
+  transfer as solanaTransfer,
+} from './wallets/solana/actions/'
 
 /**
  * Configuration options for the Openfort client
@@ -275,6 +278,8 @@ class Openfort {
           export: solanaClient.exportAccount.bind(solanaClient),
           /** Send a gasless transaction via Kora */
           sendTransaction: sendSolanaTransaction,
+          /** Transfer SOL or SPL tokens (high-level) */
+          transfer: solanaTransfer,
         },
         /** Embedded wallet operations (User custody) */
         embedded: {

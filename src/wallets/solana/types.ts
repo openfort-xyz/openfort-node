@@ -33,9 +33,23 @@ export interface SolanaSigningMethods {
 }
 
 /**
+ * Solana cluster identifier
+ */
+export type SolanaCluster = 'devnet' | 'mainnet-beta'
+
+/**
  * Full Solana server account with all signing capabilities
  */
-export type SolanaAccount = SolanaAccountBase & SolanaSigningMethods
+export type SolanaAccount = SolanaAccountBase &
+  SolanaSigningMethods & {
+    /**
+     * Transfer SOL or SPL tokens to a destination address.
+     * Handles ATA creation, mint decimals, and balance validation automatically.
+     * @param options - Transfer options (destination, amount, token, cluster)
+     * @returns Object with the transaction signature
+     */
+    transfer(options: AccountTransferOptions): Promise<{ signature: string }>
+  }
 
 /**
  * Options for creating a Solana account
@@ -110,15 +124,44 @@ export interface SendSolanaTransactionOptions {
   /** The Solana account to send the transaction from */
   account: SolanaAccount
   /** The Solana cluster to use */
-  cluster: 'devnet' | 'mainnet-beta'
-  /** Destination address (base58) */
-  destination: string
-  /** Amount in lamports (for native SOL) or smallest unit (for SPL tokens) */
-  amount: bigint | number
-  /** Token mint address. Defaults to native SOL (11111111111111111111111111111111) */
-  token?: string
+  cluster: SolanaCluster
+  /** Solana instructions to include in the transaction */
+  instructions: unknown[]
+  /** Compute unit limit (default: 200_000) */
+  computeUnitLimit?: number
+  /** Compute unit price in micro-lamports (default: 1_000_000n) */
+  computeUnitPrice?: bigint
   /** Solana RPC URL. Defaults to public RPC for the cluster. */
   rpcUrl?: string
   /** Solana WebSocket URL. Defaults to public WS for the cluster. */
   wsUrl?: string
 }
+
+/**
+ * Options for the high-level transfer action
+ */
+export interface TransferOptions {
+  /** The Solana account to transfer from */
+  account: SolanaAccount
+  /** Destination address (base58 encoded) */
+  to: string
+  /** Amount in smallest unit (lamports for SOL, base units for SPL) */
+  amount: bigint
+  /** Token to transfer: 'sol' (default), 'usdc', or a mint address */
+  token?: string
+  /** The Solana cluster to use */
+  cluster: SolanaCluster
+  /** Compute unit limit (default: 200_000) */
+  computeUnitLimit?: number
+  /** Compute unit price in micro-lamports (default: 1_000_000n) */
+  computeUnitPrice?: bigint
+  /** Solana RPC URL. Defaults to public RPC for the cluster. */
+  rpcUrl?: string
+  /** Solana WebSocket URL. Defaults to public WS for the cluster. */
+  wsUrl?: string
+}
+
+/**
+ * Transfer options without the account field, for use on the account object
+ */
+export type AccountTransferOptions = Omit<TransferOptions, 'account'>

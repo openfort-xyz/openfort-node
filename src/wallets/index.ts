@@ -28,6 +28,7 @@ export {
 
 // Solana exports
 export {
+  type AccountTransferOptions,
   type CreateSolanaAccountOptions,
   type ExportSolanaAccountOptions,
   type GetSolanaAccountOptions,
@@ -40,7 +41,9 @@ export {
   type SolanaAccountBase,
   type SolanaAccountData,
   SolanaClient,
+  type SolanaCluster,
   type SolanaSigningMethods,
+  type TransferOptions,
   toSolanaAccount,
 } from './solana'
 
