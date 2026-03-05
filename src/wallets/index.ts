@@ -33,6 +33,7 @@ export {
   type GetSolanaAccountOptions,
   type ImportSolanaAccountOptions,
   type ListSolanaAccountsOptions,
+  type SendSolanaTransactionOptions,
   type SignMessageOptions as SolanaSignMessageOptions,
   type SignTransactionOptions as SolanaSignTransactionOptions,
   type SolanaAccount,

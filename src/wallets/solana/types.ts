@@ -102,3 +102,23 @@ export interface SignTransactionOptions {
   /** Base64-encoded serialized transaction */
   transaction: string
 }
+
+/**
+ * Options for sending a gasless Solana transaction via Kora
+ */
+export interface SendSolanaTransactionOptions {
+  /** The Solana account to send the transaction from */
+  account: SolanaAccount
+  /** The Solana cluster to use */
+  cluster: 'devnet' | 'mainnet-beta'
+  /** Destination address (base58) */
+  destination: string
+  /** Amount in lamports (for native SOL) or smallest unit (for SPL tokens) */
+  amount: bigint | number
+  /** Token mint address. Defaults to native SOL (11111111111111111111111111111111) */
+  token?: string
+  /** Solana RPC URL. Defaults to public RPC for the cluster. */
+  rpcUrl?: string
+  /** Solana WebSocket URL. Defaults to public WS for the cluster. */
+  wsUrl?: string
+}
