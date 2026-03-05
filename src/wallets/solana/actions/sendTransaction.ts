@@ -13,11 +13,10 @@ const NATIVE_SOL = '11111111111111111111111111111111'
  * Orchestrates the Kora gasless flow using KoraClient:
  * 1. Get fee payer signer from Kora
  * 2. Get transfer instructions via transferTransaction
- * 3. Build transaction with compute budget + returned instructions
- * 4. Partially sign with fee payer NoopSigner
- * 5. Sign with user account (Openfort backend)
- * 6. Kora co-signs, send via RPC
- * 7. Confirm on Solana
+ * 3. Build transaction with compute budget + returned instructions + signers
+ * 4. Sign with all signers (fee payer NoopSigner + custom Openfort TransactionPartialSigner)
+ * 5. Kora co-signs, send via RPC
+ * 6. Confirm on Solana
  *
  * Requires `@solana/kit`, `@solana-program/compute-budget`, `@solana/kora`,
  * and `@solana/transaction-confirmation` as peer dependencies.
@@ -75,6 +74,26 @@ export async function sendTransaction(
     throw new UserInputValidationError(
       '@solana/transaction-confirmation is required for sendTransaction. Install it: pnpm add @solana/transaction-confirmation',
     )
+  }
+
+  // Create custom TransactionPartialSigner for Openfort backend signing
+  const userAddress = solanaKit.address(account.address)
+  const openfortSigner = {
+    address: userAddress,
+    signTransactions: async (transactions: any[]) => {
+      return Promise.all(
+        transactions.map(async (tx: any) => {
+          const messageBase64 = Buffer.from(tx.messageBytes).toString('base64')
+          const signatureHex = await account.signTransaction({
+            transaction: messageBase64,
+          })
+          const sigBytes = new Uint8Array(
+            Buffer.from(signatureHex.replace(/^0x/, ''), 'hex'),
+          )
+          return Object.freeze({ [userAddress]: sigBytes })
+        }),
+      )
+    },
   }
 
   // Get publishable key from global config
@@ -139,8 +158,8 @@ export async function sendTransaction(
     solanaKit.createTransactionMessage({
       version: CONFIG.transactionVersion,
     }),
-    (tx: any) => solanaKit.setTransactionMessageFeePayerSigner(noopSigner, tx),
-    (tx: any) =>
+    (tx) => solanaKit.setTransactionMessageFeePayerSigner(noopSigner, tx),
+    (tx) =>
       solanaKit.setTransactionMessageLifetimeUsingBlockhash(
         {
           blockhash: transferResponse.blockhash,
@@ -148,44 +167,30 @@ export async function sendTransaction(
         },
         tx,
       ),
-    (tx: any) =>
+    (tx) =>
       computeBudget.updateOrAppendSetComputeUnitPriceInstruction(
         CONFIG.computeUnitPrice,
         tx,
       ),
-    (tx: any) =>
+    (tx) =>
       computeBudget.updateOrAppendSetComputeUnitLimitInstruction(
         CONFIG.computeUnitLimit,
         tx,
       ),
-    (tx: any) =>
+    (tx) =>
       solanaKit.appendTransactionMessageInstructions(
         transferResponse.instructions,
         tx,
       ),
+    (tx) => solanaKit.addSignersToTransactionMessage([openfortSigner], tx),
   )
 
-  // Step 4: Partially sign (fee payer NoopSigner)
+  // Step 4: Sign with all signers (fee payer NoopSigner + Openfort backend signer)
   const signed =
     await solanaKit.partiallySignTransactionMessageWithSigners(txMsg)
+  const base64Full = solanaKit.getBase64EncodedWireTransaction(signed)
 
-  // Step 5: Sign with user account (Openfort backend)
-  const messageBase64 = Buffer.from(signed.messageBytes).toString('base64')
-  const signatureHex = await account.signTransaction({
-    transaction: messageBase64,
-  })
-  const sigBytes = new Uint8Array(
-    Buffer.from(signatureHex.replace(/^0x/, ''), 'hex'),
-  )
-  const userAddr = solanaKit.address(account.address)
-  const updatedSignatures = { ...signed.signatures }
-  if (userAddr in updatedSignatures) {
-    updatedSignatures[userAddr] = sigBytes
-  }
-  const signedTx = { ...signed, signatures: updatedSignatures }
-  const base64Full = solanaKit.getBase64EncodedWireTransaction(signedTx)
-
-  // Step 6: Kora co-signs, then send via RPC
+  // Step 5: Kora co-signs, then send via RPC
   const { signed_transaction } = await client.signTransaction({
     transaction: base64Full,
     signer_key: signer_address,

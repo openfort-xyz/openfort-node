@@ -95,15 +95,6 @@ function requiresPublishableKey(requestPath: string): boolean {
 }
 
 /**
- * Checks if a request path should use the publishable key for Authorization
- * instead of the secret key.  RPC proxy endpoints (e.g. `/rpc/solana/devnet`)
- * only accept publishable keys.
- */
-function usesPublishableKeyAuth(requestPath: string): boolean {
-  return requestPath.startsWith('/rpc/')
-}
-
-/**
  * Configures the Openfort API client with the given options.
  *
  * @param options - The client configuration options
@@ -158,17 +149,7 @@ export const configure = (options: OpenfortClientOptions): void => {
   axiosInstance.interceptors.request.use(async (config) => {
     // Add API key authentication only if not already set (e.g., by accessToken)
     if (!config.headers.Authorization) {
-      // RPC proxy endpoints require the publishable key, not the secret key
-      if (config.url) {
-        const path = new URL(config.url, baseURL).pathname
-        if (usesPublishableKeyAuth(path) && options.publishableKey) {
-          config.headers.Authorization = `Bearer ${options.publishableKey}`
-        } else {
-          config.headers.Authorization = `Bearer ${options.apiKey}`
-        }
-      } else {
-        config.headers.Authorization = `Bearer ${options.apiKey}`
-      }
+      config.headers.Authorization = `Bearer ${options.apiKey}`
     }
 
     // Convert BigInts in request body to strings
@@ -220,6 +201,33 @@ export const configure = (options: OpenfortClientOptions): void => {
 
     return config
   })
+
+  // Add debug interceptors if enabled
+  if (options.debugging) {
+    axiosInstance.interceptors.request.use((config) => {
+      console.log('[Openfort] Request:', {
+        method: config.method?.toUpperCase(),
+        url: config.url,
+        headers: config.headers,
+        data: config.data,
+      })
+      return config
+    })
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        console.log('[Openfort] Response:', {
+          status: response.status,
+          statusText: response.statusText,
+          data: response.data,
+        })
+        return response
+      },
+      (error) => {
+        return Promise.reject(error)
+      },
+    )
+  }
 }
 
 /**
