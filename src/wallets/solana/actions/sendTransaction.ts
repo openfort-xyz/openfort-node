@@ -139,8 +139,8 @@ export async function sendTransaction(
     solanaKit.createTransactionMessage({
       version: CONFIG.transactionVersion,
     }),
-    (tx: any) => solanaKit.setTransactionMessageFeePayerSigner(noopSigner, tx),
-    (tx: any) =>
+    (tx) => solanaKit.setTransactionMessageFeePayerSigner(noopSigner, tx),
+    (tx) =>
       solanaKit.setTransactionMessageLifetimeUsingBlockhash(
         {
           blockhash: transferResponse.blockhash,
@@ -148,17 +148,17 @@ export async function sendTransaction(
         },
         tx,
       ),
-    (tx: any) =>
+    (tx) =>
       computeBudget.updateOrAppendSetComputeUnitPriceInstruction(
         CONFIG.computeUnitPrice,
         tx,
       ),
-    (tx: any) =>
+    (tx) =>
       computeBudget.updateOrAppendSetComputeUnitLimitInstruction(
         CONFIG.computeUnitLimit,
         tx,
       ),
-    (tx: any) =>
+    (tx) =>
       solanaKit.appendTransactionMessageInstructions(
         transferResponse.instructions,
         tx,
