@@ -9,6 +9,7 @@
     "@solana-program/token",
     "@solana/kit",
     "@solana/kora",
-    "@solana/transaction-confirmation"
+    "@solana/transaction-confirmation",
+    "viem"
   ]
 }
