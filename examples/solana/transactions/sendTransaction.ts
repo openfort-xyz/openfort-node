@@ -2,8 +2,6 @@
 //
 // Low-level example using raw instructions.
 // For simple transfers, see solana/transfer.ts instead.
-//
-// Requires: pnpm add @solana/kit @solana/transaction-confirmation @solana-program/compute-budget @solana-program/system @solana/kora
 
 import Openfort from "@openfort/openfort-node";
 import { getTransferSolInstruction } from "@solana-program/system";

@@ -1,6 +1,4 @@
 // Usage: pnpm tsx solana/transactions/sendRawTransaction.ts
-//
-// Requires: pnpm add @solana/kit @solana/transaction-confirmation @solana-program/compute-budget @solana/kora
 
 import Openfort from "@openfort/openfort-node";
 import "dotenv/config";
