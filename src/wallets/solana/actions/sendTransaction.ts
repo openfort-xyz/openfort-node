@@ -60,28 +60,28 @@ export async function sendTransaction(
     solanaKit = await import('@solana/kit')
   } catch {
     throw new UserInputValidationError(
-      '@solana/kit is required for sendTransaction. Install it: pnpm add @solana/kit',
+      '`@solana/kit` is required for sendTransaction. Install it and try again.',
     )
   }
   try {
     computeBudget = await import('@solana-program/compute-budget')
   } catch {
     throw new UserInputValidationError(
-      '@solana-program/compute-budget is required for sendTransaction. Install it: pnpm add @solana-program/compute-budget',
+      '`@solana-program/compute-budget` is required for sendTransaction. Install it and try again.',
     )
   }
   try {
     koraModule = await import('@solana/kora')
   } catch {
     throw new UserInputValidationError(
-      '@solana/kora is required for sendTransaction. Install it: pnpm add @solana/kora',
+      '`@solana/kora` is required for sendTransaction. Install it and try again.',
     )
   }
   try {
     transactionConfirmation = await import('@solana/transaction-confirmation')
   } catch {
     throw new UserInputValidationError(
-      '@solana/transaction-confirmation is required for sendTransaction. Install it: pnpm add @solana/transaction-confirmation',
+      '`@solana/transaction-confirmation` is required for sendTransaction. Install it and try again.',
     )
   }
 

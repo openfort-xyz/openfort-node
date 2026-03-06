@@ -41,21 +41,21 @@ export async function sendTransaction(
     viem = await import('viem')
   } catch {
     throw new UserInputValidationError(
-      'viem is required for sendTransaction. Install it: pnpm add viem',
+      '`viem` is required for sendTransaction. Install it and try again.',
     )
   }
   try {
     viemChains = await import('viem/chains')
   } catch {
     throw new UserInputValidationError(
-      'viem/chains is required for sendTransaction. Install it: pnpm add viem',
+      '`viem` is required for sendTransaction. Install it and try again.',
     )
   }
   try {
     viemUtils = await import('viem/utils')
   } catch {
     throw new UserInputValidationError(
-      'viem/utils is required for sendTransaction. Install it: pnpm add viem',
+      '`viem` is required for sendTransaction. Install it and try again.',
     )
   }
 

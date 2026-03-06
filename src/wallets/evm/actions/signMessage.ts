@@ -43,7 +43,7 @@ export async function signMessage(
     viem = await import('viem')
   } catch {
     throw new UserInputValidationError(
-      'viem is required for signMessage. Install it: pnpm add viem',
+      '`viem` is required for signMessage. Install it and try again.',
     )
   }
 

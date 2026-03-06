@@ -58,7 +58,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
         viem = await import('viem')
       } catch {
         throw new UserInputValidationError(
-          'viem is required for signMessage. Install it: pnpm add viem',
+          '`viem` is required for signMessage. Install it and try again.',
         )
       }
 
@@ -76,7 +76,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
         viem = await import('viem')
       } catch {
         throw new UserInputValidationError(
-          'viem is required for signTransaction. Install it: pnpm add viem',
+          '`viem` is required for signTransaction. Install it and try again.',
         )
       }
 
@@ -105,7 +105,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
         viem = await import('viem')
       } catch {
         throw new UserInputValidationError(
-          'viem is required for signTypedData. Install it: pnpm add viem',
+          '`viem` is required for signTypedData. Install it and try again.',
         )
       }
 

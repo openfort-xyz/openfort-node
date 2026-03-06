@@ -42,7 +42,7 @@ export async function sendRawTransaction(
     solanaKit = await import('@solana/kit')
   } catch {
     throw new UserInputValidationError(
-      '@solana/kit is required for sendRawTransaction. Install it: pnpm add @solana/kit',
+      '`@solana/kit` is required for sendRawTransaction. Install it and try again.',
     )
   }
 

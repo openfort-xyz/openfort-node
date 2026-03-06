@@ -90,14 +90,14 @@ export async function getNativeTransferInstructions({
     solanaKit = await import('@solana/kit')
   } catch {
     throw new UserInputValidationError(
-      '@solana/kit is required for transfer. Install it: pnpm add @solana/kit',
+      '`@solana/kit` is required for transfer. Install it and try again.',
     )
   }
   try {
     systemProgram = await import('@solana-program/system')
   } catch {
     throw new UserInputValidationError(
-      '@solana-program/system is required for SOL transfers. Install it: pnpm add @solana-program/system',
+      '`@solana-program/system` is required for SOL transfers. Install it and try again.',
     )
   }
 
@@ -149,14 +149,14 @@ export async function getSplTransferInstructions({
     solanaKit = await import('@solana/kit')
   } catch {
     throw new UserInputValidationError(
-      '@solana/kit is required for transfer. Install it: pnpm add @solana/kit',
+      '`@solana/kit` is required for transfer. Install it and try again.',
     )
   }
   try {
     tokenProgram = await import('@solana-program/token')
   } catch {
     throw new UserInputValidationError(
-      '@solana-program/token is required for SPL transfers. Install it: pnpm add @solana-program/token',
+      '`@solana-program/token` is required for SPL transfers. Install it and try again.',
     )
   }
 

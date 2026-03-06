@@ -47,7 +47,7 @@ export async function signTypedData<
     viem = await import('viem')
   } catch {
     throw new UserInputValidationError(
-      'viem is required for signTypedData. Install it: pnpm add viem',
+      '`viem` is required for signTypedData. Install it and try again.',
     )
   }
 

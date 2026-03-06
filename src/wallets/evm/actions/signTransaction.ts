@@ -46,7 +46,7 @@ export async function signTransaction(
     viem = await import('viem')
   } catch {
     throw new UserInputValidationError(
-      'viem is required for signTransaction. Install it: pnpm add viem',
+      '`viem` is required for signTransaction. Install it and try again.',
     )
   }
 

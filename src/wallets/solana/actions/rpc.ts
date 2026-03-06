@@ -15,7 +15,7 @@ export async function createRpcClient(cluster: SolanaCluster, rpcUrl?: string) {
     solanaKit = await import('@solana/kit')
   } catch {
     throw new UserInputValidationError(
-      '@solana/kit is required. Install it: pnpm add @solana/kit',
+      '`@solana/kit` is required. Install it and try again.',
     )
   }
   return solanaKit.createSolanaRpc(rpcUrl ?? getRpcEndpoint(cluster))
