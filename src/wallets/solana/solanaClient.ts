@@ -63,6 +63,7 @@ export interface SolanaClientOptions {
  * Provides methods for creating, retrieving, and managing server-side Solana accounts.
  */
 export class SolanaClient {
+  /** Wallet type identifier used for client registration */
   static type = 'solanaWallet'
 
   /**

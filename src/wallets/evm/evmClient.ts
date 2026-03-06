@@ -166,6 +166,12 @@ export class EvmClient {
     throw new AccountNotFoundError()
   }
 
+  /**
+   * Retrieves delegated accounts linked to an EVM address on a specific chain.
+   *
+   * @param options - Options containing the address and chain ID
+   * @returns List of linked accounts
+   */
   public async getLinkedAccounts(
     options: GetLinkedAccountsOptions,
   ): Promise<AccountListV2Response> {

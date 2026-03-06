@@ -127,8 +127,13 @@ export interface GetEvmAccountOptions {
   id?: string
 }
 
+/**
+ * Options for retrieving linked (delegated) accounts for an EVM address
+ */
 export interface GetLinkedAccountsOptions {
+  /** The EVM address to look up linked accounts for */
   address: string
+  /** The chain ID to filter linked accounts by */
   chainId: number
 }
 

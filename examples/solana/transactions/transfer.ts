@@ -1,6 +1,4 @@
-// Usage: npx tsx solana/transfer.ts
-//
-// Requires: pnpm add @solana/kit @solana/transaction-confirmation @solana-program/compute-budget @solana-program/system @solana-program/token @solana/kora
+// Usage: pnpm tsx solana/transactions/transfer.ts
 
 import Openfort from "@openfort/openfort-node";
 import "dotenv/config";

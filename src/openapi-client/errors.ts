@@ -26,9 +26,13 @@ export type APIErrorType = HttpErrorType | string
  * Shape of Openfort API error responses
  */
 export interface OpenfortErrorResponse {
+  /** The human-readable error message */
   message?: string
+  /** The error type or description string */
   error?: string
+  /** The HTTP status code of the response */
   statusCode?: number
+  /** A unique identifier for tracing this error across systems */
   correlationId?: string
 }
 
@@ -47,11 +51,17 @@ export function isOpenfortError(obj: unknown): obj is OpenfortErrorResponse {
  * Extended API error that encompasses both Openfort errors and other API-related errors
  */
 export class APIError extends Error {
+  /** The HTTP status code */
   statusCode: number
+  /** The classified error type */
   errorType: APIErrorType
+  /** The human-readable error message */
   errorMessage: string
+  /** A unique identifier for tracing this error across systems */
   correlationId?: string
+  /** URL to documentation about this error */
   errorLink?: string
+  /** The underlying error that caused this API error */
   declare cause?: Error | unknown
 
   /**
@@ -110,6 +120,7 @@ export class APIError extends Error {
  * This includes gateway errors, IP blocklist rejections, DNS failures, timeouts, etc.
  */
 export class NetworkError extends APIError {
+  /** Additional details about the network failure (error code, message, and whether the request can be retried) */
   networkDetails?: {
     code?: string
     message?: string
@@ -157,6 +168,7 @@ export class NetworkError extends APIError {
  * Error thrown when an error is not known or cannot be categorized
  */
 export class UnknownError extends Error {
+  /** The underlying error that caused this unknown error */
   declare cause?: Error
 
   /**
@@ -178,7 +190,9 @@ export class UnknownError extends Error {
  * Error thrown for user input validation failures
  */
 export class ValidationError extends Error {
+  /** The name of the field that failed validation */
   field?: string
+  /** The invalid value that was provided */
   value?: unknown
 
   /**
