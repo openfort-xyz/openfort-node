@@ -63,9 +63,13 @@ export async function transfer(
   })
 }
 
+/** Options for building native SOL transfer instructions */
 type GetNativeTransferOptions = {
+  /** The sender's Solana address */
   from: string
+  /** The recipient's Solana address */
   to: string
+  /** Amount in lamports to transfer */
   amount: bigint
 }
 
@@ -109,11 +113,17 @@ export async function getNativeTransferInstructions({
   ]
 }
 
+/** Options for building SPL token transfer instructions */
 type GetSplTransferOptions = {
+  /** The Solana RPC client instance */
   rpc: any
+  /** The sender's Solana address */
   from: string
+  /** The recipient's Solana address */
   to: string
+  /** The SPL token mint address */
   mintAddress: string
+  /** Amount of tokens to transfer (in smallest unit) */
   amount: bigint
 }
 
