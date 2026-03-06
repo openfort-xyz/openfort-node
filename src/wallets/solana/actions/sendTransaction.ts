@@ -133,6 +133,7 @@ export async function sendTransaction(
         },
         tx,
       ),
+    (tx) => solanaKit.appendTransactionMessageInstructions(instructions, tx),
     (tx) =>
       computeBudget.updateOrAppendSetComputeUnitPriceInstruction(
         computeUnitPrice ?? DEFAULT_COMPUTE_UNIT_PRICE,
@@ -143,7 +144,6 @@ export async function sendTransaction(
         computeUnitLimit ?? DEFAULT_COMPUTE_UNIT_LIMIT,
         tx,
       ),
-    (tx) => solanaKit.appendTransactionMessageInstructions(instructions, tx),
   )
 
   // Step 4: Compile and sign manually

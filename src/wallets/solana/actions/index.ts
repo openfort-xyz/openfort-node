@@ -9,6 +9,7 @@ export {
   USDC_MAINNET_MINT_ADDRESS,
 } from './constants'
 export { createRpcClient } from './rpc'
+export { sendRawTransaction } from './sendRawTransaction'
 export { sendTransaction } from './sendTransaction'
 export { signMessage } from './signMessage'
 export { signTransaction } from './signTransaction'

@@ -3,10 +3,15 @@
  * Factory function for creating Solana account objects with bound action methods
  */
 
+import { sendRawTransaction as sendRawTransactionAction } from '../actions/sendRawTransaction'
 import { signMessage as signMessageAction } from '../actions/signMessage'
 import { signTransaction as signTransactionAction } from '../actions/signTransaction'
 import { transfer as transferAction } from '../actions/transfer'
-import type { AccountTransferOptions, SolanaAccount } from '../types'
+import type {
+  AccountSendRawTransactionOptions,
+  AccountTransferOptions,
+  SolanaAccount,
+} from '../types'
 
 /**
  * Raw account data from API response
@@ -54,6 +59,12 @@ export function toSolanaAccount(data: SolanaAccountData): SolanaAccount {
       options: AccountTransferOptions,
     ): Promise<{ signature: string }> {
       return transferAction({ ...options, account })
+    },
+
+    async sendRawTransaction(
+      options: AccountSendRawTransactionOptions,
+    ): Promise<{ signature: string }> {
+      return sendRawTransactionAction({ ...options, account })
     },
   }
 

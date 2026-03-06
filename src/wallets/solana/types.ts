@@ -51,6 +51,16 @@ export type SolanaAccount = SolanaAccountBase &
      * @returns Object with the transaction signature
      */
     transfer(options: AccountTransferOptions): Promise<{ signature: string }>
+
+    /**
+     * Send a pre-built base64-encoded transaction via the gasless Kora flow.
+     * Decodes the transaction, extracts instructions, and re-wraps them.
+     * @param options - Raw transaction options (cluster, transaction, etc.)
+     * @returns Object with the transaction signature
+     */
+    sendRawTransaction(
+      options: AccountSendRawTransactionOptions,
+    ): Promise<{ signature: string }>
   }
 
 /**
@@ -167,3 +177,31 @@ export interface TransferOptions {
  * Transfer options without the account field, for use on the account object
  */
 export type AccountTransferOptions = Omit<TransferOptions, 'account'>
+
+/**
+ * Options for sending a pre-built base64-encoded Solana transaction via Kora
+ */
+export interface SendRawSolanaTransactionOptions {
+  /** The Solana account to send the transaction from */
+  account: SolanaAccount
+  /** The Solana cluster to use */
+  cluster: SolanaCluster
+  /** Base64-encoded wire transaction */
+  transaction: string
+  /** Compute unit limit (default: 200_000) */
+  computeUnitLimit?: number
+  /** Compute unit price in micro-lamports (default: 1_000_000n) */
+  computeUnitPrice?: bigint
+  /** Solana RPC URL. Defaults to public RPC for the cluster. */
+  rpcUrl?: string
+  /** Solana WebSocket URL. Defaults to public WS for the cluster. */
+  wsUrl?: string
+}
+
+/**
+ * Raw transaction options without the account field, for use on the account object
+ */
+export type AccountSendRawTransactionOptions = Omit<
+  SendRawSolanaTransactionOptions,
+  'account'
+>
