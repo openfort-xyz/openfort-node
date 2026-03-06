@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0
+
+### Minor Changes
+
+- [#82](https://github.com/openfort-xyz/openfort-node/pull/82) [`9405310`](https://github.com/openfort-xyz/openfort-node/commit/94053105e6bd26505da3545f79d5280c2a1095c0) Thanks [@0xbri3t](https://github.com/0xbri3t)! - improve bundle size and introduce send tx with solana gasless
+
 ## 0.9.3
 
 ### Patch Changes
