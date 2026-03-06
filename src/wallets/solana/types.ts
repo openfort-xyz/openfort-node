@@ -3,6 +3,8 @@
  * Solana-specific types for wallet operations
  */
 
+import type { Instruction } from '@solana/kit'
+
 /**
  * Base Solana account with signing capabilities
  */
@@ -126,7 +128,7 @@ export interface SendSolanaTransactionOptions {
   /** The Solana cluster to use */
   cluster: SolanaCluster
   /** Solana instructions to include in the transaction */
-  instructions: unknown[]
+  instructions: Instruction[]
   /** Compute unit limit (default: 200_000) */
   computeUnitLimit?: number
   /** Compute unit price in micro-lamports (default: 1_000_000n) */

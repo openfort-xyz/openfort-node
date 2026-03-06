@@ -144,7 +144,7 @@ export async function sendTransaction(
     (tx) => solanaKit.appendTransactionMessageInstructions(instructions, tx),
   )
 
-  // Step 4: Compile and sign manually (bypasses signer framework entirely)
+  // Step 4: Compile and sign manually
   const compiled = solanaKit.compileTransaction(txMsg)
   const messageBase64 = Buffer.from(compiled.messageBytes).toString('base64')
   const signatureHex = await account.signTransaction({

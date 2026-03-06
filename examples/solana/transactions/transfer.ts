@@ -11,6 +11,7 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   publishableKey: process.env.OPENFORT_PUBLISHABLE_KEY,
 });
 
+// Prefunded devnet account with some SOL and USDC for testing transfers
 const account = await openfort.accounts.solana.backend.get({
   address: "o24A5URLU3JNKg7AoeUrPsfsAo1NQeeAB4uQViAkpjq",
 });
@@ -19,12 +20,12 @@ console.log("Solana account:", account.address);
 const DEST = "FDx9mfVqTvXUaSPQDELwDtGgMqxirmAFsEK2s4YsKfsc";
 
 // --- Example 1: SOL transfer ---
-// const solResult = await account.transfer({
-//   to: DEST,
-//   amount: 1_000_000n,
-//   cluster: "devnet",
-// });
-// console.log("SOL transfer signature:", solResult.signature);
+const solResult = await account.transfer({
+  to: DEST,
+  amount: 1_000_000n,
+  cluster: "devnet",
+});
+console.log("SOL transfer signature:", solResult.signature);
 
 // --- Example 2: USDC transfer by name ---
 const usdcResult = await account.transfer({

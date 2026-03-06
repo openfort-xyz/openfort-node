@@ -1,3 +1,4 @@
+import type { Instruction } from '@solana/kit'
 import { UserInputValidationError } from '../../../errors'
 import type { TransferOptions } from '../types'
 import { createRpcClient } from './rpc'
@@ -36,20 +37,20 @@ export async function transfer(
   const instructions =
     !options.token || options.token.toLowerCase() === 'sol'
       ? await getNativeTransferInstructions({
-          from: account.address,
-          to: options.to,
-          amount: options.amount,
-        })
+        from: account.address,
+        to: options.to,
+        amount: options.amount,
+      })
       : await getSplTransferInstructions({
-          rpc,
-          from: account.address,
-          to: options.to,
-          mintAddress:
-            options.token.toLowerCase() === 'usdc'
-              ? getUsdcMintAddress(cluster)
-              : options.token,
-          amount: options.amount,
-        })
+        rpc,
+        from: account.address,
+        to: options.to,
+        mintAddress:
+          options.token.toLowerCase() === 'usdc'
+            ? getUsdcMintAddress(cluster)
+            : options.token,
+        amount: options.amount,
+      })
 
   return sendTransaction({
     account,
@@ -78,7 +79,7 @@ export async function getNativeTransferInstructions({
   from,
   to,
   amount,
-}: GetNativeTransferOptions): Promise<any[]> {
+}: GetNativeTransferOptions): Promise<Instruction[]> {
   let solanaKit: any
   let systemProgram: any
   try {
@@ -122,8 +123,6 @@ type GetSplTransferOptions = {
  * Derives ATAs, fetches decimals, validates balance,
  * creates destination ATA if needed, and uses `getTransferCheckedInstruction`.
  *
- * Note: ATA creation requires the sender to have ~0.002 SOL for rent.
- *
  * @param options - The SPL transfer options
  * @returns The transfer instructions
  */
@@ -133,7 +132,7 @@ export async function getSplTransferInstructions({
   to,
   mintAddress,
   amount,
-}: GetSplTransferOptions): Promise<any[]> {
+}: GetSplTransferOptions): Promise<Instruction[]> {
   let solanaKit: any
   let tokenProgram: any
   try {
@@ -183,7 +182,7 @@ export async function getSplTransferInstructions({
     )
   }
 
-  const instructions: any[] = []
+  const instructions: Instruction[] = []
 
   // If destination ATA does not exist, add create instruction
   // Note: the sender pays ~0.002 SOL rent for ATA creation
