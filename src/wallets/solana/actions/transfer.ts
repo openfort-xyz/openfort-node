@@ -37,20 +37,20 @@ export async function transfer(
   const instructions =
     !options.token || options.token.toLowerCase() === 'sol'
       ? await getNativeTransferInstructions({
-        from: account.address,
-        to: options.to,
-        amount: options.amount,
-      })
+          from: account.address,
+          to: options.to,
+          amount: options.amount,
+        })
       : await getSplTransferInstructions({
-        rpc,
-        from: account.address,
-        to: options.to,
-        mintAddress:
-          options.token.toLowerCase() === 'usdc'
-            ? getUsdcMintAddress(cluster)
-            : options.token,
-        amount: options.amount,
-      })
+          rpc,
+          from: account.address,
+          to: options.to,
+          mintAddress:
+            options.token.toLowerCase() === 'usdc'
+              ? getUsdcMintAddress(cluster)
+              : options.token,
+          amount: options.amount,
+        })
 
   return sendTransaction({
     account,

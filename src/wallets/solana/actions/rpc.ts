@@ -9,10 +9,7 @@ import { getRpcEndpoint } from './utils'
  * @param rpcUrl - Optional custom RPC URL override
  * @returns The RPC client
  */
-export async function createRpcClient(
-  cluster: SolanaCluster,
-  rpcUrl?: string,
-) {
+export async function createRpcClient(cluster: SolanaCluster, rpcUrl?: string) {
   let solanaKit: any
   try {
     solanaKit = await import('@solana/kit')

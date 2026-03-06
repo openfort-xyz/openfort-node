@@ -102,7 +102,9 @@ export async function sendTransaction(
 
   // Initialize Solana RPC connections
   const rpc = solanaKit.createSolanaRpc(rpcUrl ?? getRpcEndpoint(cluster))
-  const rpcSubscriptions = solanaKit.createSolanaRpcSubscriptions(wsUrl ?? getWsEndpoint(cluster))
+  const rpcSubscriptions = solanaKit.createSolanaRpcSubscriptions(
+    wsUrl ?? getWsEndpoint(cluster),
+  )
   const confirmTransaction =
     transactionConfirmation.createRecentSignatureConfirmationPromiseFactory({
       rpc,
