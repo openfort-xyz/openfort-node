@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.3
+
+### Patch Changes
+
+- [#80](https://github.com/openfort-xyz/openfort-node/pull/80) [`12bfbf7`](https://github.com/openfort-xyz/openfort-node/commit/12bfbf70fcd9cab38d25a23de22672e2adcb15a5) Thanks [@0xbri3t](https://github.com/0xbri3t)! - sendTransaction abstraction
+
 ## 0.9.2
 
 ### Patch Changes
