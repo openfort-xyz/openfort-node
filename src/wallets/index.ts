@@ -28,12 +28,14 @@ export {
 
 // Solana exports
 export {
+  type AccountSendRawTransactionOptions,
   type AccountTransferOptions,
   type CreateSolanaAccountOptions,
   type ExportSolanaAccountOptions,
   type GetSolanaAccountOptions,
   type ImportSolanaAccountOptions,
   type ListSolanaAccountsOptions,
+  type SendRawSolanaTransactionOptions,
   type SendSolanaTransactionOptions,
   type SignMessageOptions as SolanaSignMessageOptions,
   type SignTransactionOptions as SolanaSignTransactionOptions,

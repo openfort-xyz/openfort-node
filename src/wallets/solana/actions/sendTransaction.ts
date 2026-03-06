@@ -125,6 +125,8 @@ export async function sendTransaction(
         solanaKit.address(signer_address),
         tx,
       ),
+    // Kora's getBlockhash does not return lastValidBlockHeight, so we use 0n.
+    // Transaction expiry is handled by the confirmTransaction timeout instead.
     (tx) =>
       solanaKit.setTransactionMessageLifetimeUsingBlockhash(
         {

@@ -7,7 +7,9 @@ import { getRpcEndpoint } from './utils'
  * Sends a pre-built base64-encoded Solana transaction via the gasless Kora flow.
  *
  * Decodes the base64 transaction, extracts its instructions by decompiling
- * the transaction message and re-wraps them using the existing `sendTransaction` gasless flow.
+ * the transaction message, and re-wraps them using the existing `sendTransaction`
+ * gasless flow. The original fee payer, blockhash, and any existing signatures
+ * are discarded — a new transaction is built with Kora as the fee payer.
  *
  * @param options - Raw transaction options
  * @returns Object with the transaction signature
