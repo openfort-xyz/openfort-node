@@ -1,5 +1,5 @@
 ---
-"@openfort/openfort-node": patch
+"@openfort/openfort-node": minor
 ---
 
-sendTransaction abstraction
+improve bundle size and introduce send tx with solana gasless
