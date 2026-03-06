@@ -15,12 +15,6 @@ importers:
       '@openfort/shield-js':
         specifier: ^0.1.35
         version: 0.1.35
-      '@types/node':
-        specifier: ^25.3.2
-        version: 25.3.2
-      '@types/node-fetch':
-        specifier: ^2.6.13
-        version: 2.6.13
       axios:
         specifier: ^1.13.6
         version: 1.13.6
@@ -70,6 +64,12 @@ importers:
       '@solana/transaction-confirmation':
         specifier: ^6.1.0
         version: 6.1.0(typescript@5.9.3)
+      '@types/node':
+        specifier: ^25.3.2
+        version: 25.3.2
+      '@types/node-fetch':
+        specifier: ^2.6.13
+        version: 2.6.13
       '@vitest/coverage-v8':
         specifier: ^3.2.4
         version: 3.2.4(vitest@3.2.4(@types/node@25.3.2)(jiti@2.6.1)(yaml@2.8.2))
