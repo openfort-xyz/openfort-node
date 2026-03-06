@@ -3,7 +3,7 @@
  * Sign EIP-712 typed data
  */
 
-import { hashTypedData } from 'viem'
+import { UserInputValidationError } from '../../../errors'
 import { sign } from '../../../openapi-client'
 import type { Address, Hex, TypedData, TypedDataDefinition } from '../types'
 import { normalizeSignature } from './normalizeSignature'
@@ -42,10 +42,19 @@ export async function signTypedData<
   T extends TypedData | Record<string, unknown> = TypedData,
   P extends keyof T | 'EIP712Domain' = keyof T,
 >(options: SignTypedDataOptions<T, P>): Promise<SignTypedDataResult> {
+  let viem: typeof import('viem')
+  try {
+    viem = await import('viem')
+  } catch {
+    throw new UserInputValidationError(
+      '`viem` is required for signTypedData. Install it and try again.',
+    )
+  }
+
   const { accountId, typedData } = options
 
   // Hash the typed data using EIP-712
-  const hash = hashTypedData(typedData)
+  const hash = viem.hashTypedData(typedData)
 
   // Sign the hash via v2 API
   const response = await sign(accountId, { data: hash })

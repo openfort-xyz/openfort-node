@@ -2,5 +2,14 @@
   "$schema": "https://unpkg.com/knip@latest/schema.json",
   "entry": ["src/index.ts!"],
   "project": ["src/**/*.ts!"],
-  "ignore": ["example/**"]
+  "ignore": ["example/**"],
+  "ignoreDependencies": [
+    "@solana-program/compute-budget",
+    "@solana-program/system",
+    "@solana-program/token",
+    "@solana/kit",
+    "@solana/kora",
+    "@solana/transaction-confirmation",
+    "viem"
+  ]
 }
