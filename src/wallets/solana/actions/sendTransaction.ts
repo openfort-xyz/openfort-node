@@ -118,7 +118,7 @@ export async function sendTransaction(
   const blockhashResponse = await client.getBlockhash()
 
   // Step 3: Build transaction message (address-only fee payer, no signer framework)
-  const txMsg = solanaKit.pipe(
+  let txMsg = solanaKit.pipe(
     solanaKit.createTransactionMessage({ version: 0 }),
     (tx) =>
       solanaKit.setTransactionMessageFeePayer(
@@ -147,6 +147,22 @@ export async function sendTransaction(
         tx,
       ),
   )
+
+  // Step 3b: If no explicit computeUnitLimit was provided, simulate to estimate
+  // the actual CU needed and set a tight limit for lower fees and better inclusion.
+  if (computeUnitLimit === undefined) {
+    const estimateComputeUnitLimit =
+      computeBudget.estimateComputeUnitLimitFactory({ rpc })
+    try {
+      const estimatedLimit = await estimateComputeUnitLimit(txMsg)
+      txMsg = computeBudget.updateOrAppendSetComputeUnitLimitInstruction(
+        estimatedLimit,
+        txMsg,
+      )
+    } catch {
+      // Simulation failed — keep the default limit
+    }
+  }
 
   // Step 4: Compile and sign manually
   const compiled = solanaKit.compileTransaction(txMsg)
