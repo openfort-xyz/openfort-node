@@ -3,12 +3,7 @@
  * Sign an EVM transaction
  */
 
-import {
-  keccak256,
-  parseSignature,
-  type Signature,
-  serializeTransaction,
-} from 'viem'
+import { UserInputValidationError } from '../../../errors'
 import { sign as signApi } from '../../../openapi-client'
 import type { Address, Hex, TransactionSerializable } from '../types'
 import { normalizeSignature } from './normalizeSignature'
@@ -46,22 +41,34 @@ export interface SignTransactionResult {
 export async function signTransaction(
   options: SignTransactionOptions,
 ): Promise<SignTransactionResult> {
+  let viem: any
+  try {
+    viem = await import('viem')
+  } catch {
+    throw new UserInputValidationError(
+      'viem is required for signTransaction. Install it: pnpm add viem',
+    )
+  }
+
   const { accountId, transaction } = options
 
   // Send serialized transaction (backend detects type, hashes, signs)
-  const serialized = serializeTransaction(transaction)
+  const serialized = viem.serializeTransaction(transaction)
   const response = await signApi(accountId, { data: serialized })
 
   // Parse signature into v, r, s components
-  const signature = parseSignature(
+  const signature = viem.parseSignature(
     normalizeSignature(response.signature) as Hex,
-  ) as Signature
+  )
 
   // Re-serialize with signature to get fully signed transaction
-  const signedTransaction = serializeTransaction(transaction, signature) as Hex
+  const signedTransaction = viem.serializeTransaction(
+    transaction,
+    signature,
+  ) as Hex
 
   // Hash the signed transaction to get the transaction hash
-  const transactionHash = keccak256(signedTransaction)
+  const transactionHash = viem.keccak256(signedTransaction)
 
   return {
     signedTransaction,

@@ -3,7 +3,6 @@
  * Sign an EIP-191 personal message
  */
 
-import { toHex, toPrefixedMessage } from 'viem'
 import { UserInputValidationError } from '../../../errors'
 import { sign } from '../../../openapi-client'
 import type { Address, Hex, SignableMessage } from '../types'
@@ -39,6 +38,15 @@ export interface SignMessageResult {
 export async function signMessage(
   options: SignMessageOptions,
 ): Promise<SignMessageResult> {
+  let viem: any
+  try {
+    viem = await import('viem')
+  } catch {
+    throw new UserInputValidationError(
+      'viem is required for signMessage. Install it: pnpm add viem',
+    )
+  }
+
   const { accountId, message } = options
 
   // Normalize message to a SignableMessage that toPrefixedMessage accepts
@@ -46,7 +54,7 @@ export async function signMessage(
   if (typeof message === 'string') {
     normalizedMessage = message
   } else if (message instanceof Uint8Array) {
-    normalizedMessage = { raw: toHex(message) }
+    normalizedMessage = { raw: viem.toHex(message) }
   } else if ('raw' in message) {
     normalizedMessage = message
   } else {
@@ -54,7 +62,7 @@ export async function signMessage(
   }
 
   // Send EIP-191 preimage (backend detects type, hashes, signs)
-  const preimage = toPrefixedMessage(normalizedMessage)
+  const preimage = viem.toPrefixedMessage(normalizedMessage)
   const response = await sign(accountId, { data: preimage })
 
   const signature = normalizeSignature(response.signature)

@@ -68,7 +68,6 @@
     "bs58": "^6.0.0",
     "jose": "^5.10.0",
     "node-fetch": "^2.7.0",
-    "viem": "^2.46.3",
     "zod": "^3.25.76"
   },
   "simple-git-hooks": {
@@ -92,6 +91,7 @@
     "simple-git-hooks": "^2.13.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
+    "viem": "^2.46.3",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
@@ -100,7 +100,8 @@
     "@solana-program/token": ">=0.7.0",
     "@solana/kit": ">=2.0.0",
     "@solana/kora": ">=0.1.0",
-    "@solana/transaction-confirmation": ">=6.0.0"
+    "@solana/transaction-confirmation": ">=6.0.0",
+    "viem": ">=2.0.0"
   },
   "peerDependenciesMeta": {
     "@solana/kit": {
@@ -119,6 +120,9 @@
       "optional": true
     },
     "@solana/transaction-confirmation": {
+      "optional": true
+    },
+    "viem": {
       "optional": true
     }
   },

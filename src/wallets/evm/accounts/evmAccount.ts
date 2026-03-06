@@ -3,15 +3,7 @@
  * Factory function for creating EVM account objects with bound action methods
  */
 
-import {
-  getTypesForEIP712Domain,
-  type HashTypedDataParameters,
-  hashTypedData,
-  parseSignature,
-  type Signature,
-  serializeTransaction,
-  toPrefixedMessage,
-} from 'viem'
+import { UserInputValidationError } from '../../../errors'
 import { sign } from '../../../openapi-client'
 import { signHash as signHashAction } from '../actions/signHash'
 import type {
@@ -61,24 +53,42 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
     },
 
     async signMessage(parameters: { message: SignableMessage }): Promise<Hex> {
+      let viem: any
+      try {
+        viem = await import('viem')
+      } catch {
+        throw new UserInputValidationError(
+          'viem is required for signMessage. Install it: pnpm add viem',
+        )
+      }
+
       const { message } = parameters
 
       // Send EIP-191 preimage (backend detects type, hashes, signs)
-      const preimage = toPrefixedMessage(message)
+      const preimage = viem.toPrefixedMessage(message)
       const result = await sign(id, { data: preimage })
       return result.signature as Hex
     },
 
     async signTransaction(transaction: TransactionSerializable): Promise<Hex> {
+      let viem: any
+      try {
+        viem = await import('viem')
+      } catch {
+        throw new UserInputValidationError(
+          'viem is required for signTransaction. Install it: pnpm add viem',
+        )
+      }
+
       // Send serialized transaction (backend detects type, hashes, signs)
-      const serialized = serializeTransaction(transaction)
+      const serialized = viem.serializeTransaction(transaction)
       const response = await sign(id, { data: serialized })
 
       // Parse signature into v, r, s components
-      const signature = parseSignature(response.signature as Hex) as Signature
+      const signature = viem.parseSignature(response.signature as Hex)
 
       // Re-serialize with signature to get fully signed transaction
-      const signedTransaction = serializeTransaction(
+      const signedTransaction = viem.serializeTransaction(
         transaction,
         signature,
       ) as Hex
@@ -90,14 +100,19 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
       const T extends TypedData | Record<string, unknown>,
       P extends keyof T | 'EIP712Domain' = keyof T,
     >(parameters: TypedDataDefinition<T, P>): Promise<Hex> {
+      let viem: any
+      try {
+        viem = await import('viem')
+      } catch {
+        throw new UserInputValidationError(
+          'viem is required for signTypedData. Install it: pnpm add viem',
+        )
+      }
+
       // Construct EIP712Domain types properly
-      const {
-        domain = {},
-        message,
-        primaryType,
-      } = parameters as HashTypedDataParameters
+      const { domain = {}, message, primaryType } = parameters as any
       const types = {
-        EIP712Domain: getTypesForEIP712Domain({ domain }),
+        EIP712Domain: viem.getTypesForEIP712Domain({ domain }),
         ...parameters.types,
       }
 
@@ -110,7 +125,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
 
       // Sign the typed data via API
       // Note: Openfort uses a generic sign endpoint, so we hash first
-      const hash = hashTypedData(openApiMessage)
+      const hash = viem.hashTypedData(openApiMessage)
       const result = await sign(id, { data: hash })
 
       return result.signature as Hex
