@@ -17,9 +17,6 @@ export {
   type Hex,
   type ListEvmAccountsOptions,
   type SignableMessage,
-  type SignMessageOptions as EvmSignMessageOptions,
-  type SignTransactionOptions as EvmSignTransactionOptions,
-  type SignTypedDataOptions as EvmSignTypedDataOptions,
   type TransactionSerializable,
   type TypedData,
   type TypedDataDefinition,
@@ -28,18 +25,24 @@ export {
 
 // Solana exports
 export {
+  type AccountSendRawTransactionOptions,
+  type AccountTransferOptions,
   type CreateSolanaAccountOptions,
   type ExportSolanaAccountOptions,
   type GetSolanaAccountOptions,
   type ImportSolanaAccountOptions,
   type ListSolanaAccountsOptions,
+  type SendRawSolanaTransactionOptions,
+  type SendSolanaTransactionOptions,
   type SignMessageOptions as SolanaSignMessageOptions,
   type SignTransactionOptions as SolanaSignTransactionOptions,
   type SolanaAccount,
   type SolanaAccountBase,
   type SolanaAccountData,
   SolanaClient,
+  type SolanaCluster,
   type SolanaSigningMethods,
+  type TransferOptions,
   toSolanaAccount,
 } from './solana'
 

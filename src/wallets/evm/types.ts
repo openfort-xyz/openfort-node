@@ -69,45 +69,6 @@ export interface EvmSigningMethods {
 export type EvmAccount = EvmAccountBase & EvmSigningMethods
 
 /**
- * Options for sign message action
- */
-export interface SignMessageOptions {
-  /** Account address */
-  address: Address
-  /** Message to sign (string or SignableMessage) */
-  message: SignableMessage
-  /** Idempotency key */
-  idempotencyKey?: string
-}
-
-/**
- * Options for sign typed data action
- */
-export interface SignTypedDataOptions<
-  T extends TypedData | Record<string, unknown> = TypedData,
-  P extends keyof T | 'EIP712Domain' = keyof T,
-> {
-  /** Account address */
-  address: Address
-  /** Typed data definition */
-  typedData: TypedDataDefinition<T, P>
-  /** Idempotency key */
-  idempotencyKey?: string
-}
-
-/**
- * Options for sign transaction action
- */
-export interface SignTransactionOptions {
-  /** Account address */
-  address: Address
-  /** Transaction to sign */
-  transaction: TransactionSerializable
-  /** Idempotency key */
-  idempotencyKey?: string
-}
-
-/**
  * Options for creating an EVM account
  */
 export interface CreateEvmAccountOptions {
@@ -127,8 +88,13 @@ export interface GetEvmAccountOptions {
   id?: string
 }
 
+/**
+ * Options for retrieving linked (delegated) accounts for an EVM address
+ */
 export interface GetLinkedAccountsOptions {
+  /** The EVM address to look up linked accounts for */
   address: string
+  /** The chain ID to filter linked accounts by */
   chainId: number
 }
 

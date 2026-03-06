@@ -19,13 +19,16 @@ import {
 // Policy scope
 // ---------------------------------------------------------------------------
 
+/** Zod enum for policy scope — either 'project' (all accounts) or 'account' (single account). */
 export const PolicyScopeEnum = z.enum(['project', 'account'])
+/** The scope of a policy: 'project' applies to all accounts, 'account' applies to a specific account. */
 export type PolicyScope = z.infer<typeof PolicyScopeEnum>
 
 // ---------------------------------------------------------------------------
 // Composed rule schema (discriminated union over `operation`)
 // ---------------------------------------------------------------------------
 
+/** Zod schema for a policy rule — a discriminated union over the `operation` field covering all EVM and Solana rule types. */
 export const RuleSchema = z.discriminatedUnion('operation', [
   SignEvmTransactionRuleSchema,
   SendEvmTransactionRuleSchema,
@@ -39,12 +42,14 @@ export const RuleSchema = z.discriminatedUnion('operation', [
   SponsorSolTransactionRuleSchema,
 ])
 
+/** A single policy rule. Each rule specifies an operation (e.g. signEvmTransaction), an action (accept/reject), and optional criteria. */
 export type Rule = z.infer<typeof RuleSchema>
 
 // ---------------------------------------------------------------------------
 // Create / Update body schemas
 // ---------------------------------------------------------------------------
 
+/** Zod schema for the request body when creating a new policy. */
 export const CreatePolicyBodySchema = z.object({
   /** The scope of the policy. 'project' applies to all accounts, 'account' applies to a specific account. */
   scope: PolicyScopeEnum,
@@ -60,8 +65,10 @@ export const CreatePolicyBodySchema = z.object({
   rules: z.array(RuleSchema).min(1).max(10),
 })
 
+/** Request body for creating a new policy. */
 export type CreatePolicyBody = z.infer<typeof CreatePolicyBodySchema>
 
+/** Zod schema for the request body when updating an existing policy. */
 export const UpdatePolicyBodySchema = z.object({
   /** A description of what this policy does. */
   description: z.string().optional(),
@@ -73,4 +80,5 @@ export const UpdatePolicyBodySchema = z.object({
   rules: z.array(RuleSchema).min(1).max(10).optional(),
 })
 
+/** Request body for updating an existing policy. */
 export type UpdatePolicyBody = z.infer<typeof UpdatePolicyBodySchema>

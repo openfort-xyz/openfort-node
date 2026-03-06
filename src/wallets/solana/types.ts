@@ -3,6 +3,8 @@
  * Solana-specific types for wallet operations
  */
 
+import type { Instruction } from '@solana/kit'
+
 /**
  * Base Solana account with signing capabilities
  */
@@ -33,9 +35,33 @@ export interface SolanaSigningMethods {
 }
 
 /**
+ * Solana cluster identifier
+ */
+export type SolanaCluster = 'devnet' | 'mainnet-beta'
+
+/**
  * Full Solana server account with all signing capabilities
  */
-export type SolanaAccount = SolanaAccountBase & SolanaSigningMethods
+export type SolanaAccount = SolanaAccountBase &
+  SolanaSigningMethods & {
+    /**
+     * Transfer SOL or SPL tokens to a destination address.
+     * Handles ATA creation, mint decimals, and balance validation automatically.
+     * @param options - Transfer options (destination, amount, token, cluster)
+     * @returns Object with the transaction signature
+     */
+    transfer(options: AccountTransferOptions): Promise<{ signature: string }>
+
+    /**
+     * Send a pre-built base64-encoded transaction via the gasless Kora flow.
+     * Decodes the transaction, extracts instructions, and re-wraps them.
+     * @param options - Raw transaction options (cluster, transaction, etc.)
+     * @returns Object with the transaction signature
+     */
+    sendRawTransaction(
+      options: AccountSendRawTransactionOptions,
+    ): Promise<{ signature: string }>
+  }
 
 /**
  * Options for creating a Solana account
@@ -43,8 +69,6 @@ export type SolanaAccount = SolanaAccountBase & SolanaSigningMethods
 export interface CreateSolanaAccountOptions {
   /** Wallet ID (starts with pla_). Optional - associates the wallet with a player. */
   wallet?: string
-  /** Idempotency key */
-  idempotencyKey?: string
 }
 
 /**
@@ -102,3 +126,80 @@ export interface SignTransactionOptions {
   /** Base64-encoded serialized transaction */
   transaction: string
 }
+
+/**
+ * Options for sending a gasless Solana transaction via Kora
+ */
+export interface SendSolanaTransactionOptions {
+  /** The Solana account to send the transaction from */
+  account: SolanaAccount
+  /** The Solana cluster to use */
+  cluster: SolanaCluster
+  /** Solana instructions to include in the transaction */
+  instructions: Instruction[]
+  /** Compute unit limit (default: 200_000) */
+  computeUnitLimit?: number
+  /** Compute unit price in micro-lamports (default: 50_000n) */
+  computeUnitPrice?: bigint
+  /** Solana RPC URL. Defaults to public RPC for the cluster. */
+  rpcUrl?: string
+  /** Solana WebSocket URL. Defaults to public WS for the cluster. */
+  wsUrl?: string
+}
+
+/**
+ * Options for the high-level transfer action
+ */
+export interface TransferOptions {
+  /** The Solana account to transfer from */
+  account: SolanaAccount
+  /** Destination address (base58 encoded) */
+  to: string
+  /** Amount in smallest unit (lamports for SOL, base units for SPL) */
+  amount: bigint
+  /** Token to transfer: 'sol' (default), 'usdc', or a mint address */
+  token?: string
+  /** The Solana cluster to use */
+  cluster: SolanaCluster
+  /** Compute unit limit (default: 200_000) */
+  computeUnitLimit?: number
+  /** Compute unit price in micro-lamports (default: 50_000n) */
+  computeUnitPrice?: bigint
+  /** Solana RPC URL. Defaults to public RPC for the cluster. */
+  rpcUrl?: string
+  /** Solana WebSocket URL. Defaults to public WS for the cluster. */
+  wsUrl?: string
+}
+
+/**
+ * Transfer options without the account field, for use on the account object
+ */
+export type AccountTransferOptions = Omit<TransferOptions, 'account'>
+
+/**
+ * Options for sending a pre-built base64-encoded Solana transaction via Kora
+ */
+export interface SendRawSolanaTransactionOptions {
+  /** The Solana account to send the transaction from */
+  account: SolanaAccount
+  /** The Solana cluster to use */
+  cluster: SolanaCluster
+  /** Base64-encoded wire transaction */
+  transaction: string
+  /** Compute unit limit (default: 200_000) */
+  computeUnitLimit?: number
+  /** Compute unit price in micro-lamports (default: 50_000n) */
+  computeUnitPrice?: bigint
+  /** Solana RPC URL. Defaults to public RPC for the cluster. */
+  rpcUrl?: string
+  /** Solana WebSocket URL. Defaults to public WS for the cluster. */
+  wsUrl?: string
+}
+
+/**
+ * Raw transaction options without the account field, for use on the account object
+ */
+export type AccountSendRawTransactionOptions = Omit<
+  SendRawSolanaTransactionOptions,
+  'account'
+>

@@ -1,7 +1,4 @@
-import { createPublicClient, getAddress, http } from 'viem'
-import * as chains from 'viem/chains'
-import { hashAuthorization } from 'viem/utils'
-import { DelegationError } from '../../../errors'
+import { DelegationError, UserInputValidationError } from '../../../errors'
 import {
   createTransactionIntent,
   getAccountsV2,
@@ -37,12 +34,43 @@ import { update } from './updateToDelegated'
 export async function sendTransaction(
   options: SendTransactionOptions,
 ): Promise<TransactionIntentResponse> {
+  let viem: typeof import('viem')
+  let viemChains: typeof import('viem/chains')
+  let viemUtils: typeof import('viem/utils')
+  try {
+    viem = await import('viem')
+  } catch {
+    throw new UserInputValidationError(
+      '`viem` is required for sendTransaction. Install it and try again.',
+    )
+  }
+  try {
+    viemChains = await import('viem/chains')
+  } catch {
+    throw new UserInputValidationError(
+      '`viem` is required for sendTransaction. Install it and try again.',
+    )
+  }
+  try {
+    viemUtils = await import('viem/utils')
+  } catch {
+    throw new UserInputValidationError(
+      '`viem` is required for sendTransaction. Install it and try again.',
+    )
+  }
+
   const { account, chainId, interactions, policy, rpcUrl } = options
 
   // 1. Resolve chain + RPC
-  const transport = rpcUrl ? http(rpcUrl) : http()
-  const allChains = Object.values(chains) as chains.Chain[]
-  const chain = allChains.find((c) => c.id === chainId)
+  const transport = rpcUrl ? viem.http(rpcUrl) : viem.http()
+  const allChains = Object.values(viemChains)
+  const chain = allChains.find(
+    (c) =>
+      typeof c === 'object' &&
+      c !== null &&
+      'id' in c &&
+      (c as { id: number }).id === chainId,
+  ) as import('viem').Chain | undefined
   if (!chain) {
     throw new DelegationError(
       `Unknown chain ID ${chainId}. Provide a custom rpcUrl for unsupported chains.`,
@@ -54,7 +82,7 @@ export async function sendTransaction(
   let txAccountId: string
 
   const response = await getAccountsV2({
-    address: getAddress(account.address),
+    address: viem.getAddress(account.address),
     accountType: 'Delegated Account',
     chainType: 'EVM',
     chainId: chainId,
@@ -73,13 +101,13 @@ export async function sendTransaction(
     const implementationAddress: Hex =
       '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
 
-    const publicClient = createPublicClient({ chain, transport })
+    const publicClient = viem.createPublicClient({ chain, transport })
 
     // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
     const eoaNonce = await publicClient.getTransactionCount({
       address: account.address,
     })
-    const authHash = hashAuthorization({
+    const authHash = viemUtils.hashAuthorization({
       contractAddress: implementationAddress,
       chainId,
       nonce: eoaNonce,
