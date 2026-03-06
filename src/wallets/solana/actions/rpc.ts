@@ -10,7 +10,7 @@ import { getRpcEndpoint } from './utils'
  * @returns The RPC client
  */
 export async function createRpcClient(cluster: SolanaCluster, rpcUrl?: string) {
-  let solanaKit: any
+  let solanaKit: typeof import('@solana/kit')
   try {
     solanaKit = await import('@solana/kit')
   } catch {

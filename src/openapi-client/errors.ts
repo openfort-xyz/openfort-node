@@ -20,7 +20,7 @@ export type HttpErrorType =
 /**
  * Extended API error type
  */
-export type APIErrorType = HttpErrorType | string
+export type APIErrorType = HttpErrorType | (string & {})
 
 /**
  * Shape of Openfort API error responses

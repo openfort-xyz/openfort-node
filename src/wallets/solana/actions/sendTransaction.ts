@@ -52,10 +52,10 @@ export async function sendTransaction(
   } = options
 
   // Dynamic imports for optional peer dependencies
-  let solanaKit: any
-  let computeBudget: any
-  let transactionConfirmation: any
-  let koraModule: any
+  let solanaKit: typeof import('@solana/kit')
+  let computeBudget: typeof import('@solana-program/compute-budget')
+  let transactionConfirmation: typeof import('@solana/transaction-confirmation')
+  let koraModule: typeof import('@solana/kora')
   try {
     solanaKit = await import('@solana/kit')
   } catch {
@@ -130,7 +130,8 @@ export async function sendTransaction(
     (tx) =>
       solanaKit.setTransactionMessageLifetimeUsingBlockhash(
         {
-          blockhash: blockhashResponse.blockhash,
+          blockhash:
+            blockhashResponse.blockhash as import('@solana/kit').Blockhash,
           lastValidBlockHeight: 0n,
         },
         tx,
@@ -138,7 +139,8 @@ export async function sendTransaction(
     (tx) => solanaKit.appendTransactionMessageInstructions(instructions, tx),
     (tx) =>
       computeBudget.updateOrAppendSetComputeUnitPriceInstruction(
-        computeUnitPrice ?? DEFAULT_COMPUTE_UNIT_PRICE,
+        (computeUnitPrice ??
+          DEFAULT_COMPUTE_UNIT_PRICE) as import('@solana/kit').MicroLamports,
         tx,
       ),
     (tx) =>
@@ -182,7 +184,7 @@ export async function sendTransaction(
       addr === userAddress ? sigBytes : EMPTY_SIGNATURE,
     ]),
   )
-  const signed = { ...compiled, signatures }
+  const signed = { ...compiled, signatures } as typeof compiled
   const base64Full = solanaKit.getBase64EncodedWireTransaction(signed)
 
   // Step 5: Kora co-signs, then send via RPC
@@ -191,7 +193,10 @@ export async function sendTransaction(
     signer_key: signer_address,
   })
   const signature = await rpc
-    .sendTransaction(signed_transaction, { encoding: 'base64' })
+    .sendTransaction(
+      signed_transaction as import('@solana/kit').Base64EncodedWireTransaction,
+      { encoding: 'base64' },
+    )
     .send()
 
   await confirmTransaction({

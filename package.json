@@ -61,8 +61,6 @@
   },
   "dependencies": {
     "@openfort/shield-js": "^0.1.35",
-    "@types/node": "^25.3.2",
-    "@types/node-fetch": "^2.6.13",
     "axios": "^1.13.6",
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
@@ -74,6 +72,8 @@
     "pre-commit": "pnpm check"
   },
   "devDependencies": {
+    "@types/node": "^25.3.2",
+    "@types/node-fetch": "^2.6.13",
     "@arethetypeswrong/cli": "^0.18.2",
     "@biomejs/biome": "^2.4.4",
     "@changesets/changelog-github": "^0.5.2",
@@ -98,7 +98,7 @@
     "@solana-program/compute-budget": ">=0.7.0",
     "@solana-program/system": ">=0.7.0",
     "@solana-program/token": ">=0.7.0",
-    "@solana/kit": ">=2.0.0",
+    "@solana/kit": ">=6.0.0",
     "@solana/kora": ">=0.1.0",
     "@solana/transaction-confirmation": ">=6.0.0",
     "viem": ">=2.0.0"

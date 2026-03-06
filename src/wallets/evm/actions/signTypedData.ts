@@ -42,7 +42,7 @@ export async function signTypedData<
   T extends TypedData | Record<string, unknown> = TypedData,
   P extends keyof T | 'EIP712Domain' = keyof T,
 >(options: SignTypedDataOptions<T, P>): Promise<SignTypedDataResult> {
-  let viem: any
+  let viem: typeof import('viem')
   try {
     viem = await import('viem')
   } catch {

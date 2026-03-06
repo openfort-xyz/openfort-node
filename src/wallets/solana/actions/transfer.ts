@@ -84,8 +84,8 @@ export async function getNativeTransferInstructions({
   to,
   amount,
 }: GetNativeTransferOptions): Promise<Instruction[]> {
-  let solanaKit: any
-  let systemProgram: any
+  let solanaKit: typeof import('@solana/kit')
+  let systemProgram: typeof import('@solana-program/system')
   try {
     solanaKit = await import('@solana/kit')
   } catch {
@@ -116,7 +116,7 @@ export async function getNativeTransferInstructions({
 /** Options for building SPL token transfer instructions */
 type GetSplTransferOptions = {
   /** The Solana RPC client instance */
-  rpc: any
+  rpc: Awaited<ReturnType<typeof import('./rpc').createRpcClient>>
   /** The sender's Solana address */
   from: string
   /** The recipient's Solana address */
@@ -143,8 +143,8 @@ export async function getSplTransferInstructions({
   mintAddress,
   amount,
 }: GetSplTransferOptions): Promise<Instruction[]> {
-  let solanaKit: any
-  let tokenProgram: any
+  let solanaKit: typeof import('@solana/kit')
+  let tokenProgram: typeof import('@solana-program/token')
   try {
     solanaKit = await import('@solana/kit')
   } catch {
@@ -196,9 +196,10 @@ export async function getSplTransferInstructions({
 
   // If destination ATA does not exist, add create instruction
   // Note: the sender pays ~0.002 SOL rent for ATA creation
-  try {
-    await tokenProgram.fetchToken(rpc, destAta)
-  } catch {
+  const destAccountInfo = await rpc
+    .getAccountInfo(destAta, { encoding: 'base64' })
+    .send()
+  if (!destAccountInfo.value) {
     const createDestIx =
       await tokenProgram.getCreateAssociatedTokenInstructionAsync({
         payer: solanaKit.createNoopSigner(fromAddr),

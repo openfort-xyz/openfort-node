@@ -37,7 +37,7 @@ export async function sendRawTransaction(
     wsUrl,
   } = options
 
-  let solanaKit: any
+  let solanaKit: typeof import('@solana/kit')
   try {
     solanaKit = await import('@solana/kit')
   } catch {
@@ -64,7 +64,7 @@ export async function sendRawTransaction(
   return sendTransaction({
     account,
     cluster,
-    instructions: decompiled.instructions,
+    instructions: [...decompiled.instructions],
     computeUnitLimit,
     computeUnitPrice,
     rpcUrl,

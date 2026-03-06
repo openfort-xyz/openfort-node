@@ -34,9 +34,9 @@ import { update } from './updateToDelegated'
 export async function sendTransaction(
   options: SendTransactionOptions,
 ): Promise<TransactionIntentResponse> {
-  let viem: any
-  let viemChains: any
-  let viemUtils: any
+  let viem: typeof import('viem')
+  let viemChains: typeof import('viem/chains')
+  let viemUtils: typeof import('viem/utils')
   try {
     viem = await import('viem')
   } catch {
@@ -63,8 +63,14 @@ export async function sendTransaction(
 
   // 1. Resolve chain + RPC
   const transport = rpcUrl ? viem.http(rpcUrl) : viem.http()
-  const allChains = Object.values(viemChains) as any[]
-  const chain = allChains.find((c: any) => c.id === chainId)
+  const allChains = Object.values(viemChains)
+  const chain = allChains.find(
+    (c) =>
+      typeof c === 'object' &&
+      c !== null &&
+      'id' in c &&
+      (c as { id: number }).id === chainId,
+  ) as import('viem').Chain | undefined
   if (!chain) {
     throw new DelegationError(
       `Unknown chain ID ${chainId}. Provide a custom rpcUrl for unsupported chains.`,

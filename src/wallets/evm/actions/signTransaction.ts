@@ -41,7 +41,7 @@ export interface SignTransactionResult {
 export async function signTransaction(
   options: SignTransactionOptions,
 ): Promise<SignTransactionResult> {
-  let viem: any
+  let viem: typeof import('viem')
   try {
     viem = await import('viem')
   } catch {

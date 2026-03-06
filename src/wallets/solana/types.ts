@@ -69,8 +69,6 @@ export type SolanaAccount = SolanaAccountBase &
 export interface CreateSolanaAccountOptions {
   /** Wallet ID (starts with pla_). Optional - associates the wallet with a player. */
   wallet?: string
-  /** Idempotency key */
-  idempotencyKey?: string
 }
 
 /**
@@ -141,7 +139,7 @@ export interface SendSolanaTransactionOptions {
   instructions: Instruction[]
   /** Compute unit limit (default: 200_000) */
   computeUnitLimit?: number
-  /** Compute unit price in micro-lamports (default: 1_000_000n) */
+  /** Compute unit price in micro-lamports (default: 50_000n) */
   computeUnitPrice?: bigint
   /** Solana RPC URL. Defaults to public RPC for the cluster. */
   rpcUrl?: string
@@ -165,7 +163,7 @@ export interface TransferOptions {
   cluster: SolanaCluster
   /** Compute unit limit (default: 200_000) */
   computeUnitLimit?: number
-  /** Compute unit price in micro-lamports (default: 1_000_000n) */
+  /** Compute unit price in micro-lamports (default: 50_000n) */
   computeUnitPrice?: bigint
   /** Solana RPC URL. Defaults to public RPC for the cluster. */
   rpcUrl?: string
@@ -190,7 +188,7 @@ export interface SendRawSolanaTransactionOptions {
   transaction: string
   /** Compute unit limit (default: 200_000) */
   computeUnitLimit?: number
-  /** Compute unit price in micro-lamports (default: 1_000_000n) */
+  /** Compute unit price in micro-lamports (default: 50_000n) */
   computeUnitPrice?: bigint
   /** Solana RPC URL. Defaults to public RPC for the cluster. */
   rpcUrl?: string

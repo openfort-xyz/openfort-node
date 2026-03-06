@@ -38,7 +38,7 @@ export interface SignMessageResult {
 export async function signMessage(
   options: SignMessageOptions,
 ): Promise<SignMessageResult> {
-  let viem: any
+  let viem: typeof import('viem')
   try {
     viem = await import('viem')
   } catch {

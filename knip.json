@@ -5,7 +5,10 @@
   "ignore": ["example/**"],
   "ignoreDependencies": [
     "@solana-program/compute-budget",
+    "@solana-program/system",
+    "@solana-program/token",
     "@solana/kit",
-    "@solana/kora"
+    "@solana/kora",
+    "@solana/transaction-confirmation"
   ]
 }

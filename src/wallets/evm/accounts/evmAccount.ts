@@ -5,6 +5,7 @@
 
 import { UserInputValidationError } from '../../../errors'
 import { sign } from '../../../openapi-client'
+import { normalizeSignature } from '../actions/normalizeSignature'
 import { signHash as signHashAction } from '../actions/signHash'
 import type {
   Address,
@@ -53,7 +54,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
     },
 
     async signMessage(parameters: { message: SignableMessage }): Promise<Hex> {
-      let viem: any
+      let viem: typeof import('viem')
       try {
         viem = await import('viem')
       } catch {
@@ -67,11 +68,11 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
       // Send EIP-191 preimage (backend detects type, hashes, signs)
       const preimage = viem.toPrefixedMessage(message)
       const result = await sign(id, { data: preimage })
-      return result.signature as Hex
+      return normalizeSignature(result.signature) as Hex
     },
 
     async signTransaction(transaction: TransactionSerializable): Promise<Hex> {
-      let viem: any
+      let viem: typeof import('viem')
       try {
         viem = await import('viem')
       } catch {
@@ -100,7 +101,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
       const T extends TypedData | Record<string, unknown>,
       P extends keyof T | 'EIP712Domain' = keyof T,
     >(parameters: TypedDataDefinition<T, P>): Promise<Hex> {
-      let viem: any
+      let viem: typeof import('viem')
       try {
         viem = await import('viem')
       } catch {
@@ -110,7 +111,11 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
       }
 
       // Construct EIP712Domain types properly
-      const { domain = {}, message, primaryType } = parameters as any
+      const {
+        domain = {},
+        message,
+        primaryType,
+      } = parameters as TypedDataDefinition
       const types = {
         EIP712Domain: viem.getTypesForEIP712Domain({ domain }),
         ...parameters.types,
@@ -128,7 +133,7 @@ export function toEvmAccount(data: EvmAccountData): EvmAccount {
       const hash = viem.hashTypedData(openApiMessage)
       const result = await sign(id, { data: hash })
 
-      return result.signature as Hex
+      return normalizeSignature(result.signature) as Hex
     },
   }
 
