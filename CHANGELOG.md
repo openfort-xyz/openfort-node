@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.1
+
+### Patch Changes
+
+- [#84](https://github.com/openfort-xyz/openfort-node/pull/84) [`481d81b`](https://github.com/openfort-xyz/openfort-node/commit/481d81b9691bc2be2cfab0ceda7af7a6a4713077) Thanks [@jamalavedra](https://github.com/jamalavedra)! - fix import solana
+
 ## 0.10.0
 
 ### Minor Changes
