@@ -1,6 +1,18 @@
 // Usage: npx tsx solana/signing/signTransaction.ts
 
 import Openfort from "@openfort/openfort-node";
+import { getTransferSolInstruction } from "@solana-program/system";
+import {
+  address,
+  createNoopSigner,
+  createSolanaRpc,
+  createTransactionMessage,
+  setTransactionMessageFeePayerSigner,
+  setTransactionMessageLifetimeUsingBlockhash,
+  appendTransactionMessageInstruction,
+  compileTransaction,
+  getBase64EncodedWireTransaction,
+} from "@solana/kit";
 import "dotenv/config";
 
 const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
@@ -12,28 +24,37 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
 const account = await openfort.accounts.solana.backend.create();
 console.log("Created Solana account:", account.address);
 
-// Create a sample transaction (base64 encoded)
-// In production, you would create this using @solana/web3.js
-// This is a placeholder transaction for demonstration
-const sampleTransaction = Buffer.from("sample-transaction-data").toString(
-  "base64"
+// Build a transaction using @solana/kit
+const rpc = createSolanaRpc("https://api.devnet.solana.com");
+const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();
+
+const sender = createNoopSigner(address(account.address));
+const destination = address("FDx9mfVqTvXUaSPQDELwDtGgMqxirmAFsEK2s4YsKfsc");
+
+const transferIx = getTransferSolInstruction({
+  source: sender,
+  destination,
+  amount: 1_000n,
+});
+
+const transactionMessage = appendTransactionMessageInstruction(
+  transferIx,
+  setTransactionMessageLifetimeUsingBlockhash(
+    latestBlockhash,
+    setTransactionMessageFeePayerSigner(
+      sender,
+      createTransactionMessage({ version: 0 }),
+    ),
+  ),
 );
 
-console.log("\nTransaction (base64):", sampleTransaction);
+const compiledTransaction = compileTransaction(transactionMessage);
+const base64Transaction = getBase64EncodedWireTransaction(compiledTransaction);
+
+console.log("\nTransaction (base64):", base64Transaction);
 
 // Sign the transaction
-// Note: This example uses a placeholder. In production, create a proper
-// Solana transaction using @solana/web3.js or @solana/kit and serialize it to base64
-try {
-  const signedTransaction = await account.signTransaction({
-    transaction: sampleTransaction,
-  });
-  console.log("Signed transaction:", signedTransaction);
-} catch (error) {
-  console.log(
-    "\nNote: This example uses a placeholder transaction."
-  );
-  console.log(
-    "In production, create a valid Solana transaction using @solana/web3.js"
-  );
-}
+const signedTransaction = await account.signTransaction({
+  transaction: base64Transaction,
+});
+console.log("Signed transaction:", signedTransaction);

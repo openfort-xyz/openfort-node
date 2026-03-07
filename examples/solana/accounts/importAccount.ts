@@ -1,6 +1,10 @@
 // Usage: npx tsx solana/accounts/importAccount.ts
 
 import Openfort from "@openfort/openfort-node";
+import {
+  createKeyPairFromPrivateKeyBytes,
+  getAddressFromPublicKey,
+} from "@solana/kit";
 import "dotenv/config";
 
 const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
@@ -8,18 +12,20 @@ const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });
 
-// For demonstration, we'll use a random 32-byte hex key
-// In production, you would use an actual Solana private key (base58 or hex format)
-const privateKeyHex = Array.from({ length: 64 }, () =>
-  Math.floor(Math.random() * 16).toString(16)
-).join("");
+// Generate a random 32-byte private key using @solana/kit
+const privateKeyBytes = new Uint8Array(32);
+crypto.getRandomValues(privateKeyBytes);
 
-console.log("Private key (hex):", privateKeyHex);
+const { publicKey } = await createKeyPairFromPrivateKeyBytes(privateKeyBytes);
+const solanaAddress = await getAddressFromPublicKey(publicKey);
+console.log("Generated Solana address:", solanaAddress);
+
+// Convert private key bytes to hex for import
+const privateKeyHex = Buffer.from(privateKeyBytes).toString("hex");
 
 // Import the account to Openfort
-// Openfort accepts both base58 and hex format for Solana keys
 const account = await openfort.accounts.solana.backend.import({
-  privateKey: privateKeyHex, // Can also be base58 format
+  privateKey: privateKeyHex,
 });
 
 console.log("\nImported Solana account:");
