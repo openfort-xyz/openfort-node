@@ -3,6 +3,7 @@
  * Main client for Solana wallet operations
  */
 
+import { createPrivateKey, createPublicKey } from 'node:crypto'
 import bs58 from 'bs58'
 import { IMPORT_ENCRYPTION_PUBLIC_KEY } from '../../constants'
 import {
@@ -239,11 +240,28 @@ export class SolanaClient {
       }
     }
 
-    // Solana private keys can be 32 bytes (seed) or 64 bytes (full keypair)
-    // If 64 bytes, the first 32 are the private key, last 32 are the public key
-    if (privateKeyBytes.length === 64) {
-      privateKeyBytes = privateKeyBytes.slice(0, 32)
-    } else if (privateKeyBytes.length !== 32) {
+    // Solana private keys can be 32 bytes (seed) or 64 bytes (full keypair: seed || public key)
+    // Walltee expects the full 64-byte keypair, so expand 32-byte seeds.
+    if (privateKeyBytes.length === 32) {
+      const edPrivKey = createPrivateKey({
+        key: Buffer.concat([
+          Buffer.from(
+            // PKCS#8 DER prefix for Ed25519 (RFC 8410): 16 bytes wrapping a 32-byte seed
+            '302e020100300506032b657004220420',
+            'hex',
+          ),
+          privateKeyBytes,
+        ]),
+        format: 'der',
+        type: 'pkcs8',
+      })
+      const rawPublicKey = createPublicKey(edPrivKey)
+        .export({ type: 'spki', format: 'der' })
+        .subarray(-32)
+      privateKeyBytes = new Uint8Array(
+        Buffer.concat([privateKeyBytes, rawPublicKey]),
+      )
+    } else if (privateKeyBytes.length !== 64) {
       throw new UserInputValidationError(
         'Private key must be 32 bytes (seed) or 64 bytes (full keypair)',
       )
