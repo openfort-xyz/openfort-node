@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.2
+
+### Patch Changes
+
+- [#86](https://github.com/openfort-xyz/openfort-node/pull/86) [`18c8a8e`](https://github.com/openfort-xyz/openfort-node/commit/18c8a8e2cde38ae59ef335f4a974b08a07cbdf0d) Thanks [@jamalavedra](https://github.com/jamalavedra)! - update deps
+
 ## 0.10.1
 
 ### Patch Changes
