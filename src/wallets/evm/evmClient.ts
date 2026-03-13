@@ -206,6 +206,7 @@ export class EvmClient {
       skip: options.skip,
       chainType: 'EVM',
       custody: 'Developer',
+      accountType: 'Externally Owned Account',
     })
 
     const accounts = response.data.map((wallet) =>
