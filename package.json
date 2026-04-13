@@ -132,7 +132,6 @@
       "@solana/kora>@solana/kit": "$@solana/kit",
       "@solana/kora>@solana-program/token": "$@solana-program/token",
       "picomatch": ">=4.0.4",
-      "brace-expansion": ">=5.0.5",
       "vite": ">=7.3.2",
       "yaml": ">=2.8.3",
       "smol-toml": ">=1.6.1"

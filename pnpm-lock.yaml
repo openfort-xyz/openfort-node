@@ -8,7 +8,6 @@ overrides:
   '@solana/kora>@solana/kit': ^6.1.0
   '@solana/kora>@solana-program/token': ^0.12.0
   picomatch: '>=4.0.4'
-  brace-expansion: '>=5.0.5'
   vite: '>=7.3.2'
   yaml: '>=2.8.3'
   smol-toml: '>=1.6.1'
@@ -1479,9 +1478,8 @@ packages:
   axios@1.15.0:
     resolution: {integrity: sha512-wWyJDlAatxk30ZJer+GeCWS209sA42X+N5jU2jy6oHTp7ufw8uzUTVFBX9+wTfAlhiJXGS0Bq7X6efruWjuK9Q==}
 
-  balanced-match@4.0.4:
-    resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
-    engines: {node: 18 || 20 || >=22}
+  balanced-match@1.0.2:
+    resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
   base-x@5.0.1:
     resolution: {integrity: sha512-M7uio8Zt++eg3jPj+rHMfCC+IuygQHHCOU+IYsVtik6FWjuYpVt/+MRKcgsAMHh8mMFAwnB+Bs+mTrFiXjMzKg==}
@@ -1490,9 +1488,8 @@ packages:
     resolution: {integrity: sha512-pbnl5XzGBdrFU/wT4jqmJVPn2B6UHPBOhzMQkY/SPUPB6QtUXtmBHBIwCbXJol93mOpGMnQyP/+BB19q04xj7g==}
     engines: {node: '>=4'}
 
-  brace-expansion@5.0.5:
-    resolution: {integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==}
-    engines: {node: 18 || 20 || >=22}
+  brace-expansion@2.1.0:
+    resolution: {integrity: sha512-TN1kCZAgdgweJhWWpgKYrQaMNHcDULHkWwQIspdtjV4Y5aurRdZpjAqn6yX3FPqTA9ngHCc4hJxMAMgGfve85w==}
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
@@ -4284,7 +4281,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  balanced-match@4.0.4: {}
+  balanced-match@1.0.2: {}
 
   base-x@5.0.1: {}
 
@@ -4292,9 +4289,9 @@ snapshots:
     dependencies:
       is-windows: 1.0.2
 
-  brace-expansion@5.0.5:
+  brace-expansion@2.1.0:
     dependencies:
-      balanced-match: 4.0.4
+      balanced-match: 1.0.2
 
   braces@3.0.3:
     dependencies:
@@ -4917,11 +4914,11 @@ snapshots:
 
   minimatch@5.1.9:
     dependencies:
-      brace-expansion: 5.0.5
+      brace-expansion: 2.1.0
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 5.0.5
+      brace-expansion: 2.1.0
 
   minimist@1.2.8: {}
 
