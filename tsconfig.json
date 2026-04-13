@@ -10,7 +10,6 @@
     "target": "es2021",
     "lib": ["es2022", "esnext.disposable", "dom"],
     "typeRoots": ["node_modules/@types", "./typings"],
-    "downlevelIteration": true,
     "declaration": true,
     "strictNullChecks": true,
     "newLine": "LF",
