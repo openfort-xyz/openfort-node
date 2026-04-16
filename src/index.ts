@@ -6,7 +6,6 @@ import {
   ShieldAuthProvider,
   ShieldSDK,
 } from '@openfort/shield-js'
-import fetch from 'node-fetch'
 import {
   InvalidAPIKeyFormatError,
   InvalidPublishableKeyFormatError,

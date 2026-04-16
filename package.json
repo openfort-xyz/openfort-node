@@ -36,8 +36,9 @@
   },
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "prebuild": "node -p \"'export const VERSION = ' + JSON.stringify(require('./package.json').version) + ';\\nexport const PACKAGE = ' + JSON.stringify(require('./package.json').name) + ';'\" > src/version.ts",
+    "prebuild": "node -p \"'export const VERSION = \\'' + require('./package.json').version + '\\'\\nexport const PACKAGE = \\'' + require('./package.json').name + '\\''\" > src/version.ts",
     "build": "tsup",
+    "preinstall": "npx only-allow pnpm",
     "prepublishOnly": "pnpm install && pnpm build",
     "changeset": "changeset",
     "changeset:version": "pnpm install --lockfile-only && changeset version",
@@ -65,7 +66,6 @@
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
     "jose": "^6.2.1",
-    "node-fetch": "^2.7.0",
     "zod": "^3.25.76"
   },
   "simple-git-hooks": {
@@ -73,7 +73,6 @@
   },
   "devDependencies": {
     "@types/node": "^25.3.2",
-    "@types/node-fetch": "^2.6.13",
     "@arethetypeswrong/cli": "^0.18.2",
     "@biomejs/biome": "^2.4.4",
     "@changesets/changelog-github": "^0.5.2",
@@ -131,11 +130,19 @@
     "overrides": {
       "@solana/kora>@solana/kit": "$@solana/kit",
       "@solana/kora>@solana-program/token": "$@solana-program/token",
-      "picomatch": ">=4.0.4",
-      "vite": ">=7.3.2",
-      "yaml": ">=2.8.3",
-      "smol-toml": ">=1.6.1"
-    }
+      "cross-spawn@<6.0.6": ">=6.0.6",
+      "cross-spawn@>=7.0.0 <7.0.5": ">=7.0.5",
+      "micromatch@<4.0.8": ">=4.0.8",
+      "picomatch@<2.3.2": "2.3.2",
+      "picomatch@>=4.0.0 <4.0.4": ">=4.0.4",
+      "smol-toml@<1.6.1": ">=1.6.1",
+      "vite@>=6.0.0 <=6.4.1": ">=6.4.2",
+      "vite@>=7.0.0 <=7.3.1": ">=7.3.2",
+      "yaml@>=2.0.0 <2.8.3": ">=2.8.3"
+    },
+    "onlyBuiltDependencies": [
+      "simple-git-hooks"
+    ]
   },
   "packageManager": "pnpm@10.16.1"
 }
