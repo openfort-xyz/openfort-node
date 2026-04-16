@@ -66,7 +66,6 @@
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
     "jose": "^6.2.1",
-    "node-fetch": "^2.7.0",
     "zod": "^3.25.76"
   },
   "simple-git-hooks": {
@@ -74,7 +73,6 @@
   },
   "devDependencies": {
     "@types/node": "^25.3.2",
-    "@types/node-fetch": "^2.6.13",
     "@arethetypeswrong/cli": "^0.18.2",
     "@biomejs/biome": "^2.4.4",
     "@changesets/changelog-github": "^0.5.2",

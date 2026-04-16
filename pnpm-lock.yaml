@@ -36,9 +36,6 @@ importers:
       jose:
         specifier: ^6.2.1
         version: 6.2.1
-      node-fetch:
-        specifier: ^2.7.0
-        version: 2.7.0
       zod:
         specifier: ^3.25.76
         version: 3.25.76
@@ -76,9 +73,6 @@ importers:
       '@types/node':
         specifier: ^25.3.2
         version: 25.3.2
-      '@types/node-fetch':
-        specifier: ^2.6.13
-        version: 2.6.13
       '@vitest/coverage-v8':
         specifier: ^4.1.4
         version: 4.1.4(vitest@4.1.4)
@@ -1236,9 +1230,6 @@ packages:
 
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
-
-  '@types/node-fetch@2.6.13':
-    resolution: {integrity: sha512-QGpRVpzSaUs30JBSGPjOg4Uveu384erbHBoT1zeONvyCfwQxIkUshLAOqN/k9EjGviPRmWTTe6aH2qySWKTVSw==}
 
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
@@ -3879,11 +3870,6 @@ snapshots:
   '@types/hast@3.0.4':
     dependencies:
       '@types/unist': 3.0.3
-
-  '@types/node-fetch@2.6.13':
-    dependencies:
-      '@types/node': 25.3.2
-      form-data: 4.0.5
 
   '@types/node@12.20.55': {}
 
