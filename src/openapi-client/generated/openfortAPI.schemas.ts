@@ -76,7 +76,7 @@ export type Currency = typeof Currency[keyof typeof Currency];
 
 
 export const Currency = {
-  usd: 'usd',
+  USD: 'usd',
 } as const;
 
 export interface CheckoutRequest {
@@ -115,7 +115,7 @@ export type ResponseTypeLIST = typeof ResponseTypeLIST[keyof typeof ResponseType
 
 
 export const ResponseTypeLIST = {
-  list: 'list',
+  LIST: 'list',
 } as const;
 
 export interface EntityIdResponse {
@@ -126,16 +126,16 @@ export type SponsorSchemaPAYFORUSER = typeof SponsorSchemaPAYFORUSER[keyof typeo
 
 
 export const SponsorSchemaPAYFORUSER = {
-  pay_for_user: 'pay_for_user',
+  PAY_FOR_USER: 'pay_for_user',
 } as const;
 
 export type SponsorSchema = typeof SponsorSchema[keyof typeof SponsorSchema];
 
 
 export const SponsorSchema = {
-  pay_for_user: 'pay_for_user',
-  charge_custom_tokens: 'charge_custom_tokens',
-  fixed_rate: 'fixed_rate',
+  PAY_FOR_USER: 'pay_for_user',
+  CHARGE_CUSTOM_TOKENS: 'charge_custom_tokens',
+  FIXED_RATE: 'fixed_rate',
 } as const;
 
 export interface PayForUserPolicyStrategy {
@@ -148,7 +148,7 @@ export type SponsorSchemaCHARGECUSTOMTOKENS = typeof SponsorSchemaCHARGECUSTOMTO
 
 
 export const SponsorSchemaCHARGECUSTOMTOKENS = {
-  charge_custom_tokens: 'charge_custom_tokens',
+  CHARGE_CUSTOM_TOKENS: 'charge_custom_tokens',
 } as const;
 
 export interface ChargeCustomTokenPolicyStrategy {
@@ -163,7 +163,7 @@ export type SponsorSchemaFIXEDRATE = typeof SponsorSchemaFIXEDRATE[keyof typeof 
 
 
 export const SponsorSchemaFIXEDRATE = {
-  fixed_rate: 'fixed_rate',
+  FIXED_RATE: 'fixed_rate',
 } as const;
 
 export interface FixedRateTokenPolicyStrategy {
@@ -180,7 +180,7 @@ export type EntityTypePOLICY = typeof EntityTypePOLICY[keyof typeof EntityTypePO
 
 
 export const EntityTypePOLICY = {
-  policy: 'policy',
+  POLICY: 'policy',
 } as const;
 
 export interface Policy {
@@ -206,7 +206,7 @@ export type EntityTypePLAYER = typeof EntityTypePLAYER[keyof typeof EntityTypePL
 
 
 export const EntityTypePLAYER = {
-  player: 'player',
+  PLAYER: 'player',
 } as const;
 
 export interface Player {
@@ -224,7 +224,7 @@ export type EntityTypeACCOUNT = typeof EntityTypeACCOUNT[keyof typeof EntityType
 
 
 export const EntityTypeACCOUNT = {
-  account: 'account',
+  ACCOUNT: 'account',
 } as const;
 
 export interface Account {
@@ -248,7 +248,7 @@ export type EntityTypeDEVELOPERACCOUNT = typeof EntityTypeDEVELOPERACCOUNT[keyof
 
 
 export const EntityTypeDEVELOPERACCOUNT = {
-  developerAccount: 'developerAccount',
+  DEVELOPER_ACCOUNT: 'developerAccount',
 } as const;
 
 export interface DeveloperAccount {
@@ -265,27 +265,27 @@ export type TransactionAbstractionType = typeof TransactionAbstractionType[keyof
 
 
 export const TransactionAbstractionType = {
-  accountAbstractionV6: 'accountAbstractionV6',
-  accountAbstractionV8: 'accountAbstractionV8',
-  accountAbstractionV9: 'accountAbstractionV9',
-  zkSync: 'zkSync',
-  standard: 'standard',
+  AAV6: 'accountAbstractionV6',
+  AAV8: 'accountAbstractionV8',
+  AAV9: 'accountAbstractionV9',
+  ZKSYNC: 'zkSync',
+  EOA: 'standard',
 } as const;
 
 export type TransactionStatus = typeof TransactionStatus[keyof typeof TransactionStatus];
 
 
 export const TransactionStatus = {
-  none: 'none',
-  new: 'new',
-  sent: 'sent',
-  dropped: 'dropped',
-  indexed: 'indexed',
-  confirmed: 'confirmed',
-  reverted: 'reverted',
-  notfound: 'notfound',
-  replaced: 'replaced',
-  expired: 'expired',
+  NONE: 'none',
+  NEW: 'new',
+  SENT: 'sent',
+  DROPPED: 'dropped',
+  INDEXED: 'indexed',
+  CONFIRMED: 'confirmed',
+  REVERTED: 'reverted',
+  NOT_FOUND: 'notfound',
+  REPLACED: 'replaced',
+  EXPIRED: 'expired',
 } as const;
 
 /**
@@ -473,6 +473,23 @@ export interface TransactionResponseLog {
   orphaned?: boolean;
 }
 
+export interface TransactionErrorExplanation {
+  /** A human-readable description of what caused the error. */
+  cause: string;
+  /** A human-readable suggestion for how to resolve the error. */
+  solution: string;
+}
+
+export interface TransactionError {
+  /** The error reason string returned by the bundler or execution environment. */
+  reason: string;
+  /** The decoded error name from the contract revert, if available. */
+  name?: string;
+  /** Detailed explanation of the error cause and suggested solution.
+Present only for known Account Abstraction error codes (AA10–AA99). */
+  explanation?: TransactionErrorExplanation;
+}
+
 export interface ResponseResponse {
   /** The unix timestamp in seconds when the transactionIntent was created. */
   createdAt: number;
@@ -494,8 +511,10 @@ export interface ResponseResponse {
   logs?: TransactionResponseLog[];
   /** The address of the contract of this log. */
   to?: string;
-  /** The error of the transaction of this log. */
-  error?: unknown;
+  /** The error of the transaction, if it failed or was rejected.
+Contains the error reason and, for known Account Abstraction errors (AA10–AA99),
+an explanation with cause and solution. */
+  error?: TransactionError;
 }
 
 export interface Interaction {
@@ -520,7 +539,7 @@ export type NextActionType = typeof NextActionType[keyof typeof NextActionType];
 
 
 export const NextActionType = {
-  sign_with_wallet: 'sign_with_wallet',
+  SIGN_WITH_WALLET: 'sign_with_wallet',
 } as const;
 
 export interface NextActionPayload {
@@ -557,7 +576,7 @@ export type EntityTypeTRANSACTIONINTENT = typeof EntityTypeTRANSACTIONINTENT[key
 
 
 export const EntityTypeTRANSACTIONINTENT = {
-  transactionIntent: 'transactionIntent',
+  TRANSACTION_INTENT: 'transactionIntent',
 } as const;
 
 export interface TransactionIntentResponse {
@@ -579,6 +598,8 @@ export interface TransactionIntentResponse {
   /** @deprecated */
   userOperation?: unknown;
   response?: ResponseResponse;
+  /** The actual transaction cost in USD, available after on-chain confirmation. */
+  finalCost?: string;
   interactions?: Interaction[];
   nextAction?: NextActionResponse;
   /** The policy ID (starts with pol_). */
@@ -602,7 +623,7 @@ export type ErrorTypeINVALIDREQUESTERROR = typeof ErrorTypeINVALIDREQUESTERROR[k
 
 
 export const ErrorTypeINVALIDREQUESTERROR = {
-  invalid_request_error: 'invalid_request_error',
+  INVALID_REQUEST_ERROR: 'invalid_request_error',
 } as const;
 
 export interface FieldErrors {[key: string]: {
@@ -716,33 +737,36 @@ export type APITopic = typeof APITopic[keyof typeof APITopic];
 
 
 export const APITopic = {
-  transaction_intentbroadcast: 'transaction_intent.broadcast',
-  transaction_intentsuccessful: 'transaction_intent.successful',
-  transaction_intentcancelled: 'transaction_intent.cancelled',
-  transaction_intentfailed: 'transaction_intent.failed',
-  balanceproject: 'balance.project',
-  balancecontract: 'balance.contract',
-  balancedev_account: 'balance.dev_account',
-  test: 'test',
-  usercreated: 'user.created',
-  userupdated: 'user.updated',
-  userdeleted: 'user.deleted',
-  accountcreated: 'account.created',
+  TRANSACTION_BROADCAST: 'transaction_intent.broadcast',
+  TRANSACTION_SUCCESSFUL: 'transaction_intent.successful',
+  TRANSACTION_CANCELLED: 'transaction_intent.cancelled',
+  TRANSACTION_FAILED: 'transaction_intent.failed',
+  BALANCE_PROJECT: 'balance.project',
+  BALANCE_CONTRACT: 'balance.contract',
+  BALANCE_DEV_ACCOUNT: 'balance.dev_account',
+  TEST: 'test',
+  USER_CREATED: 'user.created',
+  USER_UPDATED: 'user.updated',
+  USER_DELETED: 'user.deleted',
+  ACCOUNT_CREATED: 'account.created',
+  SOLANA_TRANSACTION_BROADCAST: 'solana_transaction.broadcast',
+  SOLANA_TRANSACTION_SUCCESSFUL: 'solana_transaction.successful',
+  SOLANA_TRANSACTION_FAILED: 'solana_transaction.failed',
 } as const;
 
 export type APITriggerType = typeof APITriggerType[keyof typeof APITriggerType];
 
 
 export const APITriggerType = {
-  webhook: 'webhook',
-  email: 'email',
+  WEBHOOK: 'webhook',
+  EMAIL: 'email',
 } as const;
 
 export type EntityTypeTRIGGER = typeof EntityTypeTRIGGER[keyof typeof EntityTypeTRIGGER];
 
 
 export const EntityTypeTRIGGER = {
-  trigger: 'trigger',
+  TRIGGER: 'trigger',
 } as const;
 
 export interface TriggerResponse {
@@ -759,7 +783,7 @@ export type EntityTypeSUBSCRIPTION = typeof EntityTypeSUBSCRIPTION[keyof typeof 
 
 
 export const EntityTypeSUBSCRIPTION = {
-  subscription: 'subscription',
+  SUBSCRIPTION: 'subscription',
 } as const;
 
 export interface SubscriptionResponse {
@@ -784,15 +808,15 @@ export type Status = typeof Status[keyof typeof Status];
 
 
 export const Status = {
-  success: 'success',
-  failed: 'failed',
+  SUCCESS: 'success',
+  FAILED: 'failed',
 } as const;
 
 export type EntityTypeLOG = typeof EntityTypeLOG[keyof typeof EntityTypeLOG];
 
 
 export const EntityTypeLOG = {
-  log: 'log',
+  LOG: 'log',
 } as const;
 
 export interface LogResponse {
@@ -891,6 +915,50 @@ export interface TriggerDeleteResponse {
   deleted: boolean;
 }
 
+/**
+ * Lifecycle status of a Solana transaction.
+ */
+export type SolanaTransactionStatus = typeof SolanaTransactionStatus[keyof typeof SolanaTransactionStatus];
+
+
+export const SolanaTransactionStatus = {
+  sent: 'sent',
+  confirmed: 'confirmed',
+  expired: 'expired',
+  failed: 'failed',
+} as const;
+
+/**
+ * Solana transaction status response — exposes the on-chain transaction signature
+(hash) and the lifecycle status of the underlying sponsorship row.
+ */
+export interface SolanaTransactionStatusResponse {
+  /** Internal Solana transaction ID (starts with `sol_`). */
+  id: string;
+  /**
+   * Caller-supplied externalId, if one was provided when the transaction was signed.
+   * @nullable
+   */
+  externalId: string | null;
+  /**
+   * Base58-encoded Solana transaction signature (a.k.a. transaction hash).
+Null only for `signTransaction` transactions that were never broadcast.
+   * @nullable
+   */
+  txSignature: string | null;
+  /** Lifecycle status of the transaction:
+- sent: signed by Kora, awaiting on-chain confirmation
+- confirmed: confirmed on-chain
+- expired: blockhash expired or never broadcast
+- failed: landed on-chain but execution failed (see errorMessage) */
+  status: SolanaTransactionStatus;
+  /**
+   * On-chain error message when status is FAILED.
+   * @nullable
+   */
+  errorMessage: string | null;
+}
+
 export interface TransactionIntent {
   id: string;
   object: EntityTypeTRANSACTIONINTENT;
@@ -910,6 +978,8 @@ export interface TransactionIntent {
   /** @deprecated */
   userOperation?: unknown;
   response?: ResponseResponse;
+  /** The actual transaction cost in USD, available after on-chain confirmation. */
+  finalCost?: string;
   interactions?: Interaction[];
   nextAction?: NextActionResponse;
   /** The policy ID (starts with pol_). */
@@ -978,7 +1048,7 @@ export type EntityTypeSIGNATURE = typeof EntityTypeSIGNATURE[keyof typeof Entity
 
 
 export const EntityTypeSIGNATURE = {
-  signature: 'signature',
+  SIGNATURE: 'signature',
 } as const;
 
 export interface SignPayloadResponse {
@@ -1041,7 +1111,7 @@ export type EntityTypeSESSION = typeof EntityTypeSESSION[keyof typeof EntityType
 
 
 export const EntityTypeSESSION = {
-  session: 'session',
+  SESSION: 'session',
 } as const;
 
 export interface SessionResponse {
@@ -1150,23 +1220,23 @@ export type PolicyRuleTypeCONTRACT = typeof PolicyRuleTypeCONTRACT[keyof typeof 
 
 
 export const PolicyRuleTypeCONTRACT = {
-  contract_functions: 'contract_functions',
+  CONTRACT: 'contract_functions',
 } as const;
 
 export type PolicyRuleType = typeof PolicyRuleType[keyof typeof PolicyRuleType];
 
 
 export const PolicyRuleType = {
-  contract_functions: 'contract_functions',
-  account_functions: 'account_functions',
-  rate_limit: 'rate_limit',
+  CONTRACT: 'contract_functions',
+  ACCOUNT: 'account_functions',
+  RATE_LIMIT: 'rate_limit',
 } as const;
 
 export type EntityTypePOLICYRULE = typeof EntityTypePOLICYRULE[keyof typeof EntityTypePOLICYRULE];
 
 
 export const EntityTypePOLICYRULE = {
-  policyRule: 'policyRule',
+  POLICY_RULE: 'policyRule',
 } as const;
 
 export interface AbiType {
@@ -1216,7 +1286,7 @@ export type EntityTypeCONTRACT = typeof EntityTypeCONTRACT[keyof typeof EntityTy
 
 
 export const EntityTypeCONTRACT = {
-  contract: 'contract',
+  CONTRACT: 'contract',
 } as const;
 
 export interface ContractResponse {
@@ -1254,7 +1324,7 @@ export type PolicyRuleTypeACCOUNT = typeof PolicyRuleTypeACCOUNT[keyof typeof Po
 
 
 export const PolicyRuleTypeACCOUNT = {
-  account_functions: 'account_functions',
+  ACCOUNT: 'account_functions',
 } as const;
 
 export interface AccountPolicyRuleResponse {
@@ -1268,23 +1338,23 @@ export type PolicyRateLimitGASPERTRANSACTION = typeof PolicyRateLimitGASPERTRANS
 
 
 export const PolicyRateLimitGASPERTRANSACTION = {
-  gas_per_transaction: 'gas_per_transaction',
+  GAS_PER_TRANSACTION: 'gas_per_transaction',
 } as const;
 
 export type PolicyRuleTypeRATELIMIT = typeof PolicyRuleTypeRATELIMIT[keyof typeof PolicyRuleTypeRATELIMIT];
 
 
 export const PolicyRuleTypeRATELIMIT = {
-  rate_limit: 'rate_limit',
+  RATE_LIMIT: 'rate_limit',
 } as const;
 
 export type PolicyRateLimit = typeof PolicyRateLimit[keyof typeof PolicyRateLimit];
 
 
 export const PolicyRateLimit = {
-  gas_per_transaction: 'gas_per_transaction',
-  gas_per_interval: 'gas_per_interval',
-  count_per_interval: 'count_per_interval',
+  GAS_PER_TRANSACTION: 'gas_per_transaction',
+  GAS_PER_INTERVAL: 'gas_per_interval',
+  COUNT_PER_INTERVAL: 'count_per_interval',
 } as const;
 
 export interface GasPerTransactionLimitPolicyRuleResponse {
@@ -1300,18 +1370,18 @@ export type PolicyRateLimitGASPERINTERVAL = typeof PolicyRateLimitGASPERINTERVAL
 
 
 export const PolicyRateLimitGASPERINTERVAL = {
-  gas_per_interval: 'gas_per_interval',
+  GAS_PER_INTERVAL: 'gas_per_interval',
 } as const;
 
 export type TimeIntervalType = typeof TimeIntervalType[keyof typeof TimeIntervalType];
 
 
 export const TimeIntervalType = {
-  minute: 'minute',
-  hour: 'hour',
-  day: 'day',
-  week: 'week',
-  month: 'month',
+  MINUTE: 'minute',
+  HOUR: 'hour',
+  DAY: 'day',
+  WEEK: 'week',
+  MONTH: 'month',
 } as const;
 
 export interface GasPerIntervalLimitPolicyRuleResponse {
@@ -1329,7 +1399,7 @@ export type PolicyRateLimitCOUNTPERINTERVAL = typeof PolicyRateLimitCOUNTPERINTE
 
 
 export const PolicyRateLimitCOUNTPERINTERVAL = {
-  count_per_interval: 'count_per_interval',
+  COUNT_PER_INTERVAL: 'count_per_interval',
 } as const;
 
 export interface CountPerIntervalLimitPolicyRuleResponse {
@@ -1536,18 +1606,15 @@ export interface MonthRange {
 }
 
 export interface GasReportTransactionIntents {
-  id: string;
-  gasFee: string;
-  gasPrice: string;
-  gasUsed: string;
-  gasFeeInUSD: string;
+  totalTransactionFee: string;
+  totalTransactionFeeInUSD: string;
+  transactionCount: number;
 }
 
 export interface GasReport {
   period: MonthRange;
   averageTransactionFee: string;
   totalTransactionFeeInCustomTokens: string;
-  totalTransactionFee: string;
   totalTransactionFeeInUSD: string;
   /** @deprecated */
   transactionIntents: GasReportTransactionIntents[];
@@ -1707,7 +1774,7 @@ export type EntityTypePAYMASTER = typeof EntityTypePAYMASTER[keyof typeof Entity
 
 
 export const EntityTypePAYMASTER = {
-  paymaster: 'paymaster',
+  PAYMASTER: 'paymaster',
 } as const;
 
 export type PaymasterResponseContext = { [key: string]: unknown };
@@ -1764,8 +1831,8 @@ export type OnrampProvider = typeof OnrampProvider[keyof typeof OnrampProvider];
 
 
 export const OnrampProvider = {
-  coinbase: 'coinbase',
-  stripe: 'stripe',
+  COINBASE: 'coinbase',
+  STRIPE: 'stripe',
 } as const;
 
 /**
@@ -1881,7 +1948,7 @@ export type EntityTypeFORWARDERCONTRACT = typeof EntityTypeFORWARDERCONTRACT[key
 
 
 export const EntityTypeFORWARDERCONTRACT = {
-  forwarderContract: 'forwarderContract',
+  FORWARDER_CONTRACT: 'forwarderContract',
 } as const;
 
 export interface ForwarderContractResponse {
@@ -1914,14 +1981,14 @@ export type APITopicBALANCECONTRACT = typeof APITopicBALANCECONTRACT[keyof typeo
 
 
 export const APITopicBALANCECONTRACT = {
-  balancecontract: 'balance.contract',
+  BALANCE_CONTRACT: 'balance.contract',
 } as const;
 
 export type EntityTypeEVENT = typeof EntityTypeEVENT[keyof typeof EntityTypeEVENT];
 
 
 export const EntityTypeEVENT = {
-  event: 'event',
+  EVENT: 'event',
 } as const;
 
 export interface ContractEventResponse {
@@ -1939,7 +2006,7 @@ export type APITopicBALANCEDEVACCOUNT = typeof APITopicBALANCEDEVACCOUNT[keyof t
 
 
 export const APITopicBALANCEDEVACCOUNT = {
-  balancedev_account: 'balance.dev_account',
+  BALANCE_DEV_ACCOUNT: 'balance.dev_account',
 } as const;
 
 export interface AccountEventResponse {
@@ -1956,7 +2023,7 @@ export type APITopicBALANCEPROJECT = typeof APITopicBALANCEPROJECT[keyof typeof 
 
 
 export const APITopicBALANCEPROJECT = {
-  balanceproject: 'balance.project',
+  BALANCE_PROJECT: 'balance.project',
 } as const;
 
 export interface BalanceEventResponse {
@@ -1971,7 +2038,7 @@ export type APITopicTRANSACTIONSUCCESSFUL = typeof APITopicTRANSACTIONSUCCESSFUL
 
 
 export const APITopicTRANSACTIONSUCCESSFUL = {
-  transaction_intentsuccessful: 'transaction_intent.successful',
+  TRANSACTION_SUCCESSFUL: 'transaction_intent.successful',
 } as const;
 
 export interface TransactionConfirmedEventResponse {
@@ -2105,7 +2172,7 @@ export type EntityTypeDEVICE = typeof EntityTypeDEVICE[keyof typeof EntityTypeDE
 
 
 export const EntityTypeDEVICE = {
-  device: 'device',
+  DEVICE: 'device',
 } as const;
 
 export interface DeviceResponse {
@@ -2220,7 +2287,7 @@ export type EntityTypeREADCONTRACT = typeof EntityTypeREADCONTRACT[keyof typeof 
 
 
 export const EntityTypeREADCONTRACT = {
-  readContract: 'readContract',
+  READCONTRACT: 'readContract',
 } as const;
 
 export interface ContractReadResponse {
@@ -2397,7 +2464,7 @@ export type EntityTypeWALLET = typeof EntityTypeWALLET[keyof typeof EntityTypeWA
 
 
 export const EntityTypeWALLET = {
-  wallet: 'wallet',
+  WALLET: 'wallet',
 } as const;
 
 export interface BaseEntityResponseEntityTypeWALLET {
@@ -2443,15 +2510,15 @@ export interface RecoveryMethodDetails {
 /**
  * Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys.
  */
-export type PregenerateAccountResponseCustody = typeof PregenerateAccountResponseCustody[keyof typeof PregenerateAccountResponseCustody];
+export type PregenerateAccountEntryCustody = typeof PregenerateAccountEntryCustody[keyof typeof PregenerateAccountEntryCustody];
 
 
-export const PregenerateAccountResponseCustody = {
+export const PregenerateAccountEntryCustody = {
   Developer: 'Developer',
   User: 'User',
 } as const;
 
-export interface PregenerateAccountResponse {
+export interface PregenerateAccountEntry {
   id: string;
   wallet: string;
   accountType: string;
@@ -2465,12 +2532,18 @@ export interface PregenerateAccountResponse {
   recoveryMethod?: string;
   recoveryMethodDetails?: RecoveryMethodDetails;
   /** Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys. */
-  custody: PregenerateAccountResponseCustody;
-  /** The recovery share for the user's embedded signer.
+  custody: PregenerateAccountEntryCustody;
+  /** The recovery share for this embedded account's signer.
 This should be stored securely and provided to the user for account recovery. */
   recoveryShare: string;
-  /** User uuid */
+}
+
+export interface PregenerateUserResponseV2 {
+  /** User uuid (starts with `usr_`). */
   user: string;
+  /** The embedded accounts that were pregenerated for this user,
+in the same order as the `accounts` array in the request. */
+  accounts: PregenerateAccountEntry[];
 }
 
 /**
@@ -2480,24 +2553,24 @@ export type ThirdPartyOAuthProvider = typeof ThirdPartyOAuthProvider[keyof typeo
 
 
 export const ThirdPartyOAuthProvider = {
-  accelbyte: 'accelbyte',
-  firebase: 'firebase',
-  lootlocker: 'lootlocker',
-  playfab: 'playfab',
-  supabase: 'supabase',
-  custom: 'custom',
-  oidc: 'oidc',
-  'better-auth': 'better-auth',
+  ACCELBYTE: 'accelbyte',
+  FIREBASE: 'firebase',
+  LOOTLOCKER: 'lootlocker',
+  PLAYFAB: 'playfab',
+  SUPABASE: 'supabase',
+  CUSTOM: 'custom',
+  OIDC: 'oidc',
+  BETTER_AUTH: 'better-auth',
 } as const;
 
 /**
  * The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
 Defaults to "Smart Account".
  */
-export type PregenerateUserRequestV2AccountType = typeof PregenerateUserRequestV2AccountType[keyof typeof PregenerateUserRequestV2AccountType];
+export type PregenerateAccountConfigAccountType = typeof PregenerateAccountConfigAccountType[keyof typeof PregenerateAccountConfigAccountType];
 
 
-export const PregenerateUserRequestV2AccountType = {
+export const PregenerateAccountConfigAccountType = {
   Externally_Owned_Account: 'Externally Owned Account',
   Smart_Account: 'Smart Account',
   Delegated_Account: 'Delegated Account',
@@ -2506,13 +2579,27 @@ export const PregenerateUserRequestV2AccountType = {
 /**
  * The chain type. "EVM" or "SVM". Defaults to "EVM".
  */
-export type PregenerateUserRequestV2ChainType = typeof PregenerateUserRequestV2ChainType[keyof typeof PregenerateUserRequestV2ChainType];
+export type PregenerateAccountConfigChainType = typeof PregenerateAccountConfigChainType[keyof typeof PregenerateAccountConfigChainType];
 
 
-export const PregenerateUserRequestV2ChainType = {
+export const PregenerateAccountConfigChainType = {
   EVM: 'EVM',
   SVM: 'SVM',
 } as const;
+
+export interface PregenerateAccountConfig {
+  /** The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
+Defaults to "Smart Account". */
+  accountType?: PregenerateAccountConfigAccountType;
+  /** The chain type. "EVM" or "SVM". Defaults to "EVM". */
+  chainType?: PregenerateAccountConfigChainType;
+  /** The chain ID. Required for Smart Account and Delegated Account types.
+Must be a [supported chain](/development/chains). */
+  chainId?: number;
+  /** The implementation type for Smart Account or Delegated Account (e.g. Calibur, UpgradeableV6).
+Required for Smart Account and Delegated Account types. */
+  implementationType?: string;
+}
 
 export interface PregenerateUserRequestV2 {
   /** The email address of the user to pregenerate.
@@ -2523,84 +2610,80 @@ Required if email is not provided. */
   thirdPartyUserId?: string;
   /** The third-party auth provider. Required when thirdPartyUserId is provided. */
   thirdPartyProvider?: ThirdPartyOAuthProvider;
-  /** The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
-Defaults to "Smart Account". */
-  accountType?: PregenerateUserRequestV2AccountType;
-  /** The chain type. "EVM" or "SVM". Defaults to "EVM". */
-  chainType?: PregenerateUserRequestV2ChainType;
-  /** The chain ID. Required for Smart Account and Delegated Account types.
-Must be a [supported chain](/development/chains). */
-  chainId?: number;
-  /** The implementation type for Smart Account or Delegated Account (e.g. Calibur, UpgradeableV6).
-Required for Smart Account and Delegated Account types. */
-  implementationType?: string;
+  /**
+   * One or more embedded accounts to pregenerate for the user.
+Each entry produces its own key material and recovery share.
+Use this to pregenerate accounts on different chain types (e.g. EVM and SVM) in a single call.
+   * @minItems 1
+   */
+  accounts: PregenerateAccountConfig[];
 }
 
 export type PolicyV2Scope = typeof PolicyV2Scope[keyof typeof PolicyV2Scope];
 
 
 export const PolicyV2Scope = {
-  project: 'project',
-  account: 'account',
-  transaction: 'transaction',
+  PROJECT: 'project',
+  ACCOUNT: 'account',
+  TRANSACTION: 'transaction',
 } as const;
 
 export type PolicyV2Action = typeof PolicyV2Action[keyof typeof PolicyV2Action];
 
 
 export const PolicyV2Action = {
-  accept: 'accept',
-  reject: 'reject',
+  ACCEPT: 'accept',
+  REJECT: 'reject',
 } as const;
 
 export type EvmCriteriaTypeEVMADDRESS = typeof EvmCriteriaTypeEVMADDRESS[keyof typeof EvmCriteriaTypeEVMADDRESS];
 
 
 export const EvmCriteriaTypeEVMADDRESS = {
-  evmAddress: 'evmAddress',
+  EVM_ADDRESS: 'evmAddress',
 } as const;
 
 export type CriteriaOperatorIN = typeof CriteriaOperatorIN[keyof typeof CriteriaOperatorIN];
 
 
 export const CriteriaOperatorIN = {
-  in: 'in',
+  IN: 'in',
 } as const;
 
 export type CriteriaOperatorNOTIN = typeof CriteriaOperatorNOTIN[keyof typeof CriteriaOperatorNOTIN];
 
 
 export const CriteriaOperatorNOTIN = {
-  not_in: 'not in',
+  NOT_IN: 'not in',
 } as const;
 
 export type EvmCriteriaType = typeof EvmCriteriaType[keyof typeof EvmCriteriaType];
 
 
 export const EvmCriteriaType = {
-  evmAddress: 'evmAddress',
-  ethValue: 'ethValue',
-  evmNetwork: 'evmNetwork',
-  evmMessage: 'evmMessage',
-  evmData: 'evmData',
-  evmTypedDataVerifyingContract: 'evmTypedDataVerifyingContract',
-  evmTypedDataField: 'evmTypedDataField',
-  netUSDChange: 'netUSDChange',
+  EVM_ADDRESS: 'evmAddress',
+  ETH_VALUE: 'ethValue',
+  EVM_NETWORK: 'evmNetwork',
+  EVM_MESSAGE: 'evmMessage',
+  EVM_DATA: 'evmData',
+  EVM_TYPED_DATA_VERIFYING_CONTRACT: 'evmTypedDataVerifyingContract',
+  EVM_TYPED_DATA_FIELD: 'evmTypedDataField',
+  NET_USD_CHANGE: 'netUSDChange',
 } as const;
 
 export type SolanaCriteriaType = typeof SolanaCriteriaType[keyof typeof SolanaCriteriaType];
 
 
 export const SolanaCriteriaType = {
-  solAddress: 'solAddress',
-  solValue: 'solValue',
-  splAddress: 'splAddress',
-  splValue: 'splValue',
-  mintAddress: 'mintAddress',
-  solData: 'solData',
-  programId: 'programId',
-  solNetwork: 'solNetwork',
-  solMessage: 'solMessage',
+  SOL_ADDRESS: 'solAddress',
+  SOL_VALUE: 'solValue',
+  SPL_ADDRESS: 'splAddress',
+  SPL_VALUE: 'splValue',
+  MINT_ADDRESS: 'mintAddress',
+  SOL_DATA: 'solData',
+  PROGRAM_ID: 'programId',
+  SOL_NETWORK: 'solNetwork',
+  SOL_MESSAGE: 'solMessage',
 } as const;
 
 export const CriteriaType = {...EvmCriteriaType,...SolanaCriteriaType,} as const
@@ -2610,14 +2693,14 @@ export type CriteriaOperator = typeof CriteriaOperator[keyof typeof CriteriaOper
 
 
 export const CriteriaOperator = {
-  in: 'in',
-  not_in: 'not in',
-  '<': '<',
-  '<=': '<=',
-  '>': '>',
-  '>=': '>=',
-  '==': '==',
-  match: 'match',
+  IN: 'in',
+  NOT_IN: 'not in',
+  LESS_THAN: '<',
+  LESS_THAN_OR_EQUAL: '<=',
+  GREATER_THAN: '>',
+  GREATER_THAN_OR_EQUAL: '>=',
+  EQUAL: '==',
+  MATCH: 'match',
 } as const;
 
 export const EvmAddressCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorNOTIN,} as const
@@ -2631,35 +2714,35 @@ export type EvmCriteriaTypeETHVALUE = typeof EvmCriteriaTypeETHVALUE[keyof typeo
 
 
 export const EvmCriteriaTypeETHVALUE = {
-  ethValue: 'ethValue',
+  ETH_VALUE: 'ethValue',
 } as const;
 
 export type CriteriaOperatorLESSTHANOREQUAL = typeof CriteriaOperatorLESSTHANOREQUAL[keyof typeof CriteriaOperatorLESSTHANOREQUAL];
 
 
 export const CriteriaOperatorLESSTHANOREQUAL = {
-  '<=': '<=',
+  LESS_THAN_OR_EQUAL: '<=',
 } as const;
 
 export type CriteriaOperatorGREATERTHANOREQUAL = typeof CriteriaOperatorGREATERTHANOREQUAL[keyof typeof CriteriaOperatorGREATERTHANOREQUAL];
 
 
 export const CriteriaOperatorGREATERTHANOREQUAL = {
-  '>=': '>=',
+  GREATER_THAN_OR_EQUAL: '>=',
 } as const;
 
 export type CriteriaOperatorLESSTHAN = typeof CriteriaOperatorLESSTHAN[keyof typeof CriteriaOperatorLESSTHAN];
 
 
 export const CriteriaOperatorLESSTHAN = {
-  '<': '<',
+  LESS_THAN: '<',
 } as const;
 
 export type CriteriaOperatorGREATERTHAN = typeof CriteriaOperatorGREATERTHAN[keyof typeof CriteriaOperatorGREATERTHAN];
 
 
 export const CriteriaOperatorGREATERTHAN = {
-  '>': '>',
+  GREATER_THAN: '>',
 } as const;
 
 export const EthValueCriterionOperator = {...CriteriaOperatorLESSTHANOREQUAL,...CriteriaOperatorGREATERTHANOREQUAL,...CriteriaOperatorLESSTHAN,...CriteriaOperatorGREATERTHAN,} as const
@@ -2673,7 +2756,7 @@ export type EvmCriteriaTypeEVMNETWORK = typeof EvmCriteriaTypeEVMNETWORK[keyof t
 
 
 export const EvmCriteriaTypeEVMNETWORK = {
-  evmNetwork: 'evmNetwork',
+  EVM_NETWORK: 'evmNetwork',
 } as const;
 
 export const EvmNetworkCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorNOTIN,} as const
@@ -2687,14 +2770,14 @@ export type EvmCriteriaTypeEVMMESSAGE = typeof EvmCriteriaTypeEVMMESSAGE[keyof t
 
 
 export const EvmCriteriaTypeEVMMESSAGE = {
-  evmMessage: 'evmMessage',
+  EVM_MESSAGE: 'evmMessage',
 } as const;
 
 export type CriteriaOperatorMATCH = typeof CriteriaOperatorMATCH[keyof typeof CriteriaOperatorMATCH];
 
 
 export const CriteriaOperatorMATCH = {
-  match: 'match',
+  MATCH: 'match',
 } as const;
 
 export interface EvmMessageCriterion {
@@ -2707,7 +2790,7 @@ export type EvmCriteriaTypeEVMDATA = typeof EvmCriteriaTypeEVMDATA[keyof typeof 
 
 
 export const EvmCriteriaTypeEVMDATA = {
-  evmData: 'evmData',
+  EVM_DATA: 'evmData',
 } as const;
 
 /**
@@ -2727,7 +2810,7 @@ export type EvmCriteriaTypeEVMTYPEDDATAVERIFYINGCONTRACT = typeof EvmCriteriaTyp
 
 
 export const EvmCriteriaTypeEVMTYPEDDATAVERIFYINGCONTRACT = {
-  evmTypedDataVerifyingContract: 'evmTypedDataVerifyingContract',
+  EVM_TYPED_DATA_VERIFYING_CONTRACT: 'evmTypedDataVerifyingContract',
 } as const;
 
 export const EvmTypedDataVerifyingContractCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorNOTIN,} as const
@@ -2741,7 +2824,7 @@ export type EvmCriteriaTypeEVMTYPEDDATAFIELD = typeof EvmCriteriaTypeEVMTYPEDDAT
 
 
 export const EvmCriteriaTypeEVMTYPEDDATAFIELD = {
-  evmTypedDataField: 'evmTypedDataField',
+  EVM_TYPED_DATA_FIELD: 'evmTypedDataField',
 } as const;
 
 export const EvmTypedDataFieldCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorLESSTHANOREQUAL,...CriteriaOperatorMATCH,} as const
@@ -2757,7 +2840,7 @@ export type EvmCriteriaTypeNETUSDCHANGE = typeof EvmCriteriaTypeNETUSDCHANGE[key
 
 
 export const EvmCriteriaTypeNETUSDCHANGE = {
-  netUSDChange: 'netUSDChange',
+  NET_USD_CHANGE: 'netUSDChange',
 } as const;
 
 export const NetUSDChangeCriterionOperator = {...CriteriaOperatorLESSTHANOREQUAL,...CriteriaOperatorGREATERTHANOREQUAL,} as const
@@ -2771,7 +2854,7 @@ export type SolanaCriteriaTypeSOLADDRESS = typeof SolanaCriteriaTypeSOLADDRESS[k
 
 
 export const SolanaCriteriaTypeSOLADDRESS = {
-  solAddress: 'solAddress',
+  SOL_ADDRESS: 'solAddress',
 } as const;
 
 export const SolAddressCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorNOTIN,} as const
@@ -2785,7 +2868,7 @@ export type SolanaCriteriaTypeSOLVALUE = typeof SolanaCriteriaTypeSOLVALUE[keyof
 
 
 export const SolanaCriteriaTypeSOLVALUE = {
-  solValue: 'solValue',
+  SOL_VALUE: 'solValue',
 } as const;
 
 export const SolValueCriterionOperator = {...CriteriaOperatorLESSTHANOREQUAL,...CriteriaOperatorGREATERTHANOREQUAL,} as const
@@ -2799,7 +2882,7 @@ export type SolanaCriteriaTypeSPLADDRESS = typeof SolanaCriteriaTypeSPLADDRESS[k
 
 
 export const SolanaCriteriaTypeSPLADDRESS = {
-  splAddress: 'splAddress',
+  SPL_ADDRESS: 'splAddress',
 } as const;
 
 export const SplAddressCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorNOTIN,} as const
@@ -2813,7 +2896,7 @@ export type SolanaCriteriaTypeSPLVALUE = typeof SolanaCriteriaTypeSPLVALUE[keyof
 
 
 export const SolanaCriteriaTypeSPLVALUE = {
-  splValue: 'splValue',
+  SPL_VALUE: 'splValue',
 } as const;
 
 export const SplValueCriterionOperator = {...CriteriaOperatorLESSTHANOREQUAL,...CriteriaOperatorGREATERTHANOREQUAL,} as const
@@ -2827,14 +2910,14 @@ export type SolanaCriteriaTypeMINTADDRESS = typeof SolanaCriteriaTypeMINTADDRESS
 
 
 export const SolanaCriteriaTypeMINTADDRESS = {
-  mintAddress: 'mintAddress',
+  MINT_ADDRESS: 'mintAddress',
 } as const;
 
 export type CriteriaOperatorEQUAL = typeof CriteriaOperatorEQUAL[keyof typeof CriteriaOperatorEQUAL];
 
 
 export const CriteriaOperatorEQUAL = {
-  '==': '==',
+  EQUAL: '==',
 } as const;
 
 export const MintAddressCriterionOperator = {...CriteriaOperatorEQUAL,...CriteriaOperatorIN,} as const
@@ -2848,7 +2931,7 @@ export type SolanaCriteriaTypeSOLDATA = typeof SolanaCriteriaTypeSOLDATA[keyof t
 
 
 export const SolanaCriteriaTypeSOLDATA = {
-  solData: 'solData',
+  SOL_DATA: 'solData',
 } as const;
 
 export interface SolDataCriterion {
@@ -2863,7 +2946,7 @@ export type SolanaCriteriaTypePROGRAMID = typeof SolanaCriteriaTypePROGRAMID[key
 
 
 export const SolanaCriteriaTypePROGRAMID = {
-  programId: 'programId',
+  PROGRAM_ID: 'programId',
 } as const;
 
 export const ProgramIdCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorNOTIN,} as const
@@ -2877,7 +2960,7 @@ export type SolanaCriteriaTypeSOLNETWORK = typeof SolanaCriteriaTypeSOLNETWORK[k
 
 
 export const SolanaCriteriaTypeSOLNETWORK = {
-  solNetwork: 'solNetwork',
+  SOL_NETWORK: 'solNetwork',
 } as const;
 
 export const SolNetworkCriterionOperator = {...CriteriaOperatorIN,...CriteriaOperatorNOTIN,} as const
@@ -2891,7 +2974,7 @@ export type SolanaCriteriaTypeSOLMESSAGE = typeof SolanaCriteriaTypeSOLMESSAGE[k
 
 
 export const SolanaCriteriaTypeSOLMESSAGE = {
-  solMessage: 'solMessage',
+  SOL_MESSAGE: 'solMessage',
 } as const;
 
 export interface SolMessageCriterion {
@@ -2906,7 +2989,7 @@ export type EntityTypePOLICYV2RULE = typeof EntityTypePOLICYV2RULE[keyof typeof 
 
 
 export const EntityTypePOLICYV2RULE = {
-  policyV2Rule: 'policyV2Rule',
+  POLICY_V2_RULE: 'policyV2Rule',
 } as const;
 
 export interface PolicyV2RuleResponse {
@@ -2927,7 +3010,7 @@ export type EntityTypePOLICYV2 = typeof EntityTypePOLICYV2[keyof typeof EntityTy
 
 
 export const EntityTypePOLICYV2 = {
-  policyV2: 'policyV2',
+  POLICY_V2: 'policyV2',
 } as const;
 
 export interface PolicyV2Response {
@@ -2991,6 +3074,10 @@ export interface PolicyV2ListQueries {
   enabled?: boolean;
   /** Filter by account ID (for account-scoped policies). */
   accountId?: string;
+  /** Only include policies that have at least one rule with an operation in this list. */
+  operation?: string[];
+  /** Exclude policies where all rules have operations in this list. */
+  operationNotIn?: string[];
 }
 
 /**
@@ -3147,14 +3234,14 @@ export type EvmDataCriterionRequestOperator = typeof EvmDataCriterionRequestOper
 
 
 export const EvmDataCriterionRequestOperator = {
-  in: 'in',
-  not_in: 'not in',
-  '<': '<',
-  '<=': '<=',
-  '>': '>',
-  '>=': '>=',
-  '==': '==',
-  match: 'match',
+  In: 'in',
+  NotIn: 'not in',
+  LessThan: '<',
+  LessThanOrEqualTo: '<=',
+  GreaterThan: '>',
+  GreaterThanOrEqualTo: '>=',
+  Equal: '==',
+  Match: 'match',
 } as const;
 
 /**
@@ -3434,8 +3521,8 @@ export type MintAddressCriterionRequestOperator = typeof MintAddressCriterionReq
 
 
 export const MintAddressCriterionRequestOperator = {
-  '==': '==',
-  in: 'in',
+  Equal: '==',
+  In: 'in',
 } as const;
 
 /**
@@ -3468,12 +3555,12 @@ export type SolDataCriterionRequestOperator = typeof SolDataCriterionRequestOper
 
 
 export const SolDataCriterionRequestOperator = {
-  in: 'in',
-  not_in: 'not in',
-  '<=': '<=',
-  '>=': '>=',
-  '==': '==',
-  match: 'match',
+  In: 'in',
+  NotIn: 'not in',
+  LessThanOrEqualTo: '<=',
+  GreaterThanOrEqualTo: '>=',
+  Equal: '==',
+  Match: 'match',
 } as const;
 
 /**
@@ -3761,13 +3848,16 @@ export interface FeeSponsorshipStrategyResponse {
   /** Whether the exchange rate is computed dynamically from cached prices.
 True when tokenContractAmount was not provided at creation time. */
   dynamicExchangeRate?: boolean;
+  /** SPL mint addresses accepted for fee payment on Solana
+charge_custom_tokens policies. */
+  splTokens?: string[];
 }
 
 export type EntityTypeFEESPONSORSHIP = typeof EntityTypeFEESPONSORSHIP[keyof typeof EntityTypeFEESPONSORSHIP];
 
 
 export const EntityTypeFEESPONSORSHIP = {
-  feeSponsorship: 'feeSponsorship',
+  FEE_SPONSORSHIP: 'feeSponsorship',
 } as const;
 
 /**
@@ -3782,6 +3872,11 @@ export interface FeeSponsorshipResponse {
    * @nullable
    */
   name: string | null;
+  /**
+   * Description or comment for the fee sponsorship.
+   * @nullable
+   */
+  description: string | null;
   /**
    * Chain ID for single-chain sponsorship.
    * @deprecated
@@ -3854,6 +3949,10 @@ export interface FeeSponsorshipStrategy {
   tokenContract?: string;
   /** Token amount for charge_custom_tokens or fixed_rate schemas. */
   tokenContractAmount?: string;
+  /** SPL mint addresses (base58) accepted as fee payment for Solana
+charge_custom_tokens policies. Solana-only; mutually exclusive with
+tokenContract / tokenContractAmount. */
+  splTokens?: string[];
 }
 
 /**
@@ -4435,10 +4534,66 @@ export interface CreateAccountRequestV2 {
   account?: string;
 }
 
+/**
+ * Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys.
+ */
+export type ExportShareResponseCustody = typeof ExportShareResponseCustody[keyof typeof ExportShareResponseCustody];
+
+
+export const ExportShareResponseCustody = {
+  Developer: 'Developer',
+  User: 'User',
+} as const;
+
+export interface ExportShareResponse {
+  id: string;
+  wallet: string;
+  accountType: string;
+  address: string;
+  ownerAddress?: string;
+  chainType: string;
+  chainId?: number;
+  createdAt: number;
+  updatedAt: number;
+  smartAccount?: SmartAccountData;
+  recoveryMethod?: string;
+  recoveryMethodDetails?: RecoveryMethodDetails;
+  /** Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys. */
+  custody: ExportShareResponseCustody;
+  share: string;
+  signerId: string;
+  userId?: string;
+}
+
 export interface DeleteAccountResponse {
   id: string;
   object: EntityTypeACCOUNT;
   deleted: boolean;
+}
+
+/**
+ * Metadata about the per-environment webhook signing secret.
+
+Never includes the raw secret. The hint is a short prefix so callers can
+identify which secret is active without seeing the full value.
+ */
+export interface WebhookSecretInfoResponse {
+  hint: string;
+  createdAt: number;
+  updatedAt: number;
+  livemode: boolean;
+}
+
+/**
+ * Response from a rotation. The raw secret is returned exactly once here and
+cannot be retrieved again — callers must capture it now. `updatedAt` is the
+timestamp at which the new secret was written.
+ */
+export interface WebhookSecretRotateResponse {
+  signingSecret: string;
+  hint: string;
+  updatedAt: number;
+  livemode: boolean;
 }
 
 export type UserProjectRole = typeof UserProjectRole[keyof typeof UserProjectRole];
@@ -4454,7 +4609,7 @@ export type EntityTypeUSER = typeof EntityTypeUSER[keyof typeof EntityTypeUSER];
 
 
 export const EntityTypeUSER = {
-  user: 'user',
+  USER: 'user',
 } as const;
 
 export interface UserProjectResponse {
@@ -4571,19 +4726,27 @@ export interface ApiKeyResponse {
   token: string;
   name: string;
   livemode: boolean;
+  /** Scopes restricting this API key's access. Empty array means full access. */
+  scopes: string[];
+  /** The raw secret key - only populated on creation/rotation for secret keys */
+  secretKey?: string;
 }
 
 export interface WebhookResponse {
   /** @nullable */
   webhook: string | null;
   livemode: boolean;
+  /** The raw webhook signing secret. Only populated on project creation —
+never returned by GET endpoints. Capture it now; use the rotate endpoint
+if you lose it. */
+  signingSecret?: string;
 }
 
 export type EntityTypePROJECT = typeof EntityTypePROJECT[keyof typeof EntityTypePROJECT];
 
 
 export const EntityTypePROJECT = {
-  project: 'project',
+  PROJECT: 'project',
 } as const;
 
 export interface ChildProjectResponse {
@@ -4613,6 +4776,7 @@ export interface ProjectResponse {
   parentProject?: string;
   childProjects?: ChildProjectListResponse;
   isV2: boolean;
+  isActive: boolean;
 }
 
 export interface ProjectListResponse {
@@ -4709,6 +4873,8 @@ export interface CreateProjectRequest {
   name: string;
   /** The private key policyfor the project. */
   pkPolicy?: PrivateKeyPolicy;
+  /** Whether to create API keys for the project. */
+  createApiKey?: boolean;
 }
 
 export interface UpdateProjectRequest {
@@ -4728,11 +4894,24 @@ export interface AllowedOriginsRequest {
   allowedOrigins: string[];
 }
 
+export interface MfaEmailChallengeResponse {
+  sent: boolean;
+}
+
+export interface MfaEmailVerifyResponse {
+  verified: boolean;
+  factorsRemoved: number;
+}
+
+export interface MfaEmailVerifyRequest {
+  code: string;
+}
+
 export type EntityTypeSMTPCONFIG = typeof EntityTypeSMTPCONFIG[keyof typeof EntityTypeSMTPCONFIG];
 
 
 export const EntityTypeSMTPCONFIG = {
-  smtpConfig: 'smtpConfig',
+  SMTP_CONFIG: 'smtpConfig',
 } as const;
 
 export interface SMTPConfigResponse {
@@ -4773,15 +4952,15 @@ export type EmailTypeResponse = typeof EmailTypeResponse[keyof typeof EmailTypeR
 
 
 export const EmailTypeResponse = {
-  emailVerification: 'emailVerification',
-  passwordReset: 'passwordReset',
+  EMAIL_VERIFICATION: 'emailVerification',
+  PASSWORD_RESET: 'passwordReset',
 } as const;
 
 export type EntityTypeEMAILSAMPLE = typeof EntityTypeEMAILSAMPLE[keyof typeof EntityTypeEMAILSAMPLE];
 
 
 export const EntityTypeEMAILSAMPLE = {
-  emailSample: 'emailSample',
+  EMAIL_SAMPLE: 'emailSample',
 } as const;
 
 export interface EmailSampleResponse {
@@ -4800,8 +4979,8 @@ export type EmailTypeRequest = typeof EmailTypeRequest[keyof typeof EmailTypeReq
 
 
 export const EmailTypeRequest = {
-  emailVerification: 'emailVerification',
-  passwordReset: 'passwordReset',
+  EMAIL_VERIFICATION: 'emailVerification',
+  PASSWORD_RESET: 'passwordReset',
 } as const;
 
 export interface CreateEmailSampleRequest {
@@ -4917,25 +5096,39 @@ export type ApiKeyType = typeof ApiKeyType[keyof typeof ApiKeyType];
 
 
 export const ApiKeyType = {
-  pk: 'pk',
-  sk: 'sk',
-  pk_shield: 'pk_shield',
-  sk_shield: 'sk_shield',
-  pk_wallet: 'pk_wallet',
+  PUBLIC_KEY: 'pk',
+  SECRET_KEY: 'sk',
+  PUBLIC_KEY_SHIELD: 'pk_shield',
+  SECRET_KEY_SHIELD: 'sk_shield',
+  BACKEND_WALLET_PUBLIC_KEY: 'pk_wallet',
 } as const;
 
 export interface CreateProjectApiKeyRequest {
   /** The type of the API key. */
   type: ApiKeyType;
+  /** Optional scopes to restrict this API key's access.
+Only applicable to secret keys (sk). Empty array or omitted means full access. */
+  scopes?: string[];
 }
 
 export interface UpdateProjectApiKeyRequest {
   /** The type of the API key. */
   type: ApiKeyType;
+  /** Optional scopes to restrict this API key's access.
+Only applicable to secret keys (sk). Empty array or omitted means full access. */
+  scopes?: string[];
   /** The API key to update. */
   uuid: string;
-  /** Whether key to use to sign webhooks. */
-  use_for_webhooks?: boolean;
+}
+
+export interface UpdateApiKeyScopesRequest {
+  /** The API key to update. */
+  uuid: string;
+  /**
+   * The scopes to set on this secret key.
+   * @minItems 1
+   */
+  scopes: string[];
 }
 
 export interface AuthorizedOriginsResponse {
@@ -5081,7 +5274,7 @@ export type Actions = typeof Actions[keyof typeof Actions];
 
 
 export const Actions = {
-  verify_email: 'verify_email',
+  ActionVerifyEmail: 'verify_email',
 } as const;
 
 export interface ActionRequiredResponse {
@@ -5184,13 +5377,13 @@ export type OAuthProvider = typeof OAuthProvider[keyof typeof OAuthProvider];
 
 
 export const OAuthProvider = {
-  google: 'google',
-  twitter: 'twitter',
-  facebook: 'facebook',
-  discord: 'discord',
-  epic_games: 'epic_games',
-  line: 'line',
-  apple: 'apple',
+  GOOGLE: 'google',
+  TWITTER: 'twitter',
+  FACEBOOK: 'facebook',
+  DISCORD: 'discord',
+  EPIC_GAMES: 'epic_games',
+  LINE: 'line',
+  APPLE: 'apple',
 } as const;
 
 /**
@@ -5238,8 +5431,8 @@ export type TokenType = typeof TokenType[keyof typeof TokenType];
 
 
 export const TokenType = {
-  idToken: 'idToken',
-  customToken: 'customToken',
+  IDTOKEN: 'idToken',
+  CUSTOMTOKEN: 'customToken',
 } as const;
 
 export interface ThirdPartyOAuthRequest {
@@ -5274,7 +5467,7 @@ export type BasicAuthProviderEMAIL = typeof BasicAuthProviderEMAIL[keyof typeof 
 
 
 export const BasicAuthProviderEMAIL = {
-  email: 'email',
+  EMAIL: 'email',
 } as const;
 
 /**
@@ -5284,11 +5477,12 @@ export type BasicAuthProvider = typeof BasicAuthProvider[keyof typeof BasicAuthP
 
 
 export const BasicAuthProvider = {
-  email: 'email',
-  wallet: 'wallet',
-  guest: 'guest',
-  web3: 'web3',
-  phone: 'phone',
+  EMAIL: 'email',
+  WALLET: 'wallet',
+  GUEST: 'guest',
+  WEB3: 'web3',
+  PHONE: 'phone',
+  TEST_ACCOUNT: 'test_account',
 } as const;
 
 /**
@@ -5333,7 +5527,7 @@ export type BasicAuthProviderGUEST = typeof BasicAuthProviderGUEST[keyof typeof 
 
 
 export const BasicAuthProviderGUEST = {
-  guest: 'guest',
+  GUEST: 'guest',
 } as const;
 
 export interface GuestAuthConfig {
@@ -5347,7 +5541,7 @@ export type BasicAuthProviderWEB3 = typeof BasicAuthProviderWEB3[keyof typeof Ba
 
 
 export const BasicAuthProviderWEB3 = {
-  web3: 'web3',
+  WEB3: 'web3',
 } as const;
 
 export interface Web3AuthConfig {
@@ -5361,14 +5555,14 @@ export type BasicAuthProviderPHONE = typeof BasicAuthProviderPHONE[keyof typeof 
 
 
 export const BasicAuthProviderPHONE = {
-  phone: 'phone',
+  PHONE: 'phone',
 } as const;
 
 export type SmsProviderTWILIO = typeof SmsProviderTWILIO[keyof typeof SmsProviderTWILIO];
 
 
 export const SmsProviderTWILIO = {
-  twilio: 'twilio',
+  TWILIO: 'twilio',
 } as const;
 
 /**
@@ -5388,7 +5582,7 @@ export type SmsProviderMESSAGEBIRD = typeof SmsProviderMESSAGEBIRD[keyof typeof 
 
 
 export const SmsProviderMESSAGEBIRD = {
-  messagebird: 'messagebird',
+  MESSAGEBIRD: 'messagebird',
 } as const;
 
 /**
@@ -5406,7 +5600,7 @@ export type SmsProviderTXTLOCAL = typeof SmsProviderTXTLOCAL[keyof typeof SmsPro
 
 
 export const SmsProviderTXTLOCAL = {
-  txtlocal: 'txtlocal',
+  TXTLOCAL: 'txtlocal',
 } as const;
 
 /**
@@ -5424,7 +5618,7 @@ export type SmsProviderVONAGE = typeof SmsProviderVONAGE[keyof typeof SmsProvide
 
 
 export const SmsProviderVONAGE = {
-  vonage: 'vonage',
+  VONAGE: 'vonage',
 } as const;
 
 /**
@@ -5444,7 +5638,7 @@ export type SmsProviderSMSAPI = typeof SmsProviderSMSAPI[keyof typeof SmsProvide
 
 
 export const SmsProviderSMSAPI = {
-  sms_api: 'sms_api',
+  SMS_API: 'sms_api',
 } as const;
 
 /**
@@ -5476,7 +5670,7 @@ export type ThirdPartyOAuthProviderSUPABASE = typeof ThirdPartyOAuthProviderSUPA
 
 
 export const ThirdPartyOAuthProviderSUPABASE = {
-  supabase: 'supabase',
+  SUPABASE: 'supabase',
 } as const;
 
 /**
@@ -5497,7 +5691,7 @@ export type ThirdPartyOAuthProviderOIDC = typeof ThirdPartyOAuthProviderOIDC[key
 
 
 export const ThirdPartyOAuthProviderOIDC = {
-  oidc: 'oidc',
+  OIDC: 'oidc',
 } as const;
 
 export interface OIDCAuthConfig {
@@ -5517,7 +5711,7 @@ export type ThirdPartyOAuthProviderACCELBYTE = typeof ThirdPartyOAuthProviderACC
 
 
 export const ThirdPartyOAuthProviderACCELBYTE = {
-  accelbyte: 'accelbyte',
+  ACCELBYTE: 'accelbyte',
 } as const;
 
 /**
@@ -5540,7 +5734,7 @@ export type OAuthProviderGOOGLE = typeof OAuthProviderGOOGLE[keyof typeof OAuthP
 
 
 export const OAuthProviderGOOGLE = {
-  google: 'google',
+  GOOGLE: 'google',
 } as const;
 
 /**
@@ -5561,7 +5755,7 @@ export type OAuthProviderTWITTER = typeof OAuthProviderTWITTER[keyof typeof OAut
 
 
 export const OAuthProviderTWITTER = {
-  twitter: 'twitter',
+  TWITTER: 'twitter',
 } as const;
 
 /**
@@ -5582,7 +5776,7 @@ export type OAuthProviderFACEBOOK = typeof OAuthProviderFACEBOOK[keyof typeof OA
 
 
 export const OAuthProviderFACEBOOK = {
-  facebook: 'facebook',
+  FACEBOOK: 'facebook',
 } as const;
 
 export interface FacebookOAuthConfig {
@@ -5600,7 +5794,7 @@ export type OAuthProviderAPPLE = typeof OAuthProviderAPPLE[keyof typeof OAuthPro
 
 
 export const OAuthProviderAPPLE = {
-  apple: 'apple',
+  APPLE: 'apple',
 } as const;
 
 export interface AppleOAuthConfig {
@@ -5618,7 +5812,7 @@ export type OAuthProviderLINE = typeof OAuthProviderLINE[keyof typeof OAuthProvi
 
 
 export const OAuthProviderLINE = {
-  line: 'line',
+  LINE: 'line',
 } as const;
 
 export interface LineOAuthConfig {
@@ -5636,7 +5830,7 @@ export type OAuthProviderDISCORD = typeof OAuthProviderDISCORD[keyof typeof OAut
 
 
 export const OAuthProviderDISCORD = {
-  discord: 'discord',
+  DISCORD: 'discord',
 } as const;
 
 export interface DiscordOAuthConfig {
@@ -5654,7 +5848,7 @@ export type OAuthProviderEPICGAMES = typeof OAuthProviderEPICGAMES[keyof typeof 
 
 
 export const OAuthProviderEPICGAMES = {
-  epic_games: 'epic_games',
+  EPIC_GAMES: 'epic_games',
 } as const;
 
 export interface EpicGamesOAuthConfig {
@@ -5672,7 +5866,7 @@ export type ThirdPartyOAuthProviderPLAYFAB = typeof ThirdPartyOAuthProviderPLAYF
 
 
 export const ThirdPartyOAuthProviderPLAYFAB = {
-  playfab: 'playfab',
+  PLAYFAB: 'playfab',
 } as const;
 
 /**
@@ -5691,7 +5885,7 @@ export type ThirdPartyOAuthProviderFIREBASE = typeof ThirdPartyOAuthProviderFIRE
 
 
 export const ThirdPartyOAuthProviderFIREBASE = {
-  firebase: 'firebase',
+  FIREBASE: 'firebase',
 } as const;
 
 /**
@@ -5710,7 +5904,7 @@ export type ThirdPartyOAuthProviderCUSTOM = typeof ThirdPartyOAuthProviderCUSTOM
 
 
 export const ThirdPartyOAuthProviderCUSTOM = {
-  custom: 'custom',
+  CUSTOM: 'custom',
 } as const;
 
 export interface CustomAuthConfig {
@@ -5728,7 +5922,7 @@ export type ThirdPartyOAuthProviderLOOTLOCKER = typeof ThirdPartyOAuthProviderLO
 
 
 export const ThirdPartyOAuthProviderLOOTLOCKER = {
-  lootlocker: 'lootlocker',
+  LOOTLOCKER: 'lootlocker',
 } as const;
 
 /**
@@ -5745,7 +5939,7 @@ export type ThirdPartyOAuthProviderBETTERAUTH = typeof ThirdPartyOAuthProviderBE
 
 
 export const ThirdPartyOAuthProviderBETTERAUTH = {
-  'better-auth': 'better-auth',
+  BETTER_AUTH: 'better-auth',
 } as const;
 
 /**
@@ -5760,7 +5954,31 @@ export interface BetterAuthConfig {
   baseUrl: string;
 }
 
-export type AuthConfig = EmailAuthConfig | GuestAuthConfig | Web3AuthConfig | PhoneAuthConfig | SupabaseAuthConfig | OIDCAuthConfig | AccelbyteOAuthConfig | GoogleOAuthConfig | TwitterOAuthConfig | FacebookOAuthConfig | AppleOAuthConfig | LineOAuthConfig | DiscordOAuthConfig | EpicGamesOAuthConfig | PlayFabOAuthConfig | FirebaseOAuthConfig | CustomAuthConfig | LootLockerOAuthConfig | BetterAuthConfig;
+export type BasicAuthProviderTESTACCOUNT = typeof BasicAuthProviderTESTACCOUNT[keyof typeof BasicAuthProviderTESTACCOUNT];
+
+
+export const BasicAuthProviderTESTACCOUNT = {
+  TEST_ACCOUNT: 'test_account',
+} as const;
+
+/**
+ * Test account configuration for automated testing and App Store review flows.
+Works on both livemode and sandbox environments with V2 auth enabled.
+ */
+export interface TestAccountConfig {
+  /** Enable OAuth provider. */
+  enabled: boolean;
+  /** OAuth provider type */
+  provider: BasicAuthProviderTESTACCOUNT;
+  /** Auto-generated 4-char hex suffix for test-XXXX@openfort.xyz. Server-generated, read-only. */
+  emailSuffix?: string;
+  /** Auto-generated 4-digit phone suffix for +1 555 555 XXXX. Server-generated, read-only. */
+  phoneSuffix?: string;
+  /** Auto-generated 6-digit OTP code. Server-generated, read-only. */
+  otpCode?: string;
+}
+
+export type AuthConfig = EmailAuthConfig | GuestAuthConfig | Web3AuthConfig | PhoneAuthConfig | SupabaseAuthConfig | OIDCAuthConfig | AccelbyteOAuthConfig | GoogleOAuthConfig | TwitterOAuthConfig | FacebookOAuthConfig | AppleOAuthConfig | LineOAuthConfig | DiscordOAuthConfig | EpicGamesOAuthConfig | PlayFabOAuthConfig | FirebaseOAuthConfig | CustomAuthConfig | LootLockerOAuthConfig | BetterAuthConfig | TestAccountConfig;
 
 /**
  * Response for the OAuth config list method.
@@ -5796,12 +6014,12 @@ export type AuthMigrationStatus = typeof AuthMigrationStatus[keyof typeof AuthMi
 
 
 export const AuthMigrationStatus = {
-  created: 'created',
-  running: 'running',
-  paused: 'paused',
-  completed: 'completed',
-  failed: 'failed',
-  canceled: 'canceled',
+  CREATED: 'created',
+  RUNNING: 'running',
+  PAUSED: 'paused',
+  COMPLETED: 'completed',
+  FAILED: 'failed',
+  CANCELED: 'canceled',
 } as const;
 
 /**
@@ -5906,9 +6124,9 @@ export type AuthenticationType = typeof AuthenticationType[keyof typeof Authenti
 
 
 export const AuthenticationType = {
-  oauth: 'oauth',
-  basic: 'basic',
-  third_party: 'third_party',
+  OAUTH: 'oauth',
+  BASIC: 'basic',
+  THIRD_PARTY: 'third_party',
 } as const;
 
 export interface AuthProviderWithTypeResponse {
@@ -6089,6 +6307,14 @@ requestID?: string;
 
 export type TestTrigger200 = {
   sent: boolean;
+};
+
+export type GetSolanaTransactionStatusParams = {
+/**
+ * Internal Solana transaction ID (starts with `sol_`).
+ */
+id?: string;
+externalId?: string;
 };
 
 export type GetDeveloperAccountsParams = {
@@ -6514,6 +6740,14 @@ enabled?: boolean;
  * Filter by account ID (for account-scoped policies).
  */
 accountId?: string;
+/**
+ * Only include policies that have at least one rule with an operation in this list.
+ */
+operation?: string[];
+/**
+ * Exclude policies where all rules have operations in this list.
+ */
+operationNotIn?: string[];
 };
 
 export type ListPoliciesScopeItem = typeof ListPoliciesScopeItem[keyof typeof ListPoliciesScopeItem];

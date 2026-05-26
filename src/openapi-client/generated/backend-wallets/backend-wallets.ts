@@ -167,6 +167,9 @@ and immediately becomes unusable (no grace period).
 Uses provided-key authentication: the request must include a walletAuthToken
 JWT signed by the private key corresponding to the NEW publicKey being registered.
 This proves possession of the new private key without transmitting it.
+
+Requires an AAL2 session (MFA step-up). Users must enroll MFA and
+complete step-up authentication before calling this endpoint.
  * @summary Rotate wallet secret.
  */
 export const rotateWalletSecret = (

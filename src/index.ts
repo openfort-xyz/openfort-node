@@ -42,6 +42,19 @@ export interface OpenfortOptions {
 }
 
 /**
+ * Input for pregenerating a single embedded account for a user
+ * via `accounts.evm.embedded.pregenerate` / `accounts.solana.embedded.pregenerate`.
+ *
+ * For multi-account pregeneration in a single call (e.g. EVM + SVM), use the
+ * lower-level `pregenerateUserV2` from the generated client and pass an `accounts` array.
+ */
+export type EmbeddedPregenerateInput = Pick<
+  api.PregenerateUserRequestV2,
+  'email' | 'thirdPartyUserId' | 'thirdPartyProvider'
+> &
+  Omit<api.PregenerateAccountConfig, 'chainType'>
+
+/**
  * Configuration for pre-generating embedded accounts with Shield
  */
 export interface ShieldConfiguration {
@@ -245,9 +258,9 @@ class Openfort {
         embedded: {
           /** Pregenerate embedded account */
           pregenerate: (
-            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            req: EmbeddedPregenerateInput,
             shieldConfig: ShieldConfiguration,
-          ) => this.pregenerateUser({ ...req, chainType: 'EVM' }, shieldConfig),
+          ) => this.pregenerateUser(req, 'EVM', shieldConfig),
           /** List embedded accounts */
           list: (
             params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
@@ -287,9 +300,9 @@ class Openfort {
         embedded: {
           /** Pregenerate embedded account */
           pregenerate: (
-            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            req: EmbeddedPregenerateInput,
             shieldConfig: ShieldConfiguration,
-          ) => this.pregenerateUser({ ...req, chainType: 'SVM' }, shieldConfig),
+          ) => this.pregenerateUser(req, 'SVM', shieldConfig),
           /** List embedded accounts */
           list: (
             params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
@@ -672,26 +685,43 @@ class Openfort {
   }
 
   /**
-   * Pre-generate a user with an embedded account (V2).
+   * Pre-generate a user with a single embedded account (V2) on the given chain type.
    * If Shield pre-registration fails, the created user will be deleted.
    * @internal
    */
   private async pregenerateUser(
-    req: api.PregenerateUserRequestV2,
+    req: EmbeddedPregenerateInput,
+    chainType: api.PregenerateAccountConfigChainType,
     shieldConfig: ShieldConfiguration,
   ): Promise<api.AccountV2Response> {
-    const response = await api.pregenerateUserV2(req)
+    const {
+      email,
+      thirdPartyUserId,
+      thirdPartyProvider,
+      accountType,
+      chainId,
+      implementationType,
+    } = req
+
+    const response = await api.pregenerateUserV2({
+      email,
+      thirdPartyUserId,
+      thirdPartyProvider,
+      accounts: [{ chainType, accountType, chainId, implementationType }],
+    })
+
+    const [account] = response.accounts
 
     try {
       await this.preRegisterWithShield(
-        response.recoveryShare,
+        account.recoveryShare,
         response.user,
-        req.thirdPartyUserId,
+        thirdPartyUserId,
         shieldConfig,
       )
 
       // Return without recoveryShare (it's been stored in Shield)
-      const { recoveryShare: _, ...accountResponse } = response
+      const { recoveryShare: _, ...accountResponse } = account
       return accountResponse
     } catch (error) {
       // If anything fails after user creation, delete the created user

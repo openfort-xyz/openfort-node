@@ -238,19 +238,26 @@
         "type": "apiKey",
         "in": "cookie",
         "name": "apiKeyCookie",
-        "description": "API Key authentication via cookie"
+        "description": "Session cookie authentication. Set automatically by the browser after sign-in."
       },
-      "bearerAuth": {
+      "auth_token": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Bearer token authentication"
+        "description": "Auth session token. Use the session token received from sign-in/sign-up responses as the Bearer token."
+      },
+      "projectKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-project-key",
+        "description": "Publishable key to identify the project. Format: pk_test_<uuid> (sandbox) or pk_live_<uuid> (live)."
       }
     }
   },
   "security": [
     {
       "apiKeyCookie": [],
-      "bearerAuth": []
+      "auth_token": [],
+      "projectKey": []
     }
   ],
   "servers": [
@@ -267,7 +274,8 @@
         "operationId": "socialSignIn",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -524,19 +532,11 @@
         "summary": "Get the current session.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [
-          {
-            "name": "x-project-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Project public key (format: pk_{mode}_{uuid}). Required for authentication but typically provided via middleware."
-          },
           {
             "name": "disableCookieCache",
             "in": "query",
@@ -669,7 +669,8 @@
         "summary": "Sign out.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -801,7 +802,8 @@
         "summary": "Sign up with email and password.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -980,7 +982,8 @@
         "summary": "Sign in with email and password.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -1183,7 +1186,8 @@
         "summary": "Forget password.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -1330,7 +1334,8 @@
         "summary": "Reset password.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -1469,7 +1474,8 @@
         "summary": "Verify email.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [
@@ -1654,7 +1660,8 @@
         "summary": "Send verification email.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -1802,7 +1809,8 @@
         "tags": ["auth v2"],
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -1969,7 +1977,8 @@
         "summary": "Change password.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -2123,7 +2132,8 @@
         "summary": "Reset password callback.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [
@@ -2263,7 +2273,8 @@
         "summary": "Request password reset.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -2410,7 +2421,8 @@
         "summary": "List sessions.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -2530,7 +2542,8 @@
         "summary": "Revoke session.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -2670,7 +2683,8 @@
         "summary": "Revoke sessions.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -2804,7 +2818,8 @@
         "summary": "Revoke other sessions.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -2938,7 +2953,8 @@
         "summary": "Link social account.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -3141,7 +3157,8 @@
         "summary": "List lined accounts.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -3299,7 +3316,8 @@
         "summary": "Unlink account.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -3436,7 +3454,8 @@
         "summary": "Refresh access token.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -3589,7 +3608,8 @@
         "summary": "Get access token.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -3742,7 +3762,8 @@
         "summary": "Get account info.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -3906,7 +3927,8 @@
         "summary": "Anonymous sign in.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -4033,7 +4055,8 @@
         "summary": "Sign in with phone.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -4173,7 +4196,8 @@
         "summary": "Send OTP to phone number.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -4312,7 +4336,8 @@
         "summary": "Verify phone OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -4518,7 +4543,8 @@
         "summary": "Reset password reset with phone(forget password flow).",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -4660,7 +4686,8 @@
         "summary": "Request password reset with phone.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -4801,7 +4828,8 @@
         "summary": "Reset password with phone OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -4943,7 +4971,8 @@
         "summary": "Request email verification with OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -5087,7 +5116,8 @@
         "summary": "Check email OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -5239,7 +5269,8 @@
         "summary": "Verify email with OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -5393,7 +5424,8 @@
         "summary": "Sign in with email OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -5541,7 +5573,8 @@
         "summary": "Request password reset with email OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -5681,7 +5714,8 @@
         "summary": "Reset password with email OTP.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -5823,7 +5857,8 @@
         "summary": "Initialize SIWE login.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -5929,7 +5964,8 @@
         "summary": "Login with SIWE.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -6079,7 +6115,8 @@
         "description": "Generates a cryptographically secure nonce for creating a SIWE message to link a wallet to the current authenticated user. Requires active session.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -6185,7 +6222,8 @@
         "description": "Verifies the SIWE signature and links the wallet to the currently authenticated user. Requires active session.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -6360,7 +6398,8 @@
         "description": "Get all SIWE wallets linked to the authenticated user with full wallet metadata including primary status and chain information. Requires active session.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
@@ -6454,7 +6493,8 @@
         "description": "Remove a linked wallet from the authenticated user account. If the wallet being unlinked is the primary wallet, another wallet will be automatically promoted to primary. Requires active session.",
         "security": [
           {
-            "bearerAuth": []
+            "auth_token": [],
+            "projectKey": []
           }
         ],
         "parameters": [],
