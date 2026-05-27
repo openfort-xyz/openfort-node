@@ -473,6 +473,23 @@ export interface TransactionResponseLog {
   orphaned?: boolean;
 }
 
+export interface TransactionErrorExplanation {
+  /** A human-readable description of what caused the error. */
+  cause: string;
+  /** A human-readable suggestion for how to resolve the error. */
+  solution: string;
+}
+
+export interface TransactionError {
+  /** The error reason string returned by the bundler or execution environment. */
+  reason: string;
+  /** The decoded error name from the contract revert, if available. */
+  name?: string;
+  /** Detailed explanation of the error cause and suggested solution.
+Present only for known Account Abstraction error codes (AA10–AA99). */
+  explanation?: TransactionErrorExplanation;
+}
+
 export interface ResponseResponse {
   /** The unix timestamp in seconds when the transactionIntent was created. */
   createdAt: number;
@@ -494,8 +511,10 @@ export interface ResponseResponse {
   logs?: TransactionResponseLog[];
   /** The address of the contract of this log. */
   to?: string;
-  /** The error of the transaction of this log. */
-  error?: unknown;
+  /** The error of the transaction, if it failed or was rejected.
+Contains the error reason and, for known Account Abstraction errors (AA10–AA99),
+an explanation with cause and solution. */
+  error?: TransactionError;
 }
 
 export interface Interaction {
@@ -579,6 +598,8 @@ export interface TransactionIntentResponse {
   /** @deprecated */
   userOperation?: unknown;
   response?: ResponseResponse;
+  /** The actual transaction cost in USD, available after on-chain confirmation. */
+  finalCost?: string;
   interactions?: Interaction[];
   nextAction?: NextActionResponse;
   /** The policy ID (starts with pol_). */
@@ -728,6 +749,9 @@ export const APITopic = {
   userupdated: 'user.updated',
   userdeleted: 'user.deleted',
   accountcreated: 'account.created',
+  solana_transactionbroadcast: 'solana_transaction.broadcast',
+  solana_transactionsuccessful: 'solana_transaction.successful',
+  solana_transactionfailed: 'solana_transaction.failed',
 } as const;
 
 export type APITriggerType = typeof APITriggerType[keyof typeof APITriggerType];
@@ -891,6 +915,50 @@ export interface TriggerDeleteResponse {
   deleted: boolean;
 }
 
+/**
+ * Lifecycle status of a Solana transaction.
+ */
+export type SolanaTransactionStatus = typeof SolanaTransactionStatus[keyof typeof SolanaTransactionStatus];
+
+
+export const SolanaTransactionStatus = {
+  sent: 'sent',
+  confirmed: 'confirmed',
+  expired: 'expired',
+  failed: 'failed',
+} as const;
+
+/**
+ * Solana transaction status response — exposes the on-chain transaction signature
+(hash) and the lifecycle status of the underlying sponsorship row.
+ */
+export interface SolanaTransactionStatusResponse {
+  /** Internal Solana transaction ID (starts with `sol_`). */
+  id: string;
+  /**
+   * Caller-supplied externalId, if one was provided when the transaction was signed.
+   * @nullable
+   */
+  externalId: string | null;
+  /**
+   * Base58-encoded Solana transaction signature (a.k.a. transaction hash).
+Null only for `signTransaction` transactions that were never broadcast.
+   * @nullable
+   */
+  txSignature: string | null;
+  /** Lifecycle status of the transaction:
+- sent: signed by Kora, awaiting on-chain confirmation
+- confirmed: confirmed on-chain
+- expired: blockhash expired or never broadcast
+- failed: landed on-chain but execution failed (see errorMessage) */
+  status: SolanaTransactionStatus;
+  /**
+   * On-chain error message when status is FAILED.
+   * @nullable
+   */
+  errorMessage: string | null;
+}
+
 export interface TransactionIntent {
   id: string;
   object: EntityTypeTRANSACTIONINTENT;
@@ -910,6 +978,8 @@ export interface TransactionIntent {
   /** @deprecated */
   userOperation?: unknown;
   response?: ResponseResponse;
+  /** The actual transaction cost in USD, available after on-chain confirmation. */
+  finalCost?: string;
   interactions?: Interaction[];
   nextAction?: NextActionResponse;
   /** The policy ID (starts with pol_). */
@@ -1536,18 +1606,15 @@ export interface MonthRange {
 }
 
 export interface GasReportTransactionIntents {
-  id: string;
-  gasFee: string;
-  gasPrice: string;
-  gasUsed: string;
-  gasFeeInUSD: string;
+  totalTransactionFee: string;
+  totalTransactionFeeInUSD: string;
+  transactionCount: number;
 }
 
 export interface GasReport {
   period: MonthRange;
   averageTransactionFee: string;
   totalTransactionFeeInCustomTokens: string;
-  totalTransactionFee: string;
   totalTransactionFeeInUSD: string;
   /** @deprecated */
   transactionIntents: GasReportTransactionIntents[];
@@ -2443,15 +2510,15 @@ export interface RecoveryMethodDetails {
 /**
  * Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys.
  */
-export type PregenerateAccountResponseCustody = typeof PregenerateAccountResponseCustody[keyof typeof PregenerateAccountResponseCustody];
+export type PregenerateAccountEntryCustody = typeof PregenerateAccountEntryCustody[keyof typeof PregenerateAccountEntryCustody];
 
 
-export const PregenerateAccountResponseCustody = {
+export const PregenerateAccountEntryCustody = {
   Developer: 'Developer',
   User: 'User',
 } as const;
 
-export interface PregenerateAccountResponse {
+export interface PregenerateAccountEntry {
   id: string;
   wallet: string;
   accountType: string;
@@ -2465,12 +2532,23 @@ export interface PregenerateAccountResponse {
   recoveryMethod?: string;
   recoveryMethodDetails?: RecoveryMethodDetails;
   /** Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys. */
-  custody: PregenerateAccountResponseCustody;
-  /** The recovery share for the user's embedded signer.
+  custody: PregenerateAccountEntryCustody;
+  /** The recovery share for this embedded account's signer.
 This should be stored securely and provided to the user for account recovery. */
   recoveryShare: string;
-  /** User uuid */
+  /** The signer UUID (starts with `sig_`) backing this embedded account.
+Use this value as the `reference` when storing the recovery share with
+Shield, so subsequent reads of the account can resolve the recovery
+method via the signer-reference lookup. */
+  signer: string;
+}
+
+export interface PregenerateUserResponseV2 {
+  /** User uuid (starts with `usr_`). */
   user: string;
+  /** The embedded accounts that were pregenerated for this user,
+in the same order as the `accounts` array in the request. */
+  accounts: PregenerateAccountEntry[];
 }
 
 /**
@@ -2494,10 +2572,10 @@ export const ThirdPartyOAuthProvider = {
  * The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
 Defaults to "Smart Account".
  */
-export type PregenerateUserRequestV2AccountType = typeof PregenerateUserRequestV2AccountType[keyof typeof PregenerateUserRequestV2AccountType];
+export type PregenerateAccountConfigAccountType = typeof PregenerateAccountConfigAccountType[keyof typeof PregenerateAccountConfigAccountType];
 
 
-export const PregenerateUserRequestV2AccountType = {
+export const PregenerateAccountConfigAccountType = {
   Externally_Owned_Account: 'Externally Owned Account',
   Smart_Account: 'Smart Account',
   Delegated_Account: 'Delegated Account',
@@ -2506,13 +2584,27 @@ export const PregenerateUserRequestV2AccountType = {
 /**
  * The chain type. "EVM" or "SVM". Defaults to "EVM".
  */
-export type PregenerateUserRequestV2ChainType = typeof PregenerateUserRequestV2ChainType[keyof typeof PregenerateUserRequestV2ChainType];
+export type PregenerateAccountConfigChainType = typeof PregenerateAccountConfigChainType[keyof typeof PregenerateAccountConfigChainType];
 
 
-export const PregenerateUserRequestV2ChainType = {
+export const PregenerateAccountConfigChainType = {
   EVM: 'EVM',
   SVM: 'SVM',
 } as const;
+
+export interface PregenerateAccountConfig {
+  /** The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
+Defaults to "Smart Account". */
+  accountType?: PregenerateAccountConfigAccountType;
+  /** The chain type. "EVM" or "SVM". Defaults to "EVM". */
+  chainType?: PregenerateAccountConfigChainType;
+  /** The chain ID. Required for Smart Account and Delegated Account types.
+Must be a [supported chain](/development/chains). */
+  chainId?: number;
+  /** The implementation type for Smart Account or Delegated Account (e.g. Calibur, UpgradeableV6).
+Required for Smart Account and Delegated Account types. */
+  implementationType?: string;
+}
 
 export interface PregenerateUserRequestV2 {
   /** The email address of the user to pregenerate.
@@ -2523,17 +2615,13 @@ Required if email is not provided. */
   thirdPartyUserId?: string;
   /** The third-party auth provider. Required when thirdPartyUserId is provided. */
   thirdPartyProvider?: ThirdPartyOAuthProvider;
-  /** The type of account to pregenerate. "Externally Owned Account", "Smart Account" or "Delegated Account".
-Defaults to "Smart Account". */
-  accountType?: PregenerateUserRequestV2AccountType;
-  /** The chain type. "EVM" or "SVM". Defaults to "EVM". */
-  chainType?: PregenerateUserRequestV2ChainType;
-  /** The chain ID. Required for Smart Account and Delegated Account types.
-Must be a [supported chain](/development/chains). */
-  chainId?: number;
-  /** The implementation type for Smart Account or Delegated Account (e.g. Calibur, UpgradeableV6).
-Required for Smart Account and Delegated Account types. */
-  implementationType?: string;
+  /**
+   * One or more embedded accounts to pregenerate for the user.
+Each entry produces its own key material and recovery share.
+Use this to pregenerate accounts on different chain types (e.g. EVM and SVM) in a single call.
+   * @minItems 1
+   */
+  accounts: PregenerateAccountConfig[];
 }
 
 export type PolicyV2Scope = typeof PolicyV2Scope[keyof typeof PolicyV2Scope];
@@ -2991,6 +3079,10 @@ export interface PolicyV2ListQueries {
   enabled?: boolean;
   /** Filter by account ID (for account-scoped policies). */
   accountId?: string;
+  /** Only include policies that have at least one rule with an operation in this list. */
+  operation?: string[];
+  /** Exclude policies where all rules have operations in this list. */
+  operationNotIn?: string[];
 }
 
 /**
@@ -3761,6 +3853,9 @@ export interface FeeSponsorshipStrategyResponse {
   /** Whether the exchange rate is computed dynamically from cached prices.
 True when tokenContractAmount was not provided at creation time. */
   dynamicExchangeRate?: boolean;
+  /** SPL mint addresses accepted for fee payment on Solana
+charge_custom_tokens policies. */
+  splTokens?: string[];
 }
 
 export type EntityTypeFEESPONSORSHIP = typeof EntityTypeFEESPONSORSHIP[keyof typeof EntityTypeFEESPONSORSHIP];
@@ -3782,6 +3877,11 @@ export interface FeeSponsorshipResponse {
    * @nullable
    */
   name: string | null;
+  /**
+   * Description or comment for the fee sponsorship.
+   * @nullable
+   */
+  description: string | null;
   /**
    * Chain ID for single-chain sponsorship.
    * @deprecated
@@ -3854,6 +3954,10 @@ export interface FeeSponsorshipStrategy {
   tokenContract?: string;
   /** Token amount for charge_custom_tokens or fixed_rate schemas. */
   tokenContractAmount?: string;
+  /** SPL mint addresses (base58) accepted as fee payment for Solana
+charge_custom_tokens policies. Solana-only; mutually exclusive with
+tokenContract / tokenContractAmount. */
+  splTokens?: string[];
 }
 
 /**
@@ -4435,10 +4539,66 @@ export interface CreateAccountRequestV2 {
   account?: string;
 }
 
+/**
+ * Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys.
+ */
+export type ExportShareResponseCustody = typeof ExportShareResponseCustody[keyof typeof ExportShareResponseCustody];
+
+
+export const ExportShareResponseCustody = {
+  Developer: 'Developer',
+  User: 'User',
+} as const;
+
+export interface ExportShareResponse {
+  id: string;
+  wallet: string;
+  accountType: string;
+  address: string;
+  ownerAddress?: string;
+  chainType: string;
+  chainId?: number;
+  createdAt: number;
+  updatedAt: number;
+  smartAccount?: SmartAccountData;
+  recoveryMethod?: string;
+  recoveryMethodDetails?: RecoveryMethodDetails;
+  /** Indicates key custody: "Developer" for TEE managed keys, "User" for user-managed keys. */
+  custody: ExportShareResponseCustody;
+  share: string;
+  signerId: string;
+  userId?: string;
+}
+
 export interface DeleteAccountResponse {
   id: string;
   object: EntityTypeACCOUNT;
   deleted: boolean;
+}
+
+/**
+ * Metadata about the per-environment webhook signing secret.
+
+Never includes the raw secret. The hint is a short prefix so callers can
+identify which secret is active without seeing the full value.
+ */
+export interface WebhookSecretInfoResponse {
+  hint: string;
+  createdAt: number;
+  updatedAt: number;
+  livemode: boolean;
+}
+
+/**
+ * Response from a rotation. The raw secret is returned exactly once here and
+cannot be retrieved again — callers must capture it now. `updatedAt` is the
+timestamp at which the new secret was written.
+ */
+export interface WebhookSecretRotateResponse {
+  signingSecret: string;
+  hint: string;
+  updatedAt: number;
+  livemode: boolean;
 }
 
 export type UserProjectRole = typeof UserProjectRole[keyof typeof UserProjectRole];
@@ -4571,12 +4731,20 @@ export interface ApiKeyResponse {
   token: string;
   name: string;
   livemode: boolean;
+  /** Scopes restricting this API key's access. Empty array means full access. */
+  scopes: string[];
+  /** The raw secret key - only populated on creation/rotation for secret keys */
+  secretKey?: string;
 }
 
 export interface WebhookResponse {
   /** @nullable */
   webhook: string | null;
   livemode: boolean;
+  /** The raw webhook signing secret. Only populated on project creation —
+never returned by GET endpoints. Capture it now; use the rotate endpoint
+if you lose it. */
+  signingSecret?: string;
 }
 
 export type EntityTypePROJECT = typeof EntityTypePROJECT[keyof typeof EntityTypePROJECT];
@@ -4613,6 +4781,7 @@ export interface ProjectResponse {
   parentProject?: string;
   childProjects?: ChildProjectListResponse;
   isV2: boolean;
+  isActive: boolean;
 }
 
 export interface ProjectListResponse {
@@ -4709,6 +4878,8 @@ export interface CreateProjectRequest {
   name: string;
   /** The private key policyfor the project. */
   pkPolicy?: PrivateKeyPolicy;
+  /** Whether to create API keys for the project. */
+  createApiKey?: boolean;
 }
 
 export interface UpdateProjectRequest {
@@ -4726,6 +4897,19 @@ export interface AllowedOriginsResponse {
 
 export interface AllowedOriginsRequest {
   allowedOrigins: string[];
+}
+
+export interface MfaEmailChallengeResponse {
+  sent: boolean;
+}
+
+export interface MfaEmailVerifyResponse {
+  verified: boolean;
+  factorsRemoved: number;
+}
+
+export interface MfaEmailVerifyRequest {
+  code: string;
 }
 
 export type EntityTypeSMTPCONFIG = typeof EntityTypeSMTPCONFIG[keyof typeof EntityTypeSMTPCONFIG];
@@ -4927,15 +5111,29 @@ export const ApiKeyType = {
 export interface CreateProjectApiKeyRequest {
   /** The type of the API key. */
   type: ApiKeyType;
+  /** Optional scopes to restrict this API key's access.
+Only applicable to secret keys (sk). Empty array or omitted means full access. */
+  scopes?: string[];
 }
 
 export interface UpdateProjectApiKeyRequest {
   /** The type of the API key. */
   type: ApiKeyType;
+  /** Optional scopes to restrict this API key's access.
+Only applicable to secret keys (sk). Empty array or omitted means full access. */
+  scopes?: string[];
   /** The API key to update. */
   uuid: string;
-  /** Whether key to use to sign webhooks. */
-  use_for_webhooks?: boolean;
+}
+
+export interface UpdateApiKeyScopesRequest {
+  /** The API key to update. */
+  uuid: string;
+  /**
+   * The scopes to set on this secret key.
+   * @minItems 1
+   */
+  scopes: string[];
 }
 
 export interface AuthorizedOriginsResponse {
@@ -5289,6 +5487,7 @@ export const BasicAuthProvider = {
   guest: 'guest',
   web3: 'web3',
   phone: 'phone',
+  test_account: 'test_account',
 } as const;
 
 /**
@@ -5760,7 +5959,31 @@ export interface BetterAuthConfig {
   baseUrl: string;
 }
 
-export type AuthConfig = EmailAuthConfig | GuestAuthConfig | Web3AuthConfig | PhoneAuthConfig | SupabaseAuthConfig | OIDCAuthConfig | AccelbyteOAuthConfig | GoogleOAuthConfig | TwitterOAuthConfig | FacebookOAuthConfig | AppleOAuthConfig | LineOAuthConfig | DiscordOAuthConfig | EpicGamesOAuthConfig | PlayFabOAuthConfig | FirebaseOAuthConfig | CustomAuthConfig | LootLockerOAuthConfig | BetterAuthConfig;
+export type BasicAuthProviderTESTACCOUNT = typeof BasicAuthProviderTESTACCOUNT[keyof typeof BasicAuthProviderTESTACCOUNT];
+
+
+export const BasicAuthProviderTESTACCOUNT = {
+  test_account: 'test_account',
+} as const;
+
+/**
+ * Test account configuration for automated testing and App Store review flows.
+Works on both livemode and sandbox environments with V2 auth enabled.
+ */
+export interface TestAccountConfig {
+  /** Enable OAuth provider. */
+  enabled: boolean;
+  /** OAuth provider type */
+  provider: BasicAuthProviderTESTACCOUNT;
+  /** Auto-generated 4-char hex suffix for test-XXXX@openfort.xyz. Server-generated, read-only. */
+  emailSuffix?: string;
+  /** Auto-generated 4-digit phone suffix for +1 555 555 XXXX. Server-generated, read-only. */
+  phoneSuffix?: string;
+  /** Auto-generated 6-digit OTP code. Server-generated, read-only. */
+  otpCode?: string;
+}
+
+export type AuthConfig = EmailAuthConfig | GuestAuthConfig | Web3AuthConfig | PhoneAuthConfig | SupabaseAuthConfig | OIDCAuthConfig | AccelbyteOAuthConfig | GoogleOAuthConfig | TwitterOAuthConfig | FacebookOAuthConfig | AppleOAuthConfig | LineOAuthConfig | DiscordOAuthConfig | EpicGamesOAuthConfig | PlayFabOAuthConfig | FirebaseOAuthConfig | CustomAuthConfig | LootLockerOAuthConfig | BetterAuthConfig | TestAccountConfig;
 
 /**
  * Response for the OAuth config list method.
@@ -6089,6 +6312,14 @@ requestID?: string;
 
 export type TestTrigger200 = {
   sent: boolean;
+};
+
+export type GetSolanaTransactionStatusParams = {
+/**
+ * Internal Solana transaction ID (starts with `sol_`).
+ */
+id?: string;
+externalId?: string;
 };
 
 export type GetDeveloperAccountsParams = {
@@ -6514,6 +6745,14 @@ enabled?: boolean;
  * Filter by account ID (for account-scoped policies).
  */
 accountId?: string;
+/**
+ * Only include policies that have at least one rule with an operation in this list.
+ */
+operation?: string[];
+/**
+ * Exclude policies where all rules have operations in this list.
+ */
+operationNotIn?: string[];
 };
 
 export type ListPoliciesScopeItem = typeof ListPoliciesScopeItem[keyof typeof ListPoliciesScopeItem];

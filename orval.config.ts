@@ -4,6 +4,9 @@ export default defineConfig({
   openfort: {
     input: {
       target: './openapi.json',
+      override: {
+        transformer: './strip-enum-varnames.cjs',
+      },
     },
     output: {
       clean: true,
@@ -22,6 +25,9 @@ export default defineConfig({
   openfortAuth: {
     input: {
       target: './openapi-auth.json',
+      override: {
+        transformer: './strip-enum-varnames.cjs',
+      },
     },
     output: {
       clean: false,

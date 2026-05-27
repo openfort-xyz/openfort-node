@@ -10,6 +10,7 @@ import type {
   BaseEntityListResponseAccountV2Response,
   CreateAccountRequestV2,
   DeleteAccountResponse,
+  ExportShareResponse,
   GetAccountsV2Params,
   GetSignerIdByAddressParams,
   SignerIdResponse,
@@ -110,9 +111,22 @@ export const switchChainV2 = (
     },
       options);
     }
+  /**
+ * Exports the primary share for an account, including all data needed to import it on another instance.
+ * @summary Export account share.
+ */
+export const exportAccountShare = (
+    accountUuid: string,
+ options?: SecondParameter<typeof openfortApiClient<ExportShareResponse>>,) => {
+      return openfortApiClient<ExportShareResponse>(
+      {url: `/v2/accounts/${accountUuid}/export-share`, method: 'POST'
+    },
+      options);
+    }
   export type GetAccountsV2Result = NonNullable<Awaited<ReturnType<typeof getAccountsV2>>>
 export type CreateAccountV2Result = NonNullable<Awaited<ReturnType<typeof createAccountV2>>>
 export type GetSignerIdByAddressResult = NonNullable<Awaited<ReturnType<typeof getSignerIdByAddress>>>
 export type GetAccountV2Result = NonNullable<Awaited<ReturnType<typeof getAccountV2>>>
 export type RemoveAccountResult = NonNullable<Awaited<ReturnType<typeof removeAccount>>>
 export type SwitchChainV2Result = NonNullable<Awaited<ReturnType<typeof switchChainV2>>>
+export type ExportAccountShareResult = NonNullable<Awaited<ReturnType<typeof exportAccountShare>>>

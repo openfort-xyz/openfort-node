@@ -11,8 +11,8 @@ import type {
   BaseEntityListResponseAuthUserResponse,
   BaseEntityResponseEntityTypeWALLET,
   GetAuthUsersParams,
-  PregenerateAccountResponse,
   PregenerateUserRequestV2,
+  PregenerateUserResponseV2,
   ThirdPartyOAuthRequest
 } from '../openfortAPI.schemas';
 
@@ -77,20 +77,23 @@ export const getUserWallet = (
       options);
     }
   /**
- * Pre-generate a user with an embedded account before they authenticate.
-Creates a user record and an embedded account using the provided SSS key shares.
-When the user later authenticates (via email, OAuth, third-party auth, etc.)
-with the same identifier, they will be linked to this pre-generated account.
+ * Pre-generate a user with one or more embedded accounts before they authenticate.
+Creates a user record and an embedded account per entry in `accounts`, each with its
+own SSS key shares. When the user later authenticates (via email, OAuth, third-party
+auth, etc.) with the same identifier, they will be linked to these pre-generated accounts.
+
+Use the `accounts` array to pregenerate accounts on different chain types
+(e.g. one EVM account and one SVM account) in a single call.
 
 You can pregenerate using either:
 - `email`: User will be linked when they authenticate with the same email
 - `thirdPartyUserId` + `thirdPartyProvider`: User will be linked when they authenticate via the same third-party provider
- * @summary Pre-generate a user with an embedded account.
+ * @summary Pre-generate a user with embedded accounts.
  */
 export const pregenerateUserV2 = (
     pregenerateUserRequestV2: PregenerateUserRequestV2,
- options?: SecondParameter<typeof openfortApiClient<PregenerateAccountResponse>>,) => {
-      return openfortApiClient<PregenerateAccountResponse>(
+ options?: SecondParameter<typeof openfortApiClient<PregenerateUserResponseV2>>,) => {
+      return openfortApiClient<PregenerateUserResponseV2>(
       {url: `/v2/users/pregenerate`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: pregenerateUserRequestV2

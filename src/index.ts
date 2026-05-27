@@ -42,6 +42,19 @@ export interface OpenfortOptions {
 }
 
 /**
+ * Input for pregenerating a single embedded account for a user
+ * via `accounts.evm.embedded.pregenerate` / `accounts.solana.embedded.pregenerate`.
+ *
+ * For multi-account pregeneration in a single call (e.g. EVM + SVM), use the
+ * lower-level `pregenerateUserV2` from the generated client and pass an `accounts` array.
+ */
+export type EmbeddedPregenerateInput = Pick<
+  api.PregenerateUserRequestV2,
+  'email' | 'thirdPartyUserId' | 'thirdPartyProvider'
+> &
+  Omit<api.PregenerateAccountConfig, 'chainType'>
+
+/**
  * Configuration for pre-generating embedded accounts with Shield
  */
 export interface ShieldConfiguration {
@@ -215,6 +228,30 @@ class Openfort {
     return {
       /** List all accounts across chains */
       list: api.getAccountsV2,
+      /** Chain-agnostic embedded wallet operations (User custody) */
+      embedded: {
+        /**
+         * Pregenerate one or more embedded accounts for a user in a single call.
+         * Each entry in `req.accounts` produces its own key material. All recovery
+         * shares are pre-registered with Shield (entropy: project) before this
+         * resolves; on any failure the created user is rolled back.
+         *
+         * @example
+         * ```typescript
+         * const { user, accounts } = await openfort.accounts.embedded.pregenerate(
+         *   {
+         *     email: 'user@example.com',
+         *     accounts: [{ chainType: 'EVM' }, { chainType: 'SVM' }],
+         *   },
+         *   shieldConfig,
+         * )
+         * ```
+         */
+        pregenerate: (
+          req: api.PregenerateUserRequestV2,
+          shieldConfig: ShieldConfiguration,
+        ) => this.pregenerateUserMulti(req, shieldConfig),
+      },
       /** EVM accounts */
       evm: {
         /** List EVM accounts */
@@ -245,9 +282,9 @@ class Openfort {
         embedded: {
           /** Pregenerate embedded account */
           pregenerate: (
-            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            req: EmbeddedPregenerateInput,
             shieldConfig: ShieldConfiguration,
-          ) => this.pregenerateUser({ ...req, chainType: 'EVM' }, shieldConfig),
+          ) => this.pregenerateUser(req, 'EVM', shieldConfig),
           /** List embedded accounts */
           list: (
             params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
@@ -287,9 +324,9 @@ class Openfort {
         embedded: {
           /** Pregenerate embedded account */
           pregenerate: (
-            req: Omit<api.PregenerateUserRequestV2, 'chainType'>,
+            req: EmbeddedPregenerateInput,
             shieldConfig: ShieldConfiguration,
-          ) => this.pregenerateUser({ ...req, chainType: 'SVM' }, shieldConfig),
+          ) => this.pregenerateUser(req, 'SVM', shieldConfig),
           /** List embedded accounts */
           list: (
             params?: Omit<api.GetAccountsV2Params, 'chainType' | 'custody'>,
@@ -672,26 +709,44 @@ class Openfort {
   }
 
   /**
-   * Pre-generate a user with an embedded account (V2).
+   * Pre-generate a user with a single embedded account (V2) on the given chain type.
    * If Shield pre-registration fails, the created user will be deleted.
    * @internal
    */
   private async pregenerateUser(
-    req: api.PregenerateUserRequestV2,
+    req: EmbeddedPregenerateInput,
+    chainType: api.PregenerateAccountConfigChainType,
     shieldConfig: ShieldConfiguration,
   ): Promise<api.AccountV2Response> {
-    const response = await api.pregenerateUserV2(req)
+    const {
+      email,
+      thirdPartyUserId,
+      thirdPartyProvider,
+      accountType,
+      chainId,
+      implementationType,
+    } = req
+
+    const response = await api.pregenerateUserV2({
+      email,
+      thirdPartyUserId,
+      thirdPartyProvider,
+      accounts: [{ chainType, accountType, chainId, implementationType }],
+    })
+
+    const [account] = response.accounts
 
     try {
       await this.preRegisterWithShield(
-        response.recoveryShare,
+        account.recoveryShare,
         response.user,
-        req.thirdPartyUserId,
+        thirdPartyUserId,
         shieldConfig,
+        account.signer,
       )
 
       // Return without recoveryShare (it's been stored in Shield)
-      const { recoveryShare: _, ...accountResponse } = response
+      const { recoveryShare: _, ...accountResponse } = account
       return accountResponse
     } catch (error) {
       // If anything fails after user creation, delete the created user
@@ -735,7 +790,53 @@ class Openfort {
   }
 
   /**
+   * Pre-generate a user with multiple embedded accounts (V2) in a single call.
+   * Pre-registers each account's recovery share with Shield.
+   * If Shield pre-registration fails on ANY account, the created user is deleted.
+   * @internal
+   */
+  private async pregenerateUserMulti(
+    req: api.PregenerateUserRequestV2,
+    shieldConfig: ShieldConfiguration,
+  ): Promise<{ user: string; accounts: api.AccountV2Response[] }> {
+    const response = await api.pregenerateUserV2(req)
+
+    try {
+      const accounts: api.AccountV2Response[] = []
+      for (const account of response.accounts) {
+        await this.preRegisterWithShield(
+          account.recoveryShare,
+          response.user,
+          req.thirdPartyUserId,
+          shieldConfig,
+          account.signer,
+        )
+        // Strip recoveryShare from the returned account (now stored in Shield)
+        const { recoveryShare: _, ...accountWithoutShare } = account
+        accounts.push(accountWithoutShare)
+      }
+      return { user: response.user, accounts }
+    } catch (error) {
+      // If anything fails after user creation, delete the created user.
+      // Shield shares already registered before the failure remain orphaned,
+      // but the Castle-side user/account/device rows are rolled back.
+      try {
+        await api.deleteUser(response.user)
+      } catch {
+        // Cleanup failed — user may be orphaned, but re-throw original error
+      }
+      throw error
+    }
+  }
+
+  /**
    * Pre-register a recovery share with Shield.
+   *
+   * If `reference` is provided, the share is stored under that reference
+   * (typically the signer UUID `sig_<uuid>`), which is what the API uses
+   * when resolving an account's recovery method via the signer-reference
+   * lookup. Omitting it falls back to user-id based matching only.
+   *
    * @internal
    */
   private async preRegisterWithShield(
@@ -743,6 +844,7 @@ class Openfort {
     openfortUserId: string,
     thirdPartyUserId: string | undefined,
     config: ShieldConfiguration,
+    reference?: string,
   ): Promise<void> {
     if (
       !config.shieldApiKey ||
@@ -780,6 +882,7 @@ class Openfort {
     const share: Share = {
       secret: recoveryShare,
       entropy: entropy.project,
+      reference,
     }
 
     const shieldSDK = new ShieldSDK({
