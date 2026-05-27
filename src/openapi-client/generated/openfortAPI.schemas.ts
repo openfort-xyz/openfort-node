@@ -2536,6 +2536,11 @@ export interface PregenerateAccountEntry {
   /** The recovery share for this embedded account's signer.
 This should be stored securely and provided to the user for account recovery. */
   recoveryShare: string;
+  /** The signer UUID (starts with `sig_`) backing this embedded account.
+Use this value as the `reference` when storing the recovery share with
+Shield, so subsequent reads of the account can resolve the recovery
+method via the signer-reference lookup. */
+  signer: string;
 }
 
 export interface PregenerateUserResponseV2 {
