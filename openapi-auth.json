@@ -46,13 +46,7 @@
             "readOnly": true
           }
         },
-        "required": [
-          "id",
-          "name",
-          "email",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "name", "email", "createdAt", "updatedAt"]
       },
       "Session": {
         "type": "object",
@@ -192,11 +186,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicKey",
-          "privateKey",
-          "createdAt"
-        ]
+        "required": ["publicKey", "privateKey", "createdAt"]
       },
       "OtpVerificationResponse": {
         "type": "object",
@@ -207,9 +197,7 @@
             "description": "Indicates whether the OTP verification was successful"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "SignOutResponse": {
         "type": "object",
@@ -220,9 +208,7 @@
             "description": "Indicates whether the sign out was successful"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "UnlinkAccountResponse": {
         "type": "object",
@@ -233,9 +219,7 @@
             "description": "Indicates whether the account was successfully unlinked"
           }
         },
-        "required": [
-          "status"
-        ]
+        "required": ["status"]
       },
       "ResetPasswordResponse": {
         "type": "object",
@@ -246,9 +230,7 @@
             "description": "Indicates whether the password was successfully reset"
           }
         },
-        "required": [
-          "status"
-        ]
+        "required": ["status"]
       }
     },
     "securitySchemes": {
@@ -286,9 +268,7 @@
   "paths": {
     "/sign-in/social": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Sign in with a social provider",
         "summary": "Sign in with a social provider.",
         "operationId": "socialSignIn",
@@ -356,9 +336,7 @@
                         "nullable": true
                       }
                     },
-                    "required": [
-                      "token"
-                    ],
+                    "required": ["token"],
                     "nullable": true
                   },
                   "scopes": {
@@ -380,9 +358,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "provider"
-                ]
+                "required": ["provider"]
               }
             }
           }
@@ -398,9 +374,7 @@
                   "properties": {
                     "redirect": {
                       "type": "boolean",
-                      "enum": [
-                        false
-                      ]
+                      "enum": [false]
                     },
                     "token": {
                       "type": "string",
@@ -451,11 +425,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "redirect",
-                    "token",
-                    "user"
-                  ]
+                  "required": ["redirect", "token", "user"]
                 }
               }
             }
@@ -470,9 +440,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -488,9 +456,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -561,9 +527,7 @@
     },
     "/get-session": {
       "get": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Get the current session",
         "summary": "Get the current session.",
         "security": [
@@ -598,10 +562,7 @@
                       "$ref": "#/components/schemas/User"
                     }
                   },
-                  "required": [
-                    "session",
-                    "user"
-                  ]
+                  "required": ["session", "user"]
                 }
               }
             }
@@ -616,9 +577,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -634,9 +593,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -707,9 +664,7 @@
     },
     "/sign-out": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Sign out the current user",
         "summary": "Sign out.",
         "security": [
@@ -755,9 +710,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -773,9 +726,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -846,9 +797,7 @@
     },
     "/sign-up/email": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Sign up a user using email and password",
         "summary": "Sign up with email and password.",
         "security": [
@@ -889,11 +838,7 @@
                     "description": "If this is false, the session will not be remembered. Default is `true`."
                   }
                 },
-                "required": [
-                  "name",
-                  "email",
-                  "password"
-                ]
+                "required": ["name", "email", "password"]
               }
             }
           }
@@ -915,9 +860,7 @@
                       "$ref": "#/components/schemas/User"
                     }
                   },
-                  "required": [
-                    "user"
-                  ]
+                  "required": ["user"]
                 }
               }
             }
@@ -932,9 +875,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -950,9 +891,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1038,9 +977,7 @@
     },
     "/sign-in/email": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Sign in with email and password",
         "summary": "Sign in with email and password.",
         "security": [
@@ -1075,10 +1012,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "email",
-                  "password"
-                ]
+                "required": ["email", "password"]
               }
             }
           }
@@ -1094,9 +1028,7 @@
                   "properties": {
                     "redirect": {
                       "type": "boolean",
-                      "enum": [
-                        false
-                      ]
+                      "enum": [false]
                     },
                     "token": {
                       "type": "string",
@@ -1147,11 +1079,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "redirect",
-                    "token",
-                    "user"
-                  ]
+                  "required": ["redirect", "token", "user"]
                 }
               }
             }
@@ -1166,9 +1094,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1184,9 +1110,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1257,9 +1181,7 @@
     },
     "/forget-password": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Send a password reset email to the user",
         "summary": "Forget password.",
         "security": [
@@ -1286,9 +1208,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "email"
-                ]
+                "required": ["email"]
               }
             }
           }
@@ -1322,9 +1242,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1340,9 +1258,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1413,9 +1329,7 @@
     },
     "/reset-password": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Reset the password for a user",
         "summary": "Reset password.",
         "security": [
@@ -1442,9 +1356,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "newPassword"
-                ]
+                "required": ["newPassword"]
               }
             }
           }
@@ -1470,9 +1382,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1488,9 +1398,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1561,9 +1469,7 @@
     },
     "/verify-email": {
       "get": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Verify the email of the user.\nUsually this endpoint is called when user clicks 'Verify email' link from the letter.",
         "summary": "Verify email.",
         "security": [
@@ -1647,10 +1553,7 @@
                       "description": "Indicates if the email was verified successfully"
                     }
                   },
-                  "required": [
-                    "user",
-                    "status"
-                  ]
+                  "required": ["user", "status"]
                 }
               }
             }
@@ -1665,9 +1568,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1683,9 +1584,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1756,9 +1655,7 @@
     },
     "/send-verification-email": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Send a verification email to the user",
         "summary": "Send verification email.",
         "security": [
@@ -1786,9 +1683,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "email"
-                ]
+                "required": ["email"]
               }
             }
           }
@@ -1838,9 +1733,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -1913,9 +1806,7 @@
       "post": {
         "description": "Change user's email",
         "summary": "Change email.",
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "security": [
           {
             "auth_token": [],
@@ -1940,9 +1831,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "newEmail"
-                ]
+                "required": ["newEmail"]
               }
             }
           }
@@ -1961,17 +1850,12 @@
                     },
                     "message": {
                       "type": "string",
-                      "enum": [
-                        "Email updated",
-                        "Verification email sent"
-                      ],
+                      "enum": ["Email updated", "Verification email sent"],
                       "description": "Status message of the email change process",
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "status"
-                  ]
+                  "required": ["status"]
                 }
               }
             }
@@ -1986,9 +1870,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2004,9 +1886,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2092,9 +1972,7 @@
     },
     "/change-password": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Change the password of the user",
         "summary": "Change password.",
         "security": [
@@ -2125,10 +2003,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "newPassword",
-                  "currentPassword"
-                ]
+                "required": ["newPassword", "currentPassword"]
               }
             }
           }
@@ -2150,9 +2025,7 @@
                       "$ref": "#/components/schemas/User"
                     }
                   },
-                  "required": [
-                    "user"
-                  ]
+                  "required": ["user"]
                 }
               }
             }
@@ -2167,9 +2040,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2185,9 +2056,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2258,9 +2127,7 @@
     },
     "/reset-password/{token}": {
       "get": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Redirects the user to the callback URL with the token",
         "summary": "Reset password callback.",
         "security": [
@@ -2314,9 +2181,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2332,9 +2197,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2405,9 +2268,7 @@
     },
     "/request-password-reset": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Send a password reset email to the user",
         "summary": "Request password reset.",
         "security": [
@@ -2434,9 +2295,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "email"
-                ]
+                "required": ["email"]
               }
             }
           }
@@ -2470,9 +2329,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2488,9 +2345,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2561,9 +2416,7 @@
     },
     "/list-sessions": {
       "get": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "List all active sessions for the user",
         "summary": "List sessions.",
         "security": [
@@ -2597,9 +2450,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2615,9 +2466,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2688,9 +2537,7 @@
     },
     "/revoke-session": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Revoke a single session",
         "summary": "Revoke session.",
         "security": [
@@ -2711,9 +2558,7 @@
                     "description": "The token to revoke"
                   }
                 },
-                "required": [
-                  "token"
-                ]
+                "required": ["token"]
               }
             }
           }
@@ -2731,9 +2576,7 @@
                       "description": "Indicates if the session was revoked successfully"
                     }
                   },
-                  "required": [
-                    "status"
-                  ]
+                  "required": ["status"]
                 }
               }
             }
@@ -2748,9 +2591,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2766,9 +2607,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2839,9 +2678,7 @@
     },
     "/revoke-sessions": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Revoke all sessions for the user",
         "summary": "Revoke sessions.",
         "security": [
@@ -2874,9 +2711,7 @@
                       "description": "Indicates if all sessions were revoked successfully"
                     }
                   },
-                  "required": [
-                    "status"
-                  ]
+                  "required": ["status"]
                 }
               }
             }
@@ -2891,9 +2726,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2909,9 +2742,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -2982,9 +2813,7 @@
     },
     "/revoke-other-sessions": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Revoke all other sessions for the user except the current one",
         "summary": "Revoke other sessions.",
         "security": [
@@ -3017,9 +2846,7 @@
                       "description": "Indicates if all other sessions were revoked successfully"
                     }
                   },
-                  "required": [
-                    "status"
-                  ]
+                  "required": ["status"]
                 }
               }
             }
@@ -3034,9 +2861,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3052,9 +2877,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3125,9 +2948,7 @@
     },
     "/link-social": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Link a social account to the user",
         "summary": "Link social account.",
         "security": [
@@ -3178,9 +2999,7 @@
                         "nullable": true
                       }
                     },
-                    "required": [
-                      "token"
-                    ],
+                    "required": ["token"],
                     "nullable": true
                   },
                   "requestSignUp": {
@@ -3206,9 +3025,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "provider"
-                ]
+                "required": ["provider"]
               }
             }
           }
@@ -3233,9 +3050,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "redirect"
-                  ]
+                  "required": ["redirect"]
                 }
               }
             }
@@ -3250,9 +3065,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3268,9 +3081,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3341,9 +3152,7 @@
     },
     "/list-accounts": {
       "get": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "List all accounts linked to the user",
         "summary": "List lined accounts.",
         "security": [
@@ -3415,9 +3224,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3433,9 +3240,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3506,9 +3311,7 @@
     },
     "/unlink-account": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Unlink an account",
         "summary": "Unlink account.",
         "security": [
@@ -3533,9 +3336,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "providerId"
-                ]
+                "required": ["providerId"]
               }
             }
           }
@@ -3561,9 +3362,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3579,9 +3378,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3652,9 +3449,7 @@
     },
     "/refresh-token": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Refresh the access token using a refresh token",
         "summary": "Refresh access token.",
         "security": [
@@ -3686,9 +3481,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "providerId"
-                ]
+                "required": ["providerId"]
               }
             }
           }
@@ -3739,9 +3532,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3812,9 +3603,7 @@
     },
     "/get-access-token": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Get a valid access token, doing a refresh if needed",
         "summary": "Get access token.",
         "security": [
@@ -3846,9 +3635,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "providerId"
-                ]
+                "required": ["providerId"]
               }
             }
           }
@@ -3899,9 +3686,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -3972,9 +3757,7 @@
     },
     "/account-info": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Get the account info provided by the provider",
         "summary": "Get account info.",
         "security": [
@@ -3996,9 +3779,7 @@
                     "description": "The provider given account id for which to get the account info"
                   }
                 },
-                "required": [
-                  "accountId"
-                ]
+                "required": ["accountId"]
               }
             }
           }
@@ -4030,10 +3811,7 @@
                           "type": "boolean"
                         }
                       },
-                      "required": [
-                        "id",
-                        "emailVerified"
-                      ]
+                      "required": ["id", "emailVerified"]
                     },
                     "data": {
                       "type": "object",
@@ -4041,10 +3819,7 @@
                       "additionalProperties": true
                     }
                   },
-                  "required": [
-                    "user",
-                    "data"
-                  ],
+                  "required": ["user", "data"],
                   "additionalProperties": false
                 }
               }
@@ -4060,9 +3835,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4078,9 +3851,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4151,9 +3922,7 @@
     },
     "/sign-in/anonymous": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Sign in anonymously",
         "summary": "Anonymous sign in.",
         "security": [
@@ -4179,10 +3948,7 @@
                       "$ref": "#/components/schemas/User"
                     }
                   },
-                  "required": [
-                    "token",
-                    "user"
-                  ]
+                  "required": ["token", "user"]
                 }
               }
             }
@@ -4197,9 +3963,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4215,9 +3979,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4288,9 +4050,7 @@
     },
     "/sign-in/phone-number": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Use this endpoint to sign in with phone number",
         "summary": "Sign in with phone.",
         "security": [
@@ -4321,10 +4081,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "phoneNumber",
-                  "password"
-                ]
+                "required": ["phoneNumber", "password"]
               }
             }
           }
@@ -4345,10 +4102,7 @@
                       "$ref": "#/components/schemas/User"
                     }
                   },
-                  "required": [
-                    "token",
-                    "user"
-                  ]
+                  "required": ["token", "user"]
                 }
               }
             }
@@ -4366,9 +4120,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4439,9 +4191,7 @@
     },
     "/phone-number/send-otp": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Use this endpoint to send OTP to phone number",
         "summary": "Send OTP to phone number.",
         "security": [
@@ -4463,9 +4213,7 @@
                     "description": "Phone number to send OTP. Eg: \"+1234567890\""
                   }
                 },
-                "required": [
-                  "phoneNumber"
-                ]
+                "required": ["phoneNumber"]
               }
             }
           }
@@ -4496,9 +4244,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4514,9 +4260,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4587,9 +4331,7 @@
     },
     "/phone-number/verify": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Use this endpoint to verify phone number",
         "summary": "Verify phone OTP.",
         "security": [
@@ -4625,10 +4367,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "phoneNumber",
-                  "code"
-                ]
+                "required": ["phoneNumber", "code"]
               }
             }
           }
@@ -4644,9 +4383,7 @@
                     "status": {
                       "type": "boolean",
                       "description": "Indicates if the verification was successful",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "token": {
                       "type": "string",
@@ -4712,9 +4449,7 @@
                       "description": "User object with phone number details, null if no user is created or found"
                     }
                   },
-                  "required": [
-                    "status"
-                  ]
+                  "required": ["status"]
                 }
               }
             }
@@ -4732,9 +4467,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4805,9 +4538,7 @@
     },
     "/phone-number/forget-password": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Request OTP for password reset via phone number",
         "summary": "Reset password reset with phone(forget password flow).",
         "security": [
@@ -4829,9 +4560,7 @@
                     "description": "The phone number which is associated with the user. Eg: \"+1234567890\""
                   }
                 },
-                "required": [
-                  "phoneNumber"
-                ]
+                "required": ["phoneNumber"]
               }
             }
           }
@@ -4847,14 +4576,10 @@
                     "status": {
                       "type": "boolean",
                       "description": "Indicates if the OTP was sent successfully",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   },
-                  "required": [
-                    "status"
-                  ]
+                  "required": ["status"]
                 }
               }
             }
@@ -4869,9 +4594,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4887,9 +4610,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -4960,9 +4681,7 @@
     },
     "/phone-number/request-password-reset": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Request OTP for password reset via phone number",
         "summary": "Request password reset with phone.",
         "security": [
@@ -4983,9 +4702,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "phoneNumber"
-                ]
+                "required": ["phoneNumber"]
               }
             }
           }
@@ -5001,14 +4718,10 @@
                     "status": {
                       "type": "boolean",
                       "description": "Indicates if the OTP was sent successfully",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   },
-                  "required": [
-                    "status"
-                  ]
+                  "required": ["status"]
                 }
               }
             }
@@ -5023,9 +4736,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5041,9 +4752,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5114,9 +4823,7 @@
     },
     "/phone-number/reset-password": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Reset password using phone number OTP",
         "summary": "Reset password with phone OTP.",
         "security": [
@@ -5146,11 +4853,7 @@
                     "description": "The new password. Eg: \"new-and-secure-password\""
                   }
                 },
-                "required": [
-                  "otp",
-                  "phoneNumber",
-                  "newPassword"
-                ]
+                "required": ["otp", "phoneNumber", "newPassword"]
               }
             }
           }
@@ -5176,9 +4879,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5194,9 +4895,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5267,9 +4966,7 @@
     },
     "/email-otp/send-verification-otp": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Send verification OTP",
         "summary": "Request email verification with OTP.",
         "security": [
@@ -5295,10 +4992,7 @@
                     "description": "Type of the OTP"
                   }
                 },
-                "required": [
-                  "email",
-                  "type"
-                ]
+                "required": ["email", "type"]
               }
             }
           }
@@ -5329,9 +5023,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5347,9 +5039,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5421,9 +5111,7 @@
     "/email-otp/check-verification-otp": {
       "post": {
         "operationId": "checkVerificationOtp",
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Check if a verification OTP is valid",
         "summary": "Check email OTP.",
         "security": [
@@ -5458,11 +5146,7 @@
                     "description": "OTP to verify"
                   }
                 },
-                "required": [
-                  "email",
-                  "type",
-                  "otp"
-                ]
+                "required": ["email", "type", "otp"]
               }
             }
           }
@@ -5493,9 +5177,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5511,9 +5193,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5584,9 +5264,7 @@
     },
     "/email-otp/verify-email": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Verify email with OTP",
         "summary": "Verify email with OTP.",
         "security": [
@@ -5612,10 +5290,7 @@
                     "description": "OTP to verify"
                   }
                 },
-                "required": [
-                  "email",
-                  "otp"
-                ]
+                "required": ["email", "otp"]
               }
             }
           }
@@ -5631,9 +5306,7 @@
                     "status": {
                       "type": "boolean",
                       "description": "Indicates if the verification was successful",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "token": {
                       "type": "string",
@@ -5644,11 +5317,7 @@
                       "$ref": "#/components/schemas/User"
                     }
                   },
-                  "required": [
-                    "status",
-                    "token",
-                    "user"
-                  ]
+                  "required": ["status", "token", "user"]
                 }
               }
             }
@@ -5663,9 +5332,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5681,9 +5348,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5754,9 +5419,7 @@
     },
     "/sign-in/email-otp": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Sign in with OTP",
         "summary": "Sign in with email OTP.",
         "security": [
@@ -5782,10 +5445,7 @@
                     "description": "OTP sent to the email"
                   }
                 },
-                "required": [
-                  "email",
-                  "otp"
-                ]
+                "required": ["email", "otp"]
               }
             }
           }
@@ -5806,10 +5466,7 @@
                       "$ref": "#/components/schemas/User"
                     }
                   },
-                  "required": [
-                    "token",
-                    "user"
-                  ]
+                  "required": ["token", "user"]
                 }
               }
             }
@@ -5824,9 +5481,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5842,9 +5497,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5915,9 +5568,7 @@
     },
     "/forget-password/email-otp": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Send a password reset OTP to the user",
         "summary": "Request password reset with email OTP.",
         "security": [
@@ -5939,9 +5590,7 @@
                     "description": "Email address to send the OTP"
                   }
                 },
-                "required": [
-                  "email"
-                ]
+                "required": ["email"]
               }
             }
           }
@@ -5973,9 +5622,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -5991,9 +5638,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6064,9 +5709,7 @@
     },
     "/email-otp/reset-password": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Reset user password with OTP",
         "summary": "Reset password with email OTP.",
         "security": [
@@ -6096,11 +5739,7 @@
                     "description": "New password"
                   }
                 },
-                "required": [
-                  "email",
-                  "otp",
-                  "password"
-                ]
+                "required": ["email", "otp", "password"]
               }
             }
           }
@@ -6126,9 +5765,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6144,9 +5781,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6217,9 +5852,7 @@
     },
     "/siwe/nonce": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Generate a nonce for Sign-In With Ethereum (SIWE) authentication",
         "summary": "Initialize SIWE login.",
         "security": [
@@ -6251,9 +5884,7 @@
                     "maximum": 2147483647
                   }
                 },
-                "required": [
-                  "walletAddress"
-                ]
+                "required": ["walletAddress"]
               }
             }
           }
@@ -6271,9 +5902,7 @@
                       "description": "Cryptographically secure random nonce to be used in SIWE message"
                     }
                   },
-                  "required": [
-                    "nonce"
-                  ]
+                  "required": ["nonce"]
                 }
               }
             }
@@ -6288,9 +5917,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6306,9 +5933,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6334,9 +5959,7 @@
     },
     "/siwe/verify": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "description": "Verify a signed SIWE message and authenticate the user",
         "summary": "Login with SIWE.",
         "security": [
@@ -6386,11 +6009,7 @@
                     "description": "Type of connector used (e.g., 'injected', 'walletConnect')"
                   }
                 },
-                "required": [
-                  "message",
-                  "signature",
-                  "walletAddress"
-                ]
+                "required": ["message", "signature", "walletAddress"]
               }
             }
           }
@@ -6427,18 +6046,10 @@
                           "description": "Chain ID used for authentication"
                         }
                       },
-                      "required": [
-                        "id",
-                        "walletAddress",
-                        "chainId"
-                      ]
+                      "required": ["id", "walletAddress", "chainId"]
                     }
                   },
-                  "required": [
-                    "token",
-                    "success",
-                    "user"
-                  ]
+                  "required": ["token", "success", "user"]
                 }
               }
             }
@@ -6453,9 +6064,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6475,9 +6084,7 @@
                       "description": "Error code (e.g., UNAUTHORIZED_INVALID_OR_EXPIRED_NONCE)"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6503,9 +6110,7 @@
     },
     "/link-siwe/nonce": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "summary": "Initialize SIWE link.",
         "description": "Generates a cryptographically secure nonce for creating a SIWE message to link a wallet to the current authenticated user. Requires active session.",
         "security": [
@@ -6537,9 +6142,7 @@
                     "maximum": 2147483647
                   }
                 },
-                "required": [
-                  "walletAddress"
-                ]
+                "required": ["walletAddress"]
               }
             }
           }
@@ -6557,9 +6160,7 @@
                       "description": "Cryptographically secure nonce to use in SIWE message"
                     }
                   },
-                  "required": [
-                    "nonce"
-                  ]
+                  "required": ["nonce"]
                 }
               }
             }
@@ -6574,9 +6175,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6592,9 +6191,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6620,9 +6217,7 @@
     },
     "/link-siwe/verify": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "summary": "Verify and link SIWE wallet.",
         "description": "Verifies the SIWE signature and links the wallet to the currently authenticated user. Requires active session.",
         "security": [
@@ -6672,11 +6267,7 @@
                     "description": "Type of connector used (e.g., 'injected', 'walletConnect')"
                   }
                 },
-                "required": [
-                  "message",
-                  "signature",
-                  "walletAddress"
-                ]
+                "required": ["message", "signature", "walletAddress"]
               }
             }
           }
@@ -6747,16 +6338,11 @@
                     },
                     "code": {
                       "type": "string",
-                      "enum": [
-                        "WALLET_ALREADY_LINKED",
-                        "BAD_REQUEST"
-                      ],
+                      "enum": ["WALLET_ALREADY_LINKED", "BAD_REQUEST"],
                       "description": "Error code indicating the type of error"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6781,9 +6367,7 @@
                       "description": "Error code indicating the authentication failure reason"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
@@ -6809,9 +6393,7 @@
     },
     "/link-siwe/list-wallets": {
       "get": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "summary": "List linked wallets.",
         "description": "Get all SIWE wallets linked to the authenticated user with full wallet metadata including primary status and chain information. Requires active session.",
         "security": [
@@ -6906,9 +6488,7 @@
     },
     "/link-siwe/unlink": {
       "post": {
-        "tags": [
-          "auth v2"
-        ],
+        "tags": ["auth v2"],
         "summary": "Unlink SIWE wallet.",
         "description": "Remove a linked wallet from the authenticated user account. If the wallet being unlinked is the primary wallet, another wallet will be automatically promoted to primary. Requires active session.",
         "security": [
@@ -6940,9 +6520,7 @@
                     "maximum": 2147483647
                   }
                 },
-                "required": [
-                  "walletAddress"
-                ]
+                "required": ["walletAddress"]
               }
             }
           }
@@ -6960,9 +6538,7 @@
                       "description": "Indicates successful wallet unlinking"
                     }
                   },
-                  "required": [
-                    "success"
-                  ]
+                  "required": ["success"]
                 }
               }
             }
@@ -6986,9 +6562,7 @@
                       "description": "Error code indicating the type of error"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             },
