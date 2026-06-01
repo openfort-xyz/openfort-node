@@ -431,7 +431,8 @@ function handleResponseError(
       throw new APIError(
         statusCode,
         'forbidden',
-        "Forbidden. You don't have permission to access this resource.",
+        errorMessage ||
+          "Forbidden. You don't have permission to access this resource.",
         correlationId,
         `${ERROR_DOCS_URL}#forbidden`,
         cause,
