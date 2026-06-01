@@ -14,8 +14,9 @@ import { update } from './updateToDelegated'
 /**
  * Delegates an EVM account via EIP-7702 and sends a gasless transaction in one call.
  *
- * Internally: registers delegation -> fetches EOA nonce via RPC -> hashes and signs
- * EIP-7702 authorization -> creates transaction intent -> signs and submits if needed.
+ * Internally: ensures a delegated-account record -> checks on-chain delegation via
+ * eth_getCode -> if the EOA is not delegated on-chain, hashes and signs an EIP-7702
+ * authorization -> creates transaction intent -> signs and submits if needed.
  *
  * @param options - Transaction options including account ID, chain, interactions, and optional policy
  * @returns The transaction intent response
@@ -62,6 +63,27 @@ export async function sendTransaction(
   const { account, chainId, interactions, policy, rpcUrl } = options
 
   // 1. Resolve chain + RPC
+  // This RPC gates EIP-7702 authorization signing, so require a trusted scheme:
+  // https everywhere, http only for loopback (local dev nodes like anvil).
+  if (rpcUrl !== undefined) {
+    let parsed: URL
+    try {
+      parsed = new URL(rpcUrl)
+    } catch {
+      throw new UserInputValidationError(`Invalid rpcUrl: ${rpcUrl}`)
+    }
+    const isLoopback = ['localhost', '127.0.0.1', '[::1]'].includes(
+      parsed.hostname,
+    )
+    if (
+      parsed.protocol !== 'https:' &&
+      !(parsed.protocol === 'http:' && isLoopback)
+    ) {
+      throw new UserInputValidationError(
+        'rpcUrl must use https (http allowed only for localhost).',
+      )
+    }
+  }
   const transport = rpcUrl ? viem.http(rpcUrl) : viem.http()
   const allChains = Object.values(viemChains)
   const chain = allChains.find(
@@ -77,19 +99,23 @@ export async function sendTransaction(
     )
   }
 
-  // 2. Get or create delegated account
-  let signedAuthorization: string | undefined
-  let txAccountId: string
+  // 2. Resolve the delegated-account record, then decide whether to (re)sign the
+  //    EIP-7702 authorization based on ACTUAL on-chain delegation state.
+  const implementationAddress: Hex =
+    '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+  const publicClient = viem.createPublicClient({ chain, transport })
+  const eoaAddress = viem.getAddress(account.address)
 
   const response = await getAccountsV2({
-    address: viem.getAddress(account.address),
+    address: eoaAddress,
     accountType: 'Delegated Account',
     chainType: 'EVM',
     chainId: chainId,
   })
 
+  let txAccountId: string
   if (response.data.length === 0) {
-    // No delegation yet - register it
+    // No delegated-account record yet - register one.
     const updated = await update({
       walletId: account.walletId,
       chainId,
@@ -97,13 +123,20 @@ export async function sendTransaction(
       accountId: account.id,
     })
     txAccountId = updated.id
+  } else {
+    txAccountId = response.data[0].id
+  }
 
-    const implementationAddress: Hex =
-      '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
-
-    const publicClient = viem.createPublicClient({ chain, transport })
-
-    // 2.1. Sign EIP-7702 authorization if not yet delegated on-chain
+  // TRANSITIONAL: stale records can read delegated while the EOA is bare on-chain
+  // (code === '0x'), causing AA34. Gate signing on actual on-chain state until the
+  // API backfill makes the DB authoritative, then REMOVE this getCode call and
+  // trust the record alone (no RPC).
+  let signedAuthorization: string | undefined
+  const code = await publicClient.getCode({ address: eoaAddress })
+  const delegationDesignator =
+    `0xef0100${implementationAddress.slice(2)}`.toLowerCase()
+  const isDelegatedOnChain = code?.toLowerCase() === delegationDesignator
+  if (!isDelegatedOnChain) {
     const eoaNonce = await publicClient.getTransactionCount({
       address: account.address,
     })
@@ -113,8 +146,6 @@ export async function sendTransaction(
       nonce: eoaNonce,
     })
     signedAuthorization = await account.sign({ hash: authHash })
-  } else {
-    txAccountId = response.data[0].id
   }
 
   // 3. Create transaction intent
