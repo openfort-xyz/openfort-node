@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { CALIBUR_IMPLEMENTATION_ADDRESS } from '../../../constants'
 import type { EvmAccount, SendTransactionOptions } from '../types'
 
 // Shared mocks (hoisted so vi.mock factories can reference them).
@@ -36,7 +37,7 @@ vi.mock('viem/utils', () => ({ hashAuthorization: mocks.hashAuthorization }))
 // Imported after mocks are registered.
 const { sendTransaction } = await import('./sendTransaction')
 
-const CALIBUR = '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+const CALIBUR = CALIBUR_IMPLEMENTATION_ADDRESS
 const DESIGNATOR = `0xef0100${CALIBUR.slice(2)}`
 
 function makeAccount() {
@@ -81,6 +82,41 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
     const intentArg = mocks.createTransactionIntent.mock.calls[0][0]
     expect(intentArg.account).toBe('acc_del')
     expect(intentArg.signedAuthorization).toBe('0xsignature') // <- the fix
+  })
+
+  it('uses the implementation address from the account record, not the hardcoded fallback', async () => {
+    const apiImpl = '0x00000000000000000000000000000000deadbeef'
+    mocks.getAccountsV2.mockResolvedValue({
+      data: [
+        { id: 'acc_del', smartAccount: { implementationAddress: apiImpl } },
+      ],
+    })
+    mocks.getCode.mockResolvedValue('0x') // not delegated -> must sign
+
+    const account = makeAccount()
+    await sendTransaction(opts(account))
+
+    expect(mocks.hashAuthorization).toHaveBeenCalledWith(
+      expect.objectContaining({ contractAddress: apiImpl }),
+    )
+  })
+
+  it('treats the EOA as delegated when on-chain code matches the record implementation', async () => {
+    const apiImpl = '0x00000000000000000000000000000000deadbeef'
+    mocks.getAccountsV2.mockResolvedValue({
+      data: [
+        { id: 'acc_del', smartAccount: { implementationAddress: apiImpl } },
+      ],
+    })
+    mocks.getCode.mockResolvedValue(`0xef0100${apiImpl.slice(2)}`)
+
+    const account = makeAccount()
+    await sendTransaction(opts(account))
+
+    expect(mocks.hashAuthorization).not.toHaveBeenCalled()
+    expect(
+      mocks.createTransactionIntent.mock.calls[0][0].signedAuthorization,
+    ).toBeUndefined()
   })
 
   it('does NOT re-sign the authorization when the EOA is already delegated on-chain to Calibur', async () => {
@@ -132,6 +168,22 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
     await expect(
       sendTransaction({ ...opts(account), rpcUrl: 'http://127.0.0.1:8545' }),
     ).resolves.toBeDefined()
+  })
+
+  it('fails open and signs the authorization when the on-chain code read throws (RPC error)', async () => {
+    mocks.getAccountsV2.mockResolvedValue({ data: [{ id: 'acc_del' }] })
+    mocks.getCode.mockRejectedValue(new Error('RPC down'))
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    const account = makeAccount()
+    await sendTransaction(opts(account))
+
+    expect(account.sign).toHaveBeenCalledWith({ hash: '0xauthhash' })
+    expect(
+      mocks.createTransactionIntent.mock.calls[0][0].signedAuthorization,
+    ).toBe('0xsignature')
+    expect(warn).toHaveBeenCalled()
+    warn.mockRestore()
   })
 
   it('registers a delegated record and signs the authorization on first send (no record yet)', async () => {

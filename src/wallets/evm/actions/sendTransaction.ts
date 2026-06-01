@@ -1,9 +1,11 @@
+import { CALIBUR_IMPLEMENTATION_ADDRESS } from '../../../constants'
 import { DelegationError, UserInputValidationError } from '../../../errors'
 import {
   createTransactionIntent,
   getAccountsV2,
   signature as submitSignature,
 } from '../../../openapi-client'
+import { isDelegatedTo } from '../delegation'
 import type {
   Hash,
   Hex,
@@ -101,8 +103,6 @@ export async function sendTransaction(
 
   // 2. Resolve the delegated-account record, then decide whether to (re)sign the
   //    EIP-7702 authorization based on ACTUAL on-chain delegation state.
-  const implementationAddress: Hex =
-    '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
   const publicClient = viem.createPublicClient({ chain, transport })
   const eoaAddress = viem.getAddress(account.address)
 
@@ -113,7 +113,11 @@ export async function sendTransaction(
     chainId: chainId,
   })
 
+  // Take the implementation address from the account record (the backend's source
+  // of truth) so the signed authorization and the on-chain check match what the
+  // platform registered. Fall back to the known Calibur address if absent.
   let txAccountId: string
+  let implementationAddress: Hex
   if (response.data.length === 0) {
     // No delegated-account record yet - register one.
     const updated = await update({
@@ -123,8 +127,15 @@ export async function sendTransaction(
       accountId: account.id,
     })
     txAccountId = updated.id
+    implementationAddress =
+      (updated.smartAccount?.implementationAddress as Hex | undefined) ??
+      CALIBUR_IMPLEMENTATION_ADDRESS
   } else {
     txAccountId = response.data[0].id
+    implementationAddress =
+      (response.data[0].smartAccount?.implementationAddress as
+        | Hex
+        | undefined) ?? CALIBUR_IMPLEMENTATION_ADDRESS
   }
 
   // TRANSITIONAL: stale records can read delegated while the EOA is bare on-chain
@@ -132,11 +143,21 @@ export async function sendTransaction(
   // API backfill makes the DB authoritative, then REMOVE this getCode call and
   // trust the record alone (no RPC).
   let signedAuthorization: string | undefined
-  const code = await publicClient.getCode({ address: eoaAddress })
-  const delegationDesignator =
-    `0xef0100${implementationAddress.slice(2)}`.toLowerCase()
-  const isDelegatedOnChain = code?.toLowerCase() === delegationDesignator
-  if (!isDelegatedOnChain) {
+  // Fail open: if the on-chain code is unreadable (RPC error), sign the
+  // authorization anyway. Re-delegating an already-delegated EOA is harmless,
+  // but skipping a needed authorization reverts on-chain with AA34.
+  let delegatedOnChain = false
+  try {
+    const code = await publicClient.getCode({ address: eoaAddress })
+    delegatedOnChain = isDelegatedTo(code, implementationAddress)
+  } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: a fallback notice belongs on stderr (warn), not stdout (log).
+    console.warn(
+      '[Openfort] Could not read on-chain code for EIP-7702 delegation check; signing authorization anyway.',
+      error,
+    )
+  }
+  if (!delegatedOnChain) {
     const eoaNonce = await publicClient.getTransactionCount({
       address: account.address,
     })
