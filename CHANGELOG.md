@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.5
+
+### Patch Changes
+
+- [#115](https://github.com/openfort-xyz/openfort-node/pull/115) [`38abe62`](https://github.com/openfort-xyz/openfort-node/commit/38abe62304970e1f07f22d16b5aa462f5084ce81) Thanks [@isardmart](https://github.com/isardmart)! - gate EIP-7702 authorization when EOA not delegated on-chain
+
 ## 0.10.4
 
 ### Patch Changes
