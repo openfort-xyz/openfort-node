@@ -5,6 +5,15 @@
  */
 
 /**
+ * Calibur implementation contract address used for EIP-7702 delegation.
+ *
+ * An EOA delegated to this implementation has on-chain code equal to the
+ * EIP-7702 designator `0xef0100 || <this address>`.
+ */
+export const CALIBUR_IMPLEMENTATION_ADDRESS =
+  '0x000000009b1d0af20d8c6d0a44e162d11f9b8f00'
+
+/**
  * Server's RSA-4096 public key for import encryption.
  *
  * This key is used to encrypt private keys before sending them to the server
