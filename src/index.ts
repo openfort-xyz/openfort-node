@@ -931,6 +931,9 @@ class Openfort {
     signature: string,
   ): Promise<T> {
     const signedPayload = await sign(this._apiKey, body)
+    if (!/^[\da-f]+$/iu.test(signature)) {
+      throw new Error('Invalid signature')
+    }
     const expectedBuffer = Buffer.from(signedPayload, 'hex')
     const receivedBuffer = Buffer.from(signature, 'hex')
     if (
