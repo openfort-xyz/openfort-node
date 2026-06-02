@@ -1,0 +1,85 @@
+name: External Issue Triage
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if external contributor
+        id: contributor
+        run: |
+          case "${{ github.event.issue.author_association }}" is
+            OWNER)
+              echo "external=false" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "external=true" >> $GITHUB_OUTPUT
+              ;;
+          esac
+
+      - name: Notify Google Chat
+        if: steps.contributor.outputs.external == 'true'
+        run: |
+          curl -X POST "${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "text": "🚨 New external GitHub issue\n\nRepository: '"${{ github.repository }}"'\nTitle: '"${{ github.event.issue.title }}"'\nAuthor: '"${{ github.event.issue.user.login }}"'\nURL: '"${{ github.event.issue.html_url }}"'"
+            }'
+
+      - name: Create Notion task
+        if: steps.contributor.outputs.external == 'true'
+        run: |
+          jq -n \
+            --arg db "$NOTION_DATABASE_ID" \
+            --arg title "${{ github.event.issue.title }}" \
+            --arg url "${{ github.event.issue.html_url }}" \
+            --arg repo "${{ github.repository }}" \
+            --arg author "${{ github.event.issue.user.login }}" \
+            '{
+              parent: { database_id: $db },
+              properties: {
+                Title: {
+                  title: [
+                    {
+                      text: {
+                        content: $title
+                      }
+                    }
+                  ]
+                },
+                Repository: {
+                  rich_text: [
+                    {
+                      text: {
+                        content: $repo
+                      }
+                    }
+                  ]
+                },
+                Author: {
+                  rich_text: [
+                    {
+                      text: {
+                        content: $author
+                      }
+                    }
+                  ]
+                },
+                "GitHub URL": {
+                  url: $url
+                }
+              }
+            }' > notion.json
+
+          curl -X POST https://api.notion.com/v1/pages \
+            -H "Authorization: Bearer $NOTION_TOKEN" \
+            -H "Notion-Version: 2022-06-28" \
+            -H "Content-Type: application/json" \
+            --data @notion.json
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
