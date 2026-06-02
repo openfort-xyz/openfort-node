@@ -23,12 +23,24 @@ jobs:
 
       - name: Notify Google Chat
         if: steps.contributor.outputs.external == 'true'
+        env:
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          REPOSITORY: ${{ github.repository }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
         run: |
-          curl -X POST "${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}" \
+          payload="$(jq -n \
+            --arg repository "$REPOSITORY" \
+            --arg title "$ISSUE_TITLE" \
+            --arg author "$ISSUE_AUTHOR" \
+            --arg url "$ISSUE_URL" \
+            '{text: ("🚨 New external GitHub issue\n\nRepository: " + $repository + "\nTitle: " + $title + "\nAuthor: " + $author + "\nURL: " + $url)}'
+          )"
+
+          curl -X POST "$GOOGLE_CHAT_WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d '{
-              "text": "🚨 New external GitHub issue\n\nRepository: '"${{ github.repository }}"'\nTitle: '"${{ github.event.issue.title }}"'\nAuthor: '"${{ github.event.issue.user.login }}"'\nURL: '"${{ github.event.issue.html_url }}"'"
-            }'
+            --data "$payload"
 
       - name: Create Notion task
         if: steps.contributor.outputs.external == 'true'
