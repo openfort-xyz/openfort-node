@@ -47,10 +47,10 @@ jobs:
         run: |
           jq -n \
             --arg db "$NOTION_DATABASE_ID" \
-            --arg title "${{ github.event.issue.title }}" \
-            --arg url "${{ github.event.issue.html_url }}" \
-            --arg repo "${{ github.repository }}" \
-            --arg author "${{ github.event.issue.user.login }}" \
+            --arg title "$ISSUE_TITLE" \
+            --arg url "$ISSUE_URL" \
+            --arg repo "$REPO" \
+            --arg author "$ISSUE_AUTHOR" \
             '{
               parent: { database_id: $db },
               properties: {
@@ -95,3 +95,7 @@ jobs:
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          REPO: ${{ github.repository }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
