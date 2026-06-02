@@ -15,7 +15,7 @@ jobs:
       - name: Check if external contributor
         id: contributor
         run: |
-          case "${{ github.event.issue.author_association }}" is
+          case "${{ github.event.issue.author_association }}" in
             OWNER)
               echo "external=false" >> $GITHUB_OUTPUT
               ;;
