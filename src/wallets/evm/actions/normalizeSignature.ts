@@ -9,9 +9,14 @@
  * @returns The signature with a corrected `v` byte
  */
 export function normalizeSignature(sig: string): string {
-  const v = parseInt(sig.slice(-2), 16)
+  const vByte = sig.slice(-2)
+  if (!/^[\da-fA-F]{2}$/.test(vByte)) {
+    throw new Error('Invalid signature recovery byte')
+  }
+
+  const v = Number.parseInt(vByte, 16)
   if (v < 27) {
-    return sig.slice(0, -2) + (v + 27).toString(16)
+    return sig.slice(0, -2) + (v + 27).toString(16).padStart(2, '0')
   }
   return sig
 }
