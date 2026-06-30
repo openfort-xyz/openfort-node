@@ -20,7 +20,7 @@ cp .env.example .env
 
 3. Edit `.env` with your Openfort API key:
 ```bash
-OPENFORT_API_KEY=sk_test_...
+OPENFORT_SECRET_KEY=sk_test_...
 CHAIN_ID=80002  # Polygon Amoy testnet
 ```
 
@@ -79,9 +79,9 @@ pnpm example evm/accounts/createAccount.ts
 | `pregenerate.ts` | Pre-generate a user with embedded wallet |
 
 > **Note:** The `pregenerate.ts` example requires Shield configuration. See `.env.example` for required environment variables:
-> - `SHIELD_API_KEY`
-> - `SHIELD_API_SECRET`
-> - `SHIELD_ENCRYPTION_SHARE`
+> - `SHIELD_PUBLISHABLE_KEY`
+> - `SHIELD_SECRET_KEY`
+> - `SHIELD_ENCRYPTION_KEY`
 
 ### Solana Wallet Examples
 

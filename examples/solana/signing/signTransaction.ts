@@ -15,7 +15,7 @@ import {
 } from "@solana/kit";
 import "dotenv/config";
 
-const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
+const openfort = new Openfort(process.env.OPENFORT_SECRET_KEY!, {
   basePath: process.env.OPENFORT_BASE_URL,
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });

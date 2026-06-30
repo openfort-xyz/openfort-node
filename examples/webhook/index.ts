@@ -17,7 +17,7 @@ app.post(
 	"/webhook/openfort",
 	express.raw({ type: "application/json" }),
 	async (req: Request, res: Response) => {
-		const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
+		const openfort = new Openfort(process.env.OPENFORT_SECRET_KEY!, {
 			basePath: process.env.OPENFORT_BASE_URL,
 		});
 		try {

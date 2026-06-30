@@ -3,7 +3,7 @@
 import 'dotenv/config'
 import Openfort from '@openfort/openfort-node'
 
-const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
+const openfort = new Openfort(process.env.OPENFORT_SECRET_KEY!, {
   walletSecret: process.env.OPENFORT_WALLET_SECRET!,
 })
 

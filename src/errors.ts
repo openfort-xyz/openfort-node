@@ -13,7 +13,7 @@ Missing required Openfort API key.
 
 You can set it as an environment variable:
 
-OPENFORT_API_KEY=sk_test_...
+OPENFORT_SECRET_KEY=sk_test_...
 
 You can also pass it to the constructor:
 

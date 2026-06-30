@@ -4,7 +4,7 @@ import Openfort from "@openfort/openfort-node";
 import "dotenv/config";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 
-const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
+const openfort = new Openfort(process.env.OPENFORT_SECRET_KEY!, {
   basePath: process.env.OPENFORT_BASE_URL,
   walletSecret: process.env.OPENFORT_WALLET_SECRET,
 });

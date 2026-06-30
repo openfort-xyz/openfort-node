@@ -3,7 +3,7 @@
 import Openfort, { ShieldAuthProvider } from "@openfort/openfort-node";
 import "dotenv/config";
 
-const openfort = new Openfort(process.env.OPENFORT_API_KEY!, {
+const openfort = new Openfort(process.env.OPENFORT_SECRET_KEY!, {
   basePath: process.env.OPENFORT_BASE_URL,
 });
 
@@ -15,10 +15,10 @@ const result = await openfort.accounts.evm.embedded.pregenerate(
     accountType: "Externally Owned Account"
   },
   {
-    shieldApiKey: process.env.SHIELD_API_KEY!,
-    shieldApiSecret: process.env.SHIELD_API_SECRET!,
+    shieldApiKey: process.env.SHIELD_PUBLISHABLE_KEY!,
+    shieldApiSecret: process.env.SHIELD_SECRET_KEY!,
     shieldAuthProvider: ShieldAuthProvider.OPENFORT,
-    encryptionShare: process.env.SHIELD_ENCRYPTION_SHARE!,
+    encryptionShare: process.env.SHIELD_ENCRYPTION_KEY!,
   }
 );
 
