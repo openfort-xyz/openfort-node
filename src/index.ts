@@ -93,7 +93,7 @@ function isValidPublishableKey(key: string): boolean {
  * Provides access to all Openfort API endpoints and wallet functionality.
  *
  * Environment variables (all optional, constructor options take precedence):
- * - `OPENFORT_API_KEY` - Secret API key (sk_test_... or sk_live_...)
+ * - `OPENFORT_SECRET_KEY` - Secret API key (sk_test_... or sk_live_...)
  * - `OPENFORT_WALLET_SECRET` - Wallet secret for backend wallet operations
  * - `OPENFORT_PUBLISHABLE_KEY` - Publishable key for auth endpoints (pk_test_... or pk_live_...)
  * - `OPENFORT_BASE_URL` - Custom API base URL
@@ -131,7 +131,7 @@ class Openfort {
 
   constructor(apiKey?: string, options?: string | OpenfortOptions) {
     // Resolve API key: explicit parameter > environment variable
-    const resolvedApiKey = apiKey || process.env.OPENFORT_API_KEY
+    const resolvedApiKey = apiKey || process.env.OPENFORT_SECRET_KEY
 
     // Resolve options
     const resolvedBasePath =
