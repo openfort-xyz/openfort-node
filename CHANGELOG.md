@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.6
+
+### Patch Changes
+
+- [#129](https://github.com/openfort-xyz/openfort-node/pull/129) [`98e13ba`](https://github.com/openfort-xyz/openfort-node/commit/98e13ba73670f51b2a9b0b046d1c299d03cffabc) Thanks [@jamalavedra](https://github.com/jamalavedra)! - Update dependencies and resolve `pnpm audit` advisories. Bumps runtime deps (`axios` to ^1.18.1, `jose`, `@openfort/shield-js`) and dev tooling, and adds `pnpm.overrides` for transitive `axios`, `ws`, and `esbuild` so `pnpm audit` reports no known vulnerabilities.
+
 ## 0.10.5
 
 ### Patch Changes
