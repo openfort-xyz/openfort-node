@@ -173,15 +173,15 @@ export interface SendTransactionOptions {
 }
 
 // Re-export viem types for convenience
+// Re-export openapi types for convenience
 export type {
   Address,
   Hash,
   Hex,
+  Interaction,
   SignableMessage,
+  TransactionIntentResponse,
   TransactionSerializable,
   TypedData,
   TypedDataDefinition,
 }
-
-// Re-export openapi types for convenience
-export type { Interaction, TransactionIntentResponse }
