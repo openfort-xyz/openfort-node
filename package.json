@@ -41,7 +41,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepublishOnly": "pnpm install && pnpm build",
     "changeset": "changeset",
-    "changeset:version": "pnpm install --lockfile-only && node scripts/changeset-version.mjs",
+    "changeset:version": "pnpm install --lockfile-only && changeset version",
     "changeset:publish": "pnpm build && changeset publish",
     "changeset:prepublish": "pnpm build",
     "check": "biome check --write --unsafe",

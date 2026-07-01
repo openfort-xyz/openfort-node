@@ -4,29 +4,74 @@ on:
   push:
     branches: [main]
 
+# Don't cancel an in-flight publish; a superseding push should queue behind it.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
+
+permissions: {} # each job declares only the permissions it needs
 
 jobs:
-  release:
-    name: Create version pull request and github release
+  # 1. When changesets are present, open/update the "version package" PR. The
+  #    changelog (which calls the GitHub API to resolve the PR behind each
+  #    changeset) is generated here, in an isolated, safely re-runnable step —
+  #    decoupled from publishing.
+  version:
+    name: Create version pull request
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    outputs:
+      hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
     permissions:
-      contents: write       # To push commits and tags
-      pull-requests: write  # To create and update PRs
-      id-token: write       # For OIDC and provenance
-      # packages: write       # To publish package to GHCR
+      contents: write       # commit version/changelog updates to the release PR
+      pull-requests: write  # create and update the release PR
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
-          # Fetch full history so Changesets can resolve the commit behind
-          # each changeset when generating changelog entries (avoids flaky
-          # GitHub API lookups against a shallow clone).
+          # Full history so Changesets can resolve the commit behind each
+          # changeset when generating changelog entries.
           fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Create version pull request
+        id: changesets
+        uses: changesets/action@ce079ea084e08a340947ed4d6ecedb2433c8f293 # v1
+        with:
+          version: pnpm changeset:version
+          commit: "chore: version package"
+          title: "chore: version package"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # 2. Once the version PR is merged there are no changesets left, so publish.
+  #    This step does NOT regenerate the changelog and makes no GitHub GraphQL
+  #    call, so the transient "Premature close" failure cannot block a publish.
+  release:
+    name: Publish to npm
+    needs: version
+    if: needs.version.outputs.hasChangesets == 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write  # create GitHub releases and tags after publish
+      id-token: write  # OIDC / npm provenance
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Install pnpm
         uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
@@ -46,10 +91,7 @@ jobs:
         uses: changesets/action@ce079ea084e08a340947ed4d6ecedb2433c8f293 # v1
         with:
           publish: pnpm changeset:publish
-          version: pnpm changeset:version
-          commit: "chore: version package" # Default is `Version Packages`
-          title: "chore: version package"  # Default is `Version Packages`
         env:
-          NPM_CONFIG_PROVENANCE: true # this works only with npmjs and public repos, not ghcr
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    # we need this for PRs
+          NPM_CONFIG_PROVENANCE: true # npmjs + public repos only, not ghcr
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: '' # bug in changesets/action - https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
