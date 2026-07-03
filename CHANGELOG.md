@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.7
+
+### Patch Changes
+
+- [#133](https://github.com/openfort-xyz/openfort-node/pull/133) [`915b7c5`](https://github.com/openfort-xyz/openfort-node/commit/915b7c5a1881129522e4bd6e6c75fd49ccb3e9b7) Thanks [@jamalavedra](https://github.com/jamalavedra)! - Fix EVM backend `sendTransaction` EIP-7702 delegation on chains where the `Calibur` implementation type is not available (e.g. Polygon Amoy / 80002).
+
+  The register-on-first-send path previously hardcoded `implementationType: "Calibur"`, which is rejected on Amoy with `not available in chainId '80002'`. It now uses a chain-aware default (`CaliburV9`, available on Amoy) and falls back to `Calibur` only on chains where `CaliburV9` is not available (Ethereum Mainnet / 1). Callers can override per call via the new `SendTransactionOptions.implementationType`.
+
 ## 0.10.6
 
 ### Patch Changes
