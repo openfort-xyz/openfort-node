@@ -30,7 +30,11 @@ vi.mock('viem', () => ({
   })),
 }))
 
-vi.mock('viem/chains', () => ({ baseSepolia: { id: 84532 } }))
+vi.mock('viem/chains', () => ({
+  baseSepolia: { id: 84532 },
+  polygonAmoy: { id: 80002 },
+  mainnet: { id: 1 },
+}))
 
 vi.mock('viem/utils', () => ({ hashAuthorization: mocks.hashAuthorization }))
 
@@ -198,5 +202,64 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
     const intentArg = mocks.createTransactionIntent.mock.calls[0][0]
     expect(intentArg.account).toBe('acc_new_del')
     expect(intentArg.signedAuthorization).toBe('0xsignature')
+  })
+
+  it('registers with the chain-aware default (CaliburV9) on first send', async () => {
+    mocks.getAccountsV2.mockResolvedValue({ data: [] })
+    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.getCode.mockResolvedValue(undefined)
+
+    const account = makeAccount()
+    await sendTransaction(opts(account)) // baseSepolia (84532)
+
+    expect(mocks.update).toHaveBeenCalledWith(
+      expect.objectContaining({ implementationType: 'CaliburV9' }),
+    )
+  })
+
+  it('registers with CaliburV9 on Polygon Amoy (80002), where V8 Calibur is not deployed', async () => {
+    mocks.getAccountsV2.mockResolvedValue({ data: [] })
+    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.getCode.mockResolvedValue(undefined)
+
+    const account = makeAccount()
+    await sendTransaction({ ...opts(account), chainId: 80002 })
+
+    expect(mocks.update).toHaveBeenCalledWith(
+      expect.objectContaining({
+        implementationType: 'CaliburV9',
+        chainId: 80002,
+      }),
+    )
+  })
+
+  it('falls back to V8 Calibur on Ethereum Mainnet (1), where CaliburV9 is not deployed', async () => {
+    mocks.getAccountsV2.mockResolvedValue({ data: [] })
+    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.getCode.mockResolvedValue(undefined)
+
+    const account = makeAccount()
+    await sendTransaction({ ...opts(account), chainId: 1 })
+
+    expect(mocks.update).toHaveBeenCalledWith(
+      expect.objectContaining({ implementationType: 'Calibur', chainId: 1 }),
+    )
+  })
+
+  it('registers with an explicit implementationType override when provided', async () => {
+    mocks.getAccountsV2.mockResolvedValue({ data: [] })
+    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.getCode.mockResolvedValue(undefined)
+
+    const account = makeAccount()
+    await sendTransaction({
+      ...opts(account),
+      chainId: 1,
+      implementationType: 'CaliburV9',
+    })
+
+    expect(mocks.update).toHaveBeenCalledWith(
+      expect.objectContaining({ implementationType: 'CaliburV9' }),
+    )
   })
 })

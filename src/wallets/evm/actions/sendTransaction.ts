@@ -13,6 +13,36 @@ import type {
   TransactionIntentResponse,
 } from '../types'
 import { update } from './updateToDelegated'
+
+/**
+ * Default EIP-7702 implementation type registered on the first send when an
+ * account has no delegated record yet.
+ *
+ * `CaliburV9` is accepted on every chain the older `Calibur` type supports plus
+ * Polygon Amoy (80002), so it is the portable default. `Calibur` alone is
+ * rejected on Amoy (the API returns `not available in chainId '80002'`).
+ */
+const DEFAULT_DELEGATION_IMPLEMENTATION_TYPE = 'CaliburV9'
+
+/**
+ * Chains where `CaliburV9` is not available and the older `Calibur` type must be
+ * used instead. Kept minimal and explicit; callers can always override via
+ * `SendTransactionOptions.implementationType`.
+ *
+ * - `1` — Ethereum Mainnet: `Calibur` only.
+ */
+const CHAINS_REQUIRING_CALIBUR_V8: ReadonlySet<number> = new Set([1])
+
+/**
+ * The default EIP-7702 implementation type for a chain, used when the caller
+ * does not pass one explicitly. See {@link DEFAULT_DELEGATION_IMPLEMENTATION_TYPE}.
+ */
+function defaultImplementationTypeForChain(chainId: number): string {
+  return CHAINS_REQUIRING_CALIBUR_V8.has(chainId)
+    ? 'Calibur'
+    : DEFAULT_DELEGATION_IMPLEMENTATION_TYPE
+}
+
 /**
  * Delegates an EVM account via EIP-7702 and sends a gasless transaction in one call.
  *
@@ -63,6 +93,8 @@ export async function sendTransaction(
   }
 
   const { account, chainId, interactions, policy, rpcUrl } = options
+  const implementationType =
+    options.implementationType ?? defaultImplementationTypeForChain(chainId)
 
   // 1. Resolve chain + RPC
   // This RPC gates EIP-7702 authorization signing, so require a trusted scheme:
@@ -123,7 +155,7 @@ export async function sendTransaction(
     const updated = await update({
       walletId: account.walletId,
       chainId,
-      implementationType: 'Calibur',
+      implementationType,
       accountId: account.id,
     })
     txAccountId = updated.id
