@@ -170,6 +170,20 @@ export interface SendTransactionOptions {
   policy?: string
   /** Custom RPC URL. If omitted, uses viem's default public RPC for the chain. */
   rpcUrl?: string
+  /**
+   * EIP-7702 implementation type to register when the account has no delegated
+   * record yet (the register-on-first-send path). Optional.
+   *
+   * When omitted, a chain-aware default is used: `"CaliburV9"` on every chain
+   * where it is deployed (including Polygon Amoy / 80002), falling back to
+   * `"Calibur"` (V8) on the chains where V9 is not available (e.g. Ethereum
+   * Mainnet / 1). Set this explicitly to override the default for a chain — for
+   * example if a newer implementation type ships before this SDK is updated.
+   *
+   * Ignored when a delegated-account record already exists (the existing
+   * record's implementation is authoritative).
+   */
+  implementationType?: string
 }
 
 // Re-export viem types for convenience
