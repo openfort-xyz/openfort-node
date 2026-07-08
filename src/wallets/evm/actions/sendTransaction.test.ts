@@ -84,7 +84,9 @@ beforeEach(() => {
 
 describe('sendTransaction — EIP-7702 authorization gating', () => {
   it('signs the authorization when a delegated record exists but the EOA is NOT delegated on-chain (stale-record regression)', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
+    mocks.getAccountsV2.mockResolvedValue({
+      data: [delegatedRecord('acc_del')],
+    })
     mocks.getCode.mockResolvedValue('0x') // bare EOA on-chain despite the DB record
 
     const account = makeAccount()
@@ -133,7 +135,9 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
   })
 
   it('does NOT re-sign the authorization when the EOA is already delegated on-chain to the record implementation', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
+    mocks.getAccountsV2.mockResolvedValue({
+      data: [delegatedRecord('acc_del')],
+    })
     mocks.getCode.mockResolvedValue(DESIGNATOR)
 
     const account = makeAccount()
@@ -146,7 +150,9 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
   })
 
   it('matches the on-chain designator case-insensitively', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
+    mocks.getAccountsV2.mockResolvedValue({
+      data: [delegatedRecord('acc_del')],
+    })
     mocks.getCode.mockResolvedValue(`0xEF0100${IMPL.slice(2).toUpperCase()}`)
 
     const account = makeAccount()
@@ -174,7 +180,9 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
   })
 
   it('allows http only for loopback (local dev nodes)', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
+    mocks.getAccountsV2.mockResolvedValue({
+      data: [delegatedRecord('acc_del')],
+    })
     mocks.getCode.mockResolvedValue(DESIGNATOR)
 
     const account = makeAccount()
@@ -184,7 +192,9 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
   })
 
   it('fails closed when the on-chain code read throws (RPC error), never signing blindly', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
+    mocks.getAccountsV2.mockResolvedValue({
+      data: [delegatedRecord('acc_del')],
+    })
     mocks.getCode.mockRejectedValue(new Error('RPC down'))
 
     const account = makeAccount()
