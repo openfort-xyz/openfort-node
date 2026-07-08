@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.8
+
+### Patch Changes
+
+- [#135](https://github.com/openfort-xyz/openfort-node/pull/135) [`bbc2446`](https://github.com/openfort-xyz/openfort-node/commit/bbc244693aa1483eb34da797990fe045615b04b6) Thanks [@jamalavedra](https://github.com/jamalavedra)! - improve sendTransaction
+
 ## 0.10.7
 
 ### Patch Changes
