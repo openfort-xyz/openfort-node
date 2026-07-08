@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { CALIBUR_IMPLEMENTATION_ADDRESS } from '../../../constants'
 import type { EvmAccount, SendTransactionOptions } from '../types'
 
 // Shared mocks (hoisted so vi.mock factories can reference them).
@@ -41,8 +40,17 @@ vi.mock('viem/utils', () => ({ hashAuthorization: mocks.hashAuthorization }))
 // Imported after mocks are registered.
 const { sendTransaction } = await import('./sendTransaction')
 
-const CALIBUR = CALIBUR_IMPLEMENTATION_ADDRESS
-const DESIGNATOR = `0xef0100${CALIBUR.slice(2)}`
+// The implementation address is always sourced from the account record's
+// `smartAccount.implementationAddress` (the backend's source of truth). A
+// delegated record with a bare EOA on-chain yields the designator below.
+const IMPL = '0x00000000000000000000000000000000deadbeef'
+const DESIGNATOR = `0xef0100${IMPL.slice(2)}`
+
+// A delegated-account record as returned by getAccountsV2 / updateToDelegated.
+const delegatedRecord = (id: string, implementationAddress = IMPL) => ({
+  id,
+  smartAccount: { implementationAddress },
+})
 
 function makeAccount() {
   return {
@@ -66,6 +74,7 @@ beforeEach(() => {
   vi.clearAllMocks()
   mocks.hashAuthorization.mockReturnValue('0xauthhash')
   mocks.getTransactionCount.mockResolvedValue(0)
+  mocks.update.mockResolvedValue(delegatedRecord('acc_new_del'))
   mocks.createTransactionIntent.mockResolvedValue({
     id: 'tin_x',
     nextAction: null,
@@ -75,7 +84,7 @@ beforeEach(() => {
 
 describe('sendTransaction — EIP-7702 authorization gating', () => {
   it('signs the authorization when a delegated record exists but the EOA is NOT delegated on-chain (stale-record regression)', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [{ id: 'acc_del' }] })
+    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
     mocks.getCode.mockResolvedValue('0x') // bare EOA on-chain despite the DB record
 
     const account = makeAccount()
@@ -123,8 +132,8 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
     ).toBeUndefined()
   })
 
-  it('does NOT re-sign the authorization when the EOA is already delegated on-chain to Calibur', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [{ id: 'acc_del' }] })
+  it('does NOT re-sign the authorization when the EOA is already delegated on-chain to the record implementation', async () => {
+    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
     mocks.getCode.mockResolvedValue(DESIGNATOR)
 
     const account = makeAccount()
@@ -137,8 +146,8 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
   })
 
   it('matches the on-chain designator case-insensitively', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [{ id: 'acc_del' }] })
-    mocks.getCode.mockResolvedValue(`0xEF0100${CALIBUR.slice(2).toUpperCase()}`)
+    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
+    mocks.getCode.mockResolvedValue(`0xEF0100${IMPL.slice(2).toUpperCase()}`)
 
     const account = makeAccount()
     await sendTransaction(opts(account))
@@ -165,7 +174,7 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
   })
 
   it('allows http only for loopback (local dev nodes)', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [{ id: 'acc_del' }] })
+    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
     mocks.getCode.mockResolvedValue(DESIGNATOR)
 
     const account = makeAccount()
@@ -174,25 +183,21 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
     ).resolves.toBeDefined()
   })
 
-  it('fails open and signs the authorization when the on-chain code read throws (RPC error)', async () => {
-    mocks.getAccountsV2.mockResolvedValue({ data: [{ id: 'acc_del' }] })
+  it('fails closed when the on-chain code read throws (RPC error), never signing blindly', async () => {
+    mocks.getAccountsV2.mockResolvedValue({ data: [delegatedRecord('acc_del')] })
     mocks.getCode.mockRejectedValue(new Error('RPC down'))
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
     const account = makeAccount()
-    await sendTransaction(opts(account))
-
-    expect(account.sign).toHaveBeenCalledWith({ hash: '0xauthhash' })
-    expect(
-      mocks.createTransactionIntent.mock.calls[0][0].signedAuthorization,
-    ).toBe('0xsignature')
-    expect(warn).toHaveBeenCalled()
-    warn.mockRestore()
+    await expect(sendTransaction(opts(account))).rejects.toThrow(
+      /Failed to read on-chain code/,
+    )
+    expect(account.sign).not.toHaveBeenCalled()
+    expect(mocks.createTransactionIntent).not.toHaveBeenCalled()
   })
 
   it('registers a delegated record and signs the authorization on first send (no record yet)', async () => {
     mocks.getAccountsV2.mockResolvedValue({ data: [] })
-    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.update.mockResolvedValue(delegatedRecord('acc_new_del'))
     mocks.getCode.mockResolvedValue(undefined) // viem returns undefined for empty code
 
     const account = makeAccount()
@@ -206,7 +211,7 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
 
   it('registers with the chain-aware default (CaliburV9) on first send', async () => {
     mocks.getAccountsV2.mockResolvedValue({ data: [] })
-    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.update.mockResolvedValue(delegatedRecord('acc_new_del'))
     mocks.getCode.mockResolvedValue(undefined)
 
     const account = makeAccount()
@@ -219,7 +224,7 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
 
   it('registers with CaliburV9 on Polygon Amoy (80002), where V8 Calibur is not deployed', async () => {
     mocks.getAccountsV2.mockResolvedValue({ data: [] })
-    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.update.mockResolvedValue(delegatedRecord('acc_new_del'))
     mocks.getCode.mockResolvedValue(undefined)
 
     const account = makeAccount()
@@ -235,7 +240,7 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
 
   it('falls back to V8 Calibur on Ethereum Mainnet (1), where CaliburV9 is not deployed', async () => {
     mocks.getAccountsV2.mockResolvedValue({ data: [] })
-    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.update.mockResolvedValue(delegatedRecord('acc_new_del'))
     mocks.getCode.mockResolvedValue(undefined)
 
     const account = makeAccount()
@@ -248,7 +253,7 @@ describe('sendTransaction — EIP-7702 authorization gating', () => {
 
   it('registers with an explicit implementationType override when provided', async () => {
     mocks.getAccountsV2.mockResolvedValue({ data: [] })
-    mocks.update.mockResolvedValue({ id: 'acc_new_del' })
+    mocks.update.mockResolvedValue(delegatedRecord('acc_new_del'))
     mocks.getCode.mockResolvedValue(undefined)
 
     const account = makeAccount()
