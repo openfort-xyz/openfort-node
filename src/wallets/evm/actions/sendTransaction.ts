@@ -1,4 +1,3 @@
-import { CALIBUR_IMPLEMENTATION_ADDRESS } from '../../../constants'
 import { DelegationError, UserInputValidationError } from '../../../errors'
 import {
   createTransactionIntent,
@@ -145,9 +144,6 @@ export async function sendTransaction(
     chainId: chainId,
   })
 
-  // Take the implementation address from the account record (the backend's source
-  // of truth) so the signed authorization and the on-chain check match what the
-  // platform registered. Fall back to the known Calibur address if absent.
   let txAccountId: string
   let implementationAddress: Hex
   if (response.data.length === 0) {
@@ -159,34 +155,33 @@ export async function sendTransaction(
       accountId: account.id,
     })
     txAccountId = updated.id
-    implementationAddress =
-      (updated.smartAccount?.implementationAddress as Hex | undefined) ??
-      CALIBUR_IMPLEMENTATION_ADDRESS
+    if (!updated.smartAccount?.implementationAddress) {
+      throw new DelegationError(
+        `Failed to create delegated account record for ${eoaAddress} on chain ${chainId}.`,
+      )
+    }
+    implementationAddress = updated.smartAccount?.implementationAddress as Hex
   } else {
     txAccountId = response.data[0].id
-    implementationAddress =
-      (response.data[0].smartAccount?.implementationAddress as
-        | Hex
-        | undefined) ?? CALIBUR_IMPLEMENTATION_ADDRESS
+    if (!response.data[0].smartAccount?.implementationAddress) {
+      throw new DelegationError(
+        `Failed to create delegated account record for ${eoaAddress} on chain ${chainId}.`,
+      )
+    }
+    implementationAddress = response.data[0].smartAccount
+      ?.implementationAddress as Hex
   }
 
   // TRANSITIONAL: stale records can read delegated while the EOA is bare on-chain
-  // (code === '0x'), causing AA34. Gate signing on actual on-chain state until the
-  // API backfill makes the DB authoritative, then REMOVE this getCode call and
-  // trust the record alone (no RPC).
+  // (code === '0x'), causing AA34.
   let signedAuthorization: string | undefined
-  // Fail open: if the on-chain code is unreadable (RPC error), sign the
-  // authorization anyway. Re-delegating an already-delegated EOA is harmless,
-  // but skipping a needed authorization reverts on-chain with AA34.
   let delegatedOnChain = false
   try {
     const code = await publicClient.getCode({ address: eoaAddress })
     delegatedOnChain = isDelegatedTo(code, implementationAddress)
   } catch (error) {
-    // biome-ignore lint/suspicious/noConsole: a fallback notice belongs on stderr (warn), not stdout (log).
-    console.warn(
-      '[Openfort] Could not read on-chain code for EIP-7702 delegation check; signing authorization anyway.',
-      error,
+    throw new DelegationError(
+      `Failed to read on-chain code for ${eoaAddress} on chain ${chainId}: ${error}`,
     )
   }
   if (!delegatedOnChain) {
