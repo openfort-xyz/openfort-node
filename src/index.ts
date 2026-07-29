@@ -12,7 +12,10 @@ import {
   MissingAPIKeyError,
 } from './errors'
 import * as api from './openapi-client'
-import { configure } from './openapi-client/openfortApiClient'
+import {
+  configure,
+  type OpenfortRequestInfo,
+} from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
 import { EvmClient } from './wallets/evm/evmClient'
 import { SolanaClient } from './wallets/solana/solanaClient'
@@ -39,6 +42,13 @@ export interface OpenfortOptions {
   debugging?: boolean
   /** Publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
   publishableKey?: string
+  /**
+   * Observability callback invoked after every API request (successful or not)
+   * with its request id, method, path, status, and duration. The request id is
+   * also sent as `x-request-id` and adopted by the Openfort API as its own
+   * request/trace id, so it joins your logs to Openfort's.
+   */
+  onRequest?: (info: OpenfortRequestInfo) => void
 }
 
 /**
@@ -180,6 +190,7 @@ class Openfort {
       walletSecret: resolvedWalletSecret,
       debugging,
       publishableKey: resolvedPublishableKey,
+      onRequest: typeof options === 'object' ? options.onRequest : undefined,
     })
   }
 

@@ -31,4 +31,7 @@ export * from './generated/subscriptions/subscriptions'
 export * from './generated/transaction-intents/transaction-intents'
 export * from './generated/users/users'
 // Request options type
-export type { RequestOptions } from './openfortApiClient'
+export type {
+  OpenfortRequestInfo,
+  RequestOptions,
+} from './openfortApiClient'
