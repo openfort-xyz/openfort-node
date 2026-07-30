@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.0
+
+### Minor Changes
+
+- [#138](https://github.com/openfort-xyz/openfort-node/pull/138) [`8c6c730`](https://github.com/openfort-xyz/openfort-node/commit/8c6c730d028d8a74a879f4ef7e901ad53af69476) Thanks [@n00m4d](https://github.com/n00m4d)! - Generate request ID
+
 ## 0.10.8
 
 ### Patch Changes
