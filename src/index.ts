@@ -534,6 +534,13 @@ class Openfort {
    * Transaction intents represent a desired on-chain action (contract calls, transfers).
    * When a fee sponsorship policy is provided (or auto-discovered from project-scoped policies),
    * gas costs are sponsored according to the policy's strategy.
+   *
+   * The `policy` field accepted by `create` is a fee-sponsorship ID (starts
+   * with `pol_`, from `openfort.feeSponsorship.create()`), not a guardrail
+   * policy ID (`ply_`, from `openfort.policies.create()`). Guardrail policies
+   * are attached by scope and enforced automatically; a guardrail policy that
+   * gets linked to a fee sponsorship (via `feeSponsorship.create({ policyId })`)
+   * governs sponsorship eligibility instead of acting as a signing guardrail.
    */
   public get transactionIntents() {
     if (!this._evmClient) {
