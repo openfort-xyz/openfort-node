@@ -225,9 +225,19 @@ export class SolanaClient {
       if (!/^[0-9a-fA-F]+$/.test(hex)) {
         throw new UserInputValidationError('Invalid hex string')
       }
+      if (hex.length % 2 !== 0) {
+        throw new UserInputValidationError(
+          'Private key hex string must contain an even number of characters',
+        )
+      }
       privateKeyBytes = Uint8Array.from(Buffer.from(hex, 'hex'))
     } else if (/^[0-9a-fA-F]+$/.test(options.privateKey)) {
       // Hex format without prefix
+      if (options.privateKey.length % 2 !== 0) {
+        throw new UserInputValidationError(
+          'Private key hex string must contain an even number of characters',
+        )
+      }
       privateKeyBytes = Uint8Array.from(Buffer.from(options.privateKey, 'hex'))
     } else {
       // Assume base58 format (standard Solana format)
