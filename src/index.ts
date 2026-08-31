@@ -525,6 +525,35 @@ class Openfort {
   }
 
   // ============================================
+  // Transactions API (v2)
+  // ============================================
+
+  /**
+   * `/v2/transactions` endpoints for creating and managing on-chain transactions.
+   *
+   * A transaction represents a desired on-chain action (contract calls, transfers) executed by an
+   * account (`acc_`). Gas can be paid by a fee sponsorship (`pol_`, see `/v2/fee-sponsorship`);
+   * `waitForReceipt: false` returns at broadcast instead of holding the request until the receipt.
+   * Poll `get` until `status` is terminal (`succeeded`, `reverted`, `failed`, `expired`); pass
+   * `expand` values (`timeline`, `userOperation`, `logs`, `account`, `user`, `feeSponsorship`)
+   * for the heavier payloads, which are omitted by default.
+   */
+  public get transactions() {
+    return {
+      /** List transactions (filters: account, user, wallet, feeSponsorship, chainId, status) */
+      list: api.listTransactionsV2,
+      /** Create a transaction from `calls`, executed by an `account` */
+      create: api.createTransactionV2,
+      /** Get a transaction by ID */
+      get: api.getTransactionV2,
+      /** Submit the signature of `nextAction.hash` and broadcast the transaction */
+      signature: api.submitTransactionSignatureV2,
+      /** Estimate gas cost for a transaction before creating it */
+      estimateCost: api.estimateTransactionV2,
+    }
+  }
+
+  // ============================================
   // Transaction Intents API
   // ============================================
 
@@ -534,6 +563,9 @@ class Openfort {
    * Transaction intents represent a desired on-chain action (contract calls, transfers).
    * When a fee sponsorship policy is provided (or auto-discovered from project-scoped policies),
    * gas costs are sponsored according to the policy's strategy.
+   *
+   * @deprecated Use {@link transactions} (`/v2/transactions`): `policy` is `feeSponsorship` there,
+   * `interactions` are `calls`, the receipt is `receipt` and the lifecycle is a single `status` field.
    */
   public get transactionIntents() {
     if (!this._evmClient) {
