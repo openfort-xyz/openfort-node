@@ -540,9 +540,9 @@ class Openfort {
    */
   public get transactions() {
     return {
-      /** List transactions (filters: account, user, wallet, feeSponsorship, chainId, status) */
+      /** List transactions (filters: accountId, userId, walletId, feeSponsorshipId, chainId, status) */
       list: api.listTransactionsV2,
-      /** Create a transaction from `calls`, executed by an `account` */
+      /** Create a transaction from `calls`, executed by the `accountId` account */
       create: api.createTransactionV2,
       /** Get a transaction by ID */
       get: api.getTransactionV2,

@@ -2958,8 +2958,6 @@ export interface TransactionResponseV2 {
   feeSponsorshipId?: string;
   /** The executing account. Present only with `expand=account`. */
   account?: AccountV2Response;
-  /** The user that owns the wallet. Present only with `expand=user`. */
-  user?: AuthUserResponse;
   /** The fee sponsorship paying for gas. Present only with `expand=feeSponsorship`. */
   feeSponsorship?: FeeSponsorshipResponse;
   /** The calls this transaction executes. */
@@ -2999,7 +2997,6 @@ export type TransactionExpandableV2 = typeof TransactionExpandableV2[keyof typeo
 
 export const TransactionExpandableV2 = {
   account: 'account',
-  user: 'user',
   feeSponsorship: 'feeSponsorship',
   timeline: 'timeline',
   userOperation: 'userOperation',
@@ -3028,13 +3025,13 @@ export interface TransactionListQueriesV2 {
   /** The chain ID. Must be a [supported chain](/development/chains). */
   chainId?: number;
   /** Filter by account ID (starts with acc_). */
-  account?: string[];
+  accountId?: string[];
   /** Filter by user ID (starts with usr_). */
-  user?: string[];
+  userId?: string[];
   /** Filter by wallet ID (starts with pla_). */
-  wallet?: string[];
+  walletId?: string[];
   /** Filter by fee sponsorship ID (starts with pol_). */
-  feeSponsorship?: string[];
+  feeSponsorshipId?: string[];
   /** Filter by transaction status. */
   status?: TransactionStatusV2;
 }
@@ -3043,12 +3040,12 @@ export interface CreateTransactionRequestV2 {
   /** The chain ID. Must be a [supported chain](/development/chains). */
   chainId: number;
   /** ID of the account that executes the transaction (starts with `acc_`). */
-  account: string;
+  accountId: string;
   /**
      * ID of the fee sponsorship that pays for gas (starts with `pol_`).
      * Omit to pay gas from the account's native token balance.
      */
-  feeSponsorship?: string;
+  feeSponsorshipId?: string;
   /**
      * For a fee sponsorship that accepts several user-pay ERC-20 tokens, the on-chain address of the
      * token the user pays the fee in. Must be one of the sponsorship's configured tokens on this chain.
@@ -8091,19 +8088,19 @@ chainId?: number;
 /**
  * Filter by account ID (starts with acc_).
  */
-account?: string[];
+accountId?: string[];
 /**
  * Filter by user ID (starts with usr_).
  */
-user?: string[];
+userId?: string[];
 /**
  * Filter by wallet ID (starts with pla_).
  */
-wallet?: string[];
+walletId?: string[];
 /**
  * Filter by fee sponsorship ID (starts with pol_).
  */
-feeSponsorship?: string[];
+feeSponsorshipId?: string[];
 /**
  * Filter by transaction status.
  */
