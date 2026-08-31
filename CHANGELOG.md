@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.12.1
+
+### Patch Changes
+
+- [#144](https://github.com/openfort-xyz/openfort-node/pull/144) [`bc69422`](https://github.com/openfort-xyz/openfort-node/commit/bc69422bd267f6745afe38a61a3ea3e0d0905c17) Thanks [@n00m4d](https://github.com/n00m4d)! - Arguments naming change
+
 ## 0.12.0
 
 ### Minor Changes
