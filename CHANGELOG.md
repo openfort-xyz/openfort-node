@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.12.0
+
+### Minor Changes
+
+- [#142](https://github.com/openfort-xyz/openfort-node/pull/142) [`7825ea5`](https://github.com/openfort-xyz/openfort-node/commit/7825ea55ab92f460031145fd651e9d8d467a4e5f) Thanks [@n00m4d](https://github.com/n00m4d)! - Transactions V2
+
 ## 0.11.0
 
 ### Minor Changes
