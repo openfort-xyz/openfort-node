@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.12.2
+
+### Patch Changes
+
+- [#146](https://github.com/openfort-xyz/openfort-node/pull/146) [`24947b0`](https://github.com/openfort-xyz/openfort-node/commit/24947b07191224a308cc8b425d040533df8a38ba) Thanks [@n00m4d](https://github.com/n00m4d)! - Update values naming in response
+
 ## 0.12.1
 
 ### Patch Changes
