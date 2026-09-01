@@ -2816,9 +2816,27 @@ export interface FeeSponsorshipResponse {
 
 /**
  * A single call executed by the transaction. Either a raw call (`to`/`value`/`data`)
- * or a contract call resolved through a registered contract (`contract`/`functionName`/`functionArgs`).
+ * or a contract call resolved through a registered contract (`contractId`/`functionName`/`functionArgs`).
  */
-export type Call = Interaction;
+export interface Call {
+  /**
+     * The address that receives the call. Use *only* for raw calls and native token transfers; a
+     * `pla_...` or `acc_...` id is converted to the corresponding address.
+     */
+  to?: string;
+  /** The value sent with the call, as a stringified number in WEI (factor 10^18). */
+  value?: string;
+  /** Raw calldata (hex) for the call. Use instead of `contractId`/`functionName`. */
+  data?: string;
+  /** Hex data appended to the encoded function call. */
+  dataSuffix?: string;
+  /** ID of the contract the call interacts with. Must have been added to Openfort first, starts with `con_`. */
+  contractId?: string;
+  /** The function name of the contract. Accepts a function signature as well (e.g. mint(address)). */
+  functionName?: string;
+  /** The function arguments of the contract, formatted as strings. */
+  functionArgs?: unknown[];
+}
 
 export type UserOperationExecutionType = typeof UserOperationExecutionType[keyof typeof UserOperationExecutionType];
 
@@ -2881,18 +2899,9 @@ export interface SignHashAction {
   hash: string;
 }
 
-export type TransactionReceiptV2Status = typeof TransactionReceiptV2Status[keyof typeof TransactionReceiptV2Status];
-
-
-export const TransactionReceiptV2Status = {
-  success: 'success',
-  reverted: 'reverted',
-} as const;
-
 export interface TransactionReceiptV2 {
   /** Unix timestamp (seconds) when the receipt was recorded. */
   createdAt: number;
-  status: TransactionReceiptV2Status;
   transactionHash?: string;
   blockNumber?: number;
   /** Address the transaction was sent to (the EntryPoint for user operations). */
@@ -2961,7 +2970,7 @@ export interface TransactionResponseV2 {
   /** The fee sponsorship paying for gas. Present only with `expand=feeSponsorship`. */
   feeSponsorship?: FeeSponsorshipResponse;
   /** The calls this transaction executes. */
-  calls?: Interaction[];
+  calls?: Call[];
   /**
      * How the transaction is executed on-chain, discriminated by `type`: `userOperation` (ERC-4337 smart
      * accounts, including EIP-7702 delegated accounts) or `transaction` (plain EOA transaction).
@@ -3051,7 +3060,7 @@ export interface CreateTransactionRequestV2 {
      * token the user pays the fee in. Must be one of the sponsorship's configured tokens on this chain.
      */
   feeSponsorshipToken?: string;
-  calls: Interaction[];
+  calls: Call[];
   /**
      * Whether to hold the request until the transaction is mined and the `receipt` is available (default `true`).
      * Set to `false` to respond as soon as the transaction is broadcast (`status: "submitted"`) and poll
