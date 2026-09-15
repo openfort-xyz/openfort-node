@@ -166,7 +166,18 @@ export interface SendTransactionOptions {
   chainId: number
   /** Contract interactions to execute */
   interactions: Interaction[]
-  /** Policy ID for gas sponsorship (starts with pol_). Optional. */
+  /**
+   * Fee-sponsorship policy ID (starts with `pol_`), obtained from
+   * `openfort.feeSponsorship.create()`. Optional — when omitted, project-scoped
+   * fee sponsorships are auto-discovered and the first matching one is applied.
+   *
+   * This is NOT a guardrail policy ID (starts with `ply_`, from
+   * `openfort.policies.create()`). Guardrail policies are attached by scope
+   * (project- or account-wide) and enforced automatically on every operation —
+   * they are never passed here. Linking a guardrail policy to a fee sponsorship
+   * (via `feeSponsorship.create({ policyId })`) makes it govern sponsorship
+   * eligibility instead; it no longer acts as a signing guardrail.
+   */
   policy?: string
   /** Custom RPC URL. If omitted, uses viem's default public RPC for the chain. */
   rpcUrl?: string

@@ -49,7 +49,8 @@ function defaultImplementationTypeForChain(chainId: number): string {
  * eth_getCode -> if the EOA is not delegated on-chain, hashes and signs an EIP-7702
  * authorization -> creates transaction intent -> signs and submits if needed.
  *
- * @param options - Transaction options including account ID, chain, interactions, and optional policy
+ * @param options - Transaction options including account ID, chain, interactions, and an
+ * optional fee-sponsorship policy (see {@link SendTransactionOptions.policy})
  * @returns The transaction intent response
  *
  * @example
@@ -58,7 +59,7 @@ function defaultImplementationTypeForChain(chainId: number): string {
  *   id: 'acc_...',
  *   chainId: 84532,
  *   interactions: [{ to: '0x...', data: '0x...' }],
- *   policy: 'pol_...',
+ *   policy: 'pol_...', // fee-sponsorship policy id, not a guardrail policy id
  * });
  * console.log(result.response?.transactionHash);
  * ```

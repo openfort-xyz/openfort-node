@@ -107,11 +107,36 @@ export type EvmMessageCriterion = z.infer<typeof EvmMessageCriterionSchema>
 export const EvmDataCriterionSchema = z.object({
   type: z.literal('evmData'),
   operator: EvmDataOperatorEnum,
-  /** Contract ABI as JSON string. */
+  /** Contract ABI as a JSON-stringified string. Typically a single-function ABI fragment covering just `functionName`. */
   abi: z.string().min(1),
   /** Function name to match. */
   functionName: z.string().min(1),
-  /** Argument constraints. */
+  /**
+   * Constraints on the function's decoded arguments, keyed by argument name
+   * (as declared in `abi`). Kept as `Record<string, unknown>` because the
+   * value shape depends on `operator` and is not uniform across all of them:
+   * membership operators (`in`, `not in`) expect an array of allowed values,
+   * while comparison operators (`<`, `<=`, `>`, `>=`, `==`) and `match` expect
+   * a single scalar value.
+   *
+   * Verified worked example — allowlist ERC-20 `transfer` recipients:
+   * ```ts
+   * {
+   *   type: 'evmData',
+   *   operator: 'in',
+   *   abi: JSON.stringify([{
+   *     type: 'function',
+   *     name: 'transfer',
+   *     inputs: [
+   *       { name: 'to', type: 'address' },
+   *       { name: 'value', type: 'uint256' },
+   *     ],
+   *   }]),
+   *   functionName: 'transfer',
+   *   args: { to: ['0x...', '0x...'] },
+   * }
+   * ```
+   */
   args: z.record(z.unknown()).optional(),
 })
 /** A criterion that validates transaction calldata against a contract ABI, function name, and argument constraints. */
