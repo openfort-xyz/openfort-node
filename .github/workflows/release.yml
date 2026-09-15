@@ -48,7 +48,7 @@ jobs:
 
       - name: Create version pull request
         id: changesets
-        uses: changesets/action@ce079ea084e08a340947ed4d6ecedb2433c8f293 # v1
+        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1
         with:
           version: pnpm changeset:version
           commit: "chore: version package"
@@ -88,7 +88,7 @@ jobs:
 
       - name: Publish
         id: changesets
-        uses: changesets/action@ce079ea084e08a340947ed4d6ecedb2433c8f293 # v1
+        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1
         with:
           publish: pnpm changeset:publish
         env:
