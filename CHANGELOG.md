@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.13.0
+
+### Minor Changes
+
+- [#148](https://github.com/openfort-xyz/openfort-node/pull/148) [`d844382`](https://github.com/openfort-xyz/openfort-node/commit/d844382963ce521ab74564518175f6ee2c195e47) Thanks [@joalavedra](https://github.com/joalavedra)! - Type `iam.getSession` as `Promise<GetGetSession200 | null>`
+
+  `GET /iam/v2/auth/get-session` answers `200` with a `null` body when the access
+  token is missing, malformed or expired — it does not return a 4xx. The return
+  type said otherwise, so the common way to call it compiled cleanly and then
+  threw on every expired session:
+
+  ```ts
+  // Used to typecheck, then fail at runtime with
+  // "TypeError: Cannot destructure property 'session' of '(intermediate value)' as it is null"
+  const { session, user } = await openfort.iam.getSession({ accessToken });
+  ```
+
+  Callers now have to check the result first, which is what the endpoint has
+  always required:
+
+  ```ts
+  const result = await openfort.iam.getSession({ accessToken });
+  if (!result) throw new Error("Invalid or expired session");
+  const { session, user } = result;
+  ```
+
+  This is a type-level change only — no runtime behaviour is different — but it
+  will surface as a compile error anywhere the result was used without a check.
+
 ## 0.12.2
 
 ### Patch Changes
