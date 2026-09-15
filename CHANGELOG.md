@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.12.2
+
+### Patch Changes
+
+- [#146](https://github.com/openfort-xyz/openfort-node/pull/146) [`24947b0`](https://github.com/openfort-xyz/openfort-node/commit/24947b07191224a308cc8b425d040533df8a38ba) Thanks [@n00m4d](https://github.com/n00m4d)! - Update values naming in response
+
+## 0.12.1
+
+### Patch Changes
+
+- [#144](https://github.com/openfort-xyz/openfort-node/pull/144) [`bc69422`](https://github.com/openfort-xyz/openfort-node/commit/bc69422bd267f6745afe38a61a3ea3e0d0905c17) Thanks [@n00m4d](https://github.com/n00m4d)! - Arguments naming change
+
+## 0.12.0
+
+### Minor Changes
+
+- [#142](https://github.com/openfort-xyz/openfort-node/pull/142) [`7825ea5`](https://github.com/openfort-xyz/openfort-node/commit/7825ea55ab92f460031145fd651e9d8d467a4e5f) Thanks [@n00m4d](https://github.com/n00m4d)! - Transactions V2
+
+## 0.11.0
+
+### Minor Changes
+
+- [#138](https://github.com/openfort-xyz/openfort-node/pull/138) [`8c6c730`](https://github.com/openfort-xyz/openfort-node/commit/8c6c730d028d8a74a879f4ef7e901ad53af69476) Thanks [@n00m4d](https://github.com/n00m4d)! - Generate request ID
+
 ## 0.10.8
 
 ### Patch Changes

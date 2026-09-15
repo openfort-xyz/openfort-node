@@ -12,7 +12,10 @@ import {
   MissingAPIKeyError,
 } from './errors'
 import * as api from './openapi-client'
-import { configure } from './openapi-client/openfortApiClient'
+import {
+  configure,
+  type OpenfortRequestInfo,
+} from './openapi-client/openfortApiClient'
 import { sign } from './utilities/signer'
 import { EvmClient } from './wallets/evm/evmClient'
 import { SolanaClient } from './wallets/solana/solanaClient'
@@ -39,6 +42,13 @@ export interface OpenfortOptions {
   debugging?: boolean
   /** Publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
   publishableKey?: string
+  /**
+   * Observability callback invoked after every API request (successful or not)
+   * with its request id, method, path, status, and duration. The request id is
+   * also sent as `x-request-id` and adopted by the Openfort API as its own
+   * request/trace id, so it joins your logs to Openfort's.
+   */
+  onRequest?: (info: OpenfortRequestInfo) => void
 }
 
 /**
@@ -180,6 +190,7 @@ class Openfort {
       walletSecret: resolvedWalletSecret,
       debugging,
       publishableKey: resolvedPublishableKey,
+      onRequest: typeof options === 'object' ? options.onRequest : undefined,
     })
   }
 
@@ -514,6 +525,35 @@ class Openfort {
   }
 
   // ============================================
+  // Transactions API (v2)
+  // ============================================
+
+  /**
+   * `/v2/transactions` endpoints for creating and managing on-chain transactions.
+   *
+   * A transaction represents a desired on-chain action (contract calls, transfers) executed by an
+   * account (`acc_`). Gas can be paid by a fee sponsorship (`pol_`, see `/v2/fee-sponsorship`);
+   * `waitForReceipt: false` returns at broadcast instead of holding the request until the receipt.
+   * Poll `get` until `status` is terminal (`succeeded`, `reverted`, `failed`, `expired`); pass
+   * `expand` values (`timeline`, `userOperation`, `logs`, `account`, `user`, `feeSponsorship`)
+   * for the heavier payloads, which are omitted by default.
+   */
+  public get transactions() {
+    return {
+      /** List transactions (filters: accountId, userId, walletId, feeSponsorshipId, chainId, status) */
+      list: api.listTransactionsV2,
+      /** Create a transaction from `calls`, executed by the `accountId` account */
+      create: api.createTransactionV2,
+      /** Get a transaction by ID */
+      get: api.getTransactionV2,
+      /** Submit the signature of `nextAction.hash` and broadcast the transaction */
+      signature: api.submitTransactionSignatureV2,
+      /** Estimate gas cost for a transaction before creating it */
+      estimateCost: api.estimateTransactionV2,
+    }
+  }
+
+  // ============================================
   // Transaction Intents API
   // ============================================
 
@@ -524,12 +564,8 @@ class Openfort {
    * When a fee sponsorship policy is provided (or auto-discovered from project-scoped policies),
    * gas costs are sponsored according to the policy's strategy.
    *
-   * The `policy` field accepted by `create` is a fee-sponsorship ID (starts
-   * with `pol_`, from `openfort.feeSponsorship.create()`), not a guardrail
-   * policy ID (`ply_`, from `openfort.policies.create()`). Guardrail policies
-   * are attached by scope and enforced automatically; a guardrail policy that
-   * gets linked to a fee sponsorship (via `feeSponsorship.create({ policyId })`)
-   * governs sponsorship eligibility instead of acting as a signing guardrail.
+   * @deprecated Use {@link transactions} (`/v2/transactions`): `policy` is `feeSponsorship` there,
+   * `interactions` are `calls`, the receipt is `receipt` and the lifecycle is a single `status` field.
    */
   public get transactionIntents() {
     if (!this._evmClient) {

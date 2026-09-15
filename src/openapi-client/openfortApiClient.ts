@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
 import axiosRetry, { exponentialDelay } from 'axios-retry'
 import { MissingPublishableKeyError, MissingWalletSecretError } from '../errors'
@@ -17,6 +18,27 @@ import {
 
 const ERROR_DOCS_URL = 'https://www.openfort.io/docs'
 
+const REQUEST_ID_HEADER = 'x-request-id'
+
+/**
+ * Summary of one API request, reported through {@link OpenfortClientOptions.onRequest}.
+ */
+export interface OpenfortRequestInfo {
+  /** The `x-request-id` sent with the request. The Openfort API adopts it as
+   * its own request/trace id, so this value can be searched directly in
+   * Openfort's logs and traces. */
+  requestId: string
+  /** Uppercase HTTP method, e.g. "POST". */
+  method: string
+  /** Request path, e.g. "/v2/accounts/backend". */
+  path: string
+  /** HTTP status of the response; undefined when no response was received
+   * (network error, timeout). */
+  status?: number
+  /** Wall-clock duration of the call, including retries. */
+  durationMs: number
+}
+
 /**
  * Configuration options for the Openfort API client
  */
@@ -35,6 +57,12 @@ export interface OpenfortClientOptions {
   source?: string
   /** Optional source version for analytics */
   sourceVersion?: string
+  /**
+   * Called after every API request (successful or not) with its request id,
+   * method, path, status, and duration. Intended for logging/observability;
+   * exceptions thrown by the callback are swallowed and never fail the request.
+   */
+  onRequest?: (info: OpenfortRequestInfo) => void
 }
 
 let axiosInstance: AxiosInstance
@@ -238,6 +266,12 @@ export interface RequestOptions {
   idempotencyKey?: string
   /** Access token for authenticated requests (overrides default Authorization header) */
   accessToken?: string
+  /**
+   * Correlation id sent as the `x-request-id` header, overriding the
+   * auto-generated one. Must match `[A-Za-z0-9._:-]{1,128}`; the Openfort API
+   * adopts UUIDs / 32-hex values as its trace id.
+   */
+  requestId?: string
 }
 
 /**
@@ -263,6 +297,10 @@ const addRequestHeaders = (
 
   if (opts.accessToken) {
     additionalHeaders.Authorization = `Bearer ${opts.accessToken}`
+  }
+
+  if (opts.requestId) {
+    additionalHeaders[REQUEST_ID_HEADER] = opts.requestId
   }
 
   if (Object.keys(additionalHeaders).length === 0) {
@@ -516,8 +554,33 @@ export const openfortApiClient = async <T>(
 
   const configWithHeaders = addRequestHeaders(config, options)
 
+  // Correlation id, set before the request goes out so it exists even when no
+  // response ever arrives (timeout, network failure) and stays constant across
+  // axios-retry attempts (one id per logical operation). The API adopts it as
+  // its own request/trace id and echoes it back.
+  const headers = { ...configWithHeaders.headers } as Record<string, string>
+  const requestId = headers[REQUEST_ID_HEADER] || randomUUID()
+  headers[REQUEST_ID_HEADER] = requestId
+  configWithHeaders.headers = headers
+
+  const startedAt = Date.now()
+  const notifyRequest = (status?: number): void => {
+    try {
+      clientConfig?.onRequest?.({
+        requestId,
+        method: (config.method ?? 'GET').toUpperCase(),
+        path: config.url ?? '',
+        status,
+        durationMs: Date.now() - startedAt,
+      })
+    } catch {
+      // A user-supplied observability callback must never fail the request.
+    }
+  }
+
   try {
     const response = await axiosInstance(configWithHeaders)
+    notifyRequest(response.status)
     return response.data as T
   } catch (error) {
     // Handle validation errors (pass through)
@@ -527,23 +590,37 @@ export const openfortApiClient = async <T>(
 
     // Handle Axios errors
     if (Axios.isAxiosError(error)) {
-      // Network-level errors (no response received)
-      if (!error.response) {
-        handleNetworkError({
-          message: error.message,
-          code: error.code,
-          cause: error.cause,
-        })
-      }
+      notifyRequest(error.response?.status)
+      try {
+        // Network-level errors (no response received)
+        if (!error.response) {
+          handleNetworkError({
+            message: error.message,
+            code: error.code,
+            cause: error.cause,
+          })
+        }
 
-      // HTTP response errors
-      handleResponseError(
-        error.response.status,
-        error.response.data,
-        error.cause,
-      )
+        // HTTP response errors
+        handleResponseError(
+          error.response.status,
+          error.response.data,
+          error.cause,
+        )
+      } catch (apiError) {
+        // Attach the correlation id (body-provided id wins if the API ever
+        // sends one) so callers can join the failure to Openfort's logs/traces.
+        if (apiError instanceof APIError) {
+          apiError.correlationId ??= requestId
+          const suffix = ` (request_id: ${apiError.correlationId})`
+          apiError.message += suffix
+          apiError.errorMessage += suffix
+        }
+        throw apiError
+      }
     }
 
+    notifyRequest(undefined)
     // Unknown errors
     throw new UnknownError(
       'Something went wrong. Please contact support at support@openfort.xyz',
