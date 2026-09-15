@@ -738,12 +738,23 @@ class Openfort {
 
   /**
    * Get session from access token.
+   *
+   * Resolves to `null` when the access token is missing, malformed, expired or
+   * otherwise unusable: `GET /iam/v2/auth/get-session` answers `200` with a
+   * `null` body in all of those cases rather than a 4xx, so a caller has to
+   * check the result before reading `session` or `user` off it.
+   *
+   * ```ts
+   * const result = await openfort.iam.getSession({ accessToken })
+   * if (!result) throw new Error('Invalid or expired session')
+   * const { session, user } = result
+   * ```
    * @internal
    */
   private getSession(options: {
     accessToken: string
     disableCookieCache?: boolean
-  }): Promise<api.authSchemas.GetGetSession200> {
+  }): Promise<api.authSchemas.GetGetSession200 | null> {
     const { accessToken, disableCookieCache } = options
     return api.authApi.getGetSession(
       disableCookieCache !== undefined ? { disableCookieCache } : undefined,
