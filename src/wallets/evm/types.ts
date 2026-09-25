@@ -173,8 +173,8 @@ export interface SendTransactionOptions {
    *
    * This is NOT a guardrail policy ID (starts with `ply_`, from
    * `openfort.policies.create()`). Guardrail policies are attached by scope
-   * (project- or account-wide) and enforced automatically on every operation —
-   * they are never passed here. Linking a guardrail policy to a fee sponsorship
+   * (project- or account-wide) and enforced automatically when a backend wallet
+   * signs — they are never passed here. Linking a guardrail policy to a fee sponsorship
    * (via `feeSponsorship.create({ policyId })`) makes it govern sponsorship
    * eligibility instead; it no longer acts as a signing guardrail.
    */

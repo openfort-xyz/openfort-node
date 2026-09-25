@@ -117,7 +117,8 @@ export const EvmDataCriterionSchema = z.object({
    * value shape depends on `operator` and is not uniform across all of them:
    * membership operators (`in`, `not in`) expect an array of allowed values,
    * while comparison operators (`<`, `<=`, `>`, `>=`, `==`) and `match` expect
-   * a single scalar value.
+   * a single string (a decimal integer for comparisons, a regex pattern for
+   * `match`). Numbers are rejected at create time.
    *
    * Verified worked example — allowlist ERC-20 `transfer` recipients:
    * ```ts
