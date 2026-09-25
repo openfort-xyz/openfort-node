@@ -15,8 +15,5 @@ export function normalizeSignature(sig: string): string {
   }
 
   const v = Number.parseInt(vByte, 16)
-  if (v < 27) {
-    return sig.slice(0, -2) + (v + 27).toString(16).padStart(2, '0')
-  }
-  return sig
+  return v < 27 ? sig.slice(0, -2) + (v + 27).toString(16) : sig
 }
