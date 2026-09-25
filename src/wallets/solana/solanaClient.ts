@@ -219,26 +219,19 @@ export class SolanaClient {
     let privateKeyBytes: Uint8Array
 
     // Determine the format and convert to bytes
-    if (options.privateKey.startsWith('0x')) {
-      // Hex format with 0x prefix
-      const hex = options.privateKey.slice(2)
-      if (!/^[0-9a-fA-F]+$/.test(hex)) {
-        throw new UserInputValidationError('Invalid hex string')
-      }
+    const hex = options.privateKey.startsWith('0x')
+      ? options.privateKey.slice(2)
+      : options.privateKey
+    if (/^[0-9a-fA-F]+$/.test(hex)) {
+      // Buffer.from drops a trailing half byte, so odd-length input would decode to a different key
       if (hex.length % 2 !== 0) {
         throw new UserInputValidationError(
           'Private key hex string must contain an even number of characters',
         )
       }
       privateKeyBytes = Uint8Array.from(Buffer.from(hex, 'hex'))
-    } else if (/^[0-9a-fA-F]+$/.test(options.privateKey)) {
-      // Hex format without prefix
-      if (options.privateKey.length % 2 !== 0) {
-        throw new UserInputValidationError(
-          'Private key hex string must contain an even number of characters',
-        )
-      }
-      privateKeyBytes = Uint8Array.from(Buffer.from(options.privateKey, 'hex'))
+    } else if (options.privateKey.startsWith('0x')) {
+      throw new UserInputValidationError('Invalid hex string')
     } else {
       // Assume base58 format (standard Solana format)
       try {

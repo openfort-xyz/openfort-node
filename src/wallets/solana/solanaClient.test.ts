@@ -11,7 +11,7 @@ describe('SolanaClient.importAccount', () => {
       client.importAccount({ privateKey: `0x${'a'.repeat(63)}` }),
     ).rejects.toThrow(UserInputValidationError)
     await expect(
-      client.importAccount({ privateKey: `0x${'a'.repeat(63)}` }),
+      client.importAccount({ privateKey: 'a'.repeat(65) }),
     ).rejects.toThrow(
       'Private key hex string must contain an even number of characters',
     )
