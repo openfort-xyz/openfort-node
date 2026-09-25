@@ -49,12 +49,19 @@ const transactionMessage = appendTransactionMessageInstruction(
 );
 
 const compiledTransaction = compileTransaction(transactionMessage);
-const base64Transaction = getBase64EncodedWireTransaction(compiledTransaction);
 
-console.log("\nTransaction (base64):", base64Transaction);
+// Sign the compiled message bytes. The API returns the ed25519 signature for this
+// account, not a signed transaction.
+const messageBase64 = Buffer.from(
+  compiledTransaction.messageBytes as unknown as Uint8Array,
+).toString("base64");
+const signatureHex = await account.signTransaction({ transaction: messageBase64 });
+console.log("Signature:", signatureHex);
 
-// Sign the transaction
-const signedTransaction = await account.signTransaction({
-  transaction: base64Transaction,
-});
-console.log("Signed transaction:", signedTransaction);
+// Place the signature in the transaction and serialize it for broadcast.
+const signature = new Uint8Array(Buffer.from(signatureHex.slice(2), "hex"));
+const signedTransaction = {
+  ...compiledTransaction,
+  signatures: { ...compiledTransaction.signatures, [account.address]: signature },
+} as typeof compiledTransaction;
+console.log("Signed transaction (base64):", getBase64EncodedWireTransaction(signedTransaction));

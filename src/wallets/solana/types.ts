@@ -123,7 +123,11 @@ export interface SignMessageOptions {
 export interface SignTransactionOptions {
   /** Account ID for API calls */
   accountId: string
-  /** Base64-encoded serialized transaction */
+  /**
+   * Base64-encoded compiled transaction message (the bytes a Solana signer signs,
+   * e.g. `compileTransaction(msg).messageBytes`). A full wire-format transaction is
+   * also accepted; only its message bytes are signed.
+   */
   transaction: string
 }
 
