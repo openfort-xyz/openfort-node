@@ -10,7 +10,7 @@ import type { SignTransactionOptions } from '../types'
  * Result of sign transaction operation
  */
 export interface SignTransactionResult {
-  /** Signature as hex string (raw signature from the API, not a reconstructed signed transaction) */
+  /** 0x-prefixed hex ed25519 signature over the transaction message. Not a signed transaction: add it to the transaction's signatures before broadcasting. */
   signedTransaction: string
 }
 
@@ -19,26 +19,17 @@ export interface SignTransactionResult {
  * The transaction should be a base64-encoded serialized transaction.
  *
  * @param options - Sign transaction options
- * @returns The signed transaction
+ * @returns The signature over the transaction message
  *
  * @example
  * ```typescript
- * import { Transaction } from '@solana/web3.js';
+ * import { compileTransaction, getBase64EncodedWireTransaction } from '@solana/kit';
  *
- * // Create your transaction
- * const transaction = new Transaction();
- * // ... add instructions ...
+ * // Build a transaction message with @solana/kit, then compile it
+ * const base64Tx = getBase64EncodedWireTransaction(compileTransaction(transactionMessage));
  *
- * // Serialize without requiring signatures
- * const serialized = transaction.serialize({
- *   requireAllSignatures: false,
- * });
- *
- * // Base64 encode for the API
- * const base64Tx = Buffer.from(serialized).toString('base64');
- *
- * // Sign via Openfort
- * const { signedTransaction } = await signTransaction({
+ * // Sign via Openfort. The result is the account's signature over the message.
+ * const { signedTransaction: signature } = await signTransaction({
  *   accountId: 'acc_...',
  *   transaction: base64Tx,
  * });
@@ -56,7 +47,6 @@ export async function signTransaction(
   // Sign via v2 API
   const response = await signApi(accountId, { data: txHex })
 
-  // The response signature is the signed transaction
   return {
     signedTransaction: response.signature,
   }

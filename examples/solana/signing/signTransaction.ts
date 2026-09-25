@@ -53,8 +53,9 @@ const base64Transaction = getBase64EncodedWireTransaction(compiledTransaction);
 
 console.log("\nTransaction (base64):", base64Transaction);
 
-// Sign the transaction
-const signedTransaction = await account.signTransaction({
+// Sign the transaction. The result is the account's signature over the
+// transaction message, to be added to the transaction before broadcasting.
+const signature = await account.signTransaction({
   transaction: base64Transaction,
 });
-console.log("Signed transaction:", signedTransaction);
+console.log("Signature:", signature);
