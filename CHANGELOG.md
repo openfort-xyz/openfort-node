@@ -1,5 +1,62 @@
 # Changelog
 
+## 0.13.0
+
+### Minor Changes
+
+- [#148](https://github.com/openfort-xyz/openfort-node/pull/148) [`d844382`](https://github.com/openfort-xyz/openfort-node/commit/d844382963ce521ab74564518175f6ee2c195e47) Thanks [@joalavedra](https://github.com/joalavedra)! - Type `iam.getSession` as `Promise<GetGetSession200 | null>`
+
+  `GET /iam/v2/auth/get-session` answers `200` with a `null` body when the access
+  token is missing, malformed or expired — it does not return a 4xx. The return
+  type said otherwise, so the common way to call it compiled cleanly and then
+  threw on every expired session:
+
+  ```ts
+  // Used to typecheck, then fail at runtime with
+  // "TypeError: Cannot destructure property 'session' of '(intermediate value)' as it is null"
+  const { session, user } = await openfort.iam.getSession({ accessToken });
+  ```
+
+  Callers now have to check the result first, which is what the endpoint has
+  always required:
+
+  ```ts
+  const result = await openfort.iam.getSession({ accessToken });
+  if (!result) throw new Error("Invalid or expired session");
+  const { session, user } = result;
+  ```
+
+  This is a type-level change only — no runtime behaviour is different — but it
+  will surface as a compile error anywhere the result was used without a check.
+
+- [#151](https://github.com/openfort-xyz/openfort-node/pull/151) [`25ca881`](https://github.com/openfort-xyz/openfort-node/commit/25ca8816ea3c9707eed10e2756d4378cc7dad5f8) Thanks [@jamalavedra](https://github.com/jamalavedra)! - Verify webhooks with the webhook signing secret
+
+  Openfort signs webhooks with the environment's `whsec_...` signing secret.
+  `constructWebhookEvent` verified them with a key derived from the secret key,
+  so it rejected every genuine webhook. Pass the secret as the `webhookSecret`
+  option or set `OPENFORT_WEBHOOK_SECRET`; the method throws if it is missing.
+  The signature must now be exactly 64 hex characters.
+
+### Patch Changes
+
+- [#127](https://github.com/openfort-xyz/openfort-node/pull/127) [`9dc64c4`](https://github.com/openfort-xyz/openfort-node/commit/9dc64c49e9b321764723748009f112a26b972721) Thanks [@samsamtrum](https://github.com/samsamtrum)! - `normalizeSignature` throws when the last byte of a signature is not two hex characters
+
+  It parsed the recovery byte with `parseInt`, which accepts partial input, so a
+  trailing `1z` became `1c` and `zz` passed through unchanged. Recovery ids 0 and
+  1 still become 27 and 28.
+
+- [#111](https://github.com/openfort-xyz/openfort-node/pull/111) [`d1a7c9a`](https://github.com/openfort-xyz/openfort-node/commit/d1a7c9a8aa7876121b77dc59b5ac5ea3df8a52ae) Thanks [@samsamtrum](https://github.com/samsamtrum)! - Reject odd-length hex private keys in Solana `importAccount`
+
+  Node's hex decoder drops a trailing half byte, so a key with one extra
+  character decoded to 32 bytes, passed the length check and imported a
+  different key than the one supplied. Odd-length hex is now rejected before
+  decoding, with or without the `0x` prefix.
+
+- [#150](https://github.com/openfort-xyz/openfort-node/pull/150) [`b652f54`](https://github.com/openfort-xyz/openfort-node/commit/b652f541f47945fb8e8531904db5d205d33e8bbf) Thanks [@jamalavedra](https://github.com/jamalavedra)! - Document that Solana `signTransaction` returns a signature, not a signed transaction
+
+  The API signs the compiled transaction message and returns the account's ed25519
+  signature. The docstring and example now say so, and the example uses `@solana/kit`.
+
 ## 0.12.2
 
 ### Patch Changes
