@@ -23,22 +23,13 @@ export interface SignTransactionResult {
  *
  * @example
  * ```typescript
- * import { Transaction } from '@solana/web3.js';
+ * import { compileTransaction, getBase64EncodedWireTransaction } from '@solana/kit';
  *
- * // Create your transaction
- * const transaction = new Transaction();
- * // ... add instructions ...
+ * // Build a transaction message with @solana/kit, then compile it
+ * const base64Tx = getBase64EncodedWireTransaction(compileTransaction(transactionMessage));
  *
- * // Serialize without requiring signatures
- * const serialized = transaction.serialize({
- *   requireAllSignatures: false,
- * });
- *
- * // Base64 encode for the API
- * const base64Tx = Buffer.from(serialized).toString('base64');
- *
- * // Sign via Openfort
- * const { signedTransaction } = await signTransaction({
+ * // Sign via Openfort. The result is the account's signature over the message.
+ * const { signedTransaction: signature } = await signTransaction({
  *   accountId: 'acc_...',
  *   transaction: base64Tx,
  * });
