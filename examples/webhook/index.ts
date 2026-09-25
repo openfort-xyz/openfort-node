@@ -19,6 +19,8 @@ app.post(
 	async (req: Request, res: Response) => {
 		const openfort = new Openfort(process.env.OPENFORT_SECRET_KEY!, {
 			basePath: process.env.OPENFORT_BASE_URL,
+			// The whsec_... value from the dashboard's webhook settings.
+			webhookSecret: process.env.OPENFORT_WEBHOOK_SECRET,
 		});
 		try {
 			const signature = req.headers["openfort-signature"];

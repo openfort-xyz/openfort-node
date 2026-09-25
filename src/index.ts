@@ -1,4 +1,4 @@
-import { timingSafeEqual } from 'node:crypto'
+import { createHmac, timingSafeEqual } from 'node:crypto'
 import {
   entropy,
   type Share,
@@ -10,13 +10,13 @@ import {
   InvalidAPIKeyFormatError,
   InvalidPublishableKeyFormatError,
   MissingAPIKeyError,
+  UserInputValidationError,
 } from './errors'
 import * as api from './openapi-client'
 import {
   configure,
   type OpenfortRequestInfo,
 } from './openapi-client/openfortApiClient'
-import { sign } from './utilities/signer'
 import { EvmClient } from './wallets/evm/evmClient'
 import { SolanaClient } from './wallets/solana/solanaClient'
 
@@ -42,6 +42,8 @@ export interface OpenfortOptions {
   debugging?: boolean
   /** Publishable key for client-side auth endpoints (pk_live_... or pk_test_...) */
   publishableKey?: string
+  /** Webhook signing secret (whsec_...) from the dashboard, used by constructWebhookEvent (optional) */
+  webhookSecret?: string
   /**
    * Observability callback invoked after every API request (successful or not)
    * with its request id, method, path, status, and duration. The request id is
@@ -135,7 +137,7 @@ function isValidPublishableKey(key: string): boolean {
  * ```
  */
 class Openfort {
-  private readonly _apiKey: string
+  private readonly _webhookSecret: string | undefined
   private _evmClient?: EvmClient
   private _solanaClient?: SolanaClient
 
@@ -159,6 +161,11 @@ class Openfort {
         ? options.publishableKey || process.env.OPENFORT_PUBLISHABLE_KEY
         : process.env.OPENFORT_PUBLISHABLE_KEY
 
+    const resolvedWebhookSecret =
+      typeof options === 'object'
+        ? options.webhookSecret || process.env.OPENFORT_WEBHOOK_SECRET
+        : process.env.OPENFORT_WEBHOOK_SECRET
+
     const debugging =
       typeof options === 'object' ? options.debugging : undefined
 
@@ -180,8 +187,7 @@ class Openfort {
       throw new InvalidPublishableKeyFormatError(resolvedPublishableKey)
     }
 
-    // Store API key for webhook signature verification
-    this._apiKey = resolvedApiKey
+    this._webhookSecret = resolvedWebhookSecret
 
     // Configure the API client
     configure({
@@ -975,22 +981,31 @@ class Openfort {
   // ============================================
 
   /**
-   * Constructs and validates a webhook event from the request body and signature.
+   * Verifies a webhook's `openfort-signature` header and returns the parsed event.
+   *
+   * The signature is an HMAC-SHA256 hex digest of the raw body, keyed with the
+   * environment's webhook signing secret (`whsec_...`). Pass it as the
+   * `webhookSecret` option or set `OPENFORT_WEBHOOK_SECRET`.
    * @param body - The raw request body
-   * @param signature - The signature header value
-   * @returns The validated webhook event
+   * @param signature - The `openfort-signature` header value
+   * @returns The verified webhook event
    */
   public async constructWebhookEvent<T = unknown>(
     body: string,
     signature: string,
   ): Promise<T> {
-    const signedPayload = await sign(this._apiKey, body)
-    const expectedBuffer = Buffer.from(signedPayload, 'hex')
-    const receivedBuffer = Buffer.from(signature, 'hex')
-    if (
-      expectedBuffer.length !== receivedBuffer.length ||
-      !timingSafeEqual(expectedBuffer, receivedBuffer)
-    ) {
+    if (!this._webhookSecret) {
+      throw new UserInputValidationError(
+        'Webhook secret is required: pass webhookSecret (the whsec_... value from the dashboard) or set OPENFORT_WEBHOOK_SECRET',
+      )
+    }
+    if (!/^[\da-f]{64}$/i.test(signature)) {
+      throw new Error('Invalid signature')
+    }
+    const expected = createHmac('sha256', this._webhookSecret)
+      .update(body, 'utf8')
+      .digest()
+    if (!timingSafeEqual(expected, Buffer.from(signature, 'hex'))) {
       throw new Error('Invalid signature')
     }
     try {
