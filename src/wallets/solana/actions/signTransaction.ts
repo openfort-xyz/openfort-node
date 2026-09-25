@@ -10,40 +10,38 @@ import type { SignTransactionOptions } from '../types'
  * Result of sign transaction operation
  */
 export interface SignTransactionResult {
-  /**
-   * 0x-prefixed hex ed25519 signature over the transaction message bytes.
-   * This is a signature, not a signed transaction: place it in the transaction's
-   * signature slot for this account before broadcasting.
-   */
+  /** 0x-prefixed hex ed25519 signature over the transaction message. Not a signed transaction: add it to the transaction's signatures before broadcasting. */
   signedTransaction: string
 }
 
 /**
- * Signs a Solana transaction message via the Openfort API.
- *
- * Send the base64-encoded compiled message bytes. The API also accepts a full
- * wire-format transaction and signs only its message bytes. Either way the
- * result is the ed25519 signature for this account, which you place in the
- * transaction's signature slot before broadcasting.
+ * Signs a Solana transaction via the Openfort API.
+ * The transaction should be a base64-encoded serialized transaction.
  *
  * @param options - Sign transaction options
- * @returns The signature over the message bytes
+ * @returns The signature over the transaction message
  *
  * @example
  * ```typescript
- * import { compileTransaction, getBase64EncodedWireTransaction } from '@solana/kit';
+ * import { Transaction } from '@solana/web3.js';
  *
- * const compiled = compileTransaction(transactionMessage);
- * const messageBase64 = Buffer.from(compiled.messageBytes).toString('base64');
+ * // Create your transaction
+ * const transaction = new Transaction();
+ * // ... add instructions ...
  *
- * const { signedTransaction: signatureHex } = await signTransaction({
- *   accountId: 'acc_...',
- *   transaction: messageBase64,
+ * // Serialize without requiring signatures
+ * const serialized = transaction.serialize({
+ *   requireAllSignatures: false,
  * });
  *
- * const signature = new Uint8Array(Buffer.from(signatureHex.slice(2), 'hex'));
- * const signed = { ...compiled, signatures: { ...compiled.signatures, [account.address]: signature } };
- * const wire = getBase64EncodedWireTransaction(signed);
+ * // Base64 encode for the API
+ * const base64Tx = Buffer.from(serialized).toString('base64');
+ *
+ * // Sign via Openfort
+ * const { signedTransaction } = await signTransaction({
+ *   accountId: 'acc_...',
+ *   transaction: base64Tx,
+ * });
  * ```
  */
 export async function signTransaction(
