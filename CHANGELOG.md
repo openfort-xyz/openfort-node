@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.1
+
+### Patch Changes
+
+- [#153](https://github.com/openfort-xyz/openfort-node/pull/153) [`1102ec3`](https://github.com/openfort-xyz/openfort-node/commit/1102ec3de67a9bbba3fccddda51931e89d0ef79f) Thanks [@jamalavedra](https://github.com/jamalavedra)! - Align policy Zod schemas with the API: allow up to 50 rules per policy and 20 criteria per rule, accept the `transaction` scope, accept `solNetwork` criteria on `signSolTransaction` rules, and drop `testnet` from the Solana network enum (the API only accepts `mainnet-beta` and `devnet`).
+
 ## 0.13.0
 
 ### Minor Changes
