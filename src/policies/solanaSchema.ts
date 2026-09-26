@@ -54,8 +54,8 @@ export const SolNetworkOperatorEnum = z.enum(['in', 'not in'])
 export type SolNetworkOperator = z.infer<typeof SolNetworkOperatorEnum>
 
 /** Zod enum for Solana network identifiers. */
-export const SolNetworkEnum = z.enum(['mainnet-beta', 'devnet', 'testnet'])
-/** A Solana network identifier: 'mainnet-beta', 'devnet', or 'testnet'. */
+export const SolNetworkEnum = z.enum(['mainnet-beta', 'devnet'])
+/** A Solana network identifier: 'mainnet-beta' or 'devnet'. */
 export type SolNetwork = z.infer<typeof SolNetworkEnum>
 
 // ---------------------------------------------------------------------------
@@ -146,7 +146,7 @@ export type ProgramIdCriterion = z.infer<typeof ProgramIdCriterionSchema>
 export const SolNetworkCriterionSchema = z.object({
   type: z.literal('solNetwork'),
   operator: SolNetworkOperatorEnum,
-  /** List of networks: "mainnet-beta", "devnet", "testnet". */
+  /** List of networks: "mainnet-beta", "devnet". */
   networks: z.array(SolNetworkEnum),
 })
 /** A criterion that restricts a rule to specific Solana networks. */
@@ -166,7 +166,7 @@ export type SolMessageCriterion = z.infer<typeof SolMessageCriterionSchema>
 // Per-operation criteria arrays
 // ---------------------------------------------------------------------------
 
-/** Criteria schema for `signSolTransaction` rules — supports address, value, SPL, mint, data, and program ID criteria. */
+/** Criteria schema for `signSolTransaction` rules — supports address, value, SPL, mint, data, program ID, and network criteria. */
 export const SignSolTransactionCriteriaSchema = z
   .array(
     z.discriminatedUnion('type', [
@@ -177,11 +177,12 @@ export const SignSolTransactionCriteriaSchema = z
       MintAddressCriterionSchema,
       SolDataCriterionSchema,
       ProgramIdCriterionSchema,
+      SolNetworkCriterionSchema,
     ]),
   )
-  .max(10)
+  .max(20)
 
-/** Criteria schema for `sendSolTransaction` rules — extends sign criteria with network criterion. */
+/** Criteria schema for `sendSolTransaction` rules — same criteria as `signSolTransaction`. */
 export const SendSolTransactionCriteriaSchema = z
   .array(
     z.discriminatedUnion('type', [
@@ -195,12 +196,12 @@ export const SendSolTransactionCriteriaSchema = z
       SolNetworkCriterionSchema,
     ]),
   )
-  .max(10)
+  .max(20)
 
 /** Criteria schema for `signSolMessage` rules — supports message pattern matching. */
 export const SignSolMessageCriteriaSchema = z
   .array(SolMessageCriterionSchema)
-  .max(10)
+  .max(20)
 
 // ---------------------------------------------------------------------------
 // Rule schemas (discriminated by `operation`)
@@ -217,7 +218,7 @@ export type SignSolTransactionRule = z.infer<
   typeof SignSolTransactionRuleSchema
 >
 
-/** Zod schema for a rule that governs Solana transaction sending (includes network criteria). */
+/** Zod schema for a rule that governs Solana transaction sending. */
 export const SendSolTransactionRuleSchema = z.object({
   action: ActionEnum,
   operation: z.literal('sendSolTransaction'),
@@ -251,7 +252,7 @@ export const SponsorSolTransactionCriteriaSchema = z
       SolNetworkCriterionSchema,
     ]),
   )
-  .max(10)
+  .max(20)
 
 /** Zod schema for a rule that governs Solana transaction fee sponsorship. */
 export const SponsorSolTransactionRuleSchema = z.object({
