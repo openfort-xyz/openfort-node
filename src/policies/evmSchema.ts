@@ -184,7 +184,7 @@ export const SignEvmTransactionCriteriaSchema = z
       EvmDataCriterionSchema,
     ]),
   )
-  .max(10)
+  .max(20)
 
 /** Criteria schema for `sendEvmTransaction` rules — supports ETH value, address, network, and calldata criteria. */
 export const SendEvmTransactionCriteriaSchema = z
@@ -196,12 +196,12 @@ export const SendEvmTransactionCriteriaSchema = z
       EvmDataCriterionSchema,
     ]),
   )
-  .max(10)
+  .max(20)
 
 /** Criteria schema for `signEvmMessage` rules — supports message pattern matching. */
 export const SignEvmMessageCriteriaSchema = z
   .array(z.discriminatedUnion('type', [EvmMessageCriterionSchema]))
-  .max(10)
+  .max(20)
 
 /** Criteria schema for `signEvmTypedData` rules — supports typed data field and verifying contract criteria. */
 export const SignEvmTypedDataCriteriaSchema = z
@@ -211,7 +211,7 @@ export const SignEvmTypedDataCriteriaSchema = z
       EvmTypedDataVerifyingContractCriterionSchema,
     ]),
   )
-  .max(10)
+  .max(20)
 
 // ---------------------------------------------------------------------------
 // Rule schemas (discriminated by `operation`)
@@ -275,7 +275,7 @@ export const SponsorEvmTransactionCriteriaSchema = z
       EvmDataCriterionSchema,
     ]),
   )
-  .max(10)
+  .max(20)
 
 /** Zod schema for a rule that governs EVM transaction gas sponsorship. */
 export const SponsorEvmTransactionRuleSchema = z.object({
