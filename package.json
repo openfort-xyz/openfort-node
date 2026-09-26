@@ -92,7 +92,7 @@
     "typescript": "^5.9.3",
     "viem": "^2.54.1",
     "vite": "^8.1.2",
-    "vitest": "^4.1.9"
+    "vitest": "^5.0.2"
   },
   "peerDependencies": {
     "@solana-program/compute-budget": ">=0.7.0",
