@@ -1125,8 +1125,40 @@ describe('CreatePolicyBodySchema', () => {
               {
                 type: 'solNetwork',
                 operator: 'in',
-                networks: ['mainnet-beta', 'devnet', 'testnet'],
+                networks: ['mainnet-beta', 'devnet'],
               },
+            ],
+          },
+        ],
+      })
+      expect(result.success).toBe(true)
+    })
+
+    it('should reject testnet, which the API does not support', () => {
+      const result = CreatePolicyBodySchema.safeParse({
+        scope: 'project',
+        rules: [
+          {
+            action: 'accept',
+            operation: 'sendSolTransaction',
+            criteria: [
+              { type: 'solNetwork', operator: 'in', networks: ['testnet'] },
+            ],
+          },
+        ],
+      })
+      expect(result.success).toBe(false)
+    })
+
+    it('should accept solNetwork on signSolTransaction', () => {
+      const result = CreatePolicyBodySchema.safeParse({
+        scope: 'project',
+        rules: [
+          {
+            action: 'accept',
+            operation: 'signSolTransaction',
+            criteria: [
+              { type: 'solNetwork', operator: 'in', networks: ['devnet'] },
             ],
           },
         ],
@@ -1428,8 +1460,49 @@ describe('CreatePolicyBodySchema', () => {
       expect(result.success).toBe(false)
     })
 
-    it('should reject more than 10 rules', () => {
-      const rules = Array.from({ length: 11 }, () => ({
+    it('should accept 20 criteria per rule and reject 21', () => {
+      const criterion = {
+        type: 'ethValue' as const,
+        operator: '<=' as const,
+        ethValue: '1',
+      }
+      const parse = (count: number) =>
+        CreatePolicyBodySchema.safeParse({
+          scope: 'project',
+          rules: [
+            {
+              action: 'accept',
+              operation: 'signEvmTransaction',
+              criteria: Array.from({ length: count }, () => criterion),
+            },
+          ],
+        })
+      expect(parse(20).success).toBe(true)
+      expect(parse(21).success).toBe(false)
+    })
+
+    it('should accept transaction scope', () => {
+      const result = CreatePolicyBodySchema.safeParse({
+        scope: 'transaction',
+        rules: [{ action: 'reject', operation: 'signEvmHash' }],
+      })
+      expect(result.success).toBe(true)
+    })
+
+    it('should accept 50 rules', () => {
+      const rules = Array.from({ length: 50 }, () => ({
+        action: 'reject' as const,
+        operation: 'signEvmHash' as const,
+      }))
+      const result = CreatePolicyBodySchema.safeParse({
+        scope: 'project',
+        rules,
+      })
+      expect(result.success).toBe(true)
+    })
+
+    it('should reject more than 50 rules', () => {
+      const rules = Array.from({ length: 51 }, () => ({
         action: 'reject' as const,
         operation: 'signEvmHash' as const,
       }))
@@ -1604,8 +1677,8 @@ describe('UpdatePolicyBodySchema', () => {
     expect(result.success).toBe(true)
   })
 
-  it('should reject more than 10 rules in update', () => {
-    const rules = Array.from({ length: 11 }, () => ({
+  it('should reject more than 50 rules in update', () => {
+    const rules = Array.from({ length: 51 }, () => ({
       action: 'reject' as const,
       operation: 'signEvmHash' as const,
     }))

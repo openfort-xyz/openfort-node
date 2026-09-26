@@ -19,9 +19,9 @@ import {
 // Policy scope
 // ---------------------------------------------------------------------------
 
-/** Zod enum for policy scope — either 'project' (all accounts) or 'account' (single account). */
-export const PolicyScopeEnum = z.enum(['project', 'account'])
-/** The scope of a policy: 'project' applies to all accounts, 'account' applies to a specific account. */
+/** Zod enum for policy scope — 'project' (all accounts), 'account' (single account), or 'transaction' (only when passed explicitly). */
+export const PolicyScopeEnum = z.enum(['project', 'account', 'transaction'])
+/** The scope of a policy: 'project' applies to all accounts, 'account' applies to a specific account, 'transaction' applies only when passed explicitly with a transaction. */
 export type PolicyScope = z.infer<typeof PolicyScopeEnum>
 
 // ---------------------------------------------------------------------------
@@ -51,7 +51,7 @@ export type Rule = z.infer<typeof RuleSchema>
 
 /** Zod schema for the request body when creating a new policy. */
 export const CreatePolicyBodySchema = z.object({
-  /** The scope of the policy. 'project' applies to all accounts, 'account' applies to a specific account. */
+  /** The scope of the policy. 'project' applies to all accounts, 'account' applies to a specific account, 'transaction' applies only when passed explicitly with a transaction. */
   scope: PolicyScopeEnum,
   /** A description of what this policy does. */
   description: z.string().optional(),
@@ -61,8 +61,8 @@ export const CreatePolicyBodySchema = z.object({
   enabled: z.boolean().optional(),
   /** Priority of the policy. Higher priority policies are evaluated first. */
   priority: z.number().int().optional(),
-  /** The rules that make up this policy. Maximum 10 rules per policy. */
-  rules: z.array(RuleSchema).min(1).max(10),
+  /** The rules that make up this policy. Maximum 50 rules per policy. */
+  rules: z.array(RuleSchema).min(1).max(50),
 })
 
 /** Request body for creating a new policy. */
@@ -76,8 +76,8 @@ export const UpdatePolicyBodySchema = z.object({
   enabled: z.boolean().optional(),
   /** Priority of the policy. Higher priority policies are evaluated first. */
   priority: z.number().int().optional(),
-  /** The rules that make up this policy. If provided, replaces all existing rules. Maximum 10 rules. */
-  rules: z.array(RuleSchema).min(1).max(10).optional(),
+  /** The rules that make up this policy. If provided, replaces all existing rules. Maximum 50 rules. */
+  rules: z.array(RuleSchema).min(1).max(50).optional(),
 })
 
 /** Request body for updating an existing policy. */
