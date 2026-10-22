@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.2
+
+### Patch Changes
+
+- [#161](https://github.com/openfort-xyz/openfort-node/pull/161) [`317e3cc`](https://github.com/openfort-xyz/openfort-node/commit/317e3cc5acbf53e8314ff2f08c7fa8b5a8d6ee9b) Thanks [@jamalavedra](https://github.com/jamalavedra)! - Bump `@openfort/shield-js` to `^0.2.1`, which depends on axios 1.20.0. Earlier `0.1.x` releases pinned axios 1.18.1, so installs of this SDK pulled a vulnerable axios even though the SDK's own axios range already allowed 1.20.0.
+
 ## 0.13.1
 
 ### Patch Changes
