@@ -13,6 +13,7 @@ export default defineConfig({
       target: './generated',
       mode: 'tags-split',
       mock: false,
+      indexFiles: false,
       override: {
         mutator: {
           path: './openfortApiClient.ts',
@@ -34,6 +35,7 @@ export default defineConfig({
       target: './generated/auth',
       mode: 'tags-split',
       mock: false,
+      indexFiles: false,
       baseUrl: '/iam/v2/auth',
       override: {
         mutator: {
