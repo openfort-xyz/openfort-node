@@ -61,7 +61,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@openfort/shield-js": "^0.1.37",
+    "@openfort/shield-js": "^0.2.1",
     "axios": "^1.18.1",
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
