@@ -61,7 +61,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@openfort/shield-js": "^0.1.37",
+    "@openfort/shield-js": "^0.2.1",
     "axios": "^1.18.1",
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
@@ -83,16 +83,16 @@
     "@solana/kora": "^0.2.1",
     "@solana/transaction-confirmation": "^7.0.0",
     "@types/node": "^25.9.4",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.12",
     "knip": "^6.23.0",
-    "orval": "^8.19.0",
+    "orval": "^8.43.0",
     "publint": "^0.3.21",
     "simple-git-hooks": "^2.13.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "viem": "^2.54.1",
-    "vite": "^8.1.2",
-    "vitest": "^4.1.9"
+    "vite": "^8.3.4",
+    "vitest": "^4.1.12"
   },
   "peerDependencies": {
     "@solana-program/compute-budget": ">=0.7.0",

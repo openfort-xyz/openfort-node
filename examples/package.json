@@ -38,7 +38,8 @@
   "pnpm": {
     "overrides": {
       "@solana/kora>@solana/kit": "$@solana/kit",
-      "@solana/kora>@solana-program/token": "$@solana-program/token"
+      "@solana/kora>@solana-program/token": "$@solana-program/token",
+      "ws@<8.21.0": ">=8.21.0"
     }
   }
 }
