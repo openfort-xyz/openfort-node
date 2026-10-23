@@ -150,6 +150,11 @@ export const configure = (options: OpenfortClientOptions): void => {
     paramsSerializer: {
       indexes: null, // Use repeat style for arrays: ?player=a&player=b instead of ?player[0]=a&player[1]=b
     },
+    // axios 1.20 builds every fetch Request with `cache: 'default'`, which
+    // Cloudflare Workers reject. With no Request constructor axios calls
+    // fetch(url, init) with only the options it was given. The Node (http)
+    // adapter ignores this. Remove once axios ships #11194.
+    env: { Request: null as unknown as undefined },
   })
 
   // Add retry logic with exponential backoff
