@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.3
+
+### Patch Changes
+
+- [#163](https://github.com/openfort-xyz/openfort-node/pull/163) [`366e802`](https://github.com/openfort-xyz/openfort-node/commit/366e8028c23642bbfc05f96b4fb2babface0fe83) Thanks [@jamalavedra](https://github.com/jamalavedra)! - Fix requests failing on Cloudflare Workers with axios 1.20 ("Unsupported cache mode: default"), and bump @openfort/shield-js to ^0.2.2, which has the same fix.
+
 ## 0.13.2
 
 ### Patch Changes
