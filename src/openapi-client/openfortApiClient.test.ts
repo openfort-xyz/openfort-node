@@ -1,6 +1,14 @@
 import { createServer, type Server } from 'node:http'
 import type { AddressInfo } from 'node:net'
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest'
 import { APIError } from './errors'
 import {
   configure,
@@ -149,5 +157,26 @@ describe('request id correlation', () => {
     ).resolves.toEqual({
       ok: true,
     })
+  })
+})
+
+describe('fetch adapter', () => {
+  // Cloudflare Workers reject a Request built with `cache: 'default'`, which
+  // axios 1.20 sets on every Request it constructs.
+  it('calls fetch with a URL and an init that has no cache mode', async () => {
+    configure({ apiKey: 'sk_test_x', basePath: baseURL })
+    const fetchSpy = vi.fn(async (_input: unknown, _init?: RequestInit) =>
+      Response.json({ ok: true }),
+    )
+    vi.stubGlobal('fetch', fetchSpy)
+    try {
+      await openfortApiClient({ method: 'GET', url: '/ok', adapter: 'fetch' })
+    } finally {
+      vi.unstubAllGlobals()
+    }
+    expect(fetchSpy).toHaveBeenCalledTimes(1)
+    const [input, init] = fetchSpy.mock.calls[0] ?? []
+    expect(input).toBe(`${baseURL}/ok`)
+    expect(init).not.toHaveProperty('cache')
   })
 })

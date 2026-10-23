@@ -25,8 +25,8 @@ importers:
   .:
     dependencies:
       '@openfort/shield-js':
-        specifier: ^0.2.1
-        version: 0.2.1
+        specifier: ^0.2.2
+        version: 0.2.2
       axios:
         specifier: ^1.18.1
         version: 1.20.0
@@ -667,8 +667,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@openfort/shield-js@0.2.1':
-    resolution: {integrity: sha512-4Mo850330TNu2tkXXTNq2Zn7rYDt68KbcRs335Tf/fQl+9sTgzxntNo0bPgU0aaf7k5juSpxvv8G/PCsoNaSAw==}
+  '@openfort/shield-js@0.2.2':
+    resolution: {integrity: sha512-1hycFfKBJgUjt0APHnCH8BhLQ80o26eVvrOkyP6atbcDLSLckdDkMuANhqPwmjjqBRiqVjavzpzxaFkoo5NLRA==}
 
   '@orval/angular@8.43.0':
     resolution: {integrity: sha512-IxDrLrm2lORBsIQt01f4fDM8P/qXuDC8qB66FABxFy8znUXre+bNZBAIeB9IwwH0A4tnPgIKM67uqaXne8qahQ==}
@@ -3626,7 +3626,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@openfort/shield-js@0.2.1':
+  '@openfort/shield-js@0.2.2':
     dependencies:
       axios: 1.20.0
       axios-retry: 4.5.0(axios@1.20.0)
