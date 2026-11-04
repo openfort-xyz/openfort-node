@@ -66,7 +66,7 @@
     "axios-retry": "^4.5.0",
     "bs58": "^6.0.0",
     "jose": "^6.2.3",
-    "zod": "^3.25.76"
+    "zod": "^4.6.7"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm check"
@@ -128,20 +128,24 @@
   },
   "pnpm": {
     "overrides": {
-      "@solana/kora>@solana/kit": "$@solana/kit",
       "@solana/kora>@solana-program/token": "$@solana-program/token",
+      "@solana/kora>@solana/kit": "$@solana/kit",
+      "axios": "$axios",
       "cross-spawn@<6.0.6": ">=6.0.6",
       "cross-spawn@>=7.0.0 <7.0.5": ">=7.0.5",
+      "esbuild@<0.28.1": ">=0.28.1",
+      "fast-uri@<3.1.9": "3.1.9",
+      "follow-redirects@<1.16.2": "1.16.2",
       "micromatch@<4.0.8": ">=4.0.8",
       "picomatch@<2.3.2": "2.3.2",
       "picomatch@>=4.0.0 <4.0.4": ">=4.0.4",
       "smol-toml@<1.6.1": ">=1.6.1",
+      "undici@<7.30.1": "7.30.1",
       "vite@>=6.0.0 <=6.4.1": ">=6.4.2",
       "vite@>=7.0.0 <=7.3.1": ">=7.3.2",
-      "yaml@>=2.0.0 <2.8.3": ">=2.8.3",
-      "axios": "$axios",
       "ws@<8.21.0": ">=8.21.0",
-      "esbuild@<0.28.1": ">=0.28.1"
+      "yaml@>=2.0.0 <2.8.3": ">=2.8.3",
+      "zod@<4.6.6": "4.6.7"
     },
     "onlyBuiltDependencies": [
       "simple-git-hooks",

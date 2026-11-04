@@ -127,7 +127,7 @@ export const SolDataCriterionSchema = z.object({
   /** Instruction name. */
   instructionName: z.string().min(1),
   /** Argument constraints. */
-  args: z.record(z.unknown()).optional(),
+  args: z.record(z.string(), z.unknown()).optional(),
 })
 /** A criterion that validates Solana instruction data against an Anchor IDL, instruction name, and argument constraints. */
 export type SolDataCriterion = z.infer<typeof SolDataCriterionSchema>
