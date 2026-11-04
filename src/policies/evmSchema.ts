@@ -138,7 +138,7 @@ export const EvmDataCriterionSchema = z.object({
    * }
    * ```
    */
-  args: z.record(z.unknown()).optional(),
+  args: z.record(z.string(), z.unknown()).optional(),
 })
 /** A criterion that validates transaction calldata against a contract ABI, function name, and argument constraints. */
 export type EvmDataCriterion = z.infer<typeof EvmDataCriterionSchema>
