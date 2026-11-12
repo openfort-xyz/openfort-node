@@ -6,19 +6,19 @@ workflows:
     '.github/workflows/pull-request.yml':
         - 'actions/checkout@v6.0.2'
         - 'actions/setup-node@v6.3.0'
-        - 'pnpm/action-setup@v4.3.0'
+        - 'pnpm/action-setup@v6.1.1'
     '.github/workflows/release.yml':
         - 'actions/checkout@v6.0.2'
         - 'actions/setup-node@v6.3.0'
         - 'changesets/action@v1.0.0'
-        - 'pnpm/action-setup@v4.3.0'
+        - 'pnpm/action-setup@v6.1.1'
     '.github/workflows/verify-lockfile.yml':
         - 'actions/checkout@v7.0.1'
     '.github/workflows/verify.yml':
         - 'actions/checkout@v6.0.2'
         - 'actions/setup-node@v6.3.0'
         - 'codecov/codecov-action@v5.5.4'
-        - 'pnpm/action-setup@v4.3.0'
+        - 'pnpm/action-setup@v6.1.1'
 dependencies:
     'actions/checkout@v6.0.2':
         ref: 'v6.0.2'
@@ -52,8 +52,8 @@ dependencies:
         repo_id: 200299178
         uses:
             - 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea'
-    'pnpm/action-setup@v4.3.0':
-        ref: 'v4.3.0'
-        commit: 'sha1-b906affcce14559ad1aafd4ab0e942779e9f58b1'
+    'pnpm/action-setup@v6.1.1':
+        ref: 'v6.1.1'
+        commit: 'sha1-73e46992e05b19abd31f2f3c20e0e7370d762115'
         owner_id: 21320719
         repo_id: 262289747
