@@ -146,12 +146,13 @@ Policies provide fine-grained control over signing operations using Zod-validate
 
 ### IAM (Identity & Access Management)
 
-| Example             | Description                   |
-| ------------------- | ----------------------------- |
-| `iam/listUsers.ts`  | List all authenticated users  |
-| `iam/getUser.ts`    | Get a user by ID              |
-| `iam/deleteUser.ts` | Delete a user                 |
-| `iam/getSession.ts` | Verify auth token server-side |
+| Example                     | Description                      |
+| --------------------------- | -------------------------------- |
+| `iam/listUsers.ts`          | List all authenticated users     |
+| `iam/getUser.ts`            | Get a user by ID                 |
+| `iam/updateUserMetadata.ts` | Store terms acceptance on a user |
+| `iam/deleteUser.ts`         | Delete a user                    |
+| `iam/getSession.ts`         | Verify auth token server-side    |
 
 ### Webhooks
 

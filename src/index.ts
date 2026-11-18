@@ -62,7 +62,7 @@ export interface OpenfortOptions {
  */
 export type EmbeddedPregenerateInput = Pick<
   api.PregenerateUserRequestV2,
-  'email' | 'thirdPartyUserId' | 'thirdPartyProvider'
+  'email' | 'thirdPartyUserId' | 'thirdPartyProvider' | 'metadata'
 > &
   Omit<api.PregenerateAccountConfig, 'chainType'>
 
@@ -686,6 +686,7 @@ class Openfort {
    * // V2 (default) - Users
    * const users = await openfort.iam.users.list();
    * const user = await openfort.iam.users.get('usr_...');
+   * await openfort.iam.users.update('usr_...', { metadata: { acceptedTerms: true } });
    *
    * // V1 - Players
    * const players = await openfort.iam.v1.players.list();
@@ -702,6 +703,11 @@ class Openfort {
         list: api.getAuthUsers,
         /** Get an authenticated user by ID */
         get: api.getAuthUser,
+        /**
+         * Update a user's metadata. Top-level keys are merged into the stored
+         * object: a value replaces that key and `null` removes it.
+         */
+        update: api.updateUser,
         /** Delete a user */
         delete: api.deleteUser,
       },
@@ -782,6 +788,7 @@ class Openfort {
       email,
       thirdPartyUserId,
       thirdPartyProvider,
+      metadata,
       accountType,
       chainId,
       implementationType,
@@ -791,6 +798,7 @@ class Openfort {
       email,
       thirdPartyUserId,
       thirdPartyProvider,
+      metadata,
       accounts: [{ chainType, accountType, chainId, implementationType }],
     })
 
