@@ -2447,6 +2447,12 @@ export interface LinkedAccountResponseV2 {
   walletClientType?: string;
 }
 
+/**
+ * Custom key-value data stored on a user, such as terms acceptance. A JSON object whose
+ * top-level keys map to any JSON value.
+ */
+export interface UserMetadata {[key: string]: unknown}
+
 export interface AuthUserResponse {
   id: string;
   createdAt: number;
@@ -2459,6 +2465,8 @@ export interface AuthUserResponse {
   phoneNumberVerified: boolean;
   isAnonymous?: boolean;
   linkedAccounts: LinkedAccountResponseV2[];
+  /** Custom data your backend stored on the user with `PATCH /v2/users/{id}`. Empty object when none is set. */
+  metadata: UserMetadata;
 }
 
 export interface BaseEntityListResponseAuthUserResponse {
@@ -2497,6 +2505,15 @@ export interface UserListQueries {
   authProviderId?: string;
   /** Filter by wallet client type (for SIWE accounts). */
   walletClientType?: string;
+}
+
+export interface UpdateUserRequest {
+  /**
+     * Keys to merge into the user's metadata. Each top-level key replaces the stored value of that
+     * key (nested objects are replaced, not merged). A key set to `null` is removed. The stored result
+     * may hold at most 50 keys, each 1 to 64 characters, and at most 8192 bytes serialized as JSON.
+     */
+  metadata: UserMetadata;
 }
 
 export type EntityTypeWALLET = typeof EntityTypeWALLET[keyof typeof EntityTypeWALLET];
@@ -2594,6 +2611,8 @@ export interface PregenerateUserResponseV2 {
      * in the same order as the `accounts` array in the request.
      */
   accounts: PregenerateAccountEntry[];
+  /** The custom data stored on the user. Empty object when none was given. */
+  metadata: UserMetadata;
 }
 
 /**
@@ -2677,6 +2696,11 @@ export interface PregenerateUserRequestV2 {
      * @minItems 1
      */
   accounts: PregenerateAccountConfig[];
+  /**
+     * Custom data to store on the user. Same limits as `PATCH /v2/users/{id}`: at most 50 keys,
+     * keys of 1 to 64 characters, 8192 bytes serialized. Keys set to `null` are dropped.
+     */
+  metadata?: UserMetadata;
 }
 
 export type TransactionStatusV2 = typeof TransactionStatusV2[keyof typeof TransactionStatusV2];

@@ -13,7 +13,8 @@ import type {
   GetAuthUsersParams,
   PregenerateUserRequestV2,
   PregenerateUserResponseV2,
-  ThirdPartyOAuthRequest
+  ThirdPartyOAuthRequest,
+  UpdateUserRequest
 } from '../openfortAPI.schemas';
 
 import { openfortApiClient } from '../../openfortApiClient';
@@ -48,6 +49,24 @@ export const getAuthUser = (
  options?: SecondParameter<typeof openfortApiClient<AuthUserResponse>>,) => {
       return openfortApiClient<AuthUserResponse>(
       {url: `/v2/users/${id}`, method: 'GET'
+    },
+      options);
+    }
+  /**
+ * Updates the metadata stored on a user. Top-level keys in `metadata` are merged into the
+ * stored object: a value replaces that key, `null` removes it, and keys not sent are kept.
+ * Metadata is returned on the user (`GET /v2/users/{id}`, `GET /iam/v2/me`) and is never
+ * writable from the client.
+ * @summary Update user metadata.
+ */
+export const updateUser = (
+    id: string,
+    updateUserRequest: UpdateUserRequest,
+ options?: SecondParameter<typeof openfortApiClient<AuthUserResponse>>,) => {
+      return openfortApiClient<AuthUserResponse>(
+      {url: `/v2/users/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateUserRequest
     },
       options);
     }
@@ -126,6 +145,7 @@ export const thirdPartyV2 = (
     }
   export type GetAuthUsersResult = NonNullable<Awaited<ReturnType<typeof getAuthUsers>>>
 export type GetAuthUserResult = NonNullable<Awaited<ReturnType<typeof getAuthUser>>>
+export type UpdateUserResult = NonNullable<Awaited<ReturnType<typeof updateUser>>>
 export type DeleteUserResult = NonNullable<Awaited<ReturnType<typeof deleteUser>>>
 export type GetUserWalletResult = NonNullable<Awaited<ReturnType<typeof getUserWallet>>>
 export type PregenerateUserV2Result = NonNullable<Awaited<ReturnType<typeof pregenerateUserV2>>>

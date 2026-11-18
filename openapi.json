@@ -5529,6 +5529,17 @@
         "type": "object",
         "additionalProperties": false
       },
+      "UserMetadata": {
+        "properties": {},
+        "additionalProperties": {},
+        "type": "object",
+        "example": {
+          "acceptedTerms": true,
+          "acceptedTermsAt": "2026-11-18T12:00:00.000Z",
+          "termsVersion": "2026-11"
+        },
+        "description": "Custom key-value data stored on a user, such as terms acceptance. A JSON object whose\ntop-level keys map to any JSON value."
+      },
       "AuthUserResponse": {
         "properties": {
           "id": {
@@ -5563,6 +5574,10 @@
               "$ref": "#/components/schemas/LinkedAccountResponseV2"
             },
             "type": "array"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/UserMetadata",
+            "description": "Custom data your backend stored on the user with `PATCH /v2/users/{id}`. Empty object when none is set."
           }
         },
         "required": [
@@ -5573,7 +5588,8 @@
           "emailVerified",
           "phoneNumber",
           "phoneNumberVerified",
-          "linkedAccounts"
+          "linkedAccounts",
+          "metadata"
         ],
         "type": "object",
         "additionalProperties": false
@@ -5661,6 +5677,22 @@
             "example": "metamask"
           }
         },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateUserRequest": {
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/UserMetadata",
+            "description": "Keys to merge into the user's metadata. Each top-level key replaces the stored value of that\nkey (nested objects are replaced, not merged). A key set to `null` is removed. The stored result\nmay hold at most 50 keys, each 1 to 64 characters, and at most 8192 bytes serialized as JSON.",
+            "example": {
+              "acceptedTerms": true,
+              "acceptedTermsAt": "2026-11-18T12:00:00.000Z",
+              "termsVersion": "2026-11"
+            }
+          }
+        },
+        "required": ["metadata"],
         "type": "object",
         "additionalProperties": false
       },
@@ -5857,9 +5889,13 @@
             },
             "type": "array",
             "description": "The embedded accounts that were pregenerated for this user,\nin the same order as the `accounts` array in the request."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/UserMetadata",
+            "description": "The custom data stored on the user. Empty object when none was given."
           }
         },
-        "required": ["user", "accounts"],
+        "required": ["user", "accounts", "metadata"],
         "type": "object",
         "additionalProperties": false
       },
@@ -5944,6 +5980,10 @@
             "type": "array",
             "description": "One or more embedded accounts to pregenerate for the user.\nEach entry produces its own key material and recovery share.\nUse this to pregenerate accounts on different chain types (e.g. EVM and SVM) in a single call.",
             "minItems": 1
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/UserMetadata",
+            "description": "Custom data to store on the user. Same limits as `PATCH /v2/users/{id}`: at most 50 keys,\nkeys of 1 to 64 characters, 8192 bytes serialized. Keys set to `null` are dropped."
           }
         },
         "required": ["accounts"],
@@ -20982,6 +21022,85 @@
             }
           }
         ]
+      },
+      "patch": {
+        "operationId": "updateUser",
+        "responses": {
+          "200": {
+            "description": "The updated user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthUserResponse"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "usr_***",
+                      "createdAt": 123456789,
+                      "name": "Satoshi",
+                      "email": "satoshi@openfort.io",
+                      "emailVerified": true,
+                      "phoneNumber": null,
+                      "phoneNumberVerified": false,
+                      "isAnonymous": false,
+                      "metadata": {
+                        "acceptedTerms": true,
+                        "acceptedTermsAt": "2026-11-18T12:00:00.000Z",
+                        "termsVersion": "2026-11"
+                      },
+                      "linkedAccounts": [
+                        {
+                          "provider": "google",
+                          "createdAt": 12346789,
+                          "updatedAt": 12346789,
+                          "accountId": "123456789"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The metadata is not a JSON object or exceeds a limit."
+          },
+          "401": {
+            "description": "Missing or invalid credentials."
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "description": "Updates the metadata stored on a user. Top-level keys in `metadata` are merged into the\nstored object: a value replaces that key, `null` removes it, and keys not sent are kept.\nMetadata is returned on the user (`GET /v2/users/{id}`, `GET /iam/v2/me`) and is never\nwritable from the client.",
+        "summary": "Update user metadata.",
+        "tags": ["Users"],
+        "security": [
+          {
+            "sk": ["users:write"]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        }
       },
       "delete": {
         "operationId": "DeleteUser",
