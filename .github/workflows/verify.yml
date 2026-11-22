@@ -1,6 +1,9 @@
 name: Verify
 on:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: false
   workflow_dispatch:
 
 jobs:
